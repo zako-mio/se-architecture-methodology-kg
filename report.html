@@ -461,6 +461,34 @@
         <li>新增 <code>20-agent-skill/</code> 与 <code>_publish/.github/workflows/rebuild.yml</code>。</li>
         <li>报告/门控三件套同步覆盖 <code>_publish/</code>；因 <code>quality-gate.md</code> 含 MISSION_ROOT 绝对路径，<strong>仅 <code>_publish/</code> 副本</strong>改写为 <code>~/…</code>（公开集脱敏），母库原件保留绝对路径不变。</li>
       </ol>
+
+      <h3>上线结果（公开仓 · 现场实测）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>项</th><th>实测值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>公开仓</td><td><code>zako-mio/se-architecture-methodology-kg</code>（<strong>PUBLIC</strong>，默认分支 <code>main</code>）</td></tr>
+            <tr><td>仓库地址</td><td><a href="https://github.com/zako-mio/se-architecture-methodology-kg">https://github.com/zako-mio/se-architecture-methodology-kg</a></td></tr>
+            <tr><td>Pages 站点</td><td><a href="https://zako-mio.github.io/se-architecture-methodology-kg/">https://zako-mio.github.io/se-architecture-methodology-kg/</a></td></tr>
+            <tr><td>Pages 可达性</td><td>首页 / 节点页 / 组页 / 术语表 / MD 镜像 / 交互图 / Agent skill <strong>7 项全部 HTTP 200</strong></td></tr>
+            <tr><td>CI 运行</td><td><code>507aff1</code> → run <code>34510503610</code> <span class="tag">success</span>；<code>8c69f27</code>（CI 修正）→ run <code>34510696621</code> <span class="tag">success</span>（build + deploy）</td></tr>
+            <tr><td>CI 覆盖门控</td><td>重建（幂等）+ 漂移检测（<code>git diff --exit-code</code>）+ L2 / L3 / L6 / L7 / L8 + 方法论 4 项全过；<strong>L4 / L5 显式 SKIPPED（绝不伪装 PASS）</strong></td></tr>
+            <tr><td>版权红线复验（远端原文）</td><td><code>02-research/E-iso-standards.json</code> 占位符 14 处、残留 ISO 正文行 <strong>0</strong>；<code>01-books/</code> 仅 5 个元数据文件</td></tr>
+            <tr><td>公开集体量</td><td>505 文件 / 19 MB</td></tr>
+            <tr><td>CI 首次失败点与处置</td><td><code>configure-pages</code> 的 <code>enablement: true</code> 因 <code>GITHUB_TOKEN</code> 无权创建 Pages 站点而失败（<strong>其前置 13 个步骤全绿</strong>）；改为用 CLI 一次性启用 Pages（<code>gh api -X POST .../pages -f build_type=workflow</code>）+ 工作流内注释化说明前置条件</td></tr>
+            <tr><td>遗留（透明披露）</td><td>Node 20 废弃警告（action 大版本可日后升级）；L4 15 条 WARN 均为非阻断项；检索层 D2 与 12factor 反向深链未做（用户已决定不做）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>暂停点 4 的裁决结果（已执行）</h3>
+      <ul>
+        <li><code>02-research/E-iso-standards.json</code>：<strong>保留脱敏版</strong>（ISO 正文性字段 <code>scope_en/zh</code> 等 14 个已全部移出，仅余标准号/版本/状态/URL 等事实元数据）。</li>
+        <li>公开集范围：<strong>按现方案定稿</strong>（交付物 10–15 + 生成链 16 + <code>00-plan</code> + <code>01-books</code> + 脱敏 <code>02-research</code> + <code>03-knowledge-map</code> + 报告三件套；不公开 <code>18-design/</code>、<code>_backup-idmigration/</code>）。</li>
+        <li>推送方式：先本地提交供用户过目 → 确认后建公开仓推送；Pages 在 Actions 首次绿后启用。</li>
+      </ul>
     </section>
 
     <section class="card" id="reflection">
@@ -474,12 +502,13 @@
         <li><strong>版本敏感判断要用 <code>is True</code></strong>：<code>verified</code> 存在 <code>true</code>（布尔）与 <code>"cited"</code>（字符串）两种，真值判断会误计；GR-10 按 149/167=89.22% 判定。</li>
         <li><strong>遗留与建议</strong>：
           <ul>
-            <li><strong><code>needs_review</code> 待裁决</strong>：<code>E-iso-standards.json</code> 移出占比 56%，建议推送前人工裁决是否整文件剔除。</li>
-            <li><strong>L4 / L5 需本地补跑</strong>：CI 无法覆盖，推送前本机执行并留档。</li>
+            <li><strong><code>needs_review</code> 已裁决（撤回原建议）</strong>：<code>E-iso-standards.json</code> <strong>保留脱敏版</strong>——ISO 正文性字段（<code>scope_en/zh</code> 等 14 个，最长 2507 字）已全部移出，余下标准号/版本/状态/URL 属不受版权保护的事实元数据，对读者有价值。</li>
+            <li><strong>L4 / L5 已在本地补跑并留档</strong>：<code>gate_visual.py --check all</code> → 262 项 / 0 FAIL / 15 WARN；<code>gate_render.py</code> → 7 用例全 PASS；CI 无法覆盖故在 <code>rebuild.yml</code> 中显式 SKIPPED。</li>
             <li><strong>12factor 反向深链未做</strong>；<strong>30 本付费书语料待用户提供</strong>（P0 14 / P1 10 / P2 6）；<strong>检索层 D2 挂起</strong>。</li>
           </ul>
         </li>
-        <li><strong>下一步</strong>：完成暂停点 4 后推送 GitHub —— 本地仓 <code>zako-mio/se-architecture-methodology-kg</code>（公开）+ GitHub Pages。<strong>版权红线</strong>：书籍/标准正文只入本地语料层，公开库只承载消化重组后的知识与自研脚本。</li>
+        <li><strong>上线完成</strong>：公开仓 <code>zako-mio/se-architecture-methodology-kg</code>（<strong>PUBLIC</strong>）+ GitHub Pages 已上线 —— 站点 <a href="https://zako-mio.github.io/se-architecture-methodology-kg/">https://zako-mio.github.io/se-architecture-methodology-kg/</a>，仓库 <a href="https://github.com/zako-mio/se-architecture-methodology-kg">https://github.com/zako-mio/se-architecture-methodology-kg</a>；Actions 两次运行（<code>34510503610</code> / <code>34510696621</code>）均 <span class="tag">success</span>。远端复验：ISO 正文残留 0、<code>01-books/</code> 仅元数据。</li>
+        <li><strong>下一步建议</strong>：①按需升级 GitHub Actions 的 action 大版本（消除 Node 20 废弃警告）；②按需启用检索层 D2 与 12factor 反向深链；③30 本付费书语料由用户提供后走 pdf-worker 解析（<code>01-books/gap-request.md</code>，P0 14 本优先）。</li>
       </ol>
     </section>
 

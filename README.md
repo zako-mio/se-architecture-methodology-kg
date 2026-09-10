@@ -6,6 +6,11 @@
 本仓库是母库的公开交付集：既供人按图谱顺序学习架构判断力，也为 AI Agent 提供结构化的
 架构知识底座（Markdown 镜像 + 单一 JSON 主图，可被检索层或 Agent 直接消费）。
 
+> **在线站点**：https://zako-mio.github.io/se-architecture-methodology-kg/
+> **仓库地址**：https://github.com/zako-mio/se-architecture-methodology-kg
+> **CI**：GitHub Actions `rebuild` —— 重建（幂等）→ 漂移检测（`git diff --exit-code`）→ L2 / L3 / L6 / L7 / L8 + 方法论门控 → Pages 部署；
+> 最近两次运行均 **success**（run `34510503610` / `34510696621`）。**L4 / L5 在 CI 中显式 SKIPPED**（需本地补跑，见下文「CI 中的门控」）。
+
 ## English Abstract
 
 This repository is a public knowledge graph of software engineering and architecture

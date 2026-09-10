@@ -245,6 +245,27 @@
 10. 新增 `20-agent-skill/`（5 文件）与 `_publish/.github/workflows/rebuild.yml`（重建 + 漂移检测 + 门控 + Pages）。
 11. 报告/门控三件套同步覆盖 `_publish/`；因 `quality-gate.md` 含 MISSION_ROOT 绝对路径，**仅 `_publish/` 副本**将其改写为 `~/…`（公开集脱敏），母库原件保留绝对路径不变；复扫 `_publish/` 本机路径 0、U+FFFD 0、疑似凭据 0。
 
+### 4.5 上线结果（公开仓 · 现场实测）
+
+| 项 | 实测值 |
+|---|---|
+| 公开仓 | `zako-mio/se-architecture-methodology-kg`（**PUBLIC**，默认分支 `main`） |
+| 仓库地址 | https://github.com/zako-mio/se-architecture-methodology-kg |
+| Pages 站点 | https://zako-mio.github.io/se-architecture-methodology-kg/ |
+| Pages 可达性 | 首页 / 节点页 / 组页 / 术语表 / MD 镜像 / 交互图 / Agent skill **7 项全部 HTTP 200** |
+| CI 运行 | `507aff1` → run `34510503610` **success**；`8c69f27`（CI 修正）→ run `34510696621` **success**（build + deploy） |
+| CI 覆盖门控 | 重建（幂等）+ 漂移检测（`git diff --exit-code`）+ L2 / L3 / L6 / L7 / L8 + 方法论 4 项全过；**L4 / L5 显式 SKIPPED（绝不伪装 PASS）** |
+| 版权红线复验（远端原文） | `02-research/E-iso-standards.json` 占位符 14 处、残留 ISO 正文行 **0**；`01-books/` 仅 5 个元数据文件 |
+| 公开集体量 | 505 文件 / 19 MB |
+| CI 首次失败点与处置 | `configure-pages` 的 `enablement: true` 因 `GITHUB_TOKEN` 无权创建 Pages 站点而失败（**其前置 13 个步骤全绿**）；改为用 CLI 一次性启用 Pages（`gh api -X POST .../pages -f build_type=workflow`）+ 工作流内注释化说明前置条件 |
+| 遗留（透明披露） | Node 20 废弃警告（action 大版本可日后升级）；L4 15 条 WARN 均为非阻断项；检索层 D2 与 12factor 反向深链未做（用户已决定不做） |
+
+### 4.6 暂停点 4 的裁决结果（已执行）
+
+- `02-research/E-iso-standards.json`：**保留脱敏版**（ISO 正文性字段 `scope_en/zh` 等 14 个已全部移出，仅余标准号/版本/状态/URL 等事实元数据）。
+- 公开集范围：**按现方案定稿**（交付物 10–15 + 生成链 16 + `00-plan` + `01-books` + 脱敏 `02-research` + `03-knowledge-map` + 报告三件套；不公开 `18-design/`、`_backup-idmigration/`）。
+- 推送方式：先本地提交供用户过目 → 确认后建公开仓推送；Pages 在 Actions 首次绿后启用。
+
 ---
 
 ## 五、反思 / 分析 / 建议
@@ -262,9 +283,10 @@
 6. **版本敏感判断要用 `is True`**：`verified` 取值存在 `true`（布尔）与 `"cited"`（字符串）两种，真值判断会把 `"cited"` 误计为 true。该陷阱已写入基线纠偏记录与门控口径（GR-10 按 149/167=89.22% 判定）。
 
 7. **遗留与建议（交由后续阶段决策）**：
-   - **`needs_review` 待裁决**：`02-research/E-iso-standards.json` 移出占比 56%（第三方标准正文偏多），建议推送前人工裁决是否整文件剔除。
-   - **L4 / L5 需本地补跑**：CI 无法覆盖，建议在推送前于本机执行 `gate_visual.py --check all` 与 `gate_render.py`，并将结果留档。
+   - **`needs_review` 已裁决（撤回原建议）**：`02-research/E-iso-standards.json` **保留脱敏版**——ISO 正文性字段（`scope_en/zh` 等 14 个，最长 2507 字）已全部移出，余下标准号/版本/状态/URL 属不受版权保护的事实元数据，对读者有价值。
+   - **L4 / L5 已在本地补跑并留档**：`gate_visual.py --check all` → 262 项 / 0 FAIL / 15 WARN；`gate_render.py` → 7 用例全 PASS；CI 无法覆盖故在 `rebuild.yml` 中显式 SKIPPED。
    - **12factor 反向深链未做**：当前仅母库→子库单向；建议补子库→母库回链形成双向导航。
    - **30 本付费书语料待用户提供**（`01-books/gap-request.md`，P0 14 / P1 10 / P2 6），提供后走 pdf-worker 解析。
    - **检索层 D2 挂起**：预留接口不建，建库后再定（轻量 FTS5 为候选）。
-8. **下一步**：完成暂停点 4 后推送 GitHub —— 本地仓 `zako-mio/se-architecture-methodology-kg`（公开，独立于母库）+ GitHub Pages；**版权红线**：书籍/标准正文只入本地语料层，公开库只承载消化重组后的知识与自研脚本。
+8. **上线完成**：公开仓 `zako-mio/se-architecture-methodology-kg`（**PUBLIC**）+ GitHub Pages 已上线 —— 站点 https://zako-mio.github.io/se-architecture-methodology-kg/ ，仓库 https://github.com/zako-mio/se-architecture-methodology-kg ；Actions 两次运行（`34510503610` / `34510696621`）均 **success**。**版权红线**：书籍/标准正文只入本地语料层，公开库只承载消化重组后的知识与自研脚本（远端复验：ISO 正文残留 0、`01-books/` 仅元数据）。
+9. **下一步建议**：①按需升级 GitHub Actions 的 action 大版本（消除 Node 20 废弃警告）；②按需启用检索层 D2 与 12factor 反向深链；③30 本付费书语料由用户提供后走 pdf-worker 解析（`01-books/gap-request.md`，P0 14 本优先）。
