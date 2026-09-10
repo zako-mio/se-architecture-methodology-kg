@@ -1,0 +1,947 @@
+{
+  "topic": "技术债（Technical Debt）——隐喻原义 / Fowler 四象限 / 本金-利息模型 / 类型学 / 度量（SQALE、SonarQube TDR、code smells、remediation cost）/ 清偿与治理（重构、strangler fig、boy-scout rule）/ 与架构腐化关系",
+  "generated_by": "technical-debt-researcher (subagent, self-authored role)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "境内可达源直连；境外被墙站点经 curl -x http://172.29.0.1:7890 访问。martinfowler.com / c2.com / docs.sonarsource.com 经代理核验。学术论文正文多为付费，本包通过 Crossref / OpenAlex 元数据与摘要核验（已回源机构库：CMU/SEI），未下载任何受版权保护的书籍全文或论文正文；sqale.org 已下线，采用 Wayback 快照核验。source id 采用 P- 前缀以避免与 B/L/M/O 包冲突；共享来源在 cross_ref 标注。",
+  "sources": [
+    {
+      "id": "OFF-009",
+      "title": "Technical Debt: From Metaphor to Theory and Practice（CMU/SEI 资产页，含摘要）",
+      "org": "Carnegie Mellon University, Software Engineering Institute (SEI)",
+      "year": "2012",
+      "url": "https://www.sei.cmu.edu/library/technical-debt-from-metaphor-to-theory-and-practice/",
+      "tier": "S1",
+      "verified": true,
+      "reused_from": "同一论文的 SEI 官方摘要页（论文本体见 P-S4-01）",
+      "key_points": [
+        "该文把技术债隐喻从『修辞概念（rhetorical concept）』推进为需要显式管理的东西",
+        "处理技术债需同时认识其成因（causes）与进行显式管理（explicit management）",
+        "组织与管理的一种路径是用 common backlog 列出债相关任务及改进动作",
+        "文章考察决策在开发中的作用，以及未来系统变更如何影响技术债的演化"
+      ],
+      "legacy_id": "P-S1-01"
+    },
+    {
+      "id": "STD-005",
+      "title": "ISO/IEC 25010:2023 — Product quality model（maintainability 质量特性）",
+      "org": "ISO/IEC (ISO Online Browsing Platform；经 ISO/IEC 25000 门户核验)",
+      "year": "2023",
+      "url": "https://www.iso.org/obp/ui#iso:std:iso-iec:25010:en",
+      "tier": "S1",
+      "verified": true,
+      "reused_from": "M-quality-ility.json S1-M01 / S2-M01",
+      "key_points": [
+        "maintainability（可维护性）：产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度",
+        "maintainability 子特性含 modularity、reusability、analysability、modifiability、testability",
+        "modularity 要求修改一个组件对其他组件影响最小——技术债度量（如 TDR）的标准化落点之一"
+      ],
+      "legacy_id": "P-S1-02"
+    },
+    {
+      "id": "WEB-002",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-21 (原 2003-10-01，2019 重写)",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S2-02；L-evolution.json S2-01",
+      "key_points": [
+        "cruft=内部质量缺陷；technical debt 是 Cunningham 提出、用以思考如何应对 cruft 的隐喻",
+        "因 cruft 多花的额外时间即 debt 的 interest；清理 cruft 相当于偿还 principal",
+        "利息按‘修改该代码’触发，而非按时间流逝累积——crufty 但稳定的代码可以不动；高频变更区需 zero-tolerance",
+        "成本无法客观度量（CannotMeasureProductivity），通常最优策略是像财务债务一样逐步偿还本金",
+        "以债为‘先发布’辩护只有停留在 design payoff line 之下才成立，而团队常在数周内就越过该线"
+      ],
+      "legacy_id": "P-S2-01"
+    },
+    {
+      "id": "WEB-013",
+      "title": "Technical Debt Quadrant (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2009-10-14 (2014-11-19 repost)",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "L-evolution.json S2-03",
+      "key_points": [
+        "两组正交判据：deliberate / inadvertent（有意/无意）与 prudent / reckless（审慎/鲁莽）",
+        "核心论点：有用的区分不是‘是不是债’，而是‘审慎的债 vs 鲁莽的债’",
+        "prudent-deliberate：明知代价仍为尽早发布选择短期不可持续设计，应尽快偿还",
+        "reckless：不懂设计实践或明知好坏却‘quick and dirty’，低估 DesignPayoffLine",
+        "prudent-inadvertent 也存在且不可避免：优秀团队边编程边学习，事后才明白设计本该如何"
+      ],
+      "legacy_id": "P-S2-02"
+    },
+    {
+      "id": "PAP-006",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham (c2.com)",
+      "year": "1992-03-26",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S2-03；L-evolution.json S2-02",
+      "key_points": [
+        "技术债隐喻原始出处：『Shipping first time code is like going into debt』",
+        "『A little debt speeds development so long as it is paid back promptly with a rewrite』；危险在于 debt 不被偿还",
+        "『Every minute spent on not-quite-right code counts as interest on that debt』；未整合实现可拖垮整个工程组织",
+        "作者视其为对 refactoring / 增量成长（consolidation）的辩护；2009 年录 5 分钟视频澄清常见误读"
+      ],
+      "legacy_id": "P-S2-03"
+    },
+    {
+      "id": "WEB-014",
+      "title": "Opportunistic Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-11-01",
+      "url": "https://martinfowler.com/bliki/OpportunisticRefactoring.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "反对设专门重构阶段；倡导把重构作为机会式（opportunistic）活动——看到不够清晰的代码就顺手改",
+        "机会式重构即 camp site rule（营地规则）/ boy-scout rule 的工程化：始终让代码比你发现时更干净",
+        "含 preparatory refactoring、加功能中清理重复、完成前调整交互等时机；需在测试全绿时进行",
+        "危险是‘钻兔子洞（yak hair）’——需判断力；强 CodeOwnership 与长生命周期 FeatureBranch 会抑制机会式重构"
+      ],
+      "legacy_id": "P-S2-04"
+    },
+    {
+      "id": "WEB-015",
+      "title": "Design Stamina Hypothesis (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2007-06-20",
+      "url": "https://martinfowler.com/bliki/DesignStaminaHypothesis.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "良好设计提升项目‘耐力（stamina）’，使长期交付更快；无设计项目初期更快但代码劣化、生产率下降",
+        "二者在某点交叉（design payoff line）；低于该线时牺牲设计换速度或可成立，高于该线则取舍是虚幻的",
+        "明确声明这是 hypothesis（conjecture），无法客观证明；对作者而言已是 axiom",
+        "技术债视角：越过 payoff line 还借债，等于用钱太久、利息已超过本金收益"
+      ],
+      "legacy_id": "P-S2-05"
+    },
+    {
+      "id": "WEB-016",
+      "title": "Strangler Fig (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2024-08-22",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "L-evolution.json S2-07",
+      "key_points": [
+        "隐喻源自 2001 年昆士兰雨林见闻，2004 年首次成文；用于遗留系统渐进式现代化",
+        "反对整机替换：『Replacing a serious IT system takes a long time』、『we've seen this simple-sounding plan go down in flames most of the time』",
+        "渐进做法：在旧系统之上/之旁增量建新功能，再把行为逐块搬走",
+        "Ian Cartwright/Rob Horn/James Lewis 归纳四活动：理解期望结果→把问题拆小→成功交付各部分→改造组织以持续进行（顺序不代表时序）"
+      ],
+      "legacy_id": "P-S2-06"
+    },
+    {
+      "id": "BK-021",
+      "title": "Definition Of Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2004-09-01",
+      "url": "https://martinfowler.com/bliki/DefinitionOfRefactoring.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "L-evolution.json S2-04",
+      "key_points": [
+        "Refactoring（名词）：a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior",
+        "Refactoring（动词）：to restructure software by applying a series of refactorings without changing its observable behavior",
+        "硬判据是‘不改变可观察行为’——与重写/改功能的分界；是偿还代码/设计债的核心手段"
+      ],
+      "legacy_id": "P-S2-07"
+    },
+    {
+      "id": "WEB-017",
+      "title": "Code Smell (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-02-09",
+      "url": "https://martinfowler.com/bliki/CodeSmell.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "L-evolution.json S2-06",
+      "key_points": [
+        "code smell 是‘对应系统中更深层问题的表层迹象（surface indication）’，术语由 Kent Beck 提出",
+        "定义要点是‘易于察觉（sniffable）’；且 smell 不必然意味着问题",
+        "smell 是重构的启发式信号——技术债在代码层的可观测代理指标之一"
+      ],
+      "legacy_id": "P-S2-08"
+    },
+    {
+      "id": "WEB-018",
+      "title": "Is High Quality Software Worth the Cost? (article)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-29",
+      "url": "https://martinfowler.com/articles/is-quality-worth-cost.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "打破‘质量=成本’的直觉：internal quality 消除拖慢新特性的 cruft，反而降低增强软件的成本",
+        "区分 external quality（用户可感知）与 internal quality（结构/模块化/可读，用户不可直接感知但影响交付速度）",
+        "即使最优秀的团队也会产生 cruft；high-quality software is cheaper to produce",
+        "引近年实证（如 DORA 精英团队研究）尝试量化内部质量/生产率影响，但承认难以直接测量"
+      ],
+      "legacy_id": "P-S2-09"
+    },
+    {
+      "id": "WEB-019",
+      "title": "Foundations for the Study of Software Architecture",
+      "org": "D. E. Perry & A. L. Wolf, ACM SIGSOFT Software Engineering Notes 17(4), pp.40-52",
+      "year": "1992-10",
+      "url": "https://users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "L-evolution.json S2-11",
+      "key_points": [
+        "提出架构演化中的 architectural erosion（架构侵蚀）与 architectural drift（架构漂移）",
+        "erosion 源于对架构的违规（violations）→ 系统问题增多、日益脆化（brittleness），如拆承重墙",
+        "drift 源于对架构的不敏感（insensitivity）→ 不适应性、形式失一致、清晰度下降，进而更易违规",
+        "两者共同造成 increasing resistance to change——架构层技术债累积的机制描述"
+      ],
+      "legacy_id": "P-S2-10"
+    },
+    {
+      "id": "VEN-009",
+      "title": "Metric definitions（SonarQube Server 官方文档）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "n.d. (accessed 2026-09-10, Server 2026.4)",
+      "url": "https://docs.sonarsource.com/sonarqube/latest/user-guide/metric-definitions/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "technical debt（sqale_index）= 所有 maintainability issue 的 remediation cost 之和；remediation cost 为规则分配的修复 effort（分钟），默认 8 小时/天",
+        "technical debt ratio：sqale_debt_ratio = technical debt / (cost to develop one line of code × number of lines of code)；cost per LOC 默认 30 分钟，可改",
+        "maintainability rating（sqale_rating）按 TDR 分档：A ≤5%、B ≥5%<10%、C ≥10%<20%、D ≥20%<50%、E ≥50%（可配置）",
+        "区分 overall code 与 new code：整体可得 A，而新代码引入更多债得 B——支撑‘新代码零债务’治理",
+        "code_smells = code smell 总数；另有 reliability/security remediation effort 等同类指标"
+      ],
+      "legacy_id": "P-S3-01"
+    },
+    {
+      "id": "VEN-010",
+      "title": "Viewing and managing rules（SonarQube Server 官方文档，含 issue 类型与 clean code 属性）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "n.d. (accessed 2026-09-10, Server 2026.4)",
+      "url": "https://docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-rules/rules",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "issue 类型：Code smell（maintainability 域）、Bug（reliability 域）、Vulnerability（security 域）、Security hotspot（security 域）",
+        "对 code smell 与 bug 期望零误报；vulnerabilities 目标 >80% 真阳性",
+        "clean code 属性（attributes）划分问题维度：consistency、intentionality、adaptability、responsibility",
+        "规则有 Beta / Deprecated / Ready 状态与 repository（分析器）归属"
+      ],
+      "legacy_id": "P-S3-02"
+    },
+    {
+      "id": "VEN-011",
+      "title": "SQALE — Software Quality Assessment based on Lifecycle Expectations（官方站点，Wayback 快照）",
+      "org": "SQALE / inspearit (formerly DNV ITGS France)",
+      "year": "2014（站点）/ 方法 2010s",
+      "url": "https://web.archive.org/web/2016/http://www.sqale.org/",
+      "tier": "S3",
+      "verified": true,
+      "cross_ref": "P-S4-02（论文）；SonarQube 沿用 SQALE 指标命名（P-S3-01）",
+      "key_points": [
+        "目标是尽可能客观、准确、可复现、自动化地评估应用源代码，并提供管理技术债的有效方法",
+        "方法含 9 项基本原则与 4 个主组件：SQALE Quality Model、SQALE Analysis Model、SQALE indices、SQALE indicators",
+        "以 life-cycle expectations 为评估基准；采用 CC BY-NC-ND 许可供组织与厂商实现"
+      ],
+      "legacy_id": "P-S3-03"
+    },
+    {
+      "id": "PAP-009",
+      "title": "Technical Debt: From Metaphor to Theory and Practice",
+      "org": "P. Kruchten, R. L. Nord, I. Ozkaya, IEEE Software 29(6), pp.18-21, DOI 10.1109/MS.2012.167",
+      "year": "2012-11",
+      "url": "https://doi.org/10.1109/MS.2012.167",
+      "tier": "S4",
+      "verified": true,
+      "cross_ref": "L-evolution.json S4-03；SEI 官方摘要页 P-S1-01",
+      "key_points": [
+        "把技术债从 Cunningham 的隐喻推进为可管理的理论与实践：把债显式化、度量并纳入决策",
+        "技术债不是纯粹的‘坏’，而是权衡工具——需与业务目标、可维护性、演化成本联动",
+        "提出以 common backlog 组织债相关任务与改进动作；考察决策在债演化中的作用",
+        "Crossref 核验：IEEE Software 2012 29(6) 18-21，被引 568+（截至回源时）"
+      ],
+      "legacy_id": "P-S4-01"
+    },
+    {
+      "id": "PAP-010",
+      "title": "Managing Technical Debt with the SQALE Method",
+      "org": "J.-L. Letouzey, M. Ilkiewicz, IEEE Software 29(6), pp.44-51, DOI 10.1109/MS.2012.129",
+      "year": "2012-11",
+      "url": "https://doi.org/10.1109/MS.2012.129",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "已有多种估算应用源代码技术债的方法；SQALE（software quality assessment based on life-cycle expectations）提供管理技术债的指导",
+        "文章给出为大型组织建立并使用 SQALE 的实施建议（来自作者辅导经验）",
+        "Crossref 核验：IEEE Software 2012 29(6) 44-51（同属该刊技术债专题）"
+      ],
+      "legacy_id": "P-S4-02"
+    },
+    {
+      "id": "PAP-011",
+      "title": "A systematic mapping study on technical debt and its management",
+      "org": "Z. Li, P. Avgeriou, P. Liang, Journal of Systems and Software 101, DOI 10.1016/j.jss.2014.12.027",
+      "year": "2015-03",
+      "url": "https://doi.org/10.1016/j.jss.2014.12.027",
+      "tier": "S4",
+      "verified": true,
+      "cross_ref": "L-evolution.json 复用同一作者群（架构腐化研究线）",
+      "key_points": [
+        "系统映射 1992–2013 年文献，纳入 94 项研究；TD 被分类为 10 种类型，识别 8 类 TD 管理（TDM）活动与 29 种 TDM 工具",
+        "TD 是反映技术妥协的隐喻——短期受益但可能伤害系统长期健康",
+        "术语‘debt’被不同人以不同方式使用，导致歧义；code-related TD 及其管理获得最多关注",
+        "呼吁更多高质量实证研究与覆盖全 TDM 过程的专用工具（摘要经 OpenAlex 核验；被引 754+）"
+      ],
+      "legacy_id": "P-S4-03"
+    },
+    {
+      "id": "PAP-012",
+      "title": "Towards an Ontology of Terms on Technical Debt",
+      "org": "N. S. R. Alves, L. F. Ribeiro, V. Caires, T. S. Mendes, R. O. Spinola, 2014 Sixth Int'l Workshop on Managing Technical Debt (MTD), DOI 10.1109/MTD.2014.9",
+      "year": "2014-09",
+      "url": "https://doi.org/10.1109/MTD.2014.9",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "当时 TD 的各类型及其指标尚未被组织；该文提出技术债术语本体（ontology），建立共同词汇表",
+        "概念来自系统文献映射结果；经本体设计质量准则与领域专家两步评估",
+        "贡献是推进 Technical Debt Landscape：组织不同技术债类型及其 indicators，便于研究与工业使用",
+        "Crossref/OpenAlex 核验（被引 149+）；正文付费，未获取 13 类类型的逐条清单（见 gaps）"
+      ],
+      "legacy_id": "P-S4-04"
+    },
+    {
+      "id": "PAP-013",
+      "title": "An Overview and Comparison of Technical Debt Measurement Tools",
+      "org": "IEEE Software (DOI 10.1109/MS.2020.3024958)",
+      "year": "2020",
+      "url": "https://doi.org/10.1109/MS.2020.3024958",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "不同工具采用不同术语、指标与识别/度量技术债的方式，导致混乱",
+        "文章比较技术债度量工具的特性与流行度，并分析其有效性的既有实证证据",
+        "对‘用工具数字直接当作债务真值’起到警示作用（摘要经 OpenAlex 核验）"
+      ],
+      "legacy_id": "P-S4-05"
+    },
+    {
+      "id": "PAP-014",
+      "title": "Automatic identification of self-admitted technical debt from four different sources",
+      "org": "Empirical Software Engineering (DOI 10.1007/s10664-023-10297-9)",
+      "year": "2023",
+      "url": "https://doi.org/10.1007/s10664-023-10297-9",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "大量技术债由开发者自己显式报告，称 Self-Admitted Technical Debt（SATD）",
+        "已有工作多从源码注释与 issue tracker 识别 SATD；该文提出整合四源（源码注释、commit 消息、pull request、issue 跟踪）的自动识别方法",
+        "方法优于基线，识别平均 F1-score 约 0.611（摘要经 OpenAlex 核验）"
+      ],
+      "legacy_id": "P-S4-06"
+    },
+    {
+      "id": "PAP-015",
+      "title": "A systematic literature review on Technical Debt prioritization: Strategies, processes, factors, and tools",
+      "org": "Journal of Systems and Software 171, DOI 10.1016/j.jss.2020.110827",
+      "year": "2020",
+      "url": "https://doi.org/10.1016/j.jss.2020.110827",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "系统综述 557 篇（截至 2020），纳入 44 项一手研究，考察技术债优先级排序（prioritization）的策略/过程/因素/工具",
+        "不同优先级方法目标不同、优化准则不同；现有度量只捕捉了实践中定性排序所用因素的一小部分",
+        "缺乏实证且经验证的工具集；研究尚初步，对关键因素及度量无共识（摘要经 OpenAlex 核验）"
+      ],
+      "legacy_id": "P-S4-07"
+    },
+    {
+      "id": "PAP-008",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process, DOI 10.1002/smr.2423",
+      "year": "2022",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "tier": "S4",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S4-01；L-evolution.json S4-01",
+      "key_points": [
+        "架构腐化（AEr）不利影响软件开发，近十年受显著关注",
+        "AEr 不仅表现为 architectural violations 与 structural issues，还引发软件质量与演化问题",
+        "成因既有技术也有非技术因素，二者需同等重视；已有检测与治理方法/工具谱系",
+        "纳入 73 项研究，归纳三类困难与五类经验教训（摘要经 Crossref 核验）"
+      ],
+      "legacy_id": "P-S4-08"
+    },
+    {
+      "id": "PAP-003",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution",
+      "org": "M. M. Lehman, Proceedings of the IEEE 68(9), pp.1060-1076, DOI 10.1109/PROC.1980.11805",
+      "year": "1980",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "tier": "S4",
+      "verified": true,
+      "cross_ref": "L-evolution.json S4-02",
+      "key_points": [
+        "软件演化定律的最初正式发表（后续扩展为八条）",
+        "Continuing Change：E-type 系统须持续适配；Increasing Complexity：随演化复杂度上升，除非显式维护",
+        "Declining Quality：除非严格维护并适配环境变化，系统质量会显得下降——技术债/腐化的时间维理论根据"
+      ],
+      "legacy_id": "P-S4-09"
+    },
+    {
+      "id": "PAP-016",
+      "title": "Software developer productivity loss due to technical debt—A replication and extension study examining developers' development work",
+      "org": "Journal of Systems and Software 156, DOI 10.1016/j.jss.2019.06.004",
+      "year": "2019",
+      "url": "https://doi.org/10.1016/j.jss.2019.06.004",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "复现并扩展关于技术债导致开发者生产率损失的研究，考察开发者日常工作",
+        "TDM 度量（利息/生产率影响）的实证方向（题录经 OpenAlex 核验；正文付费，摘要未获取，见 gaps）"
+      ],
+      "legacy_id": "P-S4-10"
+    },
+    {
+      "id": "PAP-017",
+      "title": "Building and evaluating a theory of architectural technical debt in software-intensive systems",
+      "org": "Journal of Systems and Software 176, DOI 10.1016/j.jss.2021.110925",
+      "year": "2021",
+      "url": "https://doi.org/10.1016/j.jss.2021.110925",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "架构技术债（ATD）描述那些作出时合适甚至最优、却显著阻碍未来进展的‘大’设计决策（结构、框架、技术、语言等）",
+        "代码级债可由静态分析器检测且常可增量重构；架构债难识别、修复成本范围大、令人生畏且常被回避",
+        "用扎根理论 + 焦点小组构建 ATD 理论，识别其 symptoms、causes、consequences、management strategies 与 communication problems",
+        "理论满足经典扎根理论四项评估准则（fit/work/relevance/modifiability）（摘要经 OpenAlex 核验）"
+      ],
+      "legacy_id": "P-S4-11"
+    },
+    {
+      "id": "PAP-018",
+      "title": "Identification and measurement of Requirements Technical Debt in software development: A systematic literature review",
+      "org": "Journal of Systems and Software 190, DOI 10.1016/j.jss.2022.111483",
+      "year": "2022",
+      "url": "https://doi.org/10.1016/j.jss.2022.111483",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "需求技术债（Requirements Technical Debt）指理想规格与实际实现之间的差距，源于追求即时收益的战略决策或上下文的无意变化",
+        "识别与度量是 TDM 的前两个阶段；需求债作为独立债务类型被系统综述（摘要经 OpenAlex 核验）"
+      ],
+      "legacy_id": "P-S4-12"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "technical debt（技术债）",
+      "definition": "Ward Cunningham 提出的隐喻：首次交付的代码如同负债；小额债务在及时以重写（重构）偿还时可加速开发，未偿还则每分钟花在‘不够正确’代码上的时间都成为利息。Fowler 将其操作化为‘内部质量缺陷（cruft）导致的未来变更额外成本’；Kruchten 等把它推进为需显式管理的理论与实践，Li 等定义为‘反映技术妥协的隐喻——短期受益但可能伤害系统长期健康’。",
+      "source_id": "PAP-006",
+      "cross_ref_source_ids": [
+        "P-S2-01",
+        "P-S1-01",
+        "P-S4-03"
+      ]
+    },
+    {
+      "term": "principal（本金）",
+      "definition": "清除 cruft、把内部质量恢复到良好状态所需的一次性投入（如 Fowler 例子：清理模块结构花 5 天）。偿还本金后，未来同类变更的成本下降。",
+      "source_id": "WEB-002"
+    },
+    {
+      "term": "interest（利息）",
+      "definition": "因 cruft 存在，每新增一个特性/每次修改该代码而多花的时间（Fowler 例子：本应 4 天变 6 天，2 天即利息）。关键区别于金融债：利息只在‘修改该代码’时触发，不按时间累积。",
+      "source_id": "WEB-002",
+      "cross_ref_source_ids": [
+        "P-S2-03"
+      ]
+    },
+    {
+      "term": "technical debt quadrant（技术债象限）",
+      "definition": "以 deliberate/inadvertent（有意/无意）与 prudent/reckless（审慎/鲁莽）两组正交判据区分设计缺陷；有用的问题是‘审慎的债还是鲁莽的债’，而非‘是不是债’。prudent-inadvertent 债即使优秀团队也不可避免。",
+      "source_id": "WEB-013"
+    },
+    {
+      "term": "SQALE（Software Quality Assessment based on Life-cycle Expectations）",
+      "definition": "一种以客观、准确、可复现、自动化方式评估应用源代码质量并提供技术债管理的方法；含 9 项基本原则与 4 个主组件（Quality Model、Analysis Model、indices、indicators），以生命周期期望为基准。SonarQube 的 debt 指标（sqale_index/sqale_debt_ratio/sqale_rating）沿用其命名。",
+      "source_id": "VEN-011",
+      "cross_ref_source_ids": [
+        "P-S4-02",
+        "P-S3-01"
+      ]
+    },
+    {
+      "term": "technical debt ratio（技术债比率 / SQALE debt ratio）",
+      "definition": "修复软件的成本（technical debt）与开发软件成本之比：sqale_debt_ratio = technical debt / (cost to develop one line of code × number of lines of code)；每行开发成本默认 30 分钟，可配置。据其映射 maintainability rating。",
+      "source_id": "VEN-009"
+    },
+    {
+      "term": "remediation cost / effort（修复成本/工作量）",
+      "definition": "修复一个 maintainability issue 的估计工作量（分钟），取自规则分配的 effort；technical debt（sqale_index）= 所有 maintainability issue 修复成本之和（单测按 8 小时/天换算）。",
+      "source_id": "VEN-009"
+    },
+    {
+      "term": "code smell（代码坏味道）",
+      "definition": "对应系统中更深层问题的、易于察觉（sniffable）的表层迹象；是重构的启发式信号而非结论（Fowler/Beck）。SonarQube 将 code smell 作为 maintainability 域的 issue 类型并计入技术债。",
+      "source_id": "WEB-017",
+      "cross_ref_source_ids": [
+        "P-S3-02",
+        "P-S3-01"
+      ]
+    },
+    {
+      "term": "architectural technical debt（架构技术债, ATD）",
+      "definition": "由‘大’设计决策（结构、框架、技术、语言选择等）造成的技术债：这些决策在作出时可能合适甚至最优，却显著阻碍未来进展；难识别、修复成本范围大、常被回避，且与沟通问题相关。",
+      "source_id": "PAP-017",
+      "cross_ref_source_ids": [
+        "P-S4-03",
+        "P-S2-10"
+      ]
+    },
+    {
+      "term": "self-admitted technical debt（SATD，自承认技术债）",
+      "definition": "由开发者自己显式报告/记录的技术债（常见于源码注释、issue tracker、commit 消息、pull request）；可跨四源自动识别，是技术债发现的重要补充。",
+      "source_id": "PAP-014"
+    },
+    {
+      "term": "boy-scout rule / camp site rule（童军规则/营地规则）与 opportunistic refactoring（机会式重构）",
+      "definition": "‘始终让离开时的代码比你发现时更干净’；Fowler 倡导把重构作为机会式活动，在改动代码时顺带清理，而非安排专门重构阶段，须在测试全绿、以判断力避免钻入兔子洞。",
+      "source_id": "WEB-014"
+    },
+    {
+      "term": "strangler fig pattern（绞杀者无花果模式）",
+      "definition": "遗留系统渐进式现代化模式：在旧系统之上/之旁增量构建新功能，逐步把行为迁移走，直至旧系统被替换，而非一次性整机重写。",
+      "source_id": "WEB-016"
+    },
+    {
+      "term": "design payoff line / design stamina hypothesis（设计回报线/设计耐力假说）",
+      "definition": "良好设计提升项目‘耐力’使长期交付更快；无设计项目初期更快但代码劣化、生产率下降，二者在某点（design payoff line）交叉。低于该线时牺牲设计换速度或可成立，高于该线则取舍是虚幻的。",
+      "source_id": "WEB-015"
+    },
+    {
+      "term": "technical debt management（TDM，技术债管理）",
+      "definition": "对技术债的识别/度量/跟踪/偿还等管理活动；Li 等系统映射归纳出 10 类 TD 与 8 类 TDM 活动、29 种工具，并强调需更多覆盖全过程的实证与专用工具。",
+      "source_id": "PAP-011",
+      "cross_ref_source_ids": [
+        "P-S4-07"
+      ]
+    },
+    {
+      "term": "maintainability（可维护性，ISO 25010）",
+      "definition": "产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性含 modularity、reusability、analysability、modifiability、testability。为技术债度量提供标准化质量落点。",
+      "source_id": "STD-005"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "技术债隐喻源自 Cunningham 1992：首次交付如负债，及时以重写偿还可加速开发；危险在于债不被偿还，未整合实现可拖垮整个工程组织。",
+      "source_ids": [
+        "PAP-006",
+        "WEB-002",
+        "PAP-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "本金-利息模型的操作化：利息=因 cruft 每次修改该代码多花的时间；本金=一次性清理 cruft 的投入。Fowler 用例（4 天→6 天，清理 5 天）说明只有后续还有多次同类变更，先还本才划算。",
+      "source_ids": [
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "隐喻的关键‘破绽’：技术债利息只在修改该代码时触发，不像金融债按时间累积；故 crufty 但稳定、不常改的代码可暂不处理，而高频变更区需要 zero-tolerance。",
+      "source_ids": [
+        "WEB-002",
+        "PAP-006"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "因生产率与债无法客观度量（CannotMeasureProductivity），通常最优策略是像处理财务债一样‘逐步偿还本金’，这天然把清理集中在经常修改的区域。",
+      "source_ids": [
+        "WEB-002",
+        "WEB-015"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债应按 prudent/reckless × deliberate/inadvertent 四象限分诊；争论重点应是‘债是否审慎’而非‘是否算债’，prudent-inadvertent 债即使优秀团队也不可避免。",
+      "source_ids": [
+        "WEB-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "以债为‘快速交付’辩护只在停留在 design payoff line 之下时成立，而团队常在本应数月内就越过该线；越过后再借债使交付更晚（取舍是虚幻的）。",
+      "source_ids": [
+        "WEB-002",
+        "WEB-015"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "内部质量高反而降低后续变更成本：internal quality 消除 cruft，使增强软件更便宜；即使最优秀团队也会产生 cruft。",
+      "source_ids": [
+        "WEB-018",
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债已从隐喻发展为可管理的理论与实践：需把债显式化、度量、纳入决策，并以 common backlog 列出债任务与改进动作；决策与未来系统变更共同影响债的演化。",
+      "source_ids": [
+        "PAP-009",
+        "OFF-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债类型多样：Li 等归纳 10 类 TD 与 8 类 TDM 活动、29 种工具，且 code-related TD 及其管理最受关注；Alves 等提出术语本体来组织不同债务类型及 indicators。",
+      "source_ids": [
+        "PAP-011",
+        "PAP-012"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SQALE 以生命周期期望为基准，提供客观/准确/可复现/自动化的源代码技术债评估与管理方法（9 原则 + Quality Model/Analysis Model/indices/indicators 四组件）。",
+      "source_ids": [
+        "VEN-011",
+        "PAP-010"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SonarQube 将技术债操作化为可计算量：technical debt（sqale_index）= 全部 maintainability issue 的 remediation cost 之和；remediation cost 是修复单个 issue 的分钟估计（默认 8 小时/天）。",
+      "source_ids": [
+        "VEN-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SonarQube 技术债比率 = 修复成本 /（每行开发成本 × 代码行数），每行默认 30 分钟；并据此把 maintainability rating 分为 A ≤5%…E ≥50%（阈值可配置）。",
+      "source_ids": [
+        "VEN-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SonarQube 区分 overall code 与 new code 的债与评级（整体 A、新代码 B），并以 code smell 作为 maintainability 域的 issue 类型——形成‘新代码零债务’的门控抓手。",
+      "source_ids": [
+        "VEN-009",
+        "VEN-010"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SonarQube 的 clean code 属性从 consistency、intentionality、adaptability、responsibility 四个维度组织问题，超越单一‘坏味道计数’。",
+      "source_ids": [
+        "VEN-010"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债度量工具术语/指标/识别方式各异，须比较其特性与有效性证据；现有实证证据有限，不能把单一工具的分数当作债务真值。",
+      "source_ids": [
+        "PAP-013",
+        "PAP-015"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "除静态分析外，SATD（开发者自承认技术债）可从源码注释、commit 消息、pull request、issue 跟踪四源自动识别（平均 F1≈0.611），补足工具难以捕捉的债务。",
+      "source_ids": [
+        "PAP-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债造成可观测的生产率损失，已有复现/扩展研究考察开发者日常工作；这是‘利息’可量化的实证方向。",
+      "source_ids": [
+        "PAP-016",
+        "PAP-009"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "技术债优先级排序（prioritization）是 TDM 的关键活动，但研究尚初步：现有度量只覆盖实践中定性排序所用因素的一小部分，缺乏经验证的共识与工具。",
+      "source_ids": [
+        "PAP-015",
+        "PAP-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "重构以‘不改变可观察行为’为硬判据，是偿还代码/设计债的核心手段；其目录（Refactoring 2nd ed）提供把 code smell 映射到具体变换的手法库。",
+      "source_ids": [
+        "BK-021",
+        "WEB-017"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "boy-scout/camp-site rule 的工程化即机会式重构：看到不清晰代码就顺手清理，小步、持续、测试绿灯下进行，避免安排专门重构阶段，也避免钻兔子洞。",
+      "source_ids": [
+        "WEB-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "偿还架构级技术债应避免整机重写（多数失败），采用 strangler fig 渐进迁移：增量建新、逐块搬走行为；其四活动为理解结果→拆小→交付→改造组织。",
+      "source_ids": [
+        "WEB-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构技术债由‘大’设计决策造成，难识别、修复成本范围大、常被回避，且与沟通问题相关；其理论含 symptoms/causes/consequences/management strategies 等概念。",
+      "source_ids": [
+        "PAP-017",
+        "PAP-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债与架构腐化的关系：架构侵蚀（架构违规）与架构漂移（对架构不敏感）造成‘越来越抗拒变更’，是架构层债务累积的机制；Lehman 定律的‘复杂度递增/质量下降’为其时间维理论根据。",
+      "source_ids": [
+        "WEB-019",
+        "PAP-008",
+        "PAP-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "需求层也存在技术债：需求技术债指理想规格与实际实现之间的差距，源于战略决策或上下文无意变化；识别与度量是 TDM 前两步。",
+      "source_ids": [
+        "PAP-018",
+        "PAP-011"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "debt_governance": [
+    {
+      "debt_type": "代码债（Code technical debt）",
+      "signal": "code smells（长函数、重复代码、复杂条件、深层嵌套、数据泥团）；认知/圈复杂度上升；单元可读性下降",
+      "measures": "code_smells 计数；sqale_index（remediation cost 之和）；technical debt ratio（sqale_debt_ratio）；maintainability rating（A–E）；SATD 抽取",
+      "repayment": "小步重构（Refactoring 手法目录，行为不变）；boy-scout/机会式重构；代码评审与静态分析门控；新代码零债务门控",
+      "counterexample": "无测试直接重构遗留码 → 回归缺陷；或把‘重构’当作改名/重写的借口（违反可观察行为不变）",
+      "source_ids": [
+        "VEN-009",
+        "VEN-010",
+        "BK-021",
+        "WEB-017",
+        "WEB-014",
+        "PAP-014"
+      ]
+    },
+    {
+      "debt_type": "设计债（Design technical debt）",
+      "signal": "错误/过度抽象、SOLID 违背、耦合高内聚低、职责错位；Fowler 四象限中 prudent/reckless 决策的后果",
+      "measures": "design smells/静态规则；maintainability 子特性（modularity/analysability/modifiability）；变更成本（利息）估计",
+      "repayment": "preparatory refactoring；重构到模式；用‘逐步还本’优先处理高频变更区",
+      "counterexample": "把所有设计缺陷一律斥为‘坏债’而否定 prudent-deliberate 债的正当性；或过度抽象（wrong abstraction）",
+      "source_ids": [
+        "WEB-013",
+        "WEB-014",
+        "STD-005",
+        "PAP-009"
+      ]
+    },
+    {
+      "debt_type": "架构债（Architectural technical debt, ATD）",
+      "signal": "architecture erosion（违规）与 drift（不敏感）；架构异味；系统脆化、抗拒变更；‘大’决策阻碍演化",
+      "measures": "架构适应度函数（fitness functions）；ATAM 评估；依赖/结构度量与架构异味索引；ATD 症状-成因-后果模型",
+      "repayment": "strangler fig 渐进现代化（避免整机重写）；架构重构与约束自动化；ADR 记录与 supersede；组织/沟通配套",
+      "counterexample": "只做工具化架构合规、忽视组织/沟通等非技术成因 → 治标不治本；或约束过严导致架构僵化",
+      "source_ids": [
+        "WEB-019",
+        "PAP-008",
+        "PAP-017",
+        "WEB-016"
+      ]
+    },
+    {
+      "debt_type": "测试债（Test technical debt）",
+      "signal": "测试覆盖低、测试坏味道、flaky/脆弱测试、缺乏回归安全网；无法安全重构",
+      "measures": "覆盖率；测试坏味/变异测试；特征测试（characterization tests）覆盖已知与边界行为",
+      "repayment": "先补特征测试建立行为安全网，再重构；测试重构与去 flaky；把测试纳入完成定义",
+      "counterexample": "在无安全网（无特征测试）下改动遗留码；或把特征测试误当‘正确性测试’（它只验证行为是否变化）",
+      "source_ids": [
+        "PAP-011",
+        "WEB-014",
+        "BK-021"
+      ]
+    },
+    {
+      "debt_type": "文档债（Documentation technical debt）",
+      "signal": "文档缺失/过时、无架构决策记录、知识仅存于个人；SATD 中‘待补文档’类注释",
+      "measures": "文档覆盖度抽检；SATD 来源（注释/issue/commit/PR）；ADR 存量与时效",
+      "repayment": "轻量、模块化文档（ADR，采用单调编号、被取代而非改写）；living documentation 随代码演化；机会式补充",
+      "counterexample": "追求‘永不更新的大部头文档’而非小而模块化、可 diff 的 ADR —— 大文档从不保持更新",
+      "source_ids": [
+        "PAP-014",
+        "WEB-014",
+        "OFF-009"
+      ]
+    },
+    {
+      "debt_type": "需求债（Requirements technical debt）",
+      "signal": "理想规格与实际实现之间的差距；为即时收益做的战略妥协或上下文无意变化",
+      "measures": "需求债 indicators；需求追踪/覆盖；SATD 中需求相关条目",
+      "repayment": "需求梳理与 backlog 优先级化（prioritization）；增量澄清与验收标准补齐",
+      "counterexample": "把需求债当作‘已实现即完成’而长期不澄清，导致返工与维护成本滚雪球",
+      "source_ids": [
+        "PAP-018",
+        "PAP-015",
+        "PAP-011"
+      ]
+    },
+    {
+      "debt_type": "构建/基础设施与过程债（Build / Infrastructure / Process debt）",
+      "signal": "构建缓慢/脆弱、环境不一致、手工发布、流程摩擦抑制机会式重构",
+      "measures": "构建时长/失败率；部署频率与前置时间（DORA 类指标）；变更失败率",
+      "repayment": "CI/CD 与部署流水线自动化；把 fitness functions 纳入流水线；消除抑制重构的摩擦（弱 CodeOwnership、短分支）",
+      "counterexample": "长生命周期 FeatureBranch 与强 CodeOwnership 抑制小步重构，使债在合并冲突中累积",
+      "source_ids": [
+        "WEB-014",
+        "PAP-011",
+        "WEB-018"
+      ]
+    }
+  ],
+  "principles_counterexamples": [
+    {
+      "principle": "技术债是权衡工具而非道德评判，争论‘审慎 vs 鲁莽’而非‘是不是债’",
+      "counterexample": "把一切设计缺陷都斥为‘坏’，否定 prudent-deliberate 债的正当性；反之把债当‘永远不还’的许可",
+      "source_ids": [
+        "WEB-013",
+        "WEB-002"
+      ]
+    },
+    {
+      "principle": "利息只在修改该代码时触发，优先治理高频变更区",
+      "counterexample": "对稳定但不常改的 crufty 代码过度投入清理（利息未被触发，收益低）",
+      "source_ids": [
+        "WEB-002"
+      ]
+    },
+    {
+      "principle": "通常最优策略是逐步偿还本金（gradual repayment）",
+      "counterexample": "无视具体项目，追求一次性/大爆炸式还本（big rewrite），风险高、难回滚",
+      "source_ids": [
+        "WEB-002",
+        "WEB-016"
+      ]
+    },
+    {
+      "principle": "以债换速度只在停留于 design payoff line 之下时成立",
+      "counterexample": "假设设计可长期无限期牺牲换速度（越过 payoff line 后取舍是虚幻的，交付反而更晚）",
+      "source_ids": [
+        "WEB-015",
+        "WEB-002"
+      ]
+    },
+    {
+      "principle": "重构须保持可观察行为不变",
+      "counterexample": "以‘重构’名义改功能/重写；无测试直接重构遗留码",
+      "source_ids": [
+        "BK-021",
+        "WEB-017"
+      ]
+    },
+    {
+      "principle": "机会式重构（boy-scout rule）以测试绿灯与判断力为前提",
+      "counterexample": "无测试就随手重构；或陷入 yak shaving 越改越多，偏离目标",
+      "source_ids": [
+        "WEB-014"
+      ]
+    },
+    {
+      "principle": "科技债度量数字化 ≠ 债务真值",
+      "counterexample": "把单一工具（如 Sonar 分数）当作客观债务真值，忽略工具术语/指标差异与有限的有效性证据",
+      "source_ids": [
+        "PAP-013",
+        "VEN-009"
+      ]
+    },
+    {
+      "principle": "架构债治理需技术与组织/沟通成因并治",
+      "counterexample": "只上工具做架构合规、忽视组织/沟通等非技术成因 → 治标不治本",
+      "source_ids": [
+        "PAP-008",
+        "PAP-017"
+      ]
+    },
+    {
+      "principle": "遗留系统渐进现代化优于整机重写",
+      "counterexample": "整机重写/直接替换：『we've seen this simple-sounding plan go down in flames most of the time』",
+      "source_ids": [
+        "WEB-016"
+      ]
+    },
+    {
+      "principle": "文档应小而模块化、可像代码一样维护",
+      "counterexample": "依赖从不更新的大部头文档；无 ADR 导致架构决策上下文丢失",
+      "source_ids": [
+        "OFF-009",
+        "WEB-014"
+      ]
+    },
+    {
+      "principle": "新代码应实施零债务门控",
+      "counterexample": "只关注整体债清理，放任新代码持续引入新债（整体 A、新代码 B 的陷阱）",
+      "source_ids": [
+        "VEN-009"
+      ]
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "技术债的利息随时间推移自然累积（金融债务直觉）",
+      "verified": "Fowler 明确指出隐喻在此失效：利息只在‘修改该代码’时触发，crufty 但稳定的代码可以不动",
+      "source_id": "WEB-002"
+    },
+    {
+      "misremembered": "技术债就是‘坏代码’，欠债即错误",
+      "verified": "Fowler 四象限：prudent-deliberate 债是为尽早发布的有意权衡；prudent-inadvertent 债不可避免；关键是有意/审慎与否",
+      "source_id": "WEB-013"
+    },
+    {
+      "misremembered": "工具算出的技术债比率是客观真值",
+      "verified": "不同工具术语/指标各异、有效性实证有限；TDR 依赖可配置假设（每行开发成本默认 30 分钟），是启发式而非真值",
+      "source_id": "PAP-013"
+    },
+    {
+      "misremembered": "重构（refactoring）约等于重写/清理",
+      "verified": "重构以‘不改变可观察行为’为硬判据；Cunningham 的债隐喻本意是为增量重构/consolidation 辩护",
+      "source_id": "BK-021"
+    },
+    {
+      "misremembered": "架构债与代码债同类、都可由静态分析轻易检出并增量修复",
+      "verified": "架构债难识别、修复成本范围大、常被回避，且与沟通问题相关；不可简单等同于代码级债",
+      "source_id": "PAP-017"
+    }
+  ],
+  "gaps": [
+    "Alves et al.(2014) 本体正文付费未回源：Abstract 确认其组织‘不同债务类型及 indicators’，但 13 类类型的逐条清单未获取，本包仅以 Li et al.(2015) 的‘10 类 TD’与任务指定的代码/设计/架构/测试/文档/需求分类作为治理表骨架，未逐条引用本体清单。",
+    "技术债度量工具的量化对比（P-S4-05）与需求债识别度量（P-S4-12）正文付费，仅用摘要级结论；具体工具的误报率/与人工评估一致性数据未取。",
+    "P-S4-10（生产率损失）摘要未从 OpenAlex/Crossref 获取，仅题录级证据，故 confidence=medium；建议后续以机构库或作者版补摘要与量化结论。",
+    "SQALE 官方方法定义文档（sqale.org）已下线：经 Wayback 快照核验 9 原则/4 组件与目标，但各 index 的精确定义与阈值未逐条获取；SonarQube 沿用其命名，二者细节差异未展开。",
+    "架构腐化的量化检测工具（ArchUnit/Sonargraph/Structure101 及架构异味索引）未在 P 域展开，留给 G/O/F 域或专项；P 仅记录其与债务的机制关系。",
+    "重构手法目录（Refactoring 2nd ed，68 手法）、Working Effectively with Legacy Code（特征测试/接缝）等书本体受版权未回源，本包复用 L 包已核验的作者官方页面/公开目录，页码级引用待用户提供合法本地副本后补。",
+    "‘技术债优先级排序’(P-S4-07) 与‘技术债与业务价值映射’缺乏可操作共识框架，P 域未给出统一的债量化-BV 转换公式，需阶段2/4 统一裁决。",
+    "测试债/文档债的专用度量指标（如 test smell taxonomy、documentation debt indicators）未取独立权威一手源，治理表相应行以通用原则与 TDM 活动支撑，独立性偏弱。"
+  ],
+  "notes": "信源计数：S1=2、S2=10、S3=3、S4=12，共 27 条（S2/S4 充足，S1=2 以 CMU/SEI + ISO 25010 满足关键定义标准化落点）。关键定义均 ≥2 独立源交叉验证：technical debt = Cunningham(P-S2-03)+Fowler(P-S2-01)+Kruchten/SEI(P-S4-01/P-S1-01)+Li(P-S4-03)；本金-利息 = Fowler(P-S2-01)+Cunningham(P-S2-03)；四象限 = Fowler(P-S2-02)（概念本身单一来源，已在 errata/gaps 说明）；SQALE/TDR = SQALE 官网(P-S3-03)+Letouzey 论文(P-S4-02)+SonarQube 文档(P-S3-01)；code smell = Fowler(P-S2-08)+SonarQube(P-S3-02)；架构债 = JSS 理论(P-S4-11)+Li 映射(P-S4-03)+Perry&Wolf(P-S2-10)。专项门控①：产出 7 行『债务类型→信号→度量→清偿手段』治理表（代码/设计/架构/测试/文档/需求/构建-基础设施-过程），每行配 ≥1 反例；专项门控②：11 条‘原则↔反例’配对。跨包复用：Cunningham OOPSLA'92、Fowler TechnicalDebt/TechnicalDebtQuadrant、Perry&Wolf、Li 2022、Lehman 与 B/L 包同名来源一致（source.cross_ref 标注）；ISO 25010 复用 M 包。信源分级：Wikipedia/博客等无出处二手源未采用；SonarQube/SQALE 为厂商官方文档(S3)，作为度量的操作化补充，非规范定义来源。联网策略：martinfowler.com/c2.com/docs.sonarsource.com 经代理 172.29.0.1:7890 核验；学术源经 Crossref/OpenAlex + CMU/SEI 机构页核验。版权红线遵守：未下载/写入任何受版权保护的书籍全文或论文正文，仅引用作者官方页面、官方文档、Wayback 快照与公开发表论文的题录/摘要。source id 采用 P- 前缀（P-S1-xx 等）以避免与 B/L/M/O 包 id 冲突。"
+}

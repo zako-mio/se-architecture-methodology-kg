@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>演进式架构 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>演进式架构</span></div><div class="meta">methodology · L · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>演进式架构</h1><div class="en">Evolutionary Architecture</div><div class="badges"><span class="badge pr">P0</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">L · 演化与弃用</span><span class="badge th">质量属性</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">把「有引导的增量变更」确立为跨多个<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>维度的首要原则：通过定义架构维度、以可执行机制持续校验合规，并用增量交付验证，使架构能在不失去完整性的前提下持续演化。</span></p></div><p class="note">别名：evolutionary architecture、演进式架构、guided incremental change、可演化架构　|　英文：Evolutionary Architecture　|　类型：方法 / practice</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 678 679.9" role="img" aria-label="演进式架构 的 1-2 跳邻域关系图"><title>演进式架构 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="104.8" y1="-269.6" x2="4.5" y2="-123.1" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度是演化中复杂度递增的成因</title></line><line x1="110.5" y1="-77" x2="-55.9" y2="-205.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：演化不可逆使技术债必然累积</title></line><line x1="12.6" y1="-259.1" x2="-55.9" y2="-205.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：架构侵蚀与漂移是技术债的架构层形态</title></line><line x1="110.5" y1="-77" x2="167.5" y2="-192.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：持续演化推动复杂度与变更成本上升</title></line><line x1="12.6" y1="-259.1" x2="167.5" y2="-192.9" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：侵蚀与漂移使系统抗拒变更、抬高变更成本</title></line><line x1="167.5" y1="-192.9" x2="-55.9" y2="-205.6" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：变更成本是技术债利息的可观测落点</title></line><line x1="205.6" y1="11.2" x2="-55.9" y2="-205.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：行为保持重构是偿还技术债的核心手段</title></line><line x1="107.7" y1="45.8" x2="-55.9" y2="-205.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：债务象限与偿还策略依据技术债本质</title></line><line x1="0" y1="0" x2="110.5" y2="-77" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：演进式架构以演化不可逆为前提</title></line><line x1="0.6" y1="109.2" x2="12.6" y2="-259.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：适应度函数用于抑制架构侵蚀与漂移</title></line><line x1="-178.2" y1="-119.9" x2="167.5" y2="-192.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：遗留治理以降低变更成本为目标</title></line><line x1="214.6" y1="-86.6" x2="110.5" y2="-77" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：弃用策略是演化不可逆下的有序退场</title></line><line x1="107.7" y1="45.8" x2="205.6" y2="11.2" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：债务偿还依靠行为保持重构</title></line><line x1="-178.2" y1="-119.9" x2="205.6" y2="11.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：改动遗留代码前先建立行为安全网</title></line><line x1="0.6" y1="109.2" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：适应度函数是演进式架构的强制机制</title></line><line x1="-178.2" y1="-119.9" x2="214.6" y2="-86.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：遗留治理与弃用共享迁移路径设计</title></line><line x1="107.7" y1="45.8" x2="0" y2="0" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：债务治理与演进式架构协同</title></line><line x1="4.5" y1="-123.1" x2="-55.9" y2="-205.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：演化定律的复杂度递增是技术债的理论根据</title></line><line x1="12.6" y1="-259.1" x2="4.5" y2="-123.1" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：架构腐化是演化定律在架构层的表现</title></line><line x1="0" y1="0" x2="4.5" y2="-123.1" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：演进式架构承接软件必须持续演化的定律</title></line><line x1="61.7" y1="271.9" x2="0.6" y2="109.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以可执行门控持续评估知识库架构完整性</title></line><line x1="61.7" y1="271.9" x2="-121.3" y2="75.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：把架构约束转写为自动执行、可量化判定的校验</title></line><line x1="-67.9" y1="276.9" x2="0.6" y2="109.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：用可执行门控持续校验图谱架构完整性</title></line><line x1="259.7" y1="145.5" x2="107.7" y2="45.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为技术债量化与偿还提供方法基础</title></line><line x1="172" y1="224.6" x2="107.7" y2="45.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务量化支撑按偿还优先级治理技术债</title></line><line x1="259.7" y1="145.5" x2="172" y2="224.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="-121.3" y1="75.1" x2="0.6" y2="109.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：适应度函数工具化实现架构适应度函数方法论</title></line><line x1="-121.3" y1="75.1" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：工具化持续校验支撑演进式架构的增量变更原则</title></line><line x1="-112.4" y1="-64.5" x2="-178.2" y2="-119.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：绞杀者渐进替换实现遗留系统渐进治理方法论</title></line><line x1="-112.4" y1="-64.5" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：绞杀者增量迁移体现有引导的增量演进</title></line><line x1="-121.3" y1="75.1" x2="-112.4" y2="-64.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：适应度校验与绞杀者迁移组合保护遗留系统演进</title></line><line x1="-206" y1="196.6" x2="-121.3" y2="75.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链持续校验交付物完整性</title></line><line x1="-273.3" y1="80.1" x2="-121.3" y2="75.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控做无环断链覆盖一致校验，防漂移</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">演进式架构<title>演进式架构（MTH-L-04）</title></text><circle cx="4.5" cy="-123.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="4.5" y="-104.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">软件演化定律<title>软件演化定律（ESS-L-01）</title></text><circle cx="110.5" cy="-77" r="9.0" fill="#c98a3a" stroke="none"/><text x="110.5" y="-58" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">演化的不可逆性<title>演化的不可逆性（ESS-L-04）</title></text><circle cx="107.7" cy="45.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="107.7" y="64.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术债象限与偿还策略<title>技术债象限与偿还策略（MTH-L-03）</title></text><circle cx="0.6" cy="109.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="0.6" y="128.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构适应度函数<title>架构适应度函数（MTH-L-05）</title></text><circle cx="-121.3" cy="75.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-121.3" y="94.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构适应度函数工具化<title>架构适应度函数工具化（TEC-L-01）</title></text><circle cx="-112.4" cy="-64.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="-112.4" y="-45.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">绞杀者渐进式替换<title>绞杀者渐进式替换（TEC-L-02）</title></text><circle cx="104.8" cy="-269.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="104.8" y="-253.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">本质复杂度与偶然复杂度<title>本质复杂度与偶然复杂度（ESS-O-01）</title></text><circle cx="-55.9" cy="-205.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-55.9" y="-189.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债本质<title>技术债本质（ESS-L-02）</title></text><circle cx="205.6" cy="11.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="205.6" y="27.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">行为保持重构<title>行为保持重构（MTH-L-01）</title></text><circle cx="61.7" cy="271.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="61.7" y="287.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="-206" cy="196.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-206" y="212.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Open Code Re…<title>Open Code Review 图谱（CAS-X-15）</title></text><circle cx="-273.3" cy="80.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-273.3" y="96.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">AI Agent 架构 …<title>AI Agent 架构 DAG 复盘（CAS-X-18）</title></text><circle cx="167.5" cy="-192.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="167.5" y="-176.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">变更成本随复杂度增长<title>变更成本随复杂度增长（ESS-L-05）</title></text><circle cx="259.7" cy="145.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="259.7" y="161.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="172" cy="224.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="172" y="240.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="12.6" cy="-259.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="12.6" y="-243.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构侵蚀与漂移<title>架构侵蚀与漂移（ESS-L-03）</title></text><circle cx="-178.2" cy="-119.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-178.2" y="-103.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">遗留系统渐进治理<title>遗留系统渐进治理（MTH-L-06）</title></text><circle cx="-67.9" cy="276.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-67.9" y="292.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG 两次级联升…<title>插件 DAG 两次级联升级（CAS-X-07）</title></text><circle cx="214.6" cy="-86.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="214.6" y="-70.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">弃用与日落策略<title>弃用与日落策略（MTH-L-07）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 6 个直接邻接、外环 13 个二跳节点，共 20 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">传统做法把架构视为一次性的前期设计，假设需求稳定、可以在动工前做对全部关键决策。</span><span class="hl"><a class="term" href="../14-views/glossary.html#g-111" title="evolutionary architecture — 支持「有引导的增量变更」作为多维度首要原则的架构；可演化性作为一等 -ility。">演进式架构</a>接受相反的前提：需求、环境与约束都会在生命周期内变化，因此架构必须被设计成能够改变。</span><span class="hl">它的核心主张是把<a class="term" href="../14-views/glossary.html#g-129" title="（无权威共识，给推荐口径）evolvability — 无 ISO 术语、无共识定义；推荐学术口径：在全生命周期以最低成本容纳需求变更、同时保持架构完整性；与 extensibility 边界模糊。">可演化性</a>提升为一等的<a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>，让「能否以有引导的小步变更持续调整」成为架构本身的目标，而不是事后的补救能力。</span>所谓「有引导」是关键：不是放任结构随意漂移，而是在明确的架构维度与约束下、沿可验证的方向增量前进。这种取向也改变了对架构师角色的理解：架构师不再是前期一次性决策的制定者，而是持续引导演化方向的守护者，其产出包括可执行的约束、清晰的维度与可追溯的决策，架构因此成为贯穿交付的活动。它把「变化」从需要防御的风险，重新定义为架构设计必须正面回应的常态。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">机制由三步构成。</span>第一步是识别真正重要的架构维度（如弹性、可运维性、安全性、可演化性），并明确各维度期望的方向与优先级，同时显式处理维度之间的冲突。<span class="hl">第二步是为关键维度定义可执行的校验机制，把架构意图转成能在<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">构建</a>或运行中自动判定的约束，使合规不依赖人的记忆与自觉。</span>第三步是把这些校验嵌入增量交付流程，让每次变更都要通过架构约束，从而在快速迭代中守住结构。「有引导」与「敏捷」并不矛盾，反而互为条件：只有当架构约束被自动化、且变更可小步可回滚时，团队才敢快速迭代而不担心结构失控；反之，若每次改动都可能破坏架构，团队就会被迫放慢并回到重前端设计，因此这一方法同时依赖技术机制与交付实践，两者缺一，方法就只剩下一半。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">先从<a class="term" href="../14-views/glossary.html#g-014" title="stakeholder — 对关注系统持有 Concern（关注点）的个人、群体或组织（含客户、用户、开发/维护者、监管者等）。">干系人</a>处收集最重要的架构属性并归并为主题，识别并显式记录它们之间的冲突（例如<a class="term" href="../14-views/glossary.html#g-125" title="flexibility — 25010:2023 顶层特性：产品适应需求、使用情境或系统环境变化的能力；子特性 adaptability/scalability/installability/replaceability；由 2011 版 Portability 改名。">灵活性</a>与稳定性常相互牵制）。</span><span class="hl">为每个关键属性定义可度量、可自动判定的校验，并纳入流水线分<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>执行；对难以自动化的维度保留人工评审。</span><span class="hl">以增量方式交付并频繁验证，使架构调整与<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>演进同步；把<a class="term" href="../14-views/glossary.html#g-023" title="architecture decision record (ADR) — 记录单个 architecturally significant decision 的短文本，含 Title/Context/Decision/Status/Consequences；单调编号、被取代而非改写，与 42010 Rationale 对齐。">架构决策记录</a>下来，使变更的方向可追溯。</span>把维度与校验纳入团队的工作约定也很关键：让新成员了解哪些结构约束不可违反、为什么存在，并在设计变更时同步更新维度与校验，当架构意图对团队透明且可执行时，「有引导」才不依赖少数人的记忆。定期回看维度与校验是否仍反映真实关切，当某维度不再重要时予以撤销，避免约束堆积成僵化。同时应把架构治理的成效与交付数据关联起来，观察约束引入后变更是否仍顺畅，以此判断治理是在支持演化还是拖慢交付。约束的失效案例也应被记录，作为维度与判据是否仍有效的证据。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>演进式架构有其成本与失效模式。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>其一，定义与维护校验机制需要基础设施与持续投入，校验本身也可能成为负担。</li><li>其二，校验若把实现细节固化过强，会「僵化」架构、阻止合理演化，与初衷相悖。</li><li>其三，质量属性之间常相互冲突，追求「全都要」会使权衡失焦，必须显式排序。</li><li>其四，架构维度的选择依赖判断，遗漏关键维度会导致方向性偏差。</li><li>其五，没有持续执行与增量交付的支撑，「有引导」会退化为口号。</li><li>这一方法还对基础设施与团队能力有前提要求：缺乏持续交付、自动化校验与可观测手段时，强行照搬会停留在口号层面。</li><li>因此应根据组织的实际能力渐进引入，先建立最关键的少数校验，把校验集中在结构约束而非实现细节上，再随能力提升扩展。</li><li>另一个张力是与既有组织流程的兼容：如果架构守护与团队既有的评审、发布节奏冲突，再好的机制也会被绕开；因此引入时应优先嵌入现有流程，而不是另起一套并行制度。</li><li>总体而言，演进式架构并不意味着更少的设计，而是把设计从一次性决策转为持续维护：架构师的核心工作从「做出所有关键决定」变为「保持方向清晰、约束有效、变化可承受」。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-04 · 2 跳派生：当前节点 → MTH-L-03 → MTH-L-01</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-06 · 经 MTH-L-05</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-07 · 经 MTH-L-05</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → ESS-L-01 → ESS-O-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 经 TEC-L-01</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 经 TEC-L-01</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-011、VEN-030、VEN-031、WEB-019</div><div class="r"><span class="k">入口链接</span><a href="https://nealford.com/books/buildingevolutionaryarchitectures.html" target="_blank" rel="noopener">https://nealford.com/books/buildingevolutionaryarchitectures.html</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：演进式架构等于放弃前期架构设计，边写边改</span><br>核验结论：演进式架构强调「有引导」的增量变更：仍需识别关键架构维度并定义可执行约束，只是把架构维护贯穿生命周期而非一次到位　<span class="k">[BK-011]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：只要定义了架构约束，就自然能实现演进式架构</span><br>核验结论：约束必须在交付流程中持续执行、且配合增量交付实践才能兑现；缺乏执行的约束无法防止架构漂移　<span class="k">[VEN-030]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（6 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依赖关联</td><td>← MTH-L-03</td><td>技术债象限与偿还策略<br><span style="color:var(--dim);font-size:12px">E-618</span></td><td>债务治理与演进式架构协同</td></tr><tr><td class="k">依据推导</td><td>→ ESS-L-01</td><td>软件演化定律<br><span style="color:var(--dim);font-size:12px">E-622</span></td><td>演进式架构承接软件必须持续演化的定律</td></tr><tr><td class="k">依据推导</td><td>→ ESS-L-04</td><td>演化的不可逆性<br><span style="color:var(--dim);font-size:12px">E-609</span></td><td>演进式架构以演化不可逆为前提</td></tr><tr><td class="k">实现</td><td>← TEC-L-01</td><td>架构适应度函数工具化<br><span style="color:var(--dim);font-size:12px">E-902</span></td><td>工具化持续校验支撑演进式架构的增量变更原则</td></tr><tr><td class="k">实现</td><td>← TEC-L-02</td><td>绞杀者渐进式替换<br><span style="color:var(--dim);font-size:12px">E-904</span></td><td>绞杀者增量迁移体现有引导的增量演进</td></tr><tr><td class="k">细化</td><td>← MTH-L-05</td><td>架构适应度函数<br><span style="color:var(--dim);font-size:12px">E-616</span></td><td>适应度函数是演进式架构的强制机制</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

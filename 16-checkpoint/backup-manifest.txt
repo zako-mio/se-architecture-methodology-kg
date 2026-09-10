@@ -1,0 +1,16 @@
+2db916e1f09d4a5356117bd6691b87654c27df37d52e84f5e705400f959d715d  ./02-research/A-se-definition.json
+5433f1a8c9e143afa2fecee35c7727082a28685854500b77ddccc078cdc4517c  ./02-research/B-architecture-definition.json
+98344c506a9e2348ccb3d90d92164ebed96b31f1aeec83975d24a86ec237a460  ./02-research/F-requirements.json
+b1015d244adf9e5de6b9d7262de46e372a06634923ef91bcbb6bd68279470501  ./02-research/G-architecture.json
+e8b82fe94f1c55b59aa0f5469d952b30799c6548757ff9385f6e58e1fff3492a  ./02-research/H-implementation.json
+3adc3d7a68603b30c69fc2a84732820f2a89cd0f4600a1f46556d9515da9b2e5  ./02-research/I-testing.json
+74d6f047f9f0cb97729883711391b133851e1b0326b71ad68b7463f6f1c6169a  ./02-research/J-deployment.json
+41a3e51ff92b4b117e1472619b3a6a5e8128d9d3d3a0bcfbf8255c2b669f366a  ./02-research/K-operations.json
+f672240caaba50ab5e6782922f0b4fc8970bd1e097e0f4bea4ed2e678bca42ef  ./02-research/L-evolution.json
+6448307e46c04e18872875d292a490eb050f3ae5f0b3805b7405d7134652a16a  ./02-research/M-quality-ility.json
+15cda572261749bce5ebc6a5deccf795a73e9643f464161bd3e5e46334597c83  ./02-research/N-team-conway.json
+bd65631eac0102b247969de26c02d821b0436aabd01b9f13fc01eb14ba2ec510  ./02-research/O-methodology.json
+bade4564da70a3a52b1be3b1a7b4cb9b9a029a96ee0b23e8f48d49c8177c8015  ./02-research/P-techdebt.json
+b849dfa4acdccbe4fe4be234eef60f9a880f9de9a1618e5be427f5d219ae5409  ./02-research/Q-vendor-architecture.json
+e6be855b85bed14b2763da7c4067dac980a1d6f2a67420e8daeb2ade859acaf2  ./02-research/R-foundational-papers.json
+1a8840070e2b93ae99ba13b7cf02fc5749336e69951ccff5509c9a6552aa7c5a  ./03-knowledge-map/knowledge-map.json

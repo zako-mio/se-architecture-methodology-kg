@@ -1,0 +1,435 @@
+{
+  "meta": {
+    "title": "O-PC-01..36 原则↔反例显式落点映射表",
+    "purpose": "把 principle-counterexample 覆盖判定从关键词启发式升级为显式可审计映射；每条须落于真实存在且确有反例(errata 或 contrasts/conflicts 边)的节点。",
+    "authority": "02-research/O-methodology.json principles_counterexamples（权威清单）",
+    "graph": "10-dag-data/methodology-dag.json",
+    "generated_date": "2026-09-10",
+    "counterexample_kind_enum": [
+      "errata",
+      "contrasts",
+      "conflicts",
+      "none"
+    ],
+    "note": "O-PC-03/04 的语义落点为 ESS-H-02（内聚与耦合），该节点本身无 errata/对比边；映射同时挂靠确有反例的细化/印证节点（ESS-H-08 / CAS-X-05）以保证可审计，confidence=medium。"
+  },
+  "rows": [
+    {
+      "opc_id": "O-PC-01",
+      "principle": "信息隐藏 / 优先组合而非继承（encapsulation, favor composition over inheritance）",
+      "node_ids": [
+        "ESS-H-06",
+        "ESS-H-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-06 erratum「继承是纯粹的信息隐藏与复用手段」",
+      "confidence": "high",
+      "rationale": "组合优于继承/脆弱基类反例，ESS-H-06 直接承载 fragile base class 与 white-box reuse；ESS-H-01 承载信息隐藏原始误记。"
+    },
+    {
+      "opc_id": "O-PC-02",
+      "principle": "封装 / 接口稳定（encapsulation, stable interface）",
+      "node_ids": [
+        "ESS-H-04",
+        "ESS-H-01"
+      ],
+      "counterexample_kind": "contrasts",
+      "counterexample_ref": "E-09 (ESS-H-04->ESS-H-01) 抽象泄漏揭示信息隐藏的固有边界",
+      "confidence": "high",
+      "rationale": "抽象泄漏即封装/接口稳定原则的边界反例；ESS-H-04 无 errata，故用其与 ESS-H-01 的 contrasts 边 E-09 作为反例锚点。"
+    },
+    {
+      "opc_id": "O-PC-03",
+      "principle": "高内聚（high cohesion）",
+      "node_ids": [
+        "ESS-H-02",
+        "ESS-H-08"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-08 erratum「单一职责意味着一个类只做一件事、拆分得越细越好」",
+      "confidence": "medium",
+      "rationale": "ESS-H-02 内聚与耦合语义落点但无 errata/对比边；ESS-H-08 经 E-742(refines) 细化该判据，其 errata 记录职责划分反例（过度拆分/职责堆叠），作为高内聚原则的可审计反例锚点。"
+    },
+    {
+      "opc_id": "O-PC-04",
+      "principle": "低耦合（low coupling）",
+      "node_ids": [
+        "ESS-H-02",
+        "CAS-X-05"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "CAS-X-05 erratum「耦合分析就是数依赖数量、越少越好」",
+      "confidence": "medium",
+      "rationale": "ESS-H-02 为低耦合语义落点但无 errata；CAS-X-05 经 E-950(case_instance) 印证 ESS-H-02，其 errata 直指耦合非单一计数维度，匹配低耦合反例语义（Content/Common coupling 等谱系）。"
+    },
+    {
+      "opc_id": "O-PC-05",
+      "principle": "深模块（deep modules）",
+      "node_ids": [
+        "ESS-H-05"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-05 erratum「深模块指代码行数很多的模块」",
+      "confidence": "high",
+      "rationale": "深模块/浅模块节点直接承载 classitis、pass-through 反例；errata 纠正常见误记。"
+    },
+    {
+      "opc_id": "O-PC-06",
+      "principle": "DRY（Don't Repeat Yourself）",
+      "node_ids": [
+        "ESS-H-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-03 erratum「DRY 要求消除一切代码重复」",
+      "confidence": "high",
+      "rationale": "DRY 节点 errata 明确反对过度抽象/错误抽象（prefer duplication over wrong abstraction）。"
+    },
+    {
+      "opc_id": "O-PC-07",
+      "principle": "YAGNI（You Aren't Gonna Need It）",
+      "node_ids": [
+        "MTH-O-08"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-O-08 erratum「为了未来可能的增长，应尽早采用微服务或分布式等复杂架构」",
+      "confidence": "high",
+      "rationale": "图谱时机/复杂度阶梯节点 aliases 含 YAGNI，errata 正是投机式通用化的反例。"
+    },
+    {
+      "opc_id": "O-PC-08",
+      "principle": "设计模式（GoF）",
+      "node_ids": [
+        "ESS-H-09"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-09 erratum「设计模式是放之四海皆准的成品解法，遇到相似问题套用即可」",
+      "confidence": "high",
+      "rationale": "设计模式与反模式节点承载模式过度使用/额外间接层反例。"
+    },
+    {
+      "opc_id": "O-PC-09",
+      "principle": "SRP / 单一变更原因",
+      "node_ids": [
+        "ESS-H-08",
+        "ESS-H-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-08 erratum「SOLID 五原则是彼此独立、可分别套用的规则」",
+      "confidence": "high",
+      "rationale": "SRP/单一变更原因落点；ESS-H-08 errata 纠正职责划分误用（发散式变更/职责堆叠）。"
+    },
+    {
+      "opc_id": "O-PC-10",
+      "principle": "Clean Code 短函数",
+      "node_ids": [
+        "ESS-H-05"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-H-05 erratum「深模块指代码行数很多的模块」",
+      "confidence": "medium",
+      "rationale": "短函数争议(Ousterhout)本质是接口复杂度/功能比而非函数数或行数；ESS-H-05 的 errata 与 tradeoff 明确反对以行数/函数数机械判断。"
+    },
+    {
+      "opc_id": "O-PC-11",
+      "principle": "战略式编程（strategic programming，持续设计投入）",
+      "node_ids": [
+        "MTH-H-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-H-03 erratum「战术式实现只是风格偏好，不影响长期成本」",
+      "confidence": "high",
+      "rationale": "战略式编程节点承载 tactical tornado / BBoM / 软件熵累积反例。"
+    },
+    {
+      "opc_id": "O-PC-12",
+      "principle": "模块化（Modularity）并持续维护复杂度、防止架构腐化",
+      "node_ids": [
+        "ESS-L-03",
+        "ESS-G-04"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-L-03 erratum「架构侵蚀与架构漂移是同义词」",
+      "confidence": "high",
+      "rationale": "模块化须持续维护复杂度：ESS-L-03 errata 区分 erosion/drift，ESS-G-04 承载 BBoM/模块化误记反例。"
+    },
+    {
+      "opc_id": "O-PC-13",
+      "principle": "重构须保持可观察行为不变（behavior-preserving）",
+      "node_ids": [
+        "MTH-L-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-01 erratum「可以在没有测试的代码上直接重构」",
+      "confidence": "high",
+      "rationale": "行为保持重构节点 errata 覆盖以重构之名改行为、无安全网直接改遗留码。"
+    },
+    {
+      "opc_id": "O-PC-14",
+      "principle": "小步、渐进式演进（重构小步 / strangler fig 渐进现代化）",
+      "node_ids": [
+        "MTH-L-06",
+        "TEC-L-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-06 erratum「整机重写是遗留系统现代化最干净的方案」",
+      "confidence": "high",
+      "rationale": "小步渐进/strangler fig 落点；errata 明确整机重写反例。"
+    },
+    {
+      "opc_id": "O-PC-15",
+      "principle": "smell 是启发式信号而非结论",
+      "node_ids": [
+        "MTH-L-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-02 erratum「出现坏味道就意味着代码有问题，应当立即重构」",
+      "confidence": "high",
+      "rationale": "代码坏味道启发式节点 errata 即『见 smell 就机械重构』反例。"
+    },
+    {
+      "opc_id": "O-PC-16",
+      "principle": "技术债应优先偿还高频变更区、逐步还本",
+      "node_ids": [
+        "MTH-L-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-03 erratum「欠债就必须尽快全部偿还，尤其是大额债务」",
+      "confidence": "high",
+      "rationale": "技术债象限与偿还策略 errata 直指过渡清理/一次性重写反例，主张按变更热点优先偿付。"
+    },
+    {
+      "opc_id": "O-PC-17",
+      "principle": "技术债是权衡工具而非道德评判",
+      "node_ids": [
+        "ESS-L-02",
+        "MTH-L-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-L-02 erratum「技术债就是坏代码，欠债即错误」",
+      "confidence": "high",
+      "rationale": "技术债本质节点 errata 即道德评判反例；MTH-L-03 提供 prudent/deliberate 权衡视角。"
+    },
+    {
+      "opc_id": "O-PC-18",
+      "principle": "用可执行的 fitness functions 自动化架构治理（持续校验）",
+      "node_ids": [
+        "MTH-L-05",
+        "TEC-L-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-05 erratum「适应度函数是只做一次、写在文档里的架构检查」",
+      "confidence": "high",
+      "rationale": "架构适应度函数节点 errata 覆盖一次性检查导致漂移、以及固化过强 ossify。"
+    },
+    {
+      "opc_id": "O-PC-19",
+      "principle": "改动遗留码前先建立行为安全网（characterization test / seam）",
+      "node_ids": [
+        "MTH-L-06"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-06 erratum「遗留代码指年代久远或技术栈过时的代码」",
+      "confidence": "high",
+      "rationale": "遗留系统渐进治理节点含 characterization test / seam，errata 纠正遗留码误判与整机重写倾向。"
+    },
+    {
+      "opc_id": "O-PC-20",
+      "principle": "弃用须有信号、通知期与迁移路径",
+      "node_ids": [
+        "MTH-L-07"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-07 erratum「弃用（deprecation）等同于移除（removal）」",
+      "confidence": "high",
+      "rationale": "弃用与日落策略 errata 覆盖无通知移除/僵尸功能/无迁移指引。"
+    },
+    {
+      "opc_id": "O-PC-21",
+      "principle": "版本语义区分『弃用』与『破坏性变更』",
+      "node_ids": [
+        "MTH-L-07"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-L-07 erratum「标记弃用后应尽快移除，以免遗留」",
+      "confidence": "high",
+      "rationale": "版本语义区分弃用/破坏性变更由同节点承载；errata 反对把移除塞入非 MAJOR。"
+    },
+    {
+      "opc_id": "O-PC-22",
+      "principle": "康威定律：组织沟通结构决定系统架构",
+      "node_ids": [
+        "ESS-N-01",
+        "ESS-N-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-N-01 erratum「Conway 本人命名了 Conway's Law」",
+      "confidence": "high",
+      "rationale": "康威定律节点 errata 纠正常见误记；ESS-N-02 承载部分镜像/战略性打破镜像反例。"
+    },
+    {
+      "opc_id": "O-PC-23",
+      "principle": "逆向康威操作（Inverse Conway Maneuver）：改变团队结构以催生目标架构",
+      "node_ids": [
+        "MTH-N-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-N-01 erratum「逆向康威就是重新画一次组织架构图」",
+      "confidence": "high",
+      "rationale": "逆向康威操作节点 errata 即 ICM 被误用为重组组织图的反例。"
+    },
+    {
+      "opc_id": "O-PC-24",
+      "principle": "团队拓扑四类型 + 三种交互模式",
+      "node_ids": [
+        "MTH-N-02",
+        "MTH-N-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-N-02 erratum「四种团队类型是组织设计的完整分类，现实团队必须归入其一」",
+      "confidence": "high",
+      "rationale": "团队拓扑四类型 + 三交互模式；errata 反对只用模型一部分或视为穷尽现实。"
+    },
+    {
+      "opc_id": "O-PC-25",
+      "principle": "平台团队降低 stream-aligned 认知负荷、加速交付",
+      "node_ids": [
+        "MTH-N-04",
+        "TEC-N-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "TEC-N-01 erratum「平台工程必然改善交付效能」",
+      "confidence": "high",
+      "rationale": "平台团队/TVP 节点 errata 反对臃肿平台；TEC-N-01 errata 记录平台工程可能降低稳定性与吞吐。"
+    },
+    {
+      "opc_id": "O-PC-26",
+      "principle": "用 DORA 交付指标度量效能（当前五指标）",
+      "node_ids": [
+        "MTH-N-05",
+        "TEC-N-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "TEC-N-01 erratum「交付效能平台就是把指标接到一块大屏上展示」",
+      "confidence": "medium",
+      "rationale": "DORA 指标 Goodhart/gaming 反例主要见于节点 tradeoff；TEC-N-01 errata+tradeoff 明确反对考核化与数据失真，MTH-N-05 承载口径误记。"
+    },
+    {
+      "opc_id": "O-PC-27",
+      "principle": "AI 提升开发生产力",
+      "node_ids": [
+        "MTH-N-05",
+        "TEC-N-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-N-05 erratum「采用 AI 等新技术会全面提升软件交付效能」",
+      "confidence": "high",
+      "rationale": "AI 提升生产力反例（DORA 2024）由 MTH-N-05 与 TEC-N-01 的 errata 直接记录。"
+    },
+    {
+      "opc_id": "O-PC-28",
+      "principle": "需求应陈述 what 而非 how，且须满足良构需求特性",
+      "node_ids": [
+        "MTH-F-04",
+        "ESS-F-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "ESS-F-01 erratum「需求可以等同于设计说明」",
+      "confidence": "high",
+      "rationale": "需求 what 而非 how；ESS-F-01 errata 覆盖需求内嵌设计决策，MTH-F-04 承载规约过度详细反例。"
+    },
+    {
+      "opc_id": "O-PC-29",
+      "principle": "测试金字塔：大量低层单元测试 + 少量高层端到端测试",
+      "node_ids": [
+        "MTH-I-04"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-I-04 erratum「测试金字塔要求严格按单元/服务/端到端三层固定比例分配测试」",
+      "confidence": "high",
+      "rationale": "测试金字塔与反模式节点；errata 纠正固定比例误读，反例为冰淇淋/沙漏反模式。"
+    },
+    {
+      "opc_id": "O-PC-30",
+      "principle": "质量门控以量化条件阻断不可发布版本",
+      "node_ids": [
+        "MTH-I-06",
+        "MTH-K-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-K-02 erratum「告警应基于瞬时错误率，越敏感越好」",
+      "confidence": "high",
+      "rationale": "质量门控以量化条件阻断：MTH-I-06 errata 纠正门控越严越好，MTH-K-02 承载单点瞬时告警/缺错误预算反例。"
+    },
+    {
+      "opc_id": "O-PC-31",
+      "principle": "断路器 + 超时 + 重试（指数退避 + 抖动、仅幂等操作）",
+      "node_ids": [
+        "TEC-K-01"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "TEC-K-01 erratum「重试是普适的可靠性手段，调用失败就应当自动重试」",
+      "confidence": "high",
+      "rationale": "断路器+超时+重试（指数退避+抖动、仅幂等）节点 errata 覆盖非幂等重试/重试风暴/缺舱壁。"
+    },
+    {
+      "opc_id": "O-PC-32",
+      "principle": "无指责复盘（blameless postmortem）",
+      "node_ids": [
+        "MTH-K-05",
+        "TEC-K-05"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-K-05 erratum「无指责复盘等于不追究任何责任」",
+      "confidence": "high",
+      "rationale": "无指责复盘节点 errata 覆盖追责文化/只技术排查反例；TEC-K-05 同族证实。"
+    },
+    {
+      "opc_id": "O-PC-33",
+      "principle": "不可变基础设施（部署后不再原地修改，只替换实例）",
+      "node_ids": [
+        "ESS-J-03",
+        "TEC-J-02"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "TEC-J-02 erratum「不可变基础设施意味着数据也不可变更」",
+      "confidence": "high",
+      "rationale": "不可变基础设施节点 errata 覆盖配置漂移与定义误记。"
+    },
+    {
+      "opc_id": "O-PC-34",
+      "principle": "蓝绿 / 金丝雀降低发布爆炸半径",
+      "node_ids": [
+        "MTH-J-05",
+        "TEC-J-04"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "TEC-J-04 erratum「金丝雀发布可以顺带当作 A/B 测试」",
+      "confidence": "high",
+      "rationale": "蓝绿/金丝雀节点 errata 覆盖 schema 兼容、金丝雀当 A/B 测试的目的混用反例；另有 E-845 contrasts 佐证。"
+    },
+    {
+      "opc_id": "O-PC-35",
+      "principle": "质量属性→战术映射（SEI/SAiP）",
+      "node_ids": [
+        "MTH-M-01",
+        "MTH-M-06"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-M-06 erratum「架构的目标是让所有质量属性同时达到最优」",
+      "confidence": "high",
+      "rationale": "质量属性→战术映射；MTH-M-01 errata 反对战术清单万能，MTH-M-06 承载『全都要』/属性冲突反例。"
+    },
+    {
+      "opc_id": "O-PC-36",
+      "principle": "架构风格以约束换取期望质量属性",
+      "node_ids": [
+        "ESS-G-05",
+        "MTH-G-03"
+      ],
+      "counterexample_kind": "errata",
+      "counterexample_ref": "MTH-G-03 erratum「存在普遍最优的架构风格」",
+      "confidence": "high",
+      "rationale": "架构风格以约束换属性；MTH-G-03 errata 反对普遍最优风格，ESS-G-05 反对风格可成品套用；E-213 contrasts 佐证按属性选型与按领域划边界张力。"
+    }
+  ]
+}

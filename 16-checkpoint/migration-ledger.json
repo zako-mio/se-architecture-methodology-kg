@@ -1,0 +1,156 @@
+{
+  "generated": "2026-09-10",
+  "applied": true,
+  "files": [
+    {
+      "package": "A",
+      "file": "02-research/A-se-definition.json",
+      "sources": 21,
+      "ids": 21,
+      "refs": 48,
+      "legacy": 21,
+      "bom": false
+    },
+    {
+      "package": "B",
+      "file": "02-research/B-architecture-definition.json",
+      "sources": 27,
+      "ids": 27,
+      "refs": 49,
+      "legacy": 27,
+      "bom": false
+    },
+    {
+      "package": "F",
+      "file": "02-research/F-requirements.json",
+      "sources": 17,
+      "ids": 17,
+      "refs": 42,
+      "legacy": 17,
+      "bom": false
+    },
+    {
+      "package": "G",
+      "file": "02-research/G-architecture.json",
+      "sources": 17,
+      "ids": 17,
+      "refs": 73,
+      "legacy": 17,
+      "bom": false
+    },
+    {
+      "package": "H",
+      "file": "02-research/H-implementation.json",
+      "sources": 18,
+      "ids": 18,
+      "refs": 81,
+      "legacy": 18,
+      "bom": false
+    },
+    {
+      "package": "I",
+      "file": "02-research/I-testing.json",
+      "sources": 33,
+      "ids": 33,
+      "refs": 41,
+      "legacy": 33,
+      "bom": false
+    },
+    {
+      "package": "J",
+      "file": "02-research/J-deployment.json",
+      "sources": 13,
+      "ids": 13,
+      "refs": 74,
+      "legacy": 13,
+      "bom": false
+    },
+    {
+      "package": "K",
+      "file": "02-research/K-operations.json",
+      "sources": 12,
+      "ids": 12,
+      "refs": 86,
+      "legacy": 12,
+      "bom": false
+    },
+    {
+      "package": "L",
+      "file": "02-research/L-evolution.json",
+      "sources": 24,
+      "ids": 24,
+      "refs": 101,
+      "legacy": 24,
+      "bom": false
+    },
+    {
+      "package": "M",
+      "file": "02-research/M-quality-ility.json",
+      "sources": 13,
+      "ids": 13,
+      "refs": 74,
+      "legacy": 13,
+      "bom": false
+    },
+    {
+      "package": "N",
+      "file": "02-research/N-team-conway.json",
+      "sources": 13,
+      "ids": 13,
+      "refs": 55,
+      "legacy": 13,
+      "bom": false
+    },
+    {
+      "package": "O",
+      "file": "02-research/O-methodology.json",
+      "sources": 0,
+      "ids": 0,
+      "refs": 320,
+      "legacy": 0,
+      "bom": false
+    },
+    {
+      "package": "P",
+      "file": "02-research/P-techdebt.json",
+      "sources": 27,
+      "ids": 27,
+      "refs": 106,
+      "legacy": 27,
+      "bom": false
+    },
+    {
+      "package": "Q",
+      "file": "02-research/Q-vendor-architecture.json",
+      "sources": 7,
+      "ids": 7,
+      "refs": 40,
+      "legacy": 7,
+      "bom": false
+    },
+    {
+      "package": "R",
+      "file": "02-research/R-foundational-papers.json",
+      "sources": 14,
+      "ids": 14,
+      "refs": 33,
+      "legacy": 14,
+      "bom": false
+    },
+    {
+      "package": "PHASE1",
+      "file": "03-knowledge-map/knowledge-map.json",
+      "sources": 158,
+      "ids": 158,
+      "refs": 123,
+      "legacy": 158,
+      "bom": false
+    }
+  ],
+  "unresolved": [],
+  "totals": {
+    "ids_rewritten": 414,
+    "refs_rewritten": 1346,
+    "legacy_added": 414
+  }
+}

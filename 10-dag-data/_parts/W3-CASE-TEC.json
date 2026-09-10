@@ -1,0 +1,164 @@
+{
+  "batch_id": "W3-CASE-TEC",
+  "wave": "W3",
+  "domain": "X",
+  "layers": [
+    "case",
+    "technology"
+  ],
+  "produced_by": "case-tech-linker (subagent)",
+  "generated": "2026-09-10",
+  "nodes": [],
+  "edges": [
+    {
+      "id": "E-13",
+      "from": "CAS-X-02",
+      "to": "TEC-M-03",
+      "type": "case_instance",
+      "label": "印证：适配器外置站点差异，隔离变化点缩小影响半径",
+      "sources": [
+        "LOC-021"
+      ]
+    },
+    {
+      "id": "E-14",
+      "from": "CAS-X-03",
+      "to": "TEC-M-03",
+      "type": "case_instance",
+      "label": "印证：schema 单一数据源加严格单向依赖，局部化变更",
+      "sources": [
+        "LOC-022"
+      ]
+    },
+    {
+      "id": "E-15",
+      "from": "CAS-X-04",
+      "to": "TEC-M-03",
+      "type": "case_instance",
+      "label": "印证：单一契约源与能力注册中心防止涟漪效应",
+      "sources": [
+        "LOC-023"
+      ]
+    },
+    {
+      "id": "E-16",
+      "from": "CAS-X-05",
+      "to": "TEC-M-03",
+      "type": "case_instance",
+      "label": "印证：四维耦合分析定位变更影响半径与缝隙",
+      "sources": [
+        "LOC-024"
+      ]
+    },
+    {
+      "id": "E-17",
+      "from": "CAS-X-12",
+      "to": "TEC-G-04",
+      "type": "case_instance",
+      "label": "印证：带观点的分级接入推荐，与雷达四环同构",
+      "sources": [
+        "LOC-031"
+      ]
+    },
+    {
+      "id": "E-18",
+      "from": "CAS-X-14",
+      "to": "TEC-F-01",
+      "type": "case_instance",
+      "label": "印证：requires 工件 DAG 建立需求到实现可追溯链",
+      "sources": [
+        "LOC-033"
+      ]
+    },
+    {
+      "id": "E-19",
+      "from": "CAS-X-01",
+      "to": "TEC-F-02",
+      "type": "case_instance",
+      "label": "印证：从设计文档识别需求缺口作为债务信号",
+      "sources": [
+        "LOC-020"
+      ]
+    },
+    {
+      "id": "E-20",
+      "from": "CAS-X-15",
+      "to": "TEC-H-01",
+      "type": "case_instance",
+      "label": "印证：以自动化代码审查工具为载体沉淀质量实践",
+      "sources": [
+        "LOC-034"
+      ]
+    },
+    {
+      "id": "E-21",
+      "from": "CAS-X-15",
+      "to": "TEC-L-01",
+      "type": "case_instance",
+      "label": "印证：多层门控链持续校验交付物完整性",
+      "sources": [
+        "LOC-034"
+      ]
+    },
+    {
+      "id": "E-22",
+      "from": "CAS-X-18",
+      "to": "TEC-L-01",
+      "type": "case_instance",
+      "label": "印证：门控做无环断链覆盖一致校验，防漂移",
+      "sources": [
+        "LOC-037"
+      ]
+    },
+    {
+      "id": "E-23",
+      "from": "CAS-X-05",
+      "to": "TEC-K-01",
+      "type": "case_instance",
+      "label": "印证：以显式失败取代静默降级，呼应快速失败",
+      "sources": [
+        "LOC-024"
+      ]
+    },
+    {
+      "id": "E-24",
+      "from": "CAS-X-09",
+      "to": "TEC-K-02",
+      "type": "case_instance",
+      "label": "印证：事件地图交叉核对声明点与派发点核验埋点",
+      "sources": [
+        "LOC-028"
+      ]
+    },
+    {
+      "id": "E-25",
+      "from": "CAS-X-06",
+      "to": "TEC-I-01",
+      "type": "case_instance",
+      "label": "印证：自动全量重生成加多级门控构成验证流水线",
+      "sources": [
+        "LOC-025"
+      ]
+    },
+    {
+      "id": "E-26",
+      "from": "CAS-X-18",
+      "to": "TEC-J-06",
+      "type": "case_instance",
+      "label": "印证：采集建模生成门控交付的阶段化交付流水线",
+      "sources": [
+        "LOC-037"
+      ]
+    },
+    {
+      "id": "E-27",
+      "from": "CAS-X-06",
+      "to": "TEC-J-02",
+      "type": "case_instance",
+      "label": "印证：以源数据全量重生成替代就地改页面防漂移",
+      "sources": [
+        "LOC-025"
+      ]
+    }
+  ]
+}

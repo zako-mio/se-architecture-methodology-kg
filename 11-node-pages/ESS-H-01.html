@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信息隐藏 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>信息隐藏</span></div><div class="meta">essence · H · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>信息隐藏</h1><div class="en">Information Hiding</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">H · 实现与构造</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">以「隐藏困难或可能变化的设计决策」作为<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>分解判据：每个模块把一类易变决策封装为自己的秘密，接口只揭示尽量少的内部工作，使变更局部化。它规定的是划分依据与边界，而非模块的物理形态或大小。它是模块化有效性的根本来源之一。</span></p></div><p class="note">别名：information hiding、模块分解判据、secret　|　英文：Information Hiding　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -348.1 705 687.1" role="img" aria-label="信息隐藏 的 1-2 跳邻域关系图"><title>信息隐藏 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="0.3" y1="-150.5" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：关注点分离是信息隐藏的前提</title></line><line x1="0" y1="0" x2="127.4" y2="21" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：理解信息隐藏是评估内聚耦合的前提</title></line><line x1="127.4" y1="21" x2="211.1" y2="-49.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：内聚耦合度量指导边界划分</title></line><line x1="0.3" y1="-150.5" x2="164.6" y2="-243.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：关注点分离促成知识的单一归属</title></line><line x1="70.8" y1="138.5" x2="0" y2="0" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：抽象泄漏揭示信息隐藏的固有边界</title></line><line x1="0" y1="0" x2="0.3" y2="-150.5" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：信息隐藏与关注点分离常组合使用</title></line><line x1="164.6" y1="-243.5" x2="127.4" y2="21" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：单一知识源与高内聚同向协同</title></line><line x1="33.4" y1="-276.7" x2="102.8" y2="-269.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：视图与视角概念是理解架构描述构成与对应关系的前提</title></line><line x1="102.8" y1="-269.8" x2="211.1" y2="-49.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：架构描述记录边界与接口的外部可见属性</title></line><line x1="0.3" y1="-150.5" x2="102.8" y2="-269.8" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：架构描述按干系人关注点组织局部表达</title></line><line x1="250" y1="24.6" x2="-110.3" y2="42.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SOLID 管职责与替换性，组合优先管复用机制</title></line><line x1="250" y1="24.6" x2="127.4" y2="21" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：SOLID 以职责划分细化高内聚低耦合判据</title></line><line x1="250" y1="24.6" x2="270.5" y2="112.7" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：职责划分与替换性判据是理解模式适用性的前提</title></line><line x1="270.5" y1="112.7" x2="127.4" y2="21" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：模式是被命名的内聚与解耦结构解法</title></line><line x1="270.5" y1="112.7" x2="-25.4" y2="113.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：模式以稳定接口封装变化，呼应深模块</title></line><line x1="270.5" y1="112.7" x2="70.8" y2="138.5" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：模式封装复杂度，抽象泄漏标明其边界</title></line><line x1="192" y1="228" x2="127.4" y2="21" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：评审以高内聚低耦合作为结构判据</title></line><line x1="192" y1="228" x2="164.3" y2="117.7" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：评审发现的坏味道交由重构手法处理</title></line><line x1="-184.7" y1="-232.8" x2="0.3" y2="-150.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：按关注点将系统分解为可独立处理的 18 个模块</title></line><line x1="227.5" y1="-219.8" x2="164.6" y2="-243.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：schema 作为字段知识的单一权威来源</title></line><line x1="227.5" y1="-219.8" x2="106" y2="-89.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：共享层严格单向依赖实现模块化与可独立变更</title></line><line x1="302" y1="-103.8" x2="127.4" y2="21" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以内聚与耦合维度逐点评估通道结构</title></line><line x1="302" y1="-103.8" x2="211.1" y2="-49.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：特化标识由提供者构造期绑定，通用契约零扩展</title></line><line x1="86.5" y1="274.7" x2="70.8" y2="138.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：依赖声明是泄漏的抽象，不能替代运行时真实引用</title></line><line x1="190.2" y1="-131.4" x2="106" y2="-89.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：七层职责分解与分层坐标</title></line><line x1="190.2" y1="-131.4" x2="-30" y2="-284.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：分层架构风格的工业级实例</title></line><line x1="190.2" y1="-131.4" x2="-25.4" y2="113.9" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：违背：巨型单文件偏离深模块与信息隐藏理想</title></line><line x1="-106.6" y1="-266.7" x2="0.3" y2="-150.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：查询引擎、工具、权限、记忆的关注点分离</title></line><line x1="106" y1="-89.1" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：模块化目标是信息隐藏判据的前提</title></line><line x1="106" y1="-89.1" x2="127.4" y2="21" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：模块划分质量以内聚耦合衡量</title></line><line x1="0.3" y1="-150.5" x2="-30" y2="-284.1" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：关注点分离是理解与选择架构风格的认知基础</title></line><line x1="0.3" y1="-150.5" x2="33.4" y2="-276.7" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：关注点分离是视图与视角划分的基础</title></line><line x1="33.4" y1="-276.7" x2="211.1" y2="-49.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：视图记录边界与接口的外部可见属性</title></line><line x1="0" y1="0" x2="-25.4" y2="113.9" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：信息隐藏是理解深/浅模块的前提</title></line><line x1="0" y1="0" x2="-110.3" y2="42.4" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：信息隐藏是判断继承/组合取舍的前提</title></line><line x1="-110.3" y1="42.4" x2="127.4" y2="21" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：继承在父子类之间引入实现层耦合</title></line><line x1="106" y1="-89.1" x2="0.3" y2="-150.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：模块化是关注点分离在结构上的体现</title></line><line x1="-175.9" y1="-122" x2="211.1" y2="-49.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：限界上下文依边界与接口隔离原理</title></line><line x1="164.3" y1="117.7" x2="127.4" y2="21" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：重构以改善内聚耦合、降低变更成本</title></line><line x1="-72.7" y1="-61" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：信息隐藏模块分解是信息隐藏原理的方法化</title></line><line x1="-72.7" y1="-61" x2="-175.9" y2="-122" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：信息隐藏与限界上下文同属模块边界判据</title></line><line x1="164.3" y1="117.7" x2="-72.7" y2="-61" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：重构手法族用于达成信息隐藏分解边界</title></line><line x1="164.3" y1="117.7" x2="-72.7" y2="-61" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：重构手法使信息隐藏在既有代码上可逐步落地</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">信息隐藏<title>信息隐藏（ESS-H-01）</title></text><circle cx="0.3" cy="-150.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="0.3" y="-131.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">关注点分离<title>关注点分离（ESS-G-01）</title></text><circle cx="106" cy="-89.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="106" y="-70.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">模块化与分解<title>模块化与分解（ESS-G-04）</title></text><circle cx="127.4" cy="21" r="9.0" fill="#c98a3a" stroke="none"/><text x="127.4" y="40" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">内聚与耦合<title>内聚与耦合（ESS-H-02）</title></text><circle cx="70.8" cy="138.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="70.8" y="157.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">抽象泄漏<title>抽象泄漏（ESS-H-04）</title></text><circle cx="-25.4" cy="113.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="-25.4" y="132.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">深模块与浅模块<title>深模块与浅模块（ESS-H-05）</title></text><circle cx="-110.3" cy="42.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="-110.3" y="61.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">组合优于继承与脆弱基类<title>组合优于继承与脆弱基类（ESS-H-06）</title></text><circle cx="-72.7" cy="-61" r="9.0" fill="#c98a3a" stroke="none"/><text x="-72.7" y="-42" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">信息隐藏模块化分解<title>信息隐藏模块化分解（MTH-H-02）</title></text><circle cx="211.1" cy="-49.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="211.1" y="-33.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="192" cy="228" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="192" y="244" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码复审与可读性治理<title>代码复审与可读性治理（MTH-H-04）</title></text><circle cx="302" cy="-103.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="302" y="-87.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="33.4" cy="-276.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="33.4" y="-260.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">视图与视角<title>视图与视角（ESS-G-06）</title></text><circle cx="102.8" cy="-269.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="102.8" y="-253.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构描述与对应关系<title>架构描述与对应关系（ESS-G-07）</title></text><circle cx="164.3" cy="117.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="164.3" y="133.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">重构手法族<title>重构手法族（MTH-H-01）</title></text><circle cx="-184.7" cy="-232.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-184.7" y="-216.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">去中心化聊天架构逆向<title>去中心化聊天架构逆向（CAS-X-01）</title></text><circle cx="227.5" cy="-219.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="227.5" y="-203.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v3 多模块解耦<title>网申 v3 多模块解耦（CAS-X-03）</title></text><circle cx="-30" cy="-284.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-30" y="-268.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构风格<title>架构风格（ESS-G-05）</title></text><circle cx="164.6" cy="-243.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="164.6" y="-227.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DRY 单一知识来源<title>DRY 单一知识来源（ESS-H-03）</title></text><circle cx="250" cy="24.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="250" y="40.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SOLID 职责划分与替…<title>SOLID 职责划分与替换性（ESS-H-08）</title></text><circle cx="270.5" cy="112.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="270.5" y="128.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">设计模式与反模式<title>设计模式与反模式（ESS-H-09）</title></text><circle cx="-175.9" cy="-122" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-175.9" y="-106" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">领域驱动战略设计<title>领域驱动战略设计（MTH-G-04）</title></text><circle cx="86.5" cy="274.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="86.5" y="290.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG 两次级联升…<title>插件 DAG 两次级联升级（CAS-X-07）</title></text><circle cx="190.2" cy="-131.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="190.2" y="-115.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Hermes 七层架构总…<title>Hermes 七层架构总览（CAS-X-11）</title></text><circle cx="-106.6" cy="-266.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-106.6" y="-250.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Claude Code …<title>Claude Code 架构逆向（CAS-X-13）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 7 个直接邻接、外环 16 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">系统的复杂度主要来自设计决策的易变性——数据结构、算法、外部接口假设、资源策略等都可能随认知与需求变化。</span>若把频繁变化的决策暴露在接口上，任何变化都会波及所有使用方；把同一类秘密收敛进一个模块、只暴露稳定契约，变化便被限制在该模块内部。因此模块分解不应沿处理步骤或执行时序展开，而应沿「最可能变化处」展开。<span class="hl">Parnas 的核心洞见是：模块是责任的分配，而不是子程序的集合；设计决策的生命周期通常长于<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>过程，按流程图切分会把本应<a class="term" href="../14-views/glossary.html#g-043" title="cohesion — 模块内部元素彼此关联/隶属同一目标的程度；序数型，Coincidental→Functional。">内聚</a>的秘密打散到多个模块，使核心数据一旦改变就牵动全局。</span><span class="hl">评价一种分解方案，可以看它在主要易变方向上会导致多少模块改动，改动越集中的方案越符合<a class="term" href="../14-views/glossary.html#g-041" title="information hiding — Parnas 分解判据：每个模块隐藏一个「困难或可能变化的设计决策」（secret），接口只揭示尽量少的内部工作。">信息隐藏</a>。</span>由此，模块化从一种笼统的美德变成可操作的判据：模块应围绕易变的决策组织，而非围绕代码的物理邻近或处理步骤组织；需求变化时受影响的模块集合是否稳定，正是检验划分优劣的直接证据。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">操作路径分四步：一是列出系统内困难或可能变化的设计决策清单，作为候选秘密；二是把与同一秘密相关的数据与行为归入同一模块，使该秘密只在一处被完整知晓；三是为模块定义最小接口，只揭示稳定的操作语义，不暴露内部结构、处理顺序或临时假设；四是随认知更新重新裁剪边界——曾经稳定的假设一旦变成易变点，就要移动它。</span>这样得到的边界与变化模式对齐，变更波及面收敛于模块内。KWIC 案例给出对照：按隐藏存储格式分解时，格式变更只影响单一模块；按处理步骤分解时，同一变更却要改动每个模块。Parnas 还自评过一处设计错误——某模块在接口上规定了移位的顺序，把超出必要的信息暴露给了使用方，说明「隐藏什么」本身也需要反复裁剪。<span class="hl">需要强调，秘密的边界会随系统演进而移动，因此设计不是一次性完成，而是随认知不断重划的持续活动；冻结过早的边界会在新的变化方向到来时重新变成<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>源。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">设计评审时反复追问「这个模块隐藏了什么秘密」「接口是否暴露了超出必要的细节」，把信息隐藏当作划分模块的首要且可复核的判据。</span>落地上让接口稳定、实现可替换：接口描述职责与契约，易变决策与实现细节留在内部；用封装、深模块与统一入口收敛访问路径，避免调用者绕过接口直接触碰内部结构。衡量标准可以具体化为变更影响面：当某个易变决策改变时，需要改动的模块越少越好；若一处小改动引发多个模块连锁修改，通常说明秘密泄漏到了接口。<span class="hl"><a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>时优先把散落的同一决策搬回一处，再收窄接口，而不是先把接口切细。</span>对继承体系尤需警惕：继承使子类看见父类实现，等价于把父类的秘密向下游暴露；对接口的过度规定同样会把实现假设变成调用方的负担。<span class="hl">此外，深模块——接口简单而<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>强大——通常比接口复杂却功能不足的<a class="term" href="../14-views/glossary.html#g-051" title="deep / shallow module — 深模块=接口简单但功能强大；浅模块=接口复杂却功能不足；设计目标是让模块「深」，避免 classitis。">浅模块</a>更符合信息隐藏，也更少把内部机制暴露为事实上的契约；接口大小应与其承载的能力相称。</span></p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>隐藏不足会让变更扩散、理解成本上升；隐藏过度则把本应协作的逻辑割裂到不同模块，接口与间接层增多，跨模块的协调成本可能压过收益。</p><p>因此信息隐藏的实践目标不是追求绝对封闭，而是在可接受的泄漏代价下最大化变更局部化；当隐藏的收益不再覆盖接口与间接层的成本时，就应当合并模块或调整边界。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>因此模块边界不是一次固化的产物，而要随变更模式与团队认知持续调整：初期看似稳定的决策可能随业务演进变成热点，原先的隐藏方案便要重新划分。</li><li>更根本的是，信息隐藏并非绝对封闭：任何非平凡<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>都会在性能、故障与边界行为上不同程度地泄漏底层，使用者最终仍需了解被隐藏的细节。</li><li>可行的做法是选择泄漏面可控的抽象、为其失效模式预留补偿，而不是假设秘密永不穿透。</li><li>最后要区分对象：被隐藏的是「设计决策」而非「代码行」，把代码藏起来不等于隐藏了易变决策，判据始终是变更影响面。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">ESS-G-01</span><span class="nm">关注点分离</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-G-04</span><span class="nm">模块化与分解</span></span><span class="arw">→</span><span class="step cur"><span class="id">ESS-H-01</span><span class="nm">信息隐藏</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-H-02</span><span class="nm">内聚与耦合</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-H-05</span><span class="nm">深模块与浅模块</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-H-06</span><span class="nm">组合优于继承与脆弱基类</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：抽象泄漏揭示信息隐藏的固有边界</caption><thead><tr><th>对照维度</th><th>信息隐藏</th><th>抽象泄漏</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>信息隐藏 · Information Hiding</td><td>抽象泄漏 · Leaky Abstraction</td></tr><tr><td class="k">核心定义（原文）</td><td>以「隐藏困难或可能变化的设计决策」作为模块分解判据：每个模块把一类易变决策封装为自己的秘密，接口只揭示尽量少的内部工作，使变更局部化。</td><td>所有非平凡抽象都会在不同程度上泄漏其底层实现：性能、故障与边界行为会穿透抽象边界，使用者被迫了解本应被隐藏的细节。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>系统的复杂度主要来自设计决策的易变性——数据结构、算法、外部接口假设、资源策略等都可能随认知与需求变化。</td><td>抽象以简化换取可控性，它把复杂的底层机制投影成一个更易使用的模型；但被隐藏的机制并未消失，只是在压力下重新显现。</td></tr><tr><td class="k">对照关系</td><td>抽象泄漏揭示信息隐藏的固有边界（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>隐藏不足会让变更扩散、理解成本上升；隐藏过度则把本应协作的逻辑割裂到不同模块，接口与间接层增多，跨模块的协调成本可能压过收益。</td><td>常见的失败模式是层层封装的「抽象塔」：每一层都假设下层不会泄漏，于是一次底层抖动被放大成跨层故障，排查时反而要穿透全部层次。</td></tr><tr><td class="k">处置要点（原文）</td><td>设计评审时反复追问「这个模块隐藏了什么秘密」「接口是否暴露了超出必要的细节」，把信息隐藏当作划分模块的首要且可复核的判据。</td><td>设计抽象时显式写下它的泄漏面与失效模式：它假设了什么、在什么条件下不再成立、使用者会遇到哪些可观测代价。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-01 · 经 ESS-G-01</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → ESS-G-01 → ESS-G-05</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-03 · 2 跳派生：当前节点 → ESS-G-01 → ESS-H-03</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-04 · 2 跳派生：当前节点 → ESS-G-01 → ESS-H-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-05 · 经 ESS-H-02</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-07 · 经 ESS-H-04</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → ESS-H-02 → ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-09 · 2 跳派生：当前节点 → ESS-G-01 → ESS-G-06</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-11 · 经 ESS-G-04</span><h4>Hermes 七层架构总览</h4><p>对八千余文件的工业级 AI Agent 项目做七层架构总览逆向，揭示其「越用越聪明」的自进化闭环如何在层间传导的控制型架构案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 经 ESS-G-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → ESS-H-02 → MTH-H-04</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>PAP-002、BK-008、BK-032</div><div class="r"><span class="k">入口链接</span><a href="https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf" target="_blank" rel="noopener">https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf</a>　<a href="https://web.stanford.edu/~ouster/cgi-bin/book.php" target="_blank" rel="noopener">https://web.stanford.edu/~ouster/cgi-bin/book.php</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：模块就是一个或多个子程序</span><br>核验结论：Parnas 把 module 定义为责任分配（responsibility assignment），主张为高效实现而放弃「模块=子程序」假设　<span class="k">[PAP-002]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：信息隐藏最早见于 Parnas 1972 CACM 论文</span><br>核验结论：Parnas 1971 年 IFIP 论文《Information Distribution Aspects of Design Methodology》已提出相关思想，1972 CACM 论文为奠基性正式发表　<span class="k">[PAP-002]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（8 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ ESS-G-01</td><td>关注点分离<br><span style="color:var(--dim);font-size:12px">E-10</span></td><td>信息隐藏与关注点分离常组合使用</td></tr><tr><td class="k">对照</td><td>← ESS-H-04</td><td>抽象泄漏<br><span style="color:var(--dim);font-size:12px">E-09</span></td><td>抽象泄漏揭示信息隐藏的固有边界</td></tr><tr><td class="k">依据推导</td><td>← MTH-H-02</td><td>信息隐藏模块化分解<br><span style="color:var(--dim);font-size:12px">E-207</span></td><td>信息隐藏模块分解是信息隐藏原理的方法化</td></tr><tr><td class="k">前置依赖</td><td>← ESS-G-01</td><td>关注点分离<br><span style="color:var(--dim);font-size:12px">E-01</span></td><td>关注点分离是信息隐藏的前提</td></tr><tr><td class="k">前置依赖</td><td>← ESS-G-04</td><td>模块化与分解<br><span style="color:var(--dim);font-size:12px">E-101</span></td><td>模块化目标是信息隐藏判据的前提</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-H-02</td><td>内聚与耦合<br><span style="color:var(--dim);font-size:12px">E-02</span></td><td>理解信息隐藏是评估内聚耦合的前提</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-H-05</td><td>深模块与浅模块<br><span style="color:var(--dim);font-size:12px">E-107</span></td><td>信息隐藏是理解深/浅模块的前提</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-H-06</td><td>组合优于继承与脆弱基类<br><span style="color:var(--dim);font-size:12px">E-108</span></td><td>信息隐藏是判断继承/组合取舍的前提</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

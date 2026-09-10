@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>故障不可避免性与容错 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>故障不可避免性与容错</span></div><div class="meta">essence · K · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a><a href="#xref"><span class="n">附</span>对照资源</a></nav>
+<article>
+<header class="doc"><h1>故障不可避免性与容错</h1><div class="en">Fault Inevitability and Fault Tolerance</div><div class="badges"><span class="badge pr">P0</span><span class="badge st basic">基础</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">K · 运维</span><span class="badge th">质量属性</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">在足够规模与足够时间的系统中，<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>失效、依赖超时与负载突变不可避免；运维的目标不是消除故障，而是在故障存在的前提下维持核心服务、限制影响范围并优雅退化。</span></p></div><p class="note">别名：fault inevitability、fault tolerance、graceful degradation、故障不可避免、容错、优雅降级、爆炸半径　|　英文：Fault Inevitability and Fault Tolerance　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 696.3 678" role="img" aria-label="故障不可避免性与容错 的 1-2 跳邻域关系图"><title>故障不可避免性与容错 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="0" y1="0" x2="-0.4" y2="-130.9" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：承认故障不可避免是可靠性风险管理的前提</title></line><line x1="293.3" y1="2.7" x2="142.2" y2="0" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：可观测性使度量驱动反馈闭环成为可能</title></line><line x1="142.2" y1="0" x2="-0.4" y2="-130.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：反馈闭环支撑对风险的持续管理</title></line><line x1="0" y1="0" x2="142.2" y2="0" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：故障常态要求以持续反馈发现弱点</title></line><line x1="8.2" y1="-221.5" x2="-0.4" y2="-130.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：SLO 方法源于可靠性即风险管理</title></line><line x1="-3.4" y1="135.3" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：事件响应与复盘依据故障不可避免性</title></line><line x1="-139.2" y1="-0.6" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：混沌工程依据故障不可避免性</title></line><line x1="252.9" y1="112.7" x2="142.2" y2="0" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：容量与变更管理依据度量驱动的反馈闭环</title></line><line x1="66.8" y1="212.6" x2="8.2" y2="-221.5" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：错误预算政策以服务等级目标为输入</title></line><line x1="-3.4" y1="135.3" x2="66.8" y2="212.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：事件响应决策依赖错误预算政策</title></line><line x1="-139.2" y1="-0.6" x2="-3.4" y2="135.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：事件复盘证据驱动混沌实验设计</title></line><line x1="252.9" y1="112.7" x2="66.8" y2="212.6" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：发布变更以错误预算政策为门控</title></line><line x1="260.4" y1="-109.8" x2="142.2" y2="0" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：负反馈闭环作为系统核心结构</title></line><line x1="-266" y1="23.9" x2="-139.2" y2="-0.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：混沌工程方法的实验化落地</title></line><line x1="-76.4" y1="254.5" x2="-3.4" y2="135.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：无指责复盘的文档化落地</title></line><line x1="-266" y1="23.9" x2="-76.4" y2="254.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：实验发现的弱点进入复盘与修复闭环</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">故障不可避免性与容错<title>故障不可避免性与容错（ESS-K-02）</title></text><circle cx="-0.4" cy="-130.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="-0.4" y="-111.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可靠性即风险管理<title>可靠性即风险管理（ESS-K-01）</title></text><circle cx="142.2" cy="0" r="9.0" fill="#c98a3a" stroke="none"/><text x="142.2" y="19" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">度量驱动的反馈闭环<title>度量驱动的反馈闭环（ESS-K-04）</title></text><circle cx="-3.4" cy="135.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="-3.4" y="154.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">事件响应与无指责复盘方法<title>事件响应与无指责复盘方法（MTH-K-05）</title></text><circle cx="-139.2" cy="-0.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="-139.2" y="18.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">混沌工程方法<title>混沌工程方法（MTH-K-06）</title></text><circle cx="-266" cy="23.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-266" y="39.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">混沌工程实践<title>混沌工程实践（TEC-K-04）</title></text><circle cx="8.2" cy="-221.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="8.2" y="-205.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">服务等级目标方法<title>服务等级目标方法（MTH-K-01）</title></text><circle cx="66.8" cy="212.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="66.8" y="228.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">错误预算政策与燃尽率告警<title>错误预算政策与燃尽率告警（MTH-K-02）</title></text><circle cx="260.4" cy="-109.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="260.4" y="-93.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">控制理论⊗Agent 设…<title>控制理论⊗Agent 设计（CAS-X-16）</title></text><circle cx="-76.4" cy="254.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-76.4" y="270.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">无指责复盘实践<title>无指责复盘实践（TEC-K-05）</title></text><circle cx="293.3" cy="2.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="293.3" y="18.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可观测性本质<title>可观测性本质（ESS-K-03）</title></text><circle cx="252.9" cy="112.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="252.9" y="128.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">容量规划与变更管理方法<title>容量规划与变更管理方法（MTH-K-07）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 7 个二跳节点，共 12 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">任何由多组件、网络与外部依赖构成的系统，都必然遭遇部件失效、链路中断、资源耗尽与流量突变。</span><span class="hl">规模越大、<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>越久，罕见事件的组合越可能发生，因此「不出故障」是统计上的不可能，而非可以通过谨慎编码或个体努力消除的风险。</span><span class="hl">承认这一点会带来根本的立场转变：可靠性不是让系统永不失败，而是让系统在失败发生时仍能履行最重要的<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>。</span>这意味着设计必须为异常留出确定行为——哪些功能可降级、哪些请求可拒绝、影响如何被限制在局部而不扩散为全局。<span class="hl">把故障视为常态而非例外，才能在<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>中系统性地布置隔离、冗余与恢复能力，而不是把可靠性寄托于乐观假设。</span>这一立场也是后续一切容错方法的逻辑前提。<span class="hl">把故障视为常态，也意味着在需求与设计<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>就问清楚：某组件失效时系统还剩哪些能力、用户会看到什么，而不是等到事故现场才发现没有答案。</span>承认故障常态，也让冗余、隔离与演练成为设计语言的一部分，而非出事后的补丁。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">容错沿三个环节运作：检测、隔离与恢复。</span>检测让偏离正常的状态尽早被发现，避免静默失败在无人察觉时累积；隔离把故障限制在局部，使一个部件或一类流量的问题不通过共享资源、排队或调用链放大为全局灾难；恢复在故障发生后把系统带回可用状态，或至少交付降级后的核心价值。三者的共同基础是限制「爆炸半径」：故障的影响范围应与其重要性成比例，非关键部分的波动不应拖垮关键路径。故障传播最常见的载体是过载——局部变慢会引发重试、排队与资源争用，形成正反馈把更多部分拖入失败。因此容错机制必须同时对抗过载，阻断「局部问题到全局崩溃」的链条。可靠系统不是没有故障，而是故障不扩散。隔离的粒度应与故障域对应，而非随意切分；切得不对，故障仍会通过共享依赖或同步调用跨边界扩散，隔离便形同虚设。恢复过程本身也需要被设计：恢复到什么状态、以什么顺序、如何验证，缺一不可。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">工程上先把系统按关键度分层，明确哪些能力不可中断、哪些可降级、哪些可暂时关闭，并为每类故障定义期望行为。</span>为远程调用、资源使用与并发设置明确的边界，避免任何一个依赖或流量来源无限占用共享资源；把系统切分为相互隔离的资源单元，使一类工作负载的异常不挤占其余部分的容量。对已知的脆弱依赖准备退路：缓存、冗余、备用路径或功能降级，并保证降级路径本身可用而非只存在于文档。用受控实验主动验证异常路径是否真的按预期生效，把检测时间与恢复时间作为可观测指标持续跟踪。容错能力必须随系统变化持续校准，因为依赖、流量与部署方式都在演进；上一次有效的保护措施，下一次故障中未必仍然成立。关键依赖失效时的行为应写进设计并纳入演练，而不是指望在事故现场临时决定降级到哪一步。对资源与并发的边界应随负载变化复核，避免在规模增长后旧边界反而成为瓶颈或风险。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>容错并非没有代价，也常被误用为「堆叠保护手段」。</p><p>因此容错应基于故障的业务后果来分配投入，优先隔离真正的故障域、阻断故障传播，而不是为每一处想象的风险叠加保护层；保护机制之间还须核对是否相互冲突。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是把重试当作万能解药：对非幂等操作重试会造成重复副作用，而不设退避与上限的激进重试会进一步压垮接近饱和的服务，把本来局部的抖动放大为风暴，反而降低可用性。</p><p>反例之二是伪冗余：多个副本共享同一依赖、同一网络或同一故障域，平时看似有备份，真实故障中却一起失效。</p><p>反例之三是过度降级：为保住可用性而长期返回错误或不完整结果，用户感知到的仍是不可用。</p><p>容错的目标是让失败可承受，而不是让失败不发生；混淆二者会导致投入方向偏离。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>隔离与冗余需要额外资源与协调复杂度；重试、降级与缓存会引入状态一致、重复执行与结果陈旧等问题。</li><li>更根本的是，容错投入的回报取决于故障的真实后果与概率；对所有组件同等加固，既昂贵又可能把资源从真正脆弱处挪走。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step cur"><span class="id">ESS-K-02</span><span class="nm">故障不可避免性与容错</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-K-01</span><span class="nm">可靠性即风险管理</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-16 · 经 ESS-K-04</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-024、BK-025、VEN-025、VEN-028</div><div class="r"><span class="k">入口链接</span><a href="https://pragprog.com/titles/mnee2/release-it-second-edition/" target="_blank" rel="noopener">https://pragprog.com/titles/mnee2/release-it-second-edition/</a>　<a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：重试总能提高可用性</span><br>核验结论：重试仅对瞬时故障且幂等操作安全；缺少退避与上限的重试会放大过载，把局部故障升级为级联故障　<span class="k">[BK-024]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：增加冗余实例即可保证高可用</span><br>核验结论：冗余须隔离故障域；共享同一依赖或基础设施的副本会在真实故障中同时失效，形成伪冗余　<span class="k">[VEN-025]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依赖关联</td><td>→ ESS-K-04</td><td>度量驱动的反馈闭环<br><span style="color:var(--dim);font-size:12px">E-564</span></td><td>故障常态要求以持续反馈发现弱点</td></tr><tr><td class="k">依据推导</td><td>← MTH-K-05</td><td>事件响应与无指责复盘方法<br><span style="color:var(--dim);font-size:12px">E-567</span></td><td>事件响应与复盘依据故障不可避免性</td></tr><tr><td class="k">依据推导</td><td>← MTH-K-06</td><td>混沌工程方法<br><span style="color:var(--dim);font-size:12px">E-568</span></td><td>混沌工程依据故障不可避免性</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-K-01</td><td>可靠性即风险管理<br><span style="color:var(--dim);font-size:12px">E-561</span></td><td>承认故障不可避免是可靠性风险管理的前提</td></tr></tbody></table></div></div></details></section>
+<section id="xref"><h2><span class="num">附</span>对照资源 · 12factor 子库</h2><div class="tblwrap"><table><thead><tr><th>12factor 节点</th><th>关系</th><th>对照说明</th></tr></thead><tbody><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-processes.html" target="_blank" rel="noopener">进程</a> <span class="dim">app-processes</span></td><td>跨体系对照</td><td>无状态进程即以可替换的实例承载运行，对应不可变基础设施与容错</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-disposability.html" target="_blank" rel="noopener">可处置性</a> <span class="dim">app-disposability</span></td><td>跨体系对照</td><td>快速启动与优雅终止服务容错；进程视为可丢弃的不可变实例</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-pause.html" target="_blank" rel="noopener">启动/暂停/恢复</a> <span class="dim">ag-pause</span></td><td>跨体系对照</td><td>启动/暂停/恢复的生命周期管理对应容错与可替换实例</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-stateless.html" target="_blank" rel="noopener">无状态性</a> <span class="dim">t-stateless</span></td><td>跨体系对照</td><td>无状态性是传统应用与 Agent 共有的可靠运行基石</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-disposable.html" target="_blank" rel="noopener">生命周期与可处置性</a> <span class="dim">t-disposable</span></td><td>跨体系对照</td><td>进程可处置与 Agent 可暂停恢复本质同源，指向容错与不可变实例</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

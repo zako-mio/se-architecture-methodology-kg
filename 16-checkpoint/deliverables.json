@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "generated": "2026-09-10",
+  "note": "契约声明的交付物清单（manifest）。gate_coverage.py 以此为覆盖度核对基准：pattern 为相对 repo_root 的 glob，expected 为期数。kind=node-keyed 表示按 DAG 节点 ID 逐一核对文件存在性（用于四向覆盖）。",
+  "repo_root": ".",
+  "data_dir": "10-dag-data",
+  "graph": "10-dag-data/methodology-dag.json",
+  "node_keyed": {
+    "html": {"dir": "11-node-pages", "ext": ".html", "expected": 167},
+    "md": {"dir": "15-md/nodes", "ext": ".md", "expected": 167}
+  },
+  "deliverables": [
+    {
+      "id": "node-pages",
+      "pattern": "11-node-pages/*.html",
+      "expected": 167,
+      "kind": "node-keyed",
+      "desc": "DAG 节点详情页（人读主入口），一节点一页"
+    },
+    {
+      "id": "md-nodes",
+      "pattern": "15-md/nodes/*.md",
+      "expected": 167,
+      "kind": "node-keyed",
+      "desc": "AI 友好 Markdown 节点镜像"
+    },
+    {
+      "id": "group-pages",
+      "pattern": "12-groups/*.html",
+      "expected": 19,
+      "kind": "count",
+      "desc": "18 个组页 + 组总索引 index.html"
+    },
+    {
+      "id": "views",
+      "pattern": "14-views/*.html",
+      "expected": 7,
+      "kind": "count",
+      "desc": "01-layer / 02-learning-path / 03-decision-matrix / 04-cross-mapping / 05-cases / glossary + index.html"
+    },
+    {
+      "id": "interactive",
+      "pattern": "13-interactive/index.html",
+      "expected": 1,
+      "kind": "count",
+      "desc": "交互 DAG 总览（cytoscape + dagre）"
+    },
+    {
+      "id": "root-index",
+      "pattern": "index.html",
+      "expected": 1,
+      "kind": "count",
+      "desc": "根入口"
+    },
+    {
+      "id": "xref-12factor",
+      "pattern": "16-checkpoint/xref-12factor.json",
+      "expected": 1,
+      "kind": "count",
+      "desc": "12factor 38 节点 ↔ 母库映射表"
+    }
+  ]
+}

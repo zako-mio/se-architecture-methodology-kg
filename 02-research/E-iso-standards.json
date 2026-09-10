@@ -1,0 +1,282 @@
+{
+  "topic": "软件工程与架构方法论核心 ISO/IEC/IEEE 标准元数据核实（E 号证据包）",
+  "generated_by": "iso-standard-verifier (subagent)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "iso.org 直连/代理均被 WAF 返回 403，全部 ISO 元数据经 web.archive.org 快照 + committee.iso.org + iso25000.com 核实；未下载任何标准正文。",
+  "standards": [
+    {
+      "std_no": "ISO/IEC/IEEE 42010",
+      "title_en": "Software, systems and enterprise — Architecture description",
+      "version": "ISO/IEC/IEEE 42010:2022",
+      "year": "2022",
+      "edition": "2",
+      "status": "Published — International Standard published [60.60]；当前有效版本（取代 42010:2011）",
+      "scope_en": "【已按版权红线移出（原引用 1245 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 292 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260716114220/https://www.iso.org/standard/74393.html",
+          "snapshot": "2026-07-16",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20250224180306/https://www.iso.org/standard/74393.html",
+          "snapshot": "2025-02-24",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "ISO 官方页快照（两个独立时间点：2025-02-24、2026-07-16，状态一致为 60.60，scope 文本逐字一致）"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC/IEEE 42010",
+      "title_en": "Systems and software engineering — Architecture description",
+      "version": "ISO/IEC/IEEE 42010:2011",
+      "year": "2011",
+      "edition": "1",
+      "status": "Withdrawn — Withdrawal of International Standard [95.99]；已被 ISO/IEC/IEEE 42010:2022 取代（历史版本）",
+      "scope_en": "【已按版权红线移出（原引用 711 字）· 出处见 source_id/URL】",
+      "scope_zh": "ISO/IEC/IEEE 42010:2011 针对通过架构描述对系统架构进行创建、分析和持续维护。建立了架构描述的概念模型，规定了架构描述的必备内容；引入架构视角、架构框架与架构描述语言，以固化架构描述的约定与惯例，并规定其必备内容。附录给出关键概念与术语的动机和背景，以及应用本标准的示例。",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20240204230914/https://www.iso.org/standard/50508.html",
+          "snapshot": "2024-02-04",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-420102011.html",
+          "snapshot": "2026-09-10",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "committee.iso.org（ISO/IEC JTC 1/SC 7 官方项目页）scope 文本与 ISO 快照逐字一致",
+        "ISO 快照页面标注 revisedBy = ISO/IEC/IEEE 42010:2022"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC/IEEE 12207",
+      "title_en": "Systems and software engineering — Software life cycle processes",
+      "version": "ISO/IEC/IEEE 12207:2026",
+      "year": "2026",
+      "edition": "2",
+      "status": "Published — 当前有效版本（2026 年发布，取代 12207:2017；详见下方 scope 说明与 gaps）",
+      "scope_en": null,
+      "scope_zh": null,
+      "scope_note": "12207:2026 正式发布页在 web.archive.org 尚无快照（截至 2026-09-10），故 scope 正文未能核验；ISO 项目页（standard/90219，DIS 阶段，Edition 2）沿用 2017 版 scope 文本，不能视为 2026 定稿 scope。",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260801192222/https://www.iso.org/standard/63712.html",
+          "snapshot": "2026-08-01",
+          "accessed": "2026-09-10",
+          "tier": "S1",
+          "evidence": "12207:2017 页标注 Withdrawn，并显示『New version available: ISO/IEC/IEEE 12207:2026』"
+        },
+        {
+          "url": "https://web.archive.org/web/20250930112520/https://www.iso.org/standard/90219.html",
+          "snapshot": "2025-09-30",
+          "accessed": "2026-09-10",
+          "tier": "S1",
+          "evidence": "ISO/IEC/IEEE DIS 12207（Edition 2，DIS registered [40.00]）项目页，为 2026 版前身"
+        }
+      ],
+      "confidence": "medium",
+      "cross_sources": [
+        "Wikipedia『ISO/IEC 12207』：『ISO/IEC/IEEE 12207:2026 is the newest version, published in April 2026』（S3，独立二手，与 ISO 替换公告互证）"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC/IEEE 12207",
+      "title_en": "Systems and software engineering — Software life cycle processes",
+      "version": "ISO/IEC/IEEE 12207:2017",
+      "year": "2017",
+      "edition": "1",
+      "status": "Withdrawn — Withdrawal of International Standard [95.99]；已被 ISO/IEC/IEEE 12207:2026 取代（历史版本）",
+      "scope_en": "【已按版权红线移出（原引用 1199 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 362 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20240111101721/https://www.iso.org/standard/63712.html",
+          "snapshot": "2024-01-11",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20260801192222/https://www.iso.org/standard/63712.html",
+          "snapshot": "2026-08-01",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-122072017.html",
+          "snapshot": "2026-09-10",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "committee.iso.org（SC 7 官方项目页）scope 与 ISO 快照一致",
+        "ISO 快照显示 2017→2026 的修订关系"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC 25010",
+      "title_en": "Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model",
+      "version": "ISO/IEC 25010:2023",
+      "year": "2023",
+      "edition": "2",
+      "status": "Published — International Standard published [60.60]；SQuaRE 产品质量模型当前有效版本",
+      "scope_en": "【已按版权红线移出（原引用 1675 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 354 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260819152423/https://www.iso.org/standard/78176.html",
+          "snapshot": "2026-08-19",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20240125201008/https://www.iso.org/standard/78176.html",
+          "snapshot": "2024-01-25",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "iso25000.com/en/iso-25000-standards/iso-25010：确认产品质量模型由九项质量特性构成并逐项列出，与 ISO 2023 版一致（S2）"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC 25010",
+      "title_en": "Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models",
+      "version": "ISO/IEC 25010:2011",
+      "year": "2011",
+      "edition": "1",
+      "status": "Withdrawn — Withdrawal of International Standard [95.99]；SQuaRE 重构后由后继版本接替，ISO 页面标注 New version available = ISO/IEC 25002:2024（历史版本）",
+      "scope_en": "【已按版权红线移出（原引用 2507 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 546 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260813233306/https://www.iso.org/standard/35733.html",
+          "snapshot": "2026-08-13",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20231223083754/https://www.iso.org/standard/35733.html",
+          "snapshot": "2023-12-23",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "ISO/IEC 25002:2024『Quality model overview and usage』（standard/78175）为 SQuaRE 重构后的总览标准",
+        "ISO/IEC 25019:2023 承接使用质量模型（Quality-in-use model）"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC/IEEE 14764",
+      "title_en": "Software engineering — Software life cycle processes — Maintenance",
+      "version": "ISO/IEC/IEEE 14764:2022",
+      "year": "2022",
+      "edition": "3",
+      "status": "Published — International Standard published [60.60]；当前有效版本（取代 14764:2006）",
+      "scope_en": "【已按版权红线移出（原引用 1319 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 347 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260819024657/https://www.iso.org/standard/80710.html",
+          "snapshot": "2026-08-19",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20231116230216/https://www.iso.org/standard/80710.html",
+          "snapshot": "2023-11-16",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "ISO 快照 39064（14764:2006）标注 revisedBy = ISO/IEC/IEEE 14764:2022，版本链闭合"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC 14764",
+      "title_en": "Software Engineering — Software Life Cycle Processes — Maintenance",
+      "version": "ISO/IEC 14764:2006",
+      "year": "2006",
+      "edition": "2",
+      "status": "Withdrawn — Withdrawal of International Standard [95.99]；已被 ISO/IEC/IEEE 14764:2022 取代（历史版本）",
+      "scope_en": "【已按版权红线移出（原引用 1680 字）· 出处见 source_id/URL】",
+      "scope_zh": "【已按版权红线移出（原引用 361 字）· 出处见 source_id/URL】",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20240519171526/https://www.iso.org/standard/39064.html",
+          "snapshot": "2024-05-19",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "ISO 快照显示 revisedBy = ISO/IEC/IEEE 14764:2022"
+      ]
+    },
+    {
+      "std_no": "ISO/IEC/IEEE 24765",
+      "title_en": "Systems and software engineering — Vocabulary",
+      "version": "ISO/IEC/IEEE 24765:2017",
+      "year": "2017",
+      "edition": "2",
+      "status": "Published，但为『International Standard to be revised [90.92]』（截至 2026-03 快照）；修订项目进行中（ISO 项目 92875，CD 24765 → DIS 方向）",
+      "scope_en": "【已按版权红线移出（原引用 631 字）· 出处见 source_id/URL】",
+      "scope_zh": "ISO/IEC/IEEE 24765:2017 提供适用于所有系统与软件工程工作的通用词汇表，旨在收集并统一术语。本文件可作为信息技术领域的有用参考，并鼓励使用由 ISO 及联络组织 IEEE 计算机学会与项目管理协会（PMI）制定的系统与软件工程标准。文件包含对定义的有效来源标准的引用，以便进一步探究系统与软件工程的概念与要求。",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260323122741/https://www.iso.org/standard/71952.html",
+          "snapshot": "2026-03-23",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://web.archive.org/web/20231221200726/https://www.iso.org/standard/71952.html",
+          "snapshot": "2023-12-21",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        },
+        {
+          "url": "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-247652017.html",
+          "snapshot": "2026-09-10",
+          "accessed": "2026-09-10",
+          "tier": "S1"
+        }
+      ],
+      "confidence": "high",
+      "cross_sources": [
+        "committee.iso.org（SC 7 官方项目页）scope 与 ISO 快照逐字一致",
+        "ISO 修订项目页 https://www.iso.org/standard/92875.html（ISO/IEC/IEEE CD 24765，DIS 方向）",
+        "公开可用标准（PAS）文本副本：https://standards.iso.org/ittf/PubliclyAvailableStandards/c071952_ISO_IEC_IEEE_24765_2017.zip（未下载）"
+      ]
+    }
+  ],
+  "gaps": [
+    "ISO/IEC/IEEE 12207:2026 的正式发布页在 web.archive.org 无 2026 快照，其 scope 原文与定稿状态未能直接核验；仅由 ISO 2017 版页面的替换公告（2026-08-01 快照）与 Wikipedia（2026-04 发布）互证其存在与发布月份。",
+    "iso.org 直连、走代理、代理+浏览器 UA 均返回 403（WAF 反爬），无法访问 ISO 在线浏览平台（OBP）与官方标准页实时内容；全部 ISO 元数据依赖 Wayback 快照。",
+    "SEI（sei.cmu.edu）可直连访问，但站内检索与架构栏目未找到专门引述 ISO/IEC/IEEE 42010 的页面，未能补充 SEI 作为 42010 的交叉验证源。",
+    "ISO/IEC/IEEE 24765:2017 的修订进度（CD→DIS 具体阶段与预计发布年份）仅凭单一 ISO 项目页判定，未获第二独立来源确认。",
+    "ISO/IEC 25010:2011 的替换公告指向 ISO/IEC 25002:2024（而非直接指向 25010:2023），SQuaRE 系列的重构映射（25010:2011 → 25002/25010:2023/25019:2023）为基于多个 ISO 页面的推断，尚未由单一官方映射文档确认。"
+  ],
+  "notes": "所有 scope 文本均取自 ISO 官方页面快照（itemprop=description）或 committee.iso.org 官方项目页，未下载或写入任何标准正文文件；scope_zh 为对英文原文的忠实翻译整理。"
+}

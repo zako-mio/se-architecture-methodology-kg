@@ -1,0 +1,644 @@
+{
+  "topic": "质量模型与 ilities（ISO/IEC 25010:2023 九特性 / SQuaRE 重构 / 可维护性子特性 / 可扩展性与可演化性术语归位 / 质量属性→战术映射）",
+  "generated_by": "software-quality-model-researcher (subagent, self-authored role)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "iso.org 直连/代理均被 WAF 403（E 包已证），本标准元数据与 scope 经：①ISO OBP 页面经搜索引擎索引返回的正文片段（Tavily，标注 unverified_direct）；②iTeh Standards 官方样页 PDF（含封面/目录/scope/术语节）；③iso25000.com 门户（ISO 25000 项目官方门户）；④SEI 官方报告 PDF。未下载或写入任何标准正文到公开交付目录。境外源走代理 172.29.0.1:7890。",
+  "sources": [
+    {
+      "id": "STD-005",
+      "title": "ISO/IEC 25010:2023 Systems and software engineering — SQuaRE — Product quality model（产品质量模型，第二版）",
+      "org": "ISO/IEC（JTC 1/SC 7）",
+      "year": "2023",
+      "url": "https://www.iso.org/obp/ui#iso:std:iso-iec:25010:en",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "定义由九项特性构成的产品质量模型（部分细分为子特性）；与 25002:2024、25019:2023 共同取消并取代 ISO/IEC 25010:2011（E 包快照 + OBP 前言互证）。",
+        "正式前言：『This document revises the product quality model part of ISO/IEC 25010:2011. The other parts are moved to ISO/IEC 25002 on quality models overview and usage and ISO/IEC 25019 on quality-in-use model.』",
+        "条款 3.8 flexibility：capability of a product to be adapted to changes in its requirements, contexts of use, or system environment（可作 extensibility/evolvability 最接近的标准落点）。",
+        "注记明确 Interaction capability（产品模型）与 usability（25019 使用质量模型）概念不同：前者关注交互属性，后者综合关注使用结果。",
+        "注：iso.org 直连 403，本条内容取自搜索引擎索引的 OBP 正文片段，verified=false（unverified_direct）。"
+      ],
+      "legacy_id": "S1-M01"
+    },
+    {
+      "id": "STD-027",
+      "title": "ISO/IEC 25002:2024 Systems and software engineering — SQuaRE — Quality model overview and usage（质量模型总览与使用，第一版）",
+      "org": "ISO/IEC（JTC 1/SC 7）",
+      "year": "2024",
+      "url": "https://www.iso.org/standard/78175.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Scope：建立定义质量模型（由质量特性与子特性构成）的框架，提供：质量模型概念；质量模型的结构与语义；质量模型与测量/需求定义/评价等概念的关系；使用质量模型的指南、要求与示例。",
+        "为 SQuaRE 系列（25010 产品模型、25012 数据质量、25019 使用质量等）提供统一的总览与使用指南。",
+        "样页目录含『5 Guidance for using SQuaRE quality models』『7 Quality model framework（结构/类别/本体/优先级）』『8 Quality model usage（干系人/质量过程）』。",
+        "核验方式：iTeh Standards 官方样页 PDF（第 1 页 Scope 逐字），与 ISO 标准页标题互证。"
+      ],
+      "legacy_id": "S1-M02"
+    },
+    {
+      "id": "STD-028",
+      "title": "ISO/IEC 25019:2023 Systems and software engineering — SQuaRE — Quality-in-use model（使用质量模型，第一版）",
+      "org": "ISO/IEC（JTC 1/SC 7）",
+      "year": "2023",
+      "url": "https://www.iso.org/standard/78177.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Scope：定义由三项特性构成的使用质量模型（部分细分为子特性），刻画产品/系统在特定使用情境下使用时可影响干系人的质量；适用于信息系统与 IT 服务系统的完整谱系。",
+        "前言：『【已按版权红线移出（原引用 203 字）· 出处见 source_id/URL】』——官方三方取代关系，闭合 E 包缺口。",
+        "主要变化：干系人被分类与明确；各干系人关注点被整合为质量特性；上一版（25010:2011）使用质量模型中的『context coverage』被移除。",
+        "三项特性（OBP 3.2 片段 + 学术交叉源）：beneficialness（有益性）、freedom from risk（免于风险）、acceptability（可接受性）。",
+        "术语 3.1.15 quality-in-use：extent to which the system or product, when used in a specified context of use, satisfies or exceeds stakeholders' needs to achieve specified beneficial goals or outcomes。",
+        "核验方式：iTeh Standards 官方样页 PDF（前言/Scope/术语 3.1.15 逐字）+ ISO OBP 3.2 片段 + S4-M03 学术源三方交叉。"
+      ],
+      "legacy_id": "S1-M03"
+    },
+    {
+      "id": "OFF-022",
+      "title": "Kazman, R., Echeverría, S., & Ivers, J. (2022). Extensibility (CMU/SEI-2022-TR-002)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2022",
+      "url": "https://www.sei.cmu.edu/library/extensibility",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "将 extensibility 作为独立质量属性系统分析：定义为『【已按版权红线移出（原引用 220 字）· 出处见 source_id/URL】』。",
+        "综述流行定义：Techopedia（append additional elements and features to its existing structure）；Breivold et al. 2007（enable the implementation of extensions…with minimal impact to existing system）；Papke 2000 NASA SOFIA（grow in performance and functionality…without re-designing the underlying infrastructure）。",
+        "extensibility 与 integrability/maintainability/modifiability 目标显著重叠（机制与分析手段大量共享），故常被混用。",
+        "提出 extension points / extension mechanisms 概念，并给出 extensibility 战术（12 项）：Encapsulate、Use an intermediary、Restrict communication paths、Abstract common services、Defer binding、Discover service (static)、Discover service (dynamic)、Specialized interfaces、Record/playback、Localize state storage、Orchestrate、Manage resources、Segment deployments。",
+        "tactics 定义为『smaller building blocks of design than architectural patterns』；战术描述取自 Software Architecture in Practice [Bass 2021] 与 Bellomo 2014。",
+        "核验方式：SEI 官方 PDF（977,486 bytes，pdftotext 提取全文）。"
+      ],
+      "legacy_id": "S1-M04"
+    },
+    {
+      "id": "OFF-023",
+      "title": "Scott, J., & Kazman, R. (2009). Realizing and Refining Architectural Tactics: Availability (CMU/SEI-2009-TR-006)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2009",
+      "url": "https://www.sei.cmu.edu/library/realizing-and-refining-architectural-tactics-availability",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SEI 已定义覆盖六项质量属性的战术集：performance、usability、availability、modifiability、testability、security。",
+        "availability 战术三分类：Fault Detection（Ping/Echo、Heartbeat/System Monitor、Exception Detection…）、Fault Recovery（各级冗余、Checkpoint/Rollback、Process Monitor…）、Fault Prevention（Removal from service、Transactions、Predictive Model…）。",
+        "战术目录已使用多年，实践要求促使其更新（如 Response/Remediation 等），但底层分类结构保持稳定。",
+        "核验方式：SEI 官方 PDF（901,120 bytes，pdftotext 提取全文）。"
+      ],
+      "legacy_id": "S1-M05"
+    },
+    {
+      "id": "OFF-024",
+      "title": "Bachmann, F., Bass, L., & Nord, R. (2007). Modifiability Tactics (CMU/SEI-2007-TR-009)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2007",
+      "url": "https://www.sei.cmu.edu/library/modifiability-tactics",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "modifiability 战术基于耦合、内聚与成本动因参数导出，三分类：①defer binding time（推迟绑定时间）；②localize changes（局部化变更，减少直接受影响的模块数）；③prevent ripple effects（防止涟漪效应，把修改限制在局模块）。",
+        "战术本质是调整质量属性模型参数，从而改善结果系统的质量属性特定行为。",
+        "核验方式：SEI 官方报告页 Abstract + CMU/SEI-2009-TR-006 正文对该三分类的复述（互为交叉）。"
+      ],
+      "legacy_id": "S1-M06"
+    },
+    {
+      "id": "OFF-025",
+      "title": "SEI — Reasoning About Software Quality Attributes (Quality Attribute General Scenarios & Attribute Primitives)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "quality attribute scenario 用于规定质量属性需求：为 modifiability、performance、availability、security、usability 五属性枚举『general scenario』模板（系统无关的检查清单）。",
+        "属性原语（attribute primitives / quality attribute design primitives）是面向质量目标的设计模板，是 Attribute-Based Architectural Styles 的延伸。",
+        "核验方式：SEI 官方页面正文。"
+      ],
+      "legacy_id": "S1-M07"
+    },
+    {
+      "id": "STD-007",
+      "title": "ISO/IEC/IEEE 14764:2022 Software engineering — Software life cycle processes — Maintenance（复用 E 包）",
+      "org": "ISO/IEC/IEEE",
+      "year": "2022",
+      "url": "https://www.iso.org/standard/80710.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "基于 12207:2017 维护过程，界定各类维护（corrective/adaptive/perfective/preventive 等）并提供维护指南；维护是 maintainability 的过程侧对应。",
+        "复用 E 包结论（ISO 快照 + 版本链 revision 闭合）。"
+      ],
+      "legacy_id": "S1-M08"
+    },
+    {
+      "id": "OFF-005",
+      "title": "ISO 25000 Portal — ISO/IEC 25010（质量模型九特性与子特性逐条释义）",
+      "org": "ISO 25000 Portal (iso25000.com)",
+      "year": "2024 (site)",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "逐条给出九特性英文定义与子特性：Functional Suitability（completeness/correctness/appropriateness）、Performance Efficiency（time behaviour/resource utilization/capacity）、Compatibility（co-existence/interoperability）、Interaction Capability（appropriateness recognizability/learnability/operability/user error protection/user engagement/inclusivity/user assistance/self-descriptiveness）、Reliability（faultlessness/availability/fault tolerance/recoverability）、Security（confidentiality/integrity/non-repudiation/accountability/authenticity/resistance）、Maintainability（modularity/reusability/analysability/modifiability/testability）、Flexibility（adaptability/scalability/installability/replaceability）、Safety。",
+        "明确为 ISO/IEC 25010（2023 九特性版）内容，是本包九特性定义的主要可核验来源。"
+      ],
+      "legacy_id": "S2-M01"
+    },
+    {
+      "id": "BK-009",
+      "title": "Bass, L., Clements, P., & Kazman, R. — Software Architecture in Practice, Ch.5 'Introducing Tactics'（UBC EECE417 镜像）",
+      "org": "Addison-Wesley / SEI Series（镜像站为课程公开页）",
+      "year": "2012/2021",
+      "url": "https://people.ece.ubc.ca/matei/EECE417/BASS/ch05lev1sec1.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "tactic 定义：『a design decision that influences the control of a quality attribute response』；一组战术构成 architectural strategy。",
+        "为六项属性讨论战术层级：availability、modifiability、performance、security、testability、usability（并声明任何清单必然不完整）。",
+        "tactics 可细化、可被 pattern 打包。此定义与 S1-M04/S1-M05/S1-M06 的 SEI 报告一致。"
+      ],
+      "legacy_id": "S2-M02"
+    },
+    {
+      "id": "PAP-024",
+      "title": "Breivold, H. P. — A Systematic Review of Software Evolvability（IEEE/ICSE 系系统综述）",
+      "org": "ABB Corporate Research / Mälardalen University",
+      "year": "2009 (published)/2012",
+      "url": "https://www.es.mdh.se/pdf_publications/1739.pdf",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "evolvability 定义：『a system's ability to easily accommodate changes』；引 Rowe/Leaney/Lowe：『bears on the ability of a system to accommodate changes in its requirements throughout the system's lifespan with the least possible cost while maintaining architectural integrity』。",
+        "明确指出术语混用：the notion of evolvability is used in many different ways…with many closely-related quality attributes and synonyms such as flexibility, maintainability, adaptability and modifiability。",
+        "检索式同时纳入 evolvability/maintainability/extensibility/adaptability/flexibility/changeability/modifiability（承认它们被当作近义属性），最终纳入 58 篇主研究。"
+      ],
+      "legacy_id": "S4-M01"
+    },
+    {
+      "id": "PAP-025",
+      "title": "Rowe, D., Leaney, J., & Lowe, D. (1994). Defining systems evolvability — a taxonomy of change",
+      "org": "IEEE Conference on Computer Based Systems (cited in S4-M01)",
+      "year": "1994",
+      "url": "https://www.researchgate.net/profile/John-Leaney/publication/240718016",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "evolvability 早期的系统化定义与『变更分类学』。",
+        "本条为经 S4-M01 引用的间接核验（未直接获取原文全文），verified=false（indirect_via_review）。"
+      ],
+      "legacy_id": "S4-M02"
+    },
+    {
+      "id": "PAP-026",
+      "title": "Glinz, M., et al. (2023). Towards a Modern Quality Framework（IEEE RE Workshops, REW 2023）",
+      "org": "University of Zurich / IEEE",
+      "year": "2023",
+      "url": "https://upcommons.upc.edu/bitstreams/aa5bbbe8-740f-41ac-953a-1b0322541abe/download",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "对 ISO/IEC 25010 与 Volere 的系统性批评：产品/使用质量二分法失效；质量属性覆盖不全（safety 将被加入，但 privacy、sustainability、explainability 仍缺失）。",
+        "确认 SQuaRE 重构：ISO/IEC 25010:2011 计划拆分为修订的 25010（产品模型）与 25019（使用质量模型）；新 25010 将加入 safety 作为主特性，部分子特性新增/改名。",
+        "确认 25019（DIS 阶段）使用质量模型仅保留 freedom from risk，另两个新特性为 beneficialness 与 acceptability。",
+        "指出 ISO/IEC DIS 25010 将 portability 改名为 flexibility。"
+      ],
+      "legacy_id": "S4-M03"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "产品质量模型（Product quality model）ISO/IEC 25010:2023",
+      "definition": "由九项质量特性（部分细分为子特性）构成，作为规定、测量与评价 ICT 产品/软件产品质量的参照模型；适用范围扩展至各类 ICT 产品与信息系统。",
+      "source_id": "STD-005"
+    },
+    {
+      "term": "Functional Suitability 功能适合性",
+      "definition": "Degree to which a product or system provides functions that meet stated and implied needs when used under specified conditions.（提供满足明示与隐含需求的功能的程度）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Performance Efficiency 性能效率",
+      "definition": "【已按版权红线移出（原引用 217 字）· 出处见 source_id/URL】",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Compatibility 兼容性",
+      "definition": "【已按版权红线移出（原引用 210 字）· 出处见 source_id/URL】",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Interaction Capability 交互能力",
+      "definition": "Degree to which a product or system can be interacted with by specified users to exchange information via the user interface to complete specific tasks in a variety of contexts of use.（2023 版取代 2011 版产品模型中的 Usability）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Reliability 可靠性",
+      "definition": "Degree to which a system, product or component performs specified functions under specified conditions for a specified period of time.（子特性：faultlessness, availability, fault tolerance, recoverability）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Security 信息安全",
+      "definition": "【已按版权红线移出（原引用 253 字）· 出处见 source_id/URL】",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Maintainability 可维护性",
+      "definition": "Degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it or adapt it to changes in environment, and in requirements.（子特性：modularity, reusability, analysability, modifiability, testability）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Flexibility 灵活性",
+      "definition": "Degree to which a product can be adapted to changes in its requirements, contexts of use or system environment.（ISO 25010:2023 条款 3.8；子特性：adaptability, scalability, installability, replaceability；2011 版 Portability 改名而来）",
+      "source_id": "STD-005"
+    },
+    {
+      "term": "Safety 安全（人身/环境）",
+      "definition": "Degree to which a product under defined conditions avoids a state in which human life, health, property, or the environment is endangered.（2023 版新增的顶层特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Modularity 模块化",
+      "definition": "Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.（可维护性子特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Reusability 可复用性",
+      "definition": "Degree to which a product can be used as an asset in more than one system, or in building other assets.（可维护性子特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Analysability 可分析性",
+      "definition": "【已按版权红线移出（原引用 258 字）· 出处见 source_id/URL】（可维护性子特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Modifiability 可修改性",
+      "definition": "Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality.（可维护性子特性；注意：非顶层特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Testability 可测试性",
+      "definition": "Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.（可维护性子特性）",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "Quality-in-use model 使用质量模型 ISO/IEC 25019:2023",
+      "definition": "由三项特性构成（部分细分为子特性），刻画产品/系统在特定使用情境下使用时可影响干系人的质量；适用于信息系统与 IT 服务系统完整谱系。",
+      "source_id": "STD-028"
+    },
+    {
+      "term": "beneficialness 有益性（使用质量）",
+      "definition": "Extent of benefit resulting from the use of product, system or service.（25019 使用质量特性之一；其子特性含 usability 等）",
+      "source_id": "STD-028"
+    },
+    {
+      "term": "freedom from risk 免于风险（使用质量）",
+      "definition": "使用过程中对干系人各类风险的缓解程度（25019 使用质量特性之一；唯一从 2011 版延续下来的使用质量特性）。",
+      "source_id": "PAP-026"
+    },
+    {
+      "term": "acceptability 可接受性（使用质量）",
+      "definition": "25019:2023 使用质量模型三项特性之一（替代 2011 版 effectiveness/efficiency/satisfaction/context coverage 等）。",
+      "source_id": "PAP-026"
+    },
+    {
+      "term": "Extensibility 可扩展性（工程界通行定义，SEI）",
+      "definition": "【已按版权红线移出（原引用 221 字）· 出处见 source_id/URL】（强调『已知、有计划的』扩展与预置扩展点）",
+      "source_id": "OFF-022"
+    },
+    {
+      "term": "Extensibility（替代定义，被 SEI 综述引用）",
+      "definition": "The capability of the software system to enable the implementation of extensions to expand or enhance the system with new capabilities and features with minimal impact to existing system.（Breivold et al. 2007）；另有 Techopedia（append elements/features to existing structure）与 Papke 2000（grow in performance and functionality without re-designing infrastructure）。",
+      "source_id": "OFF-022"
+    },
+    {
+      "term": "Evolvability 可演化性（学术通行定义）",
+      "definition": "A system's ability to easily accommodate changes；Rowe/Leaney/Lowe (1994)：ability of a system to accommodate changes in its requirements throughout the system's lifespan with the least possible cost while maintaining architectural integrity.（强调『全生命周期、最低成本、保持架构完整性』）",
+      "source_id": "PAP-024"
+    },
+    {
+      "term": "Tactic 战术（架构）",
+      "definition": "A design decision that influences the control of a quality attribute response；一组战术构成 architectural strategy，pattern 打包战术。SEI 已为 performance/usability/availability/modifiability/testability/security 六属性定义战术集。",
+      "source_id": "BK-009"
+    },
+    {
+      "term": "Modifiability 战术三分类",
+      "definition": "①defer binding time；②localize changes；③prevent ripple effects。",
+      "source_id": "OFF-024"
+    },
+    {
+      "term": "Extensibility 战术（12 项，SEI 2022）",
+      "definition": "【已按版权红线移出（原引用 255 字）· 出处见 source_id/URL】。",
+      "source_id": "OFF-022"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "ISO/IEC 25010:2023 的产品质量模型由九项特性构成：Functional Suitability、Performance Efficiency、Compatibility、Interaction Capability、Reliability、Security、Maintainability、Flexibility、Safety；部分特性细分为子特性。ISO 25000 门户逐条给出英文定义与子特性，与 ISO OBP 片段一致。",
+      "source_ids": [
+        "STD-005",
+        "OFF-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SQuaRE 重构的官方取代关系为：ISO/IEC 25010:2011 被『25002:2024（总览与使用）+ 25019:2023（使用质量模型）+ 25010:2023（产品模型）』三者联合取消并替换；25019 前言为权威原文。",
+      "source_ids": [
+        "STD-028",
+        "PAP-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC 25002:2024 为 SQuaRE 质量模型的总览与使用标准：建立定义质量模型（特性+子特性）的框架，规定其结构、语义、与测量/需求定义/评价的关系及使用指南。",
+      "source_ids": [
+        "STD-027"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC 25019:2023 使用质量模型由三项特性构成：beneficialness、freedom from risk、acceptability；2011 版的 context coverage 被移除，其余使用质量特性被 beneficialness/acceptability 替代。",
+      "source_ids": [
+        "STD-028",
+        "PAP-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可维护性（Maintainability）在 ISO 25010:2023 中包含五子特性：modularity、reusability、analysability、modifiability、testability；其中 reusability 在本版处于可维护性之下（2011 版即如此）。",
+      "source_ids": [
+        "OFF-005",
+        "STD-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "2023 版将 2011 版产品模型中的 Usability 改名为 Interaction Capability、Portability 改名为 Flexibility；Flexibility 子特性为 adaptability、scalability、installability、replaceability。",
+      "source_ids": [
+        "OFF-005",
+        "PAP-026",
+        "STD-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "『可扩展性 extensibility』在 ISO/IEC 25010:2023 中并非顶层质量特性或子特性；其标准侧最接近的落点是 Flexibility（adaptability/scalability）与 Maintainability（modifiability）。SEI 将 extensibility 作为独立质量属性系统研究（CMU/SEI-2022-TR-002）。",
+      "source_ids": [
+        "STD-005",
+        "OFF-022",
+        "OFF-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "『可演化性 evolvability』同样不是任何 ISO/IEC 25010/25019 的顶层或子层术语；学术文献（Rowe/Leaney/Lowe 1994；Breivold 综述）给出独立定义（全生命周期以最低成本容纳需求变更并保持架构完整性），并明确其在工程实践中与 flexibility/maintainability/adaptability/modifiability 大量混用近义。",
+      "source_ids": [
+        "PAP-024",
+        "PAP-025",
+        "OFF-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "工程质量属性与战术存在系统化映射（SEI）：SEI 已为 performance、usability、availability、modifiability、testability、security 六属性定义战术集；modifiability 战术三分类为 defer binding time / localize changes / prevent ripple effects；availability 战术三分类为 fault detection / fault recovery / fault prevention；extensibility 战术 12 项（2022 报告）。",
+      "source_ids": [
+        "OFF-023",
+        "OFF-024",
+        "OFF-022",
+        "BK-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "质量属性需求通过 quality attribute scenario 规定，SEI 为 modifiability/performance/availability/security/usability 提供系统无关的 general scenario 模板；属性原语（attribute primitives）用于把质量目标转化为可复用的设计构件（Attribute-Based Architectural Styles 延伸）。",
+      "source_ids": [
+        "OFF-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 14764:2022 界定各类软件维护并提供维护过程指南，是 maintainability（内部质量属性）在生命周期过程侧的对应标准。",
+      "source_ids": [
+        "STD-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "extensibility 与 evolvability 的区别（工程界通行口径）：extensibility 侧重『已知、有计划的』方向，通过在架构中预置 extension points/mechanisms 低成本地新增功能或增强质量；evolvability 侧重『全生命周期内任意需求变更』的容纳能力，以最低成本并保持架构完整性。二者目标与机制高度重叠、边界模糊。",
+      "source_ids": [
+        "OFF-022",
+        "PAP-024",
+        "BK-009"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "ISO 25010:2023 将 safety 提升为顶层特性，但 privacy、sustainability、explainability 仍缺失；学术批评指出其产品/使用质量二分法与部分特性（如 freedom from risk）内聚性不足、版本间使用质量模型变动剧烈。",
+      "source_ids": [
+        "PAP-026",
+        "OFF-005"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "terminology_localization": {
+    "note": "『标准术语 vs 工程口语』归位表：把工程界常用 ilities 归位到 ISO/IEC 25010:2023 / 25019:2023 / SEI 的正式落点。标准侧无顶层术语者标注为『无（标准顶层术语）』并给出工程界通行定义来源。",
+    "rows": [
+      {
+        "engineering_term": "maintainability 可维护性",
+        "standard_home": "ISO/IEC 25010:2023 顶层特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "modularity 模块化",
+        "standard_home": "Maintainability 子特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "reusability 可复用性",
+        "standard_home": "Maintainability 子特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "analysability 可分析性",
+        "standard_home": "Maintainability 子特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "modifiability 可修改性",
+        "standard_home": "Maintainability 子特性",
+        "status": "标准术语（非顶层）"
+      },
+      {
+        "engineering_term": "testability 可测试性",
+        "standard_home": "Maintainability 子特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "flexibility 灵活性",
+        "standard_home": "ISO/IEC 25010:2023 顶层特性",
+        "status": "标准术语（2023 由 Portability 改名）"
+      },
+      {
+        "engineering_term": "adaptability / scalability / installability / replaceability",
+        "standard_home": "Flexibility 子特性",
+        "status": "标准术语"
+      },
+      {
+        "engineering_term": "portability 可移植性",
+        "standard_home": "ISO/IEC 25010:2011 顶层特性",
+        "status": "已废止（2023 改名 Flexibility）"
+      },
+      {
+        "engineering_term": "usability 可用性（产品侧）",
+        "standard_home": "ISO/IEC 25010:2011 顶层特性",
+        "status": "已废止（2023 改名 Interaction Capability）"
+      },
+      {
+        "engineering_term": "usability 可用性（使用侧）",
+        "standard_home": "ISO/IEC 25019:2023 beneficialness 的子特性",
+        "status": "标准术语（与产品侧 Interaction Capability 概念不同）"
+      },
+      {
+        "engineering_term": "extensibility 可扩展性",
+        "standard_home": "ISO 25010/25019 无顶层术语；最接近 Flexibility + Maintainability(modifiability)",
+        "status": "工程界术语，标准无顶层；SEI 作为独立质量属性（CMU/SEI-2022-TR-002）"
+      },
+      {
+        "engineering_term": "evolvability 可演化性",
+        "standard_home": "ISO 25010/25019 无顶层术语；最接近 Maintainability(modifiability/analysability) + Flexibility",
+        "status": "工程界/学术术语，标准无顶层；Rowe/Leaney/Lowe 1994、Breivold 综述"
+      },
+      {
+        "engineering_term": "changeability / flexibility（作 evolvability 近义时）",
+        "standard_home": "无独立标准术语；常与 Flexibility 混用",
+        "status": "工程口语，需消歧"
+      },
+      {
+        "engineering_term": "quality in use 使用质量",
+        "standard_home": "ISO/IEC 25019:2023（三特性：beneficialness / freedom from risk / acceptability）",
+        "status": "标准术语（2023 重构）"
+      },
+      {
+        "engineering_term": "quality attribute tactics 质量属性战术",
+        "standard_home": "非 ISO；SEI/CMU + SAiP",
+        "status": "工程界标准实践（SEI）"
+      }
+    ]
+  },
+  "tactics_mapping": {
+    "note": "质量属性→战术映射（SEI/SAiP）。tactic = 影响质量属性响应控制的设计决策；pattern 打包 tactic。",
+    "rows": [
+      {
+        "quality_attribute": "Availability 可用性",
+        "tactic_categories": [
+          "Fault Detection（Ping/Echo, Heartbeat/System Monitor, Exception Detection…）",
+          "Fault Recovery（各级 Redundancy, Checkpoint/Rollback, Process Monitor…）",
+          "Fault Prevention（Removal from service, Transactions, Predictive Model…）"
+        ],
+        "source_id": "OFF-023"
+      },
+      {
+        "quality_attribute": "Modifiability 可修改性",
+        "tactic_categories": [
+          "Defer binding time",
+          "Localize changes",
+          "Prevent ripple effects（基于 coupling/cohesion/成本动因）"
+        ],
+        "source_id": "OFF-024"
+      },
+      {
+        "quality_attribute": "Performance 性能",
+        "tactic_categories": [
+          "控制资源需求（resource demand）与控制资源仲裁（resource arbitration）"
+        ],
+        "source_id": "BK-009"
+      },
+      {
+        "quality_attribute": "Security 安全",
+        "tactic_categories": [
+          "Resisting attacks / Detecting attacks / Recovering from attacks"
+        ],
+        "source_id": "BK-009"
+      },
+      {
+        "quality_attribute": "Testability 可测试性",
+        "tactic_categories": [
+          "控制可观测状态（observe state）/ 控制内部状态（control state）"
+        ],
+        "source_id": "BK-009"
+      },
+      {
+        "quality_attribute": "Usability 可用性（产品）",
+        "tactic_categories": [
+          "运行时战术（任务模型、用户模型、系统模型）与设计时战术"
+        ],
+        "source_id": "BK-009"
+      },
+      {
+        "quality_attribute": "Extensibility 可扩展性",
+        "tactic_categories": [
+          "12 项：【已按版权红线移出（原引用 255 字）· 出处见 source_id/URL】"
+        ],
+        "source_id": "OFF-022"
+      }
+    ]
+  },
+  "errata": [
+    {
+      "misremembered": "ISO/IEC 25010 是『8 项质量特性』(31 子特性)",
+      "verified": "该口径指 ISO/IEC 25010:2011（8 特性、已废止）；现行 ISO/IEC 25010:2023 为 9 特性产品模型 + 25019:2023 独立的 3 特性使用质量模型",
+      "source_ids": [
+        "STD-005",
+        "OFF-005",
+        "PAP-026"
+      ]
+    },
+    {
+      "misremembered": "ISO 25010:2011 被 25010:2023 直接取代",
+      "verified": "实际为三方联合取代：25010:2011 被 25002:2024 + 25019:2023 + 25010:2023 共同取消替换（25019 前言原文）",
+      "source_ids": [
+        "STD-028",
+        "PAP-026"
+      ]
+    },
+    {
+      "misremembered": "ISO 25010 顶层特性含 Usability 与 Portability",
+      "verified": "2023 版分别改名为 Interaction Capability 与 Flexibility",
+      "source_ids": [
+        "OFF-005",
+        "PAP-026"
+      ]
+    },
+    {
+      "misremembered": "使用质量（quality in use）为 5 特性（effectiveness/efficiency/satisfaction/freedom from risk/context coverage）",
+      "verified": "ISO/IEC 25019:2023 重构为 3 特性：beneficialness / freedom from risk / acceptability；context coverage 被移除",
+      "source_ids": [
+        "STD-028",
+        "PAP-026"
+      ]
+    },
+    {
+      "misremembered": "extensibility / evolvability 是 ISO 25010 标准顶层质量特性",
+      "verified": "两者均无 ISO 顶层术语落点；标准侧最近似为 Flexibility 与 Maintainability 子特性；SEI 与学术文献分别给出独立工程/学术定义",
+      "source_ids": [
+        "STD-005",
+        "OFF-022",
+        "PAP-024",
+        "OFF-005"
+      ]
+    }
+  ],
+  "gaps": [
+    "iso.org/obp 被 WAF 403，25010:2023 九特性的条款级定义原句未从 ISO 一手页面逐字核实；九特性定义主要取自 iso25000.com（S2），并以 ISO OBP 片段（Tavily 索引）与 E 包交叉。",
+    "ISO/IEC 25019:2023 的第三项使用质量特性『acceptability』仅由 S4-M03（DIS 阶段论文）确认，OBP 片段直接可见的是 3.2.1 beneficialness 与 3.2.2 freedom from risk；acceptability 归属为交叉推断，标 medium。",
+    "ISO/IEC 25002:2024 仅获取样页（封面/目录/Scope），其第 5–8 章框架细节与本体（ontology）未核验。",
+    "extensibility/evolvability 无单一权威标准定义，工程界均无共识；本包给出 SEI 与学术两条独立口径，术语归位为『近似映射』而非等价，属主观综合（medium）。",
+    "SEI 战术集在各报告版本间持续演化（如 availability 目录已更新），本包采用的 modifiability 三分类来自 2007/2009 报告，与 SAiP 第 4 版可能已有措辞调整，未逐版比对。",
+    "未获取 ISO/IEC 25010:2023 的 Annex C（测量）与 25019 的 Annex A（与 2011 使用质量模型对照）正文，版本映射细节留待核实。"
+  ],
+  "notes": "所有标准 scope/前言文本取自 iTeh Standards 官方样页 PDF 与 ISO OBP 片段，未下载标准正文入库；SEI 报告 PDF 为公开分发（Distribution Statement A），仅提取论点未整段复制。境外源经代理 172.29.0.1:7890；国内 iso25000.com 直连。"
+}

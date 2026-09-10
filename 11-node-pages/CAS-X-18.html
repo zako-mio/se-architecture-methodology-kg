@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 架构 DAG 复盘 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GC-CASE.html">案例层</a> <span class="sep">/</span> <span>AI Agent 架构 DAG 复盘</span></div><div class="meta">X · P2 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>AI Agent 架构 DAG 复盘</h1><div class="en">Retrospective of an AI Agent DAG Analysis Project</div><div class="badges"><span class="badge pr">P2</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge tp">案例</span><span class="badge dm">X · 跨域/其他</span><span class="badge th">质量属性</span><span class="badge th">团队与康威</span><span class="badge grp">GC-CASE · 案例层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</span></p></div><p class="note">别名：DAG 方法论复盘、三项目复盘、采集建模生成门控　|　英文：Retrospective of an AI Agent DAG Analysis Project　|　类型：案例 / retrospective</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-349.7 -360 694.4 699.2" role="img" aria-label="AI Agent 架构 DAG 复盘 的 1-2 跳邻域关系图"><title>AI Agent 架构 DAG 复盘 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-2.2" y1="-296" x2="-81.2" y2="-276.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：测试金字塔依据测试的验证与成本本质</title></line><line x1="0" y1="-142.2" x2="-81.2" y2="-276.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：质量门控以测试作为验证反馈机制为依据</title></line><line x1="0" y1="-142.2" x2="-2.2" y2="-296" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：质量门控依据金字塔分层执行自动化测试</title></line><line x1="-228.5" y1="-172" x2="-285.7" y2="-93.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：适应度函数是演进式架构的强制机制</title></line><line x1="66.4" y1="275.1" x2="173.8" y2="224.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：准入时机的质量门槛与便利性是权衡的体现</title></line><line x1="277.5" y1="56.5" x2="173.8" y2="224.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突只能显式化与排序，无法消除</title></line><line x1="134.9" y1="-43.8" x2="280.7" y2="-35.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：粒度决定偶然复杂度与理解成本</title></line><line x1="83.6" y1="115.1" x2="173.8" y2="224.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：自动化方式按可信度与频率取舍</title></line><line x1="66.4" y1="275.1" x2="83.6" y2="115.1" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：触发时机的落地依赖自动化方式选择</title></line><line x1="277.5" y1="56.5" x2="134.9" y2="-43.8" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：属性冲突治理需在粒度边界上落地</title></line><line x1="66.4" y1="275.1" x2="83.6" y2="115.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：准入时机与自动化方式需协同设计</title></line><line x1="280.7" y1="-35.3" x2="173.8" y2="224.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度不可消除支撑权衡不可消除</title></line><line x1="-227.5" y1="-0.3" x2="-228.5" y2="-172" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以可执行门控持续评估知识库架构完整性</title></line><line x1="-227.5" y1="-0.3" x2="-128.9" y2="-46" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：把架构约束转写为自动执行、可量化判定的校验</title></line><line x1="209.9" y1="-199.5" x2="134.9" y2="-43.8" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：张力：双单体大文件反映边界粒度过粗，难独立变更</title></line><line x1="264.8" y1="-126.6" x2="134.9" y2="-43.8" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：张力：受蓝本粒度约束，增量定位精度受限</title></line><line x1="-159.1" y1="-235.9" x2="0" y2="-142.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链与可再构建交付</title></line><line x1="241.5" y1="151" x2="83.6" y2="115.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：工具路由与自动化方式选择</title></line><line x1="0" y1="0" x2="83.6" y2="115.1" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：全链路自动化与子Agent 分片</title></line><line x1="0" y1="0" x2="0" y2="-142.2" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控加无头渲染加视觉三重验证</title></line><line x1="0" y1="0" x2="134.9" y2="-43.8" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：组级视图加下钻的粒度控制</title></line><line x1="79" y1="-288.3" x2="0" y2="-142.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：质量门控把分析结果转化为变更准入判断</title></line><line x1="98.3" y1="-193.4" x2="0" y2="-142.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：持续集成服务落地质量门控与持续集成方法</title></line><line x1="-241.9" y1="146.1" x2="-172.4" y2="237.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以实例替换替代就地修改</title></line><line x1="-83.6" y1="115.1" x2="-64.2" y2="275.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：多阶段制品晋级即部署流水线</title></line><line x1="-83.6" y1="115.1" x2="-172.4" y2="237.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：构建一次逐环境晋级解耦发布部署</title></line><line x1="-241.9" y1="146.1" x2="-83.6" y2="115.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：流水线产出不可变制品</title></line><line x1="-128.9" y1="-46" x2="-228.5" y2="-172" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：适应度函数工具化实现架构适应度函数方法论</title></line><line x1="-128.9" y1="-46" x2="-285.7" y2="-93.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：工具化持续校验支撑演进式架构的增量变更原则</title></line><line x1="-159.1" y1="-235.9" x2="79" y2="-288.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以自动化代码审查工具为载体沉淀质量实践</title></line><line x1="-159.1" y1="-235.9" x2="-128.9" y2="-46" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链持续校验交付物完整性</title></line><line x1="0" y1="0" x2="-128.9" y2="-46" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控做无环断链覆盖一致校验，防漂移</title></line><line x1="-227.5" y1="-0.3" x2="98.3" y2="-193.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：自动全量重生成加多级门控构成验证流水线</title></line><line x1="0" y1="0" x2="-83.6" y2="115.1" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：采集建模生成门控交付的阶段化交付流水线</title></line><line x1="-227.5" y1="-0.3" x2="-241.9" y2="146.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以源数据全量重生成替代就地改页面防漂移</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">AI Agent 架构 …<title>AI Agent 架构 DAG 复盘（CAS-X-18）</title></text><circle cx="0" cy="-142.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-123.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量门控与持续集成<title>质量门控与持续集成（MTH-I-06）</title></text><circle cx="134.9" cy="-43.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="134.9" y="-24.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">粒度与边界设定<title>粒度与边界设定（MTH-O-06）</title></text><circle cx="83.6" cy="115.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="83.6" y="134.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">自动化方式选择<title>自动化方式选择（MTH-O-07）</title></text><circle cx="-83.6" cy="115.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-83.6" y="134.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">部署流水线工具化<title>部署流水线工具化（TEC-J-06）</title></text><circle cx="-128.9" cy="-46" r="9.0" fill="#c98a3a" stroke="none"/><text x="-128.9" y="-27" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构适应度函数工具化<title>架构适应度函数工具化（TEC-L-01）</title></text><circle cx="280.7" cy="-35.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="280.7" y="-19.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">本质复杂度与偶然复杂度<title>本质复杂度与偶然复杂度（ESS-O-01）</title></text><circle cx="173.8" cy="224.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="173.8" y="240.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">权衡的不可消除性<title>权衡的不可消除性（ESS-O-03）</title></text><circle cx="-81.2" cy="-276.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-81.2" y="-260.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试作为验证与反馈机制本…<title>测试作为验证与反馈机制本质（ESS-I-01）</title></text><circle cx="79" cy="-288.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="79" y="-272.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SonarQube 静态…<title>SonarQube 静态分析平台（TEC-H-01）</title></text><circle cx="-285.7" cy="-93.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-285.7" y="-77.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">演进式架构<title>演进式架构（MTH-L-04）</title></text><circle cx="277.5" cy="56.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="277.5" y="72.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性冲突治理<title>质量属性冲突治理（MTH-O-05）</title></text><circle cx="-227.5" cy="-0.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-227.5" y="15.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="-159.1" cy="-235.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-159.1" y="-219.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Open Code Re…<title>Open Code Review 图谱（CAS-X-15）</title></text><circle cx="-64.2" cy="275.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-64.2" y="291.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线<title>部署流水线（MTH-J-01）</title></text><circle cx="-228.5" cy="-172" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-228.5" y="-156" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构适应度函数<title>架构适应度函数（MTH-L-05）</title></text><circle cx="-241.9" cy="146.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-241.9" y="162.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">不可变基础设施实现<title>不可变基础设施实现（TEC-J-02）</title></text><circle cx="-2.2" cy="-296" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-2.2" y="-280" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试金字塔与反模式<title>测试金字塔与反模式（MTH-I-04）</title></text><circle cx="98.3" cy="-193.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="98.3" y="-177.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">持续集成服务与流水线<title>持续集成服务与流水线（TEC-I-01）</title></text><circle cx="209.9" cy="-199.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="209.9" y="-183.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">dsh-manager …<title>dsh-manager 插件深度分析（CAS-X-08）</title></text><circle cx="264.8" cy="-126.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="264.8" y="-110.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">dsh 插件依赖增量定位<title>dsh 插件依赖增量定位（CAS-X-10）</title></text><circle cx="241.5" cy="151" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="241.5" y="167" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术知识中枢交付法<title>技术知识中枢交付法（CAS-X-17）</title></text><circle cx="-172.4" cy="237.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-172.4" y="253.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">发布与部署解耦<title>发布与部署解耦（MTH-J-06）</title></text><circle cx="66.4" cy="275.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="66.4" y="291.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">准入与触发时机选择<title>准入与触发时机选择（MTH-O-02）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 5 个直接邻接、外环 18 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">三个对象（插件装配体系、单体仓库加<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>双层、知识教程）表面异构，但都能<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>为「节点加边」，因此可以用同一条管线处理——差异只在采集<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>的实证依据，同构部分在于「实证、建模、生成、门控」四步。</span>方法论可迁移性的证明，恰恰来自对象异构而管线同构。<span class="hl">依赖还原的可信度锚定在三硬依据（编译依赖、<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>时依赖、组合依赖）与源码行引用上，禁止凭空臆断边；每一条依赖都必须能指回具体源码位置，否则宁可不画。</span>这套「先定证据、再定图」的顺序，是静态依赖分析不沦为示意图的关键，也让不同人对同一对象能复现出大致一致的图。换言之，方法论的边界由对象的依赖是否可静态枚举决定，其骨架由「证据先行、图后生成、门控收口」决定，前者决定适用性，后者决定可靠性。把它写成方法论而非三个项目的流水账，正是为了让经验能脱离具体对象被复用。边界清晰，才能避免把一个静态方法误用在不适合的对象上。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">采集阶段用三硬依据加上并行探索子Agent 按领域分片，主Agent 只做分片设计与聚合裁决，语义分析全部下放以控制上下文。</span>建模阶段把结果统一为含节点、边、组、层的 DAG 数据，用拓扑算法做分层（源头为第零层）、做无环校验、再做悬空边清洗。生成阶段产出多形态交付物：交互图带组级视图与点击下钻、每个节点一页、组目录、Markdown 镜像、drawio 静态图。门控阶段校验数据合法、无环、断链、覆盖、交互数据一致与统计一致，再叠加无头渲染与视觉验证。交付阶段推送托管平台并配置自动部署，形成「一次建模、多形态产出、自动发布」的完整链路。分片与聚合的分工是关键：子Agent 负责在各自领域内做深，主Agent 负责统一口径与裁决冲突，既避免单点上下文过载，也防止多人产出难以拼合。门控中的悬空边清洗与统计一致性校验，都是在真实事故后补上的，属于用代价换来的经验。分片与聚合的分工，本质是把上下文压力与口径统一分别交给不同角色承担。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">组级视图加点击下钻，解决数百节点一次性渲染的卡顿——第一层只渲染组节点，点击后下钻组内成员。</span>双轨交付满足两类读者：人类看 HTML，AI 读 Markdown。悬空边清洗必须在渲染前完成，因为图库遇到引用不存在节点的边会整图抛错而非跳过，这是实战中付出代价后确立的铁律。三个子项目合计 312 节点、740 依赖边、360 个节点页、190 张静态图，均部署为可公开访问，证明同一管线可跨源码、配置、知识三类对象稳定复用。为了长期可维护，所有交付物均由数据源经脚本重建，修正一处即可全量刷新，避免多形态产物之间出现口径漂移。节点页按统一的 why-how 结构生成，使读者在不同项目间切换时不必重新适应版式。由脚本重建交付物，是保证多形态产物长期一致的最低成本手段。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>其「可复用」验证也只覆盖了三个由同一人设计的项目，存在方法论自证的风险，普适性证据有限，故置信度标为中等。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>该方法论适合结构相对静态、依赖可枚举的对象（源码、配置、知识），对运行时反射注入、动态加载等以动态依赖为主的对象无效，需要运行时跟踪而非静态解析，这是其明确边界。</li><li>复盘本身也暴露局限：边主要覆盖直接依赖，间接与条件依赖未穷尽；边溯源率靠人工抽查、未全量自动化；节点热点分析（被依赖 Top N）尚未纳入。</li><li>此外，这是一份求职导向的复盘，结论带个人叙事色彩，部分量化指标需按当时口径解读，不能当作行业基准。</li><li>因此复盘的定位应是经验清单而非行业结论，读者应关注其可迁移的做法与踩过的坑，对其量化数字保持合理折扣与批判性使用。</li><li>若要在正式项目中复用，建议先补齐边溯源自动化与间接依赖，再扩大适用范围。</li><li>对复盘数字保持折扣，是对个人叙事类材料的合理审慎态度。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-04 · 2 跳派生：当前节点 → MTH-O-07 → ESS-O-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-06 · 2 跳派生：当前节点 → TEC-L-01 → MTH-L-05</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-07 · 2 跳派生：当前节点 → TEC-L-01 → MTH-L-05</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-08 · 经 MTH-O-06</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-10 · 经 MTH-O-06</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → MTH-O-06 → ESS-O-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-14 · 2 跳派生：当前节点 → MTH-O-07 → MTH-O-02</span><h4>OpenSpec 规约驱动解析</h4><p>对比规约驱动开发工具链 OpenSpec 与 Superpower 的元模型、工件依赖 DAG 与安全门控，提炼「规约先于实现」工程形态的解析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 经 MTH-I-06</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → MTH-O-06 → MTH-O-05</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div><div class="case-card"><span class="id">CAS-X-17 · 经 MTH-O-07</span><h4>技术知识中枢交付法</h4><p>从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>medium</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>LOC-037</div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：同一套 DAG 方法论可以分析任何复杂对象</span><br>核验结论：方法论只适用于结构相对静态、依赖可枚举的对象；运行时反射与动态加载需运行时跟踪。复盘案例的量化指标来自单一求职向项目，口径有限，置信度中等　<span class="k">[LOC-037]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（5 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>→ MTH-I-06</td><td>质量门控与持续集成<br><span style="color:var(--dim);font-size:12px">E-994</span></td><td>印证：门控加无头渲染加视觉三重验证</td></tr><tr><td class="k">案例印证</td><td>→ MTH-O-06</td><td>粒度与边界设定<br><span style="color:var(--dim);font-size:12px">E-995</span></td><td>印证：组级视图加下钻的粒度控制</td></tr><tr><td class="k">案例印证</td><td>→ MTH-O-07</td><td>自动化方式选择<br><span style="color:var(--dim);font-size:12px">E-993</span></td><td>印证：全链路自动化与子Agent 分片</td></tr><tr><td class="k">案例印证</td><td>→ TEC-J-06</td><td>部署流水线工具化<br><span style="color:var(--dim);font-size:12px">E-26</span></td><td>印证：采集建模生成门控交付的阶段化交付流水线</td></tr><tr><td class="k">案例印证</td><td>→ TEC-L-01</td><td>架构适应度函数工具化<br><span style="color:var(--dim);font-size:12px">E-22</span></td><td>印证：门控做无环断链覆盖一致校验，防漂移</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

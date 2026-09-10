@@ -1,0 +1,459 @@
+{
+  "topic": "奠基文献回源（Foundational Papers）——Royce / Lehman / Parnas / Brooks / POSA / SWEBOK 原文可核验证据包",
+  "generated_by": "学术文献溯源员 (subagent, self-authored role)",
+  "access_date": "2026-09-10",
+  "reuses": "复用 H-implementation.json 的 Parnas 1972 全文回源（H.S2-01）；主源沿用知识地图全局 ID（S4-PAP-01..05、S2-BK-16、S1-OFF-01），交叉验证源以 R-XC-nn 编号。",
+  "schema_note": "按 contract §4.1 schema（topic/generated_by/sources/definitions/findings/gaps/notes）产出；额外增加 access_date / accessibility / doi / reuse_of / errata 以承载回源状态与勘误，字段语义与 sibling 包（D/G/H）一致。",
+  "sources": [
+    {
+      "id": "PAP-004",
+      "title": "Managing the Development of Large Software Systems（Royce 1970 原文）",
+      "org": "Winston W. Royce, TRW; Proceedings, IEEE WESCON, August 1970, pp. 1-9（重印于 Proceedings 9th ICSE, 1987; 另重印于 MIT Press《Ideas That Created the Future》2021）",
+      "year": "1970",
+      "url": "https://web.archive.org/web/2019id_/http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf",
+      "tier": "S4",
+      "accessibility": "free（作者/课程机构镜像，经 Wayback 快照；原刊 IEEE WESCON / ICSE 重印版权属 IEEE）",
+      "verified": true,
+      "doi": "10.7551/mitpress/12274.003.0035（MIT Press 2021 重印本 DOI，经 Crossref 核验）",
+      "key_points": [
+        "原文并未出现 “waterfall” 一词；被后人称作瀑布模型的是 Figure 2 的 “more grandiose approach”，作者随即指出其缺陷。",
+        "原文明确刻画迭代：Figure 3 标题为 “the iterative relationship between successive development phases”，正文称‘随着设计细化，与前一步和后一步存在迭代’（line 47-49）。",
+        "Figure 4 指出实际过程中 ‘the design iterations are never confined to the successive steps’（迭代并不局限于相邻步骤）。",
+        "核心补救为五步（Figure 10 总结）：1) Program design comes first；2) Document the design；3) Do it twice；4) Plan, control and monitor testing；5) Involve the customer。",
+        "STEP 3 原文标题即 “DO IT TWICE”：若程序首次开发，应安排‘交付给客户作运行部署的版本实为关键设计/运行区域的第二版’，即先做一个缩小版/试点（pilot model）作为最终产品的早期仿真。",
+        "结论段（line 379-384）作者坦言五步各有额外成本，但‘较简单的单次方法在大型软件开发中从未奏效，补救成本远超五步流程投入’。"
+      ],
+      "legacy_id": "S4-PAP-04"
+    },
+    {
+      "id": "PAP-003",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution（Lehman 1980 原文）",
+      "org": "M. M. Lehman; Proceedings of the IEEE, 68(9):1060-1076",
+      "year": "1980",
+      "url": "https://doi.org/10.1109/proc.1980.11805",
+      "tier": "S4",
+      "accessibility": "abstract-only（IEEE Xplore 付费全文，未合法免费取得；元数据经 Crossref 核验，law 条数以 Lehman 本人 1996 复述回源）",
+      "verified": false,
+      "doi": "10.1109/PROC.1980.11805",
+      "key_points": [
+        "经 Crossref 核验：题名 ‘Programs, life cycles, and laws of software evolution’，Proceedings of the IEEE, 68(9):1060-1076, 1980。",
+        "据 Lehman 本人 1996 复述（R-XC-01）：前三定律成文于 1970 年代中期（1974/1978），本 1980 论文新增两条，故 1980 原文为 5 条定律，而非八条。",
+        "本论文以 S/P/E 三类程序区分适用性，定律主要适用于 E-type（演化型）系统。",
+        "全文未取得，故本条为 abstract-only；其论断以 R-XC-01 + R-XC-02 交叉支撑。"
+      ],
+      "legacy_id": "S4-PAP-03"
+    },
+    {
+      "id": "PAP-005",
+      "title": "Software Engineering Programmes Are Not Computer Science Programmes（Parnas 1998 原文）",
+      "org": "David Lorge Parnas, McMaster University; Annals of Software Engineering 6:19-37（1998）；重印于 IEEE Software 16(6):19-30, Nov/Dec 1999（本次核验为重印本）",
+      "year": "1998",
+      "url": "https://bioinfo.uib.es/~joemiro/semdoc/PlansEstudis/Bachelor_Masters_Curricula/DParnas.pdf",
+      "tier": "S4",
+      "accessibility": "free（大学机构存档副本；Annals of Software Engineering / IEEE Software 版权）",
+      "verified": true,
+      "doi": "10.1023/A:1018949113292",
+      "key_points": [
+        "开篇指出 ‘Software Engineering’ programs 成为大学争议焦点：CS 系声称 SE 属其学科，工程学院视其为新工程专业。",
+        "核心论点：传统 CS 与多数工程专业存在差异，SE 应遵循传统工程专业教育路径（professional engineering approach），而非作为 CS 的子领域。",
+        "以电气/机械/化工等工程专业对照，强调 CS 与工程学科在 career goals / interests / 科学基础（物理 vs 计算）上的不同。",
+        "核验副本为 IEEE Software 1999 重印版（页脚 0740-7459/99，Nov/Dec 1999, pp.19-30）；原文初刊 Annals of Software Engineering Vol.6（Crossref 记 1998-03，作者 bio 记 Apr. 1999）。"
+      ],
+      "legacy_id": "S4-PAP-05"
+    },
+    {
+      "id": "PAP-002",
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules（Parnas 1972 原文，复用 H 包回源）",
+      "org": "D. L. Parnas, Carnegie-Mellon University; Communications of the ACM 15(12):1053-1058",
+      "year": "1972",
+      "url": "https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "tier": "S4",
+      "accessibility": "free（大学课程镜像；ACM 版权）",
+      "verified": true,
+      "reuse_of": "H-implementation.json S2-01（已全文回源，本包不重复核验细节）",
+      "doi": "10.1145/361598.361623",
+      "key_points": [
+        "信息隐藏分解判据：每个模块隐藏一个‘困难或可能变化的设计决策’（secret），接口只揭示尽量少的内部工作。",
+        "module = responsibility assignment（责任分配），非子程序；不应基于流程图/执行步骤分解系统。",
+        "KWIC 案例证明：按信息隐藏分解时，核心存储格式变更只影响单个模块；按步骤分解则波及所有模块。",
+        "本包标注复用：H 包已以全文核验；此处仅登记可访问 URL 与 DOI 供跨包引用一致性。"
+      ],
+      "legacy_id": "S4-PAP-02"
+    },
+    {
+      "id": "PAP-001",
+      "title": "No Silver Bullet—Essence and Accident in Software Engineering（Brooks 1987 原文）",
+      "org": "Frederick P. Brooks, Jr.; IEEE Computer 20(4):10-19（1987）；原为 IFIP 1986 会议文（本次核验为 1986 IFIP 版 PDF）",
+      "year": "1987",
+      "url": "https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf",
+      "tier": "S4",
+      "accessibility": "free（作者/社区镜像；IEEE Computer 版权）",
+      "verified": true,
+      "doi": "10.1109/MC.1987.1663532",
+      "key_points": [
+        "核心论断：【已按版权红线移出（原引用 218 字）· 出处见 source_id/URL】",
+        "区分 essence（软件固有困难）与 accidents（当下附加困难）；沿用 Aristotle 的划分。",
+        "原文对本质复杂度的四要素表述：complexity、conformity、changeability、invisibility（‘the inherent properties of this irreducible essence…: complexity, conformity, changeability, and invisibility’）。",
+        "complexity：‘software entities are more complex for their size than perhaps any other human construct, because no two parts are alike’；且随规模非线性增长。",
+        "conformity：软件复杂度多源于对任意人为接口的符合，无法靠软件自身重构消除。",
+        "changeability：‘All successful software gets changed’；软件是 pure thought-stuff，持续受变更压力。",
+        "invisibility：软件不可见、不可可视化，缺乏几何表征，阻碍个体设计与跨人沟通。",
+        "过往突破（高级语言、分时、统一开发环境）攻克的都是 accidental 困难，故不足以解决本质困难。"
+      ],
+      "legacy_id": "S4-PAP-01"
+    },
+    {
+      "id": "BK-016",
+      "title": "Pattern-Oriented Software Architecture, Volume 1: A System of Patterns（POSA Vol.1）",
+      "org": "Frank Buschmann, Regine Meunier, Hans Rohnert, Peter Sommerlad, Michael Stal (John Wiley & Sons)",
+      "year": "1996",
+      "url": "https://www.wiley.com/en-us/Pattern-Oriented+Software+Architecture%2C+Volume+1%3A+A+System+of+Patterns-p-9780471958697",
+      "tier": "S2",
+      "accessibility": "official-sample（出版社官方免费提供 Chapter 1 与目录；书本体受版权，未下载全本）",
+      "verified": true,
+      "isbn": "978-0-471-95869-7",
+      "sample_urls": {
+        "table_of_contents": "https://media.wiley.com/product_data/excerpt/97/04719586/0471958697-5.pdf",
+        "chapter_1": "https://media.wiley.com/product_data/excerpt/97/04719586/0471958697-6.pdf",
+        "excerpt": "https://media.wiley.com/product_data/excerpt/97/04719586/0471958697-11.pdf"
+      },
+      "key_points": [
+        "Wiley 官方产品页核验：ISBN 978-0-471-95869-7，1996 年 8 月，496 页；官方提供免费的 Chapter 1、Table of Contents、Excerpt 与 Index PDF（本次仅记录链接与可达状态，未落盘全本）。",
+        "官方样章 PDF 均为扫描图像（含 “COPYRIGHTED MATERIAL” 水印），无文本层；按版权红线不作正文转写。",
+        "官方配套站点 software-pattern.org（R-XC-04）列出模式目录：Blackboard、Broker、Client-Dispatcher-Server、Command Processor、Counted Pointer、Forwarder-Receiver、Layers、Microkernel、MVC 等。",
+        "Microkernel 模式官方定义（R-XC-04）：适用于需适应变化系统需求的软件系统；将最小功能核（minimal functional core）与扩展功能及客户特定部分分离，microkernel 充当插件插座（socket）并协调其协作。",
+        "书本体未回源；模式定义依据出版社官方样章目录 + 官方配套站点，属权威二手（S2）而非逐字原著。"
+      ],
+      "legacy_id": "S2-BK-16"
+    },
+    {
+      "id": "OFF-001",
+      "title": "SWEBOK Guide V4.0（Guide to the Software Engineering Body of Knowledge），IEEE Computer Society",
+      "org": "IEEE Computer Society（ISO/IEC TR 19759）",
+      "year": "2024",
+      "url": "https://web.archive.org/web/2024/https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "accessibility": "free-metadata（官方页面经 Wayback 快照；正式 PDF 正文需 IEEE CS 会员/购买）",
+      "verified": true,
+      "key_points": [
+        "官方页面核验：SWEBOK Guide V4.0 含 18 个知识领域（KAs），‘summarize key concepts and include a reference list’。",
+        "新增三个 KA：Software Architecture、Software Engineering Operations、Software Security。",
+        "定位为 ‘generally accepted, consensus-driven knowledge derived from the interaction between software engineering theory and practice’。",
+        "V4 于 2024-10 发布；Agile 与 DevOps 已纳入。",
+        "KA 全清单由 R-XC-03（SEBoK 官方概览）与 R-XC-07（维基，引 IEEE 官方）交叉核验。"
+      ],
+      "legacy_id": "S1-OFF-01"
+    },
+    {
+      "id": "XCV-001",
+      "title": "Laws of Software Evolution Revisited（Lehman 本人对八条定律的完整复述，含定律演进史）",
+      "org": "M. M. Lehman; Software Process Technology (EWSPT'96), LNCS 1149:108-124, Springer",
+      "year": "1996",
+      "url": "https://www.cs.kent.edu/~jmaletic/cs63902/Papers/Lehman96.pdf",
+      "tier": "S4",
+      "accessibility": "free（大学课程镜像；Springer 版权）",
+      "verified": true,
+      "doi": "10.1007/BFb0017737",
+      "key_points": [
+        "定律演进史原文：【已按版权红线移出（原引用 284 字）· 出处见 source_id/URL】（即 1980 原文=5 条，第八=1996 首次成文）",
+        "八条定律原文名称（§2.1-2.8）：I Continuing Change；II Increasing Complexity；III Self Regulation；IV Conservation of Organisational Stability (invariant work rate)；V Conservation of Familiarity；VI Continuing Growth；VII Declining Quality；VIII Feedback System。",
+        "适用对象为 E-type 系统（在真实世界求解问题/实现应用的软件系统）。",
+        "II Increasing Complexity：‘As a program is evolved its complexity increases unless work is done to maintain or reduce it.’",
+        "IV（最反直觉）：‘The average effective global activity rate on an evolving system is invariant over the product life time.’",
+        "VIII Feedback System：软件开发/维护组织应视为系统论意义上的自稳定反馈系统；本文首次将其明确立为定律。"
+      ],
+      "legacy_id": "R-XC-01"
+    },
+    {
+      "id": "XCV-002",
+      "title": "Lehman's laws of software evolution（百科条目，交叉验证定律条数与 S/P/E 分类）",
+      "org": "Wikipedia（引 Lehman 1980、Lehman et al. 1997 等）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution",
+      "tier": "S2",
+      "accessibility": "free",
+      "verified": true,
+      "key_points": [
+        "‘laws … formulated starting in 1974 … Over the past decades the laws have been revised and extended several times.’——与 R-XC-01 一致。",
+        "S-program（精确规格、静态）、P-program（建模真实世界问题，如天气预报）、E-program（机械化人类/社会活动，需持续适应）、A-program（P∪E）。",
+        "本条仅作二手交叉，非独立权威；关键论断以 Lehman 本人 R-XC-01 为准。"
+      ],
+      "legacy_id": "R-XC-02"
+    },
+    {
+      "id": "XCV-003",
+      "title": "An Overview of the SWEBOK Guide（SEBoK 百科，逐条列出 V4 的 18 KA）",
+      "org": "SEBoK (Guide to the Systems Engineering Body of Knowledge)",
+      "year": "accessed 2026-09-10",
+      "url": "https://sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide",
+      "tier": "S1",
+      "accessibility": "free",
+      "verified": true,
+      "key_points": [
+        "完整列 18 KA：Requirements、Architecture*、Design、Construction、Testing、Operations*、Maintenance、Configuration Management、Engineering Management、Process、Models and Methods、Quality、Security*、Professional Practice、Economics、Computing Foundations、Mathematical Foundations、Engineering Foundations（* 为 V4 新增）。",
+        "KA2 Software Architecture 为新增：‘resulting from a realization that architecture is a significant and distinct discipline over and above software design’。",
+        "KA6 Software Engineering Operations 为新增：应对 DevOps/IaaS 与 dev-maintenance-ops 筒仓消除。",
+        "KA13 Software Security 为新增：安全须作为一等质量属性（first-class quality attribute）。",
+        "Software Maintenance 已对齐 ISO/IEC/IEEE 14764:2022。"
+      ],
+      "legacy_id": "R-XC-03"
+    },
+    {
+      "id": "XCV-004",
+      "title": "Pattern-Oriented Software Architecture Volume 1 — 官方配套站点（模式目录 + Microkernel 定义）",
+      "org": "software-pattern.org（POSA 系列官方站点，作者维护）",
+      "year": "accessed 2026-09-10",
+      "url": "http://software-pattern.org/Book/30",
+      "tier": "S2",
+      "accessibility": "free（作者/官方配套站点）",
+      "verified": true,
+      "key_points": [
+        "列出 POSA Vol.1 作者五人（F. Buschmann、R. Meunier、H. Rohnert、P. Sommerlad、M. Stal）。",
+        "模式目录：Blackboard、Broker、Client-Dispatcher-Server、Command Processor、Counted Pointer、Forwarder-Receiver、Layers、Microkernel、MVC 等。",
+        "Microkernel 定义：‘separates a minimal functional core from extended functionality and customer-specific parts… serves as a socket for plugging in these extensions and coordinating their collaboration.’"
+      ],
+      "legacy_id": "R-XC-04"
+    },
+    {
+      "id": "XCV-005",
+      "title": "Waterfall model（百科条目，交叉验证 Royce 五步与迭代原意）",
+      "org": "Wikipedia（引 Royce 1970 及软件工程史文献）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Waterfall_model",
+      "tier": "S2",
+      "accessibility": "free",
+      "verified": true,
+      "key_points": [
+        "‘the term “waterfall” is not used in the paper’——与 S4-PAP-04 全文检索一致。",
+        "Royce 批评未加修改的瀑布流程‘risky and [inviting] failure’（测试仅在末尾）。",
+        "‘The rest of his paper introduced five steps which he felt were necessary to “eliminate most of the development risks”’——与 S4-PAP-04 Figure 10 的五步一致。",
+        "本条仅作二手交叉，关键论断以 Royce 原文为准。"
+      ],
+      "legacy_id": "R-XC-05"
+    },
+    {
+      "id": "XCV-006",
+      "title": "No Silver Bullet（百科条目，交叉验证核心论断与本质/偶然复杂度）",
+      "org": "Wikipedia（引 Brooks 1986/1987）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/No_Silver_Bullet",
+      "tier": "S2",
+      "accessibility": "free",
+      "verified": true,
+      "key_points": [
+        "复述核心论断‘there is no single development … which by itself promises even one order of magnitude … improvement within a decade’。",
+        "‘Brooks distinguishes between two different types of complexity: accidental complexity and essential complexity … Accidental complexity relates to problems that engineers create and can fix.’",
+        "本条仅作二手交叉，四要素清单以 S4-PAP-01 原文为准。"
+      ],
+      "legacy_id": "R-XC-06"
+    },
+    {
+      "id": "XCV-007",
+      "title": "Software Engineering Body of Knowledge（百科条目，交叉验证 SWEBOK V4 发布与 18 KA）",
+      "org": "Wikipedia（引 IEEE Computer Society）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge",
+      "tier": "S2",
+      "accessibility": "free",
+      "verified": true,
+      "key_points": [
+        "‘The SWEBOK Evolution project resulted in the publication of SWEBOK Guide version 4 in October 2024.’",
+        "完整复述 V4 的 18 KA 名词（与 R-XC-03 一致）。",
+        "本条仅作二手交叉，以官方页面 S1-OFF-01 与 SEBoK R-XC-03 为准。"
+      ],
+      "legacy_id": "R-XC-07"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "Royce 的迭代瀑布（iterative reading of Royce 1970）",
+      "definition": "Royce 原文并未提倡单次顺序交付；Figure 3 明确‘successive development phases 之间存在迭代’，Figure 4 承认迭代不局限于相邻步骤，并提出五步补救（含 STEP 3: DO IT TWICE）以‘消除大部分开发风险’。‘waterfall’ 一词不在原文中，系后人标签。",
+      "source_id": "PAP-004"
+    },
+    {
+      "term": "do it twice（做两遍）",
+      "definition": "Royce 五步法第三步：若程序首次开发，应安排最终交付运行版本在关键设计/运行区域实为‘第二版’，通过先做缩小版/试点（pilot model）模拟最终产品，以便用实验而非纯人为判断来检验时序、存储等关键假设。",
+      "source_id": "PAP-004"
+    },
+    {
+      "term": "laws of software evolution（软件演化定律）",
+      "definition": "Lehman 及其合作者围绕 E-type 软件系统提出的演化规律集合。八条完整表述为：I Continuing Change、II Increasing Complexity、III Self Regulation、IV Conservation of Organisational Stability、V Conservation of Familiarity、VI Continuing Growth、VII Declining Quality、VIII Feedback System。其条数经多次扩展：1974 年起 3 条 → 1980 年增 2 条（共 5）→ 1991 年脚注第 6 条 → 1996 年首次成文第 7、8 条。",
+      "source_id": "XCV-001"
+    },
+    {
+      "term": "E-type software（E 型软件）",
+      "definition": "‘broadly speaking, software systems that solve a problem or implement a computer application in the real world’，即嵌入真实世界、需随运行环境持续演化的软件；Lehman 定律的适用对象。（另有 S-program 精确规格静态、P-program 建模真实世界问题、A-program = P∪E。）",
+      "source_id": "XCV-001"
+    },
+    {
+      "term": "essence vs accident（本质复杂度 vs 偶然复杂度）",
+      "definition": "Brooks 区分：essence 是软件固有困难（construct of interlocking concepts），accident 是当下附带、可随技术进步消除的困难。过往突破多消除偶然困难，故无法带来数量级提升。",
+      "source_id": "PAP-001"
+    },
+    {
+      "term": "本质复杂度的四个固有属性（four inherent properties of the essence）",
+      "definition": "complexity（同尺寸下比任何人造物更复杂，因不存在相同的两部分，且随规模非线性增长）、conformity（多源于对任意人为接口的符合）、changeability（成功软件必被修改）、invisibility（不可见、不可可视化）。注：四属性刻画的是 essence，不是‘essence 与 accident 的四要素’。",
+      "source_id": "PAP-001"
+    },
+    {
+      "term": "No Silver Bullet（无银弹）",
+      "definition": "Brooks 论断：无论技术或管理技术，都不存在单一手段能在十年内使软件生产率、可靠性、简洁性提升一个数量级（十倍）。",
+      "source_id": "PAP-001"
+    },
+    {
+      "term": "Microkernel（微内核架构模式，POSA）",
+      "definition": "适用于需适应变化系统需求的软件系统；将最小功能核（minimal functional core）与扩展功能及客户特定部分分离，microkernel 充当可插拔扩展的插座（socket）并协调其协作。",
+      "source_id": "BK-016"
+    },
+    {
+      "term": "SWEBOK knowledge area（KA，知识领域）",
+      "definition": "SWEBOK 对软件工程共识知识的划分单元。V4.0（2024）含 18 个 KA，较 V3（15 KA）新增 Software Architecture、Software Engineering Operations、Software Security。",
+      "source_id": "OFF-001"
+    },
+    {
+      "term": "information hiding / module decomposition criteria（信息隐藏分解判据，复用）",
+      "definition": "Parnas 1972：每个模块隐藏一个困难或可能变化的设计决策（secret）；module 为责任分配而非子程序；不应按流程步骤分解。详见 H-implementation.json 全文回源。",
+      "source_id": "PAP-002"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Royce 1970 原文并未主张单次瀑布；它在 Figure 3 明确刻画相邻阶段间的迭代，并在 Figure 4 承认迭代不局限于相邻步骤。‘waterfall’ 一词不出现在原文。",
+      "source_ids": [
+        "PAP-004",
+        "XCV-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Royce 提出五步补救（program design first / document the design / do it twice / plan-control-monitor testing / involve the customer），Figure 10 予以总结；他明确主张仅靠更简单的单次流程在大型项目中不可行。",
+      "source_ids": [
+        "PAP-004",
+        "XCV-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Royce 的 STEP 3 原文即 ‘DO IT TWICE’：首次开发的系统，其最终交付版本在关键设计/运行区域实为第二版，先以缩小版/试点作为最终产品的早期仿真。",
+      "source_ids": [
+        "PAP-004"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Lehman 1980 原文（Proc. IEEE 68(9):1060-1076）只表述 5 条定律：‘八条定律’的完整表述最早于 Lehman 1996 成文（前 5 条+第 6 条脚注+第 7、8 条首次发表）。",
+      "source_ids": [
+        "PAP-003",
+        "XCV-001",
+        "XCV-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "八条定律名称（Lehman 1996 原文）：I Continuing Change；II Increasing Complexity；III Self Regulation；IV Conservation of Organisational Stability；V Conservation of Familiarity；VI Continuing Growth；VII Declining Quality；VIII Feedback System。",
+      "source_ids": [
+        "XCV-001",
+        "XCV-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Lehman 定律针对 E-type 系统（真实世界应用/问题求解且需持续适应）；另区分 S-program、P-program、A-program。",
+      "source_ids": [
+        "XCV-001",
+        "XCV-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Parnas 1998 论证软件工程专业不应被视为计算机科学的子领域，而应遵循传统工程专业教育路径；CS 与工程学科在目标、兴趣与科学基础上存在根本差异。",
+      "source_ids": [
+        "PAP-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Parnas 1972 的信息隐藏分解判据（module=责任分配、按易变设计决策切分、反对按流程图分解）为已全文回源结论，本包复用 H 包结论。",
+      "source_ids": [
+        "PAP-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Brooks 1987 核心：不存在单一技术/管理手段能在十年内带来一个数量级提升；应区分 essence（固有困难）与 accidents（可消除的附带困难）。",
+      "source_ids": [
+        "PAP-001",
+        "XCV-006"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Brooks 对本质复杂度的四属性原文表述为 complexity、conformity、changeability、invisibility；四者刻画 essence，而非‘本质与偶然各四要素’。",
+      "source_ids": [
+        "PAP-001",
+        "XCV-006"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "POSA Vol.1（Wiley, 1996, ISBN 978-0-471-95869-7）官方免费提供 Chapter 1 与 Table of Contents PDF；其 Microkernel 模式定义为‘将最小功能核与扩展/客户特定部分分离，核心充当插件插座并协调协作’。书本体未回源，仅取官方样章与目录。",
+      "source_ids": [
+        "BK-016",
+        "XCV-004"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SWEBOK Guide V4.0（2024-10，IEEE CS）含 18 个 KA，较 V3 新增 Software Architecture、Software Engineering Operations、Software Security 三个 KA；Maintenance KA 已对齐 ISO/IEC/IEEE 14764:2022。",
+      "source_ids": [
+        "OFF-001",
+        "XCV-003",
+        "XCV-007"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "Royce 1970 提出了‘瀑布模型’并主张一次性顺序开发",
+      "corrected": "原文未出现 ‘waterfall’ 一词，且明确刻画阶段间迭代并提出五步补救（含 DO IT TWICE）；把 Figure 2 的单次流程当成其主张属经典误读。",
+      "basis": "S4-PAP-04 全文检索 + R-XC-05"
+    },
+    {
+      "misremembered": "Lehman 1980 论文给出了八条软件演化定律",
+      "corrected": "1980 原文为 5 条；完整八条最早成文于 Lehman 1996（第 6 条 1991 年脚注、第 7/8 条 1996 首次发表）。引用‘八条定律’应指向 1996/2003 版而非 1980。",
+      "basis": "R-XC-01 原文定律演进史 + S4-PAP-03 元数据 + R-XC-02"
+    },
+    {
+      "misremembered": "No Silver Bullet 的‘四要素’是本质复杂度与偶然复杂度各四项",
+      "corrected": "complexity/conformity/changeability/invisibility 是本质复杂度（essence）的四个固有属性；essence vs accident 是另一维二分。",
+      "basis": "S4-PAP-01 原文 §‘inherent properties of this irreducible essence’"
+    },
+    {
+      "misremembered": "Parnas 1998 标题固定为 ‘...Programmes...’",
+      "corrected": "Annals of Software Engineering 原刊用 ‘Programmes’；IEEE Software 1999 重印版改拼写为 ‘Programs’。检索与引用时两种拼写都存在。",
+      "basis": "S4-PAP-05 PDF（IEEE Software 重印本）正文标题 ‘Programs’ vs Crossref 元数据 ‘programmes’"
+    },
+    {
+      "misremembered": "Brooks 的 No Silver Bullet 首发于 IEEE Computer（1987）",
+      "corrected": "思想首发于 IFIP 1986 会议文，IEEE Computer 1987（20(4):10-19）为杂志版；二者内容高度重叠但版本不同。",
+      "basis": "S4-PAP-01 PDF 标注 (1986) + Crossref 10.1109/MC.1987.1663532"
+    },
+    {
+      "misremembered": "SWEBOK 的 KA 数历来为 18",
+      "corrected": "V4（2024）为 18 KA；V3（2014）为 15 KA。引用时须标明版本。",
+      "basis": "S1-OFF-01 官方页 + R-XC-03 SEBoK 概览"
+    }
+  ],
+  "gaps": [
+    "Lehman 1980 全文（Proc. IEEE 68(9):1060-1076）未合法免费取得，标 abstract-only；其定律条数与原文表述以 Lehman 本人 1996 复述（R-XC-01）+ 维基（R-XC-02）交叉，未逐字核验 1980 原刊。",
+    "Royce 1970 的原刊 IEEE WESCON（1970）与 ICSE 1987 重印版权版未取得；本次核验用课程机构镜像的 Wayback 快照（11 页，含图），未与 IEEE 版权版逐字比对。",
+    "Brooks No Silver Bullet 本次核验为 1986 IFIP 版 PDF（社区镜像）；与 1987 IEEE Computer 版可能存在编辑差异，未做双版逐句对照。",
+    "Parnas 1998 本次核验为 IEEE Software 1999 重印本；Annals of Software Engineering 1998 原版正文未直接取得（仅 Crossref 元数据核验）。",
+    "POSA Vol.1 书本体受版权未回源；Wiley 官方样章 PDF 为无文本层扫描件（含版权水印），仅记录链接与可达性；Microkernel 定义取自官方配套站点描述，未逐字核验书中章节原文。",
+    "SWEBOK V4 正文（含各 KA 详解）需 IEEE CS 会员/购买，未取得；18 KA 清单与三个新增 KA 由官方页面 Wayback 快照 + SEBoK 概览 + 维基交叉，未回源 PDF 目录页。",
+    "Royce 五步之措辞：Wikipedia 称‘five steps … necessary to eliminate most of the development risks’，Royce 原文 Figure 10 自述为‘the five steps that I feel necessary’；两处措辞略有差异，已按原文为准。",
+    "未能围绕 Royce‘误读’找到同行评审的史学专文（如学术史论文）作第三方交叉，当前交叉源为原文 + 维基条目，置信 high 但史学层面单薄。"
+  ],
+  "notes": "信源计数：主源 7 条（S4-PAP-01..05、S2-BK-16、S1-OFF-01），交叉验证源 7 条（R-XC-01..07），共 14 条。回源状态：verified（可核验原文）=Royce 1970、Parnas 1998、Parnas 1972（复用）、Brooks 1987、Lehman 1996、POSA 官方样章、SWEBOK 官方页元数据；abstract-only=Lehman 1980（IEEE 付费全文）。≥2 源交叉验证：Royce 迭代原意=原文全文(Figure 3/4/STEP 3)+维基瀑布条目；Lehman 定律条数=Lehman 1996 复述+1980 元数据+维基；Brooks 四属性=原文全文+维基；POSA=Wiley 官方样章页+官方配套站点；SWEBOK 18 KA=官方页 Wayback+SEBoK+维基。tier 依 contract：原始论文=S4、标准/官方=S1、经典著作与权威配套站点=S2。版权红线：未把任何受版权保护的论文/书籍全文写入 MISSION_ROOT；仅在 /tmp 临时下载用于文本核验，任务结束即删除；样章仅记录官方 URL 与可达状态。联网：境外源经代理 172.29.0.1:7890；Crossref API、Wiley media、Wayback 均直连/代理实测可达；iso.org 类 WAF 站点未涉及。"
+}

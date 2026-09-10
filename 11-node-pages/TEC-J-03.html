@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓝绿部署 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>蓝绿部署</span></div><div class="meta">technology · J · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>冲突 / 对比表</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>蓝绿部署</h1><div class="en">Blue-Green Deployment</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">J · 部署</span><span class="badge th">质量属性</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-079" title="blue-green deployment — 维护两套相同生产环境，任一时刻仅一套承载流量；新版在另一套测试通过后切换流量，出错可快速切回。">蓝绿部署</a>维护两套尽可能相同、均可承担全量负载的生产环境，任一时刻仅一套承载流量；新版本在另一套环境验证通过后整体切换流量，异常时切回原环境实现快速回滚。</span></p></div><p class="note">别名：blue-green deployment、蓝绿发布、蓝绿切换、流量切换发布、red-black deployment　|　英文：Blue-Green Deployment　|　类型：技术 / pattern</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 678 678.2" role="img" aria-label="蓝绿部署 的 1-2 跳邻域关系图"><title>蓝绿部署 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="5.1" y1="-124.9" x2="-107.3" y2="-255.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：渐进暴露依据部署即变更管理</title></line><line x1="119.8" y1="-59.3" x2="-107.3" y2="-255.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：可回滚与爆炸半径控制依据变更管理</title></line><line x1="5.1" y1="-124.9" x2="-21.9" y2="-215" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：渐进暴露依赖发布与部署解耦</title></line><line x1="5.1" y1="-124.9" x2="119.8" y2="-59.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：渐进暴露策略支撑爆炸半径控制</title></line><line x1="102.9" y1="-264.9" x2="5.1" y2="-124.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：Azure 安全部署落地渐进暴露策略</title></line><line x1="77.8" y1="107.2" x2="5.1" y2="-124.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：K8s 滚动更新实现渐进暴露</title></line><line x1="77.8" y1="107.2" x2="119.8" y2="-59.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：历史 ReplicaSet 支撑版本回退</title></line><line x1="-80.2" y1="81.7" x2="-175.4" y2="238.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：镜像构建一次并不可变复用</title></line><line x1="-80.2" y1="81.7" x2="-21.9" y2="-215" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以实例替换替代就地修改</title></line><line x1="0" y1="0" x2="5.1" y2="-124.9" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：双环境整体切换的渐进暴露</title></line><line x1="0" y1="0" x2="119.8" y2="-59.3" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：切回旧环境实现即时回滚</title></line><line x1="-125.9" y1="-41" x2="5.1" y2="-124.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：按健康指标逐步扩大流量暴露</title></line><line x1="-125.9" y1="-41" x2="119.8" y2="-59.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：reroute 回退控制爆炸半径</title></line><line x1="-209.4" y1="113.1" x2="-21.9" y2="-215" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：构建一次逐环境晋级解耦发布部署</title></line><line x1="-80.2" y1="81.7" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：不可变制品使整体切换可行</title></line><line x1="0" y1="0" x2="-125.9" y2="-41" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：整体切换与逐步导流的取舍对照</title></line><line x1="77.8" y1="107.2" x2="-125.9" y2="-41" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：编排层承载金丝雀流量切分</title></line><line x1="77.8" y1="107.2" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：编排层支撑蓝绿双环境编排</title></line><line x1="-80.2" y1="81.7" x2="-209.4" y2="113.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：流水线产出不可变制品</title></line><line x1="-64.2" y1="275.2" x2="-80.2" y2="81.7" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以源数据全量重生成替代就地改页面防漂移</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">蓝绿部署<title>蓝绿部署（TEC-J-03）</title></text><circle cx="5.1" cy="-124.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="5.1" y="-105.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">渐进暴露部署策略<title>渐进暴露部署策略（MTH-J-05）</title></text><circle cx="119.8" cy="-59.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="119.8" y="-40.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可回滚性与爆炸半径控制<title>可回滚性与爆炸半径控制（MTH-J-07）</title></text><circle cx="77.8" cy="107.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="77.8" y="126.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">Kubernetes 部…<title>Kubernetes 部署编排（TEC-J-01）</title></text><circle cx="-80.2" cy="81.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-80.2" y="100.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">不可变基础设施实现<title>不可变基础设施实现（TEC-J-02）</title></text><circle cx="-125.9" cy="-41" r="9.0" fill="#c98a3a" stroke="none"/><text x="-125.9" y="-22" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">金丝雀发布<title>金丝雀发布（TEC-J-04）</title></text><circle cx="-64.2" cy="275.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-64.2" y="291.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="-209.4" cy="113.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-209.4" y="129.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线工具化<title>部署流水线工具化（TEC-J-06）</title></text><circle cx="-107.3" cy="-255.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-107.3" y="-239.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署即变更管理<title>部署即变更管理（ESS-J-04）</title></text><circle cx="-175.4" cy="238.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-175.4" y="254.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">封闭构建<title>封闭构建（MTH-J-03）</title></text><circle cx="-21.9" cy="-215" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-21.9" y="-199" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">发布与部署解耦<title>发布与部署解耦（MTH-J-06）</title></text><circle cx="102.9" cy="-264.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="102.9" y="-248.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Azure 架构中心<title>Azure 架构中心（TEC-G-03）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 5 个直接邻接、外环 6 个二跳节点，共 12 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">用环境隔离换取<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">发布</a>的可逆性。</span>两套并行环境让新版本先在不影响用户的环境中完成最终测试，确认无误后再一次性把流量切过去；由于旧版本仍完整保留，出问题时可以立即把流量切回，把回滚从「重新部署」简化为「改路由」。这使发布风险从「在唯一的生产环境上冒险」变成「在可随时退回的候选环境上验证」。隔离还带来额外好处：切换前后两套环境可作为容灾演练对象，也便于在切换前用小比例测试流量提前暴露问题。其判据是切换是否整体、回退是否即时，而非部署过程是否复杂；部署本身可以很慢，只要切换与回退足够快，风险就被压在了可控窗口内。这一判断标准也解释了为何部署速度本身不是蓝绿的关键指标：只要两套环境等价且切换可靠，慢部署与快回滚可以并存而不冲突。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">通过路由器、负载均衡或 DNS 把入口流量在两套环境之间切换。</span>切换前 green 环境部署新版本并做最终验证，可选以极小比例生产流量做探测；切换通常是一次整体的路由变更。回滚是把路由指回 blue，影响窗口缩小到从发现问题到切回之间，且爆炸半径受导向新环境的流量规模约束。<span class="hl">最大难点在有状态层：数据库 schema 必须在切换期间同时兼容新旧两版，通常先把 schema 变更与应用升级分离，在兼容前提下做数据库<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>，确认存在回滚点后再部署新版应用，稳定后移除对旧版的支持。</span>该模式与热备机理相同，可在每次发布中演练容灾。部分实现不追求两套独立基础设施，而是在同一批资源上以重启实现切换，隔离性因此弱于真正的双环境。当两套环境共享同一入口标识时，还可借助 DNS 缓存与连接保持等细节保证切换的平滑，避免瞬时流量错乱。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">先保证两套环境尽可能等价，减少「只在 green 复现」的偏差；把环境创建、部署、验证与流量切换都脚本化，避免手工操作引入错误。</span>切换前确认新环境已预热、依赖就绪、监控就位。数据库变更遵循先扩展后收缩的兼容流程，并为切换前后的数据写入建立明确回滚路径。明确切换与回退的判据和负责人，尽量用健康指标驱动而非临场判断。注意识别不适合蓝绿的部分：共享同一数据库或同一故障域的两套「环境」在真实故障中会一起失效，需核对隔离是否真实。切换后应在一段观察窗口内保留旧环境，确认稳定后再退役，避免过早释放退路；同时应及时收缩已无用的兼容代码与旧环境资源，防止过渡态固化为长期负担。还应记录每次切换的时间、版本与健康结果，形成可回溯的发布台账，为事后复盘与审计提供依据。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>蓝绿让回滚最快、隔离最好，但资源成本约为双份，且新环境需预先具备承担全量负载的能力。</p><p>对成本敏感或变更频繁的系统，维持两套全量环境可能不经济，此时<a class="term" href="../14-views/glossary.html#g-082" title="progressive exposure — 把变更分阶段逐步暴露给更大范围用户/基础设施；每阶段须通过健康检查才推进。">渐进暴露</a>式方案往往更合适；而在合规或数据敏感场景，双环境的资源与数据复制还会带来额外治理成本。</p><p>总体而言，蓝绿适合变更不极端频繁、且对回滚速度要求高的服务，其价值取决于切换与回退能否真的以自动化和可验证的方式兑现——若切换依赖手工步骤或缺乏健康判据，双环境的成本换来的可逆性会大打折扣。</p><p>若无法承担双份资源，则应转向渐进暴露，以更小代价获得相近的风险控制。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>切换是整体的，意味着一旦验证不充分，问题会在切换瞬间波及全量流量；因此它对预验证的要求更高，而非更低。</li><li>有状态变更是最棘手处：schema 与数据的兼容与回滚远比无状态服务复杂，处理不当会让「快速回滚」名不副实。</li><li>环境边界也受应用<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>度、组织与团队能力影响，<a class="term" href="../14-views/glossary.html#g-022" title="（无权威共识，给推荐口径）microservice — 可独立部署服务套件风格（围绕业务能力、去中心化数据治理、design for failure 等）；原作者声明无精确定义，工程口径采特征清单。">微服务</a>可切得更小，单体则需更大范围、更重的测试。</li><li>因此采用蓝绿前应确认有状态<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>的回滚方案可行，否则最需要回滚的场景恰恰是它无法快速回滚的场景。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：整体切换与逐步导流的取舍对照</caption><thead><tr><th>对照维度</th><th>蓝绿部署</th><th>金丝雀发布</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>蓝绿部署 · Blue-Green Deployment</td><td><a class="term" href="../14-views/glossary.html#g-080" title="canary release — 新版本先服务一小部分用户/流量，随信心提升扩大比例直至全量，以最小化爆炸半径。">金丝雀发布</a> · Canary Release</td></tr><tr><td class="k">核心定义（原文）</td><td>蓝绿部署维护两套尽可能相同、均可承担全量负载的生产环境，任一时刻仅一套承载流量；新版本在另一套环境验证通过后整体切换流量，异常时切回原环境实现快速回滚。</td><td>金丝雀发布先把新版本部署到不接用户或仅接少量用户的基础设施上，再按健康指标逐步放大流量与用户比例直至全量，从而把新版本故障的爆炸半径限制在受影响的小范围内。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>用环境隔离换取发布的可逆性。</td><td>用受控的渐进暴露替代一次性全量风险。</td></tr><tr><td class="k">对照关系</td><td>整体切换与逐步导流的取舍对照（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>蓝绿让回滚最快、隔离最好，但资源成本约为双份，且新环境需预先具备承担全量负载的能力。</td><td>金丝雀把爆炸半径压到最小并支持自动回滚，代价是需要同时管理多个并发版本、依赖成熟的流量治理与监控能力，实现与观测成本较高。</td></tr><tr><td class="k">处置要点（原文）</td><td>先保证两套环境尽可能等价，减少「只在 green 复现」的偏差；把环境创建、部署、验证与流量切换都脚本化，避免手工操作引入错误。</td><td>先建立<a class="term" href="../14-views/glossary.html#g-090" title="（无权威共识，给推荐口径）observability — 从系统外部输出推断内部状态、回答 unknown unknowns 与「为什么」的能力；正式信号清单用 OTel 的 Traces/Metrics/Logs/Baggage。">可观测性</a>基础——没有可信的健康指标，渐进暴露就失去推进与止损的依据。</td></tr></tbody></table></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-06 · 经 TEC-J-02</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → TEC-J-02 → TEC-J-06</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>2021（AWS 白皮书）/ 2010（Fowler bliki）</div><div class="r"><span class="k">规范信源</span>WEB-032、VEN-021、VEN-022</div><div class="r"><span class="k">入口链接</span><a href="https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html</a>　<a href="https://martinfowler.com/bliki/BlueGreenDeployment.html" target="_blank" rel="noopener">https://martinfowler.com/bliki/BlueGreenDeployment.html</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：蓝绿部署模式由 Martin Fowler 命名</span><br>核验结论：Fowler 页面明确：蓝绿部署名称由 Daniel Terhorst-North 与 Jez Humble 提出，模式本身早已存在，Fowler 仅作介绍　<span class="k">[WEB-032]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：蓝绿部署可以绕开数据库 schema 变更的兼容问题</span><br>核验结论：schema 变更是蓝绿最大难点：应把 schema 变更与应用升级分离，先做兼容新旧版本的数据库重构（expand），验证有回滚点后再部署新版应用，稳定后收缩（contract）　<span class="k">[WEB-032]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（5 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>← TEC-J-01</td><td>Kubernetes 部署编排<br><span style="color:var(--dim);font-size:12px">E-847</span></td><td>编排层支撑蓝绿双环境编排</td></tr><tr><td class="k">对照</td><td>→ TEC-J-04</td><td>金丝雀发布<br><span style="color:var(--dim);font-size:12px">E-845</span></td><td>整体切换与逐步导流的取舍对照</td></tr><tr><td class="k">促成</td><td>← TEC-J-02</td><td>不可变基础设施实现<br><span style="color:var(--dim);font-size:12px">E-843</span></td><td>不可变制品使整体切换可行</td></tr><tr><td class="k">实现</td><td>→ MTH-J-05</td><td>渐进暴露部署策略<br><span style="color:var(--dim);font-size:12px">E-835</span></td><td>双环境整体切换的渐进暴露</td></tr><tr><td class="k">实现</td><td>→ MTH-J-07</td><td>可回滚性与爆炸半径控制<br><span style="color:var(--dim);font-size:12px">E-836</span></td><td>切回旧环境实现即时回滚</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

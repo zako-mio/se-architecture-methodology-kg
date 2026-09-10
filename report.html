@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段1–6 完成</title>
+<style>
+  :root {
+    --blue-900: #1b2a41;
+    --blue-700: #2f4a70;
+    --blue-500: #4a6fa5;
+    --blue-300: #8fabce;
+    --blue-050: #eef3fa;
+    --slate-700: #3a4657;
+    --slate-500: #5c6b7f;
+    --slate-200: #dde3ec;
+    --slate-100: #f4f6f9;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #232b36;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC",
+      sans-serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 22px 72px; }
+  header.doc {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 34px 34px 30px;
+    box-shadow: 0 8px 26px rgba(27, 42, 65, .18);
+  }
+  header.doc h1 {
+    margin: 0 0 18px;
+    font-size: 1.56rem;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .meta { list-style: none; margin: 0; padding: 0; }
+  .meta li {
+    margin: 7px 0;
+    padding-left: 14px;
+    position: relative;
+    font-size: .93rem;
+    line-height: 1.7;
+    color: #dbe4f2;
+  }
+  .meta li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .68em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-300);
+  }
+  .meta strong { color: #fff; font-weight: 600; }
+  .meta code {
+    background: rgba(255,255,255,.14);
+    color: #eaf0fa;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: .86em;
+  }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin: 22px 0 0;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: .95rem;
+    color: var(--slate-500);
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+  nav.toc ol { margin: 0; padding-left: 22px; }
+  nav.toc li { margin: 5px 0; }
+  nav.toc a { color: var(--blue-700); text-decoration: none; }
+  nav.toc a:hover { color: var(--blue-500); text-decoration: underline; }
+  main { margin-top: 30px; }
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 26px 30px 22px;
+    margin: 0 0 22px;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+    scroll-margin-top: 20px;
+  }
+  section.card > h2 {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-050);
+    font-size: 1.28rem;
+    color: var(--blue-900);
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  section.card > h2::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 1.05em;
+    margin-right: 12px;
+    vertical-align: -3px;
+    border-radius: 3px;
+    background: var(--blue-500);
+  }
+  section.card h3 {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: var(--blue-900); font-weight: 600; }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: var(--slate-100);
+    color: #2d3b52;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: .87em;
+    border: 1px solid var(--slate-200);
+    word-break: break-all;
+  }
+  ol, ul { margin: 0 0 14px; padding-left: 26px; }
+  li { margin: 8px 0; }
+  ol li::marker { color: var(--blue-500); font-weight: 600; }
+  ul li::marker { color: var(--blue-300); }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 18px;
+    background: var(--blue-050);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 8px 8px 0;
+    color: var(--slate-700);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 9px; border: 1px solid var(--slate-200); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; background: #fff; }
+  thead th {
+    background: var(--blue-700);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 15px;
+    border-top: 1px solid var(--slate-200);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:nth-child(even) { background: var(--slate-100); }
+  tbody tr:hover { background: var(--blue-050); }
+  .tag {
+    display: inline-block;
+    background: #e4f3e8;
+    color: #2b7a3f;
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: .8em;
+    font-weight: 600;
+  }
+  .tag.warn {
+    background: #fdeede;
+    color: #9a5b12;
+  }
+  footer.doc {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--slate-500);
+    font-size: .82rem;
+  }
+  @media (max-width: 640px) {
+    body { font-size: 15.5px; }
+    .wrap { padding: 22px 14px 48px; }
+    header.doc { padding: 24px 20px 20px; }
+    header.doc h1 { font-size: 1.3rem; }
+    section.card { padding: 20px 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <h1>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段1–6 完成</h1>
+    <ul class="meta">
+      <li><strong>日期</strong>：2026-09-11</li>
+      <li><strong>任务目录</strong>：<code>~/opencode/archive/Mission-file/2026-09/0910-软件工程架构方法论/</code></li>
+      <li><strong>GATE</strong>：范围=5 深度=5 操作=5 风险=4 → 19 → Deep（<code>[COMPLEXITY: 19/20]</code> 继承，全程 Deep 推理）</li>
+      <li><strong>本次完成</strong>：阶段6 内容版式重构 + 版权审计与脱敏公开集 + Agent 能力包 + CI/Pages；阶段1–5（建库）此前已完成并冻结</li>
+      <li><strong>规模</strong>：167 节点 / 360 边 / 18 组 / 18 案例 / 253 canonical 信源；167 节点页 + 167 MD + 7 视图</li>
+    </ul>
+  </header>
+
+  <nav class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#situation">一、当时情况</a></li>
+      <li><a href="#plan">二、制定计划</a></li>
+      <li><a href="#execution">三、执行情况</a></li>
+      <li><a href="#completion">四、完成情况</a></li>
+      <li><a href="#reflection">五、反思 / 分析 / 建议</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section class="card" id="situation">
+      <h2>一、当时情况</h2>
+      <p>用户要建立一座<strong>软件工程 / 架构设计方法论母库</strong>，兼作两用：①自己学习（<strong>人读图谱</strong>）；②为 <strong>Agent 加持架构判断力</strong>（可机读、可检索、可深链）。核心理念：软件工程 = 理解业务需求 → 可维护可扩展的架构设计 → 落地运维 → 持续对抗技术债的全生命周期管理；<strong>库自身也要体现良好架构设计</strong>——数据与渲染解耦、单一数据源、可重复生成、门控可追溯。</p>
+
+      <h3>阶段1–5 已完成事实（继承基线）</h3>
+      <ul>
+        <li><strong>阶段1–2（调研与证据）</strong>：产出 14 个证据包（A–R，JSON + Markdown）与本地架构分析留档（PA-01..18）。</li>
+        <li><strong>阶段3–4（建模与设计）</strong>：canonical 信源主表（253 实体）、全局 ID 迁移（414 old_id → 253 canonical，零悬挂）、三层 × 11 域 × 3 横切主题的数据模型与生成架构。</li>
+        <li><strong>阶段5（建库，Wave 0–4）</strong>：把证据包扩产为完整母库——<strong>167 节点 / 360 边 / 18 组 / 18 案例</strong>；6 视图 + 167 节点页 + 167 MD 镜像 + 18 组页 + 交互 DAG + 根入口；L1–L7 + 方法论四项 + 回放四硬指标全过。</li>
+        <li><strong>冻结指纹（阶段6 回滚锚点）</strong>：<code>methodology-dag.json</code> SHA-256 <code>58a7e3c3…</code>、<code>canonical-sources.json</code> SHA-256 <code>e7cd0eb7…</code>；阶段6 结束时数据指纹必须不变。</li>
+      </ul>
+
+      <h3>阶段6 的起点</h3>
+      <p>阶段5 交付的母库在<strong>内容正确性</strong>上达标（门控全过），但<strong>内容版式</strong>存在系统性缺陷。用户明确指出：<strong>「问题最大的不是视觉设计，而是内容排版」</strong>——即每个节点的详情区没有为阅读与扫读服务。对改造对象 <code>MTH-F-02.html</code> 的实测（阶段6 基线 §4b）量化如下：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>指标</th><th>改进前实测</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>全页 <code>&lt;p&gt;</code> 数</td><td><strong>1</strong></td></tr>
+            <tr><td>全页 <code>&lt;div&gt;</code> 数</td><td><strong>24</strong></td></tr>
+            <tr><td>全页 <code>&lt;h2&gt;</code> 数</td><td><strong>6</strong></td></tr>
+            <tr><td>图 / 表</td><td><strong>0 图 0 表</strong></td></tr>
+            <tr><td>TOC / 锚点 / 章节编号</td><td><strong>无</strong></td></tr>
+            <tr><td><code>detail</code> 字段呈现</td><td>每个字段被压成一段 <strong>400–600 字不间断卡片</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>因此阶段6 的任务是：<strong>内容版式架构重构</strong>（把「读得下去、扫得出来、可定位、可溯源」编码进生成链与门控），并完成<strong>版权审计与脱敏公开集</strong>、<strong>Agent 能力包</strong>与 <strong>CI/Pages</strong>，为公开上传做准备。</p>
+
+      <h3>环境基础</h3>
+      <blockquote>
+        <p><code>0823-12factor-methodology</code> 成熟 DAG 图谱与生成链已重构为「数据/渲染解耦」通用框架（<code>16-checkpoint/</code>）；<code>kb-construction</code> skill 的 L1–L7 分层门控；阶段5 冻结的单一权威图与 253 canonical 信源；网络默认直连（模型 API 直连）。</p>
+      </blockquote>
+    </section>
+
+    <section class="card" id="plan">
+      <h2>二、制定计划</h2>
+
+      <h3>主线性重定位</h3>
+      <p>阶段6 主线明确重定位为 <strong>内容版式架构（Content IA）</strong>，而非视觉皮肤：<strong>皮肤只是版式的载体</strong>。目标是让 167 个节点页从「一段段长卡片」变成「有编号、有锚点、有结构化块、有可溯源证据区的技术文档」，并把该规范同时写入<strong>生成链</strong>与<strong>门控</strong>。</p>
+
+      <h3>四个暂停点（人工把关）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>暂停点</th><th>裁决内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>设计选型</strong></td><td>3 套版式+皮肤候选横评后，用户选定「仅 A 单套落地」+「文档页浅色 / 交互图保持暗色」</td></tr>
+            <tr><td>2</td><td><strong>样板验收</strong></td><td>以 <code>MTH-F-02</code>（文档页）与 <code>MTH-O-04</code>（冲突页）为样板，验收 §1–§11 块序列后再全量生成</td></tr>
+            <tr><td>3</td><td><strong>审计清单</strong></td><td>审阅 <code>PUBLISH-MANIFEST.md</code>：长引移出、本机路径脱敏、<code>needs_review</code> 裁决</td></tr>
+            <tr><td>4</td><td><strong>推送前</strong></td><td>口径一致性复核、脱敏残差复扫、本报告更新后方可推送</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>W0–W7 波次设计</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>波次</th><th>目标</th><th>产物 / 证据</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>W0</strong></td><td>基线冻结与回滚锚点</td><td><code>00-plan/stage6-baseline.md</code>（SHA-256 指纹、输入完整性清单、纠偏记录、自决项 17–23）</td></tr>
+            <tr><td><strong>W1</strong></td><td>版式与皮肤设计选型</td><td><code>18-design/</code>（cand-A/B/C + compare/gallery + rationale）；暂停点 1</td></tr>
+            <tr><td><strong>W2</strong></td><td>版式契约与样板</td><td><code>stage6-content-ia-spec.md</code>（§1–§11 + token + 门控点位）；样板 <code>MTH-F-02</code> / <code>MTH-O-04</code>；暂停点 2</td></tr>
+            <tr><td><strong>W3</strong></td><td>全量重构与门控实装</td><td>生成链重生 + <code>gate_layout.py</code>（L8）+ <code>gate_visual.py</code>（L4 首实装）</td></tr>
+            <tr><td><strong>W4</strong></td><td>版权审计与脱敏</td><td><code>audit_publish.py</code> + <code>_publish-staging/{PUBLISH-MANIFEST.md, AUDIT-REPORT.json}</code>；暂停点 3</td></tr>
+            <tr><td><strong>W5</strong></td><td>公开集装配</td><td><code>_publish/</code>（README / LICENSE / <code>.gitignore</code> / <code>.nojekyll</code>）</td></tr>
+            <tr><td><strong>W6</strong></td><td>Agent 能力包 + CI</td><td><code>20-agent-skill/</code>（5 文件）+ <code>rebuild.yml</code></td></tr>
+            <tr><td><strong>W7</strong></td><td>推送前复核</td><td>口径一致性、脱敏复扫、报告更新；暂停点 4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>版式与皮肤一体出 3 套候选（设计选型过程）</h3>
+      <p>3 套候选<strong>共用同一数据契约</strong>，但 IA 立场与皮肤一体设计，供横评（痛点权重：结构化表达 4 &gt; 可扫读性 3 &gt; 层级导航 2 &gt; 连贯行文 1）：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>候选</th><th>IA 立场</th><th>皮肤</th><th>适用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A 文档流</strong></td><td>节点=技术文档，结构化块作文中嵌图/嵌表</td><td><strong>浅色 Codex</strong>（纸感暖底 <code>#f5f1e8</code>、衬线标题、琥珀强调）</td><td>精读、教学、打印/导出、无障碍</td></tr>
+            <tr><td><strong>B 卡片/仪表盘</strong></td><td>每语义块独立可扫读卡片/指标条</td><td>暗色 Console（与交互图同源）</td><td>速查、Agent 结构化抽取</td></tr>
+            <tr><td><strong>C 图谱优先</strong></td><td>以关系为中心，图 Hero + 注解</td><td>暗色 Atlas（近黑 + 青紫辉光）</td><td>依赖逆查、影响面分析</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>实际选定结果（用户裁决）</strong>：<strong>仅 A 单套落地</strong>——文档页采用 <strong>A 文档流 · 浅色 Codex</strong>，以换取最强的<strong>连贯行文 + 层级导航（TOC/§/锚点）+ 打印导出</strong>能力；<strong>交互图（<code>13-interactive</code>）保持暗色</strong>不动，形成「暗色总览 ↔ 浅色精读」的互补心智。设计参考实现留档于 <code>18-design/cand-A/</code>（非生成物）。</p>
+
+      <h3>执行层自决项（主Agent 承担，可被否决）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>决策</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>17</td><td>新增 <code>16-checkpoint/gate_layout.py</code> 版式门控（结构块存在性 / SVG 内联有效 / 术语链接数 / 对比表布尔）</td></tr>
+            <tr><td>18</td><td>新增契约 <code>00-plan/stage6-content-ia-spec.md</code>（版式规范，生成链与后续维护共同遵循）</td></tr>
+            <tr><td>19</td><td><code>15-md</code> 镜像同步结构化块（双轨一致性原则）</td></tr>
+            <tr><td>20</td><td>术语内联 = 每术语在页内<strong>首次出现</strong>时链 glossary</td></tr>
+            <tr><td>21</td><td>不改 <code>10-dag-data</code> 数据契约；派生素材由构建期计算</td></tr>
+            <tr><td>22</td><td><code>12-groups</code> / <code>14-views</code> / <code>index.html</code> 同步套用新版式</td></tr>
+            <tr><td>23</td><td>结构化块依据：<code>prerequisite</code> 74 节点→学习路径条；<code>conflicts</code>/<code>contrasts</code> 34 节点→对比表卡；<code>case_instance</code> 41 节点→案例带；局部关系 SVG 全量 167</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>门控设计（L1–L8 + 方法论专项 + 回放四硬指标）</h3>
+      <ul>
+        <li><strong>L1</strong> 分片自验证 → <strong>L2</strong> 全图审计 → <strong>L3</strong> 结构+断链 → <strong>L4</strong> 视觉（首实装）→ <strong>L5</strong> 渲染 → <strong>L6</strong> 覆盖度 → <strong>L7</strong> 信源 → <strong>L8</strong> 版式（新增）；</li>
+        <li><strong>方法论专项四项</strong>：层边界 / 术语一致性 / 原则↔反例 36 条 / 11 维权衡；</li>
+        <li><strong>回放四硬指标</strong>：覆盖度 ≥90% / 门控全过 / 可溯源率 ≥95% / 人工抽查无重大语义错误。</li>
+      </ul>
+      <p><strong>刚性约定</strong>：<code>skipped ≠ PASS</code>（环境或产物缺失须显式记录）；无新鲜验证证据不得声称完成。<strong>L4 / L5 在 CI 中显式 SKIPPED（不伪装 PASS）</strong>。</p>
+    </section>
+
+    <section class="card" id="execution">
+      <h2>三、执行情况</h2>
+
+      <h3>各波委派与产物</h3>
+      <ul>
+        <li><strong>W0 基线冻结</strong>：落盘 SHA-256 指纹、输入完整性清单（<code>02-research/</code> 35 文件 + <code>01-books/</code> 5 文件）、数据规模实测、纠偏记录与自决项；<code>git</code> 首个 commit 即回滚锚点（本地仓永不推送）。</li>
+        <li><strong>W1 设计选型</strong>：以 <code>MTH-F-02</code>（文档页）与 <code>MTH-O-04</code>（冲突页）为样本，产出 A/B/C 三套候选与 <code>compare.html</code> / <code>gallery.html</code> / <code>rationale.md</code>；暂停点 1 选定 A 单套 + 文档页浅色/交互图暗色。</li>
+        <li><strong>W2 契约与样板</strong>：落盘权威契约 <code>stage6-content-ia-spec.md</code>（不变式 I1–I7、浅色 Codex token、§1–§11 块序列、局部 SVG 规则、权衡卡保真红线、术语内联、跨库深链、无溢出、MD 镜像、门控点位）。</li>
+        <li><strong>W3 全量重构与门控实装</strong>：改造生成链并重生 167 节点页 + 19 组页 + 7 视图（含新增 <code>14-views/glossary.html</code>）+ 167 MD + 根入口；结构块全量落地；新增 <code>gate_layout.py</code>（L8）与 <code>gate_visual.py</code>（L4 首实装）；<code>10-dag-data</code> 指纹不变。</li>
+        <li><strong>W4 版权审计与脱敏</strong>：<code>audit_publish.py</code> 扫描 64 份原件（分级 A=30 / B=14 / C=20 / D=0）；<strong>长引移出 42 处 / 20493 字</strong>（最长 2507 字），<strong>本机路径脱敏 209 处</strong>，疑似凭据 0；<code>needs_review</code> 1 项待裁决。</li>
+        <li><strong>W5 公开集装配</strong>：装配 <code>_publish/</code>，含 README（阶段6 口径权威）、LICENSE（MIT）、<code>.gitignore</code>、<code>.nojekyll</code>。</li>
+        <li><strong>W6 Agent 能力包 + CI</strong>：<code>20-agent-skill/</code>（5 文件，轻量速查 + 路径路由）；<code>rebuild.yml</code>（重建 → 漂移检测 → 门控 → L4/L5 显式 SKIP → Pages 部署）。</li>
+        <li><strong>W7 推送前复核</strong>：<code>_publish/</code> 全量残差复扫为 0；统一 README / 报告 / 门控三方口径；本报告与 <code>quality-gate.md</code> 升级为阶段1–6 口径。</li>
+      </ul>
+
+      <h3>关键实测证据</h3>
+      <ul>
+        <li><strong>版式缺陷 → 结构化改造</strong>：改进前仅 1 <code>&lt;p&gt;</code> / 24 <code>&lt;div&gt;</code> / 6 <code>&lt;h2&gt;</code> / 0 图 0 表 / 无 TOC；改造后每节点页含内联关系 SVG、<code>defcard</code>、权衡卡、TOC+§锚点、信源证据区，L8 版式门控综合 <strong>2124/2124 = 100.00%（问题 0）</strong>。</li>
+        <li><strong>权衡卡严格归栏</strong>：对 <code>detail.tradeoff</code> 三栏做<strong>逐句显式标记词</strong>校验（反例：反例/误区/失败/反面；代价：代价/成本/风险/过度/不足；收益：收益/好处/价值），无标记句进中性「原文要点」，文本逐字引用——167/167 通过、问题 0。</li>
+        <li><strong>视觉门控首实装</strong>：L4 <code>gate_visual.py</code> 像素+运行时+VLM 三支路共 <strong>262 项 / 0 FAIL / 15 WARN / 44 SKIP</strong>，综合判定 <strong>WARN</strong>（无 FAIL）；WARN 均为可接受版式提示。</li>
+        <li><strong>数据契约不动</strong>：全量重生后主图仍为 167 节点 / 360 边、Kahn 167/167 无环、<code>validate_graph</code> errors=0 warnings=0，<code>methodology-dag.json</code> SHA-256 未变。</li>
+      </ul>
+
+      <h3>遇到的问题及处置</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>问题</th><th>处置</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>权衡卡归栏<strong>第一次口径澄清</strong>：怀疑实现「越栏」</td><td>实测证明原实现即严格标记词驱动，不存在越栏；以「仅按显式标记词归栏」固化并写入 <code>gate_layout.py</code> 强校验</td></tr>
+            <tr><td>2</td><td><strong>主Agent 自我纠偏①</strong>：曾用真值判断把 <code>"cited"</code> 误计为 <code>true</code>，据此反驳接力文档的 89.22%</td><td>实测 <code>true</code> 149 + <code>"cited"</code> 18 = 167，<strong>接力文档正确（89.22%）</strong>；主Agent 结论错误，已撤回并记录「必须 <code>is True</code>」</td></tr>
+            <tr><td>3</td><td><strong>主Agent 自我纠偏②</strong>：曾误判权衡卡「把无标记句归入代价栏」</td><td>回盘逐句核对，被疑两句含标记词「风险」，归栏成立；误判被实测推翻</td></tr>
+            <tr><td>4</td><td>审计<strong>粗正则误判</strong>：<code>P-techdebt.json</code> / <code>N-team-conway.md</code> 被初筛判含长引</td><td>复核后均为 <strong>≤200 字</strong>，未达长引移出判据，<strong>未移出</strong>（记 B/A 级原样复制）</td></tr>
+            <tr><td>5</td><td>响应式溢出：<code>.nbhd{min-width:680px}</code> 在 390px 下页面溢出</td><td>契约 §7 改为 <code>.figbox{overflow-x:auto}</code> + <code>.nbhd{width:100%}</code>，页面级 <code>scrollWidth &lt;= 391</code>；L4 运行时全 PASS</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>阶段1–5 执行回顾（建库 Wave 1–4）</h3>
+      <ul>
+        <li><strong>Wave 1</strong>：按域分批委派，产出本质层 51 + 方法论层 67 节点；不足 1500 字节点补写。</li>
+        <li><strong>Wave 2</strong>：技术层 + <code>W2-TEC-FN</code> 补 F/N 技术层 4 节点满足 GR-08；提炼 18 个 <code>CAS-X-*</code> 案例；产出 38 行 12factor 对照（不内联主 DAG）。</li>
+        <li><strong>Wave 3</strong>：单一数据源派生 6 视图 + 167 节点页 + 167 MD + 18 组页；修复 12factor 跨年份深链 38 处。</li>
+        <li><strong>Wave 4</strong>：L1–L7 + 方法论四项 + 回放四硬指标通过；产出阶段5 报告双版本。</li>
+      </ul>
+      <p>阶段1–5 关键处置：历史边 id <code>EB-P##</code> 11 条归一为 <code>E-101..111</code>；契约路径漂移以「新增 §〇.1 权威修正」对齐；O-PC 覆盖升级为 <code>opc-mapping.json</code> 显式映射（36 行）；Wave 0 骨架 11 种子节点由 281–424 字补齐至 1604–1772 字（全库 &lt;1500 字 = 0）。</p>
+    </section>
+
+    <section class="card" id="completion">
+      <h2>四、完成情况</h2>
+
+      <h3>最终交付物清单</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>交付物</th><th>规模</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>主图谱</td><td><code>10-dag-data/methodology-dag.json</code></td><td>167 节点 / 360 边 / 18 组 / 18 案例</td></tr>
+            <tr><td>节点页</td><td><code>11-node-pages/*.html</code></td><td><strong>167</strong>（§1–§11）</td></tr>
+            <tr><td>MD 镜像</td><td><code>15-md/nodes/*.md</code></td><td><strong>167</strong></td></tr>
+            <tr><td>组页</td><td><code>12-groups/*.html</code></td><td><strong>19</strong>（18 组 + index）</td></tr>
+            <tr><td>多视图</td><td><code>14-views/*.html</code></td><td><strong>7</strong>（6 视图 + glossary）</td></tr>
+            <tr><td>交互 DAG</td><td><code>13-interactive/index.html</code>（+vendor）</td><td>1（暗色，保持原状）</td></tr>
+            <tr><td>根入口</td><td><code>index.html</code></td><td>1</td></tr>
+            <tr><td>契约 / 基线</td><td><code>stage6-content-ia-spec.md</code> / <code>stage6-baseline.md</code></td><td>2</td></tr>
+            <tr><td>设计留档</td><td><code>18-design/{cand-A/B/C, compare, gallery, rationale}</code></td><td>3 套候选</td></tr>
+            <tr><td>12factor 对照 / 反例映射</td><td><code>xref-12factor.json</code> / <code>opc-mapping.json</code></td><td>38 行 / 36 行</td></tr>
+            <tr><td>canonical 信源</td><td><code>03-knowledge-map/canonical-sources.json</code></td><td>253</td></tr>
+            <tr><td>新增门控/审计脚本</td><td><code>gate_visual.py</code>（L4）+ <code>gate_layout.py</code>（L8）+ <code>audit_publish.py</code>（+<code>gen-glossary.py</code>）</td><td>3 门控/审计 + 1 生成</td></tr>
+            <tr><td>Agent 能力包</td><td><code>20-agent-skill/</code></td><td>5 文件</td></tr>
+            <tr><td>审计留档 / 公开集 / CI</td><td><code>_publish-staging/</code> / <code>_publish/</code> / <code>rebuild.yml</code></td><td>1 套</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>数据规模与层/域分布（现场实测）</h3>
+      <p><strong>167 节点 / 360 边 / 18 组 / 3 横切主题 / 18 案例</strong>；孤立节点 0，<code>nodes &lt; 1500 字</code> = 0。layer = essence <strong>51</strong> + methodology <strong>67</strong> + technology <strong>31</strong> + case(layer=null) <strong>18</strong>。域分布：F13 · G17 · H16 · I14 · J17 · K17 · L14 · M14 · N13 · O14 · X18(cases)。边类型：<code>case_instance</code> 69、<code>derives_from</code> 69、<code>implements</code> 59、<code>prerequisite</code> 58、<code>combination</code> 36、<code>dependency</code> 24、<code>contrasts</code> 14、<code>enables</code> 13、<code>refines</code> 13、<code>conflicts</code> 4、<code>cross_reference</code> 1。正文长度 min 1501 / 中位 1536 / max 1813 字；canonical 253；<code>verified</code> 分布 <code>true</code> 149 / <code>"cited"</code> 18，占比 <strong>89.22%</strong>，可溯源率 <strong>100%</strong>。</p>
+
+      <h3>阶段6 门控结果（全部现场实测）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>门控</th><th>实测</th><th>结论</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>L1 分片自验证</td><td>23 个分片 errors=0（阶段5 全量通过，阶段6 未改数据）</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L2 全图审计</td><td>nodes=167 edges=360 kahn 167/167，errors=0 warnings=0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L3 结构 + 断链（母库口径）</td><td>structure 412 / 问题 0；links 5134 / 问题 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L4 视觉（首实装）</td><td>262 项 / 0 FAIL / 15 WARN / 44 SKIP（像素+运行时 256，VLM 5 PASS + 1 WARN）</td><td><span class="tag warn">WARN（无 FAIL）</span></td></tr>
+            <tr><td>L5 渲染（headless Chromium）</td><td>7 用例全 PASS；skipped=0；JS 错误 0；悬空端点 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L6 覆盖度</td><td>manifest 363/363=100%；四向 100%；GR-08 PASS；GR-09 11/31=35.48%</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L7 信源</td><td>引用 1446（605/222/619）；悬挂 0；可溯源 100%；verified=true 89.22%；disputed 漏标 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L8 版式</td><td>综合覆盖率 2124/2124 = 100.00%，问题 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>方法论专项</td><td>layer-boundary / glossary / principle-counterexample 36/36 / tradeoff-11 11/11</td><td><span class="tag">4/4 PASS</span></td></tr>
+            <tr><td>回放四硬指标</td><td>覆盖度 100% / 门控全过 / 可溯源 100% / 抽查无重大语义错误</td><td><span class="tag">达标</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>
+        <p><strong>L4 口径</strong>：像素+运行时支路 256 项 / 0 FAIL / 14 WARN / 44 SKIP；并入 VLM 支路后 262 项 / 0 FAIL / 15 WARN / 44 SKIP，判定 WARN（无 FAIL）。唯一 VLM WARN 为 glossary 超宽表格在 <code>overflow-x:auto</code> 容器内滚动（契约 §7 允许）。<strong>CI 说明</strong>：L4/L5 因 CI runner 缺 Pillow/numpy/agent-browser，显式 SKIPPED，绝不伪装 PASS。</p>
+      </blockquote>
+
+      <h3>过程改动明细（阶段6）</h3>
+      <ol>
+        <li>新增版式契约 <code>stage6-content-ia-spec.md</code>（§1–§11 块序列 + 保真红线）。</li>
+        <li>生成链改造并全量重生 167 节点页 / 19 组页 / 7 视图 / 167 MD / <code>index.html</code>；<code>10-dag-data</code> 指纹不变。</li>
+        <li>新增 <code>14-views/glossary.html</code>（152 术语 + ASCII 安全锚点 <code>g-001…</code>）。</li>
+        <li>新增门控/审计脚本 3 个（<code>gate_visual.py</code> L4、<code>gate_layout.py</code> L8、<code>audit_publish.py</code>）+ <code>gen-glossary.py</code>。</li>
+        <li>术语内联：每术语页内首次出现链 glossary（<code>a.term</code> → <code>#g-0NN</code>），禁止跨标签/代码/ID/URL 匹配。</li>
+        <li>响应式修法：<code>.figbox{overflow-x:auto}</code> 收敛滚动，390px 页面级溢出 = 0。</li>
+        <li>12factor 跨库深链统一为绝对 URL，生成物中 <code>2026-08/</code> = 0。</li>
+        <li>审计脱敏：长引移出 42 处 / 20493 字、本机路径脱敏 209 处。</li>
+        <li>公开集残差改写 4 处（仅改 <code>_publish/</code> 副本，未触碰母库）。</li>
+        <li>新增 <code>20-agent-skill/</code> 与 <code>_publish/.github/workflows/rebuild.yml</code>。</li>
+        <li>报告/门控三件套同步覆盖 <code>_publish/</code>；因 <code>quality-gate.md</code> 含 MISSION_ROOT 绝对路径，<strong>仅 <code>_publish/</code> 副本</strong>改写为 <code>~/…</code>（公开集脱敏），母库原件保留绝对路径不变。</li>
+      </ol>
+    </section>
+
+    <section class="card" id="reflection">
+      <h2>五、反思 / 分析 / 建议</h2>
+      <ol>
+        <li><strong>内容版式缺陷的根因是「结构化缺失」，而非视觉不美</strong>。改进前 <code>MTH-F-02.html</code> 一页仅 <strong>1 个 <code>&lt;p&gt;</code>、24 个 <code>&lt;div&gt;</code>、6 个 <code>&lt;h2&gt;</code>、0 图 0 表、无 TOC/锚点</strong>，每个 <code>detail</code> 字段被压成 <strong>400–600 字不间断卡片</strong>——信息没有被「分块、编号、定位、图示」。修复的抓手是把 §1–§11 块序列<strong>数据驱动</strong>地写进生成链，而不是调 CSS，印证了用户的判断：<strong>内容排版才是主矛盾</strong>。</li>
+        <li><strong>先落契约再并行委派 = 长 prompt 不截断、零返工</strong>。先落盘 <code>stage6-content-ia-spec.md</code>（版式契约）与 <code>stage6-baseline.md</code>（事实基线），使多路并行子Agent 只需引用短路径契约，避免长 prompt 被截断导致的约定漂移；生成链与门控共享同一块序列定义，保证双轨一致。</li>
+        <li><strong>门控自身要可机检——把「保真红线」写成逐句标记词校验</strong>。权衡卡归栏最容易在「看起来合理」处失真，因此不写成文字约定，而写成 <code>gate_layout.py</code> 的<strong>逐句显式标记词校验</strong>（无证据不得归栏），让「保真」从主观承诺变为可证明、可回归的机器判据。</li>
+        <li><strong>视觉门控中像素重叠探针误报率高，只作 WARN</strong>。L4 的 <code>pixel.overlap-suspect</code> 在 14 条 WARN 中占绝大多数（密集文本行被 ≤3px 背景隔断即触发），属启发式粗检；其定位是<strong>提示而非阻断</strong>，真正阻断的是 FAIL。</li>
+        <li><strong>子Agent 自述必须回盘复验——本轮 3 次复验抓出误判</strong>。三次误判（权衡卡疑越栏、疑无标记句归栏、<code>verified</code> 真值口径）均由回盘实测纠正，其中一次是<strong>主Agent 自己的错误结论</strong>。任何结论都必须以新鲜一手数据复算，接力文档与子Agent 自述都不能直接采信；<code>skipped</code>/<code>WARN</code> 也要如实标注。</li>
+        <li><strong>版本敏感判断要用 <code>is True</code></strong>：<code>verified</code> 存在 <code>true</code>（布尔）与 <code>"cited"</code>（字符串）两种，真值判断会误计；GR-10 按 149/167=89.22% 判定。</li>
+        <li><strong>遗留与建议</strong>：
+          <ul>
+            <li><strong><code>needs_review</code> 待裁决</strong>：<code>E-iso-standards.json</code> 移出占比 56%，建议推送前人工裁决是否整文件剔除。</li>
+            <li><strong>L4 / L5 需本地补跑</strong>：CI 无法覆盖，推送前本机执行并留档。</li>
+            <li><strong>12factor 反向深链未做</strong>；<strong>30 本付费书语料待用户提供</strong>（P0 14 / P1 10 / P2 6）；<strong>检索层 D2 挂起</strong>。</li>
+          </ul>
+        </li>
+        <li><strong>下一步</strong>：完成暂停点 4 后推送 GitHub —— 本地仓 <code>zako-mio/se-architecture-methodology-kg</code>（公开）+ GitHub Pages。<strong>版权红线</strong>：书籍/标准正文只入本地语料层，公开库只承载消化重组后的知识与自研脚本。</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="doc">Mission 报告 · 阶段1–6 完成 · 167 节点 / 360 边 / 18 组 / 253 canonical 信源 · 生成于 0910-软件工程架构方法论</footer>
+</div>
+</body>
+</html>

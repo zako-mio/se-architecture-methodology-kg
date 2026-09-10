@@ -1,0 +1,667 @@
+{
+  "topic": "K 运维（operations）：可靠性与容错、可观测性、SLI/SLO/错误预算、事件响应与复盘、混沌工程、容量与变更管理",
+  "generated_by": "reliability-engineer (subagent, 自写角色)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "sre.google 直连超时，全部经代理 http://172.29.0.1:7890 + 浏览器 UA 直取；Azure/MS Learn、OTel、Datadog、AWS、DORA、principlesofchaos 经代理可达；Etsy Code as Craft 被反爬，改用 web.archive.org 快照。Release It! 为版权书，仅引用官方出版页目录核对模式名，未提取正文。",
+  "sources": [
+    {
+      "id": "BK-025",
+      "title": "Site Reliability Engineering: How Google Runs Production Systems (Google SRE Book)",
+      "org": "Google / O'Reilly Media",
+      "year": "2017",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Ch3 Embracing Risk：风险预算/错误预算（error budget）动机与成本模型；99.99% 年度允许 52.56 分钟不可用",
+        "Ch4 Service Level Objectives：SLI/SLO/SLA 定义、百分位而非均值、请求成功率口径、目标选择五原则",
+        "Ch6 Monitoring Distributed Systems：四大黄金信号 latency/traffic/errors/saturation；白盒 vs 黑盒监控",
+        "Ch8 Release Engineering：密封（hermetic）可复现构建、cherry picking、canary、Push on Green",
+        "Ch15 Postmortem Culture：无指责（blameless）复盘、触发条件、复盘文化",
+        "Ch14 Managing Incidents：Incident Commander/Ops Lead/Planning 角色、活文档、职责分离",
+        "Ch18 Software Engineering in SRE：Intent-based Capacity Planning（Auxon）",
+        "Ch21 Handling Overload / Ch22 Addressing Cascading Failures：降级、配额、客户端自适应限流 criticality、正反馈级联"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "BK-026",
+      "title": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+      "org": "Google / O'Reilly Media",
+      "year": "2018",
+      "url": "https://sre.google/workbook/table-of-contents/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Ch2 Implementing SLOs：SLI=good events/total events；SLO<100%；error budget=100%-SLO；error budget policy",
+        "Ch5 Alerting on SLOs：burn rate 多窗口多燃尽率告警（2%/5%/10% 等），precision/recall/detection/reset 四参数",
+        "Ch9 Incident Response：ICS 框架，IC/Communications Lead/Ops Lead；Google IMAG 与 PagerDuty 实践",
+        "Ch10 Postmortem Culture：无指责复盘的落地",
+        "Ch16 Canarying Releases：canary 定义（部分且限时的部署+评估）、对照组、错误预算消耗与灰度比例",
+        "Appendix A/B：Example SLO Document / Example Error Budget Policy"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "BK-024",
+      "title": "Release It! Second Edition: Design and Deploy Production-Ready Software",
+      "org": "Michael T. Nygard / The Pragmatic Bookshelf",
+      "year": "2018",
+      "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Stability Antipatterns：Integration Points、Chain Reactions、Cascading Failures、Blocked Threads、Self-Denial Attacks、Scaling Effects、Unbalanced Capacities、Dogpile、Force Multiplier、Slow Responses、Unbounded Result Sets",
+        "Stability Patterns：Timeouts、Circuit Breaker、Bulkheads、Steady State、Fail Fast、Let It Crash、Handshaking、Shed Load、Create Back Pressure、Governor",
+        "第二版新增 chaos engineering 章节与云原生/微服务系统性故障；强调 80% 项目生命周期成本在生产"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "WEB-037",
+      "title": "CircuitBreaker (bliki)",
+      "org": "Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "明确 Circuit Breaker 由 Michael Nygard 在《Release It!》中流行化，用于阻止级联故障",
+        "机制：包装受保护调用，失败达阈值即跳闸，后续调用直接报错不再发起；通常附带监控告警"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "WEB-038",
+      "title": "Principles of Chaos Engineering",
+      "org": "Chaos Engineering Community / CNCF",
+      "year": "2019",
+      "url": "https://principlesofchaos.org/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "定义：在生产中对系统做实验以建立其抵御动荡条件能力的信心",
+        "实验四步：定义稳态→假设→注入真实事件变量→比较对照组与实验组以证伪",
+        "高级原则：围绕稳态假设、变化真实事件、在生产运行、持续自动化、最小化爆炸半径"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "WEB-039",
+      "title": "Blameless PostMortems and a Just Culture",
+      "org": "John Allspaw / Etsy Code as Craft（经 web.archive.org 快照）",
+      "year": "2012",
+      "url": "https://web.archive.org/web/2019id_/https://codeascraft.com/2012/05/22/blameless-postmortems/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "无指责复盘要求工程师能详述其行为与当时掌握的信息，而非被追责",
+        "Just Culture：平衡安全与问责；关注失败机制的情境因素与决策过程",
+        "引用 Sidney Dekker 的 Bad Apple Theory 批判：人不会错，系统使然；first story vs second story",
+        "仅惩罚个人会让信息被隐藏，反而降低系统安全性"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "VEN-025",
+      "title": "Cloud Design Patterns: Circuit Breaker / Bulkhead / Retry",
+      "org": "Microsoft Azure Architecture Center (Microsoft Learn)",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "Circuit Breaker 状态机：Closed→Open（失败超阈值）→Half-Open（超时后放行少量请求）→Closed/Open",
+        "Bulkhead（又称 cell-based architecture）：按消费者/负载分区隔离资源池，阻止级联故障；bulkhead 页 URL .../patterns/bulkhead",
+        "Retry：处理瞬时故障；区分 cancel/立即重试/延迟重试；指数退避；幂等性前提；避免重试风暴加重过载；retry 页 URL .../patterns/retry",
+        "与 retry 组合、服务网格 sidecar 实现、可观测性（分布式追踪）"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "VEN-026",
+      "title": "Observability Primer & Signals",
+      "org": "OpenTelemetry (CNCF)",
+      "year": "2026",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "可观测性：从外部理解系统、回答 unknown unknowns 与 why 的能力；需先做 instrumentation",
+        "信号（signals）：Traces、Metrics、Logs、Baggage（另 events、profiles 发展中）；未使用“三支柱”措辞",
+        "trace 由 span 组成，记录单请求跨服务传播路径；log 是带时间戳消息，需与 trace/span 关联",
+        "metrics 是一段时间内数值聚合"
+      ],
+      "legacy_id": "S3-02"
+    },
+    {
+      "id": "VEN-027",
+      "title": "Service Level Objectives (SLO) 文档 / What is observability?",
+      "org": "Datadog",
+      "year": "2026",
+      "url": "https://docs.datadoghq.com/service_management/service_level_objectives/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "独立定义 SLI/SLO/SLA/Error Budget：error budget = 100% - target，用于投入产品开发",
+        "burn rate（燃尽率）用滚动窗口评估 SLO 消耗速度；支持 error budget alerts",
+        "status corrections 用于排除计划维护等预期停机",
+        "可观测性三支柱 = metrics, logs, traces；并指出成熟实践已扩展（profiles、RUM、LLM 可观测性等），真正的关键是信号可关联",
+        "URL2: https://www.datadoghq.com/knowledge-center/observability/"
+      ],
+      "legacy_id": "S3-03"
+    },
+    {
+      "id": "VEN-028",
+      "title": "Exponential Backoff And Jitter",
+      "org": "AWS Architecture Blog（Amazon）",
+      "year": "2015 (updated 2023)",
+      "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "无抖动指数退避仍会造成调用聚簇；加入 jitter 可把尖峰摊平为近恒定速率",
+        "Full Jitter / Equal Jitter / Decorrelated Jitter 三种策略对比；Full Jitter 工作量更低",
+        "该方法已成为 AWS SDK 标准/自适应重试模式的默认行为"
+      ],
+      "legacy_id": "S3-04"
+    },
+    {
+      "id": "VEN-018",
+      "title": "DORA's software delivery metrics: the four keys",
+      "org": "DORA / Google Cloud",
+      "year": "2026",
+      "url": "https://dora.dev/guides/dora-metrics-four-keys/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "交付吞吐：change lead time、deployment frequency、failed deployment recovery time",
+        "交付不稳定：change failure rate、deployment rework rate；即由四键扩展为五指标",
+        "速度与稳定性非权衡，高绩效团队五项均优；减小变更批量可同时改善两者"
+      ],
+      "legacy_id": "S3-05"
+    },
+    {
+      "id": "VEN-029",
+      "title": "Architecture strategies for defining reliability targets",
+      "org": "Microsoft Azure Well-Architected Framework",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "独立定义 SLO（可测目标）与 SLI（量的度量）；SLA 是含财务/法律后果的合同",
+        "可靠性目标含 availability / correctness / recovery（RTO/RPO/MTTR/MTBF）",
+        "整体 SLO 应反映业务目标而非依赖项的简单复合；可在应用/工作负载/流程层级分别设 SLO；复合 SLO"
+      ],
+      "legacy_id": "S3-06"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "SLI（Service Level Indicator，服务等级指标）",
+      "definition": "对服务所提供服务水平某个方面的、被谨慎定义的定量度量（如请求延迟、错误率、吞吐、可用性/成功率）。推荐口径为「好事件数 / 总事件数」，取值 0%–100%。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S3-03",
+        "S3-06",
+        "S3-02"
+      ]
+    },
+    {
+      "term": "SLO（Service Level Objective，服务等级目标）",
+      "definition": "由 SLI 度量、针对某服务水平的「目标值或取值范围」（结构为 SLI ≤ target 或 lower ≤ SLI ≤ upper）。100% 不是正确目标：既不可达，也会扼杀变更与迭代。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S2-02",
+        "S3-03",
+        "S3-06",
+        "S3-02"
+      ]
+    },
+    {
+      "term": "SLA（Service Level Agreement，服务等级协议）",
+      "definition": "与用户之间含「达成/未达成后果」的显式或隐式契约；后果通常为财务性的退款或罚金。判别法：若无人为未达成 SLO 承担明确后果，则它只是 SLO 而非 SLA。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S3-03",
+        "S3-06"
+      ]
+    },
+    {
+      "term": "错误预算（Error Budget）",
+      "definition": "允许的不可靠度，数值上等于 100% 减去 SLO 目标百分比；它把「创新 vs 稳定」之争转化为一个客观、由双方共同定义、供发布决策使用的量化指标：预算未耗尽即可继续发版，接近耗尽则放缓/回滚并投入加固。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S2-02",
+        "S3-03"
+      ]
+    },
+    {
+      "term": "错误预算政策（Error Budget Policy）",
+      "definition": "组织对「如何用错误预算做决策与排优先级」的正式承诺；是采用基于错误预算的 SRE 方法的前提之一。无此承诺，SLO 合规只是又一个 KPI。",
+      "source_id": "BK-026",
+      "cross_source_ids": [
+        "S2-01"
+      ]
+    },
+    {
+      "term": "燃尽率（Burn Rate）",
+      "definition": "错误预算被消耗的速率；SRE 实践用多窗口、多燃尽率（如 1 小时/6 小时/1 天/3 天窗口对应 14.4x/6x/1x 等）组合告警，兼顾 precision、recall、detection time、reset time 四参数。",
+      "source_id": "BK-026",
+      "cross_source_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "四大黄金信号（Four Golden Signals）",
+      "definition": "面向用户的可观测系统若只能测四个指标则测：延迟（latency，需区分成功/失败请求延迟）、流量（traffic）、错误（errors，显式/隐式/按策略）、饱和度（saturation，资源使用接近上限的程度，常是延迟上升的先行指标）。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "可观测性（Observability）与三支柱",
+      "definition": "从系统外部输出推断其内部状态、以回答未知未知（unknown unknowns）与「为什么」的能力，前提是应用已正确埋点。工程界习称的「三支柱」为 metrics（指标）、logs（日志）、traces（追踪）；OTel 官方术语则列为 Traces/Metrics/Logs/Baggage，且强调价值在于信号可关联而非数量。",
+      "source_id": "VEN-026",
+      "cross_source_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "分布式追踪 / Span（Distributed Trace / Span）",
+      "definition": "trace 记录单个请求在微服务/无服务器架构中跨服务传播的路径；由若干 span 组成，root span 代表请求从始到终，子 span 表示请求内的各步骤，用于定位分布式性能问题根因。",
+      "source_id": "VEN-026",
+      "cross_source_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "断路器（Circuit Breaker）",
+      "definition": "监控受保护远程调用失败数，失败达阈值即「跳闸」进入 Open，之后所有调用立即返回错误而不再发起，给故障依赖恢复时间并阻止级联故障；状态机为 Closed/Open/Half-Open，通常附带告警。由 Nygard《Release It!》流行化。",
+      "source_id": "WEB-037",
+      "cross_source_ids": [
+        "S2-03",
+        "S3-01"
+      ]
+    },
+    {
+      "term": "舱壁 / 隔舱（Bulkhead / Cell-based Architecture）",
+      "definition": "将应用元素按消费者或负载划分为隔离的资源池（进程、线程池、连接池、队列、容器等），使一个元素失败或过载时其余部分仍可工作，防止故障级联。名称源自船体隔舱。",
+      "source_id": "VEN-025",
+      "cross_source_ids": [
+        "S2-03"
+      ]
+    },
+    {
+      "term": "超时与重试（Timeout / Retry）",
+      "definition": "超时为远程调用设定最长等待，避免线程被不响应依赖长期阻塞；重试用于处理瞬时故障，须区分取消/立即重试/延迟重试，配合指数退避 + 抖动（jitter）避免重试风暴，且仅对幂等操作安全。",
+      "source_id": "BK-024",
+      "cross_source_ids": [
+        "S3-01",
+        "S3-04"
+      ]
+    },
+    {
+      "term": "级联故障（Cascading Failure）",
+      "definition": "随时间增长的、由正反馈驱动的故障：系统一部分失败提高了其他部分失败的概率（如单副本过载→剩余副本承压→多米诺式全挂）。最常见根因是过载。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S2-03",
+        "S3-01"
+      ]
+    },
+    {
+      "term": "混沌工程（Chaos Engineering）",
+      "definition": "在生产中对系统做受控实验，以建立对其抵御动荡条件能力的信心的学科；方法是定义稳态→提出假设→注入真实事件变量→比较对照组与实验组以证伪，并要求自动化、持续运行与最小化爆炸半径。",
+      "source_id": "WEB-038",
+      "cross_source_ids": [
+        "S2-03"
+      ]
+    },
+    {
+      "term": "无指责复盘（Blameless Postmortem）",
+      "definition": "事故发生后的书面记录（影响、缓解/处置、根因、后续行动），其文化内核是聚焦导致事件的系统性原因而非追责任何个人或团队；假设参与者出于善意、基于当时信息做了正确的事。理论根植于 Dekker 的 Just Culture 与医疗/航空业「第二故事」。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S2-06"
+      ]
+    },
+    {
+      "term": "事件指挥官（Incident Commander, IC）",
+      "definition": "事件响应中的核心角色，掌握事件高层状态、组建响应组织并按需分派职责；未分派角色默认由其兼任。ICS/IMAG 框架另有 Communications Lead 与 Operations Lead；强调清晰职责分离、活文档、显式交接。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S2-02"
+      ]
+    },
+    {
+      "term": "意图驱动的容量规划（Intent-based Capacity Planning）",
+      "definition": "以程序化方式编码服务的依赖与参数（意图，如「在每地理区域满足 Foo 的需求并保持 N+2 冗余」），据此自动生成资源分配计划；需求/供给/约束变化时自动重算，替代以需求驱动、人工调整的传统容量规划。",
+      "source_id": "BK-025"
+    },
+    {
+      "term": "金丝雀发布（Canarying）",
+      "definition": "对变更实施部分且限时的部署并评估，以决定是否继续全量；接收变更的部分为 canary、其余为 control，本质是一种 A/B 测试。其错误预算消耗与 canary 流量占比成正比（20% 缺陷 × 5% 流量 ≈ 1% 总体错误率）。",
+      "source_id": "BK-026",
+      "cross_source_ids": [
+        "S2-01"
+      ]
+    },
+    {
+      "term": "可用性九（Nines）",
+      "definition": "用百分比中 9 的个数表达高可用，如 99%=2 个 9、99.999%=5 个 9；每增加一个 9 对应向 100% 提升一个数量级。99.99% 年度允许约 52.56 分钟不可用。",
+      "source_id": "BK-025",
+      "cross_source_ids": [
+        "S3-06"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "claim": "SLI/SLO/SLA 三者应显式区分：SLI 是量的度量，SLO 是目标值/区间，SLA 是带后果的契约；三者混用会导致期望与问责错位。",
+      "source_ids": [
+        "BK-025",
+        "VEN-027",
+        "VEN-029"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "100% 可靠性不是正确目标：既不可达，也会使服务无法更新（变更是故障首要来源），且用户通常感知不到 99.99% 与 99.999% 的差别。",
+      "source_ids": [
+        "BK-025",
+        "BK-026",
+        "VEN-027"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "错误预算（100%-SLO）将「创新 vs 稳定」的政治博弈转为客观决策机制：预算充足则放行发布，耗尽则暂停发布并投入加固；Google 用其让产品团队自我约束。",
+      "source_ids": [
+        "BK-025",
+        "BK-026",
+        "VEN-027"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SLI 应以「好事件/总事件」比值表达，便于工具化（分子、分母、阈值）并天然导出错误预算；面向用户的服务还应区分成功与失败请求的延迟。",
+      "source_ids": [
+        "BK-025",
+        "BK-026",
+        "VEN-027"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "告警应基于错误预算的燃烧速率（多窗口、多燃尽率）而非单一瞬时错误率；后者 recall 高但 precision 低（可一天误报上百次而 SLO 仍达标），前者可同时控制 precision/recall/detection/reset。",
+      "source_ids": [
+        "BK-026",
+        "VEN-027"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "面向用户系统的监控若只能保留四个指标，选四大黄金信号：延迟、流量、错误、饱和度；分页应优先基于症状（black-box），cause-oriented 只用于明确且迫近的原因。",
+      "source_ids": [
+        "BK-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "监控不应只看均值：延迟呈长尾分布，均值会掩盖尾部；应使用百分位（如 p99、p99.9），且不能假设数据正态分布。",
+      "source_ids": [
+        "BK-025",
+        "BK-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可观测性工程实践以 metrics/logs/traces 三支柱为通行框架，但该措辞非 OTel 官方术语（OTel 列 Traces/Metrics/Logs/Baggage）；成熟实践更强调信号间的关联与高基数可查询性，而非支柱数量。",
+      "source_ids": [
+        "VEN-026",
+        "VEN-027"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "断路器通过有限状态机（Closed/Open/Half-Open）快速失败，防止对已故障依赖的持续调用演化为级联故障；与 Retry 组合时，重试须对断路器的非瞬态异常敏感并停止重试。",
+      "source_ids": [
+        "WEB-037",
+        "VEN-025",
+        "BK-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "舱壁模式（cell-based architecture）通过按消费者/负载分区资源池隔离故障，使单分区失败不扩散；常与 retry、circuit breaker、throttling 组合，并优先使用平台级配额/隔离能力而非自研。",
+      "source_ids": [
+        "VEN-025",
+        "BK-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "重试必须处理幂等性与过载放大：对非幂等操作重试可能重复执行；激进重试会进一步压垮接近饱和的服务，应使用指数退避+抖动并把末次失败记为 error、中间重试记为 info。",
+      "source_ids": [
+        "VEN-025",
+        "VEN-028"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "指数退避若不加抖动，会因同步退避形成调用聚簇；Full/Equal/Decorrelated Jitter 可把尖峰摊平为近恒定速率并显著减少总调用量，已成为 AWS SDK 默认重试行为。",
+      "source_ids": [
+        "VEN-028",
+        "VEN-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "级联故障的本质是正反馈（局部过载抬高其余部分失败概率）；常见放大器包括长队列、GC 死亡螺旋、线程/文件描述符耗尽、健康检查失败、客户端重试与雪崩重启；首要预防手段是做容量与过载失败模式的负载测试。",
+      "source_ids": [
+        "BK-025",
+        "BK-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "过载须优雅处理：可降低响应质量、按客户配额拒绝、客户端自适应限流（每条被拒绝请求触发客户端自我压制），并以 criticality 分级保证高关键度请求优先，避免全局过载拖垮所有客户。",
+      "source_ids": [
+        "BK-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "事件响应应尽早宣布事件并指定清晰角色（IC/CL/Ops Lead，源自 ICS），维护活文档、显式交接；Google 与 PagerDuty 的实践均表明：有组织的事件管理能更快缓解，且可复用于变更管理与灾难演练。",
+      "source_ids": [
+        "BK-025",
+        "BK-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "无指责复盘是 SRE 文化基石：聚焦系统性原因而非追责个人，假设参与者基于当时信息善意行事；追责文化会使问题被掩盖、系统性风险上升（Dekker 的 Bad Apple Theory 批判、Just Culture）。",
+      "source_ids": [
+        "BK-025",
+        "WEB-039"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "复盘应有预先定义、客观的触发条件（用户可见停机/降级超阈值、数据丢失、on-call 干预、超阈值修复时长、监控失效），并配合评审、共享与行动项闭环，否则复盘等于没做。",
+      "source_ids": [
+        "BK-025",
+        "BK-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "混沌工程是主动发现系统性弱点的受控实验（稳态→假设→注入→证伪），偏好直接在生产进行、自动化持续运行，并强制最小化爆炸半径；其价值在于暴露回退设置、超时、重试风暴、单点故障等隐患。",
+      "source_ids": [
+        "WEB-038",
+        "BK-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "容量规划正从「需求驱动人工调整」转向「意图驱动的自动分配」（如 Google Auxon）：编码依赖、约束与冗余（N+2）意图，需求/供给变化时自动重算计划，减少人工作业与分箱（bin packing）难题。",
+      "source_ids": [
+        "BK-025"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "可靠发布依赖密封可复现构建、版本分支 + cherry picking、以及按风险分级的 rollout（自动 push-on-green、集群指数扩展、敏感基础设施跨天跨地域滚动）；变更是故障首要来源，故需 canary 等灰度机制。",
+      "source_ids": [
+        "BK-025",
+        "BK-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Canary 是对变更的部分且限时部署与评估（canary vs control），错误预算损失与暴露流量成正比；应一次只跑一个 canary，并按发布频率选择时长，避免信号污染与状态难以推理。",
+      "source_ids": [
+        "BK-026",
+        "BK-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "变更管理应以 DORA 交付指标度量：吞吐（change lead time、deployment frequency）与不稳定（change failure rate、deployment rework rate、failed deployment recovery time）；其研究反复表明速度与稳定性不冲突，减小变更批量可同时改善两者。",
+      "source_ids": [
+        "VEN-018"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SRE 的 on-call 可持续性来自「运维工作 ≤50%」的硬约束：至少一半时间用于工程化自动化以规模化减少 toil；无此约束的纯运维团队会陷入过载。",
+      "source_ids": [
+        "BK-025"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "reliability_tactics": [
+    {
+      "tactic": "Timeouts（超时）",
+      "purpose": "限制远程调用最长等待，避免线程被不响应依赖阻塞",
+      "source_ids": [
+        "BK-024",
+        "VEN-025"
+      ]
+    },
+    {
+      "tactic": "Circuit Breaker（断路器）",
+      "purpose": "失败超阈值即快速失败，给依赖恢复时间并阻止级联",
+      "source_ids": [
+        "WEB-037",
+        "VEN-025",
+        "BK-024"
+      ]
+    },
+    {
+      "tactic": "Bulkhead / Cell（舱壁/单元化）",
+      "purpose": "资源池分区隔离，故障不跨舱扩散",
+      "source_ids": [
+        "VEN-025",
+        "BK-024"
+      ]
+    },
+    {
+      "tactic": "Retry + Exponential Backoff + Jitter",
+      "purpose": "处理瞬时故障，摊平重试风暴（仅幂等操作）",
+      "source_ids": [
+        "VEN-025",
+        "VEN-028"
+      ]
+    },
+    {
+      "tactic": "Load Shedding / Back Pressure / Governor（减载/背压/调速器）",
+      "purpose": "过载时保护系统，按配额与 criticality 拒绝",
+      "source_ids": [
+        "BK-024",
+        "BK-025"
+      ]
+    },
+    {
+      "tactic": "Graceful Degradation（优雅降级）",
+      "purpose": "极端过载时返回较不精确但更易计算的结果",
+      "source_ids": [
+        "BK-025"
+      ]
+    },
+    {
+      "tactic": "Fail Fast / Let It Crash",
+      "purpose": "对非瞬态故障快速失败，避免资源浪费与阻塞",
+      "source_ids": [
+        "BK-024"
+      ]
+    },
+    {
+      "tactic": "Steady State（稳态）",
+      "purpose": "控制系统增长避免累积性意外，数据不随时间膨胀",
+      "source_ids": [
+        "BK-024"
+      ]
+    },
+    {
+      "tactic": "Idempotency（幂等）",
+      "purpose": "使重试与消息重投递安全",
+      "source_ids": [
+        "VEN-025"
+      ]
+    },
+    {
+      "tactic": "Chaos Experiments（混沌实验）",
+      "purpose": "主动验证对故障的韧性，最小化爆炸半径",
+      "source_ids": [
+        "WEB-038",
+        "BK-024"
+      ]
+    }
+  ],
+  "slo_template": {
+    "sli_form": "good_events / total_events（如 成功请求数 / 总请求数；或 满足延迟阈值的请求数 / 总请求数）",
+    "slo_form": "SLI >= target（如 99.9% of requests succeed over 28d）；多阈值示例：90% < 1ms、99% < 10ms、99.9% < 100ms",
+    "error_budget": "100% - SLO target（如 99.9% SLO → 0.1% 错误预算；28 天 300 万请求 → 3000 个错误）",
+    "must_specify": [
+      "聚合窗口（如 averaged over 1 min / 28-day rolling）",
+      "聚合范围（all tasks in cluster）",
+      "测量频率",
+      "纳入的请求（如 HTTP GETs / 特定 RPC）",
+      "数据采集位置（server/client）",
+      "延迟口径（time to last byte）"
+    ],
+    "target_guidelines": [
+      "不要按当前性能定目标",
+      "保持简单",
+      "避免绝对化（infinite/always）",
+      "只保留足够覆盖属性的少量 SLO",
+      "先松后紧，可迭代",
+      "内部 SLO 比对外 SLO 更紧（留安全边际）",
+      "不要过度超额（会让用户形成错误依赖，可用计划性下线暴露依赖）"
+    ],
+    "alerting": "基于 burn rate 的多窗口多燃尽率告警（如 1h/6h/1d/3d 窗口），配套 error budget policy 明确预算耗尽后的发布冻结/回滚动作",
+    "sources": [
+      "BK-025",
+      "BK-026",
+      "VEN-027",
+      "VEN-029"
+    ]
+  },
+  "gaps": [
+    "sre.google 直连超时，依赖代理 172.29.0.1:7890；若代理不可用则该域采集失败（本次已成功）。",
+    "Release It! 为受版权保护的付费书，契约 §5 红线禁止下载正文，故书中稳定性反模式/模式仅能引用官方出版页目录核对名称，未提取作者原句定义；书本体待用户提供合法本地副本后入本地语料层解析。",
+    "无指责复盘 / Just Culture 的一手学术源（Sidney Dekker 原著）未获取，本次仅用 Allspaw 实践者文章（S2-06）+ SRE Book；建议回源 Dekker《Just Culture》《Behind Human Error》。",
+    "「可观测性三支柱」为工程口语而非标准术语：OTel 官方并未使用该措辞（列 Traces/Metrics/Logs/Baggage），术语未统一，勿写入 glossary 为规范定义。",
+    "PagerDuty 官方事件响应手册 response.pagerduty.com 未直接采集，本次仅经 SRE Workbook（PagerDuty 作者参与）转述，建议回源核对。",
+    "混沌工程官方原则页面 Last Update 2019-03，缺少近年演进（持续实验、生产实验规模化、GameDay 标准化），时效性偏旧。",
+    "DORA 指标已由「四键」演进为五指标（MTTR 被 Failed Deployment Recovery Time 取代，新增 deployment rework rate），引用旧口径（四键/MTTR）需标注版本。",
+    "容量与变更管理的量化阈值（burn rate 倍数、canary 流量/时长、N+2 冗余）随业务与架构差异大，模板中的数值是示例而非普适标准，落地需按服务校准。",
+    "ISO/IEC/IEEE 14764（维护/运维过程）与 ISO/IEC 25010 可靠性子特性等 S1 标准未在本域直接展开，运维知识主要以 S2（SRE 书/Release It!）+ S3（Azure/AWS/OTel/Datadog/DORA）支撑，S1 覆盖偏弱。"
+  ],
+  "notes": "本包覆盖 K 域（运维）六项子题：①SLI/SLO/错误预算（SRE Book Ch3-4 + Workbook Ch2/5 + Datadog）；②Release It! 稳定性反模式与断路器/舱壁/超时（Nygard + Fowler + Azure）；③可观测性三支柱（OTel + Datadog）；④事件响应与无指责复盘（SRE Book Ch14-15 + Workbook Ch9 + Allspaw）；⑤混沌工程原则（principlesofchaos.org + Release It! chaos 章）；⑥容量与变更管理（Intent-based Capacity Planning + Release Engineering + Canary + DORA）。关键定义均 ≥2 独立源交叉验证（Google/Datadog/Microsoft 相互独立）。所有 URL 于 2026-09-10 经代理实测可达，未下载任何受版权保护正文。"
+}

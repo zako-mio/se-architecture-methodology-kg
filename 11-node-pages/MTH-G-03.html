@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构风格选择方法 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>架构风格选择方法</span></div><div class="meta">methodology · G · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>架构风格选择方法</h1><div class="en">Architectural Style Selection</div><div class="badges"><span class="badge pr">P1</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">G · 架构设计</span><span class="badge th">质量属性</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">以<a class="term" href="../14-views/glossary.html#g-025" title="quality attribute scenario — 特定质量属性的可验证需求，六要素：刺激源/刺激/环境/制品/响应/响应度量；分通用与具体场景。">质量属性场景</a>为判据，把候选<a class="term" href="../14-views/glossary.html#g-021" title="architectural style — 定义一类系统结构组织模式：确定 components/connectors 词汇表及其组合约束；符合约束带来特定属性并制造代价。">架构风格</a>（分层、管道-过滤器、事件驱动、<a class="term" href="../14-views/glossary.html#g-022" title="（无权威共识，给推荐口径）microservice — 可独立部署服务套件风格（围绕业务能力、去中心化数据治理、design for failure 等）；原作者声明无精确定义，工程口径采特征清单。">微服务</a>等）的组件-连接件约束映射到属性收益与代价，在具体子域上择优而非追求普适最优的选型方法。</span></p></div><p class="note">别名：架构风格选型、style selection　|　英文：Architectural Style Selection　|　类型：方法 / decision-framework</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-365.4 -359.9 704.4 703.5" role="img" aria-label="架构风格选择方法 的 1-2 跳邻域关系图"><title>架构风格选择方法 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="1.6" y1="-295.9" x2="3.3" y2="-137.1" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度不可消除，故架构只能在约束下权衡</title></line><line x1="44.8" y1="212.6" x2="-79" y2="-178.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：组织沟通结构约束可行边界</title></line><line x1="3.3" y1="-137.1" x2="-79" y2="-178.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：边界划分是对多重质量属性的权衡</title></line><line x1="64.6" y1="-284.3" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：SLO 目标选择体现架构即权衡</title></line><line x1="137.4" y1="-261.2" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：权衡决策方法依据架构即权衡的本质</title></line><line x1="162.7" y1="-193.9" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：风格选型本质是以约束换取期望属性</title></line><line x1="196.5" y1="-116.9" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突治理依据架构即权衡的本质</title></line><line x1="196.5" y1="-116.9" x2="162.7" y2="-193.9" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：成本与质量冲突约束技术选型</title></line><line x1="-99.8" y1="69.7" x2="-242.7" y2="140.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：效用树把不可直接测量的质量属性操作化为场景</title></line><line x1="-99.8" y1="69.7" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：敏感点与权衡点分析是架构权衡判断的内核</title></line><line x1="-99.8" y1="69.7" x2="117.3" y2="69.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：效用树构造与敏感点识别细化 ATAM 评估流程的分析环节</title></line><line x1="110" y1="-63" x2="258" y2="-121.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：决策记录与文档化方法共同承载架构决策与理由</title></line><line x1="258" y1="-121.2" x2="117.3" y2="69.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：架构文档是架构评估流程的输入</title></line><line x1="-99.8" y1="69.7" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：敏感点与权衡点分析为架构风格选型提供判据</title></line><line x1="-195.9" y1="-112.4" x2="258" y2="-121.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以视图与依赖图文档化架构，支撑无源码理解</title></line><line x1="-195.9" y1="-112.4" x2="3.3" y2="-137.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：去中心化与本地优先等主张皆为显式架构取舍</title></line><line x1="-165.1" y1="-254.5" x2="162.7" y2="-193.9" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以够用原则选择最小接入组合</title></line><line x1="-165.1" y1="-254.5" x2="3.3" y2="-137.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：选型即权衡，无全能工具</title></line><line x1="238.4" y1="75.2" x2="117.3" y2="69.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：AWS 支柱评审落地质量属性场景分析</title></line><line x1="206.1" y1="199.6" x2="117.3" y2="69.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：GCP 支柱原则承载质量属性场景分析</title></line><line x1="-114.4" y1="-64.5" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：Azure 风格目录指导架构风格选择</title></line><line x1="-114.4" y1="-64.5" x2="-301.4" y2="-60.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：Azure 安全部署落地渐进暴露策略</title></line><line x1="-205.8" y1="-182.9" x2="162.7" y2="-193.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：技术雷达采用环支撑技术选型够用原则</title></line><line x1="238.4" y1="75.2" x2="-99.8" y2="69.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：AWS 支柱冲突识别支撑效用树权衡点</title></line><line x1="238.4" y1="75.2" x2="206.1" y2="199.6" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：AWS 与 GCP WAF 支柱同构但绑定不同厂商</title></line><line x1="-114.4" y1="-64.5" x2="-205.8" y2="-182.9" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：Azure 稳定工程清单对照雷达时效快照</title></line><line x1="238.4" y1="75.2" x2="206.1" y2="199.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：多云场景可组合对照两厂商 WAF 建议</title></line><line x1="-114.4" y1="-64.5" x2="-205.8" y2="-182.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：风格目录与技术雷达组合用于技术选型</title></line><line x1="-165.1" y1="-254.5" x2="-205.8" y2="-182.9" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：带观点的分级接入推荐，与雷达四环同构</title></line><line x1="-73.5" y1="-295.2" x2="3.3" y2="-137.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：风格选择是架构权衡的典型对象</title></line><line x1="110" y1="-63" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：决策记录依架构即权衡，留存取舍与理由</title></line><line x1="117.3" y1="69.1" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：ATAM 以架构权衡为根本前提</title></line><line x1="0" y1="0" x2="3.3" y2="-137.1" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：风格选择依质量属性权衡而非对错</title></line><line x1="-4" y1="116.7" x2="-79" y2="-178.2" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：限界上下文依边界与接口隔离原理</title></line><line x1="-4" y1="116.7" x2="44.8" y2="212.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：DDD 边界与组织结构相互塑造（康威）</title></line><line x1="117.3" y1="69.1" x2="110" y2="-63" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：识别敏感点与权衡点是记录架构决策的前提</title></line><line x1="117.3" y1="69.1" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：质量属性场景与评估是风格权衡选型的前置分析</title></line><line x1="110" y1="-63" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：风格选型结果以 ADR 记录理由与被否决项</title></line><line x1="-70.1" y1="279.6" x2="-4" y2="116.7" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：信息隐藏与限界上下文同属模块边界判据</title></line><line x1="0" y1="0" x2="-4" y2="116.7" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：按质量属性选风格与按领域模型划边界的依据存在张力</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">架构风格选择方法<title>架构风格选择方法（MTH-G-03）</title></text><circle cx="3.3" cy="-137.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="3.3" y="-118.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构即权衡<title>架构即权衡（ESS-O-02）</title></text><circle cx="110" cy="-63" r="9.0" fill="#c98a3a" stroke="none"/><text x="110" y="-44" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构决策记录<title>架构决策记录（MTH-G-01）</title></text><circle cx="117.3" cy="69.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="117.3" y="88.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量属性场景与ATAM<title>质量属性场景与ATAM（MTH-G-02）</title></text><circle cx="-4" cy="116.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-4" y="135.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">领域驱动战略设计<title>领域驱动战略设计（MTH-G-04）</title></text><circle cx="-99.8" cy="69.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-99.8" y="88.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">效用树与敏感点权衡点分析<title>效用树与敏感点权衡点分析（MTH-G-06）</title></text><circle cx="-114.4" cy="-64.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="-114.4" y="-45.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">Azure 架构中心<title>Azure 架构中心（TEC-G-03）</title></text><circle cx="-79" cy="-178.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-79" y="-162.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="1.6" cy="-295.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="1.6" y="-279.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">本质复杂度与偶然复杂度<title>本质复杂度与偶然复杂度（ESS-O-01）</title></text><circle cx="258" cy="-121.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="258" y="-105.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构文档化方法<title>架构文档化方法（MTH-G-05）</title></text><circle cx="-301.4" cy="-60.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-301.4" y="-44.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">渐进暴露部署策略<title>渐进暴露部署策略（MTH-J-05）</title></text><circle cx="162.7" cy="-193.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="162.7" y="-177.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术选型的够用原则<title>技术选型的够用原则（MTH-O-03）</title></text><circle cx="196.5" cy="-116.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="196.5" y="-100.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性冲突治理<title>质量属性冲突治理（MTH-O-05）</title></text><circle cx="-195.9" cy="-112.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-195.9" y="-96.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">去中心化聊天架构逆向<title>去中心化聊天架构逆向（CAS-X-01）</title></text><circle cx="-165.1" cy="-254.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-165.1" y="-238.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">MCP 四件套选型对比<title>MCP 四件套选型对比（CAS-X-12）</title></text><circle cx="-73.5" cy="-295.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-73.5" y="-279.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构风格<title>架构风格（ESS-G-05）</title></text><circle cx="-242.7" cy="140.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-242.7" y="156.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性不可直接测量<title>质量属性不可直接测量（ESS-M-05）</title></text><circle cx="64.6" cy="-284.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="64.6" y="-268.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">服务等级目标方法<title>服务等级目标方法（MTH-K-01）</title></text><circle cx="44.8" cy="212.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="44.8" y="228.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">康威定律<title>康威定律（ESS-N-01）</title></text><circle cx="-70.1" cy="279.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-70.1" y="295.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">信息隐藏模块化分解<title>信息隐藏模块化分解（MTH-H-02）</title></text><circle cx="238.4" cy="75.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="238.4" y="91.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">AWS 良好架构框架<title>AWS 良好架构框架（TEC-G-01）</title></text><circle cx="-205.8" cy="-182.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-205.8" y="-166.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">ThoughtWorks…<title>ThoughtWorks 技术雷达（TEC-G-04）</title></text><circle cx="137.4" cy="-261.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="137.4" y="-245.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性权衡决策方法<title>质量属性权衡决策方法（MTH-M-06）</title></text><circle cx="206.1" cy="199.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="206.1" y="215.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">GCP 良好架构框架<title>GCP 良好架构框架（TEC-G-02）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 6 个直接邻接、外环 17 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">架构风格定义一类系统的结构组织模式：确定可用的<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>与连接件词汇表及其组合约束，符合约束会带来特定属性，同时制造相应代价。</span><span class="hl">因此风格选择本质是<a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>权衡：约束在带来期望属性的同时引入复杂度，需按子域或限界上下文判断收益是否大于代价，宁可放松约束也不追求<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>纯洁。</span>风格是对设计的约束，而非可无条件套用的最佳实践；把风格当教条会掩盖其背后的取舍。选型的起点应是可度量的质量属性场景与现实的团队、运维约束，而非流行趋势，这样决策才可解释、可复核，也才能在语境变化时被有依据地推翻。风格之间并非互斥，实际系统常是多种风格的组合，选型因而也是组合与边界划分问题。<span class="hl">因此选型文档应同时记录被选与被否的风格及其<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">理由</a>，使后续团队能理解约束的来源，并在业务或团队变化时判断是否仍成立，而不是把当前风格当作不可质疑的默认前提。</span></p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">先明确目标质量属性并用场景排序，再把每种候选风格的收益与代价逐项对照：分层支持<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>递增与增强，但性能可能要求跨层紧<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>，且难找正确抽象层；管道-过滤器利于复用、并发分析与重组，但倾向批处理、不利交互式、双流对应困难；事件驱动解耦生产者与消费者、支持近实时扩展与故障隔离，但引入投递保证、事件排序与最终一致性挑战；微服务独立部署、故障隔离、便于引入新技术，但带来服务发现、数据一致性、分布式管理与 DevOps 成熟度要求；仓库式与<a class="term" href="../14-views/glossary.html#g-031" title="Microkernel (POSA) — 架构模式：将最小功能核（minimal functional core）与扩展功能及客户特定部分分离，microkernel 充当可插拔扩展的插座（socket）并协调其协作；适用于需适应变化系统需求的系统。">微内核</a>利于集中数据或可插拔扩展，但可能形成共享瓶颈。</span><span class="hl">以权重或权衡矩阵对候选打分收敛，记录每种风格在目标场景下的<a class="term" href="../14-views/glossary.html#g-026" title="sensitivity point — 对达成某一质量属性响应至关重要的组件/关系属性。">敏感点</a>，使选择过程可复核、可复现，而非凭直觉拍板。</span><span class="hl">打分不是制造精确数字，而是迫使团队把模糊直觉拆成可比维度并暴露分歧，最终由<a class="term" href="../14-views/glossary.html#g-014" title="stakeholder — 对关注系统持有 Concern（关注点）的个人、群体或组织（含客户、用户、开发/维护者、监管者等）。">干系人</a>按业务优先级裁决，而非由单一技术偏好决定。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">从业务能力与变更模式出发划分候选边界，结合团队结构（<a class="term" href="../14-views/glossary.html#g-131" title="Conway&#x27;s Law — 设计系统的组织会产出结构复制其沟通结构的设计；用同态描述系统图与组织图的保结构对应。">康威定律</a>）与运维成熟度评估可行性；用 ATAM 的敏感点与<a class="term" href="../14-views/glossary.html#g-027" title="tradeoff point — 同时是多个质量属性的敏感点、影响多个属性的属性；与敏感点非同义。">权衡点</a>识别每种风格在具体场景下的关键代价；决策结果用 ADR 记录理由与被否决的风格。</span>成熟做法是按子域差异化选型、允许混合风格，而不是全局强推单一风格；先以小规模试点验证收益与代价，再决定是否推广。<span class="hl">选型后应以适应度函数或架构检查持续校验实际系统是否仍在预期约束内，防止风格随演化漂移成「<a class="term" href="../14-views/glossary.html#g-050" title="Big Ball of Mud — 缺乏可感知架构的软件系统；是最常见的「架构」之一，成因含业务压力、人员流动与软件熵。">大泥球</a>」，并在业务与团队变化时重新评估。</span><span class="hl">对每个引入的风格约束，都应能说清它换来什么属性、付出什么代价，以及退出策略；约束的引入应渐进、可度量、可回退，避免一次性<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>整个系统。</span>约束一旦引入就应配套监控与文档，使后来者理解其存在理由与边界；若试点证明收益不足，应回退而非维护沉没成本。选型不是一次性事件，而是随系统成长反复校准的过程。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row gain"><div class="h">收益 · 正确姿势</div><div class="b"><p>风格是约束而非答案：约束带来属性的同时必然制造挑战，且同一风格在不同子域收益不同，不存在普适最优。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例：为追求「架构纯洁」而全局套用微服务或事件驱动，会引入建置、延迟、最终一致性与可管理性成本，在团队尚无成熟 DevOps 实践时尤为危险；反之过早统一为单体，则可能在规模到来时形成难以拆除的耦合。</p><p>另一个反例是只比较风格的优点而忽略运维、团队与数据一致性的隐含代价，使选型在落地<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>失败。</p><p>第三个反例是照搬他人成功案例而不核对其语境，忽视规模、团队与业务节奏差异；第四个反例是把风格当作招聘或宣传标签，先决定要用某技术再倒推架构，使决策被工具绑架。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>选型的最终判据是系统在真实语境下是否更易达到目标质量属性，而非是否符合某种风格教条；一旦语境变化，应重新评估而非维护旧结论。</li><li>风格没有永恒的正确，只有当下的适配。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">MTH-G-02</span><span class="nm">质量属性场景与ATAM</span></span><span class="arw">→</span><span class="step cur"><span class="id">MTH-G-03</span><span class="nm">架构风格选择方法</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：按质量属性选风格与按领域模型划边界的依据存在张力</caption><thead><tr><th>对照维度</th><th>架构风格选择方法</th><th>领域驱动战略设计</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>架构风格选择方法 · Architectural Style Selection</td><td>领域驱动战略设计 · DDD Strategic Design</td></tr><tr><td class="k">核心定义（原文）</td><td>以质量属性场景为判据，把候选架构风格（分层、管道-过滤器、事件驱动、微服务等）的组件-连接件约束映射到属性收益与代价，在具体子域上择优而非追求普适最优的选型方法。</td><td>以限界上下文显式划定模型适用边界、以<a class="term" href="../14-views/glossary.html#g-033" title="ubiquitous language (DDD) — 单一有界上下文内、贯穿团队讨论与代码的共享语言。">通用语言</a>在单个上下文内统一团队与代码的表达，并通过上下文映射管理跨上下文关系的领域建模战略方法。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>架构风格定义一类系统的结构组织模式：确定可用的组件与连接件词汇表及其组合约束，符合约束会带来特定属性，同时制造相应代价。</td><td>大型系统的领域模型无法全局一致：同一概念在不同业务语境中含义不同，强行统一会产生歧义与耦合。</td></tr><tr><td class="k">对照关系</td><td>按质量属性选风格与按领域模型划边界的依据存在张力（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例：为追求「架构纯洁」而全局套用微服务或事件驱动，会引入建置、延迟、最终一致性与可管理性成本，在团队尚无成熟 DevOps 实践时尤为危险；反之过早统一为单体，则可能在规模到来时形成难以拆除的耦合。另一个反例是只比较风格的优点而忽略运维、团队与数据一致性的隐含代价，使选型在落地阶段失败。第三个反例是照搬他人成功案例而不核对其语境，忽视规模、团队与业务节奏差异；第四个反例是把风格当作招聘或宣传标签，先决定要用某技术再倒推架构，使决策被工具绑架。</td><td>反例：不做上下文划分就让多个团队共享一个大模型，导致含义漂移、改一处而动全身；或把限界上下文数量机械等同于微服务数量，无视团队协作与数据一致性成本。第三个反例是只做建模仪式而不把通用语言落到代码与讨论中，使 DDD 退化为文档表演，徒增维护负担却无边界收益。第四个反例是领域专家缺席，模型由技术团队闭门臆造，边界与语言均偏离真实业务；第五个反例是把战术模式当战略设计，只堆砌实体与仓储而不先厘清边界，导致模型虽精致却位置错误。</td></tr><tr><td class="k">处置要点（原文）</td><td>从业务能力与变更模式出发划分候选边界，结合团队结构（康威定律）与运维成熟度评估可行性；用 ATAM 的敏感点与权衡点识别每种风格在具体场景下的关键代价；决策结果用 ADR 记录理由与被否决的风格。</td><td>以事件风暴等协作建模活动提炼通用语言与上下文边界；把上下文边界与团队边界、<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>或服务边界对齐（逆康威或康威对齐）；用防腐层隔离外部或遗留模型，避免污秽模型渗入核心域；将战略设计与<a class="term" href="../14-views/glossary.html#g-041" title="information hiding — Parnas 分解判据：每个模块隐藏一个「困难或可能变化的设计决策」（secret），接口只揭示尽量少的内部工作。">信息隐藏</a>、模块化边界判据结合，使边界沿变化原因而非技术分层对齐，从而降低变更传播。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-01 · 2 跳派生：当前节点 → MTH-G-01 → MTH-G-05</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → ESS-O-02 → ESS-G-05</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-05 · 2 跳派生：当前节点 → ESS-O-02 → ESS-G-03</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → ESS-O-02 → ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-09 · 2 跳派生：当前节点 → MTH-G-01 → MTH-G-05</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-10 · 2 跳派生：当前节点 → MTH-G-01 → MTH-G-05</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div><div class="case-card"><span class="id">CAS-X-11 · 2 跳派生：当前节点 → ESS-O-02 → ESS-G-05</span><h4>Hermes 七层架构总览</h4><p>对八千余文件的工业级 AI Agent 项目做七层架构总览逆向，揭示其「越用越聪明」的自进化闭环如何在层间传导的控制型架构案例。</p></div><div class="case-card"><span class="id">CAS-X-12 · 2 跳派生：当前节点 → ESS-O-02 → MTH-O-03</span><h4>MCP 四件套选型对比</h4><p>对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → MTH-G-01 → MTH-G-05</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → MTH-G-01 → MTH-G-05</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → ESS-O-02 → MTH-O-05</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>PAP-007、BK-009、BK-010、BK-014、BK-016</div><div class="r"><span class="k">入口链接</span><a href="https://martinfowler.com/architecture/" target="_blank" rel="noopener">https://martinfowler.com/architecture/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：存在普遍最优的架构风格</span><br>核验结论：每种风格在带来期望属性的同时制造代价，须按子域或限界上下文判断收益是否大于代价，缺少普适最优解　<span class="k">[PAP-007]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（6 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>← MTH-G-01</td><td>架构决策记录<br><span style="color:var(--dim);font-size:12px">E-210</span></td><td>风格选型结果以 ADR 记录理由与被否决项</td></tr><tr><td class="k">对照</td><td>→ MTH-G-04</td><td>领域驱动战略设计<br><span style="color:var(--dim);font-size:12px">E-213</span></td><td>按质量属性选风格与按领域模型划边界的依据存在张力</td></tr><tr><td class="k">依据推导</td><td>→ ESS-O-02</td><td>架构即权衡<br><span style="color:var(--dim);font-size:12px">E-203</span></td><td>风格选择依质量属性权衡而非对错</td></tr><tr><td class="k">促成</td><td>← MTH-G-06</td><td>效用树与敏感点权衡点分析<br><span style="color:var(--dim);font-size:12px">E-731</span></td><td>敏感点与权衡点分析为架构风格选型提供判据</td></tr><tr><td class="k">实现</td><td>← TEC-G-03</td><td>Azure 架构中心<br><span style="color:var(--dim);font-size:12px">E-883</span></td><td>Azure 风格目录指导架构风格选择</td></tr><tr><td class="k">前置依赖</td><td>← MTH-G-02</td><td>质量属性场景与ATAM<br><span style="color:var(--dim);font-size:12px">E-209</span></td><td>质量属性场景与评估是风格权衡选型的前置分析</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

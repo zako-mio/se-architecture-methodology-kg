@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>团队拓扑四类型 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>团队拓扑四类型</span></div><div class="meta">methodology · N · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>团队拓扑四类型</h1><div class="en">Four Team Topologies</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">N · 横切·团队与康威</span><span class="badge th">团队与康威</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">把团队设计约束为四种基本形态——对齐价值流的团队、教练<a class="term" href="../14-views/glossary.html#g-135" title="enabling team — 通过指导/教练帮助流对齐团队克服障碍、提升能力的团队（Facilitation 交互）。">赋能团队</a>、<a class="term" href="../14-views/glossary.html#g-136" title="complicated-subsystem team — 负责需大量专业知识的子系统，以降低其他团队认知负荷（X-as-a-Service 交互）。">复杂子系统团队</a>与<a class="term" href="../14-views/glossary.html#g-137" title="platform team — 为流对齐团队提供自服务内部产品/平台以加速交付、降低认知负荷的团队。">平台团队</a>——借成熟模式引导快速流动，同时以有限类型抑制组织设计的随意性。</span></p></div><p class="note">别名：team topologies、四种团队类型、团队形态、stream-aligned　|　英文：Four Team Topologies　|　类型：方法 / pattern</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 678 678" role="img" aria-label="团队拓扑四类型 的 1-2 跳邻域关系图"><title>团队拓扑四类型 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="228.2" y1="-149.5" x2="-55.3" y2="-222.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：同态关系是团队-架构边界耦合的理论基础</title></line><line x1="0.4" y1="-117.5" x2="-55.3" y2="-222.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：认知负荷是划定团队边界的依据</title></line><line x1="228.2" y1="-149.5" x2="43.2" y2="-228.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：同态机制细化了组织即设计系统的论断</title></line><line x1="43.2" y1="-228.3" x2="0.4" y2="-117.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：组织设计须管理团队的认知负荷</title></line><line x1="122.9" y1="-74.6" x2="228.2" y2="-149.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：逆向康威操作依据组织-架构同态关系</title></line><line x1="0" y1="0" x2="0.4" y2="-117.5" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：团队拓扑四类型依据认知负荷约束</title></line><line x1="115.2" y1="47.3" x2="-55.3" y2="-222.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：交互模式设计依据团队边界耦合</title></line><line x1="-1.6" y1="134.1" x2="0.4" y2="-117.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：平台团队以降低认知负荷为目的</title></line><line x1="-212" y1="87.3" x2="43.2" y2="-228.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：交付效能指标度量组织作为设计系统的产出</title></line><line x1="-112.4" y1="47.4" x2="-55.3" y2="-222.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：团队边界治理依据边界耦合关系</title></line><line x1="122.9" y1="-74.6" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：逆向康威操作以团队拓扑为结构模板</title></line><line x1="0" y1="0" x2="115.2" y2="47.3" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：团队类型须以交互模式定义协作</title></line><line x1="-1.6" y1="134.1" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：平台团队是四类型之一的专门化</title></line><line x1="-1.6" y1="134.1" x2="115.2" y2="47.3" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：平台团队主要采用服务消费交互</title></line><line x1="-112.4" y1="47.4" x2="0" y2="0" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：边界治理以团队拓扑为参照</title></line><line x1="-212" y1="87.3" x2="-112.4" y2="47.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：交付效能指标为边界治理提供反馈信号</title></line><line x1="0" y1="0" x2="-112.4" y2="47.4" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：约束性模板与持续边界治理的张力</title></line><line x1="-1.6" y1="134.1" x2="115.2" y2="47.3" stroke="#c22836" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>张力冲突（conflicts）：平台服务化与高带宽协作需求的张力</title></line><line x1="-244" y1="-135.1" x2="-212" y2="87.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：交付指标的自动采集与仪表化落地</title></line><line x1="-122.8" y1="-74" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：规模化组织中落地团队拓扑四类型</title></line><line x1="-122.8" y1="-74" x2="-1.6" y2="134.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以最薄可行平台落地平台团队</title></line><line x1="-122.8" y1="-74" x2="-112.4" y2="47.4" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以流动信号持续校准团队边界</title></line><line x1="-244" y1="-135.1" x2="-122.8" y2="-74" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：度量反馈与团队拓扑落地协同</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">团队拓扑四类型<title>团队拓扑四类型（MTH-N-02）</title></text><circle cx="0.4" cy="-117.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="0.4" y="-98.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">认知负荷约束<title>认知负荷约束（ESS-N-04）</title></text><circle cx="122.9" cy="-74.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="122.9" y="-55.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">逆向康威操作<title>逆向康威操作（MTH-N-01）</title></text><circle cx="115.2" cy="47.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="115.2" y="66.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">团队交互模式<title>团队交互模式（MTH-N-03）</title></text><circle cx="-1.6" cy="134.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-1.6" y="153.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">平台团队与最薄可行平台<title>平台团队与最薄可行平台（MTH-N-04）</title></text><circle cx="-112.4" cy="47.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="-112.4" y="66.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">团队边界治理<title>团队边界治理（MTH-N-06）</title></text><circle cx="-122.8" cy="-74" r="9.0" fill="#c98a3a" stroke="none"/><text x="-122.8" y="-55" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">团队拓扑落地与规模化<title>团队拓扑落地与规模化（TEC-N-02）</title></text><circle cx="228.2" cy="-149.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="228.2" y="-133.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">组织-架构同态<title>组织-架构同态（ESS-N-02）</title></text><circle cx="-55.3" cy="-222.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-55.3" y="-206.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">团队边界与架构边界耦合<title>团队边界与架构边界耦合（ESS-N-03）</title></text><circle cx="-212" cy="87.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-212" y="103.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DORA 交付效能指标<title>DORA 交付效能指标（MTH-N-05）</title></text><circle cx="-244" cy="-135.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-244" y="-119.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">交付效能度量与仪表化<title>交付效能度量与仪表化（TEC-N-01）</title></text><circle cx="43.2" cy="-228.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="43.2" y="-212.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">组织即设计系统<title>组织即设计系统（ESS-N-05）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 6 个直接邻接、外环 5 个二跳节点，共 12 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">组织设计若无约束，容易陷入按职能、按层级或按项目随意划分的惯性，制造大量交接与协调。</span>团队拓扑四类型提供一组经过归纳的基本形态，把团队设计从无边界选择收敛到有限模板，使每种团队都有清晰的目标、职责与成功判据。其价值不在于穷尽现实，而在于用约束迫使设计者认真回答：这个团队到底为谁创造什么价值？它是对齐价值流、赋能、承担复杂子系统还是提供平台？如果都不属于，是否说明职责边界出了问题。约束本身就是模型有用之处。这种约束也便于沟通：当每个人都知道其他团队承担何种形态，跨团队预期与协作方式就有了共同语言。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">四类团队各有侧重。</span>对齐价值流的团队对齐单一业务价值流，端到端负责，通常无向其他团队的交接；赋能团队通过指导与教练帮助前者克服障碍、发现缺失能力；复杂子系统团队专攻需要大量专业知识的子系统，以封装复杂度；平台团队把通用能力做成可自助使用的内部产品，加速其他团队交付。四者并非平级排列，而是围绕价值流组合：对齐价值流的团队是主体，其余三类以不同方式为它服务。不同类型对应不同的成功信号与协作方式，混用或残缺都会削弱效果。四类型并不规定团队规模与管理方式，而是规定其相对价值流的职责关系；同一类型在不同组织可有不同实现。四类各有清晰的判据与边界。<span class="hl">对齐价值流的团队对齐单一业务价值流、端到端负责从需求到<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>的全过程，通常不向其他团队交接，规模保持精简，并以长期存在来积累领域知识；赋能团队本身不承担交付主责，而是以教练与指导帮助前者补齐能力、扫清障碍，目标是让对方不再依赖；复杂子系统团队把需要深厚专业知识的子系统封装起来，使使用方可以通过简单接口获得其价值；平台团队则把重复出现的通用能力做成自助式的内部产品，支撑上面几类团队快速流动。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地时先识别价值流，围绕价值流建立端到端负责的团队，使其拥有从需求到运行的完整职责，减少交接。</span>对团队普遍缺失的能力，设立赋能团队以短周期方式提升其自主性，而非长期代劳。对需要深度专业知识的子系统，建立复杂子系统团队并定义清晰接口。对重复出现的通用能力，建立平台团队并以产品方式经营，追求适度而非完备。应把团队类型当作约束模板而非标签：定期核对每个团队是否仍承担其类型应有的职责，避免类型漂移与职责重叠。当某个团队长期无法归入任何类型时，通常说明存在职责重叠、边界模糊或未被识别的能力缺口，应优先澄清，而不是新增类型来回避问题。实践上应先识别价值流，再围绕它建立主体团队，使每块业务能力有明确的端到端所有者；随后用最小的补充团队去补齐系统性缺口：能力普遍不足时设赋能团队，专业难度过高时设复杂子系统团队，通用能力重复建设时设平台团队。四类团队的关系会随成熟度变化，例如平台能力成熟后可减少高带宽协作。还应把这一约束与按价值而非按部门组织工作的原则对齐，使团队划分服务于价值流动。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row gain"><div class="h">收益 · 正确姿势</div><div class="b"><p>若只套用四类团队的名称而不改变协作方式、所有权与激励，组织图虽变而实际工作方式未变，收益十分有限；若把复杂组织硬塞进四类，会掩盖大量中间形态与临时协作。</p></div></div><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>过度专门化会制造团队依赖，反而增加协调成本；对齐价值流的团队若被赋予过多职责，会陷入认知过载。</p><p>团队类型也不是越细分越好：过度专门化会制造相互依赖，反而抬高协调成本。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是机械照搬四类型标签而不改变协作与激励，组织图变了而实际工作方式未变；反例之二是把平台团队做成审批与管控中心，使其从加速器变成瓶颈。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>四类型是约束性启发，而非现实穷尽。</li><li>只用其中一部分（例如只套用团队类型而不配套交互模式与<a class="term" href="../14-views/glossary.html#g-139" title="cognitive load — 团队能承载的复杂度有限，每个新增工具/职责/域都消耗心智带宽；平台首要价值即降低它。">认知负荷</a>管理）收效有限；把复杂组织硬塞进四类，会掩盖真实的中间形态与临时协作。</li><li>因此应以流动与认知负荷的实际信号判断约束是否有效。</li><li>它的用法是提供共同语言与约束，而非替代对具体组织语境的判断；它帮助提问，但不直接给出答案。</li><li>最需避免的是把约束变成标签。</li><li>因此它应被当作一组用于提问与收敛选择的参考，而不是对现实组织穷尽分类的答案。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">MTH-N-01</span><span class="nm">逆向康威操作</span></span><span class="arw">→</span><span class="step cur"><span class="id">MTH-N-02</span><span class="nm">团队拓扑四类型</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：约束性模板与持续边界治理的张力</caption><thead><tr><th>对照维度</th><th>团队拓扑四类型</th><th>团队边界治理</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>团队拓扑四类型 · Four Team Topologies</td><td>团队边界治理 · Team Boundary Governance</td></tr><tr><td class="k">核心定义（原文）</td><td>把团队设计约束为四种基本形态——对齐价值流的团队、教练赋能团队、复杂子系统团队与平台团队——借成熟模式引导快速流动，同时以有限类型抑制组织设计的随意性。</td><td>把团队边界视为需要持续校准的活对象：以价值流、所有权、认知负荷与交付信号为依据，周期性评估并调整边界与交互方式，防止边界随组织惯性僵化或频繁漂移。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>组织设计若无约束，容易陷入按职能、按层级或按项目随意划分的惯性，制造大量交接与协调。</td><td>团队边界一旦设定，往往被当作固定事实，而实际的价值流、依赖关系与技术形态持续变化。</td></tr><tr><td class="k">对照关系</td><td>约束性模板与持续边界治理的张力（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例之一是机械照搬四类型标签而不改变协作与激励，组织图变了而实际工作方式未变；反例之二是把平台团队做成审批与管控中心，使其从加速器变成瓶颈。</td><td>反例之一是把边界治理变成定期重组的借口，使组织持续动荡；反例之二是只采集信号而不采取行动，让治理沦为报告。最典型的失败有两种：一是把治理变成定期重组的借口，使组织持续动荡，团队因担心随时被调整而不敢投资长期能力；二是只采集信号却不采取行动，让治理沦为一份无人使用的报告。</td></tr><tr><td class="k">处置要点（原文）</td><td>落地时先识别价值流，围绕价值流建立端到端负责的团队，使其拥有从需求到运行的完整职责，减少交接。</td><td>实践上应建立轻量的边界健康检查：定期列出跨团队依赖与共同修改热点，识别成本最高的边界；为每个边界明确所有者与交互方式，并约定复核周期。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-030、WEB-045、VEN-039</div><div class="r"><span class="k">入口链接</span><a href="https://teamtopologies.com/key-concepts" target="_blank" rel="noopener">https://teamtopologies.com/key-concepts</a>　<a href="https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale" target="_blank" rel="noopener">https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：四种团队类型是组织设计的完整分类，现实团队必须归入其一</span><br>核验结论：四类型是约束性模板而非穷尽分类，复杂组织远超此模型，其价值在于限制随意性并引导流动　<span class="k">[WEB-045]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（7 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">对照</td><td>→ MTH-N-06</td><td>团队边界治理<br><span style="color:var(--dim);font-size:12px">E-658</span></td><td>约束性模板与持续边界治理的张力</td></tr><tr><td class="k">依赖关联</td><td>→ MTH-N-03</td><td>团队交互模式<br><span style="color:var(--dim);font-size:12px">E-653</span></td><td>团队类型须以交互模式定义协作</td></tr><tr><td class="k">依赖关联</td><td>← MTH-N-06</td><td>团队边界治理<br><span style="color:var(--dim);font-size:12px">E-656</span></td><td>边界治理以团队拓扑为参照</td></tr><tr><td class="k">依据推导</td><td>→ ESS-N-04</td><td>认知负荷约束<br><span style="color:var(--dim);font-size:12px">E-647</span></td><td>团队拓扑四类型依据认知负荷约束</td></tr><tr><td class="k">实现</td><td>← TEC-N-02</td><td>团队拓扑落地与规模化<br><span style="color:var(--dim);font-size:12px">E-933</span></td><td>规模化组织中落地团队拓扑四类型</td></tr><tr><td class="k">前置依赖</td><td>← MTH-N-01</td><td>逆向康威操作<br><span style="color:var(--dim);font-size:12px">E-652</span></td><td>逆向康威操作以团队拓扑为结构模板</td></tr><tr><td class="k">细化</td><td>← MTH-N-04</td><td>平台团队与最薄可行平台<br><span style="color:var(--dim);font-size:12px">E-654</span></td><td>平台团队是四类型之一的专门化</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

@@ -1,0 +1,479 @@
+{
+  "topic": "软件工程 / 架构设计经典著作候选书单 + 可得性核实",
+  "generated_by": "技术文献选品研究员",
+  "generated_date": "2026-09-10",
+  "copyright_notice": "书籍本体受版权保护，仅可入本地语料层，永不进公开仓库。公开库只承载消化重组后的知识与方法论。本清单不下载、不写入任何书籍全文。",
+  "availability_legend": {
+    "free-official": "官方免费合法在线阅读/下载（给出 URL）",
+    "paid": "需购买（给出官方购买渠道）",
+    "user-copy": "需用户提供本地副本",
+    "unknown": "待核"
+  },
+  "groups": [
+    {
+      "domain": "软件工程通论",
+      "books": [
+        {
+          "title_cn": "Google 软件工程",
+          "title_en": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+          "author": "Titus Winters, Tom Manshreck, Hyrum Wright (Google)",
+          "edition": "1st",
+          "year": 2020,
+          "why": "Google 大规模工程实践一手总结，覆盖时间/规模/权衡三大主题，是'持续演进式软件工程'最权威的业界文本；官方免费在线全文。",
+          "tier": "S2",
+          "availability": "free-official",
+          "url": "https://abseil.io/resources/swe-book",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "人月神话",
+          "title_en": "The Mythical Man-Month: Essays on Software Engineering",
+          "author": "Frederick P. Brooks Jr.",
+          "edition": "Anniversary Edition (2nd)",
+          "year": 1995,
+          "why": "软件工程史上最具影响力的随笔集，提出'人月不可互换''没有银弹''概念完整性''外科手术团队'等奠基性论断，至今仍是项目管理与工程组织的第一经典。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000009376",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "没有银弹——软件工程的本质与偶然",
+          "title_en": "No Silver Bullet: Essence and Accidents of Software Engineering",
+          "author": "Frederick P. Brooks Jr.",
+          "edition": "Original essay IFIP 1986；收录于《人月神话》周年纪念版",
+          "year": 1986,
+          "why": "区分软件'本质复杂度'与'偶然复杂度'的经典论文，是判断一切'银弹式'技术宣称的分析框架；作为《人月神话》周年版的第16章再版。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000009376",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "代码大全（第2版）",
+          "title_en": "Code Complete: A Practical Handbook of Software Construction",
+          "author": "Steve McConnell",
+          "edition": "2nd",
+          "year": 2004,
+          "why": "软件构建（construction）领域最系统、引用最广的工程手册，覆盖变量/控制流/防御式编程/重构/调试，以实证研究支撑建议，长期作为 SE 课程参考书。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.microsoftpressstore.com/store/code-complete-9780735619678",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "软件工程（原书第10版）",
+          "title_en": "Software Engineering",
+          "author": "Ian Sommerville",
+          "edition": "10th",
+          "year": 2015,
+          "why": "全球使用最广的软件工程本科教材之一，系统性覆盖需求、设计、开发、测试、演化、项目管理，可与 SWEBOK 知识体系互为印证。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/software-engineering/P200000003290",
+          "priority": "可选"
+        },
+        {
+          "title_cn": "程序员修炼之道：从小工到专家（20周年纪念版）",
+          "title_en": "The Pragmatic Programmer: Your Journey to Mastery",
+          "author": "David Thomas, Andrew Hunt",
+          "edition": "20th Anniversary Edition (2nd)",
+          "year": 2019,
+          "why": "面向工程实践的经典，涵盖 DRY、正交性、契约式设计、自动化、知识投资等被广泛引用的原则，影响了一代工程文化。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "人件（第3版）",
+          "title_en": "Peopleware: Productive Projects and Teams",
+          "author": "Tom DeMarco, Timothy Lister",
+          "edition": "3rd",
+          "year": 2013,
+          "why": "软件工程中'人'这一维度的经典，关于团队、办公环境、心流与生产率的社会/管理视角奠基文本。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/peopleware-productive-projects-and-teams/P200000009378",
+          "priority": "可选"
+        }
+      ]
+    },
+    {
+      "domain": "架构设计",
+      "books": [
+        {
+          "title_cn": "架构整洁之道",
+          "title_en": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+          "author": "Robert C. Martin",
+          "edition": "1st",
+          "year": 2017,
+          "why": "把 SOLID 原则提升到组件与架构层，提出'依赖规则''稳定依赖''稳定抽象'，是整洁架构/六边形架构体系的高影响力文本。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "软件设计哲学（第2版）",
+          "title_en": "A Philosophy of Software Design",
+          "author": "John Ousterhout",
+          "edition": "2nd",
+          "year": 2021,
+          "why": "以'降低复杂度'为核心，提出深层模块、信息隐藏、异常消除、设计两次等可操作原则，作者为斯坦福教授/Tcl 作者，学术与工程兼备。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://web.stanford.edu/~ouster/cgi-bin/book.php",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "软件架构实践（原书第4版）",
+          "title_en": "Software Architecture in Practice",
+          "author": "Len Bass, Paul Clements, Rick Kazman",
+          "edition": "4th",
+          "year": 2021,
+          "why": "SEI（卡内基梅隆软件工程研究所）出品，架构质量属性/架构战术/ATAM/文档化的权威教科书，理论与实践结合最紧密。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000009173",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "软件架构基础（原书第2版）",
+          "title_en": "Fundamentals of Software Architecture: A Modern Engineering Approach",
+          "author": "Mark Richards, Neal Ford",
+          "edition": "2nd",
+          "year": 2025,
+          "why": "以数据化方式定义架构特征（-ilities）、组件划分、架构风格与决策，含'架构师定律/一切皆权衡'；2025年3月出版第2版，新增工程化方法。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "构建演进式架构（第2版）",
+          "title_en": "Building Evolutionary Architectures: Automated Software Governance",
+          "author": "Neal Ford, Rebecca Parsons, Patrick Kua, Pramod Sadalage",
+          "edition": "2nd",
+          "year": 2022,
+          "why": "提出适应度函数（fitness functions）与自动化演进治理，是'架构随时间演进'理念的权威来源，第2版扩展了自动化治理内容。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "企业应用架构模式",
+          "title_en": "Patterns of Enterprise Application Architecture",
+          "author": "Martin Fowler",
+          "edition": "1st",
+          "year": 2002,
+          "why": "企业级分层架构与数据映射模式的总汇（Repository/Unit of Work/Data Mapper/MVC 等），是理解现代框架设计的基础词源。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://martinfowler.com/books/eaa.html",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "软件架构文档化（第2版）",
+          "title_en": "Documenting Software Architectures: Views and Beyond",
+          "author": "Paul Clements, Felix Bachmann, Len Bass, et al.",
+          "edition": "2nd",
+          "year": 2010,
+          "why": "SEI'Views and Beyond'方法权威著作，规定视图类型、视图包、文档模板，是架构文档化的标准参考。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/documenting-software-architectures-views-and-beyond/P200000009174",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "软件架构：难点与权衡",
+          "title_en": "Software Architecture: The Hard Parts",
+          "author": "Neal Ford, Mark Richards, Pramod Sadalage, Zhamak Dehghani",
+          "edition": "1st",
+          "year": 2021,
+          "why": "聚焦分布式架构中的取舍决策（服务粒度、事务、数据所有权、契约），为现代架构权衡提供结构化方法。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/software-architecture-the/9781492086888/",
+          "priority": "可选"
+        },
+        {
+          "title_cn": "软件架构师电梯",
+          "title_en": "The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise",
+          "author": "Gregor Hohpe",
+          "edition": "1st",
+          "year": 2020,
+          "why": "从'机房到董事会'的架构师角色与沟通视角，补充技术之外的组织/战略维度。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/the-software-architect/9781492077541/",
+          "priority": "可选"
+        }
+      ]
+    },
+    {
+      "domain": "领域驱动设计",
+      "books": [
+        {
+          "title_cn": "领域驱动设计：软件核心复杂性应对之道",
+          "title_en": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+          "author": "Eric Evans",
+          "edition": "1st",
+          "year": 2003,
+          "why": "DDD 的奠基之作，提出 ubiquitous language、bounded context、aggregate、repository 等核心概念，是战略/战术设计的共同词源。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/domain-driven-design-tackling-complexity-in-the-heart-of-software/P200000009134",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "领域驱动设计参考（免费精炼版）",
+          "title_en": "Domain-Driven Design Reference: Definitions and Pattern Summaries",
+          "author": "Eric Evans",
+          "edition": "Reference PDF",
+          "year": 2014,
+          "why": "作者本人发布的 DDD 模式与术语速查，官方免费 PDF，作为原著的术语索引与交叉验证源。",
+          "tier": "S2",
+          "availability": "free-official",
+          "url": "https://domainlanguage.com/ddd/reference/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "实现领域驱动设计",
+          "title_en": "Implementing Domain-Driven Design",
+          "author": "Vaughn Vernon",
+          "edition": "1st",
+          "year": 2013,
+          "why": "DDD 的工程落地权威续作，用完整示例讲解聚合设计、上下文映射、事件驱动与重构，弥补 Evans 原著的实施缺口。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/implementing-domain-driven-design/P200000009135",
+          "priority": "建议"
+        }
+      ]
+    },
+    {
+      "domain": "代码整洁 / 重构 / 遗留系统",
+      "books": [
+        {
+          "title_cn": "代码整洁之道",
+          "title_en": "Clean Code: A Handbook of Agile Software Craftsmanship",
+          "author": "Robert C. Martin",
+          "edition": "1st",
+          "year": 2008,
+          "why": "函数/命名/注释/格式等可读性实践的行业标杆文本，广泛作为代码质量培训参考；存在一定争议，但影响力与引用度极高。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000009283",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "重构：改善既有代码的设计（第2版）",
+          "title_en": "Refactoring: Improving the Design of Existing Code",
+          "author": "Martin Fowler (with Kent Beck)",
+          "edition": "2nd",
+          "year": 2018,
+          "why": "重构手法的权威目录（含 smells 与 mechanics），第2版改用 JavaScript 示例并新增函数式重构，是重构术语的事实标准。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/P200000009306",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "修改遗留代码的有效方法",
+          "title_en": "Working Effectively with Legacy Code",
+          "author": "Michael Feathers",
+          "edition": "1st",
+          "year": 2004,
+          "why": "把遗留代码定义为'没有测试的代码'，系统给出接缝（seams）、依赖打破与特征测试（characterization tests）手法，是遗留系统改造的权威手册。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/P200000009308",
+          "priority": "必入"
+        }
+      ]
+    },
+    {
+      "domain": "数据密集型 / 分布式",
+      "books": [
+        {
+          "title_cn": "数据密集型应用系统设计（第2版）",
+          "title_en": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+          "author": "Martin Kleppmann, Chris Riccomini",
+          "edition": "2nd",
+          "year": 2026,
+          "why": "分布式数据系统的事实标准读本，覆盖存储引擎、复制、分区、事务、共识、批流处理；第2版于2026年2月出版，新增 AI/云原生内容并重构旧章节。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "发布！软件设计与部署（第2版）",
+          "title_en": "Release It! Design and Deploy Production-Ready Software",
+          "author": "Michael T. Nygard",
+          "edition": "2nd",
+          "year": 2018,
+          "why": "稳定性反模式（integration points、cascading failures、circuit breaker、bulkhead）与生产就绪设计的经典，影响微服务韧性设计。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+          "priority": "建议"
+        }
+      ]
+    },
+    {
+      "domain": "运维 / 可靠性 / 交付",
+      "books": [
+        {
+          "title_cn": "Google SRE 运维解密",
+          "title_en": "Site Reliability Engineering: How Google Runs Production Systems",
+          "author": "Betsy Beyer, Chris Jones, Jennifer Petoff, Niall Richard Murphy (Google)",
+          "edition": "1st",
+          "year": 2016,
+          "why": "SRE 学科奠基之作，提出 SLI/SLO/错误预算、减少琐事、发布工程等实践；官方免费在线全文。",
+          "tier": "S2",
+          "availability": "free-official",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "SRE 工作手册",
+          "title_en": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+          "author": "Betsy Beyer, Niall Richard Murphy, David K. Rensin, et al. (Google)",
+          "edition": "1st",
+          "year": 2018,
+          "why": "SRE 落地操作手册，给出 SLO 编写、错误预算策略、on-call 等可执行模板；官方免费在线全文。",
+          "tier": "S2",
+          "availability": "free-official",
+          "url": "https://sre.google/workbook/table-of-contents/",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "DevOps 实践指南（第2版）",
+          "title_en": "The DevOps Handbook: How to Create World-Class Agility, Reliability, and Security in Technology Organizations",
+          "author": "Gene Kim, Jez Humble, Patrick Debois, John Willis, Nicole Forsgren",
+          "edition": "2nd",
+          "year": 2021,
+          "why": "DevOps 三大路径（flow/feedback/continual learning）的实践总纲，第2版新增15个案例与研究成果。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://itrevolution.com/product/the-devops-handbook-second-edition/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "持续交付：发布可靠软件的系统方法",
+          "title_en": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+          "author": "Jez Humble, David Farley",
+          "edition": "1st",
+          "year": 2010,
+          "why": "持续交付/部署流水线的奠基著作，定义部署流水线、构建与测试自动化、低风险发布模式。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/P200000009253",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "加速：企业数字化转型的科学",
+          "title_en": "Accelerate: The Science of Lean Software and DevOps",
+          "author": "Nicole Forsgren, Jez Humble, Gene Kim",
+          "edition": "1st",
+          "year": 2018,
+          "why": "以 DORA 实证研究量化软件交付绩效（DORA 四指标）与组织绩效关系，是'用数据谈工程效能'的权威来源。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://itrevolution.com/product/accelerate/",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "团队拓扑：组织业务与技术团队以加速流动",
+          "title_en": "Team Topologies: Organizing Business and Technology Teams for Fast Flow",
+          "author": "Matthew Skelton, Manuel Pais",
+          "edition": "1st",
+          "year": 2019,
+          "why": "提出四种团队类型与三种交互模式（Conway 定律的现代操作化），是组织架构与软件架构对齐的权威框架。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://itrevolution.com/product/team-topologies/",
+          "priority": "建议"
+        },
+        {
+          "title_cn": "十二要素应用",
+          "title_en": "The Twelve-Factor App",
+          "author": "Adam Wiggins (Heroku)",
+          "edition": "Methodology (web)",
+          "year": 2011,
+          "why": "云原生/Heroku 时代应用架构的奠基方法论（12 项原则），是构建可移植 SaaS 的经典规范；官方免费。",
+          "tier": "S2",
+          "availability": "free-official",
+          "url": "https://12factor.net/",
+          "priority": "必入"
+        }
+      ]
+    },
+    {
+      "domain": "设计模式 / 企业架构",
+      "books": [
+        {
+          "title_cn": "设计模式：可复用面向对象软件的基础",
+          "title_en": "Design Patterns: Elements of Reusable Object-Oriented Software",
+          "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides (GoF)",
+          "edition": "1st",
+          "year": 1994,
+          "why": "设计模式运动的开山之作（23 个模式），奠定了面向对象设计共享词汇与分类法，影响至今所有模式语言。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009144",
+          "priority": "必入"
+        },
+        {
+          "title_cn": "企业集成模式",
+          "title_en": "Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions",
+          "author": "Gregor Hohpe, Bobby Woolf",
+          "edition": "1st",
+          "year": 2003,
+          "why": "消息中间件与集成架构的模式总汇（65 个模式），是 Apache Camel/Spring Integration 等框架的共同词源；官方站点免费提供模式概览。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.enterpriseintegrationpatterns.com/",
+          "priority": "建议"
+        }
+      ]
+    },
+    {
+      "domain": "微服务（补充域）",
+      "books": [
+        {
+          "title_cn": "构建微服务（第2版）",
+          "title_en": "Building Microservices: Designing Fine-Grained Systems",
+          "author": "Sam Newman",
+          "edition": "2nd",
+          "year": 2021,
+          "why": "微服务架构的权威导论，覆盖服务拆分、进程间通信、部署、测试与安全；第2版更新云原生与可观测性内容。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/",
+          "priority": "可选"
+        },
+        {
+          "title_cn": "微服务模式",
+          "title_en": "Microservices Patterns: With Examples in Java",
+          "author": "Chris Richardson",
+          "edition": "1st",
+          "year": 2018,
+          "why": "以模式语言系统组织微服务架构（分解、数据一致性/Saga、查询/CQRS、部署），工程落地性强。",
+          "tier": "S2",
+          "availability": "paid",
+          "url": "https://www.manning.com/books/microservices-patterns",
+          "priority": "可选"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "可得性据 2026-09-10 实测：abseil.io、12factor.net、domainlanguage.com、enterpriseintegrationpatterns.com、aosabook.org 直连 200；sre.google 为 Google 域，需经代理 172.29.0.1:7890 访问（实测 200），境内直连可能超时。",
+    "教材级版本时效：FSA 第2版=2025-03；DDIA 第2版=2026-02（O'Reilly，Kleppmann+Riccomini 合著）；DevOps Handbook 第2版=2021-11；SAIP 最新为第4版=2021。",
+    "免费官方源（free-official）可直接作为知识库公开层引用链接；paid/user-copy 书本体仅供本地语料层，公开库须用消化重组后的知识。"
+  ]
+}

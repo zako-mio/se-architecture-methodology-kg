@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>度量与反馈闭环 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>度量与反馈闭环</span></div><div class="meta">methodology · O · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a><a href="#xref"><span class="n">附</span>对照资源</a></nav>
+<article>
+<header class="doc"><h1>度量与反馈闭环</h1><div class="en">Measurement and Feedback Loop</div><div class="badges"><span class="badge pr">P1</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">O · 方法论主干/跨域综合</span><span class="badge th">质量属性</span><span class="badge th">团队与康威</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">建立轻量、客观、可复现的评估体系与反馈闭环：用真实场景与基线度量、以多指标协同避免单点失真，并把度量接入持续执行与复测；同时警惕<a class="term" href="../14-views/glossary.html#g-147" title="Goodhart&#x27;s law — 当度量成为目标时它就不再是好度量；DORA 据此警示指标 gaming。">古德哈特定律</a>，防止指标一旦成为目标即被博弈。</span></p></div><p class="note">别名：0813 维度11 评估体系、度量与反馈、可测量才可优化、SLI 与 SLO、适应度函数闭环　|　英文：Measurement and Feedback Loop　|　类型：方法 / process</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-360 -341.3 714.6 687.5" role="img" aria-label="度量与反馈闭环 的 1-2 跳邻域关系图"><title>度量与反馈闭环 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="155.7" y1="-30.6" x2="190.1" y2="-148.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：属性可操作化是可评估可维护性的前提</title></line><line x1="285.2" y1="29" x2="155.7" y2="-30.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：战术映射依据质量属性须可操作化</title></line><line x1="-202.3" y1="-130.7" x2="190.1" y2="-148.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：可维护性评估以可维护性本质为判据</title></line><line x1="60.8" y1="156.5" x2="202.2" y2="202" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：覆盖与精度只能在本质复杂度不可消除的空间中选点</title></line><line x1="60.8" y1="156.5" x2="124.3" y2="57.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：代价不对称的取舍依据权衡不可消除</title></line><line x1="74.6" y1="-250.5" x2="124.3" y2="57.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突只能显式化与排序，无法消除</title></line><line x1="-54" y1="149" x2="124.3" y2="57.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：演化中的一致性取舍依据权衡不可消除</title></line><line x1="0" y1="0" x2="124.3" y2="57.1" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：度量与反馈是对取舍效果的检验</title></line><line x1="0" y1="0" x2="155.7" y2="-30.6" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：度量方法依据质量属性不可直接测量</title></line><line x1="-54" y1="149" x2="0" y2="0" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：增量演化治理依赖度量反馈闭环</title></line><line x1="0" y1="0" x2="60.8" y2="156.5" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：度量口径是覆盖与精度取舍的前置</title></line><line x1="60.8" y1="156.5" x2="0" y2="0" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：覆盖优先与度量精确控制之间存在张力</title></line><line x1="202.2" y1="202" x2="124.3" y2="57.1" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度不可消除支撑权衡不可消除</title></line><line x1="290.6" y1="-62.2" x2="155.7" y2="-30.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：效用树把不可直接测量的质量属性操作化为场景</title></line><line x1="268.1" y1="115.5" x2="124.3" y2="57.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：拒绝静态类型/契约优先是以类型安全换取低部署成本</title></line><line x1="-67.1" y1="282.2" x2="-54" y2="149" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以增量同步与契约替代全量重建的一致性治理</title></line><line x1="-163.7" y1="233.8" x2="-270.3" y2="120.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链与可再构建交付</title></line><line x1="-163.7" y1="233.8" x2="-228.8" y2="183.9" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以代码审查工具为解析对象的质量工程</title></line><line x1="-2.4" y1="-153.3" x2="-65.2" y2="-277.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：负反馈闭环作为系统核心结构</title></line><line x1="-2.4" y1="-153.3" x2="0" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：反思与评估环的度量反馈落地</title></line><line x1="-2.4" y1="-153.3" x2="74.6" y2="-250.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：反馈整定即质量属性冲突治理</title></line><line x1="100.8" y1="-128.1" x2="0" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控链与迭代反馈闭环</title></line><line x1="-105" y1="-129.5" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：交付度量平台实现持续反馈闭环</title></line><line x1="-136.5" y1="79" x2="-228.8" y2="183.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：静态分析平台为代码评审提供自动化检查信号</title></line><line x1="-136.5" y1="79" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：平台产出可度量指标并驱动反馈闭环</title></line><line x1="-136.5" y1="79" x2="-270.3" y2="120.4" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：质量门控把分析结果转化为变更准入判断</title></line><line x1="-283.5" y1="45.5" x2="-202.3" y2="-130.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为可维护性提供量化评估方法</title></line><line x1="-283.5" y1="45.5" x2="-296" y2="-36.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为技术债量化与偿还提供方法基础</title></line><line x1="-150" y1="-23.4" x2="-202.3" y2="-130.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务比率与评级把可维护性折算为可计算指标</title></line><line x1="-150" y1="-23.4" x2="-296" y2="-36.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务量化支撑按偿还优先级治理技术债</title></line><line x1="-150" y1="-23.4" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：债务度量指标纳入度量与反馈闭环</title></line><line x1="-283.5" y1="45.5" x2="-150" y2="-23.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="-136.5" y1="79" x2="-283.5" y2="45.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SonarQube 采用 SQALE 指标命名实现债务度量</title></line><line x1="-136.5" y1="79" x2="-150" y2="-23.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：平台提供技术债量化指标的计算与展示</title></line><line x1="-150" y1="-23.4" x2="-136.5" y2="79" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：度量指标是工具估算，不等于代码质量真值</title></line><line x1="-163.7" y1="233.8" x2="-136.5" y2="79" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以自动化代码审查工具为载体沉淀质量实践</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">度量与反馈闭环<title>度量与反馈闭环（MTH-O-11）</title></text><circle cx="-2.4" cy="-153.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="-2.4" y="-134.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">控制理论⊗Agent 设…<title>控制理论⊗Agent 设计（CAS-X-16）</title></text><circle cx="100.8" cy="-128.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="100.8" y="-109.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术知识中枢交付法<title>技术知识中枢交付法（CAS-X-17）</title></text><circle cx="155.7" cy="-30.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="155.7" y="-11.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量属性不可直接测量<title>质量属性不可直接测量（ESS-M-05）</title></text><circle cx="124.3" cy="57.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="124.3" y="76.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">权衡的不可消除性<title>权衡的不可消除性（ESS-O-03）</title></text><circle cx="60.8" cy="156.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="60.8" y="175.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">覆盖与精度的不对称权衡<title>覆盖与精度的不对称权衡（MTH-O-01）</title></text><circle cx="-54" cy="149" r="9.0" fill="#c98a3a" stroke="none"/><text x="-54" y="168" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">增量演化与一致性治理<title>增量演化与一致性治理（MTH-O-10）</title></text><circle cx="-136.5" cy="79" r="9.0" fill="#c98a3a" stroke="none"/><text x="-136.5" y="98" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">SonarQube 静态…<title>SonarQube 静态分析平台（TEC-H-01）</title></text><circle cx="-150" cy="-23.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="-150" y="-4.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="-105" cy="-129.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="-105" y="-110.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">交付效能度量与仪表化<title>交付效能度量与仪表化（TEC-N-01）</title></text><circle cx="202.2" cy="202" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="202.2" y="218" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">本质复杂度与偶然复杂度<title>本质复杂度与偶然复杂度（ESS-O-01）</title></text><circle cx="-270.3" cy="120.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-270.3" y="136.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量门控与持续集成<title>质量门控与持续集成（MTH-I-06）</title></text><circle cx="-228.8" cy="183.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-228.8" y="199.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码复审与可读性治理<title>代码复审与可读性治理（MTH-H-04）</title></text><circle cx="285.2" cy="29" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="285.2" y="45" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性战术映射方法<title>质量属性战术映射方法（MTH-M-01）</title></text><circle cx="-202.3" cy="-130.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-202.3" y="-114.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可维护性评估方法<title>可维护性评估方法（MTH-M-05）</title></text><circle cx="74.6" cy="-250.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="74.6" y="-234.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性冲突治理<title>质量属性冲突治理（MTH-O-05）</title></text><circle cx="-67.1" cy="282.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-67.1" y="298.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="-163.7" cy="233.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-163.7" y="249.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Open Code Re…<title>Open Code Review 图谱（CAS-X-15）</title></text><circle cx="-65.2" cy="-277.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-65.2" y="-261.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">度量驱动的反馈闭环<title>度量驱动的反馈闭环（ESS-K-04）</title></text><circle cx="190.1" cy="-148.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="190.1" y="-132.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可维护性本质<title>可维护性本质（ESS-M-01）</title></text><circle cx="290.6" cy="-62.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="290.6" y="-46.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">效用树与敏感点权衡点分析<title>效用树与敏感点权衡点分析（MTH-G-06）</title></text><circle cx="-296" cy="-36.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-296" y="-20.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债象限与偿还策略<title>技术债象限与偿还策略（MTH-L-03）</title></text><circle cx="-283.5" cy="45.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-283.5" y="61.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="268.1" cy="115.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="268.1" y="131.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 9 个直接邻接、外环 14 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">没有度量，任何调优都只是猜测；可测量才可优化。</span>但度量并非中立：任何指标都是对复杂现实的简化，单一指标既容易漏掉重要维度，也容易在成为目标后被博弈（古德哈特定律——当一个度量成为目标，它就不再是好度量）。因此评估体系的设计既要覆盖关键面向，又要保持对指标失真的警觉。反馈闭环的价值在于把「度量→判断→改进→复测」连成循环：只度量不行动等于没有度量，只改进不复测则无法确认效果。<span class="hl"><a class="term" href="../14-views/glossary.html#g-001" title="software engineering — 把系统化、规范化、可量化的方法应用于软件的开发、运行与维护（即把工程应用于软件）；产业口径补充为「跨时间编程 + 团队协作」。">软件工程</a>中可用的度量谱系很广——交付效能指标、<a class="term" href="../14-views/glossary.html#g-084" title="service level indicator (SLI) — 对服务水平某方面被谨慎定义的定量度量；推荐口径为「好事件数 / 总事件数」。">服务等级指标</a>与<a class="term" href="../14-views/glossary.html#g-087" title="error budget — 允许的不可靠度 = 100% − SLO，将「创新 vs 稳定」转为客观发布决策机制。">错误预算</a>、<a class="term" href="../14-views/glossary.html#g-112" title="architectural fitness function — 对某些架构特性提供客观完整性评估的机制；可用 tests/metrics/monitoring 实现，在流水线持续校验。">架构适应度函数</a>、场景化的<a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>评估——它们的共同要求是客观、可复现、与真实目标相关，并在语境中解读而非机械比大小。</span>度量是决策的输入，而非决策本身。度量的价值还取决于它是否与可行动的改进路径相连：无法据以采取行动的指标，只会增加信息负担而不改善系统。因此好的评估体系应同时回答两个问题：我们是否在度量正确的东西，以及度量结果是否真的促成了改变。若两者之一为否，再精确的指标也只是装饰；只有在度量、判断与行动形成稳定循环时，评估才真正转化为系统改进的能力。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">闭环沿四步持续运转。</span>其一，建立基线与判据：选取能反映真实使用或目标的典型场景与查询，先测得基线，使后续变化有参照。其二，多指标协同：用一组互补的指标同时约束不同面向（如吞吐与稳定性、检测灵敏度与误报），避免单点指标失真；关键处可采用多窗口、多阈值组合来平衡灵敏度与误报。<span class="hl">其三，持续执行：把检查嵌入流水线或<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>时持续运行，而非一次性评估，使退化在发生时即可见。</span>其四，闭环复测：依据度量结果改进，再以同一口径复测，确认改进真实有效；口径变更时须同步重算历史数据，保证趋势可比。整个循环以客观证据替代主观印象，把评估从周期性汇报转为持续校准。为防止指标失真，可让指标的使用者与承受者分离，或采用相互制衡的指标组合，使单一指标难以被单点操纵。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地时先为关键目标定义可度量口径与数据窗口，并测定基线；指标宜少而关键、可复现、可追溯到业务目标，避免面面俱到的指标堆砌淹没重点。</span><span class="hl">把<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>与质量约束写成可执行检查接入流水线，失败即阻断并可见。</span>为指标设定组合与阈值，关注其变化方向而非单点绝对值，并对异常设置告警与归因路径。度量结果应转化为具体行动：定位问题、实施改进、再复测验证，形成闭环；未转化为行动的度量应被舍弃以减少负担。定期复核度量口径是否仍在度量真正重要的问题，防止指标僵化或被博弈。把口径与判定规则与系统同版本管理，确保结论可复现。对可能被当作考核目标的指标保持警惕，辅以人工判断与多维证据，避免为优化数字而损害真实目标。定期回看指标与实际结果的关系：若某个指标长期与真实体验脱节，应修订或废弃它，而不是继续为数字优化。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row gain"><div class="h">收益 · 正确姿势</div><div class="b"><p>因此应以驱动决策为目的，聚焦少数高价值信号，把结果与真实目标对照验证，并承认度量的近似性——它适合发现趋势、排序优先级与检验改进，不适合排名或替代深入判断。</p></div></div><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>指标是现实的简化，任何单一指标都可能误导；采集与解读需要成本，过度度量会拖慢进展并制造虚假的精确感；更危险的是当度量被当作目标，团队会优化数字而非改善实质（Goodhart 定律），使评估失去意义。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是以单一瞬时错误率告警，召回高但误报频繁；反例之二是把 SLO 合规做成没有后果的 KPI，缺少错误预算政策；反例之三是跨异质对象比较指标，得出误导结论；反例之四是只度量不行动，或在口径变动后仍与旧数据比较。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>度量体系有内生局限。</li><li>度量服务于判断，不能代替判断。</li><li>还应警惕度量带来的行为扭曲：一旦团队知道被度量，行动会向指标靠拢，因此在设计指标时就应预判并规避可能的博弈路径。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step cur"><span class="id">MTH-O-11</span><span class="nm">度量与反馈闭环</span></span><span class="arw">→</span><span class="step"><span class="id">MTH-O-01</span><span class="nm">覆盖与精度的不对称权衡</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：覆盖优先与度量精确控制之间存在张力</caption><thead><tr><th>对照维度</th><th>度量与反馈闭环</th><th>覆盖与精度的不对称权衡</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>度量与反馈闭环 · Measurement and Feedback Loop</td><td>覆盖与精度的不对称权衡 · Coverage-Precision Asymmetric Tradeoff</td></tr><tr><td class="k">核心定义（原文）</td><td>建立轻量、客观、可复现的评估体系与反馈闭环：用真实场景与基线度量、以多指标协同避免单点失真，并把度量接入持续执行与复测；同时警惕古德哈特定律，防止指标一旦成为目标即被博弈。</td><td>在同一活动中，高覆盖（宁多勿漏）与高精度（宁缺毋滥）此消彼长；因漏失常不可补救而噪声多可过滤，代价不对称，故默认偏向覆盖，再以分层门控逐级精筛。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>没有度量，任何调优都只是猜测；可测量才可优化。</td><td>覆盖与精度的张力来自同一手段无法同时最大化两者：放宽判据可捕获更多真实目标（高召回），却也引入更多误报（低精度）；收紧判据则相反。</td></tr><tr><td class="k">对照关系</td><td>覆盖优先与度量精确控制之间存在张力（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例之一是以单一瞬时错误率告警，召回高但误报频繁；反例之二是把 SLO 合规做成没有后果的 KPI，缺少错误预算政策；反例之三是跨异质对象比较指标，得出误导结论；反例之四是只度量不行动，或在口径变动后仍与旧数据比较。</td><td>反例之一是只优化单一指标：把召回推到极高却使精确率崩坏，或反之，结果是总体效用下降。反例之二是把「覆盖优先」当成不设阈值的借口，省略了必要的精筛层，使噪声直接进入决策。反例之三是忽略代价判断的情境依赖——在某些低风险场景，误报成本反而高于漏失成本，此时应反向偏向精度。</td></tr><tr><td class="k">处置要点（原文）</td><td>落地时先为关键目标定义可度量口径与数据窗口，并测定基线；指标宜少而关键、可复现、可追溯到业务目标，避免面面俱到的指标堆砌淹没重点。</td><td>落地时先显式定义两类错误：明确哪些是「漏掉即不可挽回」的关键项、哪些是「误报可承受」的噪声项，并为其设定可量化的度量口径与阈值。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-16 · 经 direct</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div><div class="case-card"><span class="id">CAS-X-17 · 经 direct</span><h4>技术知识中枢交付法</h4><p>从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</p></div><div class="case-card"><span class="id">CAS-X-04 · 经 ESS-O-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-06 · 经 MTH-O-10</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-07 · 经 MTH-O-10</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-12 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-04</span><h4>MCP 四件套选型对比</h4><p>对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → ESS-O-03 → ESS-O-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-14 · 经 MTH-O-10</span><h4>OpenSpec 规约驱动解析</h4><p>对比规约驱动开发工具链 OpenSpec 与 Superpower 的元模型、工件依赖 DAG 与安全门控，提炼「规约先于实现」工程形态的解析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → TEC-H-01 → MTH-I-06</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → CAS-X-17 → MTH-O-07</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>OFF-002、VEN-018、BK-026、VEN-027、VEN-030、BK-011、VEN-036、VEN-037</div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：度量指标越全面、越精确，评估就越可靠</span><br>核验结论：指标是对现实的简化，单一或过多指标都会失真；当度量成为目标即被博弈（Goodhart 定律），应聚焦少数关键、可复现且与目标相关的指标，并配闭环复测与人工判断　<span class="k">[VEN-036]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（10 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>← CAS-X-16</td><td>控制理论⊗Agent 设计<br><span style="color:var(--dim);font-size:12px">E-988</span></td><td>印证：反思与评估环的度量反馈落地</td></tr><tr><td class="k">案例印证</td><td>← CAS-X-17</td><td>技术知识中枢交付法<br><span style="color:var(--dim);font-size:12px">E-992</span></td><td>印证：门控链与迭代反馈闭环</td></tr><tr><td class="k">对照</td><td>← MTH-O-01</td><td>覆盖与精度的不对称权衡<br><span style="color:var(--dim);font-size:12px">E-706</span></td><td>覆盖优先与度量精确控制之间存在张力</td></tr><tr><td class="k">依赖关联</td><td>← MTH-O-10</td><td>增量演化与一致性治理<br><span style="color:var(--dim);font-size:12px">E-698</span></td><td>增量演化治理依赖度量反馈闭环</td></tr><tr><td class="k">依据推导</td><td>→ ESS-M-05</td><td>质量属性不可直接测量<br><span style="color:var(--dim);font-size:12px">E-694</span></td><td>度量方法依据质量属性不可直接测量</td></tr><tr><td class="k">依据推导</td><td>→ ESS-O-03</td><td>权衡的不可消除性<br><span style="color:var(--dim);font-size:12px">E-693</span></td><td>度量与反馈是对取舍效果的检验</td></tr><tr><td class="k">实现</td><td>← TEC-H-01</td><td>SonarQube 静态分析平台<br><span style="color:var(--dim);font-size:12px">E-802</span></td><td>平台产出可度量指标并驱动反馈闭环</td></tr><tr><td class="k">实现</td><td>← TEC-H-03</td><td>技术债量化度量指标<br><span style="color:var(--dim);font-size:12px">E-810</span></td><td>债务度量指标纳入度量与反馈闭环</td></tr><tr><td class="k">实现</td><td>← TEC-N-01</td><td>交付效能度量与仪表化<br><span style="color:var(--dim);font-size:12px">E-932</span></td><td>交付度量平台实现持续反馈闭环</td></tr><tr><td class="k">前置依赖</td><td>→ MTH-O-01</td><td>覆盖与精度的不对称权衡<br><span style="color:var(--dim);font-size:12px">E-699</span></td><td>度量口径是覆盖与精度取舍的前置</td></tr></tbody></table></div></div></details></section>
+<section id="xref"><h2><span class="num">附</span>对照资源 · 12factor 子库</h2><div class="tblwrap"><table><thead><tr><th>12factor 节点</th><th>关系</th><th>对照说明</th></tr></thead><tbody><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-errors.html" target="_blank" rel="noopener">压缩错误进上下文</a> <span class="dim">ag-errors</span></td><td>跨体系对照</td><td>错误压缩回上下文是可观测性本质与度量反馈闭环的具体化</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

@@ -1,0 +1,685 @@
+{
+  "topic": "何为架构设计（Software Architecture & Design）——权威源证据包",
+  "generated_by": "software-architecture-researcher (subagent, self-authored role)",
+  "sources": [
+    {
+      "id": "STD-001",
+      "title": "ISO/IEC/IEEE 42010 — Defining \"architecture\" (官方标准网站, 由标准编辑 Rich Hilliard 维护)",
+      "org": "ISO/IEC/IEEE (iso-architecture.org)",
+      "year": "2022 (2nd ed.)",
+      "url": "http://www.iso-architecture.org/ieee-1471/defining-architecture.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "3.2 architecture：fundamental concepts or properties of a system in its environment embodied in its elements, relationships, and in the principles of its design and evolution",
+        "架构是抽象的（概念或感知），非工件；工件称为 architecture description",
+        "architecture 向外关注‘系统及其环境’；design 在系统边界确定后向内关注",
+        "IEEE 1471:2000 旧定义：fundamental organization of a system embodied in its components, their relationships to each other, and to the environment, and the principles guiding its design and evolution",
+        "引用 Perry & Wolf 1989、Kruchten RUP、TOGAF 等对照定义，指出‘significant / fundamental’是筛选判据"
+      ],
+      "legacy_id": "S1-01"
+    },
+    {
+      "id": "OFF-001",
+      "title": "SWEBOK Guide V4.0 (Software Engineering Body of Knowledge)",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SWEBOK V4.0 含 18 个知识领域（KA），新增 Software Architecture、Software Engineering Operations、Software Security 三个 KA",
+        "Software Architecture KA（Chapter 2）与 Software Design KA（Chapter 3）分立，两者主编均为 Rich Hilliard",
+        "Software Architecture 被正式确立为软件工程的一般性共识知识领域（generally accepted, consensus-driven knowledge）"
+      ],
+      "legacy_id": "S1-02"
+    },
+    {
+      "id": "OFF-002",
+      "title": "What Is Your Definition of Software Architecture? (SEI brochure)",
+      "org": "Carnegie Mellon University, Software Engineering Institute (SEI)",
+      "year": "2017 (brochure 3854)",
+      "url": "https://www.sei.cmu.edu/architecture/start/glossary/ (PDF: https://www.sei.cmu.edu/documents/2544/2010_010_001_513810.pdf)",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "现代定义（Bass/Clements/Kazman, Software Architecture in Practice 2e, 2003）：【已按版权红线移出（原引用 224 字）· 出处见 source_id/URL】",
+        "‘externally visible’=其它元素可做的假设（提供的服务、性能、容错、共享资源等）；架构只关心元素的 public 侧，private implementation 不属于架构",
+        "Documenting Software Architectures: Views and Beyond (2e, 2010)：The set of structures needed to reason about the system, which comprises software elements, relations among them, and properties of both",
+        "经典定义：RUP/Kruchten (1999)‘the set of significant decisions about the organization of a software system…’；Perry & Wolf (1992)‘A set of architectural (or design) elements that have a particular form’；Garlan & Shaw (1993) 架构是超出算法与数据结构的整体系统结构层面的设计",
+        "每个软件系统都有架构，但架构可独立于其描述而存在（故架构文档与重建重要）"
+      ],
+      "legacy_id": "S1-03"
+    },
+    {
+      "id": "OFF-002",
+      "title": "Software Architecture (SEI overview page)",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://www.sei.cmu.edu/architecture/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "The software architecture of a system represents the design decisions related to overall system structure and behavior",
+        "架构帮助干系人理解并分析系统如何达成 modifiability、availability、security 等本质质量",
+        "架构是质量属性（performance, modifiability, security）的主要承载者",
+        "架构实践包含：文档化架构元素与相互关系、反复评估架构与业务/使命目标契合度、分析实现与架构的一致性"
+      ],
+      "legacy_id": "S1-04"
+    },
+    {
+      "id": "OFF-002",
+      "title": "Reduce Risk with Architecture Evaluation — SEI ATAM fact sheet",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "2018",
+      "url": "https://www.sei.cmu.edu/architecture/tools/evaluate/atam.cfm (PDF: https://www.sei.cmu.edu/documents/2543/2018_010_001_515610.pdf)",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Architecture Tradeoff Analysis Method (ATAM) 是领先的风险消减过程，同时帮助设计团队改进架构",
+        "方法从项目决策者处引出 business drivers 与软件架构，细化为 scenarios 及其支撑的 architectural decisions",
+        "对 scenario 与 decision 的分析产出：risks、non-risks、sensitivity points、tradeoff points，并综合为 risk themes（对应威胁的 business driver）",
+        "架构是 system quality attributes（performance, modifiability, security）的主要载体"
+      ],
+      "legacy_id": "S1-05"
+    },
+    {
+      "id": "OFF-005",
+      "title": "ISO/IEC 25010 — Product quality model",
+      "org": "ISO/IEC (via ISO/IEC 25000 portal, iso25000.com)",
+      "year": "2011 / 2023",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "质量模型是产品质量评价体系的基石，决定评估产品时纳入哪些质量特性",
+        "质量 = 系统满足各干系人已声明与隐含需求的程度（functional, performance, security, maintainability 等）",
+        "产品模型将质量分为 characteristics 与 sub-characteristics（该页称 nine quality characteristics）",
+        "Maintainability 子特性：Modularity（改一个组件对其它组件影响最小）、Reusability、Analysability、Modifiability、Testability",
+        "Reliability 子特性：Faultlessness、Availability、Fault tolerance、Recoverability；Security 子特性：Confidentiality、Integrity、Non-repudiation、Accountability、Authenticity、Resistance",
+        "注：iso.org 官方页对抓取返回 403，本包通过 ISO/IEC 25000 系列官方门户核验"
+      ],
+      "legacy_id": "S1-06"
+    },
+    {
+      "id": "STD-001",
+      "title": "ISO/IEC/IEEE 42010 — A Conceptual Model of Architecture Description",
+      "org": "ISO/IEC/IEEE (iso-architecture.org)",
+      "year": "2022 (2nd ed.)",
+      "url": "http://www.iso-architecture.org/ieee-1471/cm/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "42010 建立在 Architecture Description 的概念模型（meta model）之上",
+        "System 处于 Environment 中；Stakeholders 对 System 的 interests 称为 Concerns；Purpose 是最常见的 Concern",
+        "架构由 Architecture Viewpoints 与 Architecture Views 表达，用于框定（frame）Concerns；并含 architecture rationale 等",
+        "2022 第 2 版：subject 由 System of Interest 泛化为 Entity of Interest；Architecture Model 改为 View Component；新增 Stakeholder Perspectives、Architecture Aspects"
+      ],
+      "legacy_id": "S1-07"
+    },
+    {
+      "id": "WEB-001",
+      "title": "Software Architecture Guide",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "1 Aug 2019",
+      "url": "https://martinfowler.com/architecture/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "人们所说的 architecture 是指‘系统内部设计最重要方面’的含糊概念",
+        "Johnson/Fowler：架构是资深开发者对系统设计达成的 shared understanding；‘Architecture is about the important stuff. Whatever that is’",
+        "好的架构支持自身演化，与编程深度交织；差架构是 cruft 增长的主要来源，使特性交付更慢、缺陷更多",
+        "内部质量高反而降低后续变更成本（与通常‘高质量=高成本’相反）"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "WEB-002",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "21 May 2019",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Technical Debt 是 Ward Cunningham 提出的隐喻，用于思考如何应对 cruft（内部质量缺陷）",
+        "新增特性时因 cruft 多花的额外时间即 debt 的 interest；清理 cruft 相当于偿还 principal",
+        "若后续有多个类似特性，先偿债总体更快；高内部质量通过消除 cruft 降低增强软件的成本",
+        "成本估不准，通常最优策略是像处理财务债务那样‘先还本金’"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "PAP-006",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham (c2.com)",
+      "year": "1992-03-26",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "技术债隐喻的原始出处：Shipping first time code is like going into debt",
+        "A little debt speeds development so long as it is paid back promptly with a rewrite；危险在于 debt 不被偿还",
+        "Every minute spent on not-quite-right code counts as interest on that debt（未整合实现可能拖垮整个工程组织）",
+        "作者 2009 年录有 5 分钟视频回顾该隐喻，澄清其作为 refactoring 辩护的定位与常见误读"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "WEB-003",
+      "title": "Who Needs an Architect?",
+      "org": "Martin Fowler, IEEE Software",
+      "year": "2003",
+      "url": "https://martinfowler.com/ieeeSoftware/whoNeedsArchitect.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Ralph Johnson：不存在客观的‘最高层概念’，架构是开发者对系统在环境中的最高层概念；是否属于架构取决于开发者是否认为其重要",
+        "判断标准是 developers think it is important；‘Tell us what is important. Architecture is about the important stuff. Whatever that is’",
+        "架构师角色=worries about the important stuff；反对以‘架构师’头衔与权力控制分离的 Matrix 式形象"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "BK-012",
+      "title": "Patterns of Enterprise Application Architecture (P of EAA)",
+      "org": "Martin Fowler et al. (martinfowler.com)",
+      "year": "2002",
+      "url": "https://martinfowler.com/books/eaa.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "企业应用架构的参考模式集（约 40 个模式），含分层（how to layer an enterprise application）",
+        "主题含：分层、组织 domain logic、连接关系数据库、Web 表现层设计、分布式设计原则、offline concurrency",
+        "作者判断：软件架构中的本质问题与解法变化并不大，模式具长期相关性"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "BK-007",
+      "title": "The Clean Architecture",
+      "org": "Robert C. Martin (Clean Coder Blog)",
+      "year": "2012-08-13",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "统一 Hexagonal、Onion、Screaming、DCI、BCE 等架构，目标均为 separation of concerns，按层划分（业务规则层 + 接口层）",
+        "The Dependency Rule：source code dependencies can only point inwards；内层不得知晓外层的任何命名实体",
+        "同心圆：外层是 mechanisms，内层是 policies；带来独立于框架/UI/数据库/外部机构、可测试等性质"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "BK-008",
+      "title": "A Philosophy of Software Design (book page + 作者与 R.C. Martin 的公开讨论)",
+      "org": "John Ousterhout (Stanford University; GitHub aposd-vs-clean-code)",
+      "year": "2018 / 2nd ed. 2021 / 讨论 2025",
+      "url": "https://web.stanford.edu/~ouster/cgi-bin/aposd.php ; https://github.com/johnousterhout/aposd-vs-clean-code",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "软件设计的根本目标：make it easy to understand and modify the system",
+        "作者用‘complexity’指代使人难以理解与修改系统之物；complexity 的主要来源与 information 有关——开发者脑中需持有多少信息、所需信息是否易得/显见",
+        "评估任何设计理念的标准：是否降低 complexity（减少所需信息量或使信息更显见）",
+        "界面上区分 deep 与 shallow（shallow 接口帮助有限）；强调 abstraction（省略不重要细节的简化思维）是良好设计的重要组成；就方法长度、注释、TDD 与 Clean Code 存在分歧"
+      ],
+      "legacy_id": "S2-07"
+    },
+    {
+      "id": "BK-018",
+      "title": "Domain-Driven Design Reference — Definitions and Pattern Summaries",
+      "org": "Eric Evans, Domain Language, Inc. (CC BY 4.0)",
+      "year": "2015",
+      "url": "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Bounded Context：大型项目必然存在多个模型；模型表达只在上下文中才有意义，须显式定义模型适用的上下文并在团队组织/应用特定部分/代码库与数据库 schema 上设置边界",
+        "Ubiquitous Language：在单个 bounded context 内建立团队共享、贯穿口头讨论与代码的通用语言，是 DDD 协同创作的核心",
+        "模式语言涵盖 Putting the Model to Work（Bounded Context、Ubiquitous Language、Context Map 等）、Building Blocks（Layered Architecture、Entities、Value Objects、Services 等）与 Strategic Design"
+      ],
+      "legacy_id": "S2-08"
+    },
+    {
+      "id": "WEB-004",
+      "title": "Documenting Architecture Decisions",
+      "org": "Michael Nygard (Cognitect Blog)",
+      "year": "2011-11-15",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "敏捷项目不反对文档，只反对无价值文档；大型文档从不保持更新，小而模块化的文档才有机会被维护",
+        "ARCHITECTURE DECISION RECORD：为 architecturally significant decisions 保存记录——那些影响 structure、non-functional characteristics、dependencies、interfaces 或 construction techniques 的决策",
+        "ADR 是短文本文件，格式类似 Alexandrian pattern（每个决策平衡各种 forces），记录决策动机与后果"
+      ],
+      "legacy_id": "S2-09"
+    },
+    {
+      "id": "WEB-005",
+      "title": "Architecture Decision Record (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2026-03-24 (updated)",
+      "url": "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "ADR 是简短文档（约数页），记录单个决策及其 context 与 significant ramifications",
+        "决策变更时不修改原 ADR，而是写出 new/superseding ADR 并链接；状态：proposed / accepted / superseded",
+        "通常放在代码库源仓库 doc/adr，采用 markdown 等轻量标记以便像代码一样 diff；文件名用单调编号（如 0001-HTMX-for-active-web-pages）",
+        "写 ADR 既留档，也帮助厘清思路、暴露并化解分歧；建议 inverted pyramid 写法"
+      ],
+      "legacy_id": "S2-10"
+    },
+    {
+      "id": "WEB-006",
+      "title": "Microservices — a definition of this new architectural term",
+      "org": "James Lewis & Martin Fowler (martinfowler.com)",
+      "year": "2014-03-25",
+      "url": "https://martinfowler.com/articles/microservices.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Microservice Architecture：将应用设计为 suites of independently deployable services（独立可部署服务套件）的一组风格",
+        "特征：Componentization via Services、Organized around Business Capabilities、Products not Projects、Smart endpoints and dumb pipes、Decentralized Governance、Decentralized Data Management、Infrastructure Automation、Design for failure、Evolutionary Design",
+        "作者声明该风格尚无精确定义（new architectural term）"
+      ],
+      "legacy_id": "S2-11"
+    },
+    {
+      "id": "WEB-007",
+      "title": "Presentation Domain Data Layering",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2015-08-26",
+      "url": "https://martinfowler.com/bliki/PresentationDomainDataLayering.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "最常见的信息密集型程序模块化方式：分为 presentation(UI)、domain logic(business logic)、data access 三层",
+        "最大优势是缩小注意力范围：处理 domain 时可忽略 UI，把数据源视为抽象函数；处理数据层时专注数据整理；处理表现层时专注 UI 行为",
+        "作者在实践中经常使用并推荐此分层，强调各层开发可迭代而非严格顺序",
+        "重要变体：Presentation Domain Data Layering（持久化领域逻辑/数据库映射见 PoEAA）"
+      ],
+      "legacy_id": "S2-12"
+    },
+    {
+      "id": "WEB-008",
+      "title": "CQRS (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-07-14",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "CQRS = Command Query Responsibility Segregation，由 Greg Young 提出；核心是用不同的模型更新与读取信息",
+        "对多数系统，CQRS 会引入 risky complexity（作者明确警示）",
+        "主流方式是把信息系统当 CRUD datastore；随需求复杂化出现多个信息表示（different representations）"
+      ],
+      "legacy_id": "S2-13"
+    },
+    {
+      "id": "PAP-007",
+      "title": "An Introduction to Software Architecture (CMU-CS-94-166 / SEI-94-TR-21)",
+      "org": "David Garlan & Mary Shaw, Carnegie Mellon University / SEI",
+      "year": "1993 (book chapter); 1994 (tech report)",
+      "url": "https://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "架构框架：把系统的架构视为 computational components（组件）+ 组件间交互描述（connectors，连接件）+ 配置（configuration）；抽象为图，节点=组件、弧=连接件",
+        "Architectural style：定义一类系统的结构组织模式，决定可用的组件与连接件词汇表，以及组合约束（如无环）",
+        "常见风格分类：3.1 Pipes and Filters、3.2 Data Abstraction & Object-Oriented Organization、3.3 Event-based / Implicit Invocation、3.4 Layered Systems、3.5 Repositories、3.6 Table Driven Interpreters、3.7 其它、3.8 Heterogeneous",
+        "每种风格分析：结构模式、计算模型、本质不变量、常见用例、优缺点、常见特化（style 选择存在权衡）",
+        "当系统由众多组件构成时，整体系统的组织（软件架构）成为新的设计问题，而非算法与数据结构"
+      ],
+      "legacy_id": "S2-14"
+    },
+    {
+      "id": "PAP-002",
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+      "org": "D. L. Parnas, Carnegie-Mellon University, Communications of the ACM",
+      "year": "1972",
+      "url": "https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "模块化是提升系统灵活性、可理解性并缩短开发时间的手段，效果取决于‘划分模块的判据’",
+        "对比两种分解：按处理步骤（conventional，如流程图）vs 按信息隐藏（unconventional）",
+        "主张按信息隐藏划分模块：模块应封装/隐藏一个可能变化的设计决策（‘secret’），而非按执行步骤切分",
+        "信息隐藏是 modularity 与可维护性的奠基思想（与后续 Ousterhout 的 complexity/abstraction 一脉相承）"
+      ],
+      "legacy_id": "S2-15"
+    },
+    {
+      "id": "WEB-009",
+      "title": "MVC — Xerox PARC 1978-79 (作者原始说明)",
+      "org": "Trygve Reenskaug",
+      "year": "1979 (原文) / 页面说明",
+      "url": "https://folk.universitetetioslo.no/trygver/themes/mvc/mvc-index.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "MVC 由 Trygve Reenskaug 于 1978 年在 Xerox PARC 首次实现并写下原始 MVC note；note 定义四个术语：Model、View、Controller、Editor",
+        "MVC 的本质目的：在用户的心智模型（mental model）与计算机中的数字模型之间架桥，使用户产生‘直接操作领域信息’的错觉",
+        "当用户需要以不同上下文/视角同时查看同一模型元素时该结构有用"
+      ],
+      "legacy_id": "S2-16"
+    },
+    {
+      "id": "WEB-010",
+      "title": "GUI Architectures",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-07-18",
+      "url": "https://martinfowler.com/eaaDev/uiArchs.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "随复杂度上升，主流从 Forms and Controls 转向 Model-View-Controller(MVC)；MVC 是‘被误解最多的架构模式之一’",
+        "最佳理解：MVC 是一组原则，包含 presentation 与 domain logic 的分离，以及通过 events(observer pattern) 同步 presentation state",
+        "相关变体：Application Model、Model-View-Presenter、Presentation Model、MVVM；注意 MVC 的 Semantic Diffusion 现象"
+      ],
+      "legacy_id": "S2-17"
+    },
+    {
+      "id": "BK-016",
+      "title": "Pattern-Oriented Software Architecture, Volume 1: A System of Patterns",
+      "org": "F. Buschmann, R. Meunier, H. Rohnert, P. Sommerlad, M. Stal (Wiley)",
+      "year": "1996",
+      "url": "https://www.wiley.com/",
+      "tier": "S2",
+      "verified": false,
+      "key_points": [
+        "提出 Microkernel、Layers、Pipes and Filters、Broker、Model-View-Controller、Blackboard、Reflection 等经典软件架构模式",
+        "Microkernel：将最小功能核心（minimal functional core）与扩展功能及客户特定部分分离，核心充当可插拔扩展的插座（socket）",
+        "Layers：按抽象层次组织，上层使用下层服务；Pipes and Filters：数据流式处理",
+        "注：本书本体未在本次任务中回源（仅依据出版社页面/公认知名度），标记为 cited，置信度 medium"
+      ],
+      "legacy_id": "S2-18"
+    },
+    {
+      "id": "VEN-001",
+      "title": "Azure Architecture Center — Cloud design patterns (CQRS / Event-driven)",
+      "org": "Microsoft (Microsoft Learn)",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs ; https://learn.microsoft.com/en-us/azure/architecture/patterns/event-driven",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "CQRS 模式官方条目：用不同接口分离读与写的关注点（补充 S2-13）",
+        "Event-driven architecture 官方条目：生产者发布事件、消费者异步消费，解耦与可扩展（补充 S2-14 的 event-based 风格）"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "PAP-008",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process, DOI 10.1002/smr.2423",
+      "year": "2022",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "Architecture erosion (AEr) 会对软件开发产生不利影响，近十年受到显著关注",
+        "AEr 不仅通过 architectural violations 与 structural issues 表现，还引发软件质量与演化中的问题",
+        "成因既有技术因素也有非技术因素，二者应同等重视；存在检测与治理 AEr 的方法、工具与措施谱系",
+        "纳入 73 项研究，归纳出三类困难与五类经验教训（摘要经 Crossref 核验）"
+      ],
+      "legacy_id": "S4-01"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "architecture (系统视角)",
+      "definition": "ISO/IEC/IEEE 42010:2022 §3.2：fundamental concepts or properties of a system in its environment embodied in its elements, relationships, and in the principles of its design and evolution（系统及其环境中根本性的概念或属性，体现于其元素、关系以及设计与演化的原则之中）。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "software architecture (SEI/经典)",
+      "definition": "程序或计算系统的软件架构，是系统的单个或多个结构，由软件元素、这些元素的外部可见属性以及元素间的关系构成（Bass/Clements/Kazman；SEI）。",
+      "source_id": "OFF-002"
+    },
+    {
+      "term": "architecture description (AD)",
+      "definition": "表达与记录架构所用的工件（artifact）；架构本身是抽象的（概念或感知），不应与记录它的文档混同。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "stakeholder / concern / viewpoint / view (42010 概念模型)",
+      "definition": "System 处于 Environment 中；对系统有利益的 Stakeholders，其利益称为 Concerns；Architecture Viewpoints 框定 Concerns，Architecture Views 表达架构，并伴随 architecture rationale；2022 版新增 Stakeholder Perspectives 与 Architecture Aspects。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architectural style",
+      "definition": "定义一类系统的结构组织模式：确定该风格实例可用的 components 与 connectors 词汇表，以及它们如何组合的一组约束（可含拓扑约束，如无环）。",
+      "source_id": "PAP-007"
+    },
+    {
+      "term": "architecturally significant decision / ADR",
+      "definition": "影响 structure、non-functional characteristics、dependencies、interfaces 或 construction techniques 的决策；Architecture Decision Record 是记录此类决策及其动机与后果的短文本文件。",
+      "source_id": "WEB-004"
+    },
+    {
+      "term": "quality attribute (质量属性)",
+      "definition": "系统满足干系人已声明与隐含需求所体现的性质；ISO/IEC 25010 产品模型将其分类为 characteristics 与 sub-characteristics（如 maintainability 含 modularity/reusability/analysability/modifiability/testability）。",
+      "source_id": "OFF-005"
+    },
+    {
+      "term": "complexity (Ousterhout)",
+      "definition": "使人难以理解与修改系统之物；其主要来源与 information 有关——开发者脑中需持有多少信息、所需信息是否易得。设计的根本目标是降低 complexity。",
+      "source_id": "BK-008"
+    },
+    {
+      "term": "bounded context (DDD)",
+      "definition": "显式定义某个模型适用的上下文，并在团队组织、应用特定部分与物理制品（代码库、数据库 schema）上设置边界；模型表达只在上下文中才有意义。",
+      "source_id": "BK-018"
+    },
+    {
+      "term": "ubiquitous language (DDD)",
+      "definition": "在单个 bounded context 内建立、贯穿团队口头讨论与代码的共享语言，是 DDD 协同建模的核心。",
+      "source_id": "BK-018"
+    },
+    {
+      "term": "technical debt (技术债)",
+      "definition": "Ward Cunningham 提出的隐喻：首次交付的代码如同负债；小额债务在及时以重写偿还时可加速开发，未偿还则每分钟在‘不够正确’代码上的花费都成为利息。",
+      "source_id": "PAP-006"
+    },
+    {
+      "term": "architecture erosion / drift (架构腐化)",
+      "definition": "架构腐化（AEr）指架构层面的退化/偏离，表现为 architectural violations 与 structural issues，并引发软件质量与演化问题；成因含技术与非技术因素。",
+      "source_id": "PAP-008"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "架构是系统在环境中的根本性概念或属性，体现于元素、关系与设计与演化原则；且架构是抽象的，记录它的工件称为 architecture description。",
+      "source_ids": [
+        "STD-001",
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SEI 经典定义：软件架构是系统的单个或多个结构，由软件元素、元素的外部可见属性及元素间关系构成；架构只关心 public 侧，内部实现细节不属于架构。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "经典/现代定义交叉印证：Perry & Wolf（有特定形式的架构元素）、Kruchten/RUP（关于系统组织的 significant decisions 集合）、Garlan & Shaw（超出算法与数据结构的整体系统结构设计层面）。",
+      "source_ids": [
+        "OFF-002",
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构与详细设计的区别在于：架构向外关注‘系统及其环境’，设计在系统边界确定后向内关注；架构抑制与交互无关的内部实现细节。",
+      "source_ids": [
+        "STD-001",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构是一组 significant / fundamental 决策——并非所有决策都属于架构，只有根本性决策才是。",
+      "source_ids": [
+        "STD-001",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "42010 围绕干系人与关注点组织架构描述；2022 第 2 版引入 Entity of Interest、View Component、Stakeholder Perspectives、Architecture Aspects 等概念。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构是系统质量属性的主要承载者；架构以整体结构（structure）与行为（behavior）相关的设计决策为对象。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Fowler/Johnson 的实用定义：架构是资深开发者对系统设计的共享理解，是‘the important stuff. Whatever that is’——是否属于架构取决于开发者是否认为其重要。",
+      "source_ids": [
+        "WEB-001",
+        "WEB-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC 25010 质量模型：质量是系统满足干系人已声明与隐含需求的程度；模型将其分为特性与子特性；maintainability 落点为 modularity/reusability/analysability/modifiability/testability，其中 modularity 要求改一个组件对其它组件影响最小。",
+      "source_ids": [
+        "OFF-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SEI ATAM 是权威架构评估方法：由 business drivers 与架构引出 scenarios 与 architectural decisions，分析产出 risks、non-risks、sensitivity points、tradeoff points 并归纳为 risk themes。",
+      "source_ids": [
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构决策应被记录为 ADR：仅记录 architecturally significant 决策（影响结构、非功能特性、依赖、接口或构造技术），格式含 context/decision/consequences，具单调编号与状态，且被取代而非改写。",
+      "source_ids": [
+        "WEB-004",
+        "WEB-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Garlan & Shaw 提出架构的组件-连接件-配置框架与风格分类（pipes and filters、data abstraction/OO、event-based implicit invocation、layered、repositories、interpreters），每种风格均有权衡。",
+      "source_ids": [
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "分层（layered）是最常见的模块化风格：presentation / domain logic / data access 三层，PoEAA 系统整理了企业应用的分层与约 40 个相关模式。",
+      "source_ids": [
+        "WEB-007",
+        "BK-012"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "MVC 由 Reenskaug 于 1978/79 在 Xerox PARC 提出，目的是在用户心智模型与数字模型之间架桥；Fowler 强调 MVC 是一组原则（表现与领域逻辑分离 + 事件/observer 同步状态）。",
+      "source_ids": [
+        "WEB-009",
+        "WEB-010"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "微服务架构是将应用设计为可独立部署服务套件的风格，特征含围绕业务能力组织、去中心化数据治理、smart endpoints and dumb pipes、design for failure、evolutionary design；作者声明其当时尚无精确定义。",
+      "source_ids": [
+        "WEB-006"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "CQRS 用不同模型分离读写（Greg Young 提出），但对多数系统会引入 risky complexity。",
+      "source_ids": [
+        "WEB-008",
+        "VEN-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Microkernel 模式将最小功能核心与扩展功能及客户特定部分分离，核心充当可插拔扩展的插座（socket）。（本书未回源，标 cited）",
+      "source_ids": [
+        "BK-016"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Clean Architecture 统一多种分层思想，核心是 The Dependency Rule：源码依赖只能指向内层；同心圆中内层为 policies、外层为 mechanisms，从而独立于框架/UI/数据库/外部机构并利于测试。",
+      "source_ids": [
+        "BK-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Ousterhout：软件设计的根本目标是使系统易理解、易修改；complexity 指使人难以理解与修改之物，主要来源于 information（开发者需掌握多少信息、信息是否显见）；设计评估标准是能否降低 complexity。",
+      "source_ids": [
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Parnas (1972)：模块化效果取决于划分判据，主张按 information hiding 划分模块（隐藏可能变化的设计决策/secret），而非按处理步骤切分——这是可维护性设计的奠基思想。",
+      "source_ids": [
+        "PAP-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DDD 的两个战略设计核心：bounded context（显式定义模型适用上下文并设边界）与 ubiquitous language（单一上下文内贯穿讨论与代码的共享语言）；DDD 模式语言还含 Layered Architecture 等构造块。",
+      "source_ids": [
+        "BK-018"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债隐喻源自 Ward Cunningham 1992：首次交付代码如负债，及时重写可加速开发，未偿则成为利息；Fowler 将其释义为内部质量缺陷造成的额外变更成本，主张适时‘偿还本金’。",
+      "source_ids": [
+        "PAP-006",
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构腐化（erosion/drift）表现为架构违规与结构问题并影响质量与演化，成因兼有技术与非技术因素，已有检测与治理的方法/工具谱系。",
+      "source_ids": [
+        "PAP-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "好的架构支持自身演化并与编程深度交织；差架构是 cruft 增长主因，使交付更慢、缺陷更多——可维护性/可扩展性因此是架构的核心落点。",
+      "source_ids": [
+        "WEB-001",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "gaps": [
+    "ISO/IEC/IEEE 42010:2022 与 ISO/IEC 25010:2023 的标准正文为付费且 iso.org 对抓取返回 403；本包的定义与特性通过标准官方站点（iso-architecture.org，由标准编辑维护）与 ISO/IEC 25000 门户核验，未获取标准全文。",
+    "SWEBOK V4.0 的 Software Architecture 与 Software Design 两章正文未下载，仅通过 IEEE Computer Society 官方页面核验 KA 结构、编辑与章节存在；KA 内部条目待补。",
+    "Pattern-Oriented Software Architecture Vol.1（Microkernel 等）本体未回源，相关 finding 标记为 cited/medium；建议后续以出版社样章或权威摘录补齐。",
+    "Whiting & Andrews (2020) 'Drift and Erosion in Software Architecture' 仅核验到 Crossref 元数据，摘要未获取；架构腐化的定义主要依据 Li et al. (2022) 的 S4 综述。",
+    "Fowler 的 Evolutionary Architecture 独立页面（bliki/articles 路径）返回 404，演进式架构的一手 Fowler 文本待补（当前用其 Software Architecture Guide 与 PoEAA 替代）。",
+    "事件驱动架构主要依据 Garlan & Shaw 的 event-based/implicit invocation 与 Azure 官方条目，未取得 Fowler 专文（EDA bliki 404）。"
+  ],
+  "notes": "信源计数：S1=7、S2=18、S3=1、S4=1，共 27 条（S1≥5、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：架构定义 = ISO 42010（S1-01/07）+ SEI（S1-03）+ Garlan&Shaw（S2-14）+ Fowler（S2-01/04）；质量属性 = ISO 25010（S1-06）+ SEI ATAM（S1-05）；架构决策/ADR = Nygard（S2-09）+ Fowler（S2-10）。S5 来源（无出处二手博客/AI 内容/营销软文）未采用。联网策略：境内/可达站点直连，iso-architecture.org 与 raw.githubusercontent.com 经代理 172.29.0.1:7890 访问。书籍版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、CC-BY 许可的 DDD Reference 与公开发表论文。"
+}

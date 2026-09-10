@@ -1,0 +1,586 @@
+{
+  "topic": "N 团队与康威定律：Conway's Law 原始表述、Inverse Conway Maneuver、团队拓扑四类型与交互模式、团队边界-架构耦合、DORA 交付效能指标（四键→五指标演进）",
+  "generated_by": "org-architecture-researcher (subagent, 自写角色)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "境外源全部经代理 http://172.29.0.1:7890 + 浏览器 UA。melconway.com / martinfowler.com / teamtopologies.com / dora.dev / thoughtworks.com / scaledagile 直取成功；RePEc 元数据、HBS 工作论文 PDF（Colfer & Baldwin 2016）直取成功。Melvin Conway 1968 原文《How Do Committees Invent?》逐段回源核对（含缺省被引的 thesis 第三段结论）。DORA 口径以 dora.dev 官方页面 + Nathen Harvey 2026-01-02《A history of DORA's software delivery metrics》原文为准。书籍本体（Team Topologies 2019、Accelerate、Mythical Man-Month）仅核对官方出版页/作者页的目录与论点，未提取正文。",
+  "sources": [
+    {
+      "id": "WEB-042",
+      "title": "How Do Committees Invent? (a.k.a. Conway's Law 原文)",
+      "org": "Melvin E. Conway / Datamation, F. D. Thompson Publications",
+      "year": "1968",
+      "url": "https://www.melconway.com/Home/Committees_Paper.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "原文结论段：'organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations'（不是传闻式复述，是论文结论段原句）",
+        "论证用 homomorphism（同态）：系统线性图到设计组织线性图存在保结构关系；若每子系统各有独立设计组，则两图完全相同",
+        "A basic relationship：系统节点 x 对应设计组 X；若两节点有分支，则两组必须协商接口规格；无分支则无需协商",
+        "'there is no such thing as a design group which is both organized and unbiased'——组织划分即已排除部分设计备选",
+        "大型系统易崩解三步：诱因①设计初期过度增员；②管理层级使通信结构碎片化；③同态使系统结构复制组织碎片化",
+        "管理推论：按通信需要组织设计活动；组织需保持精简与灵活性（因首版设计几乎从非最优）",
+        "作者注（42 年后）：thesis 在倒数第三段；该原理适用性远超软件工程"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "WEB-043",
+      "title": "Conway's Law（作者本人说明页 + Brooks 命名溯源）",
+      "org": "Melvin E. Conway (melconway.com)",
+      "year": "2010",
+      "url": "https://www.melconway.com/Home/Conways_Law.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "1967 年投稿 Harvard Business Review 被拒（理由：未证明 thesis），1968 年 4 月由 Datamation 发表",
+        "'Fred Brooks cited the paper and the idea in his elegant classic The Mythical Man-Month, calling it Conway's Law. The name stuck.'——'Conway's Law' 由 Fred Brooks 在《人月神话》中命名，Conway 本人未给该名",
+        "论断：Conway's law was not intended as a joke or a Zen koan, but as a valid sociological observation（非调侃，是严肃社会学观察）",
+        "机制：模块 A、B 能正确对接的前提，是其设计/实现者彼此沟通；故接口结构必然与社会结构一致",
+        "Corollary：因首版设计几乎从非最优，组织灵活性对有效设计很重要"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "WEB-044",
+      "title": "Conway's Law (bliki)",
+      "org": "Martin Fowler / martinfowler.com",
+      "year": "2022",
+      "url": "https://martinfowler.com/bliki/ConwaysLaw.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "原文引用（注明 source 为 Conway 1968 Datamation，命名者 Fred Brooks）",
+        "解释：软件架构与开发组织高度相似；'if a single team writes a compiler, it will be a one-pass compiler, but if the team is divided into two, then it will be a two-pass compiler'",
+        "两团队分处不同城市/时区会显著减少沟通，架构必须据此设计受限交互",
+        "对 Conway's Law 的三种回应：Ignore（无视，拧扭架构）/ Accept（接受，避免架构与沟通模式冲突）/ Inverse Conway Maneuver（改变沟通模式以催生目标架构）",
+        "Inverse Conway Maneuver 术语由 Jonny LeRoy 与 Matt Simons 于 2010 年 12 月 Cutter IT Journal 提出",
+        "失败模式：架构与组织错配→设计本应直白的模块交互变复杂（负责团队协作不畅）、有益设计备选因相关组不沟通而从未被考虑",
+        "限制：ICM 非万能——已有刚性架构的系统仅调整组织不会立即修复，反而制造开发者与代码的错配、增加摩擦",
+        "与 DDD 关系：Bounded Context / Ubiquitous Language 把人按主题聚拢并与价值流对齐；模块分解与组织分解必须同步演化"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "BK-030",
+      "title": "Team Topologies (bliki)",
+      "org": "Martin Fowler / martinfowler.com",
+      "year": "2023",
+      "url": "https://martinfowler.com/bliki/TeamTopologies.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Team Topologies 由 Matthew Skelton 与 Manuel Pais 提出：定义 four forms of teams + three modes of team interactions",
+        "stream-aligned team：业务能力中心（Business Capability Centric）、full-stack full-lifecycle、Outcome Oriented、Two Pizza Team、长生命周期",
+        "platform team：以自服务（X-as-a-Service）为 stream-aligned 提供内部平台；平台作为产品，需以 collaboration 模式构建、成熟后转 XaaS",
+        "核心洞见：full-stack/full-lifecycle 团队面临过度认知负荷；平台的首要收益是降低 stream-aligned 团队的 cognitive load",
+        "enabling team：培养其他团队技能使其自主，主要用 Facilitating（教练/mentoring）模式",
+        "complicated-subsystem team：专注高难度子系统以降低使用方认知负荷；主用 XaaS，短期需 collaboration",
+        "三种交互模式：Collaboration（高带宽高成本、限时）/ X-as-a-Service（低交互、清晰边界）/ Facilitating（教练、临时聚焦）",
+        "Team Topologies 明确承认 Conway's Law 影响；主张团队结构塑造面向业务、解耦的软件架构",
+        "限制：'all models are wrong, some are useful'——复杂组织不能简化为仅四类团队与三种交互，约束本身才是模型有用之处"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "WEB-045",
+      "title": "Team Topologies: Key Concepts（作者官方站点）",
+      "org": "Matthew Skelton & Manuel Pais / teamtopologies.com",
+      "year": "2026",
+      "url": "https://teamtopologies.com/key-concepts",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Four fundamental topologies：Stream-aligned（对齐业务域价值流，You Build It You Run It，无交接）/ Enabling（帮stream-aligned 排除障碍、发现缺失能力）/ Complicated Subsystem（需大量数学/计算/技术专长）/ Platform（组合其他团队类型，为 stream-aligned 提供引人入胜的内部产品以加速交付）",
+        "Three interaction modes：Collaboration / X-as-a-Service / Facilitation",
+        "Nine Principles：聚焦 flow 而非 structure；高信任；保持团队稳定；尊重认知极限；小步安全变更；团队直连客户；拥抱复杂度；持续发现；消除团队依赖",
+        "Six Patterns：四团队类型；三交互模式；管理团队认知负荷；Thinnest Viable Platform (TVP)；弹性团队边界；持续适应",
+        "警示：不能只用一部分（如仅用 team types），否则收效有限；Team Topologies 是思考模型而非画组织架构图的方法",
+        "TVP：平台只提供刚够能力、避免臃肿；好平台让 stream-aligned 更快而非制造更多依赖",
+        "团队关系是时点快照，会随目标与发现而变化"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "BK-030",
+      "title": "Team Topologies: Organizing Business and Technology Teams for Fast Flow（官方书页）",
+      "org": "Matthew Skelton & Manuel Pais / IT Revolution Press",
+      "year": "2019",
+      "url": "https://teamtopologies.com/book",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "第一版 2019-09-07，ISBN 978-1942788812，IT Revolution Press，240 页",
+        "定位：基于四团队类型 + 三交互模式的自适应组织设计模型，团队为交付的基本单位，团队结构与沟通路径随技术/组织成熟度演化",
+        "目标：让软件架构更清晰可持续，把团队间问题转化为自组织的有价值信号；有 CN/DE/JP/KR 等译本"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "VEN-035",
+      "title": "Inverse Conway Maneuver (Technology Radar)",
+      "org": "Thoughtworks Technology Radar",
+      "year": "2015",
+      "url": "https://www.thoughtworks.com/radar/techniques/inverse-conway-maneuver",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "定义原文：'evolving your team and organizational structure to promote your desired architecture'，目标是让技术架构与业务架构同构（isomorphism）",
+        "Conway's Law 断言组织被迫产出其沟通结构的副本，常导致意外摩擦点；ICM 用以主动消除该摩擦",
+        "评级 Trial：Worth pursuing，企业应在可承受风险的项目上试点（2014-07 首次收录，2015-01 更新）",
+        "页面标注 'NOT ON THE CURRENT EDITION'——已从最新 Radar 榜移除，非当前在榜技术"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "VEN-036",
+      "title": "DORA's software delivery performance metrics（当前官方口径）",
+      "org": "DORA / Google Cloud",
+      "year": "2026",
+      "url": "https://dora.dev/guides/dora-metrics/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "当前为五指标模型（原四键演进而来），分两组因子",
+        "Throughput：Change lead time（commit→生产成功部署）/ Deployment frequency（部署频率或间隔）/ Failed deployment recovery time（失败部署恢复时间）",
+        "Instability：Change fail rate（需立即干预的部署比例）/ Deployment rework rate（因生产事故产生的非计划部署比例）",
+        "结论：速度与稳定不是权衡——top performers 五项皆优，low performers 五项皆差；指标最适按单个应用/服务度量",
+        "度量陷阱：把指标当目标（Goodhart 定律）、单指标独大、拿行业当挡箭牌、跨异质应用比较、孤岛式归属、团队间竞赛、只度量不改进",
+        "指标既是组织绩效与员工福祉的先行指标，也是开发交付实践的滞后指标"
+      ],
+      "legacy_id": "S3-02"
+    },
+    {
+      "id": "VEN-037",
+      "title": "A history of DORA's software delivery metrics",
+      "org": "Nathen Harvey / DORA (Google Cloud)",
+      "year": "2026",
+      "url": "https://dora.dev/insights/dora-metrics-history",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "2014：以四个变量起步（deployment frequency、lead time for changes、MTTR、change fail rate）；统计分析显示 change fail rate 未与其余显著相关，故 2014 的 IT performance 实为三指标（部署频率、变更前置时间、MTTR）",
+        "2015：固化为 throughput（部署频率、部署前置时间）与 stability（MTTR、change fail rate）二元；并证伪'速度为稳定之代价'",
+        "2016-2017：成为行业标准基准",
+        "2018：引入 'availability' 衡量运营健康，术语从 'IT performance' 改为 'Software Delivery and Operational (SDO) performance'；原四指标仍为交付核心",
+        "2021：availability 扩展为 reliability；报告曾不准确地把 reliability 称作 'fifth metric'（实为运营而非交付性能度量）",
+        "2023：MTTR（time to restore service）改名并重定义为 failed deployment recovery time——原定义未区分软件变更引发与外部因素（如机房故障）引发的失败",
+        "2024：新增第五指标 deployment rework rate，形成当前五指标（3 throughput + 2 instability）；Accelerate State of DevOps 2024 报告有详述"
+      ],
+      "legacy_id": "S3-03"
+    },
+    {
+      "id": "VEN-038",
+      "title": "Accelerate State of DevOps Report 2024（DORA 官方报告页）",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/research/2024/dora-report/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "AI 提升个体生产力、flow 与工作满意度，但负面影响软件交付的稳定性与吞吐——基本功（小批量、健壮测试）仍关键",
+        "用户中心性是性能终极驱动器；组织优先级不稳定显著降低生产力、增加倦怠（且难以缓解）",
+        "平台工程提升个体/团队/组织绩效，但可能降低变更稳定性与吞吐，需以开发者独立性为核心谨慎实施",
+        "变革型领导力降低倦怠；云基础设施灵活性仍关键",
+        "报告主题：AI 是放大器，最大回报来自改善底层社会技术系统"
+      ],
+      "legacy_id": "S3-04"
+    },
+    {
+      "id": "VEN-039",
+      "title": "Organizing Agile Teams and ARTs: Team Topologies at Scale",
+      "org": "Scaled Agile Framework (SAFe)",
+      "year": "2026",
+      "url": "https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "引用 Skelton & Pais：'The restriction to these four team types acts as a powerful template for effective organization design'",
+        "四基本 team topology：stream-aligned / complicated subsystem / platform / enabling，各有特定行为与职责",
+        "把团队设计限制在四种基本类型，可借成熟模式促进 flow、更快交付价值",
+        "与 SAFe Principle #10 'Organize around value' 一致"
+      ],
+      "legacy_id": "S3-05"
+    },
+    {
+      "id": "PAP-027",
+      "title": "Exploring the duality between product and organizational architectures: A test of the 'mirroring' hypothesis",
+      "org": "Alan MacCormack, Carliss Baldwin, John Rusnak / Research Policy 41(8):1309-1324 (Elsevier)",
+      "year": "2012",
+      "url": "https://ideas.repec.org/a/eee/respol/v41y2012i8p1309-1324.html",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "摘要：产品倾向于 'mirror' 开发它的组织架构；机制是组织的治理结构、问题求解惯例与沟通模式约束了其搜索解的空间",
+        "产品架构是产品性能、品种、流程柔性与产业演化路径的重要预测因子",
+        "实证支持 Conway's Law / mirroring（作者工作论文版本被广泛引用为对康威定律的强证据）",
+        "DOI: 10.1016/j.respol.2012.04.011"
+      ],
+      "legacy_id": "S4-01"
+    },
+    {
+      "id": "PAP-028",
+      "title": "The mirroring hypothesis: theory, evidence, and exceptions",
+      "org": "Lyra J. Colfer & Carliss Y. Baldwin / Industrial and Corporate Change 25(5):709-737 (Oxford)",
+      "year": "2016",
+      "url": "https://www.hbs.edu/ris/Publication%20Files/Colfer%20Baldwin%20Mirroring%20Hypothesis%20Ind%20Corp%20Change-2016_8aa320ff-6aa6-42ef-b259-d139012faaf6.pdf",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "综述 142 项实证研究，按组织形态分：产业研究、企业研究、开放协作项目研究",
+        "结论：mirroring 是普遍模式但非普适（prevalent pattern but not universal）",
+        "在技术动态变化的产业中，partial mirroring（知识边界比运营边界更宽）往往是更优策略",
+        "企业可通过模块化分区或跨边界关系契约战略性地 'break the mirror'",
+        "开放协作项目研究（多数聚焦软件）不支持该假说；数字技术使新协调模式成为可能，令群体偏离经典 mirroring",
+        "正式定义 mirroring、并将之解释为节约稀缺认知资源的组织问题求解方式；该假说不规定因果方向（可组织→技术、技术→组织，或双向）"
+      ],
+      "legacy_id": "S4-02"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "康威定律 Conway's Law",
+      "definition": "任何设计系统（广义）的组织，都会产出结构复制该组织沟通结构的设计。原文结论段：'organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations'。",
+      "source_id": "WEB-042"
+    },
+    {
+      "term": "康威定律命名来源",
+      "definition": "'Conway's Law' 这一名称并非 Conway 本人所取，而是 Fred Brooks 在《The Mythical Man-Month》(1975) 中引用该文与观点时命名。",
+      "source_id": "WEB-043"
+    },
+    {
+      "term": "同态 homomorphism",
+      "definition": "Conway 用数学同态描述系统线性图到设计组织线性图的保结构关系：若每个子系统各有独立设计组，两图完全相同；若一个设计组设计多个子系统，组织图是系统图的坍缩版本。",
+      "source_id": "WEB-042"
+    },
+    {
+      "term": "逆向康威操作 Inverse Conway Maneuver (ICM)",
+      "definition": "主动改变团队与组织结构，以促进（催生）期望的软件架构，理想状态下使技术架构与业务架构同构（isomorphism）。",
+      "source_id": "VEN-035"
+    },
+    {
+      "term": "ICM 术语出处",
+      "definition": "'inverse Conway maneuver' 一词由 Jonny LeRoy 与 Matt Simons 在 2010 年 12 月 Cutter IT Journal 文章中提出。",
+      "source_id": "WEB-044"
+    },
+    {
+      "term": "stream-aligned team（流对齐团队）",
+      "definition": "对齐单一业务域价值流的团队，端到端负责该价值的整个流；full-stack、full-lifecycle、Outcome Oriented、长生命周期，通常控制在 Two Pizza Team 规模，无向其他团队的交接（You Build It, You Run It）。",
+      "source_id": "BK-030"
+    },
+    {
+      "term": "enabling team（赋能团队）",
+      "definition": "帮助 stream-aligned 团队克服障碍、发现缺失能力，通过指导/教练提升其他团队技能使其自主；主要使用 Facilitating 交互模式，而非写代码或强推标准。",
+      "source_id": "WEB-045"
+    },
+    {
+      "term": "complicated-subsystem team（复杂子系统团队）",
+      "definition": "负责需要大量数学/计算/技术专长的子系统，以降低使用它的 stream-aligned 团队的认知负荷；主用 X-as-a-Service 交互，短时用 Collaboration。",
+      "source_id": "BK-030"
+    },
+    {
+      "term": "platform team（平台团队）",
+      "definition": "组合其他团队类型，为 stream-aligned 团队提供引人入胜的内部产品/自服务平台以加速交付；平台首要收益是降低 stream-aligned 团队的认知负荷，需作为产品经营。",
+      "source_id": "WEB-045"
+    },
+    {
+      "term": "三种团队交互模式 Three interaction modes",
+      "definition": "（1）Collaboration 协作：限时高带宽共同探索新事物（API/实践/技术）；（2）X-as-a-Service：一方提供、一方消费服务，低交互、清晰边界；（3）Facilitation 促进：一方帮助并指导另一方。",
+      "source_id": "WEB-045"
+    },
+    {
+      "term": "认知负荷 cognitive load",
+      "definition": "团队能承载的复杂度有限，每个新增工具/职责/域都会消耗其心智带宽；Team Topologies 的核心洞见是 full-stack/full-lifecycle 团队面临过度认知负荷，平台的首要价值即降低它。",
+      "source_id": "BK-030"
+    },
+    {
+      "term": "Thinnest Viable Platform (TVP)",
+      "definition": "最薄可行平台：平台只提供刚够能力而避免不必要复杂度，让 stream-aligned 更快而不制造更多依赖。",
+      "source_id": "WEB-045"
+    },
+    {
+      "term": "镜像假说 mirroring hypothesis",
+      "definition": "预测项目/企业/企业群内部的组织连接（沟通、同地办公、雇佣）会对应工作的技术依赖；是 Conway's Law 在组织设计领域的名称，不规定因果方向，可组织→技术、技术→组织或双向。",
+      "source_id": "PAP-028"
+    },
+    {
+      "term": "软交付效能五指标 DORA software delivery performance metrics",
+      "definition": "当前五项：Throughput = change lead time（提交到生产部署耗时）、deployment frequency（部署频率/间隔）、failed deployment recovery time（失败部署恢复时间）；Instability = change fail rate（需立即干预的部署比例）、deployment rework rate（因生产事故产生的非计划部署比例）。",
+      "source_id": "VEN-036"
+    },
+    {
+      "term": "变更前置时间 change lead time",
+      "definition": "一次变更从提交进版本控制到成功部署至生产所耗的时间。",
+      "source_id": "VEN-036"
+    },
+    {
+      "term": "部署频率 deployment frequency",
+      "definition": "给定周期内应用变更部署的次数，或两次部署之间的时间间隔。",
+      "source_id": "VEN-036"
+    },
+    {
+      "term": "失败部署恢复时间 failed deployment recovery time",
+      "definition": "从一次失败且需立即干预的部署中恢复所需的时间。2023 年取代原 MTTR/time to restore service，因其只聚焦由生产变更引发的服务中断，排除外部因素（如机房故障）导致的失败。",
+      "source_id": "VEN-037"
+    },
+    {
+      "term": "变更失败率 change fail rate",
+      "definition": "部署中需要立即干预（通常导致回滚或 hotfix）的比例。",
+      "source_id": "VEN-036"
+    },
+    {
+      "term": "部署返工率 deployment rework rate",
+      "definition": "因生产事故而发生的非计划部署所占比例；2024 年新增为第五指标，用以直接度量变更失败率所代理的返工量。",
+      "source_id": "VEN-037"
+    },
+    {
+      "term": "SDO performance（Software Delivery and Operational performance）",
+      "definition": "2018 年起 DORA 用该术语取代宽泛的 'IT performance'，将软件交付指标与运营健康（availability，后扩展为 reliability）合并考察。",
+      "source_id": "VEN-037"
+    },
+    {
+      "term": "Bounded Context 与团队组织",
+      "definition": "DDD 的 Bounded Context 拥有由同一组人定义并理解的 Ubiquitous Language，天然把人员按主题聚拢并与价值流对齐，从而与 Conway's Law 协同定义组织结构。",
+      "source_id": "WEB-044"
+    },
+    {
+      "term": "Goodhart 定律（DORA 度量陷阱语境）",
+      "definition": "当度量成为目标时，它就不再是好度量；DORA 明确警示把指标当目标会诱发团队 gaming（如'每应用年底前必须日部署多次'）。",
+      "source_id": "VEN-036"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "康威定律的原始表述出自 Melvin Conway 1968 年 Datamation 论文《How Do Committees Invent?》结论段，用同态（homomorphism）数学论证：设计组织的线性图与所设计系统的线性图存在保结构对应，若每子系统有独立设计组则两图完全相同。",
+      "source_ids": [
+        "WEB-042",
+        "WEB-043"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "康威定律并非玩笑或禅语，而是被作者本人定位为严肃的社会学观察：模块能正确对接的前提是其设计者彼此沟通，故接口结构必然映射社会结构。",
+      "source_ids": [
+        "WEB-043"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "'Conway's Law' 由 Fred Brooks 在《The Mythical Man-Month》(1975) 命名，非 Conway 本人命名；原文 1967 年曾投 HBR 被拒（理由'未证明'），1968 年 4 月由 Datamation 发表。",
+      "source_ids": [
+        "WEB-043",
+        "WEB-044"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "康威定律获实证支持：MacCormack, Baldwin & Rusnak (2012) 对 mirroring 假说的检验发现产品架构倾向于镜像开发组织的架构，机制是组织的治理结构、求解惯例与沟通模式约束其搜索解的空间。",
+      "source_ids": [
+        "PAP-027",
+        "PAP-028"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【反例/边界】镜像（康威）并非普适：Colfer & Baldwin (2016) 综述 142 项实证研究，结论是 mirroring 为普遍模式但非普适；在技术动态变化产业中 partial mirroring（知识边界宽于运营边界）常更优；开放协作项目（多为软件）研究不支持该假说；企业可借模块化分区或跨边界关系契约刻意 'break the mirror'。",
+      "source_ids": [
+        "PAP-028"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "对康威定律存在三种回应：Ignore（无视，导致架构被拧扭）/ Accept（接受并避免架构与沟通模式冲突）/ Inverse Conway Maneuver（主动改变沟通模式以催生目标架构）。",
+      "source_ids": [
+        "WEB-044"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【失败模式】忽视康威定律的典型后果：架构与开发组织错配时，本应直白的模块交互变复杂（负责团队协作不畅），且有益的设计备选因相关团队不沟通而从未被纳入考虑；按层（前端/后端/数据库）或按活动（分析/设计/编码/测试）划分团队会制造大量交接。",
+      "source_ids": [
+        "WEB-044"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Inverse Conway Maneuver 由 Thoughtworks 收录于 Technology Radar（2014-07 首次，2015-01 更新）并评为 Trial；定义为演进团队与组织结构以促进期望架构，目标是技术架构与业务架构同构。",
+      "source_ids": [
+        "VEN-035"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【反例/限制】ICM 并非万能：对已有刚性架构的系统，仅改变组织结构不会立即修复，反而造成开发者与代码错配、给后续增强增加摩擦；正确做法是使组织与代码库同步、小步演进并保持反馈。",
+      "source_ids": [
+        "WEB-044"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【失败模式】康威定律与 ICM 常被误用为'调整组织架构图'的工具；Team Topologies 官方与 Thoughtworks 均强调需整体社会技术（sociotechnical）视角，Team Topologies 本身是思考模型而非画组织架构图的方法。",
+      "source_ids": [
+        "WEB-045",
+        "VEN-035"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "团队拓扑四基本类型为：stream-aligned（对齐业务价值流、端到端负责、无交接）、enabling（教练赋能、发现缺失能力）、complicated-subsystem（专攻高复杂度子系统）、platform（提供自服务内部产品加速交付）。四个独立来源（Fowler / Team Topologies 官方 / Team Topologies 书页 / SAFe）定义一致。",
+      "source_ids": [
+        "BK-030",
+        "WEB-045",
+        "BK-030",
+        "VEN-039"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "三种团队交互模式为 Collaboration / X-as-a-Service / Facilitation；强调应显式定义团队如何交互，消除含糊的'加强协调'要求。",
+      "source_ids": [
+        "BK-030",
+        "WEB-045"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【失败模式】团队拓扑的专项警示：不能只用模型的一部分（例如仅套用四团队类型），否则收效有限；四类型是'强大的约束模板'而非穷尽现实，Fowler 引 George Box 'all models are wrong, some are useful' 指出复杂组织无法被简化为仅四类团队与三种交互。",
+      "source_ids": [
+        "WEB-045",
+        "BK-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Team Topologies 的核心洞见是认知负荷：full-stack/full-lifecycle 团队常面临过度认知负荷，而平台的首要收益是降低 stream-aligned 团队的认知负荷；此洞见深刻影响平台的设计决策与路线图（不同于以标准化/降本为目标的平台）。",
+      "source_ids": [
+        "BK-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "团队边界与架构耦合的对应关系：Team Topologies 明确承认康威定律影响，主张团队结构塑造面向业务、解耦、可独立演进的软件架构；DDD 的 Bounded Context/Ubiquitous Language 提供按主题聚拢人员并与价值流对齐的机制，模块分解与组织分解须全程同步演化。",
+      "source_ids": [
+        "BK-030",
+        "WEB-044"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DORA 当前采用五指标模型（3 throughput + 2 instability）：change lead time、deployment frequency、failed deployment recovery time、change fail rate、deployment rework rate；研究反复证明速度与稳定不是权衡，高绩效者五项皆优。",
+      "source_ids": [
+        "VEN-036",
+        "VEN-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DORA 口径演进（四键→五指标）：2014 以四变量起步但 change fail rate 未显著相关，实为三指标；2015 固化为 throughput/stability 四指标并存态；2018 加 availability 并改称 SDO performance；2021 扩为 reliability（曾被不准确称作第五指标）；2023 MTTR 改名重定义为 failed deployment recovery time；2024 新增 deployment rework rate 形成五指标。",
+      "source_ids": [
+        "VEN-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【勘误】'DORA 四键（four keys）'是 2015-2023 的旧口径；当前官方为五指标。旧四键 = deployment frequency、lead time for changes、change fail rate、MTTR；其中 MTTR 已于 2023 年被 failed deployment recovery time 取代，2024 又增 deployment rework rate。",
+      "source_ids": [
+        "VEN-036",
+        "VEN-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【失败模式】DORA 明确列出度量陷阱：将指标设为目标（Goodhart 定律 / 诱发 gaming）、追求'一指标统天下'、以行业/合规为不作为挡箭牌、跨异质应用比较、孤岛式指标归属引发推责、团队间竞赛、只度量不改进。",
+      "source_ids": [
+        "VEN-036"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DORA 2024 报告的张力发现：AI 提升个体生产力、flow 与满意度，但降低交付稳定性与吞吐；平台工程提升绩效但可能降低变更稳定性与吞吐，需以开发者独立性为核心谨慎实施；组织优先级不稳定显著增倦怠。",
+      "source_ids": [
+        "VEN-038"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "【反例/适用边界】康威定律适用于需要组织化沟通的规模（约一二十人以上），小团队可深度非正式沟通会自然产出单体，此时康威定律不必驱动决策；定律的作用面在'人需要被组织'时才显现。",
+      "source_ids": [
+        "WEB-044"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "counterexample_pairs": [
+    {
+      "principle": "康威定律：组织沟通结构决定系统架构",
+      "principle_source": "S2-01",
+      "counterexample": "开放协作的软件项目系统性违反严格镜像；技术动态产业中部分镜像优于完全镜像；企业可战略性地打破镜像",
+      "counterexample_source": "S4-02"
+    },
+    {
+      "principle": "Inverse Conway Maneuver：改变团队结构以催生目标架构",
+      "principle_source": "S3-01",
+      "counterexample": "对刚性遗留架构仅重组组织不会立即修复，反造成开发者-代码错配与摩擦；且 ICM 常被误用为单纯改组织架构图",
+      "counterexample_source": "S2-03"
+    },
+    {
+      "principle": "团队拓扑四类型 + 三交互模式",
+      "principle_source": "S2-05",
+      "counterexample": "只用模型一部分（如仅套四类型）收效有限；四类型/三模式是约束性隐喻而非常识穷尽，复杂组织远超此模型",
+      "counterexample_source": "S2-04"
+    },
+    {
+      "principle": "平台团队降低 stream-aligned 认知负荷、加速交付",
+      "principle_source": "S2-04",
+      "counterexample": "平台工程可能降低变更稳定性与吞吐，且臃肿平台制造更多依赖而非加速（TVP 之动因）",
+      "counterexample_source": "S2-05"
+    },
+    {
+      "principle": "DORA 五指标度量交付效能",
+      "principle_source": "S3-02",
+      "counterexample": "把指标当目标触发 Goodhart 定律与 gaming；跨异质应用比较误导；孤岛归属引发推责",
+      "counterexample_source": "S3-02"
+    },
+    {
+      "principle": "AI 提升开发生产力",
+      "principle_source": "S3-04",
+      "counterexample": "DORA 2024 发现 AI 采用同时降低软件交付稳定性与吞吐",
+      "counterexample_source": "S3-04"
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "Conway's Law 由 Melvin Conway 命名",
+      "corrected": "Conway 本人未命名；名称由 Fred Brooks 在《The Mythical Man-Month》(1975) 引用时给出",
+      "basis": "S2-02"
+    },
+    {
+      "misremembered": "Conway 1968 论文本身使用 'Conway's Law' 一词",
+      "corrected": "原文标题为《How Do Committees Invent?》，通篇无 'Conway's Law' 字样；thesis 位于倒数第三段结论",
+      "basis": "S2-01"
+    },
+    {
+      "misremembered": "DORA 四键是当前官方口径",
+      "corrected": "当前为五指标；MTTR 已于 2023 改名为 failed deployment recovery time，2024 新增 deployment rework rate",
+      "basis": "S3-02, S3-03"
+    },
+    {
+      "misremembered": "2014 DORA 定义了四键",
+      "corrected": "2014 以四变量起步，但 change fail rate 未显著相关，实际交付性能由三指标构成；四指标并存的二元（throughput/stability）于 2015 固化",
+      "basis": "S3-03"
+    },
+    {
+      "misremembered": "DORA reliability 是第五指标",
+      "corrected": "2021 报告曾不准确称 reliability 为第五指标，官方后澄清 reliability 是运营性能度量而非交付性能度量；真正的第五交付指标是 2024 的 deployment rework rate",
+      "basis": "S3-03"
+    }
+  ],
+  "gaps": [
+    "Conway 1968 原文为扫描重排版，Datamation 原始排版/页码未取得；HBR 1967 退稿信原件不可得（仅 Conway 本人转述）。",
+    "Team Topologies 书本体（2019, IT Revolution）受版权限制，仅核对官方书页与作者站点，未提取正文；第二版是否已出版未确认（站点显示第一版 2019）。",
+    "Accelerate (Forsgren/Humble/Kim 2018) 与 The DevOps Handbook 2e 为版权书，未提供本地副本，DORA 指标理论根基未回源原著。",
+    "DORA 2025 报告页面动态渲染，未逐一提取 2025 各指标基准数值（elite/low 的量化阈值）；若需 benchmark 具体数字须另取报告 PDF。",
+    "团队拓扑与架构耦合的对应关系缺 S1 标准（ISO/IEC/IEEE 12207/42010 不直接覆盖团队组织），本域以 S2/S3/S4 支撑为主，属该主题固有特征。",
+    "ICM 对企业绩效的量化效果缺独立 S4 研究（现有批评多为从业者博客，未纳入 S1/S2/S3 证据）。"
+  ],
+  "notes": "证据纪律：Conway 原文逐段回源；DORA 指标演进以官方历史文章（2026-01-02）为一级依据，并交叉 dora.dev/guides 当前页。关键定义（康威定律、ICM、四团队类型、五指标）均 ≥2 独立源（Conway+Fowler；ThoughtWorks+Fowler；Fowler+TT官方+SAFe；DORA guides+history）。专项门控 principles_counterexamples 已满足：六条核心原则各配 ≥1 反例/失败模式。"
+}

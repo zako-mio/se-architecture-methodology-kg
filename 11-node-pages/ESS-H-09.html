@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计模式与反模式 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>设计模式与反模式</span></div><div class="meta">essence · H · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>设计模式与反模式</h1><div class="en">Design Patterns and Anti-Patterns</div><div class="badges"><span class="badge pr">P1</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">H · 实现与构造</span><span class="badge th">质量属性</span><span class="badge th">技术债</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-047" title="design pattern — 对软件设计中反复出现问题的可复用解法（模板/蓝图），非可直接套用的成品设计。">设计模式</a>是对反复出现的设计问题所给的可复用解法模板，提供团队共同语言但不保证适用；<a class="term" href="../14-views/glossary.html#g-048" title="anti-pattern — 常见但适得其反的问题解法；初看合适有效但弊大于利，且有已记录的有效替代。">反模式</a>是初看合理却适得其反的常见解法，二者把设计经验的正反两面固化为可传承的知识。</span></p></div><p class="note">别名：design pattern、anti-pattern、设计模式、反模式、大泥球、Big Ball of Mud、可复用设计知识　|　英文：Design Patterns and Anti-Patterns　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -374.8 683.2 713.8" role="img" aria-label="设计模式与反模式 的 1-2 跳邻域关系图"><title>设计模式与反模式 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-27.8" y1="-226.8" x2="6.8" y2="-127.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：理解信息隐藏是评估内聚耦合的前提</title></line><line x1="6.8" y1="-127.3" x2="-183.8" y2="-234.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：内聚耦合度量指导边界划分</title></line><line x1="133.5" y1="-15.6" x2="-27.8" y2="-226.8" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：抽象泄漏揭示信息隐藏的固有边界</title></line><line x1="31.6" y1="-310.8" x2="6.8" y2="-127.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：单一知识源与高内聚同向协同</title></line><line x1="-116.2" y1="-21.9" x2="92.9" y2="-244" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SOLID 管职责与替换性，组合优先管复用机制</title></line><line x1="-116.2" y1="-21.9" x2="6.8" y2="-127.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：SOLID 以职责划分细化高内聚低耦合判据</title></line><line x1="-116.2" y1="-21.9" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：职责划分与替换性判据是理解模式适用性的前提</title></line><line x1="0" y1="0" x2="6.8" y2="-127.3" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：模式是被命名的内聚与解耦结构解法</title></line><line x1="0" y1="0" x2="-3.8" y2="103.6" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：模式以稳定接口封装变化，呼应深模块</title></line><line x1="0" y1="0" x2="133.5" y2="-15.6" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：模式封装复杂度，抽象泄漏标明其边界</title></line><line x1="-215" y1="-25.8" x2="-57.7" y2="212.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：持续设计投入以降低长期认知负荷为目标</title></line><line x1="-215" y1="-25.8" x2="-116.2" y2="-21.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：战略式设计以职责划分与替换性为判据</title></line><line x1="158.2" y1="-107.4" x2="-57.7" y2="212.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：可读性治理以可读性为工程属性为前提</title></line><line x1="158.2" y1="-107.4" x2="6.8" y2="-127.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：评审以高内聚低耦合作为结构判据</title></line><line x1="-215" y1="-25.8" x2="158.2" y2="-107.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：持续设计投入与代码评审共同对抗结构腐化</title></line><line x1="-215" y1="-25.8" x2="125.5" y2="-186.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：持续设计以重构为日常改进手段</title></line><line x1="158.2" y1="-107.4" x2="125.5" y2="-186.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：评审发现的坏味道交由重构手法处理</title></line><line x1="-244.9" y1="-141.1" x2="6.8" y2="-127.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以内聚与耦合维度逐点评估通道结构</title></line><line x1="-244.9" y1="-141.1" x2="-183.8" y2="-234.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：特化标识由提供者构造期绑定，通用契约零扩展</title></line><line x1="280.2" y1="0" x2="133.5" y2="-15.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：依赖声明是泄漏的抽象，不能替代运行时真实引用</title></line><line x1="52.3" y1="212.6" x2="-89" y2="-194.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：七层职责分解与分层坐标</title></line><line x1="52.3" y1="212.6" x2="-3.8" y2="103.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：违背：巨型单文件偏离深模块与信息隐藏理想</title></line><line x1="-89" y1="-194.1" x2="-27.8" y2="-226.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：模块化目标是信息隐藏判据的前提</title></line><line x1="-89" y1="-194.1" x2="6.8" y2="-127.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：模块划分质量以内聚耦合衡量</title></line><line x1="-27.8" y1="-226.8" x2="-3.8" y2="103.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：信息隐藏是理解深/浅模块的前提</title></line><line x1="-27.8" y1="-226.8" x2="92.9" y2="-244" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：信息隐藏是判断继承/组合取舍的前提</title></line><line x1="92.9" y1="-244" x2="6.8" y2="-127.3" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：继承在父子类之间引入实现层耦合</title></line><line x1="-3.8" y1="103.6" x2="-57.7" y2="212.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：深模块降低认知负荷，支撑可读性</title></line><line x1="125.5" y1="-186.5" x2="6.8" y2="-127.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：重构以改善内聚耦合、降低变更成本</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">设计模式与反模式<title>设计模式与反模式（ESS-H-09）</title></text><circle cx="6.8" cy="-127.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="6.8" y="-108.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">内聚与耦合<title>内聚与耦合（ESS-H-02）</title></text><circle cx="133.5" cy="-15.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="133.5" y="3.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">抽象泄漏<title>抽象泄漏（ESS-H-04）</title></text><circle cx="-3.8" cy="103.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="-3.8" y="122.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">深模块与浅模块<title>深模块与浅模块（ESS-H-05）</title></text><circle cx="-116.2" cy="-21.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="-116.2" y="-2.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">SOLID 职责划分与替…<title>SOLID 职责划分与替换性（ESS-H-08）</title></text><circle cx="-183.8" cy="-234.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-183.8" y="-218.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="-27.8" cy="-226.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-27.8" y="-210.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">信息隐藏<title>信息隐藏（ESS-H-01）</title></text><circle cx="158.2" cy="-107.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="158.2" y="-91.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码复审与可读性治理<title>代码复审与可读性治理（MTH-H-04）</title></text><circle cx="-244.9" cy="-141.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-244.9" y="-125.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="-89" cy="-194.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-89" y="-178.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">模块化与分解<title>模块化与分解（ESS-G-04）</title></text><circle cx="125.5" cy="-186.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="125.5" y="-170.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">重构手法族<title>重构手法族（MTH-H-01）</title></text><circle cx="31.6" cy="-310.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="31.6" y="-294.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DRY 单一知识来源<title>DRY 单一知识来源（ESS-H-03）</title></text><circle cx="-215" cy="-25.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-215" y="-9.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">战略式编程与持续设计投入<title>战略式编程与持续设计投入（MTH-H-03）</title></text><circle cx="280.2" cy="0" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="280.2" y="16" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG 两次级联升…<title>插件 DAG 两次级联升级（CAS-X-07）</title></text><circle cx="52.3" cy="212.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="52.3" y="228.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Hermes 七层架构总…<title>Hermes 七层架构总览（CAS-X-11）</title></text><circle cx="92.9" cy="-244" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="92.9" y="-228" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">组合优于继承与脆弱基类<title>组合优于继承与脆弱基类（ESS-H-06）</title></text><circle cx="-57.7" cy="212.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-57.7" y="228.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可读性与认知负荷<title>可读性与认知负荷（ESS-H-07）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 12 个二跳节点，共 17 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">软件设计中反复出现相似的问题，若每次都从零推导，就会重复付出认知成本，且不同人给出互不一致的解法。</span><span class="hl">设计模式把已被验证的解法<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>为可复用的描述，使设计知识可以跨项目传承，并让团队用同一套词汇精确沟通结构意图。</span>模式不是可直接套用的成品，而是「在特定语境与作用力下，针对某类问题的通用解法」：它描述的是解的骨架与参与者之间的关系，而非具体代码。与模式相对，反模式记录了那些初看有效、实际却弊大于利的常见解法，并给出已被验证的替代路径；它之所以有价值，正是因为这类错误会反复出现，且往往在短期内显得合理。设计模式与反模式共同构成设计经验的坐标系：正例告诉团队「可以怎么做」，反例告诉团队「哪些看似合理的路会通向复杂度」。<span class="hl">其中<a class="term" href="../14-views/glossary.html#g-050" title="Big Ball of Mud — 缺乏可感知架构的软件系统；是最常见的「架构」之一，成因含业务压力、人员流动与软件熵。">大泥球</a>是最典型的高频反模式——缺乏可感知<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>、靠临时拼接蔓延而成，常源于持续的业务压力与人员流动。</span></p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">设计模式通常由语境、问题、作用力与解法四部分刻画：语境界定适用场景，问题说明要解决的矛盾，作用力描述相互牵制的约束（性能、可读性、变化方向等），解法给出参与者及其协作结构与后果。</span>模式按目的分类，说明它们分别作用于对象创建、结构组织与行为协作；按作用力选择而不是按名字匹配，是模式应用的核心。反模式的识别则依赖症状：当系统反复出现特定坏味道、并且投入的补救总是反弹时，往往意味着背后有某个反模式在持续生成问题——例如职责任意堆叠、接口持续膨胀、修改总是波及大范围。识别之后应追溯生成该症状的结构性原因，而不是逐个修补表面现象。模式本身也会随实现退化：当它被过度应用或被误解时，其结构会积累新的坏味道，使最初的收益被维护成本抵消。因此模式与反模式构成一个动态谱系——同一个解法在错误的语境或过度的使用下，会从前例滑向反例。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">使用模式时先分析问题的作用力，再核对候选模式的语境是否吻合，最后检查其后果是否可接受；不要因为「看起来像某个模式」就直接套用，更不能为了用模式而制造问题。</span>把模式当作起点与共同语言：它提示了需要平衡的约束，但具体解法应结合语言能力与团队习惯裁剪，简单的直接方案往往优于为模式而引入的间接层。对反模式建立巡诊机制：以坏味道为信号，定期审视系统中的结构性退化，识别生成问题的高频结构并集中处理，而非逐处打补丁。<span class="hl">记录模式选择与放弃的<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">理由</a>，使后来者能理解哪些约束促成了当前结构。</span>由于模式的需求有时来自语言或平台表达能力的不足，评估模式时应先问「这个抽象是问题本身需要的，还是工具限制造成的」；若能在更简单的层次表达，通常应优先选择更直接的方案。最后，模式不是免于腐化的护身符，即便采用经典模式，也需持续检查其结构是否随演化而退化。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>设计模式的价值与风险同源：它用已命名的结构换取沟通效率与经验复用，但代价是引入额外的类型、间接层与约定，一旦语境不符或使用过度，就把简单问题复杂化。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是把模式当模板填空：看到相似结构就套用，结果系统充满不必要的抽象层，理解一条调用链需要在多个参与者之间跳转。</p><p>反例之二是把模式当作设计成熟度的标志，为追求「用了模式」而设计，与「未确认必需前不添加」的原则直接冲突。</p><p>反例之三是忽视模式的退化：经典模式在实现中会积累坏味道，若不加维护，其结构会从收益来源转为维护负担。</p><p>因此应以问题与作用力为中心选择解法，把模式视为讨论工具而非目标，并持续维护其结构，避免它从前例滑向反例。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>还需要区分「反模式」与「不理想的权衡」：并非所有看似糟糕的结构都是反模式，有些是在特定约束下做出的合理折中，脱离语境贴标签会造成误判。</li><li>模式也不是唯一的设计知识形态，部分模式在表达力更强的语言中会自然消解，这说明模式的需求与工具能力相关。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">ESS-H-08</span><span class="nm">SOLID 职责划分与替换性</span></span><span class="arw">→</span><span class="step cur"><span class="id">ESS-H-09</span><span class="nm">设计模式与反模式</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：模式封装复杂度，抽象泄漏标明其边界</caption><thead><tr><th>对照维度</th><th>设计模式与反模式</th><th>抽象泄漏</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>设计模式与反模式 · Design Patterns and Anti-Patterns</td><td>抽象泄漏 · Leaky Abstraction</td></tr><tr><td class="k">核心定义（原文）</td><td>设计模式是对反复出现的设计问题所给的可复用解法模板，提供团队共同语言但不保证适用；反模式是初看合理却适得其反的常见解法，二者把设计经验的正反两面固化为可传承的知识。</td><td>所有非平凡抽象都会在不同程度上泄漏其底层实现：性能、故障与边界行为会穿透抽象边界，使用者被迫了解本应被隐藏的细节。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>软件设计中反复出现相似的问题，若每次都从零推导，就会重复付出认知成本，且不同人给出互不一致的解法。</td><td>抽象以简化换取可控性，它把复杂的底层机制投影成一个更易使用的模型；但被隐藏的机制并未消失，只是在压力下重新显现。</td></tr><tr><td class="k">对照关系</td><td>模式封装复杂度，抽象泄漏标明其边界（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例之一是把模式当模板填空：看到相似结构就套用，结果系统充满不必要的抽象层，理解一条调用链需要在多个参与者之间跳转。反例之二是把模式当作设计成熟度的标志，为追求「用了模式」而设计，与「未确认必需前不添加」的原则直接冲突。反例之三是忽视模式的退化：经典模式在实现中会积累坏味道，若不加维护，其结构会从收益来源转为维护负担。因此应以问题与作用力为中心选择解法，把模式视为讨论工具而非目标，并持续维护其结构，避免它从前例滑向反例。</td><td>常见的失败模式是层层封装的「抽象塔」：每一层都假设下层不会泄漏，于是一次底层抖动被放大成跨层故障，排查时反而要穿透全部层次。</td></tr><tr><td class="k">处置要点（原文）</td><td>使用模式时先分析问题的作用力，再核对候选模式的语境是否吻合，最后检查其后果是否可接受；不要因为「看起来像某个模式」就直接套用，更不能为了用模式而制造问题。</td><td>设计抽象时显式写下它的泄漏面与失效模式：它假设了什么、在什么条件下不再成立、使用者会遇到哪些可观测代价。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → ESS-H-02 → ESS-G-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-03 · 2 跳派生：当前节点 → ESS-H-02 → ESS-H-03</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-04 · 2 跳派生：当前节点 → ESS-H-02 → ESS-H-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-05 · 经 ESS-H-02</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-07 · 经 ESS-H-04</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → ESS-H-02 → ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-11 · 2 跳派生：当前节点 → ESS-H-02 → ESS-G-04</span><h4>Hermes 七层架构总览</h4><p>对八千余文件的工业级 AI Agent 项目做七层架构总览逆向，揭示其「越用越聪明」的自进化闭环如何在层间传导的控制型架构案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → ESS-H-02 → MTH-H-04</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-032、VEN-016、WEB-021、PAP-022、WEB-023</div><div class="r"><span class="k">入口链接</span><a href="https://www.laputan.org/mud/" target="_blank" rel="noopener">https://www.laputan.org/mud/</a>　<a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Design_Patterns</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：设计模式是放之四海皆准的成品解法，遇到相似问题套用即可</span><br>核验结论：模式是对反复出现问题解的模板，须结合具体语境与作用力判断适用性；误用会引入不必要复杂度与额外间接层，且经典模式在实现中自身也会退化出坏味道　<span class="k">[VEN-016]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：经典设计模式共有 22 个</span><br>核验结论：经典原著列为 23 个模式；部分工程速查门户列为 22 个（省略 Interpreter 模式），引用时须区分来源口径　<span class="k">[BK-032]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ ESS-H-05</td><td>深模块与浅模块<br><span style="color:var(--dim);font-size:12px">E-745</span></td><td>模式以稳定接口封装变化，呼应深模块</td></tr><tr><td class="k">对照</td><td>→ ESS-H-04</td><td>抽象泄漏<br><span style="color:var(--dim);font-size:12px">E-746</span></td><td>模式封装复杂度，抽象泄漏标明其边界</td></tr><tr><td class="k">前置依赖</td><td>← ESS-H-08</td><td>SOLID 职责划分与替换性<br><span style="color:var(--dim);font-size:12px">E-743</span></td><td>职责划分与替换性判据是理解模式适用性的前提</td></tr><tr><td class="k">细化</td><td>→ ESS-H-02</td><td>内聚与耦合<br><span style="color:var(--dim);font-size:12px">E-744</span></td><td>模式是被命名的内聚与解耦结构解法</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

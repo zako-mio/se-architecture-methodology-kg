@@ -1,0 +1,349 @@
+{
+  "topic": "软件工程/架构设计方法论 — 本机本地信源盘点",
+  "generated_by": "知识资产盘点员(自写角色)",
+  "scan_root": "~",
+  "scan_date": "2026-09-10",
+  "assets": [
+    {
+      "id": "KG-01",
+      "path": "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodology/",
+      "type": "knowledge-graph",
+      "topic": "12 Factor App × 12 Factor Agent 合并方法论知识图谱（38 节点/61 边/16 组，双体系+桥接主题）",
+      "relevance": "high",
+      "reusable": "结构（DAG 数据模型 meta/groups/layers/nodes/edges + 桥接主题三栏对比设计）；脚本（07-checkpoint/gen-*.py 生成链：节点页/组页/视图/交互图/MD 镜像/根索引）；门控（quality-gate.md 七项：覆盖/结构/断链/无环/四向覆盖/抽查/交互一致）；内容（每节点 1500-3000 字 what-why-how+反模式）；08-source/ 454 文件源码资产与双索引（节点页实践资源区块 + MD 源码索引）"
+    },
+    {
+      "id": "KG-02",
+      "path": "~/opencode/archive/Mission-file/2026-08/0820-algorithm-knowledge-graph/",
+      "type": "knowledge-graph",
+      "topic": "算法知识图谱（60 组/372 节点/318 边，竞赛+系统学习）",
+      "relevance": "medium",
+      "reusable": "结构（三级下钻：组级→组内变体→页内小节；priority P0-P3 + 学习阶段多视图）；脚本（07-checkpoint gen-*.py 全自动生成链，含交互 cytoscape vendor）；门控（quality-gate.md、环检测 stats.md）；可复用其『DAG 基础设施模式』作为本库骨架参照"
+    },
+    {
+      "id": "KG-03",
+      "path": "~/opencode/archive/Mission-file/2026-08/0826-RL推理显存面试知识库/",
+      "type": "knowledge-graph",
+      "topic": "RL/LLM 推理/显存优化面试知识库（13 章 + 总述页，HTML+MD+drawio）",
+      "relevance": "medium",
+      "reusable": "章节模板 chapter-template.html（保证多章结构一致）；assets/style.css 浅色学术风（侧边目录/prev-next/证据区块/可打印）；脚本（scripts/quality-gate.py、verify-report.py、append-reflection.py）；信源规范（每知识点 ≥2 独立权威源 + 页末证据区块 + 置信度标注）；3 路并行子Agent 按主题分片检索的委派范式"
+    },
+    {
+      "id": "KG-04",
+      "path": "~/opencode/archive/Mission-file/2026-08/0813-知识库建库工程/",
+      "type": "knowledge-graph",
+      "topic": "RAG 建库工程教材（6 层）+ 第5层『架构权衡思维』11 维权衡矩阵",
+      "relevance": "high",
+      "reusable": "内容（17/18 篇『架构权衡思维』：精度vs召回 等 11 维，每维『有什么可权衡/如何权衡/为何如此权衡/你的场景』统一骨架 — 可直接迁移为架构决策方法论）；结构（分层教材 + RAG建库方案架构分层图.drawio）；流程（00-初始计划.md 建库全流程）"
+    },
+    {
+      "id": "SK-01",
+      "path": "~/.config/opencode/skills/kb-construction/SKILL.md",
+      "type": "skill",
+      "topic": "知识库构建全流程主入口（五类谱系分流 + 共享主干 + L1-L7 门控）",
+      "relevance": "high",
+      "reusable": "结构（五类谱系：内容交付/检索问答/上下文注入/语料资产/数据分析，附本地经验源索引）；reference/（source-grading.md 信源分级、gates-and-cascade.md 门控、paradigm-matrix.md 范式、type-taxonomy.md 分流、authoritative-repos.md、failure-pitfalls.md、cascade-rules.example.yaml）；scripts/（kb_gate.py 57KB 门控、data_validate.py、chunk/embed_index/hybrid_search/evaluate_rag）；chapters/ 6 章方法论文档；可直接作为母库编排方法论"
+    },
+    {
+      "id": "SK-02",
+      "path": "~/.config/opencode/skills/dag-tutorial-authoring/SKILL.md",
+      "type": "skill",
+      "topic": "DAG 教程编写方法论（零基础读者导向，可读性规律编码为门控）",
+      "relevance": "medium",
+      "reusable": "新手教程的可读性递进结构（直觉→原理→机制→工程→权衡→导读）与调研驱动编写+双轨验证(VLM+headless)方法论"
+    },
+    {
+      "id": "SK-03",
+      "path": "~/.config/opencode/skills/cytoscape-dag-visualization/SKILL.md",
+      "type": "skill",
+      "topic": "cytoscape.js 交互 DAG 可视化构建方法论（组级+下钻、DATA 注入、环修复、disabled 标注）",
+      "relevance": "medium",
+      "reusable": "交互式架构依赖图的可视化实现（DATA 注入/染色/排版/幂等防累积/VLM 验证渲染），适配架构依赖图交付"
+    },
+    {
+      "id": "SK-04",
+      "path": "~/.config/opencode/skills/multi-window-dag-delivery/SKILL.md",
+      "type": "skill",
+      "topic": "多层窗口接力 DAG 依赖链分析与交付方法论（含三硬依据 E1 编译/E2 运行时/E3 组合）",
+      "relevance": "high",
+      "reusable": "方法论（多窗口接力分析大型源码/插件库、PLAN-layerN.md 接力文件、拓扑分层、PACKAGE-MAP 覆盖度）；三硬依据溯源框架 = 架构依赖分析的可复用证据模型"
+    },
+    {
+      "id": "RL-01",
+      "path": "~/.dsh/agency-agents/engineering/engineering-software-architect.md",
+      "type": "role",
+      "topic": "Software Architect — 系统设计/DDD/架构模式/技术选型",
+      "relevance": "high",
+      "reusable": "角色 prompt 描述行可直接注入子Agent 提升架构分析专业性"
+    },
+    {
+      "id": "RL-02",
+      "path": "~/.dsh/agency-agents/engineering/engineering-backend-architect.md",
+      "type": "role",
+      "topic": "Backend Architect — 可扩展系统/数据库架构/API/云基础设施/微服务",
+      "relevance": "high",
+      "reusable": "后端/分布式架构视角的角色描述行"
+    },
+    {
+      "id": "RL-03",
+      "path": "~/.dsh/agency-agents/engineering/engineering-multi-agent-systems-architect.md",
+      "type": "role",
+      "topic": "Multi-Agent Systems Architect — 拓扑选择/上下文管理/信任/失败恢复/HITL 门控/可观测性",
+      "relevance": "high",
+      "reusable": "Agent 系统架构治理视角，适配 AI 原生软件工程章节"
+    },
+    {
+      "id": "RL-04",
+      "path": "~/.dsh/agency-agents/engineering/engineering-codebase-onboarding-engineer.md",
+      "type": "role",
+      "topic": "Codebase Onboarding Engineer — 快速读懂陌生代码库/追踪调用路径/只陈述代码事实",
+      "relevance": "medium",
+      "reusable": "源码架构逆向与依赖追踪的方法论角色"
+    },
+    {
+      "id": "RL-05",
+      "path": "~/.dsh/agency-agents/engineering/engineering-code-reviewer.md",
+      "type": "role",
+      "topic": "Code Reviewer — 正确性/可维护性/安全/性能的可执行反馈",
+      "relevance": "medium",
+      "reusable": "代码质量工程实践角色"
+    },
+    {
+      "id": "RL-06",
+      "path": "~/.dsh/agency-agents/engineering/engineering-minimal-change-engineer.md",
+      "type": "role",
+      "topic": "Minimal Change Engineer — 最小可行 diff/拒绝范围蔓延/预防重构雪崩",
+      "relevance": "medium",
+      "reusable": "『最小变更』工程纪律，可作为软件工程原则条目"
+    },
+    {
+      "id": "RL-07",
+      "path": "~/.dsh/agency-agents/engineering/engineering-git-workflow-master.md",
+      "type": "role",
+      "topic": "Git Workflow Master — 分支策略/conventional commits/rebase/worktree/CI",
+      "relevance": "medium",
+      "reusable": "版本控制与协作流程实践"
+    },
+    {
+      "id": "RL-08",
+      "path": "~/.dsh/agency-agents/engineering/engineering-senior-developer.md",
+      "type": "role",
+      "topic": "Senior Developer — 高级实现（偏前端栈）",
+      "relevance": "low",
+      "reusable": "实现层角色，架构内容相关度低"
+    },
+    {
+      "id": "RL-09",
+      "path": "~/.dsh/agency-agents/engineering/engineering-rapid-prototyper.md",
+      "type": "role",
+      "topic": "Rapid Prototyper — POC/MVP 快速开发",
+      "relevance": "low",
+      "reusable": "原型/迭代交付模式补充"
+    },
+    {
+      "id": "RL-10",
+      "path": "~/.dsh/agency-agents/product/product-manager.md",
+      "type": "role",
+      "topic": "Product Manager — 产品全生命周期/需求到交付",
+      "relevance": "low",
+      "reusable": "需求工程/产品-技术对齐视角（软件工程过程域补充）"
+    },
+    {
+      "id": "MM-01",
+      "path": "~/.config/opencode/MEMORY.md",
+      "type": "memory",
+      "topic": "项目记忆索引（建库/架构/编码纪律相关条目）",
+      "relevance": "high",
+      "reusable": "可提炼的条目：cycle_legacy_coding（编码安全/UTF-8/replaceAll 复核）；cycle_20260813_matrix（11 维权衡矩阵收敛选型法）；coverage_audit（交付物覆盖率审计 + 门控自身也要门控）；dual_track（双轨交付一致性三原则）；cross_project（经验跨项目迁移方法论）；field-level version mapping（数据驱动视图优于硬编码）；parallel_search（多路并行领域分片检索）；kb gate（HTML 双交付质量门控链）；0818_v4（共享路径反推根因法）"
+    },
+    {
+      "id": "PA-01",
+      "path": "~/opencode/archive/Mission-file/2026-08/0820-去中心化聊天架构分析/",
+      "type": "practical-archive",
+      "topic": "真实开源项目『去中心化聊天软件架构』全景分析 + 模块化 DAG 结构化（58 份设计文档）",
+      "relevance": "high",
+      "reusable": "案例（从设计文档到 18 模块依赖 DAG + 3 条核心数据流 DAG 的架构逆向方法）；产出（report.md/去中心化聊天架构-全景-DAG-需求分析.md/dag-模块依赖图.html）；可作架构分析实战范例"
+    },
+    {
+      "id": "PA-02",
+      "path": "~/opencode/archive/Mission-file/2026-08/0805-OpenJobAutofill逆向分析/",
+      "type": "practical-archive",
+      "topic": "Chrome MV3 扩展 OpenJobAutofill 逆向架构分析（总体架构/五模块/站点适配器/消息协议/数据流）",
+      "relevance": "high",
+      "reusable": "内容（01-总体架构.md、02-content引擎、03-background中枢、04-资料管理、05-站点适配器系统、06-消息协议、07-schema 文档）；drawio 三图（核心填写流程/模块依赖与数据流/站点适配器机制）；范例：适配器驱动 + 事件驱动架构的完整文档化"
+    },
+    {
+      "id": "PA-03",
+      "path": "~/opencode/archive/Mission-file/2026-08/0812-网申v3调取复制版/",
+      "type": "practical-archive",
+      "topic": "多模块解耦系统架构设计 + 跨模块接口契约（Schema 驱动，改字段不改代码）",
+      "relevance": "high",
+      "reusable": "内容（架构设计-多模块解耦.md 按『总-分-总』展开；docs/contracts.md 跨模块接口契约；架构总览.html 可视化）；范例：契约先行 + 数据驱动架构"
+    },
+    {
+      "id": "PA-04",
+      "path": "~/opencode/archive/Mission-file/2026-08/0806-网申扩展v2实现/",
+      "type": "practical-archive",
+      "topic": "网申扩展 v2 深度重构 — 架构设计思路与根因分析（接口散落 12 文件→统一）",
+      "relevance": "high",
+      "reusable": "0806-深度重构-架构设计思路.md：表面症状→根因分析→架构重构图，可作『重构方法论』案例；展现耦合/接口统一化的工程权衡"
+    },
+    {
+      "id": "PA-05",
+      "path": "~/opencode/archive/Mission-file/2026-08/0816-dsh启动失败修复/N7-架构/",
+      "type": "practical-archive",
+      "topic": "harness preset 通道架构耦合分析（委派工具层→continuation manager→preset 服务→MCP，含创建/冷恢复路径）",
+      "relevance": "high",
+      "reusable": "内容（N7-架构耦合分析.md + drawio/png/svg 架构图）；范例：通道/层耦合分析与冷恢复路径建模"
+    },
+    {
+      "id": "PA-06",
+      "path": "~/opencode/archive/Mission-file/2026-08/0819-plugin-dag-rc7/",
+      "type": "practical-archive",
+      "topic": "DeepSeek Harness 插件级 DAG 知识库 RC5→RC7 级联升级（173 插件/49 seam/545 边）",
+      "relevance": "high",
+      "reusable": "结构（01-dag-data core-dag/external-seams/webapp-dag + 02-plugin-pages/03-groups/04-interactive/05-source/06-md/07-checkpoint/08-special-modules）；方法（三硬依据溯源 + 版本级联升级流程 version-upgrade-cascade；RC5-RC7-DIFF-REPORT.md 差异分析范式）"
+    },
+    {
+      "id": "PA-07",
+      "path": "~/opencode/archive/Mission-file/2026-08/0822-plugin-dag-v0.1.1-rc2/",
+      "type": "practical-archive",
+      "topic": "dsh 插件 DAG 知识库 RC7→RC8→rc2 级联升级（含两份差异报告）",
+      "relevance": "high",
+      "reusable": "RC7-RC8-DIFF-REPORT.md / RC8-RC2-DIFF-REPORT.md：软件版本演进的依赖级联更新方法论（增量更新 + 全量门控 + 差异三路交叉验证）"
+    },
+    {
+      "id": "PA-08",
+      "path": "~/opencode/archive/Mission-file/2026-08/0822-dsh-manager-analysis/",
+      "type": "practical-archive",
+      "topic": "dsh-manager 插件深度分析（依赖/功能/需求溯源/设计问题）— 三硬依据 E1/E2/E3",
+      "relevance": "high",
+      "reusable": "方法论（E1 编译依赖 package.json peerDeps / E2 运行时依赖 ctx 服务注入 / E3 组合依赖 cordis.patch.yml 装配位置）；产出（02-analysis/dag-data.json、单页 cytoscape 交互分析页、report 双版本）；范例：架构依赖证据链 + 设计问题裁决"
+    },
+    {
+      "id": "PA-09",
+      "path": "~/opencode/archive/Mission-file/2026-08/0814-deepseek-harness源码解析/",
+      "type": "practical-archive",
+      "topic": "deepseek-harness 源码解析（官方 docs/architecture.md 镜像、03-md-cluster 模块分层、06-diagrams）",
+      "relevance": "high",
+      "reusable": "内容（02-docs-mirror/official/architecture.md 官方架构文档、native/landlock-run 架构、03-md-cluster L1-Mxx 模块分层）；范例：官方架构文档镜像 + 源码模块逐层解析 + install-guide"
+    },
+    {
+      "id": "PA-10",
+      "path": "~/opencode/archive/Mission-file/2026-08/0818-dsh-anchored-standard-analysis/",
+      "type": "practical-archive",
+      "topic": "dsh-anchored-standard 社区插件依赖位置分析（以官方 DAG 为蓝本）",
+      "relevance": "medium",
+      "reusable": "范例：第三方插件在宿主架构中的定位与依赖图增量分析（任务完成报告.md）"
+    },
+    {
+      "id": "PA-11",
+      "path": "~/opencode/archive/Mission-file/2026-08/0802-Hermes-Arch/",
+      "type": "practical-archive",
+      "topic": "Hermes Agent 整体架构报告（8251 文件工业级项目，七层架构）",
+      "relevance": "high",
+      "reusable": "内容（01-Hermes整体架构报告.md 七层架构）；范例：超大型代码库架构分层总览方法；附带官方 developer-guide/architecture.md"
+    },
+    {
+      "id": "PA-12",
+      "path": "~/opencode/archive/Mission-file/2026-08/0808-MCP四件套源码深挖/",
+      "type": "practical-archive",
+      "topic": "MCP 四件套源码深挖（含 codegraphcontext ARCHITECTURE.md/BUNDLE_ARCHITECTURE.md）",
+      "relevance": "medium",
+      "reusable": "内容：架构文档（ARCHITECTURE.md、docs/concepts/architecture.md、架构图 png）；范例：工具/服务型项目源码架构分析"
+    },
+    {
+      "id": "PA-13",
+      "path": "~/opencode/archive/Mission-file/2026-08/0808-claude-code-analysis/",
+      "type": "practical-archive",
+      "topic": "Claude Code Agent 架构深度解析（逆向工程 Agent 架构/核心机制/可借鉴模式）",
+      "relevance": "medium",
+      "reusable": "Claude-Code-Agent-Architecture-Analysis.md：Agent 架构逆向工程方法 + 系统提示词/内部机制交叉验证范式"
+    },
+    {
+      "id": "PA-14",
+      "path": "~/opencode/archive/Mission-file/2026-08/0803-OpenSpec_Superpower解析/",
+      "type": "practical-archive",
+      "topic": "OpenSpec × Superpower 工具解析（含架构对比图 + workspace-architecture.md）",
+      "relevance": "medium",
+      "reusable": "规约驱动开发（spec-driven development）工具链与架构对比；analysis/02-架构对比图.drawio"
+    },
+    {
+      "id": "PA-15",
+      "path": "~/opencode/archive/Mission-file/2026-08/0823-open-code-review/",
+      "type": "practical-archive",
+      "topic": "Open Code Review（阿里 open-code-review）项目解析知识图谱（代码审查 CLI 架构）",
+      "relevance": "high",
+      "reusable": "内容+结构：AI 代码审查工具的全套知识图谱（01-dag-data/ai-index.json/quality-gate.md）；主题=代码审查/质量工程实践，直接关联软件工程；可复用其图谱结构与工具库索引设计"
+    },
+    {
+      "id": "PA-16",
+      "path": "~/opencode/archive/Mission-file/2026-09/0907-控制理论Agent设计知识库/",
+      "type": "practical-archive",
+      "topic": "控制理论 ⊗ Agent 设计知识库（负反馈闭环/状态估计/PID/鲁棒/分层 + 6 真实 Agent 产品案例）",
+      "relevance": "high",
+      "reusable": "框架（01-theory 五维 + 02-framework/framework.md）；案例（03-cases: claude-code/codex/deepseek-harness/hermes/opencode）；范例：跨学科理论→软件/Agent 架构设计的迁移方法论（『从调参工程师到系统架构师』）"
+    },
+    {
+      "id": "PA-17",
+      "path": "~/opencode/archive/Mission-file/2026-09/0910-技术知识中枢主页/methodology/METHODOLOGY-full.md",
+      "type": "practical-archive",
+      "topic": "技术知识中枢方法论（全量版 + 可读 HTML）",
+      "relevance": "high",
+      "reusable": "内容：跨知识库统一组织/索引的方法论；QA 门控脚本 qa_gate.py；可作母库编排与交付结构参照"
+    },
+    {
+      "id": "PA-18",
+      "path": "~/opencode/archive/Mission-file/2026-08/0818-项目经历撰写/AI Agent 架构 DAG 分析项目复盘.md",
+      "type": "practical-archive",
+      "topic": "AI Agent 架构 DAG 分析项目复盘（docx+md）",
+      "relevance": "medium",
+      "reusable": "范例：架构 DAG 分析项目的复盘与经验提炼"
+    },
+    {
+      "id": "BK-01",
+      "path": "~/opencode/archive/Mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "type": "book-asset",
+      "topic": "12 Factor App 官方电子书（epub/mobi）",
+      "relevance": "medium",
+      "reusable": "语料层：12 Factor 原文（软件工程方法论经典，与母库主题直接相关）；注意版权红线，仅本地语料层"
+    },
+    {
+      "id": "BK-02",
+      "path": "~/opencode/archive/AI-Agents-in-Depth-zh-CN.pdf",
+      "type": "book-asset",
+      "topic": "AI Agents in Depth（中文版，Agent 工程）",
+      "relevance": "low",
+      "reusable": "Agent 工程语料，非软件工程/架构经典；可作 AI 原生软件工程补充"
+    }
+  ],
+  "books_finding": {
+    "expected": "无软件工程/架构类电子书",
+    "verified": true,
+    "evidence": "全盘 find (*.pdf/*.epub/*.mobi/*.azw3, 排除 node_modules) 共约 201 个文档；未发现 Clean Architecture / A Philosophy of Software Design / DDD / Refactoring / DDIA / Software Engineering at Google / SWEBOK 等主题电子书。.epub/.mobi 仅 1 组：0823-12factor项目 内的 12factor.epub/.mobi。PDF 主要为论文（0825-LLM论文全集）、算法手册（CPH）、Agent 书籍、简历/报告等",
+    "conclusion": "本机无软件工程/架构经典书籍本体；书籍语料需阶段2按 01-books 候选清单另行获取（遵守版权红线，只入本地语料层）"
+  },
+  "coverage": {
+    "kg_libraries": 4,
+    "skills": 4,
+    "roles": 10,
+    "memory": 1,
+    "practical_archives": 18,
+    "books": 2
+  },
+  "reuse_priorities": [
+    "母库骨架：复用 KG-01 的 DAG 数据模型 + 生成链 + 七项门控，作为软件工程架构母库的工程底座",
+    "内容框架：复用 KG-04『架构权衡思维 11 维』统一骨架，作为架构决策方法论主干",
+    "方法论编排：注入 SK-01（kb-construction）五类谱系 + L1-L7 门控 + reference/source-grading.md 信源分级",
+    "依赖分析证据模型：复用 SK-04/PA-08 的『三硬依据 E1/E2/E3』作为架构依赖可溯源框架",
+    "实战案例库：PA-01…PA-18 提供 18 个真实架构分析案例，可提炼为母库案例章节",
+    "角色注入：RL-01/02/03 的架构角色描述行用于后续子Agent 专业化"
+  ],
+  "gaps": [
+    "软件工程/架构经典书籍本体缺失（Clean Architecture/APoSD/DDD/DDIA/SE@Google/SWEBOK），需阶段2 另行获取",
+    "ISO/IEC/IEEE 42010、SWEBOK 等标准/S1 权威源不在本地，需联网采集",
+    "0817-plugin-dag 目录为空（内容疑似迁移至 0819-plugin-dag-rc7）",
+    "部分实战留档（0802-Hermes-Arch、0808-MCP）含大量第三方源码/规范，引用需注意版权与出处"
+  ],
+  "notes": "所有路径经 ls/glob/find 实测存在。role 文件位于 ~/.dsh/agency-agents/（非 ~/.config/opencode/skill 内）。本盘点为只读操作，未修改任何被扫描文件。"
+}

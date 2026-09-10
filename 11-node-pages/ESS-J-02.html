@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开发生产一致性 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>开发生产一致性</span></div><div class="meta">essence · J · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a><a href="#xref"><span class="n">附</span>对照资源</a></nav>
+<article>
+<header class="doc"><h1>开发生产一致性</h1><div class="en">Dev/Prod Parity</div><div class="badges"><span class="badge pr">P0</span><span class="badge st basic">基础</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">J · 部署</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-074" title="dev/prod parity — 让开发、预发、生产尽可能相似（时间差/人员差/工具差最小），backing service 同类型同版本。">开发</a>、预发与生产环境应尽可能相似，把时间差、人员差与工具差压到最小，并使用同类型同版本的支撑服务，使在早期环境中验证过的行为在生产中依然成立。</span></p></div><p class="note">别名：dev/prod parity、环境一致性、开发生产一致、环境一次　|　英文：Dev/Prod Parity　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 678 678" role="img" aria-label="开发生产一致性 的 1-2 跳邻域关系图"><title>开发生产一致性 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="0" y1="-134" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：三阶段分离是环境一致性的前提</title></line><line x1="0" y1="-134" x2="-111.1" y2="-264.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：运行阶段无变更入口是基础设施不可变的基础</title></line><line x1="0" y1="-244.2" x2="0" y2="-134" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：部署流水线依据构建发布运行分离</title></line><line x1="111.1" y1="-264.6" x2="0" y2="-134" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：封闭构建依据构建阶段的可复现要求</title></line><line x1="0" y1="107.3" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：配置外置服务于开发生产一致性</title></line><line x1="0" y1="107.3" x2="0" y2="-244.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：配置外置是流水线逐环境提升同一制品的前提</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">开发生产一致性<title>开发生产一致性（ESS-J-02）</title></text><circle cx="0" cy="-134" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-115" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">构建发布运行分离<title>构建发布运行分离（ESS-J-01）</title></text><circle cx="0" cy="107.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="126.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">配置外置与显式化<title>配置外置与显式化（MTH-J-04）</title></text><circle cx="0" cy="-244.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="0" y="-228.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线<title>部署流水线（MTH-J-01）</title></text><circle cx="111.1" cy="-264.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="111.1" y="-248.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">封闭构建<title>封闭构建（MTH-J-03）</title></text><circle cx="-111.1" cy="-264.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-111.1" y="-248.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">不可变基础设施<title>不可变基础设施（ESS-J-03）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 2 个直接邻接、外环 3 个二跳节点，共 6 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">验证的价值取决于被验证环境与真实<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>环境的接近程度。</span><span class="hl">如果开发、预发与生产在依赖类型、依赖版本、数据规模或<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>方式上存在系统性差异，那么在早期环境通过的结论就无法迁移到生产，团队会反复遭遇只在生产复现的缺陷，并把大量时间消耗在无法复现的排障上。</span>环境分歧还会掩盖集成问题：本地用轻量替代物换掉真实的支撑服务，看似降低了启动成本，实际上把最关键的集成风险推迟到了最昂贵的时刻。因此一致性不是舒适度问题，而是让验证结论可信、让反馈回路真实的前提。它并不要求各环境完全相同，而是要求把差异限制在可识别、可管理、可审查的外部配置范围内，从而让『在我这里能跑』能够有意义地推广为『在生产也能跑』。换言之，一致性追求的不是环境外观的复制，而是行为语义的可迁移，使一次验证的结论能够被信任并复用，也让持续部署建立在可信的测试证据之上。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">一致性沿三个差距收敛。</span>时间差：缩短从代码提交到部署上线的间隔，间隔越长，越难把某次变更与后来的故障对应起来。人员差：让写代码的人参与甚至负责部署，避免交付被交接给不了解其设计假设的第三方。工具差：各环境使用同类型同版本的运行时与支撑服务，避免用不同数据库或消息系统制造语义差异。实现路径是让同一不可变制品经由不同的外部配置部署到各环境，环境差异只体现为配置注入，而不是重新构建制品或替换技术栈。支撑服务尽量同类型同版本，使行为差异可预期、可解释。当环境确实无法完全一致时，应明确记录哪些差异是有意保留的，以及它们可能引入哪些风险，而不是让差异在无意中累积并最终在生产爆发。三个差距彼此关联：缩短时间差也会自然压缩工具差，因为频繁部署迫使环境趋于统一。支撑服务的一致性尤为关键：若在早期环境用类型或版本不同的替代品替换真实的存储、消息或缓存，测试所验证的语义便与生产不符，集成问题会在最昂贵的时刻才暴露。环境差异应尽量收敛为可声明、可审查的外部配置，使同一制品在不同环境仅通过注入的取值产生行为差异；让预发环境尽量镜像生产，则能把只在生产复现的缺陷提前到发布之前拦截。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">工程上应以同一构建产物与同一部署过程贯穿开发、预发与生产，把环境差异集中收敛到外部配置。</span><span class="hl">避免仅在某个环境存在的隐式依赖，定期比对各环境差异并记录有意保留的差异及其<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">理由</a>。</span>对承担关键集成风险的支撑服务，优先在各环境使用同类型同版本，而非用简化替代物。开发环境可以缩小规模以控制成本，但技术语义应尽量保持一致，例如使用同种数据库而非换成另一种存储。把环境差异纳入评审与审计，使一致性成为可核查的状态，而不是凭个人感觉判断的印象。对确实无法对齐的部分，应在测试策略上做补偿，明确哪些验证只能在接近生产的环境中完成，避免因环境差异而高估本地测试的保障能力。此外可以让开发环境按需重建并自动同步依赖版本，减少人为拉齐的成本。进一步可让各环境的部署采用同一套过程与同一批制品，仅以不同配置区分环境，从而消除因过程差异引入的隐性不一致；对无法自动对齐的环境差异，应在测试策略中显式补偿，并评估其可能掩盖的风险。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>完全一致在实践中不可行也不经济：成本、合规与数据隔离要求使生产的数据与规模无法照搬到开发环境，预发环境往往也只能近似生产。</p><p>过度追求一致会显著抬高基础设施成本并拖慢本地迭代，因此需要在保真度与成本之间取舍。</p><p>此外，一致性追求过度还可能诱发另一种偏差：为让环境看起来相同而把生产数据或敏感凭据带入低级别环境，反而制造安全与合规风险，因此差异的收敛应以行为语义为准，而非外观上的等同。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是用不同技术类型的支撑服务掩盖差异，例如开发用内存队列、生产用真实消息中间件，导致只在生产暴露的可靠性问题。</p><p>反例之二是把一致性理解成所有环境必须等大等配，于是因成本压力放弃验证的真实性，反而制造更大的发布风险。</p><p>还有一个反例是只统一了技术栈却忽略了数据形态的差异，使对空库或小数据量通过的逻辑在生产数据规模下失效。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>合理的做法是识别真正影响行为的关键差异并优先消除，对仅影响性能与规模的差异通过其他方式补偿，而不是追求形式上的完全一致。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">ESS-J-01</span><span class="nm">构建发布运行分离</span></span><span class="arw">→</span><span class="step cur"><span class="id">ESS-J-02</span><span class="nm">开发生产一致性</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-031、LOC-038、VEN-020、VEN-022</div><div class="r"><span class="k">入口链接</span><a href="https://12factor.net/dev-prod-parity" target="_blank" rel="noopener">https://12factor.net/dev-prod-parity</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：开发环境用轻量替代物、生产用真实支撑服务，二者不必一致</span><br>核验结论：应尽量缩小时间差/人员差/工具差并使支撑服务同类型同版本；用不同类型或版本的替代物会让集成风险推迟到生产才暴露　<span class="k">[BK-031]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（2 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依据推导</td><td>← MTH-J-04</td><td>配置外置与显式化<br><span style="color:var(--dim);font-size:12px">E-526</span></td><td>配置外置服务于开发生产一致性</td></tr><tr><td class="k">前置依赖</td><td>← ESS-J-01</td><td>构建发布运行分离<br><span style="color:var(--dim);font-size:12px">E-521</span></td><td>三阶段分离是环境一致性的前提</td></tr></tbody></table></div></div></details></section>
+<section id="xref"><h2><span class="num">附</span>对照资源 · 12factor 子库</h2><div class="tblwrap"><table><thead><tr><th>12factor 节点</th><th>关系</th><th>对照说明</th></tr></thead><tbody><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-config.html" target="_blank" rel="noopener">配置</a> <span class="dim">app-config</span></td><td>跨体系对照</td><td>母库『配置外置与显式化』与 12factor『配置』同源；配置差异是环境漂移主因</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-dev-prod.html" target="_blank" rel="noopener">开发/线上等价</a> <span class="dim">app-dev-prod</span></td><td>跨体系对照</td><td>母库『开发生产一致性』与 12factor『开发/线上等价』同源</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-prompts.html" target="_blank" rel="noopener">掌控你的 Prompt</a> <span class="dim">ag-prompts</span></td><td>跨体系对照</td><td>Prompt 作为代码之外的可变部分，需外置、版本化并保持环境一致</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-config.html" target="_blank" rel="noopener">配置与可变性外置</a> <span class="dim">t-config</span></td><td>跨体系对照</td><td>环境变量与 prompt 同为代码之外的可变部分，对应配置外置与环境一致</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-parity.html" target="_blank" rel="noopener">环境一致性</a> <span class="dim">t-parity</span></td><td>跨体系对照</td><td>开发与生产一致：传统靠环境等价，对应开发生产一致性与流水线</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

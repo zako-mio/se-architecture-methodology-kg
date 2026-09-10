@@ -1,0 +1,752 @@
+{
+  "topic": "实现与构造（Implementation & Construction）——模块化、信息隐藏、内聚耦合、整洁代码、设计模式与反模式、深模块",
+  "generated_by": "software-construction-researcher (subagent, self-authored role)",
+  "access_date": "2026-09-10",
+  "sources": [
+    {
+      "id": "OFF-001",
+      "title": "SWEBOK Guide V4.0 (Software Engineering Body of Knowledge) — Software Design (Ch.3) / Software Construction (Ch.4)",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SWEBOK V4.0 含 18 个知识领域（KA），Software Design（Ch.3）与 Software Construction（Ch.4）为分立 KA",
+        "Software Design KA 主编 Rich Hilliard（USA）；Software Construction KA 主编 Xin Peng（Fudan University）、Steve Schwarm（Synopsys – Black Duck）",
+        "官方参考书单列入 E. Gamma et al., Design Patterns: Elements of Reusable Object-Oriented Software (1st ed., Addison-Wesley, 1994) 与 D. Budgen, Software Design (3rd ed., CRC Press, 2021)，确认设计模式与设计方法论属 SWEBOK 认可知识",
+        "SWEBOK 定位为‘generally accepted, consensus-driven knowledge’的权威描述（V4 延续 20 年传统）"
+      ],
+      "legacy_id": "S1-01"
+    },
+    {
+      "id": "STD-005",
+      "title": "ISO/IEC 25010:2023 Product quality model — maintainability sub-characteristics（经 ISO/IEC 25000 官方门户 iso25000.com 核验）",
+      "org": "ISO/IEC (via ISO/IEC 25000 SQuaRE portal)",
+      "year": "2023",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Maintainability 子特性：Modularity、Reusability、Analysability、Modifiability、Testability",
+        "Modularity 要求‘修改一个组件对其它组件影响最小’——这是内聚/耦合工程目标的标准落点",
+        "质量=系统满足干系人已声明与隐含需求的程度（与 B 包 S1-06 同源，此处用于实现域）"
+      ],
+      "legacy_id": "S1-02"
+    },
+    {
+      "id": "PAP-002",
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules（全文回源）",
+      "org": "D. L. Parnas, Carnegie-Mellon University; Communications of the ACM, 15(12):1053-1058",
+      "year": "1972",
+      "url": "https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "doi": "10.1145/361598.361623",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "模块化提升系统灵活性、可理解性并缩短开发时间；效果取决于‘划分模块的判据’（criteria used in dividing the system into modules）",
+        "给出两种分解（KWIC 索引系统）：Modularization 1 按处理步骤/流程图切分（conventional），Modularization 2 按 information hiding 切分（unconventional）",
+        "信息隐藏判据：每个模块隐藏一个‘困难或可能变化的设计决策’（secret）；接口/定义‘reveal as little as possible about its inner workings’",
+        "‘module’被定义为 responsibility assignment（责任分配），而非子程序；设计决策超越执行时间，故模块不必对应处理步骤",
+        "例证：Modularization 2 中核心存储格式变更只影响 line storage 模块；Modularization 1 则‘would result in changes in every module’",
+        "作者自评设计错误：circular shift 模块规定了 shift 的顺序，暴露了超出必要的设计信息（over-specification）",
+        "结论：几乎总是不应基于流程图分解系统；应从‘困难/易变的设计决策清单’出发，每模块隐藏其一；高效实现需放弃‘模块=一组子程序’的假设"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "BK-008",
+      "title": "A Philosophy of Software Design (2nd ed., 2021) + 作者官方 2nd ed. book extract",
+      "org": "John Ousterhout, Stanford University / Yaknyam Press",
+      "year": "2021 (2nd ed.)",
+      "url": "https://web.stanford.edu/~ouster/cgi-bin/aposd.php ; https://web.stanford.edu/~ouster/cgi-bin/aposd2ndEdExtract.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "设计根本目标是降低 complexity：‘使人难以理解与修改系统之物’；complexity 主要来源于 information（开发者需掌握多少信息、信息是否显见）",
+        "complexity 的三种表现：change amplification（一处小改动波及多处）、cognitive load（认知负荷）、unknown unknowns（不知道要做什么/方案是否可行）；两大成因：dependencies、obscurity",
+        "deep module：提供强大功能但接口简单的模块；shallow module：接口相对复杂而功能不足，未能隐藏显著复杂度（‘classitis’=大量浅类/浅方法）",
+        "Chapter 6 ‘General-Purpose Modules are Deeper’：‘general-purpose APIs result in more information hiding’；‘over-specialization may be the single greatest cause of complexity in software’",
+        "‘somewhat general-purpose’甜点：模块功能反映当前需求，但接口应足够通用以支持多种用法；‘the interface should be easy to use for today’s needs without being tied specifically to them’",
+        "abstraction = 对实体的简化视图，省略不重要细节，使复杂事物更易思考与操作",
+        "反对‘仅为缩短函数体而拆小函数’；与 Robert C. Martin《Clean Code》在函数长度（短函数）与注释角色上有显著分歧；主张战略式编程（strategic）而非纯战术式（tactical）"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "WEB-017",
+      "title": "Code Smell (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-02-09",
+      "url": "https://martinfowler.com/bliki/CodeSmell.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "code smell 是‘a surface indication that usually corresponds to a deeper problem in the system’（对应深层问题的表层迹象）",
+        "术语由 Kent Beck 在协助 Fowler 撰写《Refactoring》时提出",
+        "smell 本身不一定有问题（‘Some long methods are just fine’），需深入查看；smell 是问题的指示器而非问题本身",
+        "价值：新手也能快速识别；‘smell of the week’式教学可逐步提升团队"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "BK-037",
+      "title": "The Pragmatic Programmer — DRY (Don't Repeat Yourself) 原则",
+      "org": "Andy Hunt & Dave Thomas (Addison-Wesley, 1999)",
+      "year": "1999",
+      "url": "https://en.wikipedia.org/wiki/Don%27t_repeat_yourself",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "DRY 定义原句：‘Every piece of knowledge must have a single, unambiguous, authoritative representation within a system’",
+        "DRY 针对‘知识/信息重复’而非机械的代码行重复；实现手段含抽象、代码生成、构建系统、数据规范化",
+        "反观点称 WET（write everything twice）；DRY 被批评可能诱导过早/过度抽象",
+        "AHA（Avoid Hasty Abstractions）编程：先优化变更、避免过早优化；Sandi Metz 名言‘prefer duplication over the wrong abstraction’；Cher Scarlett 提出 AHA 术语",
+        "配套启发式：Rule of Three（同一重复出现三次以上再抽象）"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "BK-020",
+      "title": "Clean Code (Robert C. Martin) + SOLID + 与 APoSD 的分歧",
+      "org": "Robert C. Martin；Wikipedia 综合（引 Martin 及 Ousterhout 原文）",
+      "year": "2008 (book) / 2000 (SOLID 论文)",
+      "url": "https://en.wikipedia.org/wiki/Clean_Code ; https://en.wikipedia.org/wiki/SOLID",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Clean Code 核心教学：‘Functions should do one thing. They should do it well. They should only do it.’；主张函数应短（Martin 赞 Kent Beck 程序‘每个函数只有二、三、四行’）",
+        "Clean Code 范式含 SOLID、TDD、KISS、结构化/面向对象编程与部分 Design Patterns",
+        "SOLID 由 Robert C. Martin 于 2000 年论文《Design Principles and Design Patterns》提出基本思想，缩写由 Michael Feathers 于约 2004 年给出",
+        "SRP：一个类应只有一个变更原因；OCP：对扩展开放、对修改关闭；LSP：派生类须可替换基类；ISP：不应强迫客户依赖其不用的接口方法；DIP：依赖抽象而非具体",
+        "Ousterhout 明确反对短函数教条：【已按版权红线移出（原引用 247 字）· 出处见 source_id/URL】；并反对‘少用注释’与 TDD 主张",
+        "Martin 与 Ousterhout 就上述分歧进行过长对话（作者页面亦有引用）——属‘设计口味’层面的 disputed 项，非事实冲突"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "BK-032",
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software (GoF)",
+      "org": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides (Addison-Wesley)",
+      "year": "1994",
+      "url": "https://en.wikipedia.org/wiki/Design_Patterns",
+      "isbn": "0-201-63361-2",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "全书两部分：先论 OO 设计的能力与陷阱，后描述 23 个经典模式；作者合称 Gang of Four (GoF)；销量逾 50 万册、13 种语言",
+        "23 模式按目的分三类：Creational（Abstract Factory、Builder、Factory Method、Prototype、Singleton）、Structural（Adapter、Bridge、Composite、Decorator、Facade、Flyweight、Proxy）、Behavioral（Chain of Responsibility、Command、Interpreter、Iterator、Mediator、Memento、Observer、State、Strategy、Template Method、Visitor）",
+        "两条核心 OO 原则：‘Program to an interface, not an implementation’；‘Favor object composition over class inheritance’",
+        "继承=white-box reuse（子类可见父类内部）；对象组合=black-box reuse（无需暴露内部细节）",
+        "‘Because inheritance exposes a subclass to details of its parent’s implementation… inheritance breaks encapsulation’；父类实现改动可能迫使子类改动",
+        "警告：dynamic, highly parameterized software 更难理解与构造；delegation 是组合的极端形式，可替代继承",
+        "受理批评：Norvig 证明 23 个模式中 16 个可被 Lisp/Dylan 语言特性简化或消除；Hannemann & Kiczales 用 AspectJ 消除 17/23 的代码级依赖；作者 Gamma 曾想移除 Singleton 但未达共识"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "WEB-020",
+      "title": "The Law of Leaky Abstractions",
+      "org": "Joel Spolsky (Joel on Software)",
+      "year": "2002-11-11",
+      "url": "https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "定律：‘All non-trivial abstractions, to some degree, are leaky.’（所有非平凡抽象都有一定程度的泄漏）",
+        "abstraction = 对更复杂底层机制的简化视图（如 TCP、文件系统、SQL、C++ string、远程文件）",
+        "泄漏表现：性能差异（二维数组遍历方向、SQL 等价查询数量级差异）、故障暴露（NFS 掉线）、语言/平台边界（char* vs string、ASP.NET 依赖 JS）",
+        "后果：抽象不能像预期那样简化一切，开发者最终仍需学习被抽象掉的底层细节"
+      ],
+      "legacy_id": "S2-07"
+    },
+    {
+      "id": "WEB-021",
+      "title": "Big Ball of Mud",
+      "org": "Brian Foote & Joseph Yoder（PLoP '97, Fourth Conference on Pattern Languages of Programs）",
+      "year": "1997（页面更新 1999-06-26）",
+      "url": "http://www.laputan.org/mud/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "BIG BALL OF MUD：‘a casually, even haphazardly, structured, sprawling, sloppy, duct-tape and bailing wire, spaghetti code jungle’——缺乏可感知架构的软件系统",
+        "论文主题：这一最常被部署的‘架构’为何流行、它是否真如看上去那么糟；成因含业务压力、人员流动、软件熵（software entropy）",
+        "即使架构定义良好的系统也易发生结构腐化（structural degradation），会暂时劣化后修复（SHEARING LAYERS 等）",
+        "属反模式谱系的高频实证形态，与架构腐化（erosion/drift）互为表里"
+      ],
+      "legacy_id": "S2-08"
+    },
+    {
+      "id": "WEB-022",
+      "title": "Structured Design（cohesion / coupling 概念的正式发表）",
+      "org": "W. P. Stevens, G. J. Myers, L. L. Constantine, IBM Systems Journal 13(2):115-139",
+      "year": "1974",
+      "url": "https://doi.org/10.1147/sj.132.0115",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "cohesion 与 coupling 概念由 Larry Constantine 于 1960 年代末提出，1974 年由 Stevens/Myers/Constantine 正式发表，后经 Yourdon & Constantine《Structured Design》(1979) 成为软件工程标准术语",
+        "coupling = 模块间相互依赖程度；cohesion = 单个模块内部各元素彼此关联的程度；二者属性独立、常被并置，低耦合趋与高内聚相关",
+        "内聚类型由差到优：Coincidental → Logical → Temporal → Procedural → Communicational/Informational → Sequential → Functional",
+        "耦合类型由高到低：Content → Common → External → Control → Stamp(Data-structured) → Data；另有 subclass coupling、temporal coupling 等",
+        "目标：低耦合高内聚，以降低维护与修改成本；结构化设计即以此为‘良好编程实践’的可度量特征"
+      ],
+      "legacy_id": "S2-09"
+    },
+    {
+      "id": "BK-001",
+      "title": "Software Engineering at Google — Ch.3 Knowledge Sharing（readability 流程）",
+      "org": "Google (abseil.io)",
+      "year": "2020",
+      "url": "https://abseil.io/resources/swe-book/html/ch03.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "核心命题：‘Code is read far more than it is written’（代码被读的次数远多于被写）",
+        "Google 的‘readability’不止是代码可读性，而是标准化、公司范围的代码评审导师流程，覆盖语言惯用法、代码结构、API 设计、公共库使用、文档、测试覆盖",
+        "目标：传播最佳实践、统一风格（monorepo 一致性）、避免知识孤岛（islands）、防止偏离共同规范",
+        "机制：每个 changelist 需 readability 批准；约 20% 工程师在参与、1–2% 为 readability reviewer；鼓励引用规范依据、把评审当作合作式导师而非把关",
+        "权衡：强制且人力驱动，随组织增长线性（非次线性）扩展；潜力是静态分析可自动化部分评论；EPR 研究显示净提升工程速度与工程师满意度",
+        "知识传递视角：代码即知识、注释供未来读者（含未来的自己），但注释需主动维护否则会过期"
+      ],
+      "legacy_id": "S2-10"
+    },
+    {
+      "id": "WEB-023",
+      "title": "You Aren't Gonna Need It (YAGNI) — Extreme Programming",
+      "org": "Ron Jeffries / Kent Beck, Extreme Programming（XP）",
+      "year": "1998/1999",
+      "url": "https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it ; http://ronjeffries.com/xprog/articles/practices/pracnotneed/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "YAGNI：‘a programmer should not add functionality until deemed necessary’（未确认必需前不添加功能）",
+        "与 XP 的‘do the simplest thing that could possibly work’（DTSTTCPW）配套",
+        "必须与持续重构、持续自动化单元测试、持续集成配合；脱离这些实践会退化为技术债/返工",
+        "与 Ousterhout‘somewhat general-purpose’及 DRY/AHA 构成‘抽象多少’的核心张力"
+      ],
+      "legacy_id": "S2-11"
+    },
+    {
+      "id": "VEN-015",
+      "title": "Refactoring.Guru — Design Patterns 目录 / Code Smells 目录",
+      "org": "Refactoring.Guru（patterns 与 smells 的工程速查门户）",
+      "year": "2014-2026",
+      "url": "https://refactoring.guru/design-patterns ; https://refactoring.guru/refactoring/smells",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "列 22 个经典设计模式，按 intent 分 Creational / Structural / Behavioral（比 GoF 少 Interpreter）",
+        "设计模式=常见软件设计问题的典型解法/蓝图，可自定义；提供团队共同语言",
+        "code smells 五类：Bloaters（Long Method/Large Class/Primitive Obsession/Long Parameter List/Data Clumps）、Object-Orientation Abusers、Change Preventers（Divergent Change/Shotgun Surgery/Parallel Inheritance Hierarchies）、Dispensables（Duplicate Code/Data Class/Dead Code/Lazy Class/Speculative Generality）、Couplers（Feature Envy/Inappropriate Intimacy/Message Chains/Middle Man）",
+        "注：按 stage2 计划书，refactoring.guru 仅作线索/交叉核对，不作权威一级源"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "VEN-016",
+      "title": "SourceMaking — Design Patterns / AntiPatterns",
+      "org": "SourceMaking",
+      "year": "2007-2026",
+      "url": "https://sourcemaking.com/antipatterns ; https://sourcemaking.com/design_patterns",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "模式分类与命名学与 GoF/refactoring.guru 一致，并补充 Object Pool、Private Class Data、Null Object 等",
+        "模式价值：提供经测试的解法、提高可读性、形成通用沟通词汇",
+        "模式批评（与 Wikipedia 一致）：模式需求源于语言/技术抽象能力不足；可能变为‘just barely good enough’设计并造成不必要代码重复；与其它抽象形式无本质差别；缺形式化基础"
+      ],
+      "legacy_id": "S3-02"
+    },
+    {
+      "id": "PAP-021",
+      "title": "A Metrics Suite for Object Oriented Design",
+      "org": "S. R. Chidamber, C. F. Kemerer, IEEE Transactions on Software Engineering 20(6):476-493",
+      "year": "1994",
+      "url": "https://doi.org/10.1109/32.295895 ; https://mural.maynoothuniversity.ie/id/eprint/2391/1/JM_NUIM-CS-TR-2006-03.pdf",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "提出类级 CK 度量套件，共六个：WMC（Weighted Methods per Class）、DIT（Depth of Inheritance Tree）、NOC（Number of Children）、CBO（Coupling Between Object classes）、RFC（Response For a Class）、LCOM（Lack of Cohesion in Methods）",
+        "WMC 为复杂度度量；DIT、NOC 为继承度量；CBO、RFC 为耦合度量；LCOM 为内聚的反向度量",
+        "CBO/RFC/LCOM 需方法体等实现细节方可精确计算；设计阶段可由 UML 类图估算上下界",
+        "后续被重访扩展（RFC、LCOM2/LCOM3、TCC/LCC 等），是 OO 设计定量化的基础"
+      ],
+      "legacy_id": "S4-01"
+    },
+    {
+      "id": "PAP-022",
+      "title": "Bad Smells of Gang of Four Design Patterns: A Decade Systematic Literature Review",
+      "org": "S. Almadi, D. Hooshyar, R. B. Ahmad, Sustainability 13(18):10256",
+      "year": "2021",
+      "url": "https://doi.org/10.3390/su131810256",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "GoF 设计模式中出现的 bad smells 会加剧模式结构与行为的退化，损害模式的收益",
+        "其出现‘influence software sustainability by increasing maintenance costs and energy consumption’",
+        "系统综述 10 年文献样本，填补 GoF 模式坏味道缺乏系统综述的空白",
+        "结论方向：模式并非无代价，误用/退化本身会产生可检测的坏味道（与 Ousterhout、GoF 批评互相印证）"
+      ],
+      "legacy_id": "S4-02"
+    },
+    {
+      "id": "PAP-023",
+      "title": "A Study of the Fragile Base Class Problem",
+      "org": "L. Mikhajlov, E. Sekerinski, ECOOP'98 — Object-Oriented Programming, LNCS 1445:355-382",
+      "year": "1998",
+      "url": "https://doi.org/10.1007/BFb0054099",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "脆弱基类问题（fragile base class）：对基类看似安全的修改，经继承传递后可能使派生类故障；程序员无法仅靠检查基类方法判断改动是否安全",
+        "根因关联 open recursion（对 this 的动态分派/晚绑定）：可改为默认 closed recursion（静态分派、早绑定），仅在显式请求时用 open recursion",
+        "解法谱系：实例变量私有化并强制子类走访问器；以接口替代超类；用 final/sealed/override 关键字限制或约束继承（Java/C++11/C#/Scala/Kotlin 等）",
+        "Joshua Bloch《Effective Java》item 17：‘Design and document for inheritance or else prohibit it’",
+        "该问题是 Parnas‘继承破坏信息隐藏’在 OO 语境下的具体化，是 information hiding 的经典反例"
+      ],
+      "legacy_id": "S4-03"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "information hiding（信息隐藏）",
+      "definition": "Parnas (1972) 的核心分解判据：每个模块隐藏一个‘困难或可能变化的设计决策’（secret），其接口/定义只揭示尽量少的内部工作；模块=责任分配而非子程序。Wikipedia 同源描述为‘分离程序中最可能变化的设计决策，提供稳定接口以保护其余部分’。（Parnas 1972 + 百科交叉）",
+      "source_id": "PAP-002"
+    },
+    {
+      "term": "module / modularization（模块/模块化）",
+      "definition": "在 Parnas 语境中，module 是 responsibility assignment（责任分配），而非一个或多个子程序；模块化是提升灵活性、可理解性并缩短开发时间的手段，其效果取决于划分判据。",
+      "source_id": "PAP-002"
+    },
+    {
+      "term": "cohesion（内聚）",
+      "definition": "模块内部各元素彼此关联/隶属于同一目标的程度；序数型度量（high/low）。高内聚关联健壮性、可靠性、可复用性与可理解性；低内聚则难维护、难测试、难复用。类型由差到优：Coincidental→Logical→Temporal→Procedural→Communicational→Sequential→Functional。",
+      "source_id": "WEB-022"
+    },
+    {
+      "term": "coupling（耦合）",
+      "definition": "软件模块间相互依赖的程度，非二元而是多维；低耦合常与高内聚相关，被视为结构良好的标志。类型由高到低：Content→Common→External→Control→Stamp→Data。",
+      "source_id": "WEB-022"
+    },
+    {
+      "term": "connascence（共生/牵连）",
+      "definition": "Meilir Page-Jones 提出的耦合分析框架，按 strength（改动难度）、locality（依赖方的物理/逻辑邻近度）、degree（受影响组件数）三维评估；分静态（编译期，如签名）与动态（运行期，如时序/取值/算法）两类。",
+      "source_id": "WEB-022"
+    },
+    {
+      "term": "CK metrics（Chidamber-Kemerer 度量套件）",
+      "definition": "面向对象设计的六个类级度量：WMC（加权方法数，复杂度）、DIT（继承深度）、NOC（子类数）、CBO（对象间耦合）、RFC（类响应集）、LCOM（方法内聚缺乏）。CBO/RFC 属耦合度量，LCOM 属内聚反向度量。",
+      "source_id": "PAP-021"
+    },
+    {
+      "term": "modularity（可维护性子特性，ISO 25010）",
+      "definition": "ISO/IEC 25010:2023 maintainability 的子特性，要求‘修改一个组件对其它组件的影响最小’。这是内聚/耦合工程目标在标准质量模型中的落点。",
+      "source_id": "STD-005"
+    },
+    {
+      "term": "design pattern（设计模式）",
+      "definition": "对软件设计中常见、反复出现问题的可复用解法（模板/蓝图），不是可直接套用的成品设计，而是可在不同语言与平台、不同语境中反复使用的方案描述，可视为形式化的最佳实践。（GoF 1994 + 百科）",
+      "source_id": "BK-032"
+    },
+    {
+      "term": "GoF 模式分类（Creational / Structural / Behavioral）",
+      "definition": "23 个经典模式按目的分三类：Creational（创建对象，5 个）、Structural（组织类与对象形成更大结构，7 个）、Behavioral（描述对象间协作/通信，11 个）。",
+      "source_id": "BK-032"
+    },
+    {
+      "term": "anti-pattern（反模式）",
+      "definition": "‘任何常见但适得其反的问题解法’；1995 年由 Andrew Koenig 命名，1998 年 Brown 等《AntiPatterns》一书普及并扩展至架构与项目管理。区别于坏习惯：反模式初看合适有效但弊大于利，且存在已记录的、可重复的有效替代。",
+      "source_id": "WEB-021"
+    },
+    {
+      "term": "code smell（坏味道）",
+      "definition": "源码中‘通常对应系统更深层问题的表层迹象’；术语由 Kent Beck 提出。smell 不等于问题本身，也不必然表示有问题，而是重构的启发式驱动信号。",
+      "source_id": "WEB-017"
+    },
+    {
+      "term": "Big Ball of Mud（大泥球）",
+      "definition": "缺乏可感知架构的软件系统：‘casually, even haphazardly, structured, sprawling, sloppy, duct-tape and bailing wire, spaghetti code jungle’；是最常见的‘架构’之一，成因含业务压力、人员流动与软件熵。",
+      "source_id": "WEB-021"
+    },
+    {
+      "term": "deep module / shallow module（深模块/浅模块）",
+      "definition": "deep module 是提供强大功能但接口简单的模块；shallow module 是接口相对复杂却功能不足、未隐藏显著复杂度的模块。设计目标是让模块‘深’，以避免 classitis（大量浅类/浅方法）。",
+      "source_id": "BK-008"
+    },
+    {
+      "term": "abstraction（抽象）",
+      "definition": "对实体的简化视图，省略不重要细节，使人更易思考与操作复杂事物；与模块密切相关。（Ousterhout；Spolsky 将 abstraction 定义为对更复杂底层机制的简化）",
+      "source_id": "BK-008"
+    },
+    {
+      "term": "leaky abstraction（抽象泄漏）",
+      "definition": "Spolsky 定律：‘All non-trivial abstractions, to some degree, are leaky.’ 抽象无法完全屏蔽底层复杂性，性能、故障、边界情况会泄漏出来，迫使使用/维护者了解被抽象掉的细节。",
+      "source_id": "WEB-020"
+    },
+    {
+      "term": "fragile base class（脆弱基类）",
+      "definition": "对象继承系统的固有架构问题：对基类看似安全的修改，经继承传递后可能使派生类故障；程序员无法仅检查基类方法判断改动安全性。根因关联 open recursion（对 this 的动态分派）。",
+      "source_id": "PAP-023"
+    },
+    {
+      "term": "DRY（Don't Repeat Yourself）",
+      "definition": "软件开发的减少重复原则，原句为‘Every piece of knowledge must have a single, unambiguous, authoritative representation within a system’；针对知识/信息重复，而非机械的代码重复。Hunt & Thomas 1999 年提出。",
+      "source_id": "BK-037"
+    },
+    {
+      "term": "YAGNI（You Aren't Gonna Need It）",
+      "definition": "源自极端编程（XP）的原则：程序员不应添加功能直到确认为必需；与‘do the simplest thing that could possibly work’配套，且以持续重构/测试/集成为前提。",
+      "source_id": "WEB-023"
+    },
+    {
+      "term": "SOLID（SRP/OCP/LSP/ISP/DIP）",
+      "definition": "Robert C. Martin 提出的面向对象设计五原则集合，缩写由 Michael Feathers 约 2004 年给出：单一职责、开闭、里氏替换、接口隔离、依赖倒置。",
+      "source_id": "BK-020"
+    },
+    {
+      "term": "tactical vs strategic programming（战术式 vs 战略式编程）",
+      "definition": "Ousterhout 区分：战术式编程追求尽快让功能可用、不断积累复杂度（tactical tornado）；战略式编程持续投入部分时间做系统设计，以降低长期复杂度。",
+      "source_id": "BK-008"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "信息隐藏是模块分解的核心判据：每个模块应隐藏一个困难或可能变化的设计决策（secret），其接口只揭示尽量少的内部工作；module 是责任分配而非子程序。（Parnas 1972 原文 full-text 核验）",
+      "source_ids": [
+        "PAP-002",
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Parnas 通过 KWIC 案例证明：按‘处理步骤/流程图’分解（conventional）时，核心存储格式变更会波及所有模块；按信息隐藏分解时同一变更只影响单个模块——可修改性差异显著。",
+      "source_ids": [
+        "PAP-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "模块分解不应基于执行时间顺序；设计决策超越执行时间，故模块不必对应处理步骤。此为‘按流程图分解’的奠基性反例。",
+      "source_ids": [
+        "PAP-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "cohesion 与 coupling 由 Larry Constantine 于 1960 年代末提出，1974 年由 Stevens/Myers/Constantine 正式发表；目标为低耦合、高内聚，以降低维护与修改成本。",
+      "source_ids": [
+        "WEB-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "内聚与耦合各有可分类的谱系：内聚 Coincidental→Functional，耦合 Content→Data；二者独立但常相关（低耦合趋与高内聚相关）。",
+      "source_ids": [
+        "WEB-022",
+        "VEN-015"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "CK 度量套件将内聚/耦合定量化：CBO、RFC 为耦合度量，LCOM 为内聚反向度量，另有 WMC/DIT/NOC；部分度量需实现细节（方法体）才能精确计算。",
+      "source_ids": [
+        "PAP-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC 25010:2023 将 maintainability 细分为 Modularity/Reusability/Analysability/Modifiability/Testability，其中 Modularity 定义为‘修改一个组件对其它组件影响最小’——为内聚耦合目标提供标准落点。",
+      "source_ids": [
+        "STD-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "GoF 将 23 个设计模式按目的分为 Creational/Structural/Behavioral 三类，并提炼两条核心 OO 原则：面向接口编程、优先对象组合而非类继承。",
+      "source_ids": [
+        "BK-032"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "继承=white-box reuse 且‘inheritance breaks encapsulation’；父类实现改动可能迫使子类改动——这是信息隐藏在 OO 语境下失效的机理，直接对应 fragile base class。",
+      "source_ids": [
+        "BK-032",
+        "PAP-023"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "fragile base class 是继承系统的固有架构问题，根因关联 open recursion；解法含私有实例变量+访问器、以接口替代超类、final/sealed/override 约束（‘design and document for inheritance or else prohibit it’）。",
+      "source_ids": [
+        "PAP-023"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Ousterhout：设计根本目标是降低 complexity，其中三大表现为 change amplification、cognitive load、unknown unknowns，两大成因为 dependencies 与 obscurity。",
+      "source_ids": [
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "deep module（接口简单、功能强大）优于 shallow module（接口复杂、功能不足）；‘classitis’（过多浅类/浅方法）反而增加系统复杂度。",
+      "source_ids": [
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Ousterhout 主张‘somewhat general-purpose’：模块功能可聚焦当前需求，但接口应足够通用以支持多种用法；‘general-purpose APIs result in more information hiding’，过度专门化是复杂度的最大来源之一。",
+      "source_ids": [
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "抽象是对实体的简化视图；但 Spolsky 定律指出‘All non-trivial abstractions, to some degree, are leaky’，抽象无法完全屏蔽底层复杂性（性能/故障/边界会泄漏）。",
+      "source_ids": [
+        "WEB-020",
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "code smell 是‘对应更深层问题的表层迹象’，由 Kent Beck 提出；smell 不等于问题本身，也不必然表示有问题，但常作为重构的启发式信号。",
+      "source_ids": [
+        "WEB-017"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "refactoring.guru 将 code smells 归为五类（Bloaters/OO Abusers/Change Preventers/Dispensables/Couplers），其中 Change Preventers（Divergent Change、Shotgun Surgery）与 Couplers（Feature Envy、Inappropriate Intimacy、Message Chains、Middle Man）直接映射到内聚/耦合缺陷。",
+      "source_ids": [
+        "VEN-015"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Big Ball of Mud（缺乏可感知架构的‘大泥球’系统）是最常见的架构/反模式之一，成因含业务压力、人员流动与软件熵；即使架构良好也易发生结构腐化。",
+      "source_ids": [
+        "WEB-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DRY 原句为‘Every piece of knowledge must have a single, unambiguous, authoritative representation within a system’，针对知识重复而非机械代码重复，Hunt & Thomas 1999 年提出。",
+      "source_ids": [
+        "BK-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DRY 的已知反效果是过度/错误抽象：AHA（avoid hasty abstractions）主张先优化变更、避免过早优化，Sandi Metz 之‘prefer duplication over the wrong abstraction’；Rule of Three 作为抽象门槛。",
+      "source_ids": [
+        "BK-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "YAGNI 源自 XP：未确认为必需前不添加功能，须与持续重构/测试/集成配合，否则会转化为技术债——与 DRY/AHA/Ousterhout 的通用化主张构成‘抽象程度’张力。",
+      "source_ids": [
+        "WEB-023",
+        "BK-037"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SOLID 五原则（SRP/OCP/LSP/ISP/DIP）由 Robert C. Martin 于 2000 年论文提出基本思想、Michael Feathers 约 2004 年给出缩写；SRP 要求一个类只有一个变更原因。",
+      "source_ids": [
+        "BK-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Clean Code 主张函数应短、只做一件事，并含 SOLID/TDD/KISS；Ousterhout 与之显著分歧：函数到‘几十行’后再缩小对可读性帮助有限、更多函数意味着更多接口与文档，且反对‘少用注释’——属 deprecated/disputed 的设计口味分歧。",
+      "source_ids": [
+        "BK-020",
+        "BK-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可读性是实现域核心工程关切：‘Code is read far more than it is written’；Google 以 readability 流程（强制代码评审+导师制）标准化最佳实践传播，实证净提升工程速度，但需人力、随组织线性扩展。",
+      "source_ids": [
+        "BK-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "设计模式可提高可读性、提供通用沟通词汇，但误用会引入不必要复杂度与额外间接层；且模式需求有时源于语言抽象能力不足（Norvig：23 个中 16 个可被 Lisp/Dylan 消除）。",
+      "source_ids": [
+        "BK-032",
+        "VEN-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "GoF 模式自身会出现 bad smells 并加剧模式结构/行为退化，提高维护成本与能耗（10 年系统综述）——说明‘模式≠免腐化’，是设计模式的正面对手的实证反例。",
+      "source_ids": [
+        "PAP-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SWEBOK V4.0 将 Software Design 与 Software Construction 列为独立 KA，并把 GoF《Design Patterns》列入官方参考，确认模块化/模式/构造属软件工程共识知识。",
+      "source_ids": [
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Parnas 本人指出 KWIC 的 circular shift 模块规定顺序是‘design error’（暴露了超出必要的信息）——说明信息隐藏的边界需持续裁剪，‘隐藏些什么’本身是设计决策。",
+      "source_ids": [
+        "PAP-002"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "principle_counterexample_pairs": [
+    {
+      "principle": "information hiding（Parnas 1972）",
+      "anti_example": "fragile base class：继承暴露父类实现，基类改动使派生类故障",
+      "source_ids": [
+        "PAP-002",
+        "BK-032",
+        "PAP-023"
+      ]
+    },
+    {
+      "principle": "encapsulation（封装/接口稳定）",
+      "anti_example": "leaky abstraction：抽象无法完全屏蔽底层（TCP/SQL/远程文件性能与故障泄漏）",
+      "source_ids": [
+        "WEB-020",
+        "PAP-002"
+      ]
+    },
+    {
+      "principle": "high cohesion（高内聚）",
+      "anti_example": "God object / Large Class / Coincidental cohesion（职责任意堆叠）",
+      "source_ids": [
+        "WEB-022",
+        "VEN-015"
+      ]
+    },
+    {
+      "principle": "low coupling（低耦合）",
+      "anti_example": "Content/Common coupling、Feature Envy、Inappropriate Intimacy、Message Chains",
+      "source_ids": [
+        "WEB-022",
+        "VEN-015"
+      ]
+    },
+    {
+      "principle": "deep modules（Ousterhout）",
+      "anti_example": "shallow modules / classitis / pass-through methods",
+      "source_ids": [
+        "BK-008"
+      ]
+    },
+    {
+      "principle": "DRY（Hunt & Thomas）",
+      "anti_example": "over-abstraction / wrong abstraction（AHA、‘prefer duplication over the wrong abstraction’、Speculative Generality）",
+      "source_ids": [
+        "BK-037",
+        "VEN-015"
+      ]
+    },
+    {
+      "principle": "YAGNI（XP）",
+      "anti_example": "Speculative Generality / Inner-platform effect / Abstraction inversion / Reinventing the square wheel",
+      "source_ids": [
+        "WEB-023",
+        "VEN-015"
+      ]
+    },
+    {
+      "principle": "Design Patterns（GoF）",
+      "anti_example": "模式过度使用/额外间接层；GoF 模式自身的 bad smells；Singleton 被视为 anti-pattern（部分实现下）",
+      "source_ids": [
+        "BK-032",
+        "PAP-022",
+        "VEN-016"
+      ]
+    },
+    {
+      "principle": "favor composition over inheritance（GoF）",
+      "anti_example": "脆弱基类（father 改动迫使子类改动）；‘inheritance breaks encapsulation’",
+      "source_ids": [
+        "BK-032",
+        "PAP-023"
+      ]
+    },
+    {
+      "principle": "SRP / 单一变更原因",
+      "anti_example": "Divergent Change（一个类因多种原因变化）、God object",
+      "source_ids": [
+        "BK-020",
+        "VEN-015"
+      ]
+    },
+    {
+      "principle": "Clean Code 短函数",
+      "anti_example": "Ousterhout：函数过小导致更多接口/文档、失去独立性，反增复杂度（disputed，非事实冲突）",
+      "source_ids": [
+        "BK-020",
+        "BK-008"
+      ]
+    },
+    {
+      "principle": "strategic programming（战略式设计投入）",
+      "anti_example": "tactical tornado / Big Ball of Mud / 软件熵累积",
+      "source_ids": [
+        "BK-008",
+        "WEB-021"
+      ]
+    },
+    {
+      "principle": "Modularity（ISO 25010）",
+      "anti_example": "Big Ball of Mud、架构腐化（erosion/drift）",
+      "source_ids": [
+        "STD-005",
+        "WEB-021"
+      ]
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "GoF 模式共有 22 个",
+      "corrected": "GoF 原著为 23 个；refactoring.guru 目录列 22 个（省略 Interpreter）。引用时须区分来源",
+      "basis": "S2-06（23 个，含 Interpreter）vs S3-01（22 个）"
+    },
+    {
+      "misremembered": "信息隐藏最早见诸 Parnas 1972 CACM 论文",
+      "corrected": "Parnas 1971 年 IFIP 论文《Information Distribution Aspects of Design Methodology》已提出相关思想；1972 CACM 论文为奠基性正式发表",
+      "basis": "S2-01 参考文献 [4] 与 Wikipedia 参考"
+    },
+    {
+      "misremembered": "Parnas 的 module 就是一/多个子程序",
+      "corrected": "Parnas 明确将 module 定义为 responsibility assignment，且主张为高效实现而放弃‘模块=子程序’假设",
+      "basis": "S2-01 原文"
+    },
+    {
+      "misremembered": "DRY 要求消除一切代码重复",
+      "corrected": "DRY 针对‘知识/信息重复’；Sandi Metz 主张‘prefer duplication over the wrong abstraction’，Rule of Three 作为抽象门槛",
+      "basis": "S2-04"
+    }
+  ],
+  "gaps": [
+    "APoSD 第 4 章（deep/shallow module 的完整定义与图 4.1）不在作者官方 2nd ed. extract 中（extract 只含新增章节与 Clean Code 对比）；书本体受版权保护未回源，deep/shallow 定义依据作者官方 extract（‘deep API’/‘simpler and deeper’）+ 作者页面 + 二手详读摘要交叉，置信度 high 但非逐字原文。",
+    "GoF《Design Patterns》本体未回源；23 模式分类与两条 OO 原则经 Wikipedia 条目与 SWEBOK 官方参考书单核验，未见原著内页。Clean Code、The Pragmatic Programmer、Refactoring 等经典著作本体同样仅经权威二手（Wikipedia 条目/作者页面）核验。",
+    "Chidamber & Kemerer 1994 IEEE TSE 全文 PDF 为扫描图像（pdftotext/pypdf 无文本层），CK 六度量清单经 Maynooth 技术报告（文本）与 Crossref 元数据核验，未见论文正文的度量公式细节。",
+    "Almadi et al. 2021（Bad Smells of GoF）正文 MDPI 返回 403，仅经 Crossref 摘要核验，具体坏味道清单与量化结论未获取。",
+    "SWEBOK V4.0 Software Design（Ch.3）与 Software Construction（Ch.4）正文未下载，仅经 IEEE CS 官方页核验 KA 结构、编辑与参考书单；构造过程的官方定义原文待补。",
+    "cohesion/coupling 各类型与 CK 度量多为相对/序数指标，标准未给出普适阈值；‘多高算高内聚’依赖语境，未能给出量化判据。",
+    "fragile base class 的 Wikipedia 条目与 ECOOP'98 论文均确认问题，但不同语言/硬件组合下的具体失效案例（open recursion）未逐一验证。",
+    "refactoring.guru 与 sourcemaking 按 stage2 计划书仅作线索源（S3），其 22 模式与坏味道分类已与 GoF/SWEBOK 交叉，但未作为独立权威证据。"
+  ],
+  "notes": "信源计数：S1=2、S2=11、S3=2、S4=3，共 18 条（S1≥2、S2≥4 满足）。关键定义均尽量 ≥2 独立源交叉：information hiding = Parnas(1972 全文) + 百科；cohesion/coupling = Stevens/Myers/Constantine(1974) + CK(1994)；deep/shallow = Ousterhout 官方 extract + 作者页面 + 详读摘要；fragile base class = GoF(1994) + Mikhajlov&Sekerinsski(1998)；DRY = Hunt&Thomas(1999) + AHA(Sandi Metz/Cher Scarlett)；readability = Google SWE(2020) + Ousterhout(2021)。方法论专项门控：已产出 13 条「原则↔反例配对表」，每条 ≥1 反例。信源分级：S1 标准（SWEBOK/ISO 25010）、S2 经典著作与作者原文（Parnas/Ousterhout/Fowler/Spolsky/Foote&Yoder/Google/GoF 等）、S3 门户线索（refactoring.guru/sourcemaking）、S4 学术（CK94/Almadi2021/Mikhajlov&Sekerinski1998）。禁止来源（无出处二手博客、AI 内容、营销软文）未采用；个人摘要页（mattduck）仅用于交叉理解 deep/shallow，未计入编号信源。联网策略：境内/可达源直连（win.tue.nl、abseil.io、laputan.org、joelonsoftware、stanford.edu 均直连成功），Wikipedia/refactoring.guru/sourcemaking/maynooth 经代理 172.29.0.1:7890 访问；DOI 元数据经 api.crossref.org 直连核验。版权红线遵守：未下载/写入任何受版权保护的书籍全文到公开交付目录；仅引用作者官方页面、官方免费 extract、公开论文与标准元数据。",
+  "access_note": "所有 URL 均于 2026-09-10 实测可达；访问方式：国内/可达站点直连，境外被墙站点经代理 172.29.0.1:7890；DOI 经 Crossref REST API 核验。"
+}

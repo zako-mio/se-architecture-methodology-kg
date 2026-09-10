@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可维护性量化 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>可维护性量化</span></div><div class="meta">technology · M · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>可维护性量化</h1><div class="en">Maintainability Quantification</div><div class="badges"><span class="badge pr">P1</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">M · 横切·质量属性</span><span class="badge th">质量属性</span><span class="badge th">技术债</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">把<a class="term" href="../14-views/glossary.html#g-121" title="maintainability — 产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性 modularity/reusability/analysability/modifiability/testability。">可维护性</a>与<a class="term" href="../14-views/glossary.html#g-101" title="technical debt — Cunningham 隐喻：首次交付的代码如同负债；内部质量缺陷（cruft）造成的额外变更成本。Fowler 将其操作化为「因 cruft 多花的未来变更时间」；Kruchten 等推进为需显式管理的理论与实践。">技术债</a>转写为可计算指标：以修复违规的成本估计债务本金、按对可维护性的影响折算利息，沿质量子特性组织规则与评分，使变更成本可比较、可追踪。</span></p></div><p class="note">别名：SQALE、maintainability quantification、可维护性量化、技术债指数、债务本金与利息　|　英文：Maintainability Quantification　|　类型：技术 / tool</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-344 -359.4 683 698.4" role="img" aria-label="可维护性量化 的 1-2 跳邻域关系图"><title>可维护性量化 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="2.5" y1="-135.3" x2="-141.8" y2="-245.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：可维护性评估以可维护性本质为判据</title></line><line x1="2.5" y1="-135.3" x2="-32.9" y2="-247.8" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：可维护性评估依赖质量模型的维度框架</title></line><line x1="47.6" y1="-295.4" x2="2.5" y2="-135.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为可维护性提供量化评估方法</title></line><line x1="47.6" y1="-295.4" x2="-32.9" y2="-247.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 是面向源码质量的具体质量模型实例</title></line><line x1="142.3" y1="-242.4" x2="2.5" y2="-135.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务比率与评级把可维护性折算为可计算指标</title></line><line x1="47.6" y1="-295.4" x2="142.3" y2="-242.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="115.3" y1="39.4" x2="-32.9" y2="-247.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQuaRE 质量模型工具化实现质量模型应用方法</title></line><line x1="115.3" y1="39.4" x2="2.5" y2="-135.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：质量模型为可维护性评估提供子特性维度</title></line><line x1="0" y1="0" x2="2.5" y2="-135.3" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：SQALE 量化技术债与可维护性实现可维护性评估方法</title></line><line x1="-123.2" y1="71.1" x2="-278.9" y2="-38.9" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：可修改性战术实现质量属性战术映射方法</title></line><line x1="115.3" y1="39.4" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：质量模型为可维护性量化提供子特性框架</title></line><line x1="0" y1="0" x2="-123.2" y2="71.1" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：可维护性量化与可修改性战术组合治理变更成本</title></line><line x1="-105.8" y1="261" x2="-123.2" y2="71.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：适配器外置站点差异，隔离变化点缩小影响半径</title></line><line x1="-197.5" y1="209.2" x2="-123.2" y2="71.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：schema 单一数据源加严格单向依赖，局部化变更</title></line><line x1="-255.3" y1="147.4" x2="-123.2" y2="71.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：单一契约源与能力注册中心防止涟漪效应</title></line><line x1="-280" y1="66.4" x2="-123.2" y2="71.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：四维耦合分析定位变更影响半径与缝隙</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">可维护性量化<title>可维护性量化（TEC-M-02）</title></text><circle cx="2.5" cy="-135.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="2.5" y="-116.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可维护性评估方法<title>可维护性评估方法（MTH-M-05）</title></text><circle cx="115.3" cy="39.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="115.3" y="58.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量模型工具化<title>质量模型工具化（TEC-M-01）</title></text><circle cx="-123.2" cy="71.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-123.2" y="90.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可修改性战术实现<title>可修改性战术实现（TEC-M-03）</title></text><circle cx="-278.9" cy="-38.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-278.9" y="-22.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性战术映射方法<title>质量属性战术映射方法（MTH-M-01）</title></text><circle cx="-280" cy="66.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-280" y="82.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="-141.8" cy="-245.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-141.8" y="-229.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可维护性本质<title>可维护性本质（ESS-M-01）</title></text><circle cx="47.6" cy="-295.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="47.6" y="-279.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="142.3" cy="-242.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="142.3" y="-226.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="-105.8" cy="261" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-105.8" y="277" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申填写扩展逆向架构<title>网申填写扩展逆向架构（CAS-X-02）</title></text><circle cx="-197.5" cy="209.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-197.5" y="225.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v3 多模块解耦<title>网申 v3 多模块解耦（CAS-X-03）</title></text><circle cx="-255.3" cy="147.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-255.3" y="163.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text><circle cx="-32.9" cy="-247.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-32.9" y="-231.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量模型应用方法<title>质量模型应用方法（MTH-M-04）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 3 个直接邻接、外环 9 个二跳节点，共 13 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">可维护性描述的是修改的有效性与效率，无法由单一静态数字读出，但可通过结构、变更历史与维护过程的多类证据近似判断。</span>可维护性量化工具的价值在于把「系统好不好改」从主观印象变为可比较、可追踪的判断，从而在资源有限时把治理引向真正昂贵之处。<span class="hl">以 <a class="term" href="../14-views/glossary.html#g-104" title="Software Quality Assessment based on Life-cycle Expectations — 以客观、准确、可复现、自动化方式评估源代码质量并提供技术债管理的方法；含 9 项基本原则与 4 主组件（Quality Model / Analysis Model / indices / indicators），以生命周期期望为基准。SonarQube 的 `sqale_*` 指标沿用其命名。">SQALE</a> 为代表的方法沿质量模型子特性组织一组检查规则，估计修复违规所需成本作为债务本金，并按规则对可维护性的影响折算为利息，形成可排序的债务视图，使模糊的「代码质量」变成有数量级的成本量，可作为治理排序与投入决策的依据。</span><span class="hl">这种成本化表达也便于向非技术<a class="term" href="../14-views/glossary.html#g-014" title="stakeholder — 对关注系统持有 Concern（关注点）的个人、群体或组织（含客户、用户、开发/维护者、监管者等）。">干系人</a>解释为何需要偿还技术债。</span>把债务表达为可排序的成本，也使「先还哪笔债」这一决策从直觉争论转为可比较的投入产出判断，便于在有限资源下排序。量化的意义始终是服务决策，而非产出一个好看的数字。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">量化沿「规则→违规→成本→评分」链路运作：先按选定质量子特性（如<a class="term" href="../14-views/glossary.html#g-123" title="analysability — 25010 maintainability 子特性：评估预期变更影响、诊断缺陷或识别待修改部件的有效性与效率程度。">可分析性</a>、<a class="term" href="../14-views/glossary.html#g-124" title="modifiability — 25010 maintainability 子特性：在不引入缺陷、不降低既有质量的前提下有效修改的程度（非顶层特性）。">可修改性</a>、<a class="term" href="../14-views/glossary.html#g-067" title="testability — ISO 25010 maintainability 子特性：建立测试准则并执行测试判定其是否满足的有效性与效率程度；SEI 亦视为架构级质量属性。">可测试性</a>）定义检查规则；再对代码库扫描，识别违规并估计每类违规的修复成本；把成本按其所属子特性与严重度归集，折算为债务<a class="term" href="../14-views/glossary.html#g-102" title="principal &amp; interest — 本金=清除 cruft、恢复内部质量的一次性投入（偿还 principal）；利息=因 cruft 存在而每次修改该代码多花的时间。关键区别于金融债：利息只在「修改该代码」时触发，不按时间流逝累积（crufty 但稳定的代码可不偿还）。">本金与利息</a>；最后汇总为可比较的指数或分级。</span><span class="hl">结果可映射到<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>与文件，定位高风险区域。</span>工具通常把修复成本单位化，使不同语言与规则之间可以叠加与比较。量化应可重复：明确度量口径、数据窗口与判定规则，并记录所依据的代码版本与工具假设，使不同时点的结果可比、趋势可追踪。规则集本身也会演进，需记录其版本，否则历史数据在规则变化后将失去可比性。<span class="hl">利息的折算规则体现方法对可维护性的理解，因此不同工具与<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>之间的指数并不可直接横比，跨项目比较前须先对齐口径。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">实践中把可维护性量化嵌入日常流程：在迭代或<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">发布</a>节点采集指标，形成趋势而非单点快照，把明显恶化的趋势作为深入分析的信号。</span><span class="hl">结果应转化为具体行动——针对热点模块补充测试、改善依赖方向、拆分或合并模块，并纳入正常<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>与演进计划，而非发起孤立的「代码质量专项」。</span>对指标本身保持警惕：单一阈值容易误导，指标一旦被当作考核目标就可能被博弈，因此应组合多信号并关注其变化方向。治理优先级应按变更频率与业务重要性排序，而非按分数高低；量化产出应是可讨论的假设与优先级清单，供团队结合语境做决策，并在下一轮验证改进是否真的降低了变更成本。评估的最终价值在于促成改变，而非产出一份更精细的报告。评估的自动化程度决定了它能否长期坚持；若采集与解读成本过高，指标很快会无人维护而失效，反不如少而稳定。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>其四，持续采集与解读需要成本，过细的评估会成为负担。</p><p>因此量化应以驱动决策为目的，聚焦少数高价值信号，把结果与真实变更成本对照验证，并随系统演化更新口径。</p><p>度量的价值在于它引发的行动，而非分数本身的精确，因此应避免为追求指标而做无意义的改动，把力气花在真实的变更成本上。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例是把量化做成一次性打分排名，既未转化为治理行动，也未纳入演进闭环。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>可维护性量化有内生的局限。</li><li>其一，指标只是间接信号：复杂度高未必真的难改，看似整洁的代码也可能因缺乏测试或依赖隐藏而难以安全变更。</li><li>其二，指标之间存在张力与冗余：降低<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>可能增加模块数量，降低重复可能增加间接层，单一目标的最优化可能损害整体。</li><li>其三，量化本身可能被博弈，团队会优化数字而非改善可维护性，使评估失去意义。</li><li>承认度量的近似性，才能把它用在合适的判断上。</li><li>理想的做法是让量化成为改进的起点：先看趋势与热点，再结合人工判断决定动哪些模块，最后用下一次的变更数据回验决策是否正确。</li><li>把量化嵌入迭代节奏，比周期性的大审计更易坚持，也更贴近真实变化。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-02 · 经 TEC-M-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-03 · 经 TEC-M-03</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-04 · 经 TEC-M-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-05 · 经 TEC-M-03</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>2014</div><div class="r"><span class="k">规范信源</span>VEN-011、STD-005、WEB-002</div><div class="r"><span class="k">入口链接</span><a href="https://web.archive.org/web/2016/http://www.sqale.org/" target="_blank" rel="noopener">https://web.archive.org/web/2016/http://www.sqale.org/</a>　<a href="https://www.iso.org/standard/78176.html" target="_blank" rel="noopener">https://www.iso.org/standard/78176.html</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：可维护性可以用单一代码质量分数准确衡量</span><br>核验结论：可维护性由多个子特性构成，须综合结构、变更历史与维护过程证据交叉判断；SQALE 等指数仍是对修复成本的近似估计，单一分数只是间接信号，且可能被当作目标而失真　<span class="k">[VEN-011]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（3 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ TEC-M-03</td><td>可修改性战术实现<br><span style="color:var(--dim);font-size:12px">E-910</span></td><td>可维护性量化与可修改性战术组合治理变更成本</td></tr><tr><td class="k">促成</td><td>← TEC-M-01</td><td>质量模型工具化<br><span style="color:var(--dim);font-size:12px">E-909</span></td><td>质量模型为可维护性量化提供子特性框架</td></tr><tr><td class="k">实现</td><td>→ MTH-M-05</td><td>可维护性评估方法<br><span style="color:var(--dim);font-size:12px">E-907</span></td><td>SQALE 量化技术债与可维护性实现可维护性评估方法</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

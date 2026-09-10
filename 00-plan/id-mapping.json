@@ -1,0 +1,4194 @@
+{
+  "namespace_version": "1.0.0",
+  "generated": "2026-09-10",
+  "generator": "16-checkpoint/build_mapping.py",
+  "entity_rule": "normalized URL > DOI > (title+org+year); authoritative reuse edges = sources-index.md §2 + knowledge-map evidence_ref",
+  "canonical_prefixes": [
+    "STD",
+    "OFF",
+    "BK",
+    "WEB",
+    "VEN",
+    "PAP",
+    "COM",
+    "LOC",
+    "XCV"
+  ],
+  "totals": {
+    "entries": 414,
+    "entities": 253,
+    "by_package": {
+      "PHASE1": 158,
+      "A": 21,
+      "B": 27,
+      "F": 17,
+      "G": 17,
+      "H": 18,
+      "I": 33,
+      "J": 13,
+      "K": 12,
+      "L": 24,
+      "M": 13,
+      "N": 13,
+      "P": 27,
+      "Q": 7,
+      "R": 14
+    },
+    "by_action": {
+      "collision_split": 149,
+      "merge": 160,
+      "rename": 105
+    },
+    "by_category": {
+      "BK": 38,
+      "COM": 4,
+      "LOC": 39,
+      "OFF": 25,
+      "PAP": 28,
+      "STD": 28,
+      "VEN": 39,
+      "WEB": 45,
+      "XCV": 7
+    }
+  },
+  "collisions": [
+    {
+      "old_id": "S1-01",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-001"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "STD-001"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "STD-001"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "OFF-001"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "STD-007"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-02",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "STD-004"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "OFF-001"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-001"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "STD-005"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "STD-025"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-03",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "STD-003"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "OFF-002"
+        },
+        {
+          "source_pack": "F",
+          "canonical_id": "STD-003"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-002"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "STD-026"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-04",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "STD-005"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "OFF-002"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-002"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-05",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-003"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "OFF-002"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-002"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-06",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-004"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "OFF-005"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-07",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-006"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "STD-001"
+        },
+        {
+          "source_pack": "F",
+          "canonical_id": "OFF-006"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "STD-001"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-08",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "STD-010"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "STD-001"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-09",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-008"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-015"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-10",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-002"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-016"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-11",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-007"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "OFF-002"
+        }
+      ]
+    },
+    {
+      "old_id": "S1-12",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "STD-007"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "STD-013"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-01",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "BK-004"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-001"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "PAP-002"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "BK-031"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "BK-025"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-002"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "WEB-042"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-02",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "BK-001"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-002"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "BK-008"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "WEB-032"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "BK-026"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "PAP-006"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "WEB-043"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-03",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "OFF-005"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "PAP-006"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "WEB-017"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "WEB-033"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "BK-024"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-013"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "WEB-044"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-04",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "WEB-011"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-003"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "BK-037"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "WEB-034"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "WEB-037"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "BK-021"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "BK-030"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-05",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "WEB-012"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "BK-012"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "BK-020"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "WEB-035"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "WEB-038"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "BK-021"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "WEB-045"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-06",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "BK-007"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "BK-032"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "WEB-036"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "WEB-039"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-017"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "BK-030"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-07",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "BK-008"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "WEB-020"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "BK-025"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-016"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-08",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "BK-018"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "WEB-021"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-040"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-09",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-004"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "WEB-004"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "WEB-022"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "BK-022"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-10",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-005"
+        },
+        {
+          "source_pack": "G",
+          "canonical_id": "WEB-005"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "BK-001"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-041"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-11",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-006"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "WEB-023"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "WEB-019"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-12",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-007"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "BK-011"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-13",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "WEB-008"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "BK-011"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-BK-30",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "I",
+          "canonical_id": "BK-038"
+        },
+        {
+          "source_pack": "PHASE1",
+          "canonical_id": "BK-030"
+        }
+      ]
+    },
+    {
+      "old_id": "S2-WEB-12",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "I",
+          "canonical_id": "WEB-024"
+        },
+        {
+          "source_pack": "PHASE1",
+          "canonical_id": "WEB-012"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-01",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "B",
+          "canonical_id": "VEN-001"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "VEN-015"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "VEN-020"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "VEN-025"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "VEN-030"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "VEN-035"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-02",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "G",
+          "canonical_id": "VEN-014"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "VEN-016"
+        },
+        {
+          "source_pack": "J",
+          "canonical_id": "VEN-021"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "VEN-026"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "VEN-031"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "VEN-036"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-03",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "J",
+          "canonical_id": "VEN-022"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "VEN-027"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "VEN-032"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "VEN-037"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-04",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "J",
+          "canonical_id": "VEN-023"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "VEN-028"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "VEN-033"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "VEN-038"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-05",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "J",
+          "canonical_id": "VEN-024"
+        },
+        {
+          "source_pack": "K",
+          "canonical_id": "VEN-018"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "VEN-034"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "VEN-039"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-VEN-02",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "I",
+          "canonical_id": "VEN-017"
+        },
+        {
+          "source_pack": "PHASE1",
+          "canonical_id": "VEN-002"
+        },
+        {
+          "source_pack": "Q",
+          "canonical_id": "VEN-002"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-VEN-03",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "I",
+          "canonical_id": "VEN-018"
+        },
+        {
+          "source_pack": "PHASE1",
+          "canonical_id": "VEN-003"
+        },
+        {
+          "source_pack": "Q",
+          "canonical_id": "VEN-003"
+        }
+      ]
+    },
+    {
+      "old_id": "S3-VEN-04",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "I",
+          "canonical_id": "VEN-019"
+        },
+        {
+          "source_pack": "PHASE1",
+          "canonical_id": "VEN-004"
+        },
+        {
+          "source_pack": "Q",
+          "canonical_id": "VEN-004"
+        }
+      ]
+    },
+    {
+      "old_id": "S4-01",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "PAP-003"
+        },
+        {
+          "source_pack": "B",
+          "canonical_id": "PAP-008"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "PAP-021"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "PAP-008"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "PAP-027"
+        }
+      ]
+    },
+    {
+      "old_id": "S4-02",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "PAP-004"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "PAP-022"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "PAP-003"
+        },
+        {
+          "source_pack": "N",
+          "canonical_id": "PAP-028"
+        }
+      ]
+    },
+    {
+      "old_id": "S4-03",
+      "rule": "same_id_diff_entity_split",
+      "occurrences": [
+        {
+          "source_pack": "A",
+          "canonical_id": "PAP-005"
+        },
+        {
+          "source_pack": "H",
+          "canonical_id": "PAP-023"
+        },
+        {
+          "source_pack": "L",
+          "canonical_id": "PAP-009"
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "old_id": "S1-STD-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "merge",
+      "note": "同实体复用：B/S1-01, B/S1-07, G/S1-01, G/S1-07, G/S1-08"
+    },
+    {
+      "old_id": "S1-STD-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/50508.html",
+      "canonical_id": "STD-002",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/90219.html",
+      "canonical_id": "STD-003",
+      "action": "merge",
+      "note": "同实体复用：A/S1-03, F/S1-03"
+    },
+    {
+      "old_id": "S1-STD-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/63712.html",
+      "canonical_id": "STD-004",
+      "action": "merge",
+      "note": "同实体复用：A/S1-02"
+    },
+    {
+      "old_id": "S1-STD-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S1-02, A/S1-04, H/S1-02, M/S1-M01, P/P-S1-02"
+    },
+    {
+      "old_id": "S1-STD-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/35733.html",
+      "canonical_id": "STD-006",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/80710.html",
+      "canonical_id": "STD-007",
+      "action": "merge",
+      "note": "同实体复用：A/S1-12, L/S1-01, M/S1-M08"
+    },
+    {
+      "old_id": "S1-STD-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/39064.html",
+      "canonical_id": "STD-008",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/71952.html",
+      "canonical_id": "STD-009",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:standards.ieee.org/ieee/610.12/1016",
+      "canonical_id": "STD-010",
+      "action": "merge",
+      "note": "同实体复用：A/S1-08"
+    },
+    {
+      "old_id": "S1-OFF-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "merge",
+      "note": "同实体复用：A/S1-01, B/S1-02, F/S1-A01, G/S1-02, H/S1-01, R/S1-OFF-01"
+    },
+    {
+      "old_id": "S1-OFF-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "merge",
+      "note": "同实体复用：A/S1-10, B/S1-03, B/S1-04, B/S1-05, G/S1-03, G/S1-04, G/S1-05, G/S1-11"
+    },
+    {
+      "old_id": "S1-OFF-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.acm.org/binaries/content/assets/education/se2014.pdf",
+      "canonical_id": "OFF-003",
+      "action": "merge",
+      "note": "同实体复用：A/S1-05"
+    },
+    {
+      "old_id": "S1-OFF-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:csed.acm.org/knowledge-areas",
+      "canonical_id": "OFF-004",
+      "action": "merge",
+      "note": "同实体复用：A/S1-06"
+    },
+    {
+      "old_id": "S1-OFF-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "canonical_id": "OFF-005",
+      "action": "merge",
+      "note": "同实体复用：A/S2-03, B/S1-06, I/S1-OFF-05, M/S2-M01"
+    },
+    {
+      "old_id": "S1-OFF-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:homepages.cs.ncl.ac.uk/brian.randell/nato/nato1968.pdf",
+      "canonical_id": "OFF-006",
+      "action": "merge",
+      "note": "同实体复用：A/S1-07, F/S1-07"
+    },
+    {
+      "old_id": "S1-OFF-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:agilemanifesto.org",
+      "canonical_id": "OFF-007",
+      "action": "merge",
+      "note": "同实体复用：A/S1-11"
+    },
+    {
+      "old_id": "S1-OFF-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/71952.html",
+      "canonical_id": "OFF-008",
+      "action": "merge",
+      "note": "同实体复用：A/S1-09"
+    },
+    {
+      "old_id": "S2-BK-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:abseil.io/resources/swe-book",
+      "canonical_id": "BK-001",
+      "action": "merge",
+      "note": "同实体复用：A/S2-02, H/S2-10, I/S2-BK-01"
+    },
+    {
+      "old_id": "S2-BK-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/p200000009376",
+      "canonical_id": "BK-002",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.microsoftpressstore.com/store/code-complete-9780735619678",
+      "canonical_id": "BK-003",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/software-engineering/p200000003290",
+      "canonical_id": "BK-004",
+      "action": "merge",
+      "note": "同实体复用：A/S2-01"
+    },
+    {
+      "old_id": "S2-BK-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition",
+      "canonical_id": "BK-005",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/peopleware-productive-projects-and-teams/p200000009378",
+      "canonical_id": "BK-006",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/p200000009282",
+      "canonical_id": "BK-007",
+      "action": "merge",
+      "note": "同实体复用：B/S2-06"
+    },
+    {
+      "old_id": "S2-BK-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:web.stanford.edu/~ouster/cgi-bin/book.php",
+      "canonical_id": "BK-008",
+      "action": "merge",
+      "note": "同实体复用：B/S2-07, H/S2-02"
+    },
+    {
+      "old_id": "S2-BK-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/p200000009173",
+      "canonical_id": "BK-009",
+      "action": "merge",
+      "note": "同实体复用：I/S2-BK-09, M/S2-M02"
+    },
+    {
+      "old_id": "S2-BK-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/fundamentals-of-software/9781098175504",
+      "canonical_id": "BK-010",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-11",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532",
+      "canonical_id": "BK-011",
+      "action": "merge",
+      "note": "同实体复用：L/S2-12, L/S2-13"
+    },
+    {
+      "old_id": "S2-BK-12",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/books/eaa.html",
+      "canonical_id": "BK-012",
+      "action": "merge",
+      "note": "同实体复用：B/S2-05"
+    },
+    {
+      "old_id": "S2-BK-13",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/documenting-software-architectures-views-and-beyond/p200000009174",
+      "canonical_id": "BK-013",
+      "action": "merge",
+      "note": "同实体复用：G/S2-19"
+    },
+    {
+      "old_id": "S2-BK-14",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/software-architecture-the/9781492086888",
+      "canonical_id": "BK-014",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-15",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/the-software-architect/9781492077541",
+      "canonical_id": "BK-015",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-16",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.wiley.com/en-us/pattern-oriented+software+architecture%2c+volume+1%3a+a+system+of+patterns-p-9780471958697",
+      "canonical_id": "BK-016",
+      "action": "merge",
+      "note": "同实体复用：B/S2-18, G/S2-18, R/S2-BK-16"
+    },
+    {
+      "old_id": "S2-BK-17",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/domain-driven-design-tackling-complexity-in-the-heart-of-software/p200000009134",
+      "canonical_id": "BK-017",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-18",
+      "source_pack": "PHASE1",
+      "entity_key": "url:domainlanguage.com/ddd/reference",
+      "canonical_id": "BK-018",
+      "action": "merge",
+      "note": "同实体复用：B/S2-08"
+    },
+    {
+      "old_id": "S2-BK-19",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/implementing-domain-driven-design/p200000009135",
+      "canonical_id": "BK-019",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-20",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/p200000009283",
+      "canonical_id": "BK-020",
+      "action": "merge",
+      "note": "同实体复用：H/S2-05"
+    },
+    {
+      "old_id": "S2-BK-21",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/p200000009306",
+      "canonical_id": "BK-021",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-07, L/S2-04, L/S2-05, P/P-S2-07"
+    },
+    {
+      "old_id": "S2-BK-22",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/p200000009308",
+      "canonical_id": "BK-022",
+      "action": "merge",
+      "note": "同实体复用：L/S2-09"
+    },
+    {
+      "old_id": "S2-BK-23",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058",
+      "canonical_id": "BK-023",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-24",
+      "source_pack": "PHASE1",
+      "entity_key": "url:pragprog.com/titles/mnee2/release-it-second-edition",
+      "canonical_id": "BK-024",
+      "action": "merge",
+      "note": "同实体复用：K/S2-03"
+    },
+    {
+      "old_id": "S2-BK-25",
+      "source_pack": "PHASE1",
+      "entity_key": "url:sre.google/sre-book/table-of-contents",
+      "canonical_id": "BK-025",
+      "action": "merge",
+      "note": "同实体复用：J/S2-07, K/S2-01"
+    },
+    {
+      "old_id": "S2-BK-26",
+      "source_pack": "PHASE1",
+      "entity_key": "url:sre.google/workbook/table-of-contents",
+      "canonical_id": "BK-026",
+      "action": "merge",
+      "note": "同实体复用：K/S2-02"
+    },
+    {
+      "old_id": "S2-BK-27",
+      "source_pack": "PHASE1",
+      "entity_key": "url:itrevolution.com/product/the-devops-handbook-second-edition",
+      "canonical_id": "BK-027",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-28",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/p200000009253",
+      "canonical_id": "BK-028",
+      "action": "merge",
+      "note": "同实体复用：I/S2-BK-28"
+    },
+    {
+      "old_id": "S2-BK-29",
+      "source_pack": "PHASE1",
+      "entity_key": "url:itrevolution.com/product/accelerate",
+      "canonical_id": "BK-029",
+      "action": "merge",
+      "note": "同实体复用：I/S2-BK-29"
+    },
+    {
+      "old_id": "S2-BK-30",
+      "source_pack": "PHASE1",
+      "entity_key": "url:itrevolution.com/product/team-topologies",
+      "canonical_id": "BK-030",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-BK-31",
+      "source_pack": "PHASE1",
+      "entity_key": "url:12factor.net",
+      "canonical_id": "BK-031",
+      "action": "merge",
+      "note": "同实体复用：J/S2-01"
+    },
+    {
+      "old_id": "S2-BK-32",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/p200000009144",
+      "canonical_id": "BK-032",
+      "action": "merge",
+      "note": "同实体复用：H/S2-06"
+    },
+    {
+      "old_id": "S2-BK-33",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.enterpriseintegrationpatterns.com",
+      "canonical_id": "BK-033",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-34",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.oreilly.com/library/view/building-microservices-2nd/9781492034018",
+      "canonical_id": "BK-034",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-35",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.manning.com/books/microservices-patterns",
+      "canonical_id": "BK-035",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/architecture",
+      "canonical_id": "WEB-001",
+      "action": "merge",
+      "note": "同实体复用：B/S2-01"
+    },
+    {
+      "old_id": "S2-WEB-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebt.html",
+      "canonical_id": "WEB-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-01, B/S2-02, L/S2-01, P/P-S2-01"
+    },
+    {
+      "old_id": "S2-WEB-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/ieeesoftware/whoneedsarchitect.pdf",
+      "canonical_id": "WEB-003",
+      "action": "merge",
+      "note": "同实体复用：B/S2-04"
+    },
+    {
+      "old_id": "S2-WEB-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "canonical_id": "WEB-004",
+      "action": "merge",
+      "note": "同实体复用：B/S2-09, G/S2-09"
+    },
+    {
+      "old_id": "S2-WEB-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/architecturedecisionrecord.html",
+      "canonical_id": "WEB-005",
+      "action": "merge",
+      "note": "同实体复用：B/S2-10, G/S2-10"
+    },
+    {
+      "old_id": "S2-WEB-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/articles/microservices.html",
+      "canonical_id": "WEB-006",
+      "action": "merge",
+      "note": "同实体复用：B/S2-11"
+    },
+    {
+      "old_id": "S2-WEB-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/presentationdomaindatalayering.html",
+      "canonical_id": "WEB-007",
+      "action": "merge",
+      "note": "同实体复用：B/S2-12"
+    },
+    {
+      "old_id": "S2-WEB-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/cqrs.html",
+      "canonical_id": "WEB-008",
+      "action": "merge",
+      "note": "同实体复用：B/S2-13"
+    },
+    {
+      "old_id": "S2-WEB-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:folk.universitetetioslo.no/trygver/themes/mvc/mvc-index.html",
+      "canonical_id": "WEB-009",
+      "action": "merge",
+      "note": "同实体复用：B/S2-16"
+    },
+    {
+      "old_id": "S2-WEB-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/eaadev/uiarchs.html",
+      "canonical_id": "WEB-010",
+      "action": "merge",
+      "note": "同实体复用：B/S2-17"
+    },
+    {
+      "old_id": "S2-WEB-11",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.sonarsource.com/resources/library/iso-iec-25010-explained",
+      "canonical_id": "WEB-011",
+      "action": "merge",
+      "note": "同实体复用：A/S2-04"
+    },
+    {
+      "old_id": "S2-WEB-12",
+      "source_pack": "PHASE1",
+      "entity_key": "url:en.wikipedia.org/wiki/software_engineering",
+      "canonical_id": "WEB-012",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "canonical_id": "VEN-001",
+      "action": "merge",
+      "note": "同实体复用：B/S3-01"
+    },
+    {
+      "old_id": "S4-PAP-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:worrydream.com/refs/brooks_1986_-_no_silver_bullet.pdf",
+      "canonical_id": "PAP-001",
+      "action": "merge",
+      "note": "同实体复用：A/S4-04, F/S4-04, R/S4-PAP-01"
+    },
+    {
+      "old_id": "S4-PAP-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "canonical_id": "PAP-002",
+      "action": "merge",
+      "note": "同实体复用：B/S2-15, H/S2-01, R/S4-PAP-02"
+    },
+    {
+      "old_id": "S4-PAP-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-09, A/S4-01, L/S4-02, P/P-S4-09, R/S4-PAP-03"
+    },
+    {
+      "old_id": "S4-PAP-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www-scf.usc.edu/~csci201/lectures/lecture11/royce1970.pdf",
+      "canonical_id": "PAP-004",
+      "action": "merge",
+      "note": "同实体复用：A/S4-02, R/S4-PAP-04"
+    },
+    {
+      "old_id": "S4-PAP-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:bioinfo.uib.es/~joemiro/semdoc/plansestudis/bachelor_masters_curricula/dparnas.pdf",
+      "canonical_id": "PAP-005",
+      "action": "merge",
+      "note": "同实体复用：A/S4-03, R/S4-PAP-05"
+    },
+    {
+      "old_id": "S4-PAP-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:c2.com/doc/oopsla92.html",
+      "canonical_id": "PAP-006",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-03, B/S2-03, L/S2-02, P/P-S2-03"
+    },
+    {
+      "old_id": "S4-PAP-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "canonical_id": "PAP-007",
+      "action": "merge",
+      "note": "同实体复用：B/S2-14, G/S2-14"
+    },
+    {
+      "old_id": "S4-PAP-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1002/smr.2423",
+      "canonical_id": "PAP-008",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-08, B/S4-01, L/S4-01, P/P-S4-08"
+    },
+    {
+      "old_id": "S4-COM-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:conf.researchr.org/series/icse",
+      "canonical_id": "COM-001",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-COM-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:conf.researchr.org/series/fse",
+      "canonical_id": "COM-002",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-COM-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.computer.org/csdl/journal/ts",
+      "canonical_id": "COM-003",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-COM-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:link.springer.com/journal/10664",
+      "canonical_id": "COM-004",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-KG-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0823-12factor-methodology",
+      "canonical_id": "LOC-001",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-KG-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0820-algorithm-knowledge-graph",
+      "canonical_id": "LOC-002",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-KG-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0826-rl推理显存面试知识库",
+      "canonical_id": "LOC-003",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-KG-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0813-知识库建库工程",
+      "canonical_id": "LOC-004",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-SK-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.config/opencode/skills/kb-construction/skill.md",
+      "canonical_id": "LOC-005",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-SK-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.config/opencode/skills/dag-tutorial-authoring/skill.md",
+      "canonical_id": "LOC-006",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-SK-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.config/opencode/skills/cytoscape-dag-visualization/skill.md",
+      "canonical_id": "LOC-007",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-SK-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.config/opencode/skills/multi-window-dag-delivery/skill.md",
+      "canonical_id": "LOC-008",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-software-architect.md",
+      "canonical_id": "LOC-009",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-backend-architect.md",
+      "canonical_id": "LOC-010",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-multi-agent-systems-architect.md",
+      "canonical_id": "LOC-011",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-codebase-onboarding-engineer.md",
+      "canonical_id": "LOC-012",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-code-reviewer.md",
+      "canonical_id": "LOC-013",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-minimal-change-engineer.md",
+      "canonical_id": "LOC-014",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-git-workflow-master.md",
+      "canonical_id": "LOC-015",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-senior-developer.md",
+      "canonical_id": "LOC-016",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/engineering/engineering-rapid-prototyper.md",
+      "canonical_id": "LOC-017",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-RL-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.dsh/agency-agents/product/product-manager.md",
+      "canonical_id": "LOC-018",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-MM-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/.config/opencode/memory.md",
+      "canonical_id": "LOC-019",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0820-去中心化聊天架构分析",
+      "canonical_id": "LOC-020",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0805-openjobautofill逆向分析",
+      "canonical_id": "LOC-021",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0812-网申v3调取复制版",
+      "canonical_id": "LOC-022",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0806-网申扩展v2实现",
+      "canonical_id": "LOC-023",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0816-dsh启动失败修复/n7-架构",
+      "canonical_id": "LOC-024",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0819-plugin-dag-rc7",
+      "canonical_id": "LOC-025",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0822-plugin-dag-v0.1.1-rc2",
+      "canonical_id": "LOC-026",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0822-dsh-manager-analysis",
+      "canonical_id": "LOC-027",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0814-deepseek-harness源码解析",
+      "canonical_id": "LOC-028",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0818-dsh-anchored-standard-analysis",
+      "canonical_id": "LOC-029",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-11",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0802-hermes-arch",
+      "canonical_id": "LOC-030",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-12",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0808-mcp四件套源码深挖",
+      "canonical_id": "LOC-031",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-13",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0808-claude-code-analysis",
+      "canonical_id": "LOC-032",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-14",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0803-openspec_superpower解析",
+      "canonical_id": "LOC-033",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-15",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0823-open-code-review",
+      "canonical_id": "LOC-034",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-16",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-09/0907-控制理论agent设计知识库",
+      "canonical_id": "LOC-035",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-17",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-09/0910-技术知识中枢主页/methodology/methodology-full.md",
+      "canonical_id": "LOC-036",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-PA-18",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0818-项目经历撰写/ai agent 架构 dag 分析项目复盘.md",
+      "canonical_id": "LOC-037",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "L-BK-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "canonical_id": "LOC-038",
+      "action": "merge",
+      "note": "同实体复用：J/BK-01"
+    },
+    {
+      "old_id": "L-BK-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:~/opencode/archive/ai-agents-in-depth-zh-cn.pdf",
+      "canonical_id": "LOC-039",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S3-VEN-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "canonical_id": "VEN-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf",
+      "canonical_id": "VEN-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:cloud.google.com/architecture/framework",
+      "canonical_id": "VEN-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:cloud.google.com/architecture/framework/whats-new",
+      "canonical_id": "VEN-005",
+      "action": "merge",
+      "note": "同实体复用：Q/S3-VEN-05"
+    },
+    {
+      "old_id": "S3-VEN-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.thoughtworks.com/radar",
+      "canonical_id": "VEN-006",
+      "action": "merge",
+      "note": "同实体复用：Q/S3-VEN-06"
+    },
+    {
+      "old_id": "S3-VEN-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.thoughtworks.com/radar/faq",
+      "canonical_id": "VEN-007",
+      "action": "merge",
+      "note": "同实体复用：Q/S3-VEN-07"
+    },
+    {
+      "old_id": "S3-VEN-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.thoughtworks.com/radar/archive",
+      "canonical_id": "VEN-008",
+      "action": "merge",
+      "note": "同实体复用：Q/S3-VEN-08"
+    },
+    {
+      "old_id": "P-S1-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.sei.cmu.edu/library/technical-debt-from-metaphor-to-theory-and-practice",
+      "canonical_id": "OFF-009",
+      "action": "merge",
+      "note": "同实体复用：P/P-S1-01"
+    },
+    {
+      "old_id": "P-S1-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-STD-05, A/S1-04, H/S1-02, M/S1-M01, P/P-S1-02"
+    },
+    {
+      "old_id": "P-S2-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebt.html",
+      "canonical_id": "WEB-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-WEB-02, B/S2-02, L/S2-01, P/P-S2-01"
+    },
+    {
+      "old_id": "P-S2-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebtquadrant.html",
+      "canonical_id": "WEB-013",
+      "action": "merge",
+      "note": "同实体复用：L/S2-03, P/P-S2-02"
+    },
+    {
+      "old_id": "P-S2-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:c2.com/doc/oopsla92.html",
+      "canonical_id": "PAP-006",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-06, B/S2-03, L/S2-02, P/P-S2-03"
+    },
+    {
+      "old_id": "P-S2-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/opportunisticrefactoring.html",
+      "canonical_id": "WEB-014",
+      "action": "merge",
+      "note": "同实体复用：P/P-S2-04"
+    },
+    {
+      "old_id": "P-S2-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/designstaminahypothesis.html",
+      "canonical_id": "WEB-015",
+      "action": "merge",
+      "note": "同实体复用：P/P-S2-05"
+    },
+    {
+      "old_id": "P-S2-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/stranglerfigapplication.html",
+      "canonical_id": "WEB-016",
+      "action": "merge",
+      "note": "同实体复用：L/S2-07, P/P-S2-06"
+    },
+    {
+      "old_id": "P-S2-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/p200000009306",
+      "canonical_id": "BK-021",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-21, L/S2-04, L/S2-05, P/P-S2-07"
+    },
+    {
+      "old_id": "P-S2-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/bliki/codesmell.html",
+      "canonical_id": "WEB-017",
+      "action": "merge",
+      "note": "同实体复用：H/S2-03, L/S2-06, P/P-S2-08"
+    },
+    {
+      "old_id": "P-S2-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:martinfowler.com/articles/is-quality-worth-cost.html",
+      "canonical_id": "WEB-018",
+      "action": "merge",
+      "note": "同实体复用：P/P-S2-09"
+    },
+    {
+      "old_id": "P-S2-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "canonical_id": "WEB-019",
+      "action": "merge",
+      "note": "同实体复用：L/S2-11, P/P-S2-10"
+    },
+    {
+      "old_id": "P-S3-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:docs.sonarsource.com/sonarqube/latest/user-guide/metric-definitions",
+      "canonical_id": "VEN-009",
+      "action": "merge",
+      "note": "同实体复用：P/P-S3-01"
+    },
+    {
+      "old_id": "P-S3-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-rules/rules",
+      "canonical_id": "VEN-010",
+      "action": "merge",
+      "note": "同实体复用：P/P-S3-02"
+    },
+    {
+      "old_id": "P-S3-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.sqale.org",
+      "canonical_id": "VEN-011",
+      "action": "merge",
+      "note": "同实体复用：P/P-S3-03"
+    },
+    {
+      "old_id": "P-S4-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/ms.2012.167",
+      "canonical_id": "PAP-009",
+      "action": "merge",
+      "note": "同实体复用：L/S4-03, P/P-S4-01"
+    },
+    {
+      "old_id": "P-S4-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/ms.2012.129",
+      "canonical_id": "PAP-010",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-02"
+    },
+    {
+      "old_id": "P-S4-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1016/j.jss.2014.12.027",
+      "canonical_id": "PAP-011",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-03"
+    },
+    {
+      "old_id": "P-S4-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/mtd.2014.9",
+      "canonical_id": "PAP-012",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-04"
+    },
+    {
+      "old_id": "P-S4-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/ms.2020.3024958",
+      "canonical_id": "PAP-013",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-05"
+    },
+    {
+      "old_id": "P-S4-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1007/s10664-023-10297-9",
+      "canonical_id": "PAP-014",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-06"
+    },
+    {
+      "old_id": "P-S4-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1016/j.jss.2020.110827",
+      "canonical_id": "PAP-015",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-07"
+    },
+    {
+      "old_id": "P-S4-08",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1002/smr.2423",
+      "canonical_id": "PAP-008",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-08, B/S4-01, L/S4-01, P/P-S4-08"
+    },
+    {
+      "old_id": "P-S4-09",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-03, A/S4-01, L/S4-02, P/P-S4-09, R/S4-PAP-03"
+    },
+    {
+      "old_id": "P-S4-10",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1016/j.jss.2019.06.004",
+      "canonical_id": "PAP-016",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-10"
+    },
+    {
+      "old_id": "P-S4-11",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1016/j.jss.2021.110925",
+      "canonical_id": "PAP-017",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-11"
+    },
+    {
+      "old_id": "P-S4-12",
+      "source_pack": "PHASE1",
+      "entity_key": "url:doi.org/10.1016/j.jss.2022.111483",
+      "canonical_id": "PAP-018",
+      "action": "merge",
+      "note": "同实体复用：P/P-S4-12"
+    },
+    {
+      "old_id": "R-XC-01",
+      "source_pack": "PHASE1",
+      "entity_key": "url:www.cs.kent.edu/~jmaletic/cs63902/papers/lehman96.pdf",
+      "canonical_id": "XCV-001",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-01"
+    },
+    {
+      "old_id": "R-XC-02",
+      "source_pack": "PHASE1",
+      "entity_key": "url:en.wikipedia.org/wiki/lehman%27s_laws_of_software_evolution",
+      "canonical_id": "XCV-002",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-02"
+    },
+    {
+      "old_id": "R-XC-03",
+      "source_pack": "PHASE1",
+      "entity_key": "url:sebokwiki.org/wiki/an_overview_of_the_swebok_guide",
+      "canonical_id": "XCV-003",
+      "action": "merge",
+      "note": "同实体复用：F/S1-F04, R/R-XC-03"
+    },
+    {
+      "old_id": "R-XC-04",
+      "source_pack": "PHASE1",
+      "entity_key": "url:software-pattern.org/book/30",
+      "canonical_id": "XCV-004",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-04"
+    },
+    {
+      "old_id": "R-XC-05",
+      "source_pack": "PHASE1",
+      "entity_key": "url:en.wikipedia.org/wiki/waterfall_model",
+      "canonical_id": "XCV-005",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-05"
+    },
+    {
+      "old_id": "R-XC-06",
+      "source_pack": "PHASE1",
+      "entity_key": "url:en.wikipedia.org/wiki/no_silver_bullet",
+      "canonical_id": "XCV-006",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-06"
+    },
+    {
+      "old_id": "R-XC-07",
+      "source_pack": "PHASE1",
+      "entity_key": "url:en.wikipedia.org/wiki/software_engineering_body_of_knowledge",
+      "canonical_id": "XCV-007",
+      "action": "merge",
+      "note": "同实体复用：R/R-XC-07"
+    },
+    {
+      "old_id": "S1-01",
+      "source_pack": "A",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-02",
+      "source_pack": "A",
+      "entity_key": "url:www.iso.org/standard/63712.html",
+      "canonical_id": "STD-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-03",
+      "source_pack": "A",
+      "entity_key": "url:www.iso.org/standard/90219.html",
+      "canonical_id": "STD-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-04",
+      "source_pack": "A",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-05",
+      "source_pack": "A",
+      "entity_key": "url:www.acm.org/binaries/content/assets/education/se2014.pdf",
+      "canonical_id": "OFF-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-06",
+      "source_pack": "A",
+      "entity_key": "url:csed.acm.org/knowledge-areas",
+      "canonical_id": "OFF-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-07",
+      "source_pack": "A",
+      "entity_key": "url:homepages.cs.ncl.ac.uk/brian.randell/nato/nato1968.pdf",
+      "canonical_id": "OFF-006",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-08",
+      "source_pack": "A",
+      "entity_key": "url:standards.ieee.org/ieee/610.12/1016",
+      "canonical_id": "STD-010",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-09",
+      "source_pack": "A",
+      "entity_key": "url:www.iso.org/standard/71952.html",
+      "canonical_id": "OFF-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-10",
+      "source_pack": "A",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-11",
+      "source_pack": "A",
+      "entity_key": "url:agilemanifesto.org",
+      "canonical_id": "OFF-007",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-12",
+      "source_pack": "A",
+      "entity_key": "url:www.iso.org/standard/80710.html",
+      "canonical_id": "STD-007",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "A",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/software-engineering/p200000003290",
+      "canonical_id": "BK-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "A",
+      "entity_key": "url:abseil.io/resources/swe-book",
+      "canonical_id": "BK-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "A",
+      "entity_key": "url:iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "canonical_id": "OFF-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "A",
+      "entity_key": "url:www.sonarsource.com/resources/library/iso-iec-25010-explained",
+      "canonical_id": "WEB-011",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "A",
+      "entity_key": "url:en.wikipedia.org/wiki/software_engineering",
+      "canonical_id": "WEB-012",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-01",
+      "source_pack": "A",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-02",
+      "source_pack": "A",
+      "entity_key": "url:www-scf.usc.edu/~csci201/lectures/lecture11/royce1970.pdf",
+      "canonical_id": "PAP-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-03",
+      "source_pack": "A",
+      "entity_key": "url:bioinfo.uib.es/~joemiro/semdoc/plansestudis/bachelor_masters_curricula/dparnas.pdf",
+      "canonical_id": "PAP-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-04",
+      "source_pack": "A",
+      "entity_key": "url:worrydream.com/refs/brooks_1986_-_no_silver_bullet.pdf",
+      "canonical_id": "PAP-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-01, F/S4-04, R/S4-PAP-01"
+    },
+    {
+      "old_id": "S1-01",
+      "source_pack": "B",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-02",
+      "source_pack": "B",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-03",
+      "source_pack": "B",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-04",
+      "source_pack": "B",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-05",
+      "source_pack": "B",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-06",
+      "source_pack": "B",
+      "entity_key": "url:iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "canonical_id": "OFF-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-07",
+      "source_pack": "B",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/architecture",
+      "canonical_id": "WEB-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebt.html",
+      "canonical_id": "WEB-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "B",
+      "entity_key": "url:c2.com/doc/oopsla92.html",
+      "canonical_id": "PAP-006",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/ieeesoftware/whoneedsarchitect.pdf",
+      "canonical_id": "WEB-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/books/eaa.html",
+      "canonical_id": "BK-012",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "B",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/p200000009282",
+      "canonical_id": "BK-007",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-07",
+      "source_pack": "B",
+      "entity_key": "url:web.stanford.edu/~ouster/cgi-bin/book.php",
+      "canonical_id": "BK-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-08",
+      "source_pack": "B",
+      "entity_key": "url:domainlanguage.com/ddd/reference",
+      "canonical_id": "BK-018",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-09",
+      "source_pack": "B",
+      "entity_key": "url:cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "canonical_id": "WEB-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-10",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/bliki/architecturedecisionrecord.html",
+      "canonical_id": "WEB-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-11",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/articles/microservices.html",
+      "canonical_id": "WEB-006",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-12",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/bliki/presentationdomaindatalayering.html",
+      "canonical_id": "WEB-007",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-13",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/bliki/cqrs.html",
+      "canonical_id": "WEB-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-14",
+      "source_pack": "B",
+      "entity_key": "url:www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "canonical_id": "PAP-007",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-07, G/S2-14"
+    },
+    {
+      "old_id": "S2-15",
+      "source_pack": "B",
+      "entity_key": "url:www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "canonical_id": "PAP-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-02, H/S2-01, R/S4-PAP-02"
+    },
+    {
+      "old_id": "S2-16",
+      "source_pack": "B",
+      "entity_key": "url:folk.universitetetioslo.no/trygver/themes/mvc/mvc-index.html",
+      "canonical_id": "WEB-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-WEB-09"
+    },
+    {
+      "old_id": "S2-17",
+      "source_pack": "B",
+      "entity_key": "url:martinfowler.com/eaadev/uiarchs.html",
+      "canonical_id": "WEB-010",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-WEB-10"
+    },
+    {
+      "old_id": "S2-18",
+      "source_pack": "B",
+      "entity_key": "url:www.wiley.com/en-us/pattern-oriented+software+architecture%2c+volume+1%3a+a+system+of+patterns-p-9780471958697",
+      "canonical_id": "BK-016",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-16, G/S2-18, R/S2-BK-16"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "B",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "canonical_id": "VEN-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-01",
+      "source_pack": "B",
+      "entity_key": "url:doi.org/10.1002/smr.2423",
+      "canonical_id": "PAP-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-03",
+      "source_pack": "F",
+      "entity_key": "url:www.iso.org/standard/90219.html",
+      "canonical_id": "STD-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-07",
+      "source_pack": "F",
+      "entity_key": "url:homepages.cs.ncl.ac.uk/brian.randell/nato/nato1968.pdf",
+      "canonical_id": "OFF-006",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-04",
+      "source_pack": "F",
+      "entity_key": "url:worrydream.com/refs/brooks_1986_-_no_silver_bullet.pdf",
+      "canonical_id": "PAP-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-01, A/S4-04, R/S4-PAP-01"
+    },
+    {
+      "old_id": "S1-A01",
+      "source_pack": "F",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-OFF-01, A/S1-01, B/S1-02, G/S1-02, H/S1-01, R/S1-OFF-01"
+    },
+    {
+      "old_id": "S1-F01",
+      "source_pack": "F",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering/topics",
+      "canonical_id": "OFF-010",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F02",
+      "source_pack": "F",
+      "entity_key": "url:www.iso.org/standard/72089.html",
+      "canonical_id": "STD-011",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F03",
+      "source_pack": "F",
+      "entity_key": "url:standards.ieee.org/ieee/29148/12262",
+      "canonical_id": "STD-012",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F04",
+      "source_pack": "F",
+      "entity_key": "url:sebokwiki.org/wiki/an_overview_of_the_swebok_guide",
+      "canonical_id": "XCV-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-03, R/R-XC-03"
+    },
+    {
+      "old_id": "S1-F05",
+      "source_pack": "F",
+      "entity_key": "url:sebokwiki.org/wiki/stakeholder_needs_and_requirements_(glossary)",
+      "canonical_id": "OFF-011",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F06",
+      "source_pack": "F",
+      "entity_key": "url:sebokwiki.org/wiki/stakeholder_(glossary)",
+      "canonical_id": "OFF-012",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F07",
+      "source_pack": "F",
+      "entity_key": "url:www.sei.cmu.edu/our-work/software-architecture",
+      "canonical_id": "OFF-013",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-F08",
+      "source_pack": "F",
+      "entity_key": "url:cs.fit.edu/~kgallagher/schtick/serious/swebokv3.pdf",
+      "canonical_id": "OFF-014",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-F01",
+      "source_pack": "F",
+      "entity_key": "url:people.ece.ubc.ca/matei/eece417/bass/ch04lev1sec3.html",
+      "canonical_id": "BK-036",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-F01",
+      "source_pack": "F",
+      "entity_key": "url:www.extuitive.co.uk/papers/iso29148nzrequirements.pdf",
+      "canonical_id": "PAP-019",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-F02",
+      "source_pack": "F",
+      "entity_key": "url:se.inf.ethz.ch/~meyer/publications/requirements/requirements_anatomy.pdf",
+      "canonical_id": "PAP-020",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S3-F01",
+      "source_pack": "F",
+      "entity_key": "url:possessionplanning.com/traceability-matrix/iso-iec-ieee-291482018",
+      "canonical_id": "VEN-012",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S3-F02",
+      "source_pack": "F",
+      "entity_key": "url:www.modernrequirements.com/blogs/iso-29148-explained",
+      "canonical_id": "VEN-013",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-01",
+      "source_pack": "G",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-02",
+      "source_pack": "G",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-03",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-04",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-05",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-07",
+      "source_pack": "G",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-08",
+      "source_pack": "G",
+      "entity_key": "url:www.iso.org/standard/74393.html",
+      "canonical_id": "STD-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-09",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture/tools/document/viewsandbeyond.cfm",
+      "canonical_id": "OFF-015",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-10",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture/documentation_methods.html",
+      "canonical_id": "OFF-016",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-11",
+      "source_pack": "G",
+      "entity_key": "url:www.sei.cmu.edu/architecture",
+      "canonical_id": "OFF-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-12",
+      "source_pack": "G",
+      "entity_key": "url:www.iso-architecture.org/42010",
+      "canonical_id": "STD-013",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-09",
+      "source_pack": "G",
+      "entity_key": "url:cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "canonical_id": "WEB-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-10",
+      "source_pack": "G",
+      "entity_key": "url:martinfowler.com/bliki/architecturedecisionrecord.html",
+      "canonical_id": "WEB-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-14",
+      "source_pack": "G",
+      "entity_key": "url:www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "canonical_id": "PAP-007",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-07, B/S2-14"
+    },
+    {
+      "old_id": "S2-18",
+      "source_pack": "G",
+      "entity_key": "url:www.wiley.com/en-us/pattern-oriented+software+architecture%2c+volume+1%3a+a+system+of+patterns-p-9780471958697",
+      "canonical_id": "BK-016",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-16, B/S2-18, R/S2-BK-16"
+    },
+    {
+      "old_id": "S2-19",
+      "source_pack": "G",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/documenting-software-architectures-views-and-beyond/p200000009174",
+      "canonical_id": "BK-013",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-13"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "G",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles",
+      "canonical_id": "VEN-014",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-01",
+      "source_pack": "H",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-02",
+      "source_pack": "H",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "H",
+      "entity_key": "url:www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "canonical_id": "PAP-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "H",
+      "entity_key": "url:web.stanford.edu/~ouster/cgi-bin/book.php",
+      "canonical_id": "BK-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "H",
+      "entity_key": "url:martinfowler.com/bliki/codesmell.html",
+      "canonical_id": "WEB-017",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "H",
+      "entity_key": "url:en.wikipedia.org/wiki/don%27t_repeat_yourself",
+      "canonical_id": "BK-037",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "H",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/p200000009283",
+      "canonical_id": "BK-020",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "H",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/p200000009144",
+      "canonical_id": "BK-032",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-07",
+      "source_pack": "H",
+      "entity_key": "url:www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions",
+      "canonical_id": "WEB-020",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-08",
+      "source_pack": "H",
+      "entity_key": "url:www.laputan.org/mud",
+      "canonical_id": "WEB-021",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-09",
+      "source_pack": "H",
+      "entity_key": "url:doi.org/10.1147/sj.132.0115",
+      "canonical_id": "WEB-022",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-10",
+      "source_pack": "H",
+      "entity_key": "url:abseil.io/resources/swe-book",
+      "canonical_id": "BK-001",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-11",
+      "source_pack": "H",
+      "entity_key": "url:en.wikipedia.org/wiki/you_aren%27t_gonna_need_it ; http://ronjeffries.com/xprog/articles/practices/pracnotneed",
+      "canonical_id": "WEB-023",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "H",
+      "entity_key": "url:refactoring.guru/design-patterns ; https://refactoring.guru/refactoring/smells",
+      "canonical_id": "VEN-015",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "H",
+      "entity_key": "url:sourcemaking.com/antipatterns ; https://sourcemaking.com/design_patterns",
+      "canonical_id": "VEN-016",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-01",
+      "source_pack": "H",
+      "entity_key": "url:doi.org/10.1109/32.295895 ; https://mural.maynoothuniversity.ie/id/eprint/2391/1/jm_nuim-cs-tr-2006-03.pdf",
+      "canonical_id": "PAP-021",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-02",
+      "source_pack": "H",
+      "entity_key": "url:doi.org/10.3390/su131810256",
+      "canonical_id": "PAP-022",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-03",
+      "source_pack": "H",
+      "entity_key": "url:doi.org/10.1007/bfb0054099",
+      "canonical_id": "PAP-023",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-STD-11",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/81291.html",
+      "canonical_id": "STD-014",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-12",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/79428.html",
+      "canonical_id": "STD-015",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-13",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/79429.html",
+      "canonical_id": "STD-016",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-14",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/79430.html",
+      "canonical_id": "STD-017",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-15",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/87233.html",
+      "canonical_id": "STD-018",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-16",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/81293.html",
+      "canonical_id": "STD-019",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-17",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/79016.html",
+      "canonical_id": "STD-020",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-18",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/84220.html",
+      "canonical_id": "STD-021",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-19",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/67407.html",
+      "canonical_id": "STD-022",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-STD-20",
+      "source_pack": "I",
+      "entity_key": "url:www.iso.org/standard/55154.html",
+      "canonical_id": "STD-023",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-09",
+      "source_pack": "I",
+      "entity_key": "url:softwaretestingstandard.org",
+      "canonical_id": "STD-024",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-10",
+      "source_pack": "I",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering/v4",
+      "canonical_id": "OFF-017",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-11",
+      "source_pack": "I",
+      "entity_key": "url:www.istqb.org/wp-content/uploads/2024/11/istqb_ctfl_syllabus_v4.0.1.pdf",
+      "canonical_id": "OFF-018",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-05",
+      "source_pack": "I",
+      "entity_key": "url:iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "canonical_id": "OFF-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-OFF-05, A/S2-03, B/S1-06, M/S2-M01"
+    },
+    {
+      "old_id": "S1-OFF-12",
+      "source_pack": "I",
+      "entity_key": "url:www.sei.cmu.edu/blog/a-taxonomy-of-testing",
+      "canonical_id": "OFF-019",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-13",
+      "source_pack": "I",
+      "entity_key": "url:www.sei.cmu.edu/blog/four-types-of-shift-left-testing",
+      "canonical_id": "OFF-020",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-OFF-14",
+      "source_pack": "I",
+      "entity_key": "url:www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies",
+      "canonical_id": "OFF-021",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-12",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/bliki/testpyramid.html",
+      "canonical_id": "WEB-024",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-WEB-13",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/articles/practical-test-pyramid.html",
+      "canonical_id": "WEB-025",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-14",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/bliki/testdrivendevelopment.html",
+      "canonical_id": "WEB-026",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-15",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/bliki/unittest.html",
+      "canonical_id": "WEB-027",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-16",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/bliki/integrationtest.html",
+      "canonical_id": "WEB-028",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-17",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/bliki/testdouble.html",
+      "canonical_id": "WEB-029",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-18",
+      "source_pack": "I",
+      "entity_key": "url:martinfowler.com/articles/continuousintegration.html",
+      "canonical_id": "WEB-030",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-WEB-19",
+      "source_pack": "I",
+      "entity_key": "url:kentbeck.com",
+      "canonical_id": "WEB-031",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-BK-01",
+      "source_pack": "I",
+      "entity_key": "url:abseil.io/resources/swe-book",
+      "canonical_id": "BK-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-01, A/S2-02, H/S2-10"
+    },
+    {
+      "old_id": "S2-BK-09",
+      "source_pack": "I",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/p200000009173",
+      "canonical_id": "BK-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-09, M/S2-M02"
+    },
+    {
+      "old_id": "S2-BK-28",
+      "source_pack": "I",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/p200000009253",
+      "canonical_id": "BK-028",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-28"
+    },
+    {
+      "old_id": "S2-BK-29",
+      "source_pack": "I",
+      "entity_key": "url:itrevolution.com/product/accelerate",
+      "canonical_id": "BK-029",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-29"
+    },
+    {
+      "old_id": "S2-BK-30",
+      "source_pack": "I",
+      "entity_key": "url:www.mountaingoatsoftware.com/books/succeeding-with-agile",
+      "canonical_id": "BK-038",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-02",
+      "source_pack": "I",
+      "entity_key": "url:testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html",
+      "canonical_id": "VEN-017",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-03",
+      "source_pack": "I",
+      "entity_key": "url:dora.dev/guides/dora-metrics-four-keys",
+      "canonical_id": "VEN-018",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-04",
+      "source_pack": "I",
+      "entity_key": "url:docs.sonarsource.com/sonarqube-server/latest/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates",
+      "canonical_id": "VEN-019",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "J",
+      "entity_key": "url:12factor.net",
+      "canonical_id": "BK-031",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "J",
+      "entity_key": "url:martinfowler.com/bliki/bluegreendeployment.html",
+      "canonical_id": "WEB-032",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "J",
+      "entity_key": "url:martinfowler.com/bliki/canaryrelease.html",
+      "canonical_id": "WEB-033",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "J",
+      "entity_key": "url:martinfowler.com/bliki/immutableserver.html",
+      "canonical_id": "WEB-034",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "J",
+      "entity_key": "url:martinfowler.com/bliki/phoenixserver.html",
+      "canonical_id": "WEB-035",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "J",
+      "entity_key": "url:martinfowler.com/bliki/deploymentpipeline.html",
+      "canonical_id": "WEB-036",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-07",
+      "source_pack": "J",
+      "entity_key": "url:sre.google/sre-book/table-of-contents",
+      "canonical_id": "BK-025",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "J",
+      "entity_key": "url:dora.dev/devops-capabilities/technical/deployment-automation",
+      "canonical_id": "VEN-020",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "J",
+      "entity_key": "url:docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html",
+      "canonical_id": "VEN-021",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-03",
+      "source_pack": "J",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/well-architected/operational-excellence/safe-deployments",
+      "canonical_id": "VEN-022",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-04",
+      "source_pack": "J",
+      "entity_key": "url:kubernetes.io/docs/concepts/workloads/controllers/deployment",
+      "canonical_id": "VEN-023",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-05",
+      "source_pack": "J",
+      "entity_key": "url:glossary.cncf.io/immutable-infrastructure",
+      "canonical_id": "VEN-024",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "BK-01",
+      "source_pack": "J",
+      "entity_key": "url:~/opencode/archive/mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "canonical_id": "LOC-038",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/L-BK-01"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "K",
+      "entity_key": "url:sre.google/sre-book/table-of-contents",
+      "canonical_id": "BK-025",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "K",
+      "entity_key": "url:sre.google/workbook/table-of-contents",
+      "canonical_id": "BK-026",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "K",
+      "entity_key": "url:pragprog.com/titles/mnee2/release-it-second-edition",
+      "canonical_id": "BK-024",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "K",
+      "entity_key": "url:martinfowler.com/bliki/circuitbreaker.html",
+      "canonical_id": "WEB-037",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "K",
+      "entity_key": "url:principlesofchaos.org",
+      "canonical_id": "WEB-038",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "K",
+      "entity_key": "url:codeascraft.com/2012/05/22/blameless-postmortems",
+      "canonical_id": "WEB-039",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "K",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "canonical_id": "VEN-025",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "K",
+      "entity_key": "url:opentelemetry.io/docs/concepts/observability-primer",
+      "canonical_id": "VEN-026",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-03",
+      "source_pack": "K",
+      "entity_key": "url:docs.datadoghq.com/service_management/service_level_objectives",
+      "canonical_id": "VEN-027",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-04",
+      "source_pack": "K",
+      "entity_key": "url:aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter",
+      "canonical_id": "VEN-028",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-05",
+      "source_pack": "K",
+      "entity_key": "url:dora.dev/guides/dora-metrics-four-keys",
+      "canonical_id": "VEN-018",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-06",
+      "source_pack": "K",
+      "entity_key": "url:learn.microsoft.com/en-us/azure/well-architected/reliability/metrics",
+      "canonical_id": "VEN-029",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-01",
+      "source_pack": "L",
+      "entity_key": "url:www.iso.org/standard/80710.html",
+      "canonical_id": "STD-007",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-02",
+      "source_pack": "L",
+      "entity_key": "url:www.rfc-editor.org/rfc/rfc8594.txt",
+      "canonical_id": "STD-025",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-03",
+      "source_pack": "L",
+      "entity_key": "url:www.rfc-editor.org/rfc/rfc9745.txt",
+      "canonical_id": "STD-026",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "L",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebt.html",
+      "canonical_id": "WEB-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "L",
+      "entity_key": "url:c2.com/doc/oopsla92.html",
+      "canonical_id": "PAP-006",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "L",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebtquadrant.html",
+      "canonical_id": "WEB-013",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "L",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/p200000009306",
+      "canonical_id": "BK-021",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "L",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/p200000009306",
+      "canonical_id": "BK-021",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "L",
+      "entity_key": "url:martinfowler.com/bliki/codesmell.html",
+      "canonical_id": "WEB-017",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-07",
+      "source_pack": "L",
+      "entity_key": "url:martinfowler.com/bliki/stranglerfigapplication.html",
+      "canonical_id": "WEB-016",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-08",
+      "source_pack": "L",
+      "entity_key": "url:martinfowler.com/articles/refactoring-2nd-ed.html",
+      "canonical_id": "WEB-040",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-09",
+      "source_pack": "L",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/p200000009308",
+      "canonical_id": "BK-022",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-10",
+      "source_pack": "L",
+      "entity_key": "url:michaelfeathers.silvrback.com",
+      "canonical_id": "WEB-041",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-11",
+      "source_pack": "L",
+      "entity_key": "url:users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "canonical_id": "WEB-019",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-12",
+      "source_pack": "L",
+      "entity_key": "url:www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532",
+      "canonical_id": "BK-011",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-13",
+      "source_pack": "L",
+      "entity_key": "url:www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532",
+      "canonical_id": "BK-011",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "L",
+      "entity_key": "url:www.thoughtworks.com/insights/blog/fitness-function-driven-development",
+      "canonical_id": "VEN-030",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "L",
+      "entity_key": "url:www.thoughtworks.com/radar/techniques/architectural-fitness-function",
+      "canonical_id": "VEN-031",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-03",
+      "source_pack": "L",
+      "entity_key": "url:google.aip.dev/180",
+      "canonical_id": "VEN-032",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-04",
+      "source_pack": "L",
+      "entity_key": "url:learn.microsoft.com/en-us/lifecycle/policies/modern",
+      "canonical_id": "VEN-033",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-05",
+      "source_pack": "L",
+      "entity_key": "url:semver.org",
+      "canonical_id": "VEN-034",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-01",
+      "source_pack": "L",
+      "entity_key": "url:doi.org/10.1002/smr.2423",
+      "canonical_id": "PAP-008",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-02",
+      "source_pack": "L",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-03",
+      "source_pack": "L",
+      "entity_key": "url:doi.org/10.1109/ms.2012.167",
+      "canonical_id": "PAP-009",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S1-M01",
+      "source_pack": "M",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S1-02, PHASE1/S1-STD-05, A/S1-04, H/S1-02, P/P-S1-02"
+    },
+    {
+      "old_id": "S1-M02",
+      "source_pack": "M",
+      "entity_key": "url:www.iso.org/standard/78175.html",
+      "canonical_id": "STD-027",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M03",
+      "source_pack": "M",
+      "entity_key": "url:www.iso.org/standard/78177.html",
+      "canonical_id": "STD-028",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M04",
+      "source_pack": "M",
+      "entity_key": "url:www.sei.cmu.edu/library/extensibility",
+      "canonical_id": "OFF-022",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M05",
+      "source_pack": "M",
+      "entity_key": "url:www.sei.cmu.edu/library/realizing-and-refining-architectural-tactics-availability",
+      "canonical_id": "OFF-023",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M06",
+      "source_pack": "M",
+      "entity_key": "url:www.sei.cmu.edu/library/modifiability-tactics",
+      "canonical_id": "OFF-024",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M07",
+      "source_pack": "M",
+      "entity_key": "url:www.sei.cmu.edu/library/reasoning-about-software-quality-attributes",
+      "canonical_id": "OFF-025",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S1-M08",
+      "source_pack": "M",
+      "entity_key": "url:www.iso.org/standard/80710.html",
+      "canonical_id": "STD-007",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-STD-07, A/S1-12, L/S1-01"
+    },
+    {
+      "old_id": "S2-M01",
+      "source_pack": "M",
+      "entity_key": "url:iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "canonical_id": "OFF-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-OFF-05, A/S2-03, B/S1-06, I/S1-OFF-05"
+    },
+    {
+      "old_id": "S2-M02",
+      "source_pack": "M",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/p200000009173",
+      "canonical_id": "BK-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-09, I/S2-BK-09"
+    },
+    {
+      "old_id": "S4-M01",
+      "source_pack": "M",
+      "entity_key": "url:www.es.mdh.se/pdf_publications/1739.pdf",
+      "canonical_id": "PAP-024",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-M02",
+      "source_pack": "M",
+      "entity_key": "url:www.researchgate.net/profile/john-leaney/publication/240718016",
+      "canonical_id": "PAP-025",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S4-M03",
+      "source_pack": "M",
+      "entity_key": "url:upcommons.upc.edu/bitstreams/aa5bbbe8-740f-41ac-953a-1b0322541abe/download",
+      "canonical_id": "PAP-026",
+      "action": "rename",
+      "note": "净新增/直接重命名"
+    },
+    {
+      "old_id": "S2-01",
+      "source_pack": "N",
+      "entity_key": "url:www.melconway.com/home/committees_paper.html",
+      "canonical_id": "WEB-042",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-02",
+      "source_pack": "N",
+      "entity_key": "url:www.melconway.com/home/conways_law.html",
+      "canonical_id": "WEB-043",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-03",
+      "source_pack": "N",
+      "entity_key": "url:martinfowler.com/bliki/conwayslaw.html",
+      "canonical_id": "WEB-044",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-04",
+      "source_pack": "N",
+      "entity_key": "url:itrevolution.com/product/team-topologies",
+      "canonical_id": "BK-030",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-05",
+      "source_pack": "N",
+      "entity_key": "url:teamtopologies.com/key-concepts",
+      "canonical_id": "WEB-045",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S2-06",
+      "source_pack": "N",
+      "entity_key": "url:itrevolution.com/product/team-topologies",
+      "canonical_id": "BK-030",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-01",
+      "source_pack": "N",
+      "entity_key": "url:www.thoughtworks.com/radar/techniques/inverse-conway-maneuver",
+      "canonical_id": "VEN-035",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-02",
+      "source_pack": "N",
+      "entity_key": "url:dora.dev/guides/dora-metrics",
+      "canonical_id": "VEN-036",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-03",
+      "source_pack": "N",
+      "entity_key": "url:dora.dev/insights/dora-metrics-history",
+      "canonical_id": "VEN-037",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-04",
+      "source_pack": "N",
+      "entity_key": "url:dora.dev/research/2024/dora-report",
+      "canonical_id": "VEN-038",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-05",
+      "source_pack": "N",
+      "entity_key": "url:framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale",
+      "canonical_id": "VEN-039",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-01",
+      "source_pack": "N",
+      "entity_key": "url:ideas.repec.org/a/eee/respol/v41y2012i8p1309-1324.html",
+      "canonical_id": "PAP-027",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S4-02",
+      "source_pack": "N",
+      "entity_key": "url:www.hbs.edu/ris/publication%20files/colfer%20baldwin%20mirroring%20hypothesis%20ind%20corp%20change-2016_8aa320ff-6aa6-42ef-b259-d139012faaf6.pdf",
+      "canonical_id": "PAP-028",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "P-S1-01",
+      "source_pack": "P",
+      "entity_key": "url:www.sei.cmu.edu/library/technical-debt-from-metaphor-to-theory-and-practice",
+      "canonical_id": "OFF-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S1-01"
+    },
+    {
+      "old_id": "P-S1-02",
+      "source_pack": "P",
+      "entity_key": "url:www.iso.org/standard/78176.html",
+      "canonical_id": "STD-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S1-02, PHASE1/S1-STD-05, A/S1-04, H/S1-02, M/S1-M01"
+    },
+    {
+      "old_id": "P-S2-01",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebt.html",
+      "canonical_id": "WEB-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-01, PHASE1/S2-WEB-02, B/S2-02, L/S2-01"
+    },
+    {
+      "old_id": "P-S2-02",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/technicaldebtquadrant.html",
+      "canonical_id": "WEB-013",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-02, L/S2-03"
+    },
+    {
+      "old_id": "P-S2-03",
+      "source_pack": "P",
+      "entity_key": "url:c2.com/doc/oopsla92.html",
+      "canonical_id": "PAP-006",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-03, PHASE1/S4-PAP-06, B/S2-03, L/S2-02"
+    },
+    {
+      "old_id": "P-S2-04",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/opportunisticrefactoring.html",
+      "canonical_id": "WEB-014",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-04"
+    },
+    {
+      "old_id": "P-S2-05",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/designstaminahypothesis.html",
+      "canonical_id": "WEB-015",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-05"
+    },
+    {
+      "old_id": "P-S2-06",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/stranglerfigapplication.html",
+      "canonical_id": "WEB-016",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-06, L/S2-07"
+    },
+    {
+      "old_id": "P-S2-07",
+      "source_pack": "P",
+      "entity_key": "url:www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/p200000009306",
+      "canonical_id": "BK-021",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-07, PHASE1/S2-BK-21, L/S2-04, L/S2-05"
+    },
+    {
+      "old_id": "P-S2-08",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/bliki/codesmell.html",
+      "canonical_id": "WEB-017",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-08, H/S2-03, L/S2-06"
+    },
+    {
+      "old_id": "P-S2-09",
+      "source_pack": "P",
+      "entity_key": "url:martinfowler.com/articles/is-quality-worth-cost.html",
+      "canonical_id": "WEB-018",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-09"
+    },
+    {
+      "old_id": "P-S2-10",
+      "source_pack": "P",
+      "entity_key": "url:users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "canonical_id": "WEB-019",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S2-10, L/S2-11"
+    },
+    {
+      "old_id": "P-S3-01",
+      "source_pack": "P",
+      "entity_key": "url:docs.sonarsource.com/sonarqube/latest/user-guide/metric-definitions",
+      "canonical_id": "VEN-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S3-01"
+    },
+    {
+      "old_id": "P-S3-02",
+      "source_pack": "P",
+      "entity_key": "url:docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-rules/rules",
+      "canonical_id": "VEN-010",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S3-02"
+    },
+    {
+      "old_id": "P-S3-03",
+      "source_pack": "P",
+      "entity_key": "url:www.sqale.org",
+      "canonical_id": "VEN-011",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S3-03"
+    },
+    {
+      "old_id": "P-S4-01",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1109/ms.2012.167",
+      "canonical_id": "PAP-009",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-01, L/S4-03"
+    },
+    {
+      "old_id": "P-S4-02",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1109/ms.2012.129",
+      "canonical_id": "PAP-010",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-02"
+    },
+    {
+      "old_id": "P-S4-03",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1016/j.jss.2014.12.027",
+      "canonical_id": "PAP-011",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-03"
+    },
+    {
+      "old_id": "P-S4-04",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1109/mtd.2014.9",
+      "canonical_id": "PAP-012",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-04"
+    },
+    {
+      "old_id": "P-S4-05",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1109/ms.2020.3024958",
+      "canonical_id": "PAP-013",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-05"
+    },
+    {
+      "old_id": "P-S4-06",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1007/s10664-023-10297-9",
+      "canonical_id": "PAP-014",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-06"
+    },
+    {
+      "old_id": "P-S4-07",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1016/j.jss.2020.110827",
+      "canonical_id": "PAP-015",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-07"
+    },
+    {
+      "old_id": "P-S4-08",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1002/smr.2423",
+      "canonical_id": "PAP-008",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-08, PHASE1/S4-PAP-08, B/S4-01, L/S4-01"
+    },
+    {
+      "old_id": "P-S4-09",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-09, PHASE1/S4-PAP-03, A/S4-01, L/S4-02, R/S4-PAP-03"
+    },
+    {
+      "old_id": "P-S4-10",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1016/j.jss.2019.06.004",
+      "canonical_id": "PAP-016",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-10"
+    },
+    {
+      "old_id": "P-S4-11",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1016/j.jss.2021.110925",
+      "canonical_id": "PAP-017",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-11"
+    },
+    {
+      "old_id": "P-S4-12",
+      "source_pack": "P",
+      "entity_key": "url:doi.org/10.1016/j.jss.2022.111483",
+      "canonical_id": "PAP-018",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-12"
+    },
+    {
+      "old_id": "S3-VEN-02",
+      "source_pack": "Q",
+      "entity_key": "url:docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "canonical_id": "VEN-002",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-03",
+      "source_pack": "Q",
+      "entity_key": "url:docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf",
+      "canonical_id": "VEN-003",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-04",
+      "source_pack": "Q",
+      "entity_key": "url:cloud.google.com/architecture/framework",
+      "canonical_id": "VEN-004",
+      "action": "collision_split",
+      "note": "同形 ID 跨包指向不同实体，按 URL/DOI 拆分"
+    },
+    {
+      "old_id": "S3-VEN-05",
+      "source_pack": "Q",
+      "entity_key": "url:cloud.google.com/architecture/framework/whats-new",
+      "canonical_id": "VEN-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S3-VEN-05"
+    },
+    {
+      "old_id": "S3-VEN-06",
+      "source_pack": "Q",
+      "entity_key": "url:www.thoughtworks.com/radar",
+      "canonical_id": "VEN-006",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S3-VEN-06"
+    },
+    {
+      "old_id": "S3-VEN-07",
+      "source_pack": "Q",
+      "entity_key": "url:www.thoughtworks.com/radar/faq",
+      "canonical_id": "VEN-007",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S3-VEN-07"
+    },
+    {
+      "old_id": "S3-VEN-08",
+      "source_pack": "Q",
+      "entity_key": "url:www.thoughtworks.com/radar/archive",
+      "canonical_id": "VEN-008",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S3-VEN-08"
+    },
+    {
+      "old_id": "S4-PAP-04",
+      "source_pack": "R",
+      "entity_key": "url:www-scf.usc.edu/~csci201/lectures/lecture11/royce1970.pdf",
+      "canonical_id": "PAP-004",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-04, A/S4-02"
+    },
+    {
+      "old_id": "S4-PAP-03",
+      "source_pack": "R",
+      "entity_key": "url:doi.org/10.1109/proc.1980.11805",
+      "canonical_id": "PAP-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/P-S4-09, PHASE1/S4-PAP-03, A/S4-01, L/S4-02, P/P-S4-09"
+    },
+    {
+      "old_id": "S4-PAP-05",
+      "source_pack": "R",
+      "entity_key": "url:bioinfo.uib.es/~joemiro/semdoc/plansestudis/bachelor_masters_curricula/dparnas.pdf",
+      "canonical_id": "PAP-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-05, A/S4-03"
+    },
+    {
+      "old_id": "S4-PAP-02",
+      "source_pack": "R",
+      "entity_key": "url:www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "canonical_id": "PAP-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-02, B/S2-15, H/S2-01"
+    },
+    {
+      "old_id": "S4-PAP-01",
+      "source_pack": "R",
+      "entity_key": "url:worrydream.com/refs/brooks_1986_-_no_silver_bullet.pdf",
+      "canonical_id": "PAP-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S4-PAP-01, A/S4-04, F/S4-04"
+    },
+    {
+      "old_id": "S2-BK-16",
+      "source_pack": "R",
+      "entity_key": "url:www.wiley.com/en-us/pattern-oriented+software+architecture%2c+volume+1%3a+a+system+of+patterns-p-9780471958697",
+      "canonical_id": "BK-016",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S2-BK-16, B/S2-18, G/S2-18"
+    },
+    {
+      "old_id": "S1-OFF-01",
+      "source_pack": "R",
+      "entity_key": "url:www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "canonical_id": "OFF-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/S1-OFF-01, A/S1-01, B/S1-02, F/S1-A01, G/S1-02, H/S1-01"
+    },
+    {
+      "old_id": "R-XC-01",
+      "source_pack": "R",
+      "entity_key": "url:www.cs.kent.edu/~jmaletic/cs63902/papers/lehman96.pdf",
+      "canonical_id": "XCV-001",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-01"
+    },
+    {
+      "old_id": "R-XC-02",
+      "source_pack": "R",
+      "entity_key": "url:en.wikipedia.org/wiki/lehman%27s_laws_of_software_evolution",
+      "canonical_id": "XCV-002",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-02"
+    },
+    {
+      "old_id": "R-XC-03",
+      "source_pack": "R",
+      "entity_key": "url:sebokwiki.org/wiki/an_overview_of_the_swebok_guide",
+      "canonical_id": "XCV-003",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-03, F/S1-F04"
+    },
+    {
+      "old_id": "R-XC-04",
+      "source_pack": "R",
+      "entity_key": "url:software-pattern.org/book/30",
+      "canonical_id": "XCV-004",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-04"
+    },
+    {
+      "old_id": "R-XC-05",
+      "source_pack": "R",
+      "entity_key": "url:en.wikipedia.org/wiki/waterfall_model",
+      "canonical_id": "XCV-005",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-05"
+    },
+    {
+      "old_id": "R-XC-06",
+      "source_pack": "R",
+      "entity_key": "url:en.wikipedia.org/wiki/no_silver_bullet",
+      "canonical_id": "XCV-006",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-06"
+    },
+    {
+      "old_id": "R-XC-07",
+      "source_pack": "R",
+      "entity_key": "url:en.wikipedia.org/wiki/software_engineering_body_of_knowledge",
+      "canonical_id": "XCV-007",
+      "action": "merge",
+      "note": "同实体复用：PHASE1/R-XC-07"
+    }
+  ]
+}

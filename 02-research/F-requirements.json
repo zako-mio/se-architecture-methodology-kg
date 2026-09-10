@@ -1,0 +1,466 @@
+{
+  "topic": "概念与需求（Concept & Requirements）——软件工程定义补全（SWEBOK V4 KA1）、软件危机与本质复杂度、需求工程过程（ISO/IEC/IEEE 29148:2018）、干系人识别、质量属性需求（QA scenario / SEI）",
+  "generated_by": "requirements-engineering-researcher (subagent, F 域)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "联网直连为主，境外/被墙站点走代理 172.29.0.1:7890。iso.org 实测 WAF 403（与 E 包结论一致），ISO 29148:2018 元数据与 abstract 经 web.archive.org 快照获取；computer.org 直连 403，SWEBOK V4 目录经 Wayback 快照获取；SEBoK 直连 200。未下载任何标准正文入库。SWEBOK 定义原句经 Tavily 返回的 PDF 文本快照与学术转引交叉核验（V3 官方 PDF 镜像下载损坏，见 gaps）。",
+  "sources": [
+    {
+      "id": "STD-003",
+      "title": "ISO/IEC/IEEE 12207:2026 — Systems and software engineering — Software life cycle processes（复用 E 包）",
+      "org": "ISO / IEC / IEEE",
+      "year": "2026",
+      "url": "https://www.iso.org/standard/90219.html",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "复用 E 包结论：12207 定义生命周期『过程』而非固定『阶段』，采用 15288 的四组过程（协议、组织项目使能、技术管理、技术）；需求相关过程嵌入其技术过程框架。",
+        "E 包经 ISO 页快照与 Wikipedia 互证 2026 版发布；iso.org 403，scope 未逐字核对。"
+      ],
+      "legacy_id": "S1-03"
+    },
+    {
+      "id": "OFF-006",
+      "title": "Software Engineering: Report on a conference sponsored by the NATO Science Committee, Garmisch, Germany, 7–11 October 1968（Naur & Randell 编）（复用 A 包）",
+      "org": "NATO Science Committee",
+      "year": "1969",
+      "url": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1968.PDF",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "复用 A 包 S1-07：1968 Garmisch 会议与 1969 罗马会议为软件工程学科起点；报告第 7 章记录对 software crisis / software gap 的争论（承诺与实现鸿沟、成本估算不符、大型软件不可靠等），与会者严重程度意见不一。"
+      ],
+      "legacy_id": "S1-07"
+    },
+    {
+      "id": "PAP-001",
+      "title": "No Silver Bullet — Essence and Accidents of Software Engineering（Frederick P. Brooks, Jr.，TR86-020）（复用 A 包；本轮获取原始 PDF）",
+      "org": "University of North Carolina at Chapel Hill / IEEE Computer",
+      "year": "1986/1987",
+      "url": "https://www.cs.unc.edu/techreports/86-020.pdf",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "本轮已下载并文本提取 UNC 原始技术报告 TR86-020（807KB，897 行），直接核对原文：区分 essential tasks（塑造抽象概念结构）与 accidental tasks（表示与映射）；提出本质困难四要素 complexity、conformity、changeability、invisibility。",
+        "原文结论：软件的复杂度是本质属性而非偶然属性；若偶然任务耗时不占 9/10 以上，即使将其清零也无法带来数量级改进，故不存在银弹。"
+      ],
+      "legacy_id": "S4-04"
+    },
+    {
+      "id": "OFF-001",
+      "title": "Guide to the Software Engineering Body of Knowledge (SWEBOK Guide V3.0；V4.0 于 2024-10 发布)",
+      "org": "IEEE Computer Society（SWEBOK / ISO/IEC TR 19759）",
+      "year": "2014 (V3) / 2024 (V4)",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "复用 A 包 S1-01：SWEBOK 是软件工程知识体系基线标准；V3 划定 15 个知识域，V4.0（2024-10 发布）扩展为 18 个知识域，其中『软件需求（Software Requirements）』为 KA1。",
+        "V3 KA1 给出软件需求的最基本定义（见 definitions），并区分功能需求、非功能需求、技术约束、服务质量约束等类别。",
+        "V4 将敏捷与 DevOps 融入多个 KA，并强化需求文档对长期维护的价值。"
+      ],
+      "legacy_id": "S1-A01"
+    },
+    {
+      "id": "OFF-010",
+      "title": "SWEBOK Guide V4.0 Topics — Chapter 1: Software Requirements Fundamentals（官方目录页快照）",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://web.archive.org/web/20241212105347/https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SWEBOK V4.0 共 18 个知识域（KA），KA1 为『软件需求（Software Requirements）』，含 8 个二级主题簇。",
+        "KA1 结构：1 软件需求基础（定义/分类/产品与项目需求/功能需求/非功能需求/技术约束/服务质量约束/系统需求与软件需求/派生需求/需求活动）；2 需求引出（需求源、常用引出技术）；3 需求分析（基础分析、服务质量约束经济学、形式化分析、需求冲突处理）；4 需求规格说明（非结构化自然语言/结构化自然语言/验收准则/模型化/需求属性/增量与完整规格）；5 需求验证（评审、仿真与执行、原型）；6 需求管理活动（需求清理 scrubbing、变更控制、范围匹配）；7 实践考量（迭代性、优先级、追溯、稳定性与易变性、需求度量、过程质量与改进）；8 软件需求工具。",
+        "该目录页快照日期为 2024-12-12，与 SWEBOK V4.0（2024-10 发布）一致。"
+      ],
+      "legacy_id": "S1-F01"
+    },
+    {
+      "id": "STD-011",
+      "title": "ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Life cycle processes — Requirements engineering（官方页快照）",
+      "org": "ISO / IEC / IEEE（ISO/IEC JTC 1/SC 7）",
+      "year": "2018",
+      "url": "https://web.archive.org/web/20240116061908/https://www.iso.org/standard/72089.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "正式全名与版本：ISO/IEC/IEEE 29148:2018（第 2 版），Publication date 2018-11，92 页，技术委员会 ISO/IEC JTC 1/SC 7，ICS 35.080。状态：Published（under review），生命周期阶段 90.20『International Standard under systematic review』（自 2023-10-15 起）。",
+        "官方 Abstract：本文件规定在工程活动中产生系统与软件产品（含服务）需求所需的『过程』；为 ISO/IEC/IEEE 15288 与 12207 中需求及需求相关过程的应用提供指南；规定需求过程产出的『信息项（information items）』及其必需内容；并提供信息项格式指南。适用于无论项目范围、产品、方法、规模或复杂度的系统与软件工程。",
+        "替代关系：ISO/IEC/IEEE 29148:2018 取代 29148:2011；IEEE 口径同时取代 IEEE 830-1998（SRS）、IEEE 1233-1998（SRD）、IEEE 1362-1998（ConOps）。",
+        "标准覆盖的过程（据报道转述）：业务或任务分析（Business or Mission Analysis）、干系人需要与需求定义（Stakeholder Needs and Requirements Definition）、系统[系统/软件]需求定义（System [System/Software] Requirements Definition）、其他技术过程中的需求工程活动、需求管理；信息项含 BRS（业务需求规格）、StRS（干系人需求规格）、SyRS（系统需求规格）、SRS（软件需求规格）。"
+      ],
+      "legacy_id": "S1-F02"
+    },
+    {
+      "id": "STD-012",
+      "title": "IEEE SA — IEEE/ISO/IEC P29148（Active PAR，修订项目）",
+      "org": "IEEE Standards Association",
+      "year": "2026（访问时）",
+      "url": "https://standards.ieee.org/ieee/29148/12262",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "IEEE SA 页面标注『Active PAR』，项目编号 P29148，类型为 ISO/IEC/IEEE International Draft。",
+        "说明 29148:2018 正在被修订（P29148 为进行中的新版本草案）；截至访问日尚未发布替代版本，29148:2018 仍为现行版本。"
+      ],
+      "legacy_id": "S1-F03"
+    },
+    {
+      "id": "XCV-003",
+      "title": "SEBoK — An Overview of the SWEBOK Guide（软件工程知识体系概览）",
+      "org": "BKCASE / Stevens Institute of Technology（Guide to the Systems Engineering Body of Knowledge）",
+      "year": "2026（持续更新）",
+      "url": "https://sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SEBoK 转述 SWEBOK V4：18 个知识域，KA1『Software Requirements』描述引出、分析、规定、验证与管理软件需求的活动。",
+        "V4 新增知识域含 Architecture、Operations、Security（以 * 标注为 V3 未含）。",
+        "SEBoK 为系统工程与软件工程官方知识体系（BKCASE 项目），可作 SWEBOK 结构的权威二手交叉源。"
+      ],
+      "legacy_id": "S1-F04"
+    },
+    {
+      "id": "OFF-011",
+      "title": "SEBoK — Stakeholder Needs and Requirements (glossary)（干系人需要与需求术语条目）",
+      "org": "BKCASE / SEBoK",
+      "year": "2026（持续更新）",
+      "url": "https://sebokwiki.org/wiki/Stakeholder_Needs_and_Requirements_(glossary)",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "（1a）干系人需要（stakeholder needs）包含对已识别干系人的 needs、wants、desires、expectations 与 perceived constraints 的引出；需要聚焦系统目的与行为，并在运行环境与条件下描述（引自 ISO/IEC/IEEE 15288:2023 §6.4.2）。",
+        "（1b）干系人需求（stakeholder requirements）由干系人需要转化而来，是客观充分、结构化且更正式的陈述（引自 ISO/IEC/IEEE 29148:2018 §5.2.3）。",
+        "（1c）干系人需求表达系统与其运行环境的预期交互，是验证各运行能力的参照；定义时须考虑关注系统、互操作与使能系统，以及法律、法规、环境限制与伦理价值（引自 ISO/IEC/IEEE 15288:2023 §6.4.2）。"
+      ],
+      "legacy_id": "S1-F05"
+    },
+    {
+      "id": "OFF-012",
+      "title": "SEBoK — Stakeholder (glossary)（干系人术语条目）",
+      "org": "BKCASE / SEBoK",
+      "year": "2026（持续更新）",
+      "url": "https://sebokwiki.org/wiki/Stakeholder_(glossary)",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "（1）干系人：对系统或其具备满足其需要与期望的特性拥有权利、份额、主张或利益的个人或组织（ISO/IEC/IEEE 2015）。",
+        "（2）进一步列举干系人包括但不限于：最终用户、用户组织、支持方、开发方、生产方、培训方、维护方、处置方、采购方、客户、操作方、供应方组织与监管机构（ISO/IEC June 2010）。",
+        "（4）Freeman(1984)：干系人是能影响组织目标实现或受其影响的任何群体或个人。"
+      ],
+      "legacy_id": "S1-F06"
+    },
+    {
+      "id": "OFF-013",
+      "title": "SEI — Software Architecture（质量属性与 ATAM 架构评估）",
+      "org": "Carnegie Mellon Software Engineering Institute (SEI)",
+      "year": "2026（访问时）",
+      "url": "https://www.sei.cmu.edu/our-work/software-architecture/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SEI 将质量属性（quality attributes）视为软件架构的核心关切，架构实践指导系统质量属性的分析与实现。",
+        "SEI 开发了 Architecture Tradeoff Analysis Method®（ATAM®）作为软件架构评估领域的领先方法，可在软件开发生命周期各阶段应用。",
+        "SEI 为合同定义的软件工程权威机构（美国国防部 FFRDC），是质量属性/架构评估方法论的一手机构源。"
+      ],
+      "legacy_id": "S1-F07"
+    },
+    {
+      "id": "OFF-014",
+      "title": "SWEBOK Guide V3.0（PDF 镜像，Chapter 1 Software Requirements Fundamentals）",
+      "org": "IEEE Computer Society（镜像：Florida Institute of Technology）",
+      "year": "2014",
+      "url": "https://cs.fit.edu/~kgallagher/Schtick/Serious/SWEBOKv3.pdf",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "KA1 §1.1 原文：『At its most basic, a software requirement is a property that must be exhibited by something in order to solve some problem in the real world.』（软件需求是最基本层面须被某物展现、以解决现实世界问题的属性。）",
+        "该原句经 Tavily 检索返回的 PDF 文本快照（cs.fit.edu 镜像）与 ETH Zurich 学术论文（Meyer, Towards an Anatomy of Software Requirements）转引一致交叉核验。",
+        "注：镜像 PDF 完整下载两次失败（文件损坏/trailer 缺失），未能逐页 OCR 核对；verified=false。"
+      ],
+      "legacy_id": "S1-F08"
+    },
+    {
+      "id": "BK-036",
+      "title": "Software Architecture in Practice — Chapter 4: Quality Attribute Scenarios（Bass, Clements, Kazman，在线章节节选）",
+      "org": "Addison-Wesley / SEI（作者含 SEI 首席架构师）",
+      "year": "2003 (2nd ed.)",
+      "url": "https://people.ece.ubc.ca/matei/EECE417/BASS/ch04lev1sec3.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "功能与质量属性正交：作何功能不决定各项质量属性的水平，架构选择决定相对质量水平；每个质量属性可独立选择期望水平。",
+        "质量属性场景（quality attribute scenario）是『特定于某质量属性的需求』，由六部分组成：刺激源（Source of stimulus）、刺激（Stimulus）、环境（Environment）、制品（Artifact）、响应（Response）、响应度量（Response measure）。",
+        "区分通用场景（general scenario，系统无关，可适用任何系统）与具体场景（concrete scenario，针对特定系统）；通用场景需特化为具体系统需求才可测试。",
+        "非功能质量属性示例（Bass 列为可用性、可修改性、性能、安全性、可测试性、易用性）；质量属性定义须可操作，否则『系统可修改』一类陈述无意义。"
+      ],
+      "legacy_id": "S2-F01"
+    },
+    {
+      "id": "PAP-019",
+      "title": "The application of ISO 29148 to requirements in NZ infrastructure projects（John Welford，INCOSE NZ Conference 2025）",
+      "org": "INCOSE New Zealand（会议论文/实务审计）",
+      "year": "2025",
+      "url": "http://www.extuitive.co.uk/papers/iso29148NzRequirements.pdf",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "逐条转录 ISO/IEC/IEEE 29148:2018 §5.2.5：单条干系人/系统/系统元素需求须具备以下特性——necessary（必要）、appropriate（恰当）、unambiguous（无歧义）、complete（完整）、singular（单一）、feasible（可行）、verifiable（可验证）、correct（正确）、conforming（符合）。",
+        "转录 §5.2.6：需求集（set of requirements）须具备完整（Complete）、一致（Consistent）、可行（Feasible）、可理解（Comprehensible）、可验证（Able to be validated）。",
+        "转录 §5.2.7 需求语言准则：需求应陈述『需要什么（what）』而非『如何做（how）』，不含设计决策；避免模糊笼统措辞。",
+        "转录 §5.2.8 需求属性：每条需求宜唯一标识、标注优先级、捕获依据（rationale）、记录假定难度，并预先识别质量需求（ilities）。",
+        "对 5 个真实基础设施项目做 ISO 29148『shall/should』条款的 Red-Amber-Green 合规审计，结论：多数需求构造良好且 solution-agnostic，但仍有需求/需求集不满足质量特性、假定未被管理、优先级与难度未评估。"
+      ],
+      "legacy_id": "S4-F01"
+    },
+    {
+      "id": "PAP-020",
+      "title": "Towards an Anatomy of Software Requirements（Bertrand Meyer，ETH Zurich）",
+      "org": "ETH Zurich（学术论文）",
+      "year": "2019",
+      "url": "https://se.inf.ethz.ch/~meyer/publications/requirements/requirements_anatomy.pdf",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "转引 SWEBOK 定义：『a property that must be exhibited by something in order to solve some problem in the real world』，并对其提出批评（认为该定义部分无用、部分错误），是『软件需求定义存在学术争议』的独立证据。",
+        "用于交叉核验 SWEBOK 需求定义原句，同时记录学界对该定义的异议（定义争议，非错误）。"
+      ],
+      "legacy_id": "S4-F02"
+    },
+    {
+      "id": "VEN-012",
+      "title": "ISO/IEC/IEEE 29148:2018 Requirements Characteristics（Possession Planning 汇总页）",
+      "org": "Possession Planning（需求管理从业者站点）",
+      "year": "2024",
+      "url": "https://possessionplanning.com/traceability-matrix/iso-iec-ieee-291482018",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "汇总 29148 需求特性为：Necessary、Implementation Free、Unambiguous、Consistent、Complete、Singular、Feasible、Traceable、Verifiable（与 S4-F01 转录的 ISO §5.2.5 列表存在差异，见 cross_validation）。",
+        "汇总 29148 需求类型：业务需求、干系人需求、系统需求、软件需求；需求活动：Elicitation、Analysis、Specification、Verification、Management。",
+        "指出 29148 统一了 ISO/IEC 12207、15288 与 IEEE 830 的需求相关内容。"
+      ],
+      "legacy_id": "S3-F01"
+    },
+    {
+      "id": "VEN-013",
+      "title": "ISO 29148 Explained: Requirements Engineering Standard（Modern Requirements 解释页）",
+      "org": "Modern Requirements（需求管理工具厂商）",
+      "year": "2024",
+      "url": "https://www.modernrequirements.com/blogs/iso-29148-explained",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "确认 ISO/IEC/IEEE 29148:2018 全名与定位（Systems and Software Engineering, Life Cycle Processes, Requirements Engineering），为需求工程国际标准。",
+        "列出需求特性释义（Necessary：删除会造成系统缺口即非必要；Complete：每个阈值与条件须写出；Singular：一条需求只述一件事）。",
+        "说明 Stakeholder Needs and Requirements Definition 过程（29148 展开、15288:2015 概述）的目的为定义干系人需求。"
+      ],
+      "legacy_id": "S3-F02"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "软件需求知识域 (Software Requirements KA) — SWEBOK V4 KA1",
+      "definition": "SWEBOK V4.0 的第一个知识域，描述引出（eliciting）、分析（analyzing）、规定（specifying）、验证（validating）与管理（managing）软件需求的活动；覆盖需求基础与分类、需求引出、需求分析、需求规格说明、需求验证、需求管理、实践考量与需求工具八大主题簇。",
+      "source_id": "OFF-010"
+    },
+    {
+      "term": "软件需求 (Software Requirement) — SWEBOK 基础定义",
+      "definition": "At its most basic, a software requirement is a property that must be exhibited by something in order to solve some problem in the real world.（软件需求是最基本层面须被某物展现、以解决现实世界问题的属性。）",
+      "source_id": "OFF-014"
+    },
+    {
+      "term": "需求工程 (Requirements Engineering) — ISO/IEC/IEEE 29148:2018",
+      "definition": "在生命周期各阶段，对系统与软件产品（含服务）的需求进行工程化处理的『过程』与『产品』；标准规定产生需求所需的工程过程、给出 15288/12207 需求相关过程的应用指南、规定需求过程的信息项及其内容与格式。29148:2018 取代 29148:2011（IEEE 口径同时取代 IEEE 830/1233/1362）。",
+      "source_id": "STD-011"
+    },
+    {
+      "term": "干系人 (Stakeholder)",
+      "definition": "对系统或其具备满足其需要与期望的特性拥有权利、份额、主张或利益的个人或组织（individual or organization having a right, share, claim, or interest in a system or in its possession of characteristics that meet their needs and expectations）；包括但不限于最终用户、用户组织、支持方、开发方、生产方、维护方、处置方、采购方、客户、操作方、供应方组织与监管机构。",
+      "source_id": "OFF-012"
+    },
+    {
+      "term": "干系人需要 (Stakeholder Needs)",
+      "definition": "对已识别干系人的 needs、wants、desires、expectations 与 perceived constraints 的引出；需要聚焦系统目的与行为，并在运行环境与条件下描述。（ISO/IEC/IEEE 15288:2023 §6.4.2）",
+      "source_id": "OFF-011"
+    },
+    {
+      "term": "干系人需求 (Stakeholder Requirements)",
+      "definition": "由干系人需要转化而来的、客观充分、结构化且更正式的需求陈述（ISO/IEC/IEEE 29148:2018 §5.2.3）；表达系统与其运行环境的预期交互，是验证各运行能力的参照，定义时须考虑关注系统、互操作与使能系统以及法律、法规、环境限制与伦理价值。",
+      "source_id": "OFF-011"
+    },
+    {
+      "term": "业务或任务分析 (Business or Mission Analysis) — 需求工程上游过程",
+      "definition": "ISO/IEC/IEEE 29148:2018 定义的第一个需求相关过程：定义问题或机会空间、刻画解决方案空间、评估备选方案类、管理该分析过程；产出业务需要/需求，作为干系人需求与系统需求的来源。",
+      "source_id": "STD-011"
+    },
+    {
+      "term": "系统需求定义 (System / System-Software Requirements Definition)",
+      "definition": "将干系人需求转化为系统[系统/软件]需求的过程；需求应尽量不隐含特定实现（solution-agnostic），并建立从系统/软件需求（含派生需求）到干系人需求与目标的追溯。",
+      "source_id": "STD-011"
+    },
+    {
+      "term": "软件需求规格说明 (Software Requirements Specification, SRS)",
+      "definition": "ISO/IEC/IEEE 29148 规定的需求信息项之一，用于规定软件产品的需求；与 BRS（业务需求规格）、StRS（干系人需求规格）、SyRS（系统需求规格）共同构成需求信息项体系。SRS 概念源自 IEEE 830（已由 29148 取代）。",
+      "source_id": "STD-011"
+    },
+    {
+      "term": "功能需求与非功能需求 (Functional / Nonfunctional Requirements)",
+      "definition": "SWEBOK V4 KA1 将软件需求分类为功能需求（软件须执行的功能/行为）与非功能需求（功能之外的质量约束与属性）；并单列技术约束（Technology Constraints）与服务质量约束（Quality of Service Constraints）两类。",
+      "source_id": "OFF-010"
+    },
+    {
+      "term": "质量属性 (Quality Attribute)",
+      "definition": "系统可独立选择期望水平的、功能之外的质量维度（Bass 等列为可用性、可修改性、性能、安全性、可测试性、易用性等）；其定义必须可操作，否则无法据以设计或验证。SEI 将质量属性分析视为软件架构的核心活动。",
+      "source_id": "BK-036"
+    },
+    {
+      "term": "质量属性场景 (Quality Attribute Scenario) — SEI/Bass 六要素",
+      "definition": "特定于某质量属性的需求，由六部分组成：刺激源（Source of stimulus）、刺激（Stimulus）、环境（Environment）、制品（Artifact）、响应（Response）、响应度量（Response measure）。分通用场景（系统无关）与具体场景（针对特定系统）；通用场景须特化后用于特定系统。",
+      "source_id": "BK-036"
+    },
+    {
+      "term": "本质复杂度 (Essential Complexity)",
+      "definition": "构成抽象软件实体的复杂概念结构本身固有的复杂度；软件实体按规模增长时元素数量与交互非线性增长，故复杂度是软件的『本质』属性而非『偶然』属性，无法通过任何单一技术或管理突破（银弹）消除。",
+      "source_id": "PAP-001"
+    },
+    {
+      "term": "偶然复杂度 / 附属复杂度 (Accidental Complexity)",
+      "definition": "将抽象实体用程序语言表示、并映射到机器语言时受空间与速度约束所产生的复杂度；过去的大部分生产率提升来自消除使偶然任务异常困难的人为障碍（硬件限制、笨拙语言、机时缺乏）。",
+      "source_id": "PAP-001"
+    },
+    {
+      "term": "软件危机 (Software Crisis / Software Gap)",
+      "definition": "1968 年 NATO Garmisch 软件工程会议讨论的现象：承诺与实现之间的鸿沟、成本估算与实际支出不符、大型软件不可靠、进度延迟与项目失控；与会者对其严重程度意见不一。（NATO 1968 报告第 7 章）",
+      "source_id": "OFF-006"
+    },
+    {
+      "term": "良构需求的特性 (Characteristics of Well-formed Requirements) — ISO 29148 §5.2.5/5.2.6",
+      "definition": "单条需求须具备：necessary、appropriate、unambiguous、complete、singular、feasible、verifiable、correct、conforming；需求集须具备：Complete、Consistent、Feasible、Comprehensible、Able to be validated。",
+      "source_id": "PAP-019"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "SWEBOK Guide V4.0（2024-10 发布）共 18 个知识域，『软件需求』为 KA1，涵盖需求基础与分类、引出、分析、规格说明、验证、管理、实践考量与工具八大主题簇；这是软件工程需求领域的官方知识体系基线。",
+      "source_ids": [
+        "OFF-001",
+        "OFF-010",
+        "XCV-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SWEBOK 对软件需求的最基本定义是『须被某物展现、以解决现实世界问题的属性（a property that must be exhibited by something in order to solve some problem in the real world）』；该定义在学界存在异议（Meyer 认为部分无用、部分错误），属定义争议而非事实错误。",
+      "source_ids": [
+        "OFF-014",
+        "PAP-020"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 29148:2018 是需求工程领域的现行国际标准（第 2 版，2018-11 发布，92 页），取代 29148:2011，并（IEEE 口径）取代 IEEE 830/1233/1362；截至 2026-09-10 其状态为 Published (under review)，处于每 5 年一次的定期系统评审阶段（90.20，自 2023-10-15）。",
+      "source_ids": [
+        "STD-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "29148:2018 正在被修订：IEEE SA 项目 P29148 为 Active PAR（进行中的国际草案），但截至访问日尚无替代版本发布，29148:2018 仍为唯一现行版本。",
+      "source_ids": [
+        "STD-012"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 29148:2018 规定需求工程过程链为：业务或任务分析 → 干系人需要与需求定义 → 系统[系统/软件]需求定义（并在其他技术过程中嵌入需求活动）→ 需求管理；产出 BRS、StRS、SyRS、SRS 四类信息项。",
+      "source_ids": [
+        "STD-011",
+        "PAP-019",
+        "VEN-012"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "单条良好需求须具备 9 项特性（necessary、appropriate、unambiguous、complete、singular、feasible、verifiable、correct、conforming），需求集须具备 5 项特性（complete、consistent、feasible、comprehensible、able to be validated）；需求应陈述 what 而非 how，不含设计决策。不同二手来源对特性清单表述存在差异（vendor 版加入 implementation-free/traceable、将 consistent 列入单条特性），应以 ISO §5.2.5/5.2.6 为准。",
+      "source_ids": [
+        "PAP-019",
+        "VEN-012",
+        "VEN-013"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "干系人权威定义为『对系统或其特性拥有权利、份额、主张或利益的个人或组织』（ISO/IEC/IEEE）；干系人识别须覆盖多层级视角，包括但不限于最终用户、用户组织、开发/生产/维护/处置方、采购方、客户、操作方、供应方与监管机构。",
+      "source_ids": [
+        "OFF-012",
+        "PAP-019"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "干系人需要（needs）与干系人需求（requirements）是两级不同对象：需求由需要转化而来，是客观充分、结构化、更正式的陈述；干系人需求可记录彼此冲突，最终一致性应建立于系统需求层面。",
+      "source_ids": [
+        "OFF-011",
+        "PAP-019"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "质量属性场景（QA scenario）是 SEI 学派将质量属性转化为可验证需求的标准方法，由六要素构成：刺激源、刺激、环境、制品、响应、响应度量；区分通用场景与具体场景，只有具体场景可直接测试。",
+      "source_ids": [
+        "BK-036",
+        "OFF-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "功能与质量属性正交：功能不决定质量属性水平，是架构选择决定各质量属性的相对水平；故质量属性需求须在架构设计前以可操作、可度量的方式（场景）显式表达。",
+      "source_ids": [
+        "BK-036"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Brooks『No Silver Bullet』（1986）区分本质任务与偶然任务，指出软件的『本质困难』有四：complexity（复杂度）、conformity（一致性/合规）、changeability（易变性）、invisibility（不可见性）；本质复杂度是软件的固有属性，不存在单一技术银弹可使其消失。",
+      "source_ids": [
+        "PAP-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件危机（1968 NATO 会议）表现为成本/进度超支、质量低劣、难以维护、项目失控；与会者对其严重程度意见不一。现代需求工程（SWEBOK/29148）可视为对软件危机中『需求不清、需求管理缺失』这一类根因的系统化回应。",
+      "source_ids": [
+        "OFF-006",
+        "PAP-019"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "现代实证审计（2025 INCOSE NZ，5 个基础设施项目）显示：ISO 29148 合规的主要薄弱点在于——并非所有需求/需求集满足质量特性、需求假定未被管理、优先级与难度未评估；说明软件危机式的需求质量问题在今天仍具现实相关性。",
+      "source_ids": [
+        "PAP-019"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "软件工程（SWEBOK 采用口径）关注需求、设计、构造与高效经济运行软件系统；ISO/IEC/IEEE 12207:2026 以过程而非固定阶段组织生命周期，需求相关过程（业务/任务分析、干系人需求、系统需求）嵌入其技术过程框架。",
+      "source_ids": [
+        "OFF-001",
+        "STD-003"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "gaps": [
+    "ISO/IEC/IEEE 29148:2018 正文（受版权保护）未获取；§5.2.5/§5.2.6 需求特性清单经 INCOSE 2025 会议论文逐条转录并经两个厂商二手源交叉，非逐字核对标准原文。",
+    "ISO 29148:2018 自 2023-10-15 起处于定期系统评审（90.20），评审结论（维持/修订/撤销）未公开核验；修订项目 P29148 的发布计划与 scope 变更点未知。",
+    "SWEBOK V4.0 正文未获取；KA1 目录结构取自 computer.org 官方 Topics 页 Wayback 快照（2024-12-12），但 KA1 各小节的定义与详细内容仍依据 V3（2014）与目录标题推断，V4 相对 V3 在需求 KA 的增删未逐条核验。",
+    "SWEBOK V3 PDF（cs.fit.edu 镜像）两次下载均损坏（trailer/xref 缺失，pymupdf 读取 0 页），软件需求基础定义原句仅经 Tavily 返回的 PDF 文本快照与 ETH 论文转引交叉，未直接打开官方 PDF 核对。",
+    "『软件危机/本质复杂度的现代解读』缺乏单一权威标准或机构文本；本包基于 Brooks 1986 原文（一手）+ NATO 1968 报告 + 2025 实务审计构成证据链，属推断性综合而非某权威源的直接论断。",
+    "SEI 官网未提供单一、免费、逐年更新的『六要素质量属性场景』规范页；六要素定义取自 Bass/Clements/Kazman《Software Architecture in Practice》在线章节（作者与 SEI 关联，列为 S2），SEI 机构页仅佐证质量属性/ATAM 的机构地位。",
+    "需求引出技术（访谈/工作坊/观察/原型等）的权威分类清单未在本轮采集（SWEBOK V4 KA1 §2.2 仅列出主题名，未取正文），留待需求 KA 正文补充。",
+    "软件需求优先级方法（如 MoSCoW、Kano、100 美元法）与需求追溯（traceability）的权威来源未在本包展开，属工程技术细节，建议由后续 O 域或专门工件补充。"
+  ],
+  "notes": "方法说明：采用『LLM 初发现定位 → Tavily 首筛 → curl 回源官方/文库页面（ISO 走 Wayback、computer.org 走 Wayback、SEBoK/SEI/学术 PDF 直连）→ 多源交叉验证』链路。已回源并文本提取的一手/准一手材料：ISO 29148:2018 官方页快照（abstract/status）、SWEBOK V4.0 Topics 官方页快照、IEEE SA P29148 项目页、SEBoK 术语条目、SEI 架构页、Brooks No Silver Bullet 原始 TR86-020 PDF（UNC）、Bass 架构教材在线章节、INCOSE NZ 2025 应用审计 PDF、Possession Planning 与 Modern Requirements 汇总页。iso.org 直连 403（与 E 包 iso-access-notes 结论一致），未重试；computer.org 直连 403，走 Wayback。信源分级：S1=国际标准/官方知识体系/SEI 等机构；S2=经典著作（含在线章节）；S3=厂商官方/权威二手；S4=学术/会议论文。关键定义（软件需求、需求工程、干系人、质量属性场景、本质/偶然复杂度）均以 ≥2 独立来源交叉验证；SWEBOK 需求定义存在学术争议已如实记录。与 A 包分工：A 负责软件工程总定义/起源/生命周期，F 补 SWEBOK V4 需求 KA、ISO 29148、干系人与质量属性需求，避免重复。复用 A 包 source_id：S1-A01、S1-07、S4-04、S1-03。"
+}

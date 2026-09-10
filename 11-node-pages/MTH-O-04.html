@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>能力-成本-速度三角 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>能力-成本-速度三角</span></div><div class="meta">methodology · O · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>能力-成本-速度三角</h1><div class="en">Capability-Cost-Speed Triangle</div><div class="badges"><span class="badge pr">P1</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">O · 方法论主干/跨域综合</span><span class="badge th">其他跨域</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">在能力/质量、成本与交付速度之间取舍时，须区分一次性成本与持续成本，先量化各方案的人力、基础设施与运维开销；研究表明速度与稳定可兼得，成本优化的重点应是持续成本与减小变更批量。</span></p></div><p class="note">别名：0813 维度4 Embedding 选型、能力成本速度、一次性与持续成本、交付效能、成本量化　|　英文：Capability-Cost-Speed Triangle　|　类型：方法 / decision-framework</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -339 701.6 684.6" role="img" aria-label="能力-成本-速度三角 的 1-2 跳邻域关系图"><title>能力-成本-速度三角 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="178.2" y1="-92.1" x2="-56" y2="-224.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度不可消除，故架构只能在约束下权衡</title></line><line x1="277.8" y1="-66.9" x2="178.2" y2="-92.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：覆盖与精度只能在本质复杂度不可消除的空间中选点</title></line><line x1="277.8" y1="-66.9" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：代价不对称的取舍依据权衡不可消除</title></line><line x1="298.6" y1="4.8" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：准入时机的质量门槛与便利性是权衡的体现</title></line><line x1="1.3" y1="90" x2="-56" y2="-224.2" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：风格选型本质是以约束换取期望属性</title></line><line x1="0" y1="0" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：能力成本速度三角是权衡不可消除的实例</title></line><line x1="-123.9" y1="-7.7" x2="-56" y2="-224.2" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突治理依据架构即权衡的本质</title></line><line x1="-123.9" y1="-7.7" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突只能显式化与排序，无法消除</title></line><line x1="-214.9" y1="-73.8" x2="178.2" y2="-92.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：粒度决定偶然复杂度与理解成本</title></line><line x1="278.2" y1="75.6" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：自动化方式按可信度与频率取舍</title></line><line x1="-35.8" y1="221" x2="178.2" y2="-92.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：复杂度阶梯以降低认知复杂度为目标</title></line><line x1="247.8" y1="153.3" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：演化中的一致性取舍依据权衡不可消除</title></line><line x1="134.5" y1="180.4" x2="130.4" y2="2.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：度量与反馈是对取舍效果的检验</title></line><line x1="-35.8" y1="221" x2="1.3" y2="90" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：复杂度阶梯是选型够用原则的时序细化</title></line><line x1="-123.9" y1="-7.7" x2="1.3" y2="90" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：成本与质量冲突约束技术选型</title></line><line x1="247.8" y1="153.3" x2="134.5" y2="180.4" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：增量演化治理依赖度量反馈闭环</title></line><line x1="134.5" y1="180.4" x2="277.8" y2="-66.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：度量口径是覆盖与精度取舍的前置</title></line><line x1="298.6" y1="4.8" x2="278.2" y2="75.6" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：触发时机的落地依赖自动化方式选择</title></line><line x1="0" y1="0" x2="1.3" y2="90" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：成本量化是选型匹配的前置输入</title></line><line x1="-123.9" y1="-7.7" x2="-214.9" y2="-73.8" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：属性冲突治理需在粒度边界上落地</title></line><line x1="0" y1="0" x2="-123.9" y2="-7.7" stroke="#c22836" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>张力冲突（conflicts）：能力与质量提升同成本约束存在张力</title></line><line x1="1.3" y1="90" x2="-35.8" y2="221" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：静态选型与动态进阶是同一成本观的两面</title></line><line x1="298.6" y1="4.8" x2="278.2" y2="75.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：准入时机与自动化方式需协同设计</title></line><line x1="277.8" y1="-66.9" x2="134.5" y2="180.4" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：覆盖优先与度量精确控制之间存在张力</title></line><line x1="178.2" y1="-92.1" x2="130.4" y2="2.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：本质复杂度不可消除支撑权衡不可消除</title></line><line x1="70.9" y1="281.6" x2="1.3" y2="90" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：零依赖零构建按约束选择刚好够用的技术</title></line><line x1="181.7" y1="-222.3" x2="130.4" y2="2.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：拒绝静态类型/契约优先是以类型安全换取低部署成本</title></line><line x1="1.2" y1="-124.7" x2="1.3" y2="90" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以够用原则选择最小接入组合</title></line><line x1="1.2" y1="-124.7" x2="0" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：能力成本速度三角下的分级接入</title></line><line x1="1.2" y1="-124.7" x2="-56" y2="-224.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：选型即权衡，无全能工具</title></line><line x1="-217.5" y1="77.9" x2="134.5" y2="180.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：反思与评估环的度量反馈落地</title></line><line x1="-217.5" y1="77.9" x2="-123.9" y2="-7.7" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：反馈整定即质量属性冲突治理</title></line><line x1="62.3" y1="-234.3" x2="1.3" y2="90" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：技术雷达采用环支撑技术选型够用原则</title></line><line x1="1.2" y1="-124.7" x2="62.3" y2="-234.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：带观点的分级接入推荐，与雷达四环同构</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">能力-成本-速度三角<title>能力-成本-速度三角（MTH-O-04）</title></text><circle cx="1.2" cy="-124.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="1.2" y="-105.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">MCP 四件套选型对比<title>MCP 四件套选型对比（CAS-X-12）</title></text><circle cx="130.4" cy="2.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="130.4" y="21.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">权衡的不可消除性<title>权衡的不可消除性（ESS-O-03）</title></text><circle cx="1.3" cy="90" r="9.0" fill="#c98a3a" stroke="none"/><text x="1.3" y="109" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术选型的够用原则<title>技术选型的够用原则（MTH-O-03）</title></text><circle cx="-123.9" cy="-7.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-123.9" y="11.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量属性冲突治理<title>质量属性冲突治理（MTH-O-05）</title></text><circle cx="-56" cy="-224.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-56" y="-208.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构即权衡<title>架构即权衡（ESS-O-02）</title></text><circle cx="178.2" cy="-92.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="178.2" y="-76.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">本质复杂度与偶然复杂度<title>本质复杂度与偶然复杂度（ESS-O-01）</title></text><circle cx="134.5" cy="180.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="134.5" y="196.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">度量与反馈闭环<title>度量与反馈闭环（MTH-O-11）</title></text><circle cx="-214.9" cy="-73.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-214.9" y="-57.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">粒度与边界设定<title>粒度与边界设定（MTH-O-06）</title></text><circle cx="247.8" cy="153.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="247.8" y="169.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">增量演化与一致性治理<title>增量演化与一致性治理（MTH-O-10）</title></text><circle cx="70.9" cy="281.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="70.9" y="297.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申填写扩展逆向架构<title>网申填写扩展逆向架构（CAS-X-02）</title></text><circle cx="181.7" cy="-222.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="181.7" y="-206.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text><circle cx="278.2" cy="75.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="278.2" y="91.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">自动化方式选择<title>自动化方式选择（MTH-O-07）</title></text><circle cx="-217.5" cy="77.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-217.5" y="93.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">控制理论⊗Agent 设…<title>控制理论⊗Agent 设计（CAS-X-16）</title></text><circle cx="277.8" cy="-66.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="277.8" y="-50.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">覆盖与精度的不对称权衡<title>覆盖与精度的不对称权衡（MTH-O-01）</title></text><circle cx="298.6" cy="4.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="298.6" y="20.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">准入与触发时机选择<title>准入与触发时机选择（MTH-O-02）</title></text><circle cx="-35.8" cy="221" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-35.8" y="237" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">复杂度阶梯与演进时机<title>复杂度阶梯与演进时机（MTH-O-08）</title></text><circle cx="62.3" cy="-234.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="62.3" y="-218.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">ThoughtWorks…<title>ThoughtWorks 技术雷达（TEC-G-04）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 13 个二跳节点，共 18 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">任何方案都消耗资源，而资源总是有限的，因此能力、成本与速度构成一组相互牵制的约束。</span><span class="hl">提高测试保真度、环境冗余或自动化程度会提升能力，却推高一次性建设成本与持续<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>成本；追求更高交付频率则对流程与工具提出要求。</span><span class="hl">理解这一三角的关键是区分成本的时间结构：一次性成本（如搭建环境、<a class="term" href="../14-views/glossary.html#g-074" title="dev/prod parity — 让开发、预发、生产尽可能相似（时间差/人员差/工具差最小），backing service 同类型同版本。">开发</a>工具、迁移平台）在投入后不再重复，持续成本（如每次调用、日常运维、双份环境运行）则随规模与时间累积。</span>许多决策失误源于只盯一次性成本而忽略持续成本，或反之。DORA 的研究进一步表明速度与稳定并非必然取舍，高绩效组织两者兼得，因此不应把「慢一点以换稳定」当作默认前提。成本优化应聚焦持续成本与减小变更批量，因为它们是长期复利式的负担。成本与能力的取舍还受规模效应影响：某些能力的单位成本随规模上升而摊薄，另一些则线性甚至超线性增长，因此同一方案在不同规模下结论可能相反。因此成本讨论应尽量落到具体单位与时间结构上，用可比较的数字替代笼统的「贵」与「便宜」，并显式标注估算的假设与不确定性。只有当速度、成本与能力都被翻译成同一套可核对的量，取舍才可能摆脱印象之争，成为可追溯、可复盘的管理决策。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">权衡沿成本结构与交付变量展开。</span><span class="hl">成本侧分三层计量：人力（建设与运维工时）、基础设施（算力、存储、网络、<a class="term" href="../14-views/glossary.html#g-126" title="safety — 25010:2023 新增顶层特性：在既定条件下避免危及人身、健康、财产或环境的状态的程度。">环境）</a>、机会成本（延迟交付或错失窗口）；并显式区分一次性投入与按次/按时的持续开销。</span><span class="hl">速度侧用可观测的交付指标刻画，如<a class="term" href="../14-views/glossary.html#g-142" title="change lead time — 一次变更从提交进版本控制到成功部署至生产所耗时间。">变更前置时间</a>、<a class="term" href="../14-views/glossary.html#g-143" title="deployment frequency — 给定周期内应用变更部署的次数或两次部署间隔。">部署频率</a>、<a class="term" href="../14-views/glossary.html#g-145" title="change fail rate — 部署中需立即干预（通常导致回滚或 hotfix）的比例。">变更失败率</a>与恢复时间，使「快」与「稳」都可度量，从而检验二者是否真的冲突。</span><span class="hl">机制上，降低持续成本的手段包括复用预计算、缩小变更批量、按需而非超额<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>资源；提升速度的手段包括自动化、松<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>与流水线；提升能力的手段往往以成本为代价。</span>三者的可行域由硬约束（预算、合规、团队规模）划定，优化必须在可行域内进行。先量化再优化，避免凭感觉在错误的方向上投入。速度与稳定之所以能兼得，往往来自减少变更批量、缩短反馈回路等共同杠杆，它们同时改善两者，而非在两者之间移动工作点。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地时先为候选方案建立成本模型：列出一次性与持续两类开销，用可比较的单位（工时、费用、资源量）估算，并标注不确定性。</span>把交付速度与稳定性指标纳入同一看板，验证是否为真取舍——若两者可兼得，就不应以稳定为名放慢交付。优化顺序上优先处理持续成本与批量大小，因为持续开销随时间和规模放大；对一次性成本，除非它能显著削减后续持续开销，否则不宜过度投入。控制变更批量、缩短反馈回路，通常能同时改善速度与稳定。定期复盘实际成本与预估的偏差，修正模型而非固守初始判断。<span class="hl">把成本量化结果与透明度纳入<a class="term" href="../14-views/glossary.html#g-023" title="architecture decision record (ADR) — 记录单个 architecturally significant decision 的短文本，含 Title/Context/Decision/Status/Consequences；单调编号、被取代而非改写，与 42010 Rationale 对齐。">架构决策记录</a>，使资源分配可被讨论、可被复核。</span>把成本模型的输入（单价、规模、增长假设）显式列出并定期复核，当假设变化时重算而非沿用旧结论。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>该视角也有误用风险。</p><p>过度追求成本最低可能削减必要的能力与冗余，使系统在压力下失效，长期损失远超节省的开支；过度投入能力又可能为用不到的规模与保真度付费。</p><p>此外，成本量化需要投入，对影响小的决策过度建模会拖慢进展。</p><p>因此应把分析强度与决策重要性匹配，聚焦持续成本与高杠杆的批量优化，并接受估算的近似性，用实际数据持续校准，而非追求精确到小数点的成本核算。</p><p>要警惕成本被当作唯一判据：在某些场景，适度的能力冗余或保真度正是为了避免灾难性损失，单纯的成本最小化可能带来不可承受的风险暴露。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是把一次性成本当作全部成本，选择初期便宜但持续昂贵的方案；反例之二是把速度与稳定当作必然对立，为稳定无谓地牺牲交付节奏，而证据显示二者可以兼得；反例之三是只做粗略估算便下结论，忽视成本估算本身的不确定性，导致优化方向错误。</p></div></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step cur"><span class="id">MTH-O-04</span><span class="nm">能力-成本-速度三角</span></span><span class="arw">→</span><span class="step"><span class="id">MTH-O-03</span><span class="nm">技术选型的够用原则</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 张力冲突 边：能力与质量提升同成本约束存在张力</caption><thead><tr><th>对照维度</th><th>能力-成本-速度三角</th><th>质量属性冲突治理</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>能力-成本-速度三角 · Capability-Cost-Speed Triangle</td><td><a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>冲突治理 · Quality Attribute Conflict Governance</td></tr><tr><td class="k">核心定义（原文）</td><td>在能力/质量、成本与交付速度之间取舍时，须区分一次性成本与持续成本，先量化各方案的人力、基础设施与运维开销；研究表明速度与稳定可兼得，成本优化的重点应是持续成本与减小变更批量。</td><td>质量属性之间此消彼长（如性能与<a class="term" href="../14-views/glossary.html#g-124" title="modifiability — 25010 maintainability 子特性：在不引入缺陷、不降低既有质量的前提下有效修改的程度（非顶层特性）。">可修改性</a>、安全与性能、可靠性与成本），治理方法是在场景层面显式化<a class="term" href="../14-views/glossary.html#g-026" title="sensitivity point — 对达成某一质量属性响应至关重要的组件/关系属性。">敏感点</a>与<a class="term" href="../14-views/glossary.html#g-027" title="tradeoff point — 同时是多个质量属性的敏感点、影响多个属性的属性；与敏感点非同义。">权衡点</a>，用可度量判据排序取舍并写入决策记录，而非追求所有属性同时最优。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>任何方案都消耗资源，而资源总是有限的，因此能力、成本与速度构成一组相互牵制的约束。</td><td>质量属性无法同时达到最优，因为它们常由同一设计决策驱动且方向相反：加密与校验提升安全却消耗时间，缓存与冗余改善性能或可用性却引入一致性风险，<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>与分层提升<a class="term" href="../14-views/glossary.html#g-121" title="maintainability — 产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性 modularity/reusability/analysability/modifiability/testability。">可维护性</a>却增加运行期开销。</td></tr><tr><td class="k">张力冲突关系</td><td>能力与质量提升同成本约束存在张力（张力冲突）</td><td>同一条 张力冲突 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例之一是把一次性成本当作全部成本，选择初期便宜但持续昂贵的方案；反例之二是把速度与稳定当作必然对立，为稳定无谓地牺牲交付节奏，而证据显示二者可以兼得；反例之三是只做粗略估算便下结论，忽视成本估算本身的不确定性，导致优化方向错误。</td><td>反例之一是把冲突治理做成形式主义打分表，用加权数字掩盖权重的主观性；反例之二是只比较优点而忽略二阶影响，例如为可用性增加冗余却未计入一致性与运维负担；反例之三是把一次裁决当作永久结论，语境变化后仍沿用旧取舍。</td></tr><tr><td class="k">处置要点（原文）</td><td>落地时先为候选方案建立成本模型：列出一次性与持续两类开销，用可比较的单位（工时、费用、资源量）估算，并标注不确定性。</td><td>实践中把冲突分析嵌入<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">架构决策</a>流程：在设计里程碑组织<a class="term" href="../14-views/glossary.html#g-014" title="stakeholder — 对关注系统持有 Concern（关注点）的个人、群体或组织（含客户、用户、开发/维护者、监管者等）。">干系人</a>，先对齐业务驱动与质量优先级，再针对候选<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>识别敏感点与权衡点，把每个冲突写成「若选 A 则牺牲 B」的明确陈述，据此决策并记录。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-12 · 经 direct</span><h4>MCP 四件套选型对比</h4><p>对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</p></div><div class="case-card"><span class="id">CAS-X-01 · 2 跳派生：当前节点 → CAS-X-12 → ESS-O-02</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-02 · 经 MTH-O-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-04 · 经 ESS-O-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-06 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-10</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-07 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-10</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → MTH-O-05 → MTH-O-06</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-10 · 2 跳派生：当前节点 → MTH-O-05 → MTH-O-06</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → ESS-O-03 → ESS-O-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-14 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-10</span><h4>OpenSpec 规约驱动解析</h4><p>对比规约驱动开发工具链 OpenSpec 与 Superpower 的元模型、工件依赖 DAG 与安全门控，提炼「规约先于实现」工程形态的解析案例。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-11</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div><div class="case-card"><span class="id">CAS-X-17 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-07</span><h4>技术知识中枢交付法</h4><p>从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → ESS-O-03 → MTH-O-07</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-001、WEB-032、VEN-022、BK-025、VEN-036</div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：提升交付速度必然以牺牲稳定性为代价</span><br>核验结论：DORA 度量表明吞吐与不稳定指标并非负相关，高绩效组织速度与稳定兼得；应区分一次性与持续成本，聚焦持续成本与减小变更批量　<span class="k">[VEN-036]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>← CAS-X-12</td><td>MCP 四件套选型对比<br><span style="color:var(--dim);font-size:12px">E-976</span></td><td>印证：能力成本速度三角下的分级接入</td></tr><tr><td class="k">张力冲突</td><td>→ MTH-O-05</td><td>质量属性冲突治理<br><span style="color:var(--dim);font-size:12px">E-703</span></td><td>能力与质量提升同成本约束存在张力</td></tr><tr><td class="k">依据推导</td><td>→ ESS-O-03</td><td>权衡的不可消除性<br><span style="color:var(--dim);font-size:12px">E-685</span></td><td>能力成本速度三角是权衡不可消除的实例</td></tr><tr><td class="k">前置依赖</td><td>→ MTH-O-03</td><td>技术选型的够用原则<br><span style="color:var(--dim);font-size:12px">E-701</span></td><td>成本量化是选型匹配的前置输入</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

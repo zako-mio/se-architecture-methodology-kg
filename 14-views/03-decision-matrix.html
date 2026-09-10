@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>决策矩阵 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.card h3{font-size:15px;color:var(--accent);margin:0 0 8px;}
+.card p{font-size:13px;color:var(--dim);margin-bottom:10px;}
+.card .go{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:8px;padding:6px 14px;color:#1d4ed8;font-size:13px;text-decoration:none;}
+.stat{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:4px;text-align:center;}
+.stat b{display:block;font-size:22px;color:var(--accent);}
+.stat span{font-size:12px;color:var(--dim);}
+.row{display:flex;align-items:baseline;gap:10px;padding:9px 6px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.row .nm{min-width:200px;flex:0 0 auto;font-size:14px;font-weight:600;}
+.row .brief{flex:1 1 320px;font-size:12.5px;color:var(--dim);min-width:240px;}
+.layer-nav{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;}
+.layer-nav a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;color:var(--text);text-decoration:none;}
+.empty{background:var(--panel);border:1px dashed var(--border);border-radius:8px;padding:24px;color:var(--dim);text-align:center;}
+.sec-card{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:10px 18px;margin:12px 0;}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="index.html">视图入口</a> <span class="sep">/</span> <span>决策矩阵</span></div><div class="meta">按生命周期域与层定位知识点，并核对横切主题覆盖。</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>生命周期域 × 层 落点矩阵</a><a href="#s2"><span class="n">§2</span>横切主题覆盖</a></nav>
+<article>
+<header class="doc"><h1>决策矩阵</h1><div class="en">按生命周期域与层定位知识点，并核对横切主题覆盖。</div><div class="badges"><span class="badge">167 节点</span><span class="badge">18 组</span><span class="badge">360 边</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>生命周期域 × 层 落点矩阵</h2><div class="tblwrap"><table><thead><tr><th>生命周期域</th><th>本质 essence</th><th>方法论 methodology</th><th>技术实践 technology</th></tr></thead><tbody><tr><td>F · 概念与需求</td><td><a href="../11-node-pages/ESS-F-01.html">软件需求</a><br><a href="../11-node-pages/ESS-F-02.html">干系人与需要</a><br><a href="../11-node-pages/ESS-F-03.html">需求可追溯性与可验证性</a><br><a href="../11-node-pages/ESS-F-04.html">需求的不确定性与变更</a><br><a href="../11-node-pages/ESS-F-05.html">业务与任务价值</a><br></td><td><a href="../11-node-pages/MTH-F-01.html">需求工程过程</a><br><a href="../11-node-pages/MTH-F-02.html">需求获取</a><br><a href="../11-node-pages/MTH-F-03.html">干系人识别与分析</a><br><a href="../11-node-pages/MTH-F-04.html">需求规格说明</a><br><a href="../11-node-pages/MTH-F-05.html">功能与非功能需求分类</a><br><a href="../11-node-pages/MTH-F-06.html">需求属性与优先级</a><br></td><td><a href="../11-node-pages/TEC-F-01.html">需求可追溯性与影响分析</a><br><a href="../11-node-pages/TEC-F-02.html">需求技术债识别与度量</a><br></td></tr><tr><td>G · 架构设计</td><td><a href="../11-node-pages/ESS-G-01.html">关注点分离</a><br><a href="../11-node-pages/ESS-G-02.html">依赖倒置与依赖规则</a><br><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a><br><a href="../11-node-pages/ESS-G-07.html">架构描述与对应关系</a><br><a href="../11-node-pages/ESS-G-04.html">模块化与分解</a><br><a href="../11-node-pages/ESS-G-05.html">架构风格</a><br><a href="../11-node-pages/ESS-G-06.html">视图与视角</a><br></td><td><a href="../11-node-pages/MTH-G-05.html">架构文档化方法</a><br><a href="../11-node-pages/MTH-G-06.html">效用树与敏感点权衡点分析</a><br><a href="../11-node-pages/MTH-G-01.html">架构决策记录</a><br><a href="../11-node-pages/MTH-G-02.html">质量属性场景与ATAM</a><br><a href="../11-node-pages/MTH-G-03.html">架构风格选择方法</a><br><a href="../11-node-pages/MTH-G-04.html">领域驱动战略设计</a><br></td><td><a href="../11-node-pages/TEC-G-01.html">AWS 良好架构框架</a><br><a href="../11-node-pages/TEC-G-02.html">GCP 良好架构框架</a><br><a href="../11-node-pages/TEC-G-03.html">Azure 架构中心</a><br><a href="../11-node-pages/TEC-G-04.html">ThoughtWorks 技术雷达</a><br></td></tr><tr><td>H · 实现与构造</td><td><a href="../11-node-pages/ESS-H-01.html">信息隐藏</a><br><a href="../11-node-pages/ESS-H-02.html">内聚与耦合</a><br><a href="../11-node-pages/ESS-H-03.html">DRY 单一知识来源</a><br><a href="../11-node-pages/ESS-H-04.html">抽象泄漏</a><br><a href="../11-node-pages/ESS-H-08.html">SOLID 职责划分与替换性</a><br><a href="../11-node-pages/ESS-H-09.html">设计模式与反模式</a><br><a href="../11-node-pages/ESS-H-05.html">深模块与浅模块</a><br><a href="../11-node-pages/ESS-H-06.html">组合优于继承与脆弱基类</a><br><a href="../11-node-pages/ESS-H-07.html">可读性与认知负荷</a><br></td><td><a href="../11-node-pages/MTH-H-03.html">战略式编程与持续设计投入</a><br><a href="../11-node-pages/MTH-H-04.html">代码复审与可读性治理</a><br><a href="../11-node-pages/MTH-H-01.html">重构手法族</a><br><a href="../11-node-pages/MTH-H-02.html">信息隐藏模块化分解</a><br></td><td><a href="../11-node-pages/TEC-H-01.html">SonarQube 静态分析平台</a><br><a href="../11-node-pages/TEC-H-02.html">SQALE 技术债评估方法</a><br><a href="../11-node-pages/TEC-H-03.html">技术债量化度量指标</a><br></td></tr><tr><td>I · 测试</td><td><a href="../11-node-pages/ESS-I-01.html">测试作为验证与反馈机制本质</a><br><a href="../11-node-pages/ESS-I-02.html">可测试性本质</a><br><a href="../11-node-pages/ESS-I-03.html">错误、缺陷与失效</a><br><a href="../11-node-pages/ESS-I-04.html">测试的不可穷尽性</a><br></td><td><a href="../11-node-pages/MTH-I-01.html">测试层次</a><br><a href="../11-node-pages/MTH-I-02.html">测试类型</a><br><a href="../11-node-pages/MTH-I-03.html">测试驱动开发</a><br><a href="../11-node-pages/MTH-I-04.html">测试金字塔与反模式</a><br><a href="../11-node-pages/MTH-I-05.html">测试替身与测试策略</a><br><a href="../11-node-pages/MTH-I-06.html">质量门控与持续集成</a><br><a href="../11-node-pages/MTH-I-07.html">软件测试过程模型</a><br></td><td><a href="../11-node-pages/TEC-I-01.html">持续集成服务与流水线</a><br><a href="../11-node-pages/TEC-I-02.html">关键字驱动测试框架</a><br><a href="../11-node-pages/TEC-I-03.html">xUnit 测试框架族</a><br></td></tr><tr><td>J · 部署</td><td><a href="../11-node-pages/ESS-J-01.html">构建发布运行分离</a><br><a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a><br><a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a><br><a href="../11-node-pages/ESS-J-04.html">部署即变更管理</a><br></td><td><a href="../11-node-pages/MTH-J-01.html">部署流水线</a><br><a href="../11-node-pages/MTH-J-02.html">发布工程</a><br><a href="../11-node-pages/MTH-J-03.html">封闭构建</a><br><a href="../11-node-pages/MTH-J-04.html">配置外置与显式化</a><br><a href="../11-node-pages/MTH-J-05.html">渐进暴露部署策略</a><br><a href="../11-node-pages/MTH-J-06.html">发布与部署解耦</a><br><a href="../11-node-pages/MTH-J-07.html">可回滚性与爆炸半径控制</a><br></td><td><a href="../11-node-pages/TEC-J-01.html">Kubernetes 部署编排</a><br><a href="../11-node-pages/TEC-J-02.html">不可变基础设施实现</a><br><a href="../11-node-pages/TEC-J-03.html">蓝绿部署</a><br><a href="../11-node-pages/TEC-J-04.html">金丝雀发布</a><br><a href="../11-node-pages/TEC-J-05.html">部署自动化</a><br><a href="../11-node-pages/TEC-J-06.html">部署流水线工具化</a><br></td></tr><tr><td>K · 运维</td><td><a href="../11-node-pages/ESS-K-01.html">可靠性即风险管理</a><br><a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a><br><a href="../11-node-pages/ESS-K-03.html">可观测性本质</a><br><a href="../11-node-pages/ESS-K-04.html">度量驱动的反馈闭环</a><br></td><td><a href="../11-node-pages/MTH-K-01.html">服务等级目标方法</a><br><a href="../11-node-pages/MTH-K-02.html">错误预算政策与燃尽率告警</a><br><a href="../11-node-pages/MTH-K-03.html">四大黄金信号监控方法</a><br><a href="../11-node-pages/MTH-K-04.html">可观测性信号关联方法</a><br><a href="../11-node-pages/MTH-K-05.html">事件响应与无指责复盘方法</a><br><a href="../11-node-pages/MTH-K-06.html">混沌工程方法</a><br><a href="../11-node-pages/MTH-K-07.html">容量规划与变更管理方法</a><br></td><td><a href="../11-node-pages/TEC-K-01.html">断路器与重试退避</a><br><a href="../11-node-pages/TEC-K-02.html">可观测性信号采集</a><br><a href="../11-node-pages/TEC-K-03.html">服务等级目标与错误预算</a><br><a href="../11-node-pages/TEC-K-04.html">混沌工程实践</a><br><a href="../11-node-pages/TEC-K-05.html">无指责复盘实践</a><br><a href="../11-node-pages/TEC-K-06.html">DORA 交付指标</a><br></td></tr><tr><td>L · 演化与弃用</td><td><a href="../11-node-pages/ESS-L-01.html">软件演化定律</a><br><a href="../11-node-pages/ESS-L-02.html">技术债本质</a><br><a href="../11-node-pages/ESS-L-03.html">架构侵蚀与漂移</a><br><a href="../11-node-pages/ESS-L-04.html">演化的不可逆性</a><br><a href="../11-node-pages/ESS-L-05.html">变更成本随复杂度增长</a><br></td><td><a href="../11-node-pages/MTH-L-01.html">行为保持重构</a><br><a href="../11-node-pages/MTH-L-02.html">代码坏味道启发式</a><br><a href="../11-node-pages/MTH-L-03.html">技术债象限与偿还策略</a><br><a href="../11-node-pages/MTH-L-04.html">演进式架构</a><br><a href="../11-node-pages/MTH-L-05.html">架构适应度函数</a><br><a href="../11-node-pages/MTH-L-06.html">遗留系统渐进治理</a><br><a href="../11-node-pages/MTH-L-07.html">弃用与日落策略</a><br></td><td><a href="../11-node-pages/TEC-L-01.html">架构适应度函数工具化</a><br><a href="../11-node-pages/TEC-L-02.html">绞杀者渐进式替换</a><br></td></tr><tr><td>M · 横切·质量属性</td><td><a href="../11-node-pages/ESS-M-01.html">可维护性本质</a><br><a href="../11-node-pages/ESS-M-02.html">可演化性与可扩展性</a><br><a href="../11-node-pages/ESS-M-03.html">性能效率本质</a><br><a href="../11-node-pages/ESS-M-04.html">可靠性与可用性</a><br><a href="../11-node-pages/ESS-M-05.html">质量属性不可直接测量</a><br></td><td><a href="../11-node-pages/MTH-M-01.html">质量属性战术映射方法</a><br><a href="../11-node-pages/MTH-M-02.html">可修改性战术应用</a><br><a href="../11-node-pages/MTH-M-03.html">可用性战术应用</a><br><a href="../11-node-pages/MTH-M-04.html">质量模型应用方法</a><br><a href="../11-node-pages/MTH-M-05.html">可维护性评估方法</a><br><a href="../11-node-pages/MTH-M-06.html">质量属性权衡决策方法</a><br></td><td><a href="../11-node-pages/TEC-M-01.html">质量模型工具化</a><br><a href="../11-node-pages/TEC-M-02.html">可维护性量化</a><br><a href="../11-node-pages/TEC-M-03.html">可修改性战术实现</a><br></td></tr><tr><td>N · 横切·团队与康威</td><td><a href="../11-node-pages/ESS-N-01.html">康威定律</a><br><a href="../11-node-pages/ESS-N-02.html">组织-架构同态</a><br><a href="../11-node-pages/ESS-N-03.html">团队边界与架构边界耦合</a><br><a href="../11-node-pages/ESS-N-04.html">认知负荷约束</a><br><a href="../11-node-pages/ESS-N-05.html">组织即设计系统</a><br></td><td><a href="../11-node-pages/MTH-N-01.html">逆向康威操作</a><br><a href="../11-node-pages/MTH-N-02.html">团队拓扑四类型</a><br><a href="../11-node-pages/MTH-N-03.html">团队交互模式</a><br><a href="../11-node-pages/MTH-N-04.html">平台团队与最薄可行平台</a><br><a href="../11-node-pages/MTH-N-05.html">DORA 交付效能指标</a><br><a href="../11-node-pages/MTH-N-06.html">团队边界治理</a><br></td><td><a href="../11-node-pages/TEC-N-01.html">交付效能度量与仪表化</a><br><a href="../11-node-pages/TEC-N-02.html">团队拓扑落地与规模化</a><br></td></tr><tr><td>O · 方法论主干/跨域综合</td><td><a href="../11-node-pages/ESS-O-01.html">本质复杂度与偶然复杂度</a><br><a href="../11-node-pages/ESS-O-02.html">架构即权衡</a><br><a href="../11-node-pages/ESS-O-03.html">权衡的不可消除性</a><br></td><td><a href="../11-node-pages/MTH-O-01.html">覆盖与精度的不对称权衡</a><br><a href="../11-node-pages/MTH-O-02.html">准入与触发时机选择</a><br><a href="../11-node-pages/MTH-O-03.html">技术选型的够用原则</a><br><a href="../11-node-pages/MTH-O-04.html">能力-成本-速度三角</a><br><a href="../11-node-pages/MTH-O-05.html">质量属性冲突治理</a><br><a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a><br><a href="../11-node-pages/MTH-O-07.html">自动化方式选择</a><br><a href="../11-node-pages/MTH-O-08.html">复杂度阶梯与演进时机</a><br><a href="../11-node-pages/MTH-O-09.html">理解成本优先的简单原则</a><br><a href="../11-node-pages/MTH-O-10.html">增量演化与一致性治理</a><br><a href="../11-node-pages/MTH-O-11.html">度量与反馈闭环</a><br></td><td><span class="dim">—</span></td></tr><tr><td>X · 跨域/其他</td><td><span class="dim">—</span></td><td><span class="dim">—</span></td><td><span class="dim">—</span></td></tr></tbody></table></div></section>
+<section id="s2"><h2><span class="num">§2</span>横切主题覆盖</h2><div class="tblwrap"><table><thead><tr><th>主题</th><th>节点数</th><th>落点节点</th></tr></thead><tbody><tr><td>M · 质量属性</td><td>96</td><td><a href="../11-node-pages/ESS-O-02.html">架构即权衡</a>、<a href="../11-node-pages/ESS-F-01.html">软件需求</a>、<a href="../11-node-pages/ESS-F-03.html">需求可追溯性与可验证性</a>、<a href="../11-node-pages/MTH-F-05.html">功能与非功能需求分类</a>、<a href="../11-node-pages/ESS-I-01.html">测试作为验证与反馈机制本质</a>、<a href="../11-node-pages/ESS-I-02.html">可测试性本质</a>、<a href="../11-node-pages/ESS-I-03.html">错误、缺陷与失效</a>、<a href="../11-node-pages/ESS-I-04.html">测试的不可穷尽性</a>、<a href="../11-node-pages/MTH-I-01.html">测试层次</a>、<a href="../11-node-pages/MTH-I-02.html">测试类型</a>、<a href="../11-node-pages/MTH-I-03.html">测试驱动开发</a>、<a href="../11-node-pages/MTH-I-04.html">测试金字塔与反模式</a>、<a href="../11-node-pages/MTH-I-05.html">测试替身与测试策略</a>、<a href="../11-node-pages/MTH-I-06.html">质量门控与持续集成</a>、<a href="../11-node-pages/MTH-I-07.html">软件测试过程模型</a>、<a href="../11-node-pages/ESS-J-04.html">部署即变更管理</a>、<a href="../11-node-pages/MTH-J-05.html">渐进暴露部署策略</a>、<a href="../11-node-pages/MTH-J-07.html">可回滚性与爆炸半径控制</a>、<a href="../11-node-pages/ESS-K-01.html">可靠性即风险管理</a>、<a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a>、<a href="../11-node-pages/ESS-K-03.html">可观测性本质</a>、<a href="../11-node-pages/ESS-K-04.html">度量驱动的反馈闭环</a>、<a href="../11-node-pages/MTH-K-01.html">服务等级目标方法</a>、<a href="../11-node-pages/MTH-K-02.html">错误预算政策与燃尽率告警</a>、<a href="../11-node-pages/MTH-K-03.html">四大黄金信号监控方法</a>、<a href="../11-node-pages/MTH-K-04.html">可观测性信号关联方法</a>、<a href="../11-node-pages/MTH-K-05.html">事件响应与无指责复盘方法</a>、<a href="../11-node-pages/MTH-K-06.html">混沌工程方法</a>、<a href="../11-node-pages/MTH-K-07.html">容量规划与变更管理方法</a>、<a href="../11-node-pages/ESS-L-05.html">变更成本随复杂度增长</a>、<a href="../11-node-pages/MTH-L-04.html">演进式架构</a>、<a href="../11-node-pages/MTH-L-05.html">架构适应度函数</a>、<a href="../11-node-pages/ESS-M-01.html">可维护性本质</a>、<a href="../11-node-pages/ESS-M-02.html">可演化性与可扩展性</a>、<a href="../11-node-pages/ESS-M-03.html">性能效率本质</a>、<a href="../11-node-pages/ESS-M-04.html">可靠性与可用性</a>、<a href="../11-node-pages/ESS-M-05.html">质量属性不可直接测量</a>、<a href="../11-node-pages/MTH-M-01.html">质量属性战术映射方法</a>、<a href="../11-node-pages/MTH-M-02.html">可修改性战术应用</a>、<a href="../11-node-pages/MTH-M-03.html">可用性战术应用</a>、<a href="../11-node-pages/MTH-M-04.html">质量模型应用方法</a>、<a href="../11-node-pages/MTH-M-05.html">可维护性评估方法</a>、<a href="../11-node-pages/MTH-M-06.html">质量属性权衡决策方法</a>、<a href="../11-node-pages/ESS-O-03.html">权衡的不可消除性</a>、<a href="../11-node-pages/MTH-O-01.html">覆盖与精度的不对称权衡</a>、<a href="../11-node-pages/MTH-O-05.html">质量属性冲突治理</a>、<a href="../11-node-pages/MTH-O-09.html">理解成本优先的简单原则</a>、<a href="../11-node-pages/MTH-O-11.html">度量与反馈闭环</a>、<a href="../11-node-pages/MTH-G-05.html">架构文档化方法</a>、<a href="../11-node-pages/MTH-G-06.html">效用树与敏感点权衡点分析</a>、<a href="../11-node-pages/ESS-H-08.html">SOLID 职责划分与替换性</a>、<a href="../11-node-pages/ESS-H-09.html">设计模式与反模式</a>、<a href="../11-node-pages/MTH-H-04.html">代码复审与可读性治理</a>、<a href="../11-node-pages/CAS-X-02.html">网申填写扩展逆向架构</a>、<a href="../11-node-pages/CAS-X-03.html">网申 v3 多模块解耦</a>、<a href="../11-node-pages/CAS-X-05.html">preset 通道耦合分析</a>、<a href="../11-node-pages/CAS-X-08.html">dsh-manager 插件深度分析</a>、<a href="../11-node-pages/CAS-X-10.html">dsh 插件依赖增量定位</a>、<a href="../11-node-pages/CAS-X-11.html">Hermes 七层架构总览</a>、<a href="../11-node-pages/CAS-X-12.html">MCP 四件套选型对比</a>、<a href="../11-node-pages/CAS-X-13.html">Claude Code 架构逆向</a>、<a href="../11-node-pages/CAS-X-14.html">OpenSpec 规约驱动解析</a>、<a href="../11-node-pages/CAS-X-15.html">Open Code Review 图谱</a>、<a href="../11-node-pages/CAS-X-16.html">控制理论⊗Agent 设计</a>、<a href="../11-node-pages/CAS-X-17.html">技术知识中枢交付法</a>、<a href="../11-node-pages/CAS-X-18.html">AI Agent 架构 DAG 复盘</a>、<a href="../11-node-pages/TEC-F-01.html">需求可追溯性与影响分析</a>、<a href="../11-node-pages/TEC-G-01.html">AWS 良好架构框架</a>、<a href="../11-node-pages/TEC-G-02.html">GCP 良好架构框架</a>、<a href="../11-node-pages/TEC-G-03.html">Azure 架构中心</a>、<a href="../11-node-pages/TEC-H-01.html">SonarQube 静态分析平台</a>、<a href="../11-node-pages/TEC-H-02.html">SQALE 技术债评估方法</a>、<a href="../11-node-pages/TEC-H-03.html">技术债量化度量指标</a>、<a href="../11-node-pages/TEC-I-01.html">持续集成服务与流水线</a>、<a href="../11-node-pages/TEC-I-02.html">关键字驱动测试框架</a>、<a href="../11-node-pages/TEC-I-03.html">xUnit 测试框架族</a>、<a href="../11-node-pages/TEC-J-01.html">Kubernetes 部署编排</a>、<a href="../11-node-pages/TEC-J-02.html">不可变基础设施实现</a>、<a href="../11-node-pages/TEC-J-03.html">蓝绿部署</a>、<a href="../11-node-pages/TEC-J-04.html">金丝雀发布</a>、<a href="../11-node-pages/TEC-J-06.html">部署流水线工具化</a>、<a href="../11-node-pages/TEC-K-01.html">断路器与重试退避</a>、<a href="../11-node-pages/TEC-K-02.html">可观测性信号采集</a>、<a href="../11-node-pages/TEC-K-03.html">服务等级目标与错误预算</a>、<a href="../11-node-pages/TEC-K-04.html">混沌工程实践</a>、<a href="../11-node-pages/TEC-K-05.html">无指责复盘实践</a>、<a href="../11-node-pages/TEC-K-06.html">DORA 交付指标</a>、<a href="../11-node-pages/TEC-L-01.html">架构适应度函数工具化</a>、<a href="../11-node-pages/TEC-M-01.html">质量模型工具化</a>、<a href="../11-node-pages/TEC-M-02.html">可维护性量化</a>、<a href="../11-node-pages/TEC-M-03.html">可修改性战术实现</a>、<a href="../11-node-pages/ESS-G-04.html">模块化与分解</a>、<a href="../11-node-pages/ESS-G-05.html">架构风格</a>、<a href="../11-node-pages/MTH-G-01.html">架构决策记录</a>、<a href="../11-node-pages/MTH-G-02.html">质量属性场景与ATAM</a>、<a href="../11-node-pages/MTH-G-03.html">架构风格选择方法</a></td></tr><tr><td>P · 技术债</td><td>31</td><td><a href="../11-node-pages/ESS-L-01.html">软件演化定律</a>、<a href="../11-node-pages/ESS-L-02.html">技术债本质</a>、<a href="../11-node-pages/ESS-L-03.html">架构侵蚀与漂移</a>、<a href="../11-node-pages/ESS-L-04.html">演化的不可逆性</a>、<a href="../11-node-pages/ESS-L-05.html">变更成本随复杂度增长</a>、<a href="../11-node-pages/MTH-L-01.html">行为保持重构</a>、<a href="../11-node-pages/MTH-L-02.html">代码坏味道启发式</a>、<a href="../11-node-pages/MTH-L-03.html">技术债象限与偿还策略</a>、<a href="../11-node-pages/MTH-L-06.html">遗留系统渐进治理</a>、<a href="../11-node-pages/MTH-L-07.html">弃用与日落策略</a>、<a href="../11-node-pages/MTH-O-10.html">增量演化与一致性治理</a>、<a href="../11-node-pages/ESS-H-09.html">设计模式与反模式</a>、<a href="../11-node-pages/MTH-H-03.html">战略式编程与持续设计投入</a>、<a href="../11-node-pages/CAS-X-04.html">网申 v2 深度重构</a>、<a href="../11-node-pages/CAS-X-05.html">preset 通道耦合分析</a>、<a href="../11-node-pages/CAS-X-06.html">插件 DAG RC5→RC7 升级</a>、<a href="../11-node-pages/CAS-X-07.html">插件 DAG 两次级联升级</a>、<a href="../11-node-pages/CAS-X-08.html">dsh-manager 插件深度分析</a>、<a href="../11-node-pages/CAS-X-10.html">dsh 插件依赖增量定位</a>、<a href="../11-node-pages/CAS-X-12.html">MCP 四件套选型对比</a>、<a href="../11-node-pages/CAS-X-14.html">OpenSpec 规约驱动解析</a>、<a href="../11-node-pages/CAS-X-15.html">Open Code Review 图谱</a>、<a href="../11-node-pages/CAS-X-16.html">控制理论⊗Agent 设计</a>、<a href="../11-node-pages/TEC-F-02.html">需求技术债识别与度量</a>、<a href="../11-node-pages/TEC-H-01.html">SonarQube 静态分析平台</a>、<a href="../11-node-pages/TEC-H-02.html">SQALE 技术债评估方法</a>、<a href="../11-node-pages/TEC-H-03.html">技术债量化度量指标</a>、<a href="../11-node-pages/TEC-J-02.html">不可变基础设施实现</a>、<a href="../11-node-pages/TEC-L-02.html">绞杀者渐进式替换</a>、<a href="../11-node-pages/TEC-M-02.html">可维护性量化</a>、<a href="../11-node-pages/MTH-H-01.html">重构手法族</a></td></tr><tr><td>N · 团队与康威</td><td>29</td><td><a href="../11-node-pages/ESS-N-01.html">康威定律</a>、<a href="../11-node-pages/MTH-I-03.html">测试驱动开发</a>、<a href="../11-node-pages/MTH-K-05.html">事件响应与无指责复盘方法</a>、<a href="../11-node-pages/ESS-N-02.html">组织-架构同态</a>、<a href="../11-node-pages/ESS-N-03.html">团队边界与架构边界耦合</a>、<a href="../11-node-pages/ESS-N-04.html">认知负荷约束</a>、<a href="../11-node-pages/ESS-N-05.html">组织即设计系统</a>、<a href="../11-node-pages/MTH-N-01.html">逆向康威操作</a>、<a href="../11-node-pages/MTH-N-02.html">团队拓扑四类型</a>、<a href="../11-node-pages/MTH-N-03.html">团队交互模式</a>、<a href="../11-node-pages/MTH-N-04.html">平台团队与最薄可行平台</a>、<a href="../11-node-pages/MTH-N-05.html">DORA 交付效能指标</a>、<a href="../11-node-pages/MTH-N-06.html">团队边界治理</a>、<a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a>、<a href="../11-node-pages/MTH-O-09.html">理解成本优先的简单原则</a>、<a href="../11-node-pages/MTH-O-11.html">度量与反馈闭环</a>、<a href="../11-node-pages/MTH-H-04.html">代码复审与可读性治理</a>、<a href="../11-node-pages/CAS-X-11.html">Hermes 七层架构总览</a>、<a href="../11-node-pages/CAS-X-13.html">Claude Code 架构逆向</a>、<a href="../11-node-pages/CAS-X-17.html">技术知识中枢交付法</a>、<a href="../11-node-pages/CAS-X-18.html">AI Agent 架构 DAG 复盘</a>、<a href="../11-node-pages/TEC-N-01.html">交付效能度量与仪表化</a>、<a href="../11-node-pages/TEC-N-02.html">团队拓扑落地与规模化</a>、<a href="../11-node-pages/TEC-J-05.html">部署自动化</a>、<a href="../11-node-pages/TEC-J-06.html">部署流水线工具化</a>、<a href="../11-node-pages/TEC-K-03.html">服务等级目标与错误预算</a>、<a href="../11-node-pages/TEC-K-05.html">无指责复盘实践</a>、<a href="../11-node-pages/TEC-K-06.html">DORA 交付指标</a>、<a href="../11-node-pages/MTH-G-04.html">领域驱动战略设计</a></td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 视图页由 16-checkpoint/gen-views.py 生成</footer>
+</article>
+</div>
+</body>
+</html>

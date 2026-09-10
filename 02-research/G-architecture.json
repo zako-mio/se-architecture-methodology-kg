@@ -1,0 +1,698 @@
+{
+  "topic": "架构设计（Architecture Design）——42010 概念模型/视图、架构↔设计↔需求边界、风格与模式权衡、ADR、架构文档化（V&B）、ATAM 术语",
+  "generated_by": "software-architecture-researcher (subagent, self-authored role)",
+  "generated_date": "2026-09-10",
+  "reuses": "复用 B-architecture-definition.json 的 source_id（S1-01/02/03/04/05/07、S2-09/10/14/18）以避免重复；本包仅新增 G 域专属源并补充其上下文。",
+  "sources": [
+    {
+      "id": "STD-001",
+      "title": "ISO/IEC/IEEE 42010 — Defining \"architecture\"（标准编辑 Rich Hilliard 维护的官方解释页）",
+      "org": "ISO/IEC/IEEE (iso-architecture.org)",
+      "year": "2022 (2nd ed.)",
+      "url": "http://www.iso-architecture.org/ieee-1471/defining-architecture.html",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-01",
+      "key_points": [
+        "架构（system 视角）：fundamental concepts or properties of a system in its environment embodied in its elements, relationships, and in the principles of its design and evolution",
+        "架构是抽象（概念或感知），非工件；记录架构的工件称 architecture description（AD）",
+        "architecture 向外关注‘系统及其环境’；design 在系统边界确定后向内关注（outwardly/inwardly focused）",
+        "per signiﬁcant/fundamental：只有根本性决策属于架构（Kruchten 定义中的 significant）",
+        "架构可关注元素、关系、以及设计与演化原则三类形态（软件/系统/企业架构各有侧重）"
+      ],
+      "legacy_id": "S1-01"
+    },
+    {
+      "id": "OFF-001",
+      "title": "SWEBOK Guide V4.0 — Software Architecture KA 与 Software Design KA 分立",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-02",
+      "key_points": [
+        "SWEBOK V4.0 含 18 个 KA，新增 Software Architecture、Software Engineering Operations、Software Security",
+        "Software Architecture KA（Ch.2）与 Software Design KA（Ch.3）分立，主编均为 Rich Hilliard",
+        "架构成为软件工程一般性共识知识领域"
+      ],
+      "legacy_id": "S1-02"
+    },
+    {
+      "id": "OFF-002",
+      "title": "SEI: What Is Your Definition of Software Architecture?（含 Perry&Wolf / Kruchten / Garlan&Shaw 对照）",
+      "org": "Carnegie Mellon University, Software Engineering Institute (SEI)",
+      "year": "2017 (brochure 3854)",
+      "url": "https://www.sei.cmu.edu/architecture/start/glossary/",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-03",
+      "key_points": [
+        "现代定义（Bass/Clements/Kazman）：software architecture = 系统的结构或结构集，由软件元素、元素的外部可见属性及元素间关系构成",
+        "externally visible = 其它元素可做的假设；架构不关心 private implementation",
+        "Documenting Software Architectures: Views and Beyond 定义：the set of structures needed to reason about the system",
+        "Perry&Wolf、Kruchten(RUP)、Garlan&Shaw 三个经典口径"
+      ],
+      "legacy_id": "S1-03"
+    },
+    {
+      "id": "OFF-002",
+      "title": "SEI: Software Architecture（架构领域总览页）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://www.sei.cmu.edu/architecture/",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-04",
+      "key_points": [
+        "架构代表与整体系统结构与行为相关的设计决策",
+        "架构实践包含：文档化架构元素与相互关系、反复评估架构与业务/使命目标契合度、分析实现与架构一致性",
+        "SEI 架构丛书（Software Architecture in Practice、Designing Software Architectures）定义了架构的定义/设计/文档化/评估实践"
+      ],
+      "legacy_id": "S1-04"
+    },
+    {
+      "id": "OFF-002",
+      "title": "SEI ATAM fact sheet: Reduce Risk with Architecture Evaluation（含 risk themes）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "2018",
+      "url": "https://www.sei.cmu.edu/documents/2543/2018_010_001_515610.pdf",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-05",
+      "key_points": [
+        "ATAM 是领先的风险消减过程，同时帮助设计团队改进架构",
+        "由 business drivers 与架构引出 scenarios 与 architectural decisions",
+        "分析产出 risks、non-risks、sensitivity points、tradeoff points，并综合为 risk themes（对应受威胁的 business driver）",
+        "架构是 system quality attributes（performance/modifiability/security）的主要载体"
+      ],
+      "legacy_id": "S1-05"
+    },
+    {
+      "id": "STD-001",
+      "title": "ISO/IEC/IEEE 42010 — A Conceptual Model of Architecture Description（概念模型细分：视角/视图/模型种类/对应关系/决策与理由）",
+      "org": "ISO/IEC/IEEE (iso-architecture.org)",
+      "year": "2022 (2nd ed.)",
+      "url": "http://www.iso-architecture.org/ieee-1471/cm/",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "B.S1-07",
+      "key_points": [
+        "System 处于 Environment 中；Stakeholders 的 interests = Concerns；Purpose 是常见 Concern",
+        "Architecture Viewpoint（构建/解释/分析一类 View 的约定集，含 Model Kinds、语言/记号、方法、分析技术）框定 Concerns；Architecture View 按视角约定表达架构",
+        "Architecture View 由 Architecture Models 构成；Model Kind 定义一类模型约定",
+        "AD 由 AD Elements 构成；Correspondences 表达 AD 元素间关系，Correspondence Rules 强制关系（composition/refinement/consistency/traceability/dependency/constraint/obligation）",
+        "Architecture Decision 影响 AD Elements 并关联 Concerns；Architecture Rationale 记录已做决策的解释/依据与未选方案",
+        "Architecture Framework（TOGAF、RM-ODP、Kruchten 4+1、MODAF）与 ADL（SysML、ArchiMate、ACME、xADL、Rapide）建立在概念模型之上",
+        "2022 第 2 版：subject 由 System of Interest 泛化为 Entity of Interest；Architecture Model 改为 View Component；新增 Stakeholder Perspectives、Architecture Aspects"
+      ],
+      "legacy_id": "S1-07"
+    },
+    {
+      "id": "STD-001",
+      "title": "ISO/IEC/IEEE 42010:2022 标准页（scope 原文与版本状态，经 Wayback 快照核验）",
+      "org": "ISO (via web.archive.org)",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20260716114220/https://www.iso.org/standard/74393.html",
+      "tier": "S1",
+      "verified": true,
+      "reuse_of": "E.ISO/IEC/IEEE 42010:2022",
+      "key_points": [
+        "规定架构描述（AD）的结构与表达要求，适用于软件/系统/企业/系统的系统/产品族/服务线/技术/业务领域等各类实体",
+        "区分‘关注实体的架构’与‘表达该架构的 AD’；架构本身不是本标准对象",
+        "规定 AD、ADF、ADL、architecture viewpoint、model kind 的符合性要求",
+        "不规定创建/使用/管理 AD 的过程、架构方法、模型、记号、技术、工具，也不规定 AD 的记录格式或介质",
+        "状态：International Standard published [60.60]，取代 42010:2011"
+      ],
+      "legacy_id": "S1-08"
+    },
+    {
+      "id": "OFF-015",
+      "title": "SEI: Views and Beyond — The SEI Approach to Architecture Documentation（官方方法页，Archive 快照）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "c. 2011 (archived 2011-08-07)",
+      "url": "https://web.archive.org/web/20110807114506/http://www.sei.cmu.edu/architecture/tools/document/viewsandbeyond.cfm",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "V&B 以「view」为架构文档化的基本组织原则；view 表示一组系统元素及其关系",
+        "基本方法：文档化相关视图，然后文档化适用于多个视图的信息（how-what-why：如何组织、架构是什么、为何如此即 rationale）",
+        "文档化应是架构决策的产物而非独立步骤；与设计分离的方法越重，越可能根本不写",
+        "依赖预期用途选择视图；可用于分析/约束实现/管理项目/概览",
+        "V&B 与 ISO/IEC 42010 和 IEEE 1471-2000 兼容，且不依赖记号/语言/领域/技术"
+      ],
+      "legacy_id": "S1-09"
+    },
+    {
+      "id": "OFF-016",
+      "title": "SEI: Methods for Software Architecture Documentation（官方方法页，Archive 快照）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "c. 2008 (archived 2008-05-13)",
+      "url": "https://web.archive.org/web/20080513033149/http://www.sei.cmu.edu/architecture/documentation_methods.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "V&B 包含基于软件架构固有结构 + 干系人需求与关注点来选择相关视图的方法",
+        "说明如何文档化视图、如何文档化跨视图信息、如何组合视图避免文档过载、如何用 UML 文档化常见架构构造",
+        "列举并存的其他文档化方法：ISO/IEC 42010 / IEEE 1471、RUP 4+1 View、Architectural Perspectives"
+      ],
+      "legacy_id": "S1-10"
+    },
+    {
+      "id": "OFF-002",
+      "title": "ATAM: Method for Architecture Evaluation（CMU/SEI-2000-TR-004, Kazman/Klein/Clements）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "2000-08",
+      "url": "https://www.sei.cmu.edu/documents/629/2000_005_001_13706.pdf",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "ATAM 基于三个概念：架构风格是质量属性的主要决定因素、质量属性特征化（quality attribute characterizations）、基于属性的架构风格（ABASs）",
+        "ATAM 九步：1 介绍 ATAM、2 陈述业务驱动、3 陈述架构、4 识别架构方法、5 生成质量属性 utility tree、6 分析架构方法、7 头脑风暴并排序场景、8 再次分析架构方法、9 呈现结果",
+        "sensitivity point：一个或多个组件（及/或组件关系）中，对达成某一质量属性响应至关重要的属性（yellow flag）",
+        "tradeoff point：同时影响多个质量属性、且是多个属性的 sensitivity point 的属性（最关键决策）",
+        "risk：有潜在问题的架构决策；non-risk：依赖（常隐含）假设的良好决策；二者均需显式记录（决策 + 质量属性响应/后果 + 理由）",
+        "utility tree：以 utility 为根，逐层细化质量属性到场景并（按重要性/实现难度）排序，作为分析计划"
+      ],
+      "legacy_id": "S1-11"
+    },
+    {
+      "id": "STD-013",
+      "title": "ISO/IEC/IEEE 42020（Architecture processes）与 42030（Architecture evaluation framework）发布信息",
+      "org": "ISO/IEC/IEEE (iso-architecture.org 新闻)",
+      "year": "2019-07",
+      "url": "http://www.iso-architecture.org/42010/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "ISO/IEC/IEEE 42020《Software, systems and enterprise — Architecture processes》与 42030《Architecture evaluation framework》于 2019 年 7 月发布",
+        "42010 为架构描述，42020 为架构过程，42030 为架构评估框架，三者构成配套标准族",
+        "42020 草案 scope：为架构组合的治理/管理及实体的架构化建立通用过程描述框架"
+      ],
+      "legacy_id": "S1-12"
+    },
+    {
+      "id": "WEB-004",
+      "title": "Documenting Architecture Decisions（ADR 术语原始出处，文中即为一篇 ADR）",
+      "org": "Michael Nygard (Cognitect Blog)",
+      "year": "2011-11-15",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "tier": "S2",
+      "verified": true,
+      "reuse_of": "B.S2-09",
+      "key_points": [
+        "ADR 保存 architecturally significant decisions（影响 structure、non-functional characteristics、dependencies、interfaces 或 construction techniques 的决策）",
+        "记录格式（Alexandrian pattern 风格）：Title（短名词短语）、Context（力量/forces，价值中立）、Decision（完整句、主动语态 'We will…'）、Status（proposed/accepted/deprecated/superseded）、Consequences（正/负/中性后果全部列出）",
+        "单文件 1–2 页；单调递增编号不复用；置于 doc/arch/adr-NNN.md；轻量标记（Markdown/Textile）",
+        "决策被推翻时保留旧 ADR 并标 superseded（而非改写）"
+      ],
+      "legacy_id": "S2-09"
+    },
+    {
+      "id": "WEB-005",
+      "title": "Architecture Decision Record (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2026-03-24 (updated)",
+      "url": "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html",
+      "tier": "S2",
+      "verified": true,
+      "reuse_of": "B.S2-10",
+      "key_points": [
+        "ADR 是记录单个决策及其 context 与 significant ramifications 的短文（约一两页）",
+        "状态：proposed / accepted / superseded；变更不修改原 ADR，而是链接到取代它的新 ADR",
+        "建议 inverted pyramid 写法（最重要内容放最前）；文件名单调编号（如 0001-HTMX-for-active-web-pages）",
+        "内容应含决策的理由与取舍、明确列出考虑过的严肃备选及其利弊；可记录决策置信度与应触发重评的上下文变化",
+        "写 ADR 兼具留档与厘清思路/暴露并化解分歧之效；在 Advice Process 中用于征询专业意见与对齐",
+        "通常放在代码库 doc/adr，用 markdown 以便像代码一样 diff"
+      ],
+      "legacy_id": "S2-10"
+    },
+    {
+      "id": "PAP-007",
+      "title": "An Introduction to Software Architecture（组件-连接件-配置框架与风格分类，含各风格权衡）",
+      "org": "David Garlan & Mary Shaw, CMU / SEI (CMU-CS-94-166 / SEI-94-TR-21)",
+      "year": "1993 (book chapter); 1994 (tech report)",
+      "url": "https://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "tier": "S2",
+      "verified": true,
+      "reuse_of": "B.S2-14",
+      "key_points": [
+        "架构框架：computational components（组件）+ connectors（连接件）+ configuration（配置）；抽象为图（节点=组件、弧=连接件）",
+        "Architectural style：定义一类系统的结构组织模式，确定可用的组件/连接件词汇表与组合约束（如无环）",
+        "风格目录：3.1 Pipes and Filters、3.2 Data Abstraction & Object-Oriented Organization、3.3 Event-based/Implicit Invocation、3.4 Layered Systems、3.5 Repositories、3.6 Table Driven Interpreters、3.8 Heterogeneous",
+        "每种风格按结构模式/计算模型/本质不变量/用例/优缺点分析（选择存在权衡）",
+        "Pipes&Filters：利于理解组合、复用、维护、吞吐/死锁分析、并发；但倾向批处理、不利于交互式、跨流对应困难、可能统一数据格式损失性能",
+        "Event-based/Implicit Invocation：强复用与易演化；但组件放弃对计算的控制、无法预知响应者与顺序、数据交换可能依赖共享仓库、正确性推理困难",
+        "Layered：支持按抽象层递增设计、可增强、可复用；但并非所有系统都易分层、性能可能要求紧密耦合、难找正确抽象层",
+        "Repositories 分传统数据库（事务流触发）与 blackboard（状态触发）两类；无统一‘最佳’风格"
+      ],
+      "legacy_id": "S2-14"
+    },
+    {
+      "id": "BK-016",
+      "title": "Pattern-Oriented Software Architecture, Vol.1: A System of Patterns（架构模式目录）",
+      "org": "F. Buschmann et al. (Wiley)",
+      "year": "1996",
+      "url": "https://www.wiley.com/",
+      "tier": "S2",
+      "verified": false,
+      "reuse_of": "B.S2-18",
+      "key_points": [
+        "提出 Microkernel、Layers、Pipes and Filters、Broker、MVC、Blackboard、Reflection 等经典架构模式",
+        "Microkernel：将最小功能核心与扩展功能/客户特定部分分离，核心充当可插拔扩展的插座（socket）",
+        "注：本书本体未回源（仅出版社页/公认知名度），标 cited，置信度 medium"
+      ],
+      "legacy_id": "S2-18"
+    },
+    {
+      "id": "BK-013",
+      "title": "Documenting Software Architectures: Views and Beyond, 2nd Edition（目录经出版社/零售商 InformIT 页核验）",
+      "org": "Paul C. Clements, Felix Bachmann, Len Bass, David Garlan, James Ivers, Reed Little, Paulo Merson, Robert Nord, Judith Stafford (Addison-Wesley)",
+      "year": "2010",
+      "url": "https://www.sei.cmu.edu/library/documenting-software-architectures-views-and-beyond-second-edition/ ; https://www.informit.com/store/documenting-software-architectures-views-and-beyond-9780321552686",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Part I 视图分类：Module Views、Component-and-Connector Views、Allocation Views（三类视图，各自含一组 viewtypes/styles）",
+        "Part II Beyond Structure：Beyond the Basics、Documenting Software Interfaces、Documenting Behavior（结构之外还需文档化接口与行为）",
+        "Part III 构建架构文档：Choosing the Views、Building the Documentation Package、Reviewing an Architecture Document",
+        "Epilogue：与其他方法（如 ISO/IEC 42010）配合使用",
+        "提供 V&B 文档模板、规则与模板（含接口、行为、rationale）；覆盖 SOA/多层/数据模型等风格"
+      ],
+      "legacy_id": "S2-19"
+    },
+    {
+      "id": "VEN-014",
+      "title": "Azure Architecture Center — Architecture Styles（云架构风格清单，每风格含适用性/收益/挑战）",
+      "org": "Microsoft (Microsoft Learn)",
+      "year": "2025-10-14 (last updated)",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "架构风格 = 共享特定特征的一族架构；风格是对设计的约束（规定可出现哪些元素及允许的关系）",
+        "风格清单：N-tier、Web-Queue-Worker、Microservices、Event-driven、Big data、Big compute；每种给出依赖管理方式与适配领域",
+        "N-tier：水平分层，适配传统领域/低更新频率；横向分层导致改一处影响多处、敏捷性受限",
+        "Web-Queue-Worker：前后端由异步消息解耦，适配较简单域 + 部分重计算；易理解/易部署，但两端易变大单体",
+        "Microservices：垂直功能分解、API 通信、每服务独享数据；支持团队自治/高频发布，但引入服务发现/数据一致性/分布式管理复杂度，需成熟 DevOps",
+        "Event-driven：生产者/消费者经 broker 解耦、近实时；适合 IoT/实时流；挑战在投递保证、事件排序、最终一致性",
+        "Big data / Big compute：分别面向大规模数据集并行处理与大量核心计算",
+        "风格选择应与干系人共同决定，先定义业务驱动与架构特性（非功能需求）并排序；约束带来收益也带来挑战，需权衡；宁可放松约束而非追求架构纯洁"
+      ],
+      "legacy_id": "S3-02"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "architecture（架构，ISO 42010:2022 §3.2）",
+      "definition": "fundamental concepts or properties of a system in its environment embodied in its elements, relationships, and in the principles of its design and evolution。架构是抽象（概念或感知），不是工件；只有根本性（fundamental/significant）的概念或属性才构成架构。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture description（架构描述, AD）",
+      "definition": "用于表达一个架构的工件（可为文档、模型集、模型库等）；42010 区分‘实体的架构’与‘表达该架构的 AD’，并规定 AD/ADF/ADL/viewpoint/model kind 的符合性要求而不规定其过程、方法、记号、格式或介质。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "stakeholder（干系人）",
+      "definition": "对关注系统（System of Interest）持有 Concern 的个人、群体或组织（如客户、所有者、用户、供应商、设计者、维护者、审计者、认证机构、架构师）。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "concern（关注点）",
+      "definition": "对系统的任何利益/关注，源自 Dijkstra 的 separation of concerns；例：purpose、functionality、structure、behavior、cost、supportability、safety、interoperability。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture viewpoint（架构视角）",
+      "definition": "构建、解释、使用与分析某一类 Architecture View 的约定集；视角包含 Model Kinds、视角语言与记号、建模方法与分析技术，用于框定特定的一组 Concerns。例：operational、systems、technical、logical、deployment、process、information。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture view（架构视图）",
+      "definition": "按某个视角的约定，从一或多个干系人的视角表达关注系统架构的 AD 组成部分，用以应对特定 Concerns；一个 View 由一个或多个 Architecture Models 构成。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "view component / architecture model kind（视图构件 / 模型种类）",
+      "definition": "42010:2011 中 View 由 Architecture Models 构成（以 Model Kind 定义其约定）；2022 第 2 版将 Architecture Model 改称 View Component（模型种类仍定义一类模型的约定）。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "AD element / correspondence / correspondence rule（AD 元素与对应关系）",
+      "definition": "AD 中任何条目都是 AD Element（含 Stakeholder、Concern、Viewpoint、View、Model Kind 及视角/模型种类引入的构造）；Correspondences 表达 AD 元素间关系，Correspondence Rules 强制关系（composition、refinement、consistency、traceability、dependency、constraint、obligation），可在 AD 内或 AD 间。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture decision / architecture rationale（架构决策与理由）",
+      "definition": "创建架构涉及做架构决策；Architecture Decision 影响 AD Elements 并关联一或多个 Concerns（做决策又可能引出新 Concerns）；Architecture Rationale 记录对已做决策的解释/依据/推理以及未选择的架构备选方案。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture framework（架构框架）",
+      "definition": "为特定应用域或干系人共同体建立创建、解释、分析、使用架构描述的通用实践；例：MODAF、TOGAF、Kruchten 4+1 View Model、RM-ODP。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architecture description language（架构描述语言, ADL）",
+      "definition": "用于架构描述的任何表达形式，可只含单一 Model Kind、单一视角或多视角；例：Rapide、SysML、ArchiMate、ACME、xADL。",
+      "source_id": "STD-001"
+    },
+    {
+      "term": "architectural style（架构风格）",
+      "definition": "定义一类系统的结构组织模式：确定该风格实例可用的 components 与 connectors 词汇表，以及它们如何组合的一组约束（可含拓扑约束，如无环）；架构风格是对设计的约束，符合约束会带来特定属性。",
+      "source_id": "PAP-007"
+    },
+    {
+      "term": "module view（模块视图）",
+      "definition": "Views and Beyond 三类视图之一，记录实现单元（模块）及其关系（如分解、使用、分层、泛化、数据模型）。",
+      "source_id": "BK-013"
+    },
+    {
+      "term": "component-and-connector view（组件-连接件视图, C&C）",
+      "definition": "V&B 三类视图之一，记录运行期组件与连接件及其交互（如管道-过滤器、客户端-服务器、发布-订阅、并发/通信进程）。",
+      "source_id": "BK-013"
+    },
+    {
+      "term": "allocation view（分配视图）",
+      "definition": "V&B 三类视图之一，记录软件元素与外部环境（开发/部署/组织结构）的映射（如部署、安装、工作分配、实现）。",
+      "source_id": "BK-013"
+    },
+    {
+      "term": "architecture decision record（架构决策记录, ADR）",
+      "definition": "记录单个 architecturally significant decision（影响 structure、non-functional characteristics、dependencies、interfaces 或 construction techniques）的短文本文件，格式类似 Alexandrian pattern，含 Title/Context/Decision/Status/Consequences，单文件 1–2 页，单调编号，被取代而非改写。",
+      "source_id": "WEB-004"
+    },
+    {
+      "term": "sensitivity point（敏感点）",
+      "definition": "一个或多个组件（及/或组件关系）中，对达成某一质量属性响应至关重要的属性；它提示‘改此处需谨慎’，是设计者/分析者聚焦之处。",
+      "source_id": "OFF-002"
+    },
+    {
+      "term": "tradeoff point（权衡点）",
+      "definition": "同时影响多个质量属性、且对多个属性都是 sensitivity point 的属性；是架构中可做的最关键决策。例：加密强度同时影响安全与性能。",
+      "source_id": "OFF-002"
+    },
+    {
+      "term": "risk / non-risk（风险 / 非风险）",
+      "definition": "risk 是有潜在问题的架构决策；non-risk 是依赖（常常隐含）假设的良好决策。二者均以‘架构决策 + 质量属性响应及后果 + 正/负效应的理由’记录；假设变化时 non-risk 可能转为 risk。",
+      "source_id": "OFF-002"
+    },
+    {
+      "term": "risk theme（风险主题）",
+      "definition": "ATAM 将各 risk 综合归纳为 risk themes，每个风险主题显示其如何威胁某一 business driver（业务驱动）。",
+      "source_id": "OFF-002"
+    },
+    {
+      "term": "utility tree（效用树）",
+      "definition": "ATAM 的自顶向下机制：以 utility 为根，将质量属性逐层细化到场景（标注刺激与响应）并优先级排序，产出驱动架构需求的排序清单，用作分析与探测风险的指南。",
+      "source_id": "OFF-002"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "ISO/IEC/IEEE 42010:2022 以概念模型（meta model）组织架构描述，核心概念为 Entity of Interest、Environment、Stakeholder、Concern、Viewpoint、View（含 View Component）、Model Kind、AD Element、Correspondence（Rule）、Architecture Decision/Rationale。",
+      "source_ids": [
+        "STD-001",
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Viewpoint 与 View 是不同概念：Viewpoint 是构造/解释/分析一类 View 的‘约定集’（含模型种类、语言与记号、方法与分析技术），View 是按该约定、面向特定干系人关注点对架构的具体表达。",
+      "source_ids": [
+        "STD-001",
+        "OFF-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "42010 用 Correspondences / Correspondence Rules 表达并强制视图内部与视图之间的架构关系（组合、细化、一致性、可追溯、依赖、约束、义务），从而支持跨视图一致性与可追溯。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "42010 把架构决策与理由纳入 AD：Architecture Decision 影响 AD 元素并关联 Concerns，Architecture Rationale 记录决策依据及被否决的架构备选方案。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Architecture Framework（TOGAF、RM-ODP、4+1、MODAF）与 ADL（SysML、ArchiMate、ACME、xADL、Rapide）均可基于 42010 概念模型规范化，框架/语言的具体选择域由 42010 提供元层支撑。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "42010:2022（第 2 版）相对 2011 版的关键变化：主体由 System of Interest 泛化为 Entity of Interest；Architecture Model 改名 View Component；新增 Stakeholder Perspectives（分组 Concerns 以组织 Viewpoint）与 Architecture Aspects（关注实体在 View 中反映的特征，用于细化 Concern→View 的可追溯性）。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "42010 的 scope 明确限定在‘架构描述的表示’，不规定创建/使用/管理 AD 的过程、架构方法、模型、记号、技术或工具，也不规定记录格式或介质；架构本身不在其对象范围。",
+      "source_ids": [
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 42010:2022 为当前有效版本（取代 2011 版），状态 60.60；配套标准 42020（架构过程）与 42030（架构评估框架）于 2019 年发布。",
+      "source_ids": [
+        "STD-001",
+        "STD-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构与设计的经典边界：架构向外（outwardly）关注系统及其环境，设计在系统边界确定后向内（inwardly）关注；架构只关心元素的外部可见属性，私有实现不属于架构。",
+      "source_ids": [
+        "STD-001",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构是一组 significant/fundamental 决策而非全部决策；架构定义中的 significant 是筛选判据（Kruchten/RUP：架构是关于系统组织的显著决策集）。",
+      "source_ids": [
+        "STD-001",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "在知识体系层面，架构与设计被并列为不同知识领域：SWEBOK V4.0 将 Software Architecture 与 Software Design 分设为两个 KA（Ch.2 / Ch.3），均由 Rich Hilliard 主编。",
+      "source_ids": [
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构与需求的接口：架构是质量属性（performance、modifiability、security）的主要承载者；ATAM 从 business drivers 引出质量属性场景，再落到架构决策——需求（业务驱动+质量属性）先于/驱动架构分析。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构风格 = 组件/连接件词汇表 + 组合约束；Garlan&Shaw 给出 6 类核心风格（Pipes&Filters、ADT/OO、Event-based/Implicit Invocation、Layered、Repositories、Table-Driven Interpreters）及异构组合，每类均有明确的优缺点（权衡）。",
+      "source_ids": [
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Pipes and Filters 风格：收益为输入/输出可组合理解、可复用、可维护/增强、支持吞吐与死锁分析、天然并发；代价为倾向批处理、不利交互式、双流对应困难、可能被迫统一数据格式而损失性能与增加过滤器复杂度。",
+      "source_ids": [
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Event-based / Implicit Invocation 风格：收益为强复用（注册即可引入组件）与易演化（替换组件不影响其它接口）；代价为组件放弃对计算的控制、无法预知响应者与调用顺序、数据交换可能依赖共享仓库、正确性推理困难。",
+      "source_ids": [
+        "PAP-007",
+        "VEN-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Layered 风格：收益为支持按抽象递增设计、支持增强（改动至多影响相邻两层）、支持复用（可换同接口实现）；代价为并非所有系统易分层、性能可能要求跨层紧耦合、难找正确抽象层（标准化分层尤甚）。",
+      "source_ids": [
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "云架构常见风格（Azure）：N-tier、Web-Queue-Worker、Microservices、Event-driven、Big data、Big compute；每种风格给出依赖管理方式与适配领域（如 N-tier↔传统低更新频率域，Microservices↔复杂且高频更新域，Event-driven↔IoT/实时系统）。",
+      "source_ids": [
+        "VEN-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Microservices 风格：约束为‘每服务单一职责、服务相互独立、数据为服务私有且不共享’；收益为独立部署、故障隔离、更频繁更新、更易引入新技术；代价为服务发现、数据一致性、分布式管理等显著复杂度，且需成熟 DevOps 实践。",
+      "source_ids": [
+        "VEN-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Event-driven 风格：以 broker 解耦生产者/消费者、支持近实时与横向扩展、故障隔离好；代价为投递保证、事件排序、跨组件最终一致性等挑战。",
+      "source_ids": [
+        "VEN-014"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "POSA 架构模式目录（Microkernel、Layers、Pipes and Filters、Broker、MVC、Blackboard、Reflection）补充了 Garlan&Shaw 之外的经典架构模式；其中 Microkernel 将最小功能核心与可插拔扩展分离。（本书未回源，标 cited）",
+      "source_ids": [
+        "BK-016"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "架构风格选择存在根本权衡：约束在带来期望属性的同时制造挑战（复杂度、最终一致性、服务间通信开销、可管理性），因此需按子域/bounded context 判断收益是否大于代价；宁可放松约束而非追求架构纯洁。",
+      "source_ids": [
+        "VEN-014",
+        "PAP-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ADR 的原始模板（Nygard 2011）含五个部分：Title（短名词短语）、Context（价值中立地陈述 forces）、Decision（主动语态 ‘We will…’）、Status（proposed/accepted/deprecated/superseded）、Consequences（列出全部正/负/中性后果）。",
+      "source_ids": [
+        "WEB-004"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ADR 的工程约定：单文件约 1–2 页，单调递增编号且不复用，置于 doc/adr（源仓库），用 Markdown 等轻量标记以便 diff；决策变更时保留旧 ADR 并标 superseded 链接到新 ADR，而非修改。",
+      "source_ids": [
+        "WEB-004",
+        "WEB-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Fowler 对 ADR 的扩展：建议 inverted pyramid 写法；内容应含理由、取舍与‘认真考虑过的备选方案及利弊’；可记录决策置信度与应触发重评的上下文变化；写 ADR 本身有助于厘清思路、暴露并化解分歧。",
+      "source_ids": [
+        "WEB-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ADR 与 ISO/IEC/IEEE 42010 的 Architecture Rationale 概念呼应：两者都强调记录架构决策及其依据与被否决的备选，ADR 是落地该要求的轻量载体。",
+      "source_ids": [
+        "WEB-004",
+        "STD-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SEI Views and Beyond（V&B）方法：文档化架构 = 文档化相关视图 + 文档化适用于多个视图的信息；跨视图信息遵循 how-what-why（如何组织/架构是什么/为何如此即 rationale）。",
+      "source_ids": [
+        "OFF-015",
+        "OFF-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "V&B 将视图归为三大类：Module Views、Component-and-Connector Views、Allocation Views；‘Beyond Structure’ 部分另行文档化接口与行为，文档包构建包含 Choosing the Views、Building the Documentation Package、Reviewing an Architecture Document。",
+      "source_ids": [
+        "BK-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "V&B 强调按预期用途与干系人需求选择视图，并有意识地组合视图以避免‘文档过载’；文档化应是架构决策过程的产物，而非设计之后的独立步骤。",
+      "source_ids": [
+        "OFF-015",
+        "OFF-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "V&B 明确与 ISO/IEC 42010 及 IEEE 1471-2000 兼容，且独立于记号、语言、领域与技术；它可与 4+1 View、Architectural Perspectives 等方法并存使用。",
+      "source_ids": [
+        "OFF-015",
+        "OFF-016",
+        "BK-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ATAM（Architecture Tradeoff Analysis Method）是领先的架构风险消减与架构改进方法，围绕‘架构风格/决策是质量属性的主要决定因素’组织，从 business drivers 引出场景与架构决策并做分析。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ATAM 的核心术语：sensitivity point（对达成某质量属性响应至关重要的组件/关系属性）、tradeoff point（同时是多个质量属性的敏感点、影响多个属性）、risk（有潜在问题的决策）、non-risk（依赖隐含假设的良好决策）、risk theme（将 risk 归纳为对 business driver 的威胁）。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ATAM 由九个步骤组成，可分三组：Presentation（1 介绍 ATAM、2 陈述业务驱动、3 陈述架构）、Investigation&Analysis（4 识别架构方法、5 生成 utility tree、6 分析架构方法并识别 risks/sensitivity/tradeoff）、Testing（7 头脑风暴并排序场景、8 再分析架构方法）与 Reporting（9 呈现结果）。步骤非严格瀑布，可迭代。",
+      "source_ids": [
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ATAM 以 utility tree 为自顶向下机制，将质量属性细化到带刺激/响应的场景并排序；其结果包括场景、分析问题、utility tree、架构方法/风格、risks/non-risks、sensitivity/tradeoff points 等，最终综合为 risk themes。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构评估已标准化：ISO/IEC/IEEE 42030（Architecture evaluation framework, 2019）与架构过程标准 42020 配套 42010 构成标准族。",
+      "source_ids": [
+        "STD-013"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "errata": [
+    {
+      "misconception": "ATAM 自始即包含 risk themes 术语",
+      "verified": "risk themes 是较晚的 ATAM 表述（SEI 2018 fact sheet S1-05 明确使用），2000 年原始技术报告 CMU/SEI-2000-TR-004（S1-11）重点定义 risks/non-risks/sensitivity points/tradeoff points，未使用 risk themes。",
+      "basis": "S1-11 vs S1-05 文本比对"
+    },
+    {
+      "misconception": "‘architecture’ 即架构文档",
+      "verified": "ISO 42010 明确架构是抽象（概念/感知），文档是 architecture description（AD）；企业架构领域常混用二者，属广泛误用。",
+      "basis": "S1-01、S1-08"
+    },
+    {
+      "misconception": "ATAM 中的 sensitivity point 与 tradeoff point 同义",
+      "verified": "tradeoff point 是影响多个质量属性的属性，且对其中多个属性都是 sensitivity point；sensitivity point 只针对单一质量属性响应。",
+      "basis": "S1-11 §7.2"
+    }
+  ],
+  "gaps": [
+    "ISO/IEC/IEEE 42010:2022 正文为付费且 iso.org 对抓取返回 403（WAF）；本包概念模型通过标准编辑维护的 iso-architecture.org（S1-01/S1-07）与 Wayback 标准页快照（S1-08）核验，未获取标准全文。",
+    "SWEBOK V4.0 的 Software Architecture / Software Design 两章正文未下载，仅凭官方页面核验 KA 结构与编辑（S1-02）。",
+    "Views and Beyond 著作本体未获取；三类视图（Module/C&C/Allocation）与章节结构依据 SEI 官方书页 + InformIT 目录（S2-19）核验，各类视图下的完整 viewtype 清单未从一次原文逐一核对。",
+    "ATAM 权威定义来自 2000 年技术报告（S1-11）与 2018 fact sheet（S1-05），二者术语略有演进（risk themes 仅见于后者）；未取得统一的最新版 ATAM 规范。",
+    "ISO/IEC/IEEE 42020:2019 / 42030:2019 的版本与 scope 仅由 iso-architecture.org 新闻页核验（S1-12），未回源 ISO 标准页确认版本年与 scope 原文。",
+    "POSA（Buschmann 等）本体未回源，相关 finding 标 cited/medium（S2-18）。",
+    "现代架构风格权衡矩阵（如 Richards & Ford《Fundamentals of Software Architecture》的风格-特性矩阵）未纳入；当前风格权衡主要来自 Garlan&Shaw（1990s）+ Azure（S3）。",
+    "未引入 S4 实证研究做风格/文档化/ATAM 效果的量化交叉验证；本包以规范与权威实践源为主，实证有效性证据待补。"
+  ],
+  "notes": "信源计数（含复用 B 的 id）：S1=11（S1-01/02/03/04/05/07/08/09/10/11/12）、S2=5（S2-09/10/14/18/19）、S3=1（S3-02），共 17 条；新增 G 域专属源 8 条，其余复用 B 包 source_id 以避免重复。关键定义均 ≥2 独立源交叉验证：architecture = ISO 42010（S1-01/07/08）+ SEI（S1-03）；viewpoint/view = 42010 概念模型（S1-07）+ SEI V&B（S1-09/10）；architectural style = Garlan&Shaw（S2-14）+ Azure（S3-02）；ADR = Nygard（S2-09）+ Fowler（S2-10）；ATAM 术语 = SEI 2000 技术报告（S1-11）+ SEI 2018 fact sheet（S1-05）。联网策略：SEI、iso-architecture.org、martinfowler.com、cognitect.com、learn.microsoft.com 经代理 172.29.0.1:7890 访问；iso.org 仍 403 不再重试，走 Wayback 快照。版权红线：未下载/写入任何受版权保护的标准或书籍全文，仅引用作者官方页、CC 许可页面、公开发表的 SEI 技术报告与官方文档页面。"
+}

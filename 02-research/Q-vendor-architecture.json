@@ -1,0 +1,340 @@
+{
+  "topic": "Q 域：主流厂商架构体系（S3）——AWS Well-Architected Framework、Google Cloud Well-Architected Framework、ThoughtWorks Technology Radar 的定义、原则与适用边界",
+  "generated_by": "cloud-architecture-framework-researcher (subagent, self-authored role)",
+  "generated_date": "2026-09-10",
+  "ownership_note": "S3 = 官方厂商架构中心，非国际标准；引用时须标注厂商立场（见 notes 与每条 finding 的 vendor_stance）。ID 续接 knowledge-map 的 S3-VEN-01（Azure）。",
+  "sources": [
+    {
+      "id": "VEN-002",
+      "title": "AWS Well-Architected Framework — The pillars of the framework（官方文档）",
+      "org": "Amazon Web Services (AWS Documentation)",
+      "year": "2024-11-06 (Publication date)",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "AWS",
+      "key_points": [
+        "框架帮助理解在 AWS 上构建系统时各项决策的利弊，并学习架构最佳实践；用于对照最佳实践一致地度量架构",
+        "六大支柱：Operational excellence / Security / Reliability / Performance efficiency / Cost optimization / Sustainability",
+        "定义原文：helps you understand the pros and cons of decisions you make while building systems on AWS；架构评审是建设性对话（constructive conversation），不是审计机制（not an audit mechanism）",
+        "General design principles（6 条通用设计原则）：【已按版权红线移出（原引用 221 字）· 出处见 source_id/URL】"
+      ],
+      "legacy_id": "S3-VEN-02"
+    },
+    {
+      "id": "VEN-003",
+      "title": "AWS Well-Architected Framework（官方白皮书 PDF，含各支柱定义与设计原则）",
+      "org": "Amazon Web Services",
+      "year": "2024-11-06",
+      "url": "https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "AWS",
+      "key_points": [
+        "Operational excellence (OE): a commitment to build software correctly while consistently delivering a great customer experience（8 条 OE 设计原则，4 个最佳实践域）",
+        "Security: the ability to protect data, systems, and assets to take advantage of cloud technologies to improve your security（7 条设计原则，7 个实践域）",
+        "Reliability: the ability of a workload to perform its intended function correctly and consistently when it's expected to（5 条设计原则，4 个实践域）",
+        "Performance efficiency: the ability to use cloud resources efficiently to meet performance requirements, and to maintain that efficiency as demand changes and technologies evolve（5 条设计原则，5 个实践域）",
+        "Cost optimization: the ability to run systems to deliver business value at the lowest price point（5 条设计原则，5 个实践域）",
+        "Sustainability: focuses on environmental impacts, especially energy consumption and efficiency（2021-12 新增；6 条设计原则，6 个实践域）"
+      ],
+      "legacy_id": "S3-VEN-03"
+    },
+    {
+      "id": "VEN-004",
+      "title": "Google Cloud Well-Architected Framework（原 Google Cloud Architecture Framework，官方枢纽页）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2026-01-28 (Last reviewed)",
+      "url": "https://cloud.google.com/architecture/framework",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "Google Cloud",
+      "key_points": [
+        "定义原文：【已按版权红线移出（原引用 224 字）· 出处见 source_id/URL】",
+        "由 Google 跨职能专家团队校核，并随 Google Cloud 能力、行业实践、社区知识与用户反馈更新",
+        "支柱（pillar）= 针对某一非功能关注点的原则与建议（security / reliability / performance / cost / operations / sustainability）；视角（perspective）= 面向特定技术/行业/领域的跨支柱视图",
+        "六大支柱：Operational excellence；Security, privacy, and compliance；Reliability；Cost optimization；Performance optimization；Sustainability（Sustainability 于 2026-01-28 升为完整支柱）",
+        "跨支柱视角：AI and ML、Financial services (FS)",
+        "跨支柱核心原则：Design for change / Document your architecture / Simplify your design and use fully managed services / Decouple your architecture / Use a stateless architecture"
+      ],
+      "legacy_id": "S3-VEN-04"
+    },
+    {
+      "id": "VEN-005",
+      "title": "Google Cloud WAF 支柱页与 What's new（各支柱 core principles 与变更记录）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2024-10 ~ 2026-02",
+      "url": "https://cloud.google.com/architecture/framework/whats-new",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "Google Cloud",
+      "key_points": [
+        "OE core principles：Ensure operational readiness and performance using CloudOps / Manage incidents and problems / Manage and optimize cloud resources / Automate and manage change / Continuously improve and innovate",
+        "Security core principles：【已按版权红线移出（原引用 235 字）· 出处见 source_id/URL】",
+        "Reliability core principles：【已按版权红线移出（原引用 368 字）· 出处见 source_id/URL】",
+        "Cost core principles：Align cloud spending with business value / Foster a culture of cost awareness / Optimize resource usage / Optimize continuously；Performance core principles：Plan resource allocation / Take advantage of elasticity / Promote modular design / Continuously monitor and improve performance；Sustainability core principles：【已按版权红线移出（原引用 249 字）· 出处见 source_id/URL】",
+        "What's new 记录：2024-10-11 加入 AI and ML perspective；2024-08-27 移除 System Design 类别；2026-01-28 Sustainability 扩展为完整支柱；页面现自称 Google Cloud Well-Architected Framework"
+      ],
+      "legacy_id": "S3-VEN-05"
+    },
+    {
+      "id": "VEN-006",
+      "title": "Thoughtworks Technology Radar（官方主页，Vol 34 / April 2026）",
+      "org": "Thoughtworks",
+      "year": "2026-04 (Vol 34)",
+      "url": "https://www.thoughtworks.com/radar",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "Thoughtworks",
+      "key_points": [
+        "自我定位：An opinionated guide to today's technology landscape；twice-yearly snapshot of tools, techniques, platforms, languages and frameworks",
+        "基于 Thoughtworks 全球团队在客户项目中的经验；由 Technology Advisory Board (TAB)（约 20 位资深技术专家，每年线下会两次）撰写",
+        "官方明确：不追求全面（no attempt to be comprehensive or to survey the market at large），也不接受厂商付费影响收录（we don't publish the Radar to secure revenue, nor do we accept vendor requests to influence what we include）",
+        "blips 默认只出现一期，除非在环间移动；旧 blip 保留于归档但不再更新"
+      ],
+      "legacy_id": "S3-VEN-06"
+    },
+    {
+      "id": "VEN-007",
+      "title": "Thoughtworks Technology Radar FAQ — 四环与四象限机制（方法论官方说明）",
+      "org": "Thoughtworks",
+      "year": "2026 (accessed 2026-09-10)",
+      "url": "https://www.thoughtworks.com/radar/faq",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "Thoughtworks",
+      "key_points": [
+        "blip = 在软件开发中扮演角色的技术或方法；用两个分类元素组织：quadrants（类型）与 rings（推荐程度）",
+        "四象限：Techniques（软件开发过程要素与结构化软件的方式）/ Platforms（构建软件所依赖的东西）/ Tools（组件类工具）/ Languages and Frameworks（编程语言与框架）",
+        "四环（由内向外）：Adopt / Trial / Assess / Caution（官网现称 Caution；历史上第四环名为 Hold）",
+        "Adopt：无争议地成熟可用，但任何工具都应在适当情境中使用；Trial：可用于生产但不如 Adopt 充分验证；Assess：值得密切关注但尚未试用；Caution：行业已接受但 Thoughtworks 体验不佳、存在重大顾虑",
+        "进入 Trial 环的必要条件：必须已有在生产软件中使用该 blip 的经验；进入 Adopt 的条件：在合适项目情境下不用它会是糟糕甚至不负责任的选择"
+      ],
+      "legacy_id": "S3-VEN-07"
+    },
+    {
+      "id": "VEN-008",
+      "title": "Thoughtworks Technology Radar 归档 PDF（Vol 26–34，用于核对第四环 Hold→Caution 演变）",
+      "org": "Thoughtworks",
+      "year": "2022-03 ~ 2026-04",
+      "url": "https://www.thoughtworks.com/radar/archive",
+      "tier": "S3",
+      "verified": true,
+      "vendor": "Thoughtworks",
+      "key_points": [
+        "Vol 26（2022-03）、Vol 27（2022-10）、Vol 28（2023-04）、Vol 29（2023-09）、Vol 31（2024-10）、Vol 33（2025-11）PDF 环形图例均标注 'Hold: Proceed with caution.'",
+        "Vol 34（2026-04）PDF 环形图例改为 'Caution: Proceed with care. These items involve significant concerns that require careful evaluation for your specific context.'",
+        "结论：第四环在 Vol 33→Vol 34 之间由 Hold 更名为 Caution，任务所依据的 'Adopt/Trial/Assess/Hold' 命名已过时（截至 2026-09 现行 Vol 34 为 Caution）"
+      ],
+      "legacy_id": "S3-VEN-08"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "AWS Well-Architected Framework",
+      "definition": "帮助理解在 AWS 上构建系统时决策利弊、学习架构最佳实践，并一致地度量架构是否符合最佳实践的框架；架构评审是建设性对话而非审计机制。",
+      "source_id": "VEN-002"
+    },
+    {
+      "term": "AWS 六大支柱（six pillars）",
+      "definition": "Operational excellence、Security、Reliability、Performance efficiency、Cost optimization、Sustainability。",
+      "source_id": "VEN-002"
+    },
+    {
+      "term": "Operational Excellence（AWS OE 支柱）",
+      "definition": "a commitment to build software correctly while consistently delivering a great customer experience；含组织团队、设计工作负载、规模化运营并持续演进的实践。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Security（AWS 安全支柱）",
+      "definition": "the ability to protect data, systems, and assets to take advantage of cloud technologies to improve your security。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Reliability（AWS 可靠性支柱）",
+      "definition": "the ability of a workload to perform its intended function correctly and consistently when it's expected to，包括在全生命周期内运行与测试工作负载的能力。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Performance Efficiency（AWS 性能效率支柱）",
+      "definition": "the ability to use cloud resources efficiently to meet performance requirements, and to maintain that efficiency as demand changes and technologies evolve。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Cost Optimization（AWS 成本优化支柱）",
+      "definition": "the ability to run systems to deliver business value at the lowest price point。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Sustainability（AWS 可持续性支柱）",
+      "definition": "聚焦环境影响（尤其能耗与能效）；2021-12 成为框架支柱，帮助架构师采取直接行动减少资源使用。",
+      "source_id": "VEN-003"
+    },
+    {
+      "term": "Google Cloud Well-Architected Framework",
+      "definition": "提供建议以帮助架构师、开发者、管理员等设计并运营安全、高效、韧性、高性能、成本有效且可持续的云拓扑；由 Google 跨职能专家团队校核。原名 Google Cloud Architecture Framework。",
+      "source_id": "VEN-004"
+    },
+    {
+      "term": "Google Cloud 六支柱与跨支柱视角",
+      "definition": "支柱：Operational excellence、Security privacy and compliance、Reliability、Cost optimization、Performance optimization、Sustainability；视角（perspective）：AI and ML、Financial services，为跨支柱的特定技术/行业视图。",
+      "source_id": "VEN-004"
+    },
+    {
+      "term": "ThoughtWorks Technology Radar",
+      "definition": "由 Thoughtworks Technology Advisory Board 撰写的、每年两次的技术快照，以 blip（技术/方法）经四象限与四环组织，表达对技术采用程度的推荐意见。",
+      "source_id": "VEN-006"
+    },
+    {
+      "term": "blip",
+      "definition": "在软件开发中扮演角色的技术或方法；位置会随信心变化在环间移动。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "quadrant（象限）",
+      "definition": "Techniques、Platforms、Tools、Languages and Frameworks 四类；表示 blip 的类型，官方称其仅为话题切分方式，重要性低于环。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "ring（环）",
+      "definition": "表示对技术/方法的采用推荐程度，由内向外：Adopt、Trial、Assess、Caution（旧称 Hold）。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "Adopt 环",
+      "definition": "成熟且被证实的 blip，在适当情境下应认真考虑使用；不用它可能是糟糕甚至不负责任的选择。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "Trial 环",
+      "definition": "已可用于生产但不如 Adopt 充分验证；建议在可承担风险的项目上试用，进入该环必须已有生产使用经验。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "Assess 环",
+      "definition": "值得密切关注、探索其对企业影响，但尚不宜试用。",
+      "source_id": "VEN-007"
+    },
+    {
+      "term": "Caution 环（旧称 Hold 环）",
+      "definition": "行业可能已接受但 Thoughtworks 体验不佳、或存在重大顾虑，需要结合具体情境审慎评估；Vol 33→Vol 34 由 'Hold: Proceed with caution' 更名为 'Caution: Proceed with care'。",
+      "source_id": "VEN-008"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "AWS Well-Architected Framework 由六大支柱构成：Operational excellence、Security、Reliability、Performance efficiency、Cost optimization、Sustainability；该框架用于度量架构与最佳实践的一致性，官方定位为架构评审的建设性对话而非审计。",
+      "source_ids": [
+        "VEN-002",
+        "VEN-003"
+      ],
+      "confidence": "high",
+      "vendor_stance": "AWS 官方框架，方法论与最佳实践绑定 AWS 服务与云运营模型"
+    },
+    {
+      "claim": "AWS 框架给出 6 条通用设计原则：Stop guessing your capacity needs、Test systems at production scale、Automate with architectural experimentation in mind、Consider evolutionary architectures、Drive architectures using data、Improve through game days。",
+      "source_ids": [
+        "VEN-002",
+        "VEN-003"
+      ],
+      "confidence": "high",
+      "vendor_stance": "AWS 官方"
+    },
+    {
+      "claim": "AWS 各支柱设计原则：OE（8 条，含 Organize teams around business outcomes、Implement observability、Safely automate、Make frequent small reversible changes、Refine operations procedures、Anticipate failure、Learn from all operational events、Use managed services）；Security（7 条）；Reliability（5 条）；Performance Efficiency（5 条）；Cost Optimization（5 条）；Sustainability（6 条）。",
+      "source_ids": [
+        "VEN-003"
+      ],
+      "confidence": "high",
+      "vendor_stance": "AWS 官方白皮书"
+    },
+    {
+      "claim": "Google Cloud 的框架现以 'Google Cloud Well-Architected Framework' 名义发布（原 Google Cloud Architecture Framework），含六大支柱：Operational excellence、Security privacy and compliance、Reliability、Cost optimization、Performance optimization、Sustainability。",
+      "source_ids": [
+        "VEN-004",
+        "VEN-005"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Google Cloud 官方；命名向 AWS 'Well-Architected' 靠拢"
+    },
+    {
+      "claim": "Google Cloud 框架的跨支柱核心原则为：Design for change、Document your architecture、Simplify your design and use fully managed services、Decouple your architecture、Use a stateless architecture；Sustainability 于 2026-01-28 由章节扩展为完整支柱。",
+      "source_ids": [
+        "VEN-004",
+        "VEN-005"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Google Cloud 官方；'use fully managed services' 体现厂商服务导向"
+    },
+    {
+      "claim": "Google Cloud 各支柱有明确的 core principles 清单（如 Reliability 9 条、Security 8 条、Sustainability 8 条、OE 5 条、Cost 4 条、Performance 4 条），并另有 AI and ML、Financial services 两个跨支柱 perspective。",
+      "source_ids": [
+        "VEN-004",
+        "VEN-005"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Google Cloud 官方"
+    },
+    {
+      "claim": "两个云厂商框架的支柱高度同构（Operational excellence / Security / Reliability / Performance / Cost 五支柱命名与内涵基本对应），AWS 与 Google Cloud 均已将 Sustainability 列为独立支柱；这反映了云厂商在架构方法论上的趋同。",
+      "source_ids": [
+        "VEN-002",
+        "VEN-004"
+      ],
+      "confidence": "high",
+      "vendor_stance": "跨厂商比较，综合官方源；厂商框架趋同，但具体建议仍服务于各自服务组合"
+    },
+    {
+      "claim": "ThoughtWorks Technology Radar 是每半年发布一次的技术快照（当前 Vol 34，2026-04），由 Thoughtworks Technology Advisory Board 编写，官方定位为'有观点的技术全景指南'且明确不追求全面、不接受厂商影响。",
+      "source_ids": [
+        "VEN-006",
+        "VEN-007"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Thoughtworks 咨询公司视角，属主观编辑判断而非行业标准"
+    },
+    {
+      "claim": "Radar 用四象限（Techniques / Platforms / Tools / Languages and Frameworks）表示 blip 类型，用四环表示采用推荐程度；官方称象限重要性低于环（只有环引发大量讨论，象限仅为话题切分）。",
+      "source_ids": [
+        "VEN-007"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Thoughtworks 官方方法论"
+    },
+    {
+      "claim": "四环定义（由内向外）：Adopt（成熟且被证实，应认真考虑）、Trial（可用于生产、建议可承担风险的项目试用，进入须有生产经验）、Assess（值得关注探索但尚未试用）、第四环（行业接受但体验不佳/有重大顾虑）。第四环的正确现行名称是 Caution 而非 Hold。",
+      "source_ids": [
+        "VEN-007",
+        "VEN-008"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Thoughtworks 官方；第四环命名存在版本差异，引用须注明版本"
+    },
+    {
+      "claim": "Radar 第四环在 Vol 33（2025-11）及更早为 'Hold: Proceed with caution.'，Vol 34（2026-04）更名为 'Caution: Proceed with care. These items involve significant concerns that require careful evaluation for your specific context.'；因此任务原表述 Adopt/Trial/Assess/Hold 已过时。",
+      "source_ids": [
+        "VEN-008",
+        "VEN-007"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Thoughtworks 官方归档 PDF 证据"
+    },
+    {
+      "claim": "ThoughtWorks Radar 的 blip 默认只保留一期，除非在环间移动（fades from the Radar if it doesn't move）；这使其更接近'当期观点快照'而非稳定知识库，引用时效性要求高。",
+      "source_ids": [
+        "VEN-006",
+        "VEN-007"
+      ],
+      "confidence": "high",
+      "vendor_stance": "Thoughtworks 官方"
+    }
+  ],
+  "gaps": [
+    "独立于厂商的第三方权威解读（如 Gartner/Forrester/InfoQ/ISO 或同行评审文献）未取得：三大体系的关键定义均以官方页 + 官方深度文档（白皮书/FAQ/归档 PDF）作为两个来源，非严格意义上相互独立的第三方交叉验证；引用时须明示厂商立场。",
+    "AWS 各支柱设计原则的逐条官方独立页面 URL 未稳定取得（部分 slug 302 跳回目录），本包以官方白皮书 PDF 为准（PDF 为权威一手）；若阶段2 需网页级引用，须重新定位各支柱 'design principles' 页面。",
+    "Google Cloud 框架的命名变更时间线（Architecture Framework → Well-Architected Framework）未从官方变更公告单独回源，仅依据页面自称 + What's new 记录；精确改名日期待核。",
+    "ThoughtWorks 第四环 Hold→Caution 更名未见官方公告/编辑说明，仅由 Vol 33 与 Vol 34 官方 PDF 图例对比推得；更名动因（措辞从 'proceed with caution' 改为 'proceed with care'）待官方说明。",
+    "三者均为厂商/咨询机构立场体系，不可作为国际标准（S1）引用；本包仅提供其定义、原则与适用边界，未做标准级质量属性映射。"
+  ],
+  "notes": "适用边界总提示：S3 厂商体系的权威性来自其作为厂商官方方法论，而非中立标准。①AWS WAF 与 Google Cloud WAF 均将'use managed services'写入原则，天然倾向引导用户采用其托管服务，存在厂商服务绑定/锁定偏向；②Google Cloud 框架在 2024-10-11 移除 System Design 类别，说明其分类法随产品与市场调整，稳定性弱于 ISO 系列标准；③ThoughtWorks Radar 明确声明'不追求全面、有观点（opinionated）'，blip 生命周期短，属时效性强的行业快照，不可当作长期定义源；④三者可作 S2/S1 标准与经典著作的'工程落地补充'，适合放入阶段2 建库的『厂商实践视角』分区，引用时统一标注 tier=S3 与厂商立场。"
+}

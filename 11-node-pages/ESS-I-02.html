@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可测试性本质 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>可测试性本质</span></div><div class="meta">essence · I · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>冲突 / 对比表</a><a href="#s9"><span class="n">§9</span>案例带</a><a href="#s10"><span class="n">§10</span>信源与核验</a><a href="#s11"><span class="n">§11</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>可测试性本质</h1><div class="en">Essence of Testability</div><div class="badges"><span class="badge pr">P0</span><span class="badge st basic">基础</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">I · 测试</span><span class="badge th">质量属性</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-067" title="testability — ISO 25010 maintainability 子特性：建立测试准则并执行测试判定其是否满足的有效性与效率程度；SEI 亦视为架构级质量属性。">可测试性</a>是建立系统、产品或<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>的测试准则，并执行测试以判定这些准则是否被满足的有效性与效率程度；它由可观察性、可控制性与判据明确性共同决定，是系统结构赋予测试的可行性。</span></p></div><p class="note">别名：testability、可测试性、测试性、可测性　|　英文：Essence of Testability　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -361.9 678 700.9" role="img" aria-label="可测试性本质 的 1-2 跳邻域关系图"><title>可测试性本质 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-176.8" y1="-223.2" x2="2" y2="-138.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：错误-缺陷-失效概念是测试活动的认知对象</title></line><line x1="0" y1="0" x2="2" y2="-138.9" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：可测试性是有效测试得以进行的前提</title></line><line x1="2" y1="-138.9" x2="127.9" y2="71.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：认识测试方能理解其不可穷尽性</title></line><line x1="0" y1="0" x2="127.9" y2="71.5" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：可测试性提升不等于测试可以穷尽</title></line><line x1="-79.8" y1="-244.3" x2="2" y2="-138.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：测试层次以测试的验证与反馈本质为依据</title></line><line x1="-122.5" y1="46" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：测试类型设计以可测试性为结构前提</title></line><line x1="-3.4" y1="-297.9" x2="2" y2="-138.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：TDD 以测试作为快速反馈机制为依据</title></line><line x1="82.5" y1="-275.7" x2="2" y2="-138.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：测试金字塔依据测试的验证与成本本质</title></line><line x1="173.1" y1="-222.1" x2="2" y2="-138.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：质量门控以测试作为验证反馈机制为依据</title></line><line x1="-79.8" y1="-244.3" x2="-122.5" y2="46" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：测试层次是应用测试类型的结构前提</title></line><line x1="82.5" y1="-275.7" x2="-79.8" y2="-244.3" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：测试金字塔按测试层次组织测试分布</title></line><line x1="173.1" y1="-222.1" x2="82.5" y2="-275.7" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：质量门控依据金字塔分层执行自动化测试</title></line><line x1="-242.7" y1="140.1" x2="-122.5" y2="46" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：关键字驱动测试作为规格化黑盒测试类型的实现</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">可测试性本质<title>可测试性本质（ESS-I-02）</title></text><circle cx="2" cy="-138.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="2" y="-119.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">测试作为验证与反馈机制本…<title>测试作为验证与反馈机制本质（ESS-I-01）</title></text><circle cx="127.9" cy="71.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="127.9" y="90.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">测试的不可穷尽性<title>测试的不可穷尽性（ESS-I-04）</title></text><circle cx="-122.5" cy="46" r="9.0" fill="#c98a3a" stroke="none"/><text x="-122.5" y="65" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">测试类型<title>测试类型（MTH-I-02）</title></text><circle cx="173.1" cy="-222.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="173.1" y="-206.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量门控与持续集成<title>质量门控与持续集成（MTH-I-06）</title></text><circle cx="-79.8" cy="-244.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-79.8" y="-228.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试层次<title>测试层次（MTH-I-01）</title></text><circle cx="82.5" cy="-275.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="82.5" y="-259.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试金字塔与反模式<title>测试金字塔与反模式（MTH-I-04）</title></text><circle cx="-242.7" cy="140.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-242.7" y="156.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">关键字驱动测试框架<title>关键字驱动测试框架（TEC-I-02）</title></text><circle cx="-3.4" cy="-297.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-3.4" y="-281.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试驱动开发<title>测试驱动开发（MTH-I-03）</title></text><circle cx="-176.8" cy="-223.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-176.8" y="-207.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">错误、缺陷与失效<title>错误、缺陷与失效（ESS-I-03）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 3 个直接邻接、外环 6 个二跳节点，共 10 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">可测试性是系统在结构上支持测试的可行性，衡量建立测试准则并执行测试以判定准则是否满足的有效性与效率。</span>它不是测试活动的属性，而是被测制品的属性：同样的测试团队与方法，面对可测试性不同的系统，建立受控情境、观察内部状态与取得反馈的代价会有数量级差异。<span class="hl">可测试性强意味着系统具备清晰的<a class="term" href="../14-views/glossary.html#g-114" title="seam — 在不改动该处代码的前提下即可改变程序行为的位置（预处理/链接/对象接缝）。">接缝</a>、可替换的依赖、可观察的状态与明确的接口，使测试能够以较低成本设定输入并读取结果。</span><span class="hl">在质量标准中，可测试性被归为<a class="term" href="../14-views/glossary.html#g-121" title="maintainability — 产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性 modularity/reusability/analysability/modifiability/testability。">可维护性</a>的一项子特性，因为难以测试的系统同样难以安全修改；而在<a class="term" href="../14-views/glossary.html#g-016" title="architecture viewpoint — 构建、解释、分析某一类架构视图的约定集（含模型种类、记号、方法与分析技术）。">架构视角</a>下，它又是一种需要以场景刻画、以战术达成的<a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>。</span><span class="hl">可测试性是测试策略的经济前提：它决定自动化测试能否快速、稳定、低成本地<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>，也间接决定团队能否借助测试持续演进系统。</span></p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">可测试性由三组结构性条件共同支撑。</span>可观察性：测试能够取得被测对象的状态、输出与副作用，以判断行为是否符合预期；若关键状态被深藏而无法读取，测试只能依赖间接推断。可控制性：测试能够构造所需的输入、前置状态与环境，使待验证的行为可被触发；若依赖难以替换或初始化成本极高，测试就难以隔离目标行为。判据明确性：存在清晰、可判定的预期结果，使测试能给出确定的通过或失败信号。<span class="hl">三者在<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>上通过接缝体现——接缝是可以在不修改生产代码的前提下替换行为的位置，依赖注入、稳定接口、显式的状态暴露与对时间、随机、外部系统的隔离都属于此类手段。</span><span class="hl">可测试性还可借助<a class="term" href="../14-views/glossary.html#g-025" title="quality attribute scenario — 特定质量属性的可验证需求，六要素：刺激源/刺激/环境/制品/响应/响应度量；分通用与具体场景。">质量属性场景</a>来表达：以刺激、环境与响应描述一次期望的测试交互，使「如何测试」从模糊要求变为可设计、可验证的结构目标。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">设计<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>应把可测试性当作与<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>并列的约束：识别系统中难以观察或难以控制的部分，优先在架构上引入接缝，而不是等实现完成后才设法插入测试。</span><span class="hl">常用做法包括面向外部资源编程时使用接口、把时间与随机来源显式化以便替换、限制过深的调用链与隐藏状态、为关键<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>定义稳定且可观察的边界。</span>对遗留系统，可先在风险最高处寻找或人工制造接缝，逐步扩大可测试范围，避免一次性大规模改造。<span class="hl">测试层面应让测试能够独立、可重复地运行，不与执行顺序或外部环境<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>。</span>可测试性投入同样需要排序：优先改善变更频繁、缺陷集中或业务关键的模块，而非均匀铺开。最后应把可测试性纳入评审检查项，并随系统演进持续维护接缝的稳定，防止新增结构重新把关键行为埋入不可观察、不可控制之处。对无法立即改造的部分，可用受控的接口封装与显式的依赖声明，把可测试性问题局部化，避免其扩散为全局约束。可测试性的改进应可被验证：以一次典型测试的建立成本是否下降作为判据。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>可测试性还可能被过度追求：为每一个内部方法都建立接缝与替身，会产生大量脆弱测试与被测试绑定的实现，使<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>寸步难行。</p><p>因此可测试性应在结构质量与测试便利之间权衡：优先建立少量稳定、语义清晰的接缝，让测试针对行为而非实现，并在封装被削弱时评估其长期代价，避免为解决测试问题而制造更大的设计问题。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是把可测试性等同于高覆盖率，认为只要测试能跑就算可测试，忽视了测试是否观测了真正重要的行为。</p><p>反例之二是以测试需要为由牺牲封装，把私有状态公开，短期便于断言，长期却把内部结构固化为对外契约。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>可测试性与封装、性能、安全之间存在张力。</li><li>为便于观察而暴露内部状态，可能破坏<a class="term" href="../14-views/glossary.html#g-041" title="information hiding — Parnas 分解判据：每个模块隐藏一个「困难或可能变化的设计决策」（secret），接口只揭示尽量少的内部工作。">信息隐藏</a>并诱使外部依赖实现细节；为便于控制而引入的接缝、依赖注入与间接层会增加复杂度与运行期开销。</li><li>因此应把可测试性设计为少量稳定接缝上的能力，而非对系统内部的全面开放，避免以测试之名侵蚀封装边界。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step cur"><span class="id">ESS-I-02</span><span class="nm">可测试性本质</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-I-01</span><span class="nm">测试作为验证与反馈机制本质</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：可测试性提升不等于测试可以穷尽</caption><thead><tr><th>对照维度</th><th>可测试性本质</th><th>测试的不可穷尽性</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>可测试性本质 · Essence of Testability</td><td>测试的不可穷尽性 · Testing is Not Exhaustive</td></tr><tr><td class="k">核心定义（原文）</td><td>可测试性是建立系统、产品或组件的测试准则，并执行测试以判定这些准则是否被满足的有效性与效率程度；它由可观察性、可控制性与判据明确性共同决定，是系统结构赋予测试的可行性。</td><td>测试只能证明缺陷的存在、无法证明其不存在；由于输入、状态与执行路径的组合空间在现实中不可穷尽，测试永远是抽样活动，因此测试策略的核心不是穷尽验证，而是基于风险选择最有价值的样本。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>可测试性是系统在结构上支持测试的可行性，衡量建立测试准则并执行测试以判定准则是否满足的有效性与效率。</td><td>测试的不可穷尽性是一条被广泛接受的基本原则：除极少数平凡情形外，穷尽所有输入、状态与执行路径的测试在事实上不可能完成，即使可能，其成本也远超收益。</td></tr><tr><td class="k">对照关系</td><td>可测试性提升不等于测试可以穷尽（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>反例之一是把可测试性等同于高覆盖率，认为只要测试能跑就算可测试，忽视了测试是否观测了真正重要的行为。反例之二是以测试需要为由牺牲封装，把私有状态公开，短期便于断言，长期却把内部结构固化为对外契约。</td><td>反例之一是把覆盖率当作穷尽性的替代品，用行覆盖或分支覆盖的数字制造「已经测全」的错觉，掩盖了未被覆盖的行为组合与错误预期。反例之二是走向另一极端，试图通过极度详尽的用例追求完备，投入巨大却仍无法覆盖真实空间，反而拖慢反馈、抬高维护成本。</td></tr><tr><td class="k">处置要点（原文）</td><td>设计阶段应把可测试性当作与功能并列的约束：识别系统中难以观察或难以控制的部分，优先在架构上引入接缝，而不是等实现完成后才设法插入测试。</td><td>工程上应以风险为基础分配测试资源：识别最关键、最易变、历史上缺陷最多的功能与路径，把最密集的测试集中在这些区域；对低风险区域采用较稀疏的抽样，并显式接受其残余风险。</td></tr></tbody></table></div></section>
+<section id="s9"><h2><span class="num">§9</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → ESS-I-01 → MTH-I-06</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → ESS-I-01 → MTH-I-06</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>OFF-005、BK-009、OFF-021、OFF-020</div><div class="r"><span class="k">入口链接</span><a href="https://iso25000.com/index.php/en/iso-25000-standards/iso-25010" target="_blank" rel="noopener">https://iso25000.com/index.php/en/iso-25000-standards/iso-25010</a>　<a href="https://www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies/" target="_blank" rel="noopener">https://www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：可测试性只是测试人员关心的事，与系统设计无关</span><br>核验结论：可测试性是系统结构赋予的属性，属可维护性的一项子特性，也在架构层面作为质量属性以场景与战术处理，其高低决定测试的成本与可行性　<span class="k">[OFF-005]</span></div></div></div></section>
+<section id="s11"><h2><span class="num">§11</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（3 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">对照</td><td>→ ESS-I-04</td><td>测试的不可穷尽性<br><span style="color:var(--dim);font-size:12px">E-484</span></td><td>可测试性提升不等于测试可以穷尽</td></tr><tr><td class="k">依据推导</td><td>← MTH-I-02</td><td>测试类型<br><span style="color:var(--dim);font-size:12px">E-486</span></td><td>测试类型设计以可测试性为结构前提</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-I-01</td><td>测试作为验证与反馈机制本质<br><span style="color:var(--dim);font-size:12px">E-482</span></td><td>可测试性是有效测试得以进行的前提</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

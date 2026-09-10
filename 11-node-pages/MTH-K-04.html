@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可观测性信号关联方法 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>可观测性信号关联方法</span></div><div class="meta">methodology · K · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>可观测性信号关联方法</h1><div class="en">Correlating Observability Signals</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">K · 运维</span><span class="badge th">质量属性</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">用数值聚合、带上下文的事件记录与请求级路径追踪三类信号共同刻画系统，并通过统一的身份与时间基准把它们关联起来；价值在于信号可相互串联以定位根因，而非信号数量或支柱的划分。</span></p></div><p class="note">别名：three pillars、observability signals、metrics logs traces、信号关联、分布式追踪、span　|　英文：Correlating Observability Signals　|　类型：方法 / practice</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-344 -345.8 683 684.8" role="img" aria-label="可观测性信号关联方法 的 1-2 跳邻域关系图"><title>可观测性信号关联方法 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="0" y1="-143.2" x2="0" y2="-281.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：可观测性使度量驱动反馈闭环成为可能</title></line><line x1="0" y1="0" x2="0" y2="-143.2" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：信号关联与追踪依据可观测性本质</title></line><line x1="125.9" y1="75" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：四大黄金信号是可观测性信号的核心指标集</title></line><line x1="-119.2" y1="71.2" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：可观测信号关联方法的技术实现</title></line><line x1="-119.2" y1="71.2" x2="125.9" y2="75" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：四大黄金信号的采集与呈现</title></line><line x1="-119.2" y1="71.2" x2="-255.3" y2="147.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测信号使 SLO 可度量</title></line><line x1="-119.2" y1="71.2" x2="-280" y2="66.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测稳态为混沌实验提供判据</title></line><line x1="-197.5" y1="209.2" x2="-280" y2="66.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：容错机制可由混沌实验验证</title></line><line x1="-280" y1="66.4" x2="-278.9" y2="-38.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：实验发现的弱点进入复盘与修复闭环</title></line><line x1="-197.5" y1="209.2" x2="-119.2" y2="71.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：熔断与重试事件需被可观测信号捕获</title></line><line x1="-255.3" y1="147.4" x2="-280" y2="66.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：错误预算界定混沌实验可接受的爆炸半径</title></line><line x1="-119.2" y1="71.2" x2="-278.9" y2="-38.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测信号是事故复盘的时间线证据</title></line><line x1="-105.8" y1="261" x2="-119.2" y2="71.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：事件地图交叉核对声明点与派发点核验埋点</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">可观测性信号关联方法<title>可观测性信号关联方法（MTH-K-04）</title></text><circle cx="0" cy="-143.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-124.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可观测性本质<title>可观测性本质（ESS-K-03）</title></text><circle cx="125.9" cy="75" r="9.0" fill="#c98a3a" stroke="none"/><text x="125.9" y="94" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">四大黄金信号监控方法<title>四大黄金信号监控方法（MTH-K-03）</title></text><circle cx="-119.2" cy="71.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="-119.2" y="90.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可观测性信号采集<title>可观测性信号采集（TEC-K-02）</title></text><circle cx="0" cy="-281.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="0" y="-265.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">度量驱动的反馈闭环<title>度量驱动的反馈闭环（ESS-K-04）</title></text><circle cx="-197.5" cy="209.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-197.5" y="225.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">断路器与重试退避<title>断路器与重试退避（TEC-K-01）</title></text><circle cx="-255.3" cy="147.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-255.3" y="163.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">服务等级目标与错误预算<title>服务等级目标与错误预算（TEC-K-03）</title></text><circle cx="-280" cy="66.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-280" y="82.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">混沌工程实践<title>混沌工程实践（TEC-K-04）</title></text><circle cx="-105.8" cy="261" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-105.8" y="277" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">harness 源码架构…<title>harness 源码架构解析（CAS-X-09）</title></text><circle cx="-278.9" cy="-38.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-278.9" y="-22.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">无指责复盘实践<title>无指责复盘实践（TEC-K-05）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 3 个直接邻接、外环 6 个二跳节点，共 10 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">不同信号回答不同问题，任何单一形态都有盲区。</span>数值聚合擅长发现趋势与异常，却缺乏解释单个事件所需的上下文；离散的事件记录擅长保留细节，却难以反映整体的态势与趋势；请求级路径追踪擅长重建一次操作在跨服务调用中的完整旅程，是从哪里慢走向为什么慢的关键。<span class="hl">把它们割裂使用，定位过程就会在多种数据源之间反复手动跳转；把它们关联，才能从异常数值快速下钻到具体请求、再从请求路径定位到根因<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>。</span>因此方法的组织原则不是维护几类数据，而是让数据围绕同一实体（如同一请求、同一服务、同一时间）可被串联。术语上，把信号归纳为固定几类支柱是工程界的通行说法，但应把握其精神——可关联性——而非机械强调类别数量。<span class="hl">因此衡量<a class="term" href="../14-views/glossary.html#g-090" title="（无权威共识，给推荐口径）observability — 从系统外部输出推断内部状态、回答 unknown unknowns 与「为什么」的能力；正式信号清单用 OTel 的 Traces/Metrics/Logs/Baggage。">可观测性</a>成熟度的，不是某一类信号是否齐全，而是从任意一条线索出发能否顺畅地抵达根因。</span>因此可关联性应作为信号体系的一等设计要求，而非事后补救。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">关联依赖共享的标识与一致的上下文传播。</span>数值信号需带上可定位到具体维度的标签，才能从整体错误率上升缩小到某类请求在某依赖上失败。事件记录需携带同一身份标识与时间戳，才能与相应请求和数值对应。路径追踪把一次请求拆分为若干带父子关系的步骤，每个步骤记录起点、终点、耗时与状态，从而呈现请求在服务之间传播的全貌；父子关系使因果链显式，耗时可被逐段归因。三类信号通过共同的身份标识、时间戳与资源属性被缝合成一体，使排查者能在同一时间轴上观察数值异常、检索相关事件并查看对应请求的路径。缺少统一标识时，即便采集了全部三类数据，也无法回答跨信号的新问题。统一标识与时间基准是关联的前提，也往往是最易被忽视的工程债：后期补加的成本远高于设计之初就统一。跨服务传播的上下文一旦中断，整条链路就会在断点处失去解释能力。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">实践中先统一身份的构成与传播规则，确保一次请求在跨越服务边界时携带一致的关联标识，并对所有信号采用同一时间基准。</span>为数值信号设计能支持细分的标签，但控制标签基数以免成本失控。让路径追踪覆盖真实的端到端调用，并保证采样策略在故障放大时仍能捕获有价值的长尾样本，而非只采成功请求。把事件记录结构化为可检索的字段而非自由文本，使其能与请求和数值关联。建立从概览到细节的路径：从整体态势发现异常，下钻到受影响请求，再查看路径与相关事件。以回答一个此前未设问的问题为验收标准演练整套能力，而不仅是确认已知告警有效。应在关键路径上保证采样的连续与可比，使故障期间与常态下的数据能放在同一口径下对照。应对关联链路做端到端演练，验证它在新问题下是否真的可用。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>关联能力伴随显著成本与组织挑战。</p><p>高基数、高扇出的信号在采集、传输与存储上都很昂贵，过度采集会让信噪比下降并掩盖关键信息；而过度采样又会在真正需要时缺少样本。</p><p>因此信号体系的建设应以问题驱动、逐步补全，而不是一次性追求全都要，否则成本与复杂度会先于价值到来。</p><p>因此采集范围应与可能的提问和成本共同权衡，而非默认全量。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是采集齐全却无统一标识，信号彼此无法对应；反例之二是全量保留所有细节导致成本与噪声失控；反例之三是把追踪当作只在<a class="term" href="../14-views/glossary.html#g-074" title="dev/prod parity — 让开发、预发、生产尽可能相似（时间差/人员差/工具差最小），backing service 同类型同版本。">开发</a>期使用的调试手段，生产环境样本稀少，故障时无从下钻。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>三类信号的成熟度与语义并不统一，强行关联可能因标识缺失、时间漂移或采样不一致而产生错误联系，反而误导根因判断。</li><li>术语上的支柱划分也非标准，某些规范把信号列得更多（另行区分事件与上下文传播），若固守类别数量会忽视真正重要的可关联性。</li><li>因此应按可回答的问题取舍采集范围与采样策略，优先保证关键路径上的关联质量。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-05 · 2 跳派生：当前节点 → TEC-K-02 → TEC-K-01</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-09 · 经 TEC-K-02</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → ESS-K-03 → ESS-K-04</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>medium</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>VEN-026、VEN-027</div><div class="r"><span class="k">入口链接</span><a href="https://opentelemetry.io/docs/concepts/observability-primer/" target="_blank" rel="noopener">https://opentelemetry.io/docs/concepts/observability-primer/</a>　<a href="https://www.datadoghq.com/knowledge-center/observability/" target="_blank" rel="noopener">https://www.datadoghq.com/knowledge-center/observability/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：可观测性等于 metrics/logs/traces 三支柱</span><br>核验结论：三支柱为工程口语，非统一标准术语；某些规范在追踪、指标、日志之外还列上下文传播等信号，价值关键在信号可关联而非类别数量　<span class="k">[VEN-026]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（3 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依据推导</td><td>→ ESS-K-03</td><td>可观测性本质<br><span style="color:var(--dim);font-size:12px">E-566</span></td><td>信号关联与追踪依据可观测性本质</td></tr><tr><td class="k">实现</td><td>← TEC-K-02</td><td>可观测性信号采集<br><span style="color:var(--dim);font-size:12px">E-858</span></td><td>可观测信号关联方法的技术实现</td></tr><tr><td class="k">细化</td><td>← MTH-K-03</td><td>四大黄金信号监控方法<br><span style="color:var(--dim);font-size:12px">E-571</span></td><td>四大黄金信号是可观测性信号的核心指标集</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

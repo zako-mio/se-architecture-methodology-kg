@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="opencode" version="21.6.8" type="device">
+  <diagram id="stage4-architecture" name="stage4-architecture">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="1010" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="软件工程 / 架构方法论 母库 · 概念架构图" style="text;html=1;fontFamily=Microsoft YaHei;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="12" width="1560" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="生命周期驱动 · 内容三层 · 依赖倒置（技术实践 → 方法论 → 本质）" style="text;html=1;fontFamily=Microsoft YaHei;fontSize=13;fontColor=#666666;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="52" width="1560" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="sec_cons" value="消费方与交付（Consumer &amp; Delivery）" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;html=1;fontFamily=Microsoft YaHei;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="84" width="1560" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="human" value="人读侧（Human）" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#6c8ebf;html=1;fontFamily=Microsoft YaHei;fontSize=12;fontStyle=1;" vertex="1" parent="sec_cons">
+          <mxGeometry x="16" y="42" width="752" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="交互式 DAG" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="human">
+          <mxGeometry x="14" y="46" width="172" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="节点页" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="human">
+          <mxGeometry x="192" y="46" width="172" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="多视图" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="human">
+          <mxGeometry x="370" y="46" width="172" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="MD 镜像" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="human">
+          <mxGeometry x="548" y="46" width="172" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" value="Agent 侧（Machine）" style="swimlane;startSize=24;fillColor=#ffffff;strokeColor=#82b366;html=1;fontFamily=Microsoft YaHei;fontSize=12;fontStyle=1;" vertex="1" parent="sec_cons">
+          <mxGeometry x="784" y="42" width="760" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="graph skill（封装入口）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="agent">
+          <mxGeometry x="14" y="46" width="230" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="路径路由（按域加载）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="agent">
+          <mxGeometry x="258" y="46" width="230" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="检索层（预留）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;dashed=1;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="agent">
+          <mxGeometry x="502" y="46" width="230" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="sec_layer" value="内容三层（依赖倒置：技术实践 → 方法论 → 本质）" style="swimlane;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;html=1;fontFamily=Microsoft YaHei;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="252" width="1560" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="lay_pr" value="&lt;b&gt;技术实践层 · Practice&lt;/b&gt;&lt;br&gt;工具 / 战术 / 落地实现" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="sec_layer">
+          <mxGeometry x="1050" y="34" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="lay_me" value="&lt;b&gt;方法论层 · Methodology&lt;/b&gt;&lt;br&gt;原则 / 过程 / 权衡取舍" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="sec_layer">
+          <mxGeometry x="600" y="34" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="lay_es" value="&lt;b&gt;本质层 · Essence&lt;/b&gt;&lt;br&gt;第一性问题 / 根本规律 / 价值定义" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="sec_layer">
+          <mxGeometry x="150" y="34" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dep1" value="依赖" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=10;" edge="1" parent="sec_layer" source="lay_pr" target="lay_me">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dep2" value="依赖" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=10;" edge="1" parent="sec_layer" source="lay_me" target="lay_es">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="matrix" value="骨架主轴：生命周期阶段（横轴） × 内容三层（纵轴）" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;html=1;fontFamily=Microsoft YaHei;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="366" width="1268" height="408" as="geometry" />
+        </mxCell>
+        <mxCell id="mh_label" value="三层 ＼ 阶段" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="matrix">
+          <mxGeometry x="10" y="40" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh0" value="概念 · 需求" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="134" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh1" value="架构设计" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="294" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh2" value="实现" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="454" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh3" value="测试" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="614" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh4" value="部署" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="774" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh5" value="运维" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="934" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mh6" value="演化 · 弃用" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="1094" y="40" width="158" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_label" value="本质层&lt;br&gt;Essence" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="10" y="84" width="120" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c0" value="问题与价值定义" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="134" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c1" value="根本性决策" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="294" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c2" value="本质复杂度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="454" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c3" value="质量即验证" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="614" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c4" value="环境即契约" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="774" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c5" value="熵增与可靠" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="934" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r1c6" value="演化规律" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#6c8ebf;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="1094" y="84" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_label" value="方法论层&lt;br&gt;Methodology" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="10" y="192" width="120" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c0" value="需求工程过程" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="134" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c1" value="风格 · ADR · ATAM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="294" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c2" value="模块化 · 信息隐藏" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="454" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c3" value="测试层次 · TDD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="614" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c4" value="部署策略 · 配置" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="774" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c5" value="SLI/SLO · 可观测" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="934" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r2c6" value="重构 · 演进架构" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="1094" y="192" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_label" value="技术实践层&lt;br&gt;Practice" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;fontStyle=1;" vertex="1" parent="matrix">
+          <mxGeometry x="10" y="300" width="120" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c0" value="需求建模工具" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="134" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c1" value="视图 · 建模（C4）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="294" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c2" value="模式 · CI 门控" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="454" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c3" value="测试框架 · 门控" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="614" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c4" value="流水线 · IaC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="774" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c5" value="监控 · 追踪工具" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="934" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="r3c6" value="fitness function" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=11;" vertex="1" parent="matrix">
+          <mxGeometry x="1094" y="300" width="158" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="side" value="横切主题（旁挂带，贯穿全阶段 × 三层）" style="swimlane;startSize=30;fillColor=#fce4ec;strokeColor=#b85450;html=1;fontFamily=Microsoft YaHei;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1324" y="366" width="250" height="408" as="geometry" />
+        </mxCell>
+        <mxCell id="q1" value="&lt;b&gt;质量属性&lt;/b&gt;&lt;br&gt;ISO/IEC 25010:2023&lt;br&gt;九特性：可维护性 / 性能 /&lt;br&gt;安全 / 可靠性 / 兼容性 …&lt;br&gt;&lt;br&gt;贯穿全阶段 × 三层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Microsoft YaHei;fontSize=11;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" vertex="1" parent="side">
+          <mxGeometry x="16" y="42" width="218" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="q2" value="&lt;b&gt;技术债与架构腐化&lt;/b&gt;&lt;br&gt;技术债 Technical Debt&lt;br&gt;架构腐化 / 漂移&lt;br&gt;持续治理对象&lt;br&gt;&lt;br&gt;演化阶段重点" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Microsoft YaHei;fontSize=11;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" vertex="1" parent="side">
+          <mxGeometry x="16" y="204" width="218" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cases" value="案例层（旁挂带，挂载于技术实践层）" style="swimlane;startSize=28;fillColor=#e1d5e7;strokeColor=#9673a6;html=1;fontFamily=Microsoft YaHei;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="790" width="1534" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="12factor 应用实例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0e6f5;strokeColor=#9673a6;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="cases">
+          <mxGeometry x="30" y="38" width="340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="微服务架构实例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0e6f5;strokeColor=#9673a6;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="cases">
+          <mxGeometry x="392" y="38" width="340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="分层 + MVC 实例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0e6f5;strokeColor=#9673a6;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="cases">
+          <mxGeometry x="754" y="38" width="340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="DDD 限界上下文实例" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0e6f5;strokeColor=#9673a6;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="cases">
+          <mxGeometry x="1116" y="38" width="340" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="data" value="数据底座（DAG data）· 唯一权威源" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;html=1;fontFamily=Microsoft YaHei;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="892" width="1534" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="nodes（节点）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="data">
+          <mxGeometry x="30" y="38" width="300" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="edges（关系）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="data">
+          <mxGeometry x="344" y="38" width="300" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="canonical ID（统一标识）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontFamily=Microsoft YaHei;fontSize=12;" vertex="1" parent="data">
+          <mxGeometry x="658" y="38" width="320" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="dnote" value="人读侧 .html 为人类入口，.md 为 AI 镜像；两侧统一消费同一数据源" style="text;html=1;fontFamily=Microsoft YaHei;fontSize=11;fontColor=#333333;align=left;verticalAlign=middle;" vertex="1" parent="data">
+          <mxGeometry x="1000" y="38" width="500" height="42" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

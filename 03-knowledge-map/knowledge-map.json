@@ -1,0 +1,3550 @@
+{
+  "meta": {
+    "mission": "0910-软件工程架构方法论（阶段1）",
+    "artifact": "权威知识地图（阶段1 第二大交付物）",
+    "generated_by": "software-architect-subagent",
+    "generated_date": "2026-09-10",
+    "access_date": "2026-09-10",
+    "contract": "00-plan/contract.md",
+    "purpose": "把散落在 A/B/C/D/E/P/Q/R 证据包中的信源，整理为分级、去重、可机器消费、可人工查阅的知识地图；供阶段2/3 以 ID 引用。",
+    "id_scheme": {
+      "S1-STD": "国际标准",
+      "S1-OFF": "官方知识体系/机构/门户",
+      "S2-BK": "经典著作（含 D 书单）",
+      "S2-WEB": "权威作者文章/官方章节（非书本体）",
+      "S3-VEN": "官方厂商架构中心",
+      "S4-PAP": "学术奠基论文",
+      "S4-COM": "主要学术会议/期刊",
+      "L-": "本地信源（KG/SK/RL/MM/PA/BK）",
+      "P-S1/S2/S3/S4": "技术债域信源（P 包，共 27；部分复用 B/L/M 同名来源，用 P- 前缀区分）",
+      "R-XC": "奠基文献回源交叉验证源（R 包，共 7；主源 S1-OFF-01/S2-BK-16/S4-PAP-01..05 已就地升级为 verified/abstract-only）"
+    },
+    "tier_legend": {
+      "S1": "国际标准 / 官方知识体系（最高权威）",
+      "S2": "经典著作 / 权威作者官方文章",
+      "S3": "官方厂商架构中心",
+      "S4": "学术论文 / 会议期刊",
+      "LOCAL": "本机可复用资产（非外部权威，但为本地语料/工具/方法论）"
+    },
+    "dedup_note": "A/B/D/E 的重复信源已合并为唯一条目并保留最全字段，证据出处列入 evidence_ref。ISO 版本以 E 为准。No Silver Bullet 在 D（S2 书单）与 A（S4 论文）重复，合并入 S4-PAP-01。",
+    "counts": {
+      "LOCAL": 39,
+      "P-S1": 2,
+      "P-S2": 10,
+      "P-S3": 3,
+      "P-S4": 12,
+      "R-XC": 7,
+      "S1-OFF": 8,
+      "S1-STD": 10,
+      "S2-BK": 35,
+      "S2-WEB": 12,
+      "S3-VEN": 8,
+      "S4-COM": 4,
+      "S4-PAP": 8,
+      "total": 158
+    },
+    "gaps_count": 12,
+    "update_note": "2026-09-10 勘误级联（R/Q/P 包）：①S3 厂商体系补齐 S3-VEN-02..08（AWS/Google/ThoughtWorks），GAP-07/08/09 已解决；②并入 P 域技术债 27 条、R 域回源交叉源 7 条，R 主源 cited→verified/abstract-only，GAP-05/06 已部分解决；③勘误 Lehman 1980 定律条数（原文 5 条，「八条」成文于 1996）与 ThoughtWorks 第四环 Hold→Caution。"
+  },
+  "sources": [
+    {
+      "id": "STD-001",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Software, systems and enterprise — Architecture description",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2022",
+      "version": "ISO/IEC/IEEE 42010:2022（Edition 2）",
+      "status": "Published [60.60]；当前有效版本（取代 42010:2011）",
+      "url": "https://www.iso.org/standard/74393.html",
+      "urls": [
+        "https://web.archive.org/web/20260716114220/https://www.iso.org/standard/74393.html",
+        "https://web.archive.org/web/20250224180306/https://www.iso.org/standard/74393.html",
+        "http://www.iso-architecture.org/ieee-1471/defining-architecture.html",
+        "http://www.iso-architecture.org/ieee-1471/cm/"
+      ],
+      "access": "iso.org 被 WAF 403；元数据经 web.archive.org 快照（2025-02-24、2026-07-16 双时间点）核验；定义与概念模型经标准编辑维护站 iso-architecture.org 核验",
+      "scope": "规定各类实体架构描述（AD）的结构与表达要求，区分『架构』与『架构描述』，规定 ADF/ADL/架构视角/模型种类及符合性。",
+      "availability": "standard-paywalled",
+      "priority": "必入",
+      "evidence_ref": [
+        "E:42010-2022",
+        "B:S1-01",
+        "B:S1-07"
+      ],
+      "legacy_id": "S1-STD-01"
+    },
+    {
+      "id": "STD-002",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software engineering — Architecture description",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2011",
+      "version": "ISO/IEC/IEEE 42010:2011（Edition 1）",
+      "status": "Withdrawn [95.99]；已被 42010:2022 取代（历史版本，保留用于版本对照）",
+      "url": "https://www.iso.org/standard/50508.html",
+      "urls": [
+        "https://web.archive.org/web/20240204230914/https://www.iso.org/standard/50508.html",
+        "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-420102011.html"
+      ],
+      "access": "Wayback 快照 + committee.iso.org 官方项目页（iso.org WAF 403）",
+      "scope": "建立架构描述概念模型，规定架构描述必备内容，引入架构视角/框架/描述语言并规定其内容。",
+      "availability": "standard-paywalled-withdrawn",
+      "priority": "参考",
+      "evidence_ref": [
+        "E:42010-2011"
+      ],
+      "legacy_id": "S1-STD-02"
+    },
+    {
+      "id": "STD-003",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software engineering — Software life cycle processes",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2026",
+      "version": "ISO/IEC/IEEE 12207:2026（Edition 2）",
+      "status": "Published — 当前有效版本（2026-04 发布，取代 12207:2017）；scope 正文未取得（无 Wayback 快照）",
+      "url": "https://www.iso.org/standard/90219.html",
+      "urls": [
+        "https://web.archive.org/web/20250930112520/https://www.iso.org/standard/90219.html"
+      ],
+      "access": "ISO 2017 版页替换公告（2026-08-01 快照）+ DIS 项目页（2025-09-30 快照）+ Wikipedia 互证；scope 未核验",
+      "scope": "为软件生命周期建立共同过程框架（与 15288:2015 统一为协议/组织项目使能/技术管理/技术四组过程，过程数由 43 统一为 30）。",
+      "availability": "standard-paywalled",
+      "priority": "必入",
+      "evidence_ref": [
+        "E:12207-2026",
+        "A:S1-03"
+      ],
+      "legacy_id": "S1-STD-03"
+    },
+    {
+      "id": "STD-004",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software engineering — Software life cycle processes",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2017",
+      "version": "ISO/IEC/IEEE 12207:2017（Edition 1）",
+      "status": "Withdrawn [95.99]；已被 12207:2026 取代（历史版本）",
+      "url": "https://www.iso.org/standard/63712.html",
+      "urls": [
+        "https://web.archive.org/web/20240111101721/https://www.iso.org/standard/63712.html",
+        "https://web.archive.org/web/20260801192222/https://www.iso.org/standard/63712.html",
+        "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-122072017.html"
+      ],
+      "access": "Wayback 快照 ×2 + committee.iso.org 官方项目页（scope 逐字一致）",
+      "scope": "提供可在组织/项目内定义、控制和改进软件生命周期过程的过程、活动与任务；可与 15288:2015 联合使用。",
+      "availability": "standard-paywalled-withdrawn",
+      "priority": "参考",
+      "evidence_ref": [
+        "E:12207-2017",
+        "A:S1-02"
+      ],
+      "legacy_id": "S1-STD-04"
+    },
+    {
+      "id": "STD-005",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model",
+      "org": "ISO / IEC",
+      "year": "2023",
+      "version": "ISO/IEC 25010:2023（Edition 2）",
+      "status": "Published [60.60]；SQuaRE 产品质量模型当前有效版本",
+      "url": "https://www.iso.org/standard/78176.html",
+      "urls": [
+        "https://web.archive.org/web/20260819152423/https://www.iso.org/standard/78176.html",
+        "https://web.archive.org/web/20240125201008/https://www.iso.org/standard/78176.html",
+        "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010"
+      ],
+      "access": "Wayback 快照 ×2 + iso25000.com 官方门户交叉核验（iso.org WAF 403）",
+      "scope": "定义适用于 ICT/软件产品的产品质量模型，由功能适合性、性能效率、兼容性、交互能力、可靠性、安全性(security)、可维护性、灵活性、安全(safety) 九特性构成。",
+      "availability": "standard-paywalled",
+      "priority": "必入",
+      "evidence_ref": [
+        "E:25010-2023",
+        "A:S1-04",
+        "B:S1-06",
+        "A:S2-03",
+        "A:S2-04"
+      ],
+      "legacy_id": "S1-STD-05"
+    },
+    {
+      "id": "STD-006",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models",
+      "org": "ISO / IEC",
+      "year": "2011",
+      "version": "ISO/IEC 25010:2011（Edition 1）",
+      "status": "Withdrawn [95.99]；SQuaRE 重构后由 ISO/IEC 25002:2024 等接替（历史版本，八特性对照用）",
+      "url": "https://www.iso.org/standard/35733.html",
+      "urls": [
+        "https://web.archive.org/web/20260813233306/https://www.iso.org/standard/35733.html",
+        "https://web.archive.org/web/20231223083754/https://www.iso.org/standard/35733.html"
+      ],
+      "access": "Wayback 快照 ×2（iso.org WAF 403）",
+      "scope": "定义使用质量模型（五特性）与产品质量模型（八特性），取代 ISO/IEC 9126，为 2023 版（九特性）之前身。",
+      "availability": "standard-paywalled-withdrawn",
+      "priority": "参考",
+      "evidence_ref": [
+        "E:25010-2011",
+        "A:S2-05"
+      ],
+      "legacy_id": "S1-STD-06"
+    },
+    {
+      "id": "STD-007",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Software engineering — Software life cycle processes — Maintenance",
+      "org": "ISO / IEC / IEEE",
+      "year": "2022",
+      "version": "ISO/IEC/IEEE 14764:2022（Edition 3）",
+      "status": "Published [60.60]；当前有效版本（取代 14764:2006）",
+      "url": "https://www.iso.org/standard/80710.html",
+      "urls": [
+        "https://web.archive.org/web/20260819024657/https://www.iso.org/standard/80710.html",
+        "https://web.archive.org/web/20231116230216/https://www.iso.org/standard/80710.html"
+      ],
+      "access": "Wayback 快照 ×2（iso.org WAF 403）",
+      "scope": "基于 12207:2017 维护过程，为软件维护提供指南，界定纠正性/适应性/完善性/预防性四类维护，并含处置过程。",
+      "availability": "standard-paywalled",
+      "priority": "必入",
+      "evidence_ref": [
+        "E:14764-2022",
+        "A:S1-12"
+      ],
+      "legacy_id": "S1-STD-07"
+    },
+    {
+      "id": "STD-008",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Software Engineering — Software Life Cycle Processes — Maintenance",
+      "org": "ISO / IEC",
+      "year": "2006",
+      "version": "ISO/IEC 14764:2006（Edition 2）",
+      "status": "Withdrawn [95.99]；已被 ISO/IEC/IEEE 14764:2022 取代（历史版本）",
+      "url": "https://www.iso.org/standard/39064.html",
+      "urls": [
+        "https://web.archive.org/web/20240519171526/https://www.iso.org/standard/39064.html"
+      ],
+      "access": "Wayback 快照（iso.org WAF 403）",
+      "scope": "更详细描述 ISO/IEC 12207 维护过程的管理，确立各类维护定义，提供维护策划执行评审收尾指南。",
+      "availability": "standard-paywalled-withdrawn",
+      "priority": "参考",
+      "evidence_ref": [
+        "E:14764-2006"
+      ],
+      "legacy_id": "S1-STD-08"
+    },
+    {
+      "id": "STD-009",
+      "tier": "S1",
+      "category": "standard",
+      "title": "Systems and software engineering — Vocabulary (SEVOCAB)",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "version": "ISO/IEC/IEEE 24765:2017（Edition 2）",
+      "status": "Published，但为『to be revised [90.92]』；修订项目进行中（ISO 92875，CD→DIS 方向）",
+      "url": "https://www.iso.org/standard/71952.html",
+      "urls": [
+        "https://web.archive.org/web/20260323122741/https://www.iso.org/standard/71952.html",
+        "https://web.archive.org/web/20231221200726/https://www.iso.org/standard/71952.html",
+        "https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-247652017.html",
+        "https://standards.iso.org/ittf/PubliclyAvailableStandards/c071952_ISO_IEC_IEEE_24765_2017.zip"
+      ],
+      "access": "Wayback 快照 ×2 + committee.iso.org 项目页 + ISO 公开可用标准（PAS）文本副本（未下载）",
+      "scope": "软件与系统工程术语权威汇编，为跨标准术语一致的依据（SWEBOK 的 SE 定义即标注来自 SEVOCAB）。",
+      "availability": "standard-pas-public",
+      "priority": "必入",
+      "evidence_ref": [
+        "E:24765-2017",
+        "A:S1-09"
+      ],
+      "legacy_id": "S1-STD-09"
+    },
+    {
+      "id": "STD-010",
+      "tier": "S1",
+      "category": "standard",
+      "title": "IEEE Standard Glossary of Software Engineering Terminology",
+      "org": "IEEE",
+      "year": "1990",
+      "version": "IEEE Std 610.12-1990",
+      "status": "历史标准（定义沿用至 ISO/IEC/IEEE 24765 SEVOCAB）",
+      "url": "https://standards.ieee.org/ieee/610.12/1016/",
+      "urls": [],
+      "access": "IEEE 标准页面对本机 403；定义原文经 SEBoK 词条与 SWEBOK V3 正文完整转引核验（cited）",
+      "scope": "给出被最广泛引用的软件工程定义：『将系统化、规范化、可量化的方法应用于软件的开发、运行与维护；即把工程应用于软件』。",
+      "availability": "standard-paywalled",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-08"
+      ],
+      "legacy_id": "S1-STD-10"
+    },
+    {
+      "id": "OFF-001",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "Guide to the Software Engineering Body of Knowledge (SWEBOK) V3.0 / V4.0",
+      "org": "IEEE Computer Society（ISO/IEC TR 19759 认定的知识体系基线）",
+      "year": "2014（V3）/ 2024（V4）",
+      "version": "V3.0（2014，15 KA）/ V4.0（2024-10，18 KA，新增 Software Architecture、SE Operations、Software Security）",
+      "status": "V3 正文 PDF 已核验；V4（2024-10）官方页经 Wayback 快照核验 18 KA（新增 Software Architecture / SE Operations / Software Security），正文需 IEEE CS 会员。R 包回源：verified（官方页元数据）",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "urls": [],
+      "access": "computer.org 官方页（走代理 403，经官方条目 + Wikipedia 转述核验 KA 结构）",
+      "scope": "软件工程知识体系基线标准；划定知识域（KA），软件架构与软件设计分立（V4 第2/3章，主编 Rich Hilliard）。",
+      "availability": "kb-public-page",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-01",
+        "B:S1-02",
+        "R:S1-OFF-01"
+      ],
+      "legacy_id": "S1-OFF-01"
+    },
+    {
+      "id": "OFF-002",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "Carnegie Mellon Software Engineering Institute (SEI) — 架构定义/架构总览/ATAM 方法",
+      "org": "SEI, Carnegie Mellon University（美国国防部 FFRDC）",
+      "year": "2017-2018 及持续更新",
+      "version": "SEI brochure 3854（定义 2017）；ATAM fact sheet 2018",
+      "status": "官方页面全部 verified",
+      "url": "https://www.sei.cmu.edu/architecture/",
+      "urls": [
+        "https://www.sei.cmu.edu/about/",
+        "https://www.sei.cmu.edu/architecture/start/glossary/",
+        "https://www.sei.cmu.edu/documents/2544/2010_010_001_513810.pdf",
+        "https://www.sei.cmu.edu/architecture/tools/evaluate/atam.cfm",
+        "https://www.sei.cmu.edu/documents/2543/2018_010_001_515610.pdf"
+      ],
+      "access": "sei.cmu.edu 直连 200（走代理）",
+      "scope": "架构经典定义（Bass/Clements/Kazman）来源；架构质量属性承载者；ATAM 架构权衡分析方法（产出 risks/non-risks/sensitivity/tradeoff points）。",
+      "availability": "kb-public-page",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-10",
+        "B:S1-03",
+        "B:S1-04",
+        "B:S1-05"
+      ],
+      "legacy_id": "S1-OFF-02"
+    },
+    {
+      "id": "OFF-003",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "Software Engineering 2014: Curriculum Guidelines for Undergraduate Degree Programs in Software Engineering (SE2014)",
+      "org": "Joint Task Force, IEEE Computer Society & ACM",
+      "year": "2015（内容 2014）",
+      "version": "SE2014",
+      "status": "官方 PDF 已核验",
+      "url": "https://www.acm.org/binaries/content/assets/education/se2014.pdf",
+      "urls": [],
+      "access": "ACM 官方 PDF 直连文本提取",
+      "scope": "定义软件工程不只是编程，列举软件区别于传统工程客体的特性（抽象不可见、内在复杂、无制造阶段、不磨损等），强调工程权衡与团队协作。",
+      "availability": "kb-public-pdf",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-05"
+      ],
+      "legacy_id": "S1-OFF-03"
+    },
+    {
+      "id": "OFF-004",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "Computer Science Curricula 2023 (CS2023) — Software Engineering Knowledge Area",
+      "org": "ACM / IEEE-CS / AAAI Joint Task Force",
+      "year": "2023",
+      "version": "CS2023（SE KA，Beta v2 文本）",
+      "status": "官方页面 verified；详细 topics/LO 取自 Beta v2，最终版可能调整",
+      "url": "https://csed.acm.org/knowledge-areas",
+      "urls": [],
+      "access": "csed.acm.org 官方页 + Beta PDF",
+      "scope": "把『编程 vs 软件工程』差异归纳为时间（多版本、长期存活）与人员（团队协作）两维；强调测试、设计、维护与演化、工作流。",
+      "availability": "kb-public-page",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-06"
+      ],
+      "legacy_id": "S1-OFF-04"
+    },
+    {
+      "id": "OFF-005",
+      "tier": "S1",
+      "category": "official-portal",
+      "title": "ISO 25000 Portal — ISO/IEC 25010 质量标准门户",
+      "org": "AENOR（西班牙标准机构）/ iso25000.com",
+      "year": "2024",
+      "version": "ISO 25000 系列官方门户",
+      "status": "verified（200）",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "urls": [],
+      "access": "iso25000.com 直连（走代理 200）",
+      "scope": "逐项列出 ISO/IEC 25010 九大质量特性及子特性定义，是核验 25010 结构的一手门户。",
+      "availability": "kb-public-page",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S2-03",
+        "B:S1-06"
+      ],
+      "legacy_id": "S1-OFF-05"
+    },
+    {
+      "id": "OFF-006",
+      "tier": "S1",
+      "category": "official-report",
+      "title": "Software Engineering: Report on a conference sponsored by the NATO Science Committee, Garmisch, 1968",
+      "org": "NATO Science Committee（Naur & Randell 编）",
+      "year": "1969",
+      "version": "1968 Garmisch 会议报告",
+      "status": "原 PDF 已文本提取核验",
+      "url": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1968.PDF",
+      "urls": [],
+      "access": "Newcastle 大学官方托管 PDF 直连",
+      "scope": "软件工程学科起点文献；记录 software crisis / software gap 争论，术语来源归于 F. L. Bauer。",
+      "availability": "kb-public-pdf",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-07"
+      ],
+      "legacy_id": "S1-OFF-06"
+    },
+    {
+      "id": "OFF-007",
+      "tier": "S1",
+      "category": "official-declaration",
+      "title": "Manifesto for Agile Software Development（敏捷软件开发宣言）",
+      "org": "17 位署名作者（Beck, Cockburn, Fowler 等）",
+      "year": "2001",
+      "version": "原始宣言",
+      "status": "verified",
+      "url": "https://agilemanifesto.org/",
+      "urls": [],
+      "access": "官方站点直连",
+      "scope": "四大价值声明 + 十二条原则，标志从瀑布向迭代、增量、快速反馈、响应变化的范式转向。",
+      "availability": "kb-public-page",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S1-11"
+      ],
+      "legacy_id": "S1-OFF-07"
+    },
+    {
+      "id": "OFF-008",
+      "tier": "S1",
+      "category": "official-glossary",
+      "title": "ISO/IEC/IEEE 24765 SEVOCAB 在线术语库（配合 S1-STD-09）",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "version": "SEVOCAB 在线版",
+      "status": "入口引用（正文受版权，未入库）",
+      "url": "https://www.iso.org/standard/71952.html",
+      "urls": [],
+      "access": "经 ISO 门户访问；术语正文受版权，不下载",
+      "scope": "提供软件与系统工程术语的在线查询入口与标准来源标注。",
+      "availability": "standard-pas-public",
+      "priority": "参考",
+      "evidence_ref": [
+        "A:S1-09"
+      ],
+      "legacy_id": "S1-OFF-08"
+    },
+    {
+      "id": "BK-001",
+      "tier": "S2",
+      "category": "book",
+      "title": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+      "org": "O'Reilly（Titus Winters, Tom Manshreck, Hyrum Wright 编）",
+      "year": "2020",
+      "version": "1st",
+      "status": "官方免费在线全文",
+      "url": "https://abseil.io/resources/swe-book",
+      "urls": [],
+      "access": "free-official",
+      "scope": "Google 大规模工程实践一手总结，提出『Programming Over Time』；软件工程=长期构建维护代码的全部工具与流程。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:通论-SE@Google",
+        "A:S2-02"
+      ],
+      "legacy_id": "S2-BK-01"
+    },
+    {
+      "id": "BK-002",
+      "tier": "S2",
+      "category": "book",
+      "title": "The Mythical Man-Month: Essays on Software Engineering",
+      "org": "Pearson（Frederick P. Brooks Jr.）",
+      "year": "1995",
+      "version": "Anniversary Edition (2nd)",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000009376",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "提出人月不可互换、没有银弹、概念完整性、外科手术团队等项目与组织奠基论断。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:通论-人月神话",
+        "A:S4-04"
+      ],
+      "legacy_id": "S2-BK-02"
+    },
+    {
+      "id": "BK-003",
+      "tier": "S2",
+      "category": "book",
+      "title": "Code Complete: A Practical Handbook of Software Construction",
+      "org": "Microsoft Press（Steve McConnell）",
+      "year": "2004",
+      "version": "2nd",
+      "status": "在版",
+      "url": "https://www.microsoftpressstore.com/store/code-complete-9780735619678",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "软件构建领域最系统的工程手册，覆盖变量/控制流/防御式编程/重构/调试，以实证研究支撑建议。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:通论-代码大全"
+      ],
+      "legacy_id": "S2-BK-03"
+    },
+    {
+      "id": "BK-004",
+      "tier": "S2",
+      "category": "book",
+      "title": "Software Engineering（Ian Sommerville 教材）",
+      "org": "Pearson（Ian Sommerville）",
+      "year": "2015",
+      "version": "10th",
+      "status": "在版；A 中引用的定义版为 2007 第 8 版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/software-engineering/P200000003290",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "全球使用最广的 SE 本科教材，覆盖需求、设计、开发、测试、演化、项目管理，可与 SWEBOK 互证。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:通论-Sommerville",
+        "A:S2-01"
+      ],
+      "legacy_id": "S2-BK-04"
+    },
+    {
+      "id": "BK-005",
+      "tier": "S2",
+      "category": "book",
+      "title": "The Pragmatic Programmer: Your Journey to Mastery",
+      "org": "The Pragmatic Bookshelf（David Thomas, Andrew Hunt）",
+      "year": "2019",
+      "version": "20th Anniversary Edition (2nd)",
+      "status": "在版",
+      "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "DRY、正交性、契约式设计、自动化、知识投资等被广泛引用的工程实践原则。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:通论-程序员修炼之道"
+      ],
+      "legacy_id": "S2-BK-05"
+    },
+    {
+      "id": "BK-006",
+      "tier": "S2",
+      "category": "book",
+      "title": "Peopleware: Productive Projects and Teams",
+      "org": "Pearson（Tom DeMarco, Timothy Lister）",
+      "year": "2013",
+      "version": "3rd",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/peopleware-productive-projects-and-teams/P200000009378",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "软件工程中『人』维度的经典：团队、办公环境、心流与生产率的社会/管理视角。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:通论-人件"
+      ],
+      "legacy_id": "S2-BK-06"
+    },
+    {
+      "id": "BK-007",
+      "tier": "S2",
+      "category": "book",
+      "title": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+      "org": "Pearson（Robert C. Martin）",
+      "year": "2017",
+      "version": "1st",
+      "status": "在版；作者官方文章已核验（The Clean Architecture, 2012）",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282",
+      "urls": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      ],
+      "access": "paid（官方购买）；核心观点可经作者官方博客核验",
+      "scope": "把 SOLID 提升到组件与架构层，提出依赖规则（源码依赖只能向内）、稳定依赖、稳定抽象，统一 Hexagonal/Onion/Clean 等分层思想。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:架构-CleanArchitecture",
+        "B:S2-06"
+      ],
+      "legacy_id": "S2-BK-07"
+    },
+    {
+      "id": "BK-008",
+      "tier": "S2",
+      "category": "book",
+      "title": "A Philosophy of Software Design",
+      "org": "Yaknyam Press / Stanford（John Ousterhout）",
+      "year": "2021",
+      "version": "2nd（修订版）",
+      "status": "在版；作者官方页与 aposd-vs-clean-code 讨论已核验",
+      "url": "https://web.stanford.edu/~ouster/cgi-bin/book.php",
+      "urls": [
+        "https://web.stanford.edu/~ouster/cgi-bin/aposd.php",
+        "https://github.com/johnousterhout/aposd-vs-clean-code"
+      ],
+      "access": "paid（官方购买）；核心观点经作者官方页核验",
+      "scope": "以降低复杂度为核心，提出深层模块、信息隐藏、异常消除、设计两次等可操作原则；complexity 主要来源于 information。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:架构-APoSD",
+        "B:S2-07"
+      ],
+      "legacy_id": "S2-BK-08"
+    },
+    {
+      "id": "BK-009",
+      "tier": "S2",
+      "category": "book",
+      "title": "Software Architecture in Practice",
+      "org": "Pearson（Len Bass, Paul Clements, Rick Kazman, SEI）",
+      "year": "2021",
+      "version": "4th",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000009173",
+      "urls": [
+        "https://www.sei.cmu.edu/architecture/start/glossary/"
+      ],
+      "access": "paid（官方购买）；SEI 官方定义手册可交叉核验",
+      "scope": "SEI 出品，架构质量属性/架构战术/ATAM/文档化权威教科书；架构经典定义（Bass/Clements/Kazman）来源。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:架构-SAIP",
+        "B:S1-03"
+      ],
+      "legacy_id": "S2-BK-09"
+    },
+    {
+      "id": "BK-010",
+      "tier": "S2",
+      "category": "book",
+      "title": "Fundamentals of Software Architecture: A Modern Engineering Approach",
+      "org": "O'Reilly（Mark Richards, Neal Ford）",
+      "year": "2025",
+      "version": "2nd",
+      "status": "在版（2025-03 第2版）",
+      "url": "https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "以数据化方式定义架构特征（-ilities）、组件划分、架构风格与决策，含架构师定律与『一切皆权衡』。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:架构-FSA"
+      ],
+      "legacy_id": "S2-BK-10"
+    },
+    {
+      "id": "BK-011",
+      "tier": "S2",
+      "category": "book",
+      "title": "Building Evolutionary Architectures: Automated Software Governance",
+      "org": "O'Reilly（Neal Ford, Rebecca Parsons, Patrick Kua, Pramod Sadalage）",
+      "year": "2022",
+      "version": "2nd",
+      "status": "在版",
+      "url": "https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "提出适应度函数（fitness functions）与自动化演进治理，是『架构随时间演进』理念的权威来源。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:架构-BuildingEvolutionary"
+      ],
+      "legacy_id": "S2-BK-11"
+    },
+    {
+      "id": "BK-012",
+      "tier": "S2",
+      "category": "book",
+      "title": "Patterns of Enterprise Application Architecture (PoEAA)",
+      "org": "Addison-Wesley（Martin Fowler 等）",
+      "year": "2002",
+      "version": "1st",
+      "status": "在版；作者官方书页已核验",
+      "url": "https://martinfowler.com/books/eaa.html",
+      "urls": [],
+      "access": "paid（官方购买）；官方书页与模式索引可核验",
+      "scope": "企业应用分层架构与数据映射模式总汇（Repository/Unit of Work/Data Mapper/MVC 等，约 40 模式），现代框架设计的基础词源。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:架构-PoEAA",
+        "B:S2-05"
+      ],
+      "legacy_id": "S2-BK-12"
+    },
+    {
+      "id": "BK-013",
+      "tier": "S2",
+      "category": "book",
+      "title": "Documenting Software Architectures: Views and Beyond",
+      "org": "Pearson / SEI（Paul Clements, Felix Bachmann, Len Bass 等）",
+      "year": "2010",
+      "version": "2nd",
+      "status": "在版；SEI 定义手册已引用其定义",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/documenting-software-architectures-views-and-beyond/P200000009174",
+      "urls": [
+        "https://www.sei.cmu.edu/architecture/start/glossary/"
+      ],
+      "access": "paid（官方购买）",
+      "scope": "SEI『Views and Beyond』方法权威著作，规定视图类型、视图包与文档模板，架构文档化的标准参考。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:架构-DocumentingArchitectures",
+        "B:S1-03"
+      ],
+      "legacy_id": "S2-BK-13"
+    },
+    {
+      "id": "BK-014",
+      "tier": "S2",
+      "category": "book",
+      "title": "Software Architecture: The Hard Parts",
+      "org": "O'Reilly（Neal Ford, Mark Richards, Pramod Sadalage, Zhamak Dehghani）",
+      "year": "2021",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.oreilly.com/library/view/software-architecture-the/9781492086888/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "聚焦分布式架构取舍决策（服务粒度、事务、数据所有权、契约），为现代架构权衡提供结构化方法。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:架构-HardParts"
+      ],
+      "legacy_id": "S2-BK-14"
+    },
+    {
+      "id": "BK-015",
+      "tier": "S2",
+      "category": "book",
+      "title": "The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise",
+      "org": "O'Reilly（Gregor Hohpe）",
+      "year": "2020",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.oreilly.com/library/view/the-software-architect/9781492077541/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "从机房到董事会的架构师角色与沟通视角，补充技术之外的组织/战略维度。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:架构-ArchitectElevator"
+      ],
+      "legacy_id": "S2-BK-15"
+    },
+    {
+      "id": "BK-016",
+      "tier": "S2",
+      "category": "book",
+      "title": "Pattern-Oriented Software Architecture, Volume 1: A System of Patterns",
+      "org": "Wiley（F. Buschmann, R. Meunier, H. Rohnert, P. Sommerlad, M. Stal）",
+      "year": "1996",
+      "version": "1st",
+      "status": "verified（official-sample；Wiley 官方免费提供 Chapter 1 + 目录 PDF，扫描件含版权水印无文本层，全本受版权未回源）",
+      "url": "https://www.wiley.com/en-us/Pattern-Oriented+Software+Architecture%2C+Volume+1%3A+A+System+of+Patterns-p-9780471958697",
+      "urls": [
+        "https://media.wiley.com/product_data/excerpt/97/04719586/0471958697-6.pdf",
+        "http://software-pattern.org/Book/30"
+      ],
+      "access": "official-sample（Wiley 官方免费样章）；书本体 paid 未回源",
+      "scope": "提出 Microkernel、Layers、Pipes and Filters、Broker、MVC、Blackboard、Reflection 等经典软件架构模式；Microkernel=最小功能核 + 可插拔扩展插座。",
+      "availability": "official-sample",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-18",
+        "R:S2-BK-16"
+      ],
+      "legacy_id": "S2-BK-16"
+    },
+    {
+      "id": "BK-017",
+      "tier": "S2",
+      "category": "book",
+      "title": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+      "org": "Addison-Wesley（Eric Evans）",
+      "year": "2003",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/domain-driven-design-tackling-complexity-in-the-heart-of-software/P200000009134",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "DDD 奠基之作，提出 ubiquitous language、bounded context、aggregate、repository 等战略/战术设计核心概念。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:DDD-DDD原著"
+      ],
+      "legacy_id": "S2-BK-17"
+    },
+    {
+      "id": "BK-018",
+      "tier": "S2",
+      "category": "book",
+      "title": "Domain-Driven Design Reference: Definitions and Pattern Summaries",
+      "org": "Domain Language, Inc.（Eric Evans，CC BY 4.0）",
+      "year": "2015（D 记 2014）",
+      "version": "Reference PDF",
+      "status": "官方免费 PDF，已核验",
+      "url": "https://domainlanguage.com/ddd/reference/",
+      "urls": [
+        "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf"
+      ],
+      "access": "free-official（CC BY 4.0，可公开引用）",
+      "scope": "DDD 模式与术语速查（Bounded Context、Ubiquitous Language、Context Map、Building Blocks 等），原著术语索引与交叉验证源。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:DDD-DDDReference",
+        "B:S2-08"
+      ],
+      "legacy_id": "S2-BK-18"
+    },
+    {
+      "id": "BK-019",
+      "tier": "S2",
+      "category": "book",
+      "title": "Implementing Domain-Driven Design",
+      "org": "Addison-Wesley（Vaughn Vernon）",
+      "year": "2013",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/implementing-domain-driven-design/P200000009135",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "DDD 工程落地权威续作，讲聚合设计、上下文映射、事件驱动与重构，弥补 Evans 原著实施缺口。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:DDD-IDDD"
+      ],
+      "legacy_id": "S2-BK-19"
+    },
+    {
+      "id": "BK-020",
+      "tier": "S2",
+      "category": "book",
+      "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+      "org": "Pearson（Robert C. Martin）",
+      "year": "2008",
+      "version": "1st",
+      "status": "在版（存在争议，但影响力与引用度极高）",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000009283",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "函数/命名/注释/格式等可读性实践的行业标杆文本，代码质量培训常用参考。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:代码质量-CleanCode"
+      ],
+      "legacy_id": "S2-BK-20"
+    },
+    {
+      "id": "BK-021",
+      "tier": "S2",
+      "category": "book",
+      "title": "Refactoring: Improving the Design of Existing Code",
+      "org": "Addison-Wesley（Martin Fowler with Kent Beck）",
+      "year": "2018",
+      "version": "2nd（JS 示例，新增函数式重构）",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/P200000009306",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "重构手法权威目录（含 smells 与 mechanics），重构术语的事实标准。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:代码质量-Refactoring"
+      ],
+      "legacy_id": "S2-BK-21"
+    },
+    {
+      "id": "BK-022",
+      "tier": "S2",
+      "category": "book",
+      "title": "Working Effectively with Legacy Code",
+      "org": "Pearson（Michael Feathers）",
+      "year": "2004",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/P200000009308",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "把遗留代码定义为『没有测试的代码』，给出接缝（seams）、依赖打破与特征测试（characterization tests）手法。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:代码质量-LegacyCode"
+      ],
+      "legacy_id": "S2-BK-22"
+    },
+    {
+      "id": "BK-023",
+      "tier": "S2",
+      "category": "book",
+      "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+      "org": "O'Reilly（Martin Kleppmann, Chris Riccomini）",
+      "year": "2026",
+      "version": "2nd（2026-02 出版）",
+      "status": "在版",
+      "url": "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "分布式数据系统事实标准读本，覆盖存储引擎、复制、分区、事务、共识、批流处理；第2版新增 AI/云原生内容。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:数据分布式-DDIA"
+      ],
+      "legacy_id": "S2-BK-23"
+    },
+    {
+      "id": "BK-024",
+      "tier": "S2",
+      "category": "book",
+      "title": "Release It! Design and Deploy Production-Ready Software",
+      "org": "The Pragmatic Bookshelf（Michael T. Nygard）",
+      "year": "2018",
+      "version": "2nd",
+      "status": "在版",
+      "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "稳定性反模式（integration points、cascading failures、circuit breaker、bulkhead）与生产就绪设计的经典。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:数据分布式-ReleaseIt"
+      ],
+      "legacy_id": "S2-BK-24"
+    },
+    {
+      "id": "BK-025",
+      "tier": "S2",
+      "category": "book",
+      "title": "Site Reliability Engineering: How Google Runs Production Systems",
+      "org": "O'Reilly / Google（Betsy Beyer 等）",
+      "year": "2016",
+      "version": "1st",
+      "status": "官方免费在线全文",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "urls": [],
+      "access": "free-official（sre.google 需走代理 172.29.0.1:7890）",
+      "scope": "SRE 学科奠基之作，提出 SLI/SLO/错误预算、减少琐事、发布工程等实践。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:运维-SRE Book"
+      ],
+      "legacy_id": "S2-BK-25"
+    },
+    {
+      "id": "BK-026",
+      "tier": "S2",
+      "category": "book",
+      "title": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+      "org": "O'Reilly / Google（Betsy Beyer 等）",
+      "year": "2018",
+      "version": "1st",
+      "status": "官方免费在线全文",
+      "url": "https://sre.google/workbook/table-of-contents/",
+      "urls": [],
+      "access": "free-official（需走代理）",
+      "scope": "SRE 落地操作手册，给出 SLO 编写、错误预算策略、on-call 等可执行模板。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:运维-SRE Workbook"
+      ],
+      "legacy_id": "S2-BK-26"
+    },
+    {
+      "id": "BK-027",
+      "tier": "S2",
+      "category": "book",
+      "title": "The DevOps Handbook",
+      "org": "IT Revolution（Gene Kim, Jez Humble, Patrick Debois, John Willis, Nicole Forsgren）",
+      "year": "2021",
+      "version": "2nd",
+      "status": "在版",
+      "url": "https://itrevolution.com/product/the-devops-handbook-second-edition/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "DevOps 三大路径（flow/feedback/continual learning）实践总纲，第2版新增 15 案例与研究成果。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:运维-DevOpsHandbook"
+      ],
+      "legacy_id": "S2-BK-27"
+    },
+    {
+      "id": "BK-028",
+      "tier": "S2",
+      "category": "book",
+      "title": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+      "org": "Pearson（Jez Humble, David Farley）",
+      "year": "2010",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/P200000009253",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "持续交付/部署流水线奠基著作，定义部署流水线、构建与测试自动化、低风险发布模式。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:运维-ContinuousDelivery"
+      ],
+      "legacy_id": "S2-BK-28"
+    },
+    {
+      "id": "BK-029",
+      "tier": "S2",
+      "category": "book",
+      "title": "Accelerate: The Science of Lean Software and DevOps",
+      "org": "IT Revolution（Nicole Forsgren, Jez Humble, Gene Kim）",
+      "year": "2018",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://itrevolution.com/product/accelerate/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "以 DORA 实证研究量化软件交付绩效（DORA 四指标）与组织绩效关系，『用数据谈工程效能』权威来源。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:运维-Accelerate"
+      ],
+      "legacy_id": "S2-BK-29"
+    },
+    {
+      "id": "BK-030",
+      "tier": "S2",
+      "category": "book",
+      "title": "Team Topologies: Organizing Business and Technology Teams for Fast Flow",
+      "org": "IT Revolution（Matthew Skelton, Manuel Pais）",
+      "year": "2019",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://itrevolution.com/product/team-topologies/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "提出四种团队类型与三种交互模式（Conway 定律的现代操作化），组织架构与软件架构对齐的权威框架。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:运维-TeamTopologies"
+      ],
+      "legacy_id": "S2-BK-30"
+    },
+    {
+      "id": "BK-031",
+      "tier": "S2",
+      "category": "book",
+      "title": "The Twelve-Factor App",
+      "org": "Adam Wiggins (Heroku)",
+      "year": "2011",
+      "version": "Methodology (web)",
+      "status": "官方免费；本机已有 epub/mobi 语料（L-BK-01）",
+      "url": "https://12factor.net/",
+      "urls": [],
+      "access": "free-official",
+      "scope": "云原生时代应用架构奠基方法论（12 项原则），构建可移植 SaaS 的经典规范。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:运维-12Factor",
+        "C:BK-01"
+      ],
+      "legacy_id": "S2-BK-31"
+    },
+    {
+      "id": "BK-032",
+      "tier": "S2",
+      "category": "book",
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "org": "Addison-Wesley（Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides / GoF）",
+      "year": "1994",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009144",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "设计模式运动开山之作（23 模式），奠定面向对象设计共享词汇与分类法。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "D:设计模式-GoF"
+      ],
+      "legacy_id": "S2-BK-32"
+    },
+    {
+      "id": "BK-033",
+      "tier": "S2",
+      "category": "book",
+      "title": "Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions",
+      "org": "Addison-Wesley（Gregor Hohpe, Bobby Woolf）",
+      "year": "2003",
+      "version": "1st",
+      "status": "在版；官方站点免费提供模式概览",
+      "url": "https://www.enterpriseintegrationpatterns.com/",
+      "urls": [],
+      "access": "paid（官方购买）；官方站点可核验模式清单",
+      "scope": "消息中间件与集成架构的模式总汇（65 模式），Apache Camel/Spring Integration 等框架的共同词源。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "D:设计模式-EIP"
+      ],
+      "legacy_id": "S2-BK-33"
+    },
+    {
+      "id": "BK-034",
+      "tier": "S2",
+      "category": "book",
+      "title": "Building Microservices: Designing Fine-Grained Systems",
+      "org": "O'Reilly（Sam Newman）",
+      "year": "2021",
+      "version": "2nd",
+      "status": "在版",
+      "url": "https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "微服务架构权威导论，覆盖服务拆分、进程间通信、部署、测试与安全；第2版更新云原生与可观测性。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:微服务-BuildingMicroservices"
+      ],
+      "legacy_id": "S2-BK-34"
+    },
+    {
+      "id": "BK-035",
+      "tier": "S2",
+      "category": "book",
+      "title": "Microservices Patterns: With Examples in Java",
+      "org": "Manning（Chris Richardson）",
+      "year": "2018",
+      "version": "1st",
+      "status": "在版",
+      "url": "https://www.manning.com/books/microservices-patterns",
+      "urls": [],
+      "access": "paid（官方购买）",
+      "scope": "以模式语言系统组织微服务架构（分解、数据一致性/Saga、查询/CQRS、部署），工程落地性强。",
+      "availability": "paid",
+      "priority": "可选",
+      "evidence_ref": [
+        "D:微服务-MicroservicesPatterns"
+      ],
+      "legacy_id": "S2-BK-35"
+    },
+    {
+      "id": "WEB-001",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Software Architecture Guide",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-08-01",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/architecture/",
+      "urls": [],
+      "access": "official-web",
+      "scope": "实用定义：架构是资深开发者对系统设计的共享理解（the important stuff）；好架构支持自身演化，差架构是 cruft 增长主因。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-01"
+      ],
+      "legacy_id": "S2-WEB-01"
+    },
+    {
+      "id": "WEB-002",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-21",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "技术债释义：cruft 造成的额外变更成本为利息，清理 cruft 为偿还本金；高内部质量降低增强成本。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-02"
+      ],
+      "legacy_id": "S2-WEB-02"
+    },
+    {
+      "id": "WEB-003",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Who Needs an Architect?",
+      "org": "Martin Fowler, IEEE Software",
+      "year": "2003",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/ieeeSoftware/whoNeedsArchitect.pdf",
+      "urls": [],
+      "access": "official-web (PDF)",
+      "scope": "Ralph Johnson：架构是否成立取决于开发者是否认为其重要；架构师=worries about the important stuff。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-04"
+      ],
+      "legacy_id": "S2-WEB-03"
+    },
+    {
+      "id": "WEB-004",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Documenting Architecture Decisions",
+      "org": "Michael Nygard (Cognitect Blog)",
+      "year": "2011-11-15",
+      "version": "—",
+      "status": "verified",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "urls": [],
+      "access": "official-web",
+      "scope": "ADR 原始定义：为 architecturally significant decisions（影响结构/非功能/依赖/接口/构造技术）留短记录，格式似 Alexandrian pattern。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-09"
+      ],
+      "legacy_id": "S2-WEB-04"
+    },
+    {
+      "id": "WEB-005",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Architecture Decision Record (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2026-03-24 (updated)",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "ADR 实践：短文档、单调编号、状态 proposed/accepted/superseded、被取代而非改写，置于 doc/adr。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-10"
+      ],
+      "legacy_id": "S2-WEB-05"
+    },
+    {
+      "id": "WEB-006",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Microservices — a definition of this new architectural term",
+      "org": "James Lewis & Martin Fowler (martinfowler.com)",
+      "year": "2014-03-25",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/articles/microservices.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "微服务=独立可部署服务套件风格；九大特征（业务能力组织、去中心化治理/数据、design for failure、evolutionary design 等）。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-11"
+      ],
+      "legacy_id": "S2-WEB-06"
+    },
+    {
+      "id": "WEB-007",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Presentation Domain Data Layering",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2015-08-26",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/PresentationDomainDataLayering.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "最常见的信息密集型程序模块化方式：presentation/domain/data 三层，最大优势是缩小注意力范围。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-12"
+      ],
+      "legacy_id": "S2-WEB-07"
+    },
+    {
+      "id": "WEB-008",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "CQRS (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-07-14",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "CQRS=用不同模型分离读写（Greg Young 提出）；作者警示其对多数系统引入 risky complexity。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-13"
+      ],
+      "legacy_id": "S2-WEB-08"
+    },
+    {
+      "id": "WEB-009",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "MVC — Xerox PARC 1978-79（作者原始说明）",
+      "org": "Trygve Reenskaug",
+      "year": "1979",
+      "version": "原始 MVC note",
+      "status": "verified",
+      "url": "https://folk.universitetetioslo.no/trygver/themes/mvc/mvc-index.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "MVC 原始定义（Model/View/Controller/Editor），目的是在用户心智模型与数字模型间架桥。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-16"
+      ],
+      "legacy_id": "S2-WEB-09"
+    },
+    {
+      "id": "WEB-010",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "GUI Architectures",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-07-18",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/eaaDev/uiArchs.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "MVC 作为一组原则（表现与领域逻辑分离 + events/observer 同步状态）；变体 MVP/Presentation Model/MVVM。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S2-17"
+      ],
+      "legacy_id": "S2-WEB-10"
+    },
+    {
+      "id": "WEB-011",
+      "tier": "S2",
+      "category": "secondary-explainer",
+      "title": "ISO/IEC 25010 Explained: 9 Software Quality Characteristics",
+      "org": "SonarSource",
+      "year": "2024",
+      "version": "—",
+      "status": "verified（二手解释性来源，与 S1-STD-05 一致）",
+      "url": "https://www.sonarsource.com/resources/library/iso-iec-25010-explained/",
+      "urls": [],
+      "access": "official-web",
+      "scope": "列出 25010:2023 可维护性/灵活性子特性，用于交叉核验（非一手标准）。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "A:S2-04"
+      ],
+      "legacy_id": "S2-WEB-11"
+    },
+    {
+      "id": "WEB-012",
+      "tier": "S2",
+      "category": "secondary-index",
+      "title": "Wikipedia 条目组（Software engineering / SWEBOK / NATO Conferences / Software crisis / ISO 12207 / Lehman's laws / ISO 9126）",
+      "org": "Wikimedia Foundation",
+      "year": "2026（持续更新）",
+      "version": "—",
+      "status": "verified（二手汇总，仅用于线索与交叉，不单独作权威）",
+      "url": "https://en.wikipedia.org/wiki/Software_engineering",
+      "urls": [
+        "https://en.wikipedia.org/wiki/ISO/IEC_12207",
+        "https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution"
+      ],
+      "access": "official-web",
+      "scope": "早期术语线索（1965/1966/Margaret Hamilton）、NATO 会议、ISO 沿革、Lehman 八定律、9126→25010 演进的二手汇总。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "A:S2-05",
+        "E:cross-sources"
+      ],
+      "legacy_id": "S2-WEB-12"
+    },
+    {
+      "id": "VEN-001",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Azure Architecture Center — Cloud design patterns (CQRS / Event-driven architecture)",
+      "org": "Microsoft (Microsoft Learn)",
+      "year": "n.d. (accessed 2026-09-10)",
+      "version": "—",
+      "status": "verified",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "urls": [
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-driven"
+      ],
+      "access": "official-web",
+      "scope": "CQRS 官方条目（读写关注点分离）与 Event-driven architecture 官方条目（生产者发布事件、消费者异步消费，解耦与可扩展）。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "B:S3-01"
+      ],
+      "legacy_id": "S3-VEN-01"
+    },
+    {
+      "id": "PAP-001",
+      "tier": "S4",
+      "category": "paper",
+      "title": "No Silver Bullet — Essence and Accidents of Software Engineering",
+      "org": "IEEE Computer（Frederick P. Brooks, Jr.）；原为 IFIP 1986，收录于《人月神话》周年版第16章",
+      "year": "1987（essay 1986）",
+      "version": "—",
+      "status": "verified（全文核验；本次为 1986 IFIP 版 PDF，与 1987 IEEE Computer 版未逐句对照）",
+      "url": "https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf",
+      "urls": [
+        "https://doi.org/10.1109/MC.1987.1663532"
+      ],
+      "access": "free（作者/社区镜像）；IEEE Computer 版权",
+      "scope": "提出「无银弹」论断，区分 essence（固有困难）与 accident（可消除的附带困难）；essence 的四个固有属性为 complexity / conformity / changeability / invisibility（非「本质与偶然各四要素」）。",
+      "availability": "free-mirror",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S4-04",
+        "D:通论-没有银弹",
+        "R:S4-PAP-01"
+      ],
+      "legacy_id": "S4-PAP-01"
+    },
+    {
+      "id": "PAP-002",
+      "tier": "S4",
+      "category": "paper",
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+      "org": "D. L. Parnas, Communications of the ACM",
+      "year": "1972",
+      "version": "—",
+      "status": "verified（PDF 已核验）",
+      "url": "https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "urls": [
+        "https://doi.org/10.1145/361598.361623"
+      ],
+      "access": "public-pdf",
+      "scope": "提出按信息隐藏划分模块（隐藏可能变化的设计决策/secret），是模块化与可维护性设计的奠基思想。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-15"
+      ],
+      "legacy_id": "S4-PAP-02"
+    },
+    {
+      "id": "PAP-003",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution",
+      "org": "Meir M. Lehman, Proc. IEEE 68(9)",
+      "year": "1980",
+      "version": "—",
+      "status": "abstract-only（1980 原刊 IEEE 付费全文未合法取得；定律条数经 Lehman 本人 1996 复述回源）",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "urls": [],
+      "access": "IEEE Xplore 付费全文；元数据经 Crossref 核验",
+      "scope": "1980 原文为 5 条演化定律（前三定律成文于 1970 年代中期，本文新增两条）；「八条定律」完整表述最早成文于 Lehman 1996《Laws of Software Evolution Revisited》。区分 S/P/E 类程序，定律主要适用 E-type。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S4-01",
+        "R:S4-PAP-03",
+        "R:XC-01"
+      ],
+      "legacy_id": "S4-PAP-03"
+    },
+    {
+      "id": "PAP-004",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Managing the Development of Large Software Systems",
+      "org": "Winston W. Royce, Proc. IEEE WESCON",
+      "year": "1970",
+      "version": "—",
+      "status": "verified（全文核验，11 页含图；经 Wayback 快照）",
+      "url": "https://web.archive.org/web/2019id_/http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf",
+      "urls": [],
+      "access": "free（课程机构镜像经 Wayback）；原刊 IEEE WESCON / ICSE 重印版权属 IEEE",
+      "scope": "常被误读为「瀑布宣言」；原文未出现 waterfall 一词，Figure 3/4 明确相邻阶段间及非相邻步骤的迭代，并提出五步补救（含 STEP 3 'DO IT TWICE'）。",
+      "availability": "free-mirror",
+      "priority": "必入",
+      "evidence_ref": [
+        "A:S4-02",
+        "R:S4-PAP-04"
+      ],
+      "legacy_id": "S4-PAP-04"
+    },
+    {
+      "id": "PAP-005",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Software Engineering Programmes are not Computer Science Programmes",
+      "org": "David L. Parnas, Annals of Software Engineering",
+      "year": "1998",
+      "version": "—",
+      "status": "verified（全文核验；本次为 IEEE Software 1999 重印本，原刊 Annals 版权版未取得）",
+      "url": "https://bioinfo.uib.es/~joemiro/semdoc/PlansEstudis/Bachelor_Masters_Curricula/DParnas.pdf",
+      "urls": [
+        "https://doi.org/10.1023/A:1018949113292"
+      ],
+      "access": "free（大学机构存档副本）",
+      "scope": "主张软件工程是独立工程学科集合（与土木/机械/化工/电气并列），而非计算机科学子领域。",
+      "availability": "free-mirror",
+      "priority": "建议",
+      "evidence_ref": [
+        "A:S4-03",
+        "R:S4-PAP-05"
+      ],
+      "legacy_id": "S4-PAP-05"
+    },
+    {
+      "id": "PAP-006",
+      "tier": "S4",
+      "category": "paper",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham",
+      "year": "1992-03-26",
+      "version": "—",
+      "status": "verified",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "技术债隐喻原始出处：首次交付代码如负债，及时重写偿还可加速开发，未偿还则付出利息。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-03"
+      ],
+      "legacy_id": "S4-PAP-06"
+    },
+    {
+      "id": "PAP-007",
+      "tier": "S4",
+      "category": "paper",
+      "title": "An Introduction to Software Architecture (CMU-CS-94-166 / SEI-94-TR-21)",
+      "org": "David Garlan & Mary Shaw, Carnegie Mellon University / SEI",
+      "year": "1993（book chapter）/ 1994（tech report）",
+      "version": "—",
+      "status": "verified（PDF 已核验）",
+      "url": "https://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "urls": [],
+      "access": "public-pdf",
+      "scope": "提出组件-连接件-配置架构框架与风格分类（管道过滤器/事件驱动/分层/仓库/解释器等），每种风格均有权衡。",
+      "availability": "free-official",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S2-14"
+      ],
+      "legacy_id": "S4-PAP-07"
+    },
+    {
+      "id": "PAP-008",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process",
+      "year": "2022",
+      "version": "—",
+      "status": "verified（摘要经 Crossref 核验；纳入 73 项研究）",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "urls": [],
+      "access": "DOI",
+      "scope": "架构腐化（AEr）系统映射：表现为架构违规与结构问题并损害质量与演化；成因含技术与非技术因素，含检测治理方法谱系。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "B:S4-01"
+      ],
+      "legacy_id": "S4-PAP-08"
+    },
+    {
+      "id": "COM-001",
+      "tier": "S4",
+      "category": "venue",
+      "title": "ICSE — International Conference on Software Engineering",
+      "org": "ACM / IEEE-CS（软件工程顶会）",
+      "year": "annual",
+      "version": "—",
+      "status": "canonical venue（证据包未直接收录；官方站点核验入口）",
+      "url": "https://conf.researchr.org/series/icse",
+      "urls": [
+        "https://www.icse-conferences.org/"
+      ],
+      "access": "official-web",
+      "scope": "软件工程领域旗舰学术会议，架构/维护/演化/质量等方向的顶级发表场所。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "task-required"
+      ],
+      "legacy_id": "S4-COM-01"
+    },
+    {
+      "id": "COM-002",
+      "tier": "S4",
+      "category": "venue",
+      "title": "FSE (ESEC/FSE) — ACM International Conference on the Foundations of Software Engineering",
+      "org": "ACM SIGSOFT（软件工程顶会）",
+      "year": "annual",
+      "version": "—",
+      "status": "canonical venue（证据包未直接收录；官方站点核验入口）",
+      "url": "https://conf.researchr.org/series/fse",
+      "urls": [],
+      "access": "official-web",
+      "scope": "软件工程领域顶级会议之一，覆盖 SE 理论、实践与经验研究。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "task-required"
+      ],
+      "legacy_id": "S4-COM-02"
+    },
+    {
+      "id": "COM-003",
+      "tier": "S4",
+      "category": "venue",
+      "title": "IEEE Transactions on Software Engineering (TSE)",
+      "org": "IEEE Computer Society（软件工程顶级期刊）",
+      "year": "1975–",
+      "version": "—",
+      "status": "canonical venue（证据包未直接收录；官方站点核验入口）",
+      "url": "https://www.computer.org/csdl/journal/ts",
+      "urls": [],
+      "access": "official-web",
+      "scope": "软件工程领域历史最悠久、影响因子领先的顶级期刊之一。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "task-required"
+      ],
+      "legacy_id": "S4-COM-03"
+    },
+    {
+      "id": "COM-004",
+      "tier": "S4",
+      "category": "venue",
+      "title": "Empirical Software Engineering (EMSE)",
+      "org": "Springer（软件工程权威期刊）",
+      "year": "1996–",
+      "version": "—",
+      "status": "canonical venue（证据包未直接收录；官方站点核验入口）",
+      "url": "https://link.springer.com/journal/10664",
+      "urls": [],
+      "access": "official-web",
+      "scope": "聚焦软件工程实证研究的权威期刊，架构腐化等综述常发表于此。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "task-required"
+      ],
+      "legacy_id": "S4-COM-04"
+    },
+    {
+      "id": "LOC-001",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "12 Factor App × 12 Factor Agent 合并方法论知识图谱",
+      "org": "本地留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（38 节点/61 边/16 组）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodology/",
+      "access": "local-read-only",
+      "scope": "DAG 数据模型 + gen-*.py 生成链 + 七项门控 + 节点内容 + 454 源码资产，可作母库工程底座。",
+      "relevance": "high",
+      "reusable": "结构/脚本/门控/内容/双索引",
+      "evidence_ref": [
+        "C:KG-01"
+      ],
+      "legacy_id": "L-KG-01"
+    },
+    {
+      "id": "LOC-002",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "算法知识图谱",
+      "org": "本地留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（60 组/372 节点/318 边）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0820-algorithm-knowledge-graph/",
+      "access": "local-read-only",
+      "scope": "三级下钻结构 + 全自动生成链 + 环检测，可复用其 DAG 基础设施模式。",
+      "relevance": "medium",
+      "reusable": "结构/脚本/门控",
+      "evidence_ref": [
+        "C:KG-02"
+      ],
+      "legacy_id": "L-KG-02"
+    },
+    {
+      "id": "LOC-003",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "RL/LLM 推理/显存优化面试知识库",
+      "org": "本地留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（13 章 + 总述页）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0826-RL推理显存面试知识库/",
+      "access": "local-read-only",
+      "scope": "章节模板 + 浅色学术风 CSS + 质量门控脚本 + 每知识点 ≥2 源证据区块；含 3 路并行检索委派范式。",
+      "relevance": "medium",
+      "reusable": "章节模板/信源规范/委派范式",
+      "evidence_ref": [
+        "C:KG-03"
+      ],
+      "legacy_id": "L-KG-03"
+    },
+    {
+      "id": "LOC-004",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "RAG 建库工程教材 + 第5层『架构权衡思维』11 维权衡矩阵",
+      "org": "本地留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（17/18 篇）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0813-知识库建库工程/",
+      "access": "local-read-only",
+      "scope": "11 维持衡矩阵，每维统一骨架『有什么可权衡/如何权衡/为何如此权衡/你的场景』，可直接迁移为架构决策方法论。",
+      "relevance": "high",
+      "reusable": "内容框架/分层图/建库流程",
+      "evidence_ref": [
+        "C:KG-04"
+      ],
+      "legacy_id": "L-KG-04"
+    },
+    {
+      "id": "LOC-005",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "kb-construction 知识库构建全流程主入口",
+      "org": "本地 skill",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.config/opencode/skills/kb-construction/SKILL.md",
+      "access": "local-read-only",
+      "scope": "五类谱系分流 + L1-L7 门控 + source-grading 信源分级；可直接作为母库编排方法论。",
+      "relevance": "high",
+      "reusable": "方法论/门控/信源分级/脚本",
+      "evidence_ref": [
+        "C:SK-01"
+      ],
+      "legacy_id": "L-SK-01"
+    },
+    {
+      "id": "LOC-006",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "dag-tutorial-authoring DAG 教程编写方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.config/opencode/skills/dag-tutorial-authoring/SKILL.md",
+      "access": "local-read-only",
+      "scope": "新手教程可读性递进结构（直觉→原理→机制→工程→权衡→导读）+ 调研驱动 + 双轨验证。",
+      "relevance": "medium",
+      "reusable": "可读性结构/双轨验证",
+      "evidence_ref": [
+        "C:SK-02"
+      ],
+      "legacy_id": "L-SK-02"
+    },
+    {
+      "id": "LOC-007",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "cytoscape-dag-visualization 交互 DAG 可视化方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.config/opencode/skills/cytoscape-dag-visualization/SKILL.md",
+      "access": "local-read-only",
+      "scope": "组级+下钻、DATA 注入、环修复、disabled 标注、幂等防累积、VLM 验证渲染。",
+      "relevance": "medium",
+      "reusable": "交互图实现方法论",
+      "evidence_ref": [
+        "C:SK-03"
+      ],
+      "legacy_id": "L-SK-03"
+    },
+    {
+      "id": "LOC-008",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "multi-window-dag-delivery 多窗口接力 DAG 分析交付方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.config/opencode/skills/multi-window-dag-delivery/SKILL.md",
+      "access": "local-read-only",
+      "scope": "多窗口接力分析大型源码库、PLAN-layerN.md 接力、拓扑分层、PACKAGE-MAP 覆盖度、三硬依据 E1/E2/E3。",
+      "relevance": "high",
+      "reusable": "依赖分析证据模型/接力流程",
+      "evidence_ref": [
+        "C:SK-04"
+      ],
+      "legacy_id": "L-SK-04"
+    },
+    {
+      "id": "LOC-009",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Software Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-software-architect.md",
+      "access": "local-read-only",
+      "scope": "系统设计/DDD/架构模式/技术选型角色描述行，可注入子Agent 提升专业性。",
+      "relevance": "high",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-01"
+      ],
+      "legacy_id": "L-RL-01"
+    },
+    {
+      "id": "LOC-010",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Backend Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-backend-architect.md",
+      "access": "local-read-only",
+      "scope": "可扩展系统/数据库架构/API/云基础设施/微服务视角。",
+      "relevance": "high",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-02"
+      ],
+      "legacy_id": "L-RL-02"
+    },
+    {
+      "id": "LOC-011",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Multi-Agent Systems Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-multi-agent-systems-architect.md",
+      "access": "local-read-only",
+      "scope": "拓扑选择/上下文管理/信任/失败恢复/HITL 门控/可观测性，适配 AI 原生软件工程。",
+      "relevance": "high",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-03"
+      ],
+      "legacy_id": "L-RL-03"
+    },
+    {
+      "id": "LOC-012",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Codebase Onboarding Engineer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-codebase-onboarding-engineer.md",
+      "access": "local-read-only",
+      "scope": "快速读懂陌生代码库/追踪调用路径/只陈述代码事实。",
+      "relevance": "medium",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-04"
+      ],
+      "legacy_id": "L-RL-04"
+    },
+    {
+      "id": "LOC-013",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Code Reviewer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-code-reviewer.md",
+      "access": "local-read-only",
+      "scope": "正确性/可维护性/安全/性能的可执行反馈。",
+      "relevance": "medium",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-05"
+      ],
+      "legacy_id": "L-RL-05"
+    },
+    {
+      "id": "LOC-014",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Minimal Change Engineer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-minimal-change-engineer.md",
+      "access": "local-read-only",
+      "scope": "最小可行 diff/拒绝范围蔓延/预防重构雪崩。",
+      "relevance": "medium",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-06"
+      ],
+      "legacy_id": "L-RL-06"
+    },
+    {
+      "id": "LOC-015",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Git Workflow Master 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-git-workflow-master.md",
+      "access": "local-read-only",
+      "scope": "分支策略/conventional commits/rebase/worktree/CI。",
+      "relevance": "medium",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-07"
+      ],
+      "legacy_id": "L-RL-07"
+    },
+    {
+      "id": "LOC-016",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Senior Developer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-senior-developer.md",
+      "access": "local-read-only",
+      "scope": "高级实现（偏前端栈）。",
+      "relevance": "low",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-08"
+      ],
+      "legacy_id": "L-RL-08"
+    },
+    {
+      "id": "LOC-017",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Rapid Prototyper 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/engineering/engineering-rapid-prototyper.md",
+      "access": "local-read-only",
+      "scope": "POC/MVP 快速开发。",
+      "relevance": "low",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-09"
+      ],
+      "legacy_id": "L-RL-09"
+    },
+    {
+      "id": "LOC-018",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Product Manager 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.dsh/agency-agents/product/product-manager.md",
+      "access": "local-read-only",
+      "scope": "产品全生命周期/需求到交付，需求工程视角补充。",
+      "relevance": "low",
+      "reusable": "角色描述行",
+      "evidence_ref": [
+        "C:RL-10"
+      ],
+      "legacy_id": "L-RL-10"
+    },
+    {
+      "id": "LOC-019",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "项目记忆索引 MEMORY.md（建库/架构/编码纪律条目）",
+      "org": "本地记忆",
+      "year": "2026",
+      "version": "—",
+      "status": "存在",
+      "url": "~/.config/opencode/MEMORY.md",
+      "access": "local-read-only",
+      "scope": "可提炼条目：编码安全/11 维权衡矩阵/覆盖率审计/双轨一致性/跨项目迁移/字段级版本映射/并行检索/HTML 门控/共享路径反推根因。",
+      "relevance": "high",
+      "reusable": "方法论条目",
+      "evidence_ref": [
+        "C:MM-01"
+      ],
+      "legacy_id": "L-MM-01"
+    },
+    {
+      "id": "LOC-020",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "去中心化聊天架构全景分析 + 模块化 DAG（58 份设计文档）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0820-去中心化聊天架构分析/",
+      "access": "local-read-only",
+      "scope": "从设计文档到 18 模块依赖 DAG + 3 条核心数据流 DAG 的架构逆向方法。",
+      "relevance": "high",
+      "reusable": "架构逆向案例",
+      "evidence_ref": [
+        "C:PA-01"
+      ],
+      "legacy_id": "L-PA-01"
+    },
+    {
+      "id": "LOC-021",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "OpenJobAutofill Chrome MV3 扩展逆向架构分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0805-OpenJobAutofill逆向分析/",
+      "access": "local-read-only",
+      "scope": "适配器驱动 + 事件驱动架构的完整文档化案例（总体架构/五模块/站点适配器/消息协议/数据流 + 三张 drawio）。",
+      "relevance": "high",
+      "reusable": "架构文档化范例",
+      "evidence_ref": [
+        "C:PA-02"
+      ],
+      "legacy_id": "L-PA-02"
+    },
+    {
+      "id": "LOC-022",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "多模块解耦系统架构设计 + 跨模块接口契约（网申 v3）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0812-网申v3调取复制版/",
+      "access": "local-read-only",
+      "scope": "契约先行 + 数据驱动架构范例（Schema 驱动，改字段不改代码；docs/contracts.md 跨模块接口契约）。",
+      "relevance": "high",
+      "reusable": "契约先行/数据驱动案例",
+      "evidence_ref": [
+        "C:PA-03"
+      ],
+      "legacy_id": "L-PA-03"
+    },
+    {
+      "id": "LOC-023",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "网申扩展 v2 深度重构 — 架构设计思路与根因分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0806-网申扩展v2实现/",
+      "access": "local-read-only",
+      "scope": "表面症状→根因分析→架构重构图；接口散落 12 文件→统一化的工程权衡案例。",
+      "relevance": "high",
+      "reusable": "重构方法论案例",
+      "evidence_ref": [
+        "C:PA-04"
+      ],
+      "legacy_id": "L-PA-04"
+    },
+    {
+      "id": "LOC-024",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "harness preset 通道架构耦合分析（dsh 启动失败修复 N7）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0816-dsh启动失败修复/N7-架构/",
+      "access": "local-read-only",
+      "scope": "委派工具层→continuation manager→preset 服务→MCP 的通道耦合分析与冷恢复路径建模。",
+      "relevance": "high",
+      "reusable": "通道/层耦合分析案例",
+      "evidence_ref": [
+        "C:PA-05"
+      ],
+      "legacy_id": "L-PA-05"
+    },
+    {
+      "id": "LOC-025",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "DeepSeek Harness 插件级 DAG 知识库 RC5→RC7 级联升级",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（173 插件/49 seam/545 边）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0819-plugin-dag-rc7/",
+      "access": "local-read-only",
+      "scope": "三硬依据溯源 + 版本级联升级流程 version-upgrade-cascade；RC5-RC7-DIFF-REPORT 差异分析范式。",
+      "relevance": "high",
+      "reusable": "版本级联升级方法",
+      "evidence_ref": [
+        "C:PA-06"
+      ],
+      "legacy_id": "L-PA-06"
+    },
+    {
+      "id": "LOC-026",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "dsh 插件 DAG 知识库 RC7→RC8→rc2 级联升级",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在（含两份差异报告）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0822-plugin-dag-v0.1.1-rc2/",
+      "access": "local-read-only",
+      "scope": "软件版本演进的依赖级联更新方法论（增量更新 + 全量门控 + 差异三路交叉验证）。",
+      "relevance": "high",
+      "reusable": "级联更新/差异验证方法",
+      "evidence_ref": [
+        "C:PA-07"
+      ],
+      "legacy_id": "L-PA-07"
+    },
+    {
+      "id": "LOC-027",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "dsh-manager 插件深度分析（依赖/功能/需求溯源/设计问题）— 三硬依据 E1/E2/E3",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0822-dsh-manager-analysis/",
+      "access": "local-read-only",
+      "scope": "E1 编译依赖 / E2 运行时依赖 / E3 组合依赖证据链 + 设计问题裁决范例。",
+      "relevance": "high",
+      "reusable": "架构依赖证据模型",
+      "evidence_ref": [
+        "C:PA-08"
+      ],
+      "legacy_id": "L-PA-08"
+    },
+    {
+      "id": "LOC-028",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "deepseek-harness 源码解析（官方 architecture.md 镜像 + 模块分层）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0814-deepseek-harness源码解析/",
+      "access": "local-read-only",
+      "scope": "官方架构文档镜像 + 源码模块逐层解析（L1-Mxx）+ install-guide。",
+      "relevance": "high",
+      "reusable": "官方架构文档镜像范例",
+      "evidence_ref": [
+        "C:PA-09"
+      ],
+      "legacy_id": "L-PA-09"
+    },
+    {
+      "id": "LOC-029",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "dsh-anchored-standard 社区插件依赖位置分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0818-dsh-anchored-standard-analysis/",
+      "access": "local-read-only",
+      "scope": "以官方 DAG 为蓝本的第三方插件定位与依赖图增量分析。",
+      "relevance": "medium",
+      "reusable": "插件依赖增量分析范例",
+      "evidence_ref": [
+        "C:PA-10"
+      ],
+      "legacy_id": "L-PA-10"
+    },
+    {
+      "id": "LOC-030",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Hermes Agent 整体架构报告（8251 文件工业级项目，七层架构）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0802-Hermes-Arch/",
+      "access": "local-read-only",
+      "scope": "超大型代码库架构分层总览方法 + 官方 developer-guide/architecture.md。",
+      "relevance": "high",
+      "reusable": "超大型库架构分层方法",
+      "evidence_ref": [
+        "C:PA-11"
+      ],
+      "legacy_id": "L-PA-11"
+    },
+    {
+      "id": "LOC-031",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "MCP 四件套源码深挖",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0808-MCP四件套源码深挖/",
+      "access": "local-read-only",
+      "scope": "工具/服务型项目源码架构分析（ARCHITECTURE.md/BUNDLE_ARCHITECTURE.md + 架构图）。",
+      "relevance": "medium",
+      "reusable": "工具/服务型项目分析范例",
+      "evidence_ref": [
+        "C:PA-12"
+      ],
+      "legacy_id": "L-PA-12"
+    },
+    {
+      "id": "LOC-032",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Claude Code Agent 架构深度解析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0808-claude-code-analysis/",
+      "access": "local-read-only",
+      "scope": "Agent 架构逆向工程方法 + 系统提示词/内部机制交叉验证范式。",
+      "relevance": "medium",
+      "reusable": "Agent 架构逆向方法",
+      "evidence_ref": [
+        "C:PA-13"
+      ],
+      "legacy_id": "L-PA-13"
+    },
+    {
+      "id": "LOC-033",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "OpenSpec × Superpower 工具解析（含架构对比图）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0803-OpenSpec_Superpower解析/",
+      "access": "local-read-only",
+      "scope": "规约驱动开发（spec-driven development）工具链与架构对比。",
+      "relevance": "medium",
+      "reusable": "规约驱动开发案例",
+      "evidence_ref": [
+        "C:PA-14"
+      ],
+      "legacy_id": "L-PA-14"
+    },
+    {
+      "id": "LOC-034",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "Open Code Review（阿里 open-code-review）项目解析知识图谱",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-open-code-review/",
+      "access": "local-read-only",
+      "scope": "AI 代码审查工具全套知识图谱（DAG 数据 + quality-gate.md），主题=代码审查/质量工程实践。",
+      "relevance": "high",
+      "reusable": "代码审查/质量工程案例",
+      "evidence_ref": [
+        "C:PA-15"
+      ],
+      "legacy_id": "L-PA-15"
+    },
+    {
+      "id": "LOC-035",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "控制理论 ⊗ Agent 设计知识库",
+      "org": "本地实战留档",
+      "year": "2026-09",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-09/0907-控制理论Agent设计知识库/",
+      "access": "local-read-only",
+      "scope": "负反馈闭环/状态估计/PID/鲁棒/分层五维框架 + 6 真实 Agent 产品案例，跨学科理论→软件/Agent 架构迁移方法论。",
+      "relevance": "high",
+      "reusable": "跨学科迁移方法论",
+      "evidence_ref": [
+        "C:PA-16"
+      ],
+      "legacy_id": "L-PA-16"
+    },
+    {
+      "id": "LOC-036",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "技术知识中枢方法论（全量版 + 可读 HTML）",
+      "org": "本地实战留档",
+      "year": "2026-09",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-09/0910-技术知识中枢主页/methodology/METHODOLOGY-full.md",
+      "access": "local-read-only",
+      "scope": "跨知识库统一组织/索引方法论 + QA 门控脚本 qa_gate.py，可作母库编排与交付结构参照。",
+      "relevance": "high",
+      "reusable": "母库编排/交付结构参照",
+      "evidence_ref": [
+        "C:PA-17"
+      ],
+      "legacy_id": "L-PA-17"
+    },
+    {
+      "id": "LOC-037",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "AI Agent 架构 DAG 分析项目复盘",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "version": "—",
+      "status": "存在",
+      "url": "~/opencode/archive/Mission-file/2026-08/0818-项目经历撰写/AI Agent 架构 DAG 分析项目复盘.md",
+      "access": "local-read-only",
+      "scope": "架构 DAG 分析项目的复盘与经验提炼。",
+      "relevance": "medium",
+      "reusable": "项目复盘经验",
+      "evidence_ref": [
+        "C:PA-18"
+      ],
+      "legacy_id": "L-PA-18"
+    },
+    {
+      "id": "LOC-038",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "12 Factor App 官方电子书（epub/mobi）",
+      "org": "本地语料",
+      "year": "2011",
+      "version": "epub/mobi",
+      "status": "存在（版权：仅本地语料层）",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "access": "local-read-only（永不进公开仓库）",
+      "scope": "12 Factor 原文语料（软件工程方法论经典，与母库主题直接相关）。",
+      "relevance": "medium",
+      "reusable": "本地语料",
+      "evidence_ref": [
+        "C:BK-01"
+      ],
+      "legacy_id": "L-BK-01"
+    },
+    {
+      "id": "LOC-039",
+      "tier": "LOCAL",
+      "category": "local",
+      "title": "AI Agents in Depth（中文版，Agent 工程）",
+      "org": "本地语料",
+      "year": "—",
+      "version": "PDF",
+      "status": "存在（版权：仅本地语料层）",
+      "url": "~/opencode/archive/AI-Agents-in-Depth-zh-CN.pdf",
+      "access": "local-read-only（永不进公开仓库）",
+      "scope": "Agent 工程语料，非软件工程/架构经典；可作 AI 原生软件工程补充。",
+      "relevance": "low",
+      "reusable": "本地语料",
+      "evidence_ref": [
+        "C:BK-02"
+      ],
+      "legacy_id": "L-BK-02"
+    },
+    {
+      "id": "VEN-002",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "AWS Well-Architected Framework — The pillars of the framework（官方文档）",
+      "org": "Amazon Web Services (AWS Documentation)",
+      "year": "2024-11-06",
+      "version": "—",
+      "status": "verified（官方文档）",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "AWS 六大支柱（Operational Excellence / Security / Reliability / Performance Efficiency / Cost Optimization / Sustainability）与 6 条通用设计原则；架构评审定位为建设性对话而非审计。厂商立场：绑定 AWS 服务。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "Q:VEN-02"
+      ],
+      "legacy_id": "S3-VEN-02"
+    },
+    {
+      "id": "VEN-003",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "AWS Well-Architected Framework（官方白皮书 PDF，含各支柱定义与设计原则）",
+      "org": "Amazon Web Services",
+      "year": "2024-11-06",
+      "version": "—",
+      "status": "verified（官方白皮书 PDF）",
+      "url": "https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf",
+      "urls": [],
+      "access": "official-web",
+      "scope": "逐支柱定义与设计原则：OE（8 条）、Security（7 条）、Reliability（5 条）、Performance Efficiency（5 条）、Cost Optimization（5 条）、Sustainability（6 条，2021-12 新增）。厂商立场：AWS。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "Q:VEN-03"
+      ],
+      "legacy_id": "S3-VEN-03"
+    },
+    {
+      "id": "VEN-004",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Google Cloud Well-Architected Framework（原 Google Cloud Architecture Framework，官方枢纽页）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2026-01-28",
+      "version": "—",
+      "status": "verified（官方页）",
+      "url": "https://cloud.google.com/architecture/framework",
+      "urls": [],
+      "access": "official-web",
+      "scope": "【已按版权红线移出（原引用 246 字）· 出处见 source_id/URL】",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "Q:VEN-04"
+      ],
+      "legacy_id": "S3-VEN-04"
+    },
+    {
+      "id": "VEN-005",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Google Cloud WAF 支柱页与 What's new（各支柱 core principles 与变更记录）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2024-10 ~ 2026-02",
+      "version": "—",
+      "status": "verified（官方页）",
+      "url": "https://cloud.google.com/architecture/framework/whats-new",
+      "urls": [],
+      "access": "official-web",
+      "scope": "各支柱 core principles 清单与变更记录（2024-08-27 移除 System Design 类别；2026-01-28 Sustainability 升为完整支柱）。厂商立场：Google Cloud。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "Q:VEN-05"
+      ],
+      "legacy_id": "S3-VEN-05"
+    },
+    {
+      "id": "VEN-006",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Thoughtworks Technology Radar（官方主页，Vol 34 / April 2026）",
+      "org": "Thoughtworks",
+      "year": "2026-04 (Vol 34)",
+      "version": "Vol 34",
+      "status": "verified（官方页）",
+      "url": "https://www.thoughtworks.com/radar",
+      "urls": [],
+      "access": "official-web",
+      "scope": "每半年一期、由 TAB 撰写的「有观点」技术快照；明确不追求全面、不接受厂商付费影响；blip 默认只保留一期。立场：咨询机构主观判断，非行业标准。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "Q:VEN-06"
+      ],
+      "legacy_id": "S3-VEN-06"
+    },
+    {
+      "id": "VEN-007",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Thoughtworks Technology Radar FAQ — 四环与四象限机制（方法论官方说明）",
+      "org": "Thoughtworks",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（官方 FAQ）",
+      "url": "https://www.thoughtworks.com/radar/faq",
+      "urls": [],
+      "access": "official-web",
+      "scope": "四象限（Techniques/Platforms/Tools/Languages & Frameworks）× 四环（Adopt/Trial/Assess/Caution，旧称 Hold），环表示采用推荐程度。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "Q:VEN-07"
+      ],
+      "legacy_id": "S3-VEN-07"
+    },
+    {
+      "id": "VEN-008",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Thoughtworks Technology Radar 归档 PDF（Vol 26–34，用于核对第四环 Hold→Caution 演变）",
+      "org": "Thoughtworks",
+      "year": "2022-03 ~ 2026-04",
+      "version": "Vol 26–34",
+      "status": "verified（官方归档 PDF）",
+      "url": "https://www.thoughtworks.com/radar/archive",
+      "urls": [],
+      "access": "official-web",
+      "scope": "勘误证据：第四环在 Vol 33→Vol 34 之间由 'Hold: Proceed with caution.' 更名为 'Caution: Proceed with care.'；截至 2026-09 现行 Vol 34 为 Caution，任务原 'Adopt/Trial/Assess/Hold' 表述已过时。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "Q:VEN-08"
+      ],
+      "legacy_id": "S3-VEN-08"
+    },
+    {
+      "id": "OFF-009",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "Technical Debt: From Metaphor to Theory and Practice（CMU/SEI 资产页，含摘要）",
+      "org": "Carnegie Mellon University, Software Engineering Institute (SEI)",
+      "year": "2012",
+      "version": "—",
+      "status": "verified（官方资产页 + 摘要）",
+      "url": "https://www.sei.cmu.edu/library/technical-debt-from-metaphor-to-theory-and-practice/",
+      "urls": [],
+      "access": "free-official",
+      "scope": "把技术债从修辞隐喻推进为需显式管理之物；成因认识 + common backlog 显式管理；与决策和未来变更联动。论文本体见 P-S4-01。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S1-01"
+      ],
+      "legacy_id": "P-S1-01"
+    },
+    {
+      "id": "STD-005",
+      "tier": "S1",
+      "category": "standard",
+      "title": "ISO/IEC 25010:2023 — Product quality model（maintainability 质量特性）",
+      "org": "ISO/IEC（ISO OBP；经 ISO/IEC 25000 门户核验）",
+      "year": "2023",
+      "version": "2023（Ed.2）",
+      "status": "verified（复用 S1-STD-05；本条目为技术债域视角引用，不重复计标准数）",
+      "url": "https://www.iso.org/obp/ui#iso:std:iso-iec:25010:en",
+      "urls": [],
+      "access": "free-metadata",
+      "scope": "maintainability 及其 modularity/reusability/analysability/modifiability/testability 子特性；为 TDR 等债务度量提供标准落点。",
+      "availability": "standard-paywalled",
+      "priority": "参考",
+      "reused_from": "M-quality-ility S1-M01/S2-M01；复用 S1-STD-05",
+      "evidence_ref": [
+        "P:S1-02",
+        "S1-STD-05"
+      ],
+      "legacy_id": "P-S1-02"
+    },
+    {
+      "id": "WEB-002",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-21（原 2003-10-01）",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "cruft=内部质量缺陷；利息按「修改」触发而非时间累积；稳定 cruft 可暂缓、高频变更区需 zero-tolerance；通常最优为逐步偿还本金。复用 S2-WEB-02。",
+      "availability": "free-official",
+      "priority": "必入",
+      "cross_ref": "S2-WEB-02；B:S2-02；L-evolution S2-01",
+      "evidence_ref": [
+        "P:S2-01"
+      ],
+      "legacy_id": "P-S2-01"
+    },
+    {
+      "id": "WEB-013",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Technical Debt Quadrant (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2009-10-14",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "prudent/reckless × deliberate/inadvertent 四象限分诊；有用的问题是「审慎还是鲁莽」而非「算不算债」；prudent-inadvertent 债不可避免。",
+      "availability": "free-official",
+      "priority": "必入",
+      "cross_ref": "L-evolution S2-03",
+      "evidence_ref": [
+        "P:S2-02"
+      ],
+      "legacy_id": "P-S2-02"
+    },
+    {
+      "id": "PAP-006",
+      "tier": "S2",
+      "category": "paper",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham (c2.com)",
+      "year": "1992-03-26",
+      "version": "—",
+      "status": "verified",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "技术债隐喻原始出处；及时重写偿还可加速开发，未偿还则以分钟计利息。复用 S4-PAP-06。",
+      "availability": "free-official",
+      "priority": "必入",
+      "cross_ref": "S4-PAP-06；B:S2-03；L-evolution S2-02",
+      "evidence_ref": [
+        "P:S2-03"
+      ],
+      "legacy_id": "P-S2-03"
+    },
+    {
+      "id": "WEB-014",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Opportunistic Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-11-01",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/OpportunisticRefactoring.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "反对专门重构阶段；把重构作为机会式活动（营地/boy-scout 规则），需测试绿灯；警惕钻兔子洞，强 CodeOwnership 与长生命周期分支会抑制。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S2-04"
+      ],
+      "legacy_id": "P-S2-04"
+    },
+    {
+      "id": "WEB-015",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Design Stamina Hypothesis (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2007-06-20",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/DesignStaminaHypothesis.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "良好设计提升项目耐力使长期更快；存在 design payoff line，越低越划算，越过还借债则利息超本金。作者声明为 hypothesis。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S2-05"
+      ],
+      "legacy_id": "P-S2-05"
+    },
+    {
+      "id": "WEB-016",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Strangler Fig (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2024-08-22",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "遗留系统渐进式现代化，反对整机替换（多数失败）；四活动：理解期望结果/拆小问题/交付各部分/改造组织。",
+      "availability": "free-official",
+      "priority": "建议",
+      "cross_ref": "L-evolution S2-07",
+      "evidence_ref": [
+        "P:S2-06"
+      ],
+      "legacy_id": "P-S2-06"
+    },
+    {
+      "id": "BK-021",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Definition Of Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2004-09-01",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/DefinitionOfRefactoring.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "重构=在不改变可观察行为前提下改善内部结构；硬判据「不改变可观察行为」，是偿还代码/设计债的核心手段。",
+      "availability": "free-official",
+      "priority": "必入",
+      "cross_ref": "L-evolution S2-04",
+      "evidence_ref": [
+        "P:S2-07"
+      ],
+      "legacy_id": "P-S2-07"
+    },
+    {
+      "id": "WEB-017",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Code Smell (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-02-09",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/bliki/CodeSmell.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "code smell=深层问题的表层可嗅迹象（Kent Beck 提出），不必然意味问题；是重构启发式信号与债务代码层代理指标。",
+      "availability": "free-official",
+      "priority": "建议",
+      "cross_ref": "L-evolution S2-06",
+      "evidence_ref": [
+        "P:S2-08"
+      ],
+      "legacy_id": "P-S2-08"
+    },
+    {
+      "id": "WEB-018",
+      "tier": "S2",
+      "category": "author-article",
+      "title": "Is High Quality Software Worth the Cost? (article)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-29",
+      "version": "—",
+      "status": "verified",
+      "url": "https://martinfowler.com/articles/is-quality-worth-cost.html",
+      "urls": [],
+      "access": "official-web",
+      "scope": "区分 external/internal quality；消除拖慢新特性的 cruft 反降低增强成本（high-quality software is cheaper to produce）；引 DORA 等实证尝试。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S2-09"
+      ],
+      "legacy_id": "P-S2-09"
+    },
+    {
+      "id": "WEB-019",
+      "tier": "S2",
+      "category": "paper",
+      "title": "Foundations for the Study of Software Architecture",
+      "org": "D. E. Perry & A. L. Wolf, ACM SIGSOFT Software Engineering Notes 17(4):40-52",
+      "year": "1992-10",
+      "version": "—",
+      "status": "verified（机构镜像 PDF）",
+      "url": "https://users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "urls": [],
+      "access": "official-mirror",
+      "scope": "提出 architectural erosion（违规→脆化）与 architectural drift（不敏感→失一致）及 increasing resistance to change——架构层债务累积机制。",
+      "availability": "free-mirror",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S2-10"
+      ],
+      "legacy_id": "P-S2-10"
+    },
+    {
+      "id": "VEN-009",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Metric definitions（SonarQube Server 官方文档）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "accessed 2026-09-10 (Server 2026.4)",
+      "version": "Server 2026.4",
+      "status": "verified",
+      "url": "https://docs.sonarsource.com/sonarqube/latest/user-guide/metric-definitions/",
+      "urls": [],
+      "access": "official-web",
+      "scope": "technical debt（sqale_index）=maintainability issue 修复成本之和；TDR 分档 A ≤5%…E ≥50%；区分 overall/new code。工具指标差异大，不可当作债务真值。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S3-01"
+      ],
+      "legacy_id": "P-S3-01"
+    },
+    {
+      "id": "VEN-010",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "Viewing and managing rules（SonarQube Server 官方文档，含 issue 类型与 clean code 属性）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "accessed 2026-09-10 (Server 2026.4)",
+      "version": "Server 2026.4",
+      "status": "verified",
+      "url": "https://docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-rules/rules",
+      "urls": [],
+      "access": "official-web",
+      "scope": "issue 类型（Code smell/Bug/Vulnerability/Security hotspot）与 clean code 属性（consistency/intentionality/adaptability/responsibility）。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S3-02"
+      ],
+      "legacy_id": "P-S3-02"
+    },
+    {
+      "id": "VEN-011",
+      "tier": "S3",
+      "category": "vendor",
+      "title": "SQALE — Software Quality Assessment based on Lifecycle Expectations（官方站点，Wayback 快照）",
+      "org": "SQALE / inspearit (formerly DNV ITGS France)",
+      "year": "2014（站点）",
+      "version": "—",
+      "status": "verified（Wayback 快照）",
+      "url": "https://web.archive.org/web/2016/http://www.sqale.org/",
+      "urls": [],
+      "access": "free（Wayback）",
+      "scope": "以生命周期期望为基准，9 原则 + 4 组件（Quality Model / Analysis Model / indices / indicators）；CC BY-NC-ND。SonarQube 沿用其指标命名。",
+      "availability": "free-archive",
+      "priority": "参考",
+      "cross_ref": "P-S4-02；P-S3-01",
+      "evidence_ref": [
+        "P:S3-03"
+      ],
+      "legacy_id": "P-S3-03"
+    },
+    {
+      "id": "PAP-009",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Technical Debt: From Metaphor to Theory and Practice",
+      "org": "P. Kruchten, R. L. Nord, I. Ozkaya, IEEE Software 29(6):18-21, DOI 10.1109/MS.2012.167",
+      "year": "2012-11",
+      "version": "—",
+      "status": "verified（Crossref 核验）",
+      "url": "https://doi.org/10.1109/MS.2012.167",
+      "urls": [],
+      "access": "paid (IEEE Xplore)；摘要经 Crossref/SEI 页核验",
+      "scope": "把技术债从隐喻推进为可管理理论与实践；债作为权衡工具与 common backlog；考察决策在债演化中的作用。",
+      "availability": "paid",
+      "priority": "建议",
+      "cross_ref": "P-S1-01；L-evolution S4-03",
+      "evidence_ref": [
+        "P:S4-01"
+      ],
+      "legacy_id": "P-S4-01"
+    },
+    {
+      "id": "PAP-010",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Managing Technical Debt with the SQALE Method",
+      "org": "J.-L. Letouzey, M. Ilkiewicz, IEEE Software 29(6):44-51, DOI 10.1109/MS.2012.129",
+      "year": "2012-11",
+      "version": "—",
+      "status": "verified（Crossref 核验）",
+      "url": "https://doi.org/10.1109/MS.2012.129",
+      "urls": [],
+      "access": "paid (IEEE Xplore)",
+      "scope": "SQALE 方法在大组织中的实施建议，用于管理应用源代码技术债。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-02"
+      ],
+      "legacy_id": "P-S4-02"
+    },
+    {
+      "id": "PAP-011",
+      "tier": "S4",
+      "category": "paper",
+      "title": "A systematic mapping study on technical debt and its management",
+      "org": "Z. Li, P. Avgeriou, P. Liang, Journal of Systems and Software 101, DOI 10.1016/j.jss.2014.12.027",
+      "year": "2015-03",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1016/j.jss.2014.12.027",
+      "urls": [],
+      "access": "paid (Elsevier)；摘要级",
+      "scope": "系统映射 1992–2013 纳入 94 项研究：10 类 TD、8 类 TDM 活动、29 种 TDM 工具；code-related 最受关注。",
+      "availability": "paid",
+      "priority": "必入",
+      "evidence_ref": [
+        "P:S4-03"
+      ],
+      "legacy_id": "P-S4-03"
+    },
+    {
+      "id": "PAP-012",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Towards an Ontology of Terms on Technical Debt",
+      "org": "N. S. R. Alves et al., 6th Int'l Workshop on Managing Technical Debt (MTD), DOI 10.1109/MTD.2014.9",
+      "year": "2014-09",
+      "version": "—",
+      "status": "verified（Crossref/OpenAlex 核验；正文付费，13 类清单未逐条取）",
+      "url": "https://doi.org/10.1109/MTD.2014.9",
+      "urls": [],
+      "access": "paid (IEEE Xplore)",
+      "scope": "技术债术语本体，建立类型与 indicators 的共同词汇表，推进 Technical Debt Landscape。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S4-04"
+      ],
+      "legacy_id": "P-S4-04"
+    },
+    {
+      "id": "PAP-013",
+      "tier": "S4",
+      "category": "paper",
+      "title": "An Overview and Comparison of Technical Debt Measurement Tools",
+      "org": "IEEE Software, DOI 10.1109/MS.2020.3024958",
+      "year": "2020",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1109/MS.2020.3024958",
+      "urls": [],
+      "access": "paid (IEEE Xplore)",
+      "scope": "比较债务度量工具的术语/指标/技术与流行度及有效性证据；警示「工具数字非债务真值」。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-05"
+      ],
+      "legacy_id": "P-S4-05"
+    },
+    {
+      "id": "PAP-014",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Automatic identification of self-admitted technical debt from four different sources",
+      "org": "Empirical Software Engineering, DOI 10.1007/s10664-023-10297-9",
+      "year": "2023",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1007/s10664-023-10297-9",
+      "urls": [],
+      "access": "paid (Springer)",
+      "scope": "整合源码注释/commit 消息/pull request/issue 四源自动识别 SATD，平均 F1≈0.611。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-06"
+      ],
+      "legacy_id": "P-S4-06"
+    },
+    {
+      "id": "PAP-015",
+      "tier": "S4",
+      "category": "paper",
+      "title": "A systematic literature review on Technical Debt prioritization: Strategies, processes, factors, and tools",
+      "org": "Journal of Systems and Software 171, DOI 10.1016/j.jss.2020.110827",
+      "year": "2020",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1016/j.jss.2020.110827",
+      "urls": [],
+      "access": "paid (Elsevier)",
+      "scope": "系统综述债优先级排序的策略/过程/因素/工具；现有度量仅捕捉实践定性因素的一小部分，无共识。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-07"
+      ],
+      "legacy_id": "P-S4-07"
+    },
+    {
+      "id": "PAP-008",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process, DOI 10.1002/smr.2423",
+      "year": "2022",
+      "version": "—",
+      "status": "verified（摘要经 Crossref 核验）",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "urls": [],
+      "access": "paid (Wiley)；摘要级",
+      "scope": "架构腐化（AEr）不限于违规与结构问题，还引发质量与演化问题；成因兼有技术与非技术因素；纳入 73 项研究。复用 S4-PAP-08。",
+      "availability": "paid",
+      "priority": "必入",
+      "cross_ref": "S4-PAP-08；B:S4-01；L-evolution S4-01",
+      "evidence_ref": [
+        "P:S4-08"
+      ],
+      "legacy_id": "P-S4-08"
+    },
+    {
+      "id": "PAP-003",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution",
+      "org": "M. M. Lehman, Proceedings of the IEEE 68(9):1060-1076, DOI 10.1109/PROC.1980.11805",
+      "year": "1980",
+      "version": "—",
+      "status": "verified（题录/摘要；正文付费）",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "urls": [],
+      "access": "paid (IEEE Xplore)；与 S4-PAP-03 同源",
+      "scope": "软件演化定律最初正式发表（后续扩展为八条）；Continuing Change 与 Declining Quality 是技术债/腐化的时间维理论根据。复用 S4-PAP-03（1980 原文为 5 条定律）。",
+      "availability": "paid",
+      "priority": "必入",
+      "cross_ref": "S4-PAP-03；L-evolution S4-02",
+      "evidence_ref": [
+        "P:S4-09"
+      ],
+      "legacy_id": "P-S4-09"
+    },
+    {
+      "id": "PAP-016",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Software developer productivity loss due to technical debt—A replication and extension study",
+      "org": "Journal of Systems and Software 156, DOI 10.1016/j.jss.2019.06.004",
+      "year": "2019",
+      "version": "—",
+      "status": "verified（题录经 OpenAlex 核验；正文付费，摘要未获取）",
+      "url": "https://doi.org/10.1016/j.jss.2019.06.004",
+      "urls": [],
+      "access": "paid (Elsevier)",
+      "scope": "复现并扩展技术债导致开发者生产率损失的研究，TDM 度量实证方向。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-10"
+      ],
+      "legacy_id": "P-S4-10"
+    },
+    {
+      "id": "PAP-017",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Building and evaluating a theory of architectural technical debt in software-intensive systems",
+      "org": "Journal of Systems and Software 176, DOI 10.1016/j.jss.2021.110925",
+      "year": "2021",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1016/j.jss.2021.110925",
+      "urls": [],
+      "access": "paid (Elsevier)",
+      "scope": "架构技术债（ATD）=作出时合适却显著阻碍未来进展的「大」设计决策；难识别、修复成本范围大、常被回避；扎根理论构建其症状/成因/后果/管理策略。",
+      "availability": "paid",
+      "priority": "建议",
+      "evidence_ref": [
+        "P:S4-11"
+      ],
+      "legacy_id": "P-S4-11"
+    },
+    {
+      "id": "PAP-018",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Identification and measurement of Requirements Technical Debt in software development: A systematic literature review",
+      "org": "Journal of Systems and Software 190, DOI 10.1016/j.jss.2022.111483",
+      "year": "2022",
+      "version": "—",
+      "status": "verified（摘要经 OpenAlex 核验）",
+      "url": "https://doi.org/10.1016/j.jss.2022.111483",
+      "urls": [],
+      "access": "paid (Elsevier)",
+      "scope": "需求技术债=理想规格与实际实现之差，源于追求即时收益的战略决策或上下文无意变化；识别与度量是 TDM 前两阶段。",
+      "availability": "paid",
+      "priority": "参考",
+      "evidence_ref": [
+        "P:S4-12"
+      ],
+      "legacy_id": "P-S4-12"
+    },
+    {
+      "id": "XCV-001",
+      "tier": "S4",
+      "category": "paper",
+      "title": "Laws of Software Evolution Revisited（Lehman 本人对八条定律的完整复述，含定律演进史）",
+      "org": "M. M. Lehman; Software Process Technology (EWSPT'96), LNCS 1149:108-124, Springer",
+      "year": "1996",
+      "version": "—",
+      "status": "verified（全文核验；大学课程镜像）",
+      "url": "https://www.cs.kent.edu/~jmaletic/cs63902/Papers/Lehman96.pdf",
+      "urls": [
+        "https://doi.org/10.1007/BFb0017737"
+      ],
+      "access": "free（课程镜像）；Springer 版权",
+      "scope": "「八条定律」完整表述最早成文处：前三 1970 年代中期 + 2 条 1980 + 第 6 条 1991 脚注 + 第 7/8 条 1996 首次发表（故 1980 原文为 5 条）；适用 E-type。",
+      "availability": "free-mirror",
+      "priority": "必入",
+      "evidence_ref": [
+        "R:XC-01"
+      ],
+      "legacy_id": "R-XC-01"
+    },
+    {
+      "id": "XCV-002",
+      "tier": "S2",
+      "category": "reference",
+      "title": "Lehman's laws of software evolution（百科条目，交叉验证定律条数与 S/P/E 分类）",
+      "org": "Wikipedia（引 Lehman 1980、Lehman et al. 1997 等）",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（二手交叉，关键论断以 R-XC-01 为准）",
+      "url": "https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution",
+      "urls": [],
+      "access": "free",
+      "scope": "定律条数演进与 S/P/E/A 程序分类的二手交叉。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "R:XC-02"
+      ],
+      "legacy_id": "R-XC-02"
+    },
+    {
+      "id": "XCV-003",
+      "tier": "S1",
+      "category": "official-body",
+      "title": "An Overview of the SWEBOK Guide（SEBoK 百科，逐条列出 V4 的 18 KA）",
+      "org": "SEBoK (Guide to the Systems Engineering Body of Knowledge)",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（官方百科）",
+      "url": "https://sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide",
+      "urls": [],
+      "access": "free",
+      "scope": "完整列 SWEBOK V4 的 18 KA（含新增 Software Architecture / SE Operations / Software Security）；Maintenance 对齐 ISO/IEC/IEEE 14764:2022。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "R:XC-03"
+      ],
+      "legacy_id": "R-XC-03"
+    },
+    {
+      "id": "XCV-004",
+      "tier": "S2",
+      "category": "reference",
+      "title": "Pattern-Oriented Software Architecture Volume 1 — 官方配套站点（模式目录 + Microkernel 定义）",
+      "org": "software-pattern.org（POSA 系列官方站点，作者维护）",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（官方配套站点）",
+      "url": "http://software-pattern.org/Book/30",
+      "urls": [],
+      "access": "free（官方站点）",
+      "scope": "POSA Vol.1 模式目录与 Microkernel 定义（最小功能核 + 可插拔扩展插座）。",
+      "availability": "free-official",
+      "priority": "建议",
+      "evidence_ref": [
+        "R:XC-04"
+      ],
+      "legacy_id": "R-XC-04"
+    },
+    {
+      "id": "XCV-005",
+      "tier": "S2",
+      "category": "reference",
+      "title": "Waterfall model（百科条目，交叉验证 Royce 五步与迭代原意）",
+      "org": "Wikipedia（引 Royce 1970 及软件工程史文献）",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（二手交叉，关键论断以 S4-PAP-04 原文为准）",
+      "url": "https://en.wikipedia.org/wiki/Waterfall_model",
+      "urls": [],
+      "access": "free",
+      "scope": "印证原文未出现 waterfall 一词、Royce 批评未修改瀑布并给出五步补救。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "R:XC-05"
+      ],
+      "legacy_id": "R-XC-05"
+    },
+    {
+      "id": "XCV-006",
+      "tier": "S2",
+      "category": "reference",
+      "title": "No Silver Bullet（百科条目，交叉验证核心论断与本质/偶然复杂度）",
+      "org": "Wikipedia（引 Brooks 1986/1987）",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（二手交叉，四要素以 S4-PAP-01 原文为准）",
+      "url": "https://en.wikipedia.org/wiki/No_Silver_Bullet",
+      "urls": [],
+      "access": "free",
+      "scope": "复述无银弹核心论断与 accidental/essential complexity 区分。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "R:XC-06"
+      ],
+      "legacy_id": "R-XC-06"
+    },
+    {
+      "id": "XCV-007",
+      "tier": "S2",
+      "category": "reference",
+      "title": "Software Engineering Body of Knowledge（百科条目，交叉验证 SWEBOK V4 发布与 18 KA）",
+      "org": "Wikipedia（引 IEEE Computer Society）",
+      "year": "accessed 2026-09-10",
+      "version": "—",
+      "status": "verified（二手交叉，以 S1-OFF-01 / R-XC-03 为准）",
+      "url": "https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge",
+      "urls": [],
+      "access": "free",
+      "scope": "SWEBOK V4（2024-10）发布与 18 KA 清单交叉核验。",
+      "availability": "free-official",
+      "priority": "参考",
+      "evidence_ref": [
+        "R:XC-07"
+      ],
+      "legacy_id": "R-XC-07"
+    }
+  ],
+  "themes": [
+    {
+      "stage": "1. 概念与需求（Concept & Requirements）",
+      "description": "从利益相关方关注点到需求规格；生命周期过程框架与学科定位。",
+      "sources": [
+        "STD-003",
+        "STD-004",
+        "OFF-001",
+        "OFF-003",
+        "OFF-004",
+        "OFF-006",
+        "OFF-007",
+        "BK-002",
+        "BK-004",
+        "BK-006",
+        "BK-030",
+        "PAP-004",
+        "PAP-005",
+        "LOC-004",
+        "LOC-018"
+      ]
+    },
+    {
+      "stage": "2. 架构设计（Architecture Design）",
+      "description": "架构定义与描述、架构决策、风格与模式、文档化、质量属性驱动设计。",
+      "sources": [
+        "STD-001",
+        "STD-002",
+        "OFF-001",
+        "OFF-002",
+        "BK-007",
+        "BK-008",
+        "BK-009",
+        "BK-010",
+        "BK-011",
+        "BK-012",
+        "BK-013",
+        "BK-014",
+        "BK-015",
+        "BK-016",
+        "BK-017",
+        "BK-018",
+        "BK-019",
+        "BK-032",
+        "BK-033",
+        "BK-034",
+        "BK-035",
+        "WEB-001",
+        "WEB-003",
+        "WEB-004",
+        "WEB-005",
+        "WEB-006",
+        "WEB-007",
+        "WEB-008",
+        "WEB-009",
+        "WEB-010",
+        "VEN-001",
+        "PAP-002",
+        "PAP-007",
+        "LOC-004",
+        "LOC-008",
+        "LOC-020",
+        "LOC-021",
+        "LOC-022",
+        "LOC-030"
+      ]
+    },
+    {
+      "stage": "3. 实现与构造（Implementation & Construction）",
+      "description": "编码、构建、重构、遗留代码改造、代码质量与可读性。",
+      "sources": [
+        "OFF-001",
+        "BK-001",
+        "BK-003",
+        "BK-005",
+        "BK-006",
+        "BK-008",
+        "BK-020",
+        "BK-021",
+        "BK-022",
+        "BK-032",
+        "BK-033",
+        "WEB-002",
+        "LOC-013",
+        "LOC-014",
+        "LOC-015",
+        "LOC-016",
+        "LOC-017"
+      ]
+    },
+    {
+      "stage": "4. 测试（Testing）",
+      "description": "测试目标与策略、特征测试、自动化测试与质量保证（本阶段外部信源较薄，见 GAP-12）。",
+      "sources": [
+        "OFF-001",
+        "OFF-004",
+        "BK-001",
+        "BK-022",
+        "BK-028",
+        "LOC-005",
+        "LOC-013"
+      ]
+    },
+    {
+      "stage": "5. 部署（Deployment）",
+      "description": "可移植应用、持续交付流水线、生产就绪设计、发布工程。",
+      "sources": [
+        "STD-003",
+        "BK-024",
+        "BK-027",
+        "BK-028",
+        "BK-031",
+        "LOC-001",
+        "LOC-038"
+      ]
+    },
+    {
+      "stage": "6. 运维（Operations）",
+      "description": "SRE、可靠性、可观测性、SLO/错误预算、事件响应。",
+      "sources": [
+        "STD-007",
+        "OFF-001",
+        "BK-024",
+        "BK-025",
+        "BK-026",
+        "BK-027",
+        "PAP-003",
+        "LOC-034"
+      ]
+    },
+    {
+      "stage": "7. 演化与弃用（Evolution & Retirement）",
+      "description": "演化定律、重构、架构腐化/技术债治理、维护与处置过程。",
+      "sources": [
+        "STD-003",
+        "STD-007",
+        "STD-008",
+        "PAP-001",
+        "PAP-003",
+        "PAP-008",
+        "BK-001",
+        "BK-011",
+        "BK-021",
+        "BK-022",
+        "WEB-002",
+        "LOC-025",
+        "LOC-026"
+      ]
+    },
+    {
+      "stage": "横切：质量属性（Quality Attributes）",
+      "description": "ISO 25010 质量模型、架构质量属性承载、ATAM 权衡分析。",
+      "sources": [
+        "STD-005",
+        "STD-006",
+        "OFF-002",
+        "OFF-005",
+        "BK-009",
+        "BK-010",
+        "BK-014",
+        "WEB-011",
+        "PAP-008"
+      ]
+    },
+    {
+      "stage": "横切：技术债（Technical Debt）",
+      "description": "技术债隐喻与度量、复杂度控制、内部质量与变更成本。",
+      "sources": [
+        "WEB-001",
+        "WEB-002",
+        "BK-001",
+        "BK-008",
+        "BK-021",
+        "BK-022",
+        "PAP-006",
+        "PAP-008"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-01",
+      "item": "ISO 标准正文（42010、12207、25010、14764、24765）",
+      "why": "iso.org 直连/代理/代理+浏览器 UA 均被 WAF 返回 403；未下载/入库任何标准正文（版权红线）。",
+      "route": "web.archive.org 快照（可拿元数据与 scope）+ committee.iso.org 官方项目页 + iso25000.com 门户；正文按需购买或经机构订阅。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-02",
+      "item": "SWEBOK V4.0（2024）正文 18 KA 逐条内容",
+      "why": "computer.org 官方页 x403/x000，仅核验 KA 结构与主编（Rich Hilliard）。",
+      "route": "IEEE Computer Society 官方购买/会员入口；或等官方稳定页；V3（2014）PDF 可作过渡依据。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-03",
+      "item": "ISO/IEC/IEEE 15288:2015（系统生命周期过程）",
+      "why": "被 12207/14764 引用为联合使用标准，但本阶段未单独采集。",
+      "route": "Wayback 快照 iso.org 对应标准页 + committee.iso.org；或经 ISO 订阅。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-04",
+      "item": "ISO/IEC/IEEE 12207:2026 定稿 scope 与阶段/过程清单",
+      "why": "正式发布页在 Wayback 无 2026 快照，DIS 页 scope 不能视为定稿。",
+      "route": "待 Wayback 出现新快照，或 ISO OBP 订阅访问；当前以 2017 版 + 替换公告互证。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-05",
+      "item": "奠基论文原文（Royce 1970、Lehman 1980、Parnas 1998、Brooks 1987）",
+      "why": "付费墙/可得性限制，未回源原文，观点经 Wikipedia 与 SE2014 转引（medium）。",
+      "route": "已由 R 包回源：Royce 1970 / Parnas 1998 / Parnas 1972 / Brooks 1987 / Lehman 1996 / POSA 官方样章 / SWEBOK V4 官方页元数据 verified；仅 Lehman 1980 全文为 abstract-only（IEEE 付费），Royce/Brooks 双版未逐字对照。",
+      "status": "已解决（部分）"
+    },
+    {
+      "id": "GAP-06",
+      "item": "Pattern-Oriented Software Architecture Vol.1 本体（Microkernel 等）",
+      "why": "D/B 均未回源，仅依据出版社页面与公认知名度（cited/medium）。",
+      "route": "R 包已取得 Wiley 官方免费样章（Chapter 1 + 目录 PDF）与官方配套站点，Microkernel 定义可核验；书本体仍受版权未回源。",
+      "status": "已解决（部分）"
+    },
+    {
+      "id": "GAP-07",
+      "item": "AWS Well-Architected Framework（厂商体系）",
+      "why": "A/B/C/D/E 证据包中未采集 AWS 官方架构中心。",
+      "route": "已由 Q 包补齐：S3-VEN-02/03（AWS WAF 官方文档 + 白皮书 PDF，2024-11-06）。",
+      "status": "已解决"
+    },
+    {
+      "id": "GAP-08",
+      "item": "Google Cloud Architecture Center / Architecture Framework（厂商体系）",
+      "why": "证据包未采集；仅 B 有 Azure 与 GCP 无。",
+      "route": "已由 Q 包补齐：S3-VEN-04/05（Google Cloud WAF 官方枢纽页 + What's new，2026-01-28）。",
+      "status": "已解决"
+    },
+    {
+      "id": "GAP-09",
+      "item": "ThoughtWorks Technology Radar（行业技术趋势）",
+      "why": "证据包未采集；契约中列为 S3 可选。",
+      "route": "已由 Q 包补齐：S3-VEN-06/07/08（Thoughtworks Radar 主页 + FAQ + 归档 PDF，Vol 34）。",
+      "status": "已解决"
+    },
+    {
+      "id": "GAP-10",
+      "item": "软件工程/架构经典书籍本体（本机）",
+      "why": "C 盘点确认本机无 Clean Architecture/APoSD/DDD/DDIA/SE@Google/SWEBOK 等电子书。",
+      "route": "免费官方源（SE@Google、SRE、12-Factor、DDD Reference）可直接引用；付费书本体仅入本地语料层，永不进公开仓库。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-11",
+      "item": "S4 主要会议/期刊（ICSE/FSE/TSE/EMSE）",
+      "why": "证据包未直接收录，S4-COM-01..04 为任务要求补齐的 canonical venue 入口（URL 为官方站点）。",
+      "route": "阶段2/3 通过官方 proceedings/期刊页定向检索架构与维护方向论文。",
+      "status": "未解决"
+    },
+    {
+      "id": "GAP-12",
+      "item": "测试阶段专用信源、extensibility/evolvability 标准级定义、1969 罗马会议报告",
+      "why": "测试外部信源偏薄（主要为 SWEBOK/CS2023/教材）；extensibility/evolvability 无独立顶层标准术语（由 25010 子特性与演化定律承载）；1969 Rome report 未做文本提取。",
+      "route": "阶段2 定向补充 ISTQB/ISO/IEC/IEEE 29119 测试标准与 Fowler 测试专文；架构演化术语从 42010/25010/Lehman 交叉构建。",
+      "status": "未解决"
+    }
+  ]
+}

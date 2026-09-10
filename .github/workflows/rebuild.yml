@@ -1,0 +1,115 @@
+# =============================================================================
+# rebuild.yml — 母库自动重建 + 门控 + 漂移检测 + GitHub Pages 部署
+#
+# 为什么 L4 / L5 在 CI 中显式 SKIPPED（绝不伪装 PASS）：
+#   - L4 视觉门控 (gate_visual.py) 需要 Pillow + numpy + agent-browser
+#     （headless Chromium）做截图、像素计数与 VLM 交叉，标准 ubuntu-latest
+#     runner 未预装这套渲染环境。
+#   - L5 渲染门控 (gate_render.py) 需要 agent-browser（headless Chromium）
+#     实际渲染 cytoscape 画布并统计节点/边，同样在 CI 中不可用。
+#   因此本工作流对这两层只打印明确的 SKIP 原因，不计为 PASS。
+#   本地补跑方式：
+#     python3 16-checkpoint/gate_visual.py --check all
+#     python3 16-checkpoint/gate_render.py
+#
+# 漂移检测：生成物不含任何时间戳，生成链实测完全幂等，故重建后用
+#   `git diff --exit-code` 断言「仓库内容 == 数据重建结果」，任何差异即失败。
+# =============================================================================
+
+name: rebuild
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "10-dag-data/**"
+      - "16-checkpoint/**"
+      - ".github/workflows/rebuild.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild (stdlib only, hermetic)
+        run: python3 16-checkpoint/build.py --config mother --quiet
+
+      - name: Drift detection (rebuild must be idempotent)
+        run: git diff --exit-code
+
+      - name: Gate L2 — full graph audit
+        run: |
+          python3 16-checkpoint/validate_graph.py \
+            --graph 10-dag-data/methodology-dag.json \
+            --canonical 03-knowledge-map/canonical-sources.json
+
+      - name: Gate L3 — structure + links
+        run: |
+          python3 16-checkpoint/kb_gate.py --root . --layers structure,links \
+            --exclude 02-research --exclude 01-books --exclude 03-knowledge-map \
+            --exclude 00-plan --exclude 16-checkpoint --exclude .github --quiet
+
+      - name: Gate L8 — layout
+        run: python3 16-checkpoint/gate_layout.py --check all
+
+      - name: Gate L6 — coverage
+        run: python3 16-checkpoint/gate_coverage.py
+
+      - name: Gate L7 — sources
+        run: python3 16-checkpoint/gate_sources.py
+
+      - name: Gate — methodology (4 checks)
+        run: python3 16-checkpoint/gate_methodology.py --check all
+
+      - name: Gate L4 — visual [SKIPPED in CI]
+        run: |
+          echo "SKIPPED (L4): gate_visual.py requires Pillow + numpy + agent-browser"
+          echo "(headless Chromium), which are not available on the stock GitHub runner."
+          echo "It is NOT reported as PASS. Run locally: python3 16-checkpoint/gate_visual.py --check all"
+
+      - name: Gate L5 — render [SKIPPED in CI]
+        run: |
+          echo "SKIPPED (L5): gate_render.py requires agent-browser (headless Chromium),"
+          echo "which is not available on the stock GitHub runner."
+          echo "It is NOT reported as PASS. Run locally: python3 16-checkpoint/gate_render.py"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          # 首次运行时自启用 Pages（源 = GitHub Actions）。
+          # 该步骤位于所有门控之后，故只有门控全过才会有 Pages 被启用/部署。
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

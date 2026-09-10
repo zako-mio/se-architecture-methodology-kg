@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>断路器与重试退避 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>断路器与重试退避</span></div><div class="meta">technology · K · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>断路器与重试退避</h1><div class="en">Circuit Breaker with Retry and Backoff</div><div class="badges"><span class="badge pr">P1</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">K · 运维</span><span class="badge th">质量属性</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-092" title="circuit breaker — 监控远程调用失败数，超阈值即跳闸进入 Open 快速失败，给依赖恢复时间并阻断级联；状态机 Closed/Open/Half-Open。">断路器</a>、<a class="term" href="../14-views/glossary.html#g-094" title="timeout / retry — 超时限制远程调用等待；重试处理瞬时故障，须配指数退避+抖动且仅对幂等操作安全。">超时与重试</a>是一组协同的远程调用稳定性实现：超时限制等待，断路器在失败达阈值后快速失败以阻止级联，重试仅针对幂等操作的瞬时故障并以指数退避加抖动控制节奏。</span></p></div><p class="note">别名：Circuit Breaker、断路器、熔断器、指数退避与抖动、Retry with Exponential Backoff and Jitter、超时与重试　|　英文：Circuit Breaker with Retry and Backoff　|　类型：技术 / pattern</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -352.4 685.2 697.8" role="img" aria-label="断路器与重试退避 的 1-2 跳邻域关系图"><title>断路器与重试退避 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="46.3" y1="-288.4" x2="-46.3" y2="-288.4" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：内聚耦合度量指导边界划分</title></line><line x1="-46.3" y1="-288.4" x2="-142.3" y2="-242.4" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：先划定边界，才能约束依赖方向</title></line><line x1="-95.3" y1="271.5" x2="-173.3" y2="238.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：四大黄金信号是可观测性信号的核心指标集</title></line><line x1="135.3" y1="-44" x2="220" y2="-180.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：战术映射依据质量属性须可操作化</title></line><line x1="90.2" y1="109.5" x2="165.4" y2="227.7" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：可用性战术服务于可靠性与可用性</title></line><line x1="271.7" y1="-85.2" x2="135.3" y2="-44" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：可修改性战术是战术映射的细化</title></line><line x1="90.2" y1="109.5" x2="135.3" y2="-44" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：可用性战术是战术映射的细化</title></line><line x1="90.2" y1="109.5" x2="271.7" y2="-85.2" stroke="#c22836" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>张力冲突（conflicts）：冗余可用性措施与可修改性存在张力</title></line><line x1="282.2" y1="25" x2="135.3" y2="-44" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：战术映射是权衡决策的前置输入</title></line><line x1="0" y1="-141.8" x2="46.3" y2="-288.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以内聚与耦合维度逐点评估通道结构</title></line><line x1="0" y1="-141.8" x2="-46.3" y2="-288.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：特化标识由提供者构造期绑定，通用契约零扩展</title></line><line x1="0" y1="-141.8" x2="-142.3" y2="-242.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：张力：服务定位的隐式依赖与静默短路削弱依赖倒置</title></line><line x1="0" y1="0" x2="90.2" y2="109.5" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：断路器与重试实现可用性战术</title></line><line x1="0" y1="0" x2="135.3" y2="-44" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：容错战术映射至质量属性</title></line><line x1="-83.6" y1="115.1" x2="-173.3" y2="238.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：可观测信号关联方法的技术实现</title></line><line x1="-83.6" y1="115.1" x2="-95.3" y2="271.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：四大黄金信号的采集与呈现</title></line><line x1="-136.2" y1="-44.2" x2="-268" y2="-87.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：混沌工程方法的实验化落地</title></line><line x1="-83.6" y1="115.1" x2="-228.7" y2="174.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测信号使 SLO 可度量</title></line><line x1="-83.6" y1="115.1" x2="-136.2" y2="-44.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测稳态为混沌实验提供判据</title></line><line x1="0" y1="0" x2="-136.2" y2="-44.2" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：容错机制可由混沌实验验证</title></line><line x1="-136.2" y1="-44.2" x2="-270.6" y2="77.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：实验发现的弱点进入复盘与修复闭环</title></line><line x1="0" y1="0" x2="-83.6" y2="115.1" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：熔断与重试事件需被可观测信号捕获</title></line><line x1="-228.7" y1="174.6" x2="-136.2" y2="-44.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：错误预算界定混沌实验可接受的爆炸半径</title></line><line x1="-83.6" y1="115.1" x2="-270.6" y2="77.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：可观测信号是事故复盘的时间线证据</title></line><line x1="136.8" y1="-246.9" x2="135.3" y2="-44" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：可修改性战术实现质量属性战术映射方法</title></line><line x1="0" y1="-141.8" x2="136.8" y2="-246.9" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：四维耦合分析定位变更影响半径与缝隙</title></line><line x1="0" y1="-141.8" x2="0" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以显式失败取代静默降级，呼应快速失败</title></line><line x1="9.5" y1="281.4" x2="-83.6" y2="115.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：事件地图交叉核对声明点与派发点核验埋点</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">断路器与重试退避<title>断路器与重试退避（TEC-K-01）</title></text><circle cx="0" cy="-141.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-122.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="135.3" cy="-44" r="9.0" fill="#c98a3a" stroke="none"/><text x="135.3" y="-25" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量属性战术映射方法<title>质量属性战术映射方法（MTH-M-01）</title></text><circle cx="90.2" cy="109.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="90.2" y="128.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可用性战术应用<title>可用性战术应用（MTH-M-03）</title></text><circle cx="-83.6" cy="115.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-83.6" y="134.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可观测性信号采集<title>可观测性信号采集（TEC-K-02）</title></text><circle cx="-136.2" cy="-44.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="-136.2" y="-25.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">混沌工程实践<title>混沌工程实践（TEC-K-04）</title></text><circle cx="-46.3" cy="-288.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-46.3" y="-272.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="46.3" cy="-288.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="46.3" y="-272.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">内聚与耦合<title>内聚与耦合（ESS-H-02）</title></text><circle cx="136.8" cy="-246.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="136.8" y="-230.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可修改性战术实现<title>可修改性战术实现（TEC-M-03）</title></text><circle cx="-142.3" cy="-242.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-142.3" y="-226.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">依赖倒置与依赖规则<title>依赖倒置与依赖规则（ESS-G-02）</title></text><circle cx="-228.7" cy="174.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-228.7" y="190.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">服务等级目标与错误预算<title>服务等级目标与错误预算（TEC-K-03）</title></text><circle cx="9.5" cy="281.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="9.5" y="297.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">harness 源码架构…<title>harness 源码架构解析（CAS-X-09）</title></text><circle cx="220" cy="-180.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="220" y="-164.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性不可直接测量<title>质量属性不可直接测量（ESS-M-05）</title></text><circle cx="-173.3" cy="238.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-173.3" y="254.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可观测性信号关联方法<title>可观测性信号关联方法（MTH-K-04）</title></text><circle cx="-268" cy="-87.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-268" y="-71.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">混沌工程方法<title>混沌工程方法（MTH-K-06）</title></text><circle cx="271.7" cy="-85.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="271.7" y="-69.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可修改性战术应用<title>可修改性战术应用（MTH-M-02）</title></text><circle cx="-270.6" cy="77.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-270.6" y="93.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">无指责复盘实践<title>无指责复盘实践（TEC-K-05）</title></text><circle cx="165.4" cy="227.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="165.4" y="243.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可靠性与可用性<title>可靠性与可用性（ESS-M-04）</title></text><circle cx="-95.3" cy="271.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-95.3" y="287.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">四大黄金信号监控方法<title>四大黄金信号监控方法（MTH-K-03）</title></text><circle cx="282.2" cy="25" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="282.2" y="41" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性权衡决策方法<title>质量属性权衡决策方法（MTH-M-06）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 5 个直接邻接、外环 14 个二跳节点，共 20 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">分布式系统中的远程调用失败是常态而非例外：瞬时抖动、依赖过载、网络分区都会让调用超时或报错。</span><span class="hl">若不加约束，客户端会持续向已故障的依赖发送请求，耗尽自身线程与连接资源，使局部故障沿调用链扩散为<a class="term" href="../14-views/glossary.html#g-095" title="cascading failure — 随时间增长的、由正反馈驱动的故障（局部过载抬高其余失败概率）；最常见根因是过载。">级联故障</a>。</span>级联故障的本质是正反馈——系统一部分失败提高了其余部分失败的概率。断路器、超时与重试是一组协同的稳定性战术：超时为每次调用设定等待上限，避免线程被无响应依赖长期占用；断路器在失败达到阈值后快速失败，给依赖恢复时间并阻止持续冲击；重试用于处理瞬时故障，但必须仅作用于幂等操作，并以指数退避加抖动控制重试节奏，否则重试本身会放大过载。三者缺一不可，单独使用任一都可能从保护机制变成故障放大器。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">断路器本质是一个包装受保护调用的有限状态机，其状态转换由失败统计驱动。</span>闭合态正常转发请求并累计失败计数，当失败率或连续失败数达到设定阈值即跳闸进入打开态；打开态期间所有调用立即返回错误、不再触达依赖，既避免继续冲击已故障的下游，也为其留出恢复窗口，经过一段冷却时间后进入半开态；半开态放行少量试探请求，若成功达到要求则恢复闭合，否则重新打开并重置计时，避免在依赖尚未恢复时被瞬间打回。超时给出单次调用的时长上界，使线程阻塞可控、避免连接池被拖垮。重试在失败后重新发起调用，指数退避让相邻重试的间隔按基数倍增（如 base×2^attempt），抖动则在退避值上引入随机量，把多个客户端同步退避形成的调用聚簇摊平为近似恒定速率的负载；常用抖动策略有 Full Jitter、Equal Jitter 与 Decorrelated Jitter，其中 Full Jitter 的总工作量与调用次数通常更低。<span class="hl">需要强调的是，断路器、超时与重试并非独立<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>，而应作为一个整体协同调参：超时应小于上游的调用预算，退避累计时长应小于业务可接受的等待上限，断路器阈值应与依赖的恢复时间匹配。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">实现时应优先复用平台能力：服务网格 sidecar、云 SDK 的自适应重试与熔断、API 网关的超时与限流，而非各服务自行手写，以统一策略并降低出错概率。</span>为每次远程调用设置明确且合理的超时与重试上限、退避基数与最大间隔，并叠加抖动；把重试严格限制在幂等操作上，用幂等键、请求去重或版本号保证重复执行安全；对末次失败记 error、对中间重试记 info，避免告警噪声掩盖真实故障。断路器需暴露状态（闭合/打开/半开）与跳闸次数的指标及告警，便于运维判断依赖健康状况。重试应与断路器协同：断路器打开或遇到非瞬态异常（如参数错误、鉴权失败）时停止重试。<span class="hl">配合<a class="term" href="../14-views/glossary.html#g-093" title="bulkhead / cell-based — 按消费者或负载划分隔离资源池，使单分区失败不跨舱扩散。">舱壁</a>隔离资源池、减载与背压，才能从整体上阻止级联。</span>上线前用故障注入或混沌实验验证阈值与超时设置是否合理。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>此外，全局共享的熔断器可能因某个操作的失败殃及无关操作，须按依赖或操作粒度划分；熔断打开期间返回的错误也需被上层正确处理，否则可能引发误判。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>这组战术并非免费的可靠性，误用会制造新故障。</li><li>断路器过于敏感会因瞬时抖动频繁跳闸，把本可自愈的问题放大为用户可见错误；阈值或超时设得过松则形同虚设，无法及时止损。</li><li>重试对非幂等操作会重复执行副作用，造成重复扣款、重复下单等数据错误；无抖动的指数退避仍会使客户端同步重试，形成调用聚簇并加重过载，即重试风暴。</li><li>重试还会增加总负载与端到端延迟，若缺乏重试预算，重试可能成为比原始故障更严重的放大器。</li><li>因此这些参数必须结合容量与故障模式校准，并通过混沌实验持续验证，而非照搬默认值。</li><li>缺乏舱壁隔离时，单一依赖的故障还会经共享线程池扩散至整个服务。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-05 · 经 direct</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → CAS-X-05 → ESS-G-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-03 · 2 跳派生：当前节点 → CAS-X-05 → ESS-G-02</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-04 · 2 跳派生：当前节点 → CAS-X-05 → TEC-M-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → CAS-X-05 → ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-09 · 经 TEC-K-02</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-10 · 2 跳派生：当前节点 → CAS-X-05 → ESS-G-02</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>2026 (Azure Cloud Design Patterns) / 2015-updated-2023 (AWS backoff) / 2018 (Release It! 2e)</div><div class="r"><span class="k">规范信源</span>VEN-025、WEB-037、VEN-028、BK-024</div><div class="r"><span class="k">入口链接</span><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker</a>　<a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/retry" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/azure/architecture/patterns/retry</a>　<a href="https://martinfowler.com/bliki/CircuitBreaker.html" target="_blank" rel="noopener">https://martinfowler.com/bliki/CircuitBreaker.html</a>　<a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：重试是普适的可靠性手段，调用失败就应当自动重试</span><br>核验结论：重试仅适用于瞬时故障，且仅对幂等操作安全；对非幂等操作重试会重复执行副作用，造成重复数据与资金错误　<span class="k">[VEN-025]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：采用指数退避即可消除重试风暴</span><br>核验结论：无抖动的指数退避仍会产生同步调用聚簇；必须叠加抖动（Full/Equal/Decorrelated Jitter）把尖峰摊平为近似恒定速率　<span class="k">[VEN-028]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：断路器只是失败后重试的开关，与资源隔离无关</span><br>核验结论：断路器阻止对已故障依赖的持续调用，但阻止级联通常还需舱壁（资源池隔离）、减载与背压协同　<span class="k">[BK-024]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（5 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>← CAS-X-05</td><td>preset 通道耦合分析<br><span style="color:var(--dim);font-size:12px">E-23</span></td><td>印证：以显式失败取代静默降级，呼应快速失败</td></tr><tr><td class="k">组合</td><td>→ TEC-K-02</td><td>可观测性信号采集<br><span style="color:var(--dim);font-size:12px">E-870</span></td><td>熔断与重试事件需被可观测信号捕获</td></tr><tr><td class="k">组合</td><td>→ TEC-K-04</td><td>混沌工程实践<br><span style="color:var(--dim);font-size:12px">E-867</span></td><td>容错机制可由混沌实验验证</td></tr><tr><td class="k">实现</td><td>→ MTH-M-01</td><td>质量属性战术映射方法<br><span style="color:var(--dim);font-size:12px">E-857</span></td><td>容错战术映射至质量属性</td></tr><tr><td class="k">实现</td><td>→ MTH-M-03</td><td>可用性战术应用<br><span style="color:var(--dim);font-size:12px">E-856</span></td><td>断路器与重试实现可用性战术</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

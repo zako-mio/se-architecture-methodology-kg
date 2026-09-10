@@ -1,0 +1,744 @@
+{
+  "topic": "阶段2 free-official 书籍/在线正文直取与结构提取",
+  "generated_by": "语料采集员（自写角色）",
+  "generated_date": "2026-09-10",
+  "access_date": "2026-09-10",
+  "policy": "严守版权红线：只提取公开在线目录/章节结构与核心论点摘要，不下载、不落盘任何书籍/PDF 全文；书籍本体仅可入本地语料层，公开仓库只承载消化重组后的知识。",
+  "sources": [
+    {
+      "id": "FO-01",
+      "title": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+      "title_cn": "Google 软件工程",
+      "author": "Titus Winters, Tom Manshreck, Hyrum Wright (Google)",
+      "year": 2020,
+      "url": "https://abseil.io/resources/swe-book",
+      "toc_url": "https://abseil.io/resources/swe-book/html/toc.html",
+      "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
+      "reachable": true,
+      "channel": "direct",
+      "http_status": 200,
+      "toc": [
+        {
+          "part": "Part I. Thesis",
+          "url": "https://abseil.io/resources/swe-book/html/part1.html",
+          "chapters": [
+            {
+              "n": 1,
+              "title": "What Is Software Engineering?",
+              "url": "https://abseil.io/resources/swe-book/html/ch01.html"
+            }
+          ]
+        },
+        {
+          "part": "Part II. Culture",
+          "url": "https://abseil.io/resources/swe-book/html/part2.html",
+          "chapters": [
+            {
+              "n": 2,
+              "title": "How to Work Well on Teams",
+              "url": "https://abseil.io/resources/swe-book/html/ch02.html"
+            },
+            {
+              "n": 3,
+              "title": "Knowledge Sharing",
+              "url": "https://abseil.io/resources/swe-book/html/ch03.html"
+            },
+            {
+              "n": 4,
+              "title": "Engineering for Equity",
+              "url": "https://abseil.io/resources/swe-book/html/ch04.html"
+            },
+            {
+              "n": 5,
+              "title": "How to Lead a Team",
+              "url": "https://abseil.io/resources/swe-book/html/ch05.html"
+            },
+            {
+              "n": 6,
+              "title": "Leading at Scale",
+              "url": "https://abseil.io/resources/swe-book/html/ch06.html"
+            },
+            {
+              "n": 7,
+              "title": "Measuring Engineering Productivity",
+              "url": "https://abseil.io/resources/swe-book/html/ch07.html"
+            }
+          ]
+        },
+        {
+          "part": "Part III. Processes",
+          "url": "https://abseil.io/resources/swe-book/html/part3.html",
+          "chapters": [
+            {
+              "n": 8,
+              "title": "Style Guides and Rules",
+              "url": "https://abseil.io/resources/swe-book/html/ch08.html"
+            },
+            {
+              "n": 9,
+              "title": "Code Review",
+              "url": "https://abseil.io/resources/swe-book/html/ch09.html"
+            },
+            {
+              "n": 10,
+              "title": "Documentation",
+              "url": "https://abseil.io/resources/swe-book/html/ch10.html"
+            },
+            {
+              "n": 11,
+              "title": "Testing Overview",
+              "url": "https://abseil.io/resources/swe-book/html/ch11.html"
+            },
+            {
+              "n": 12,
+              "title": "Unit Testing",
+              "url": "https://abseil.io/resources/swe-book/html/ch12.html"
+            },
+            {
+              "n": 13,
+              "title": "Test Doubles",
+              "url": "https://abseil.io/resources/swe-book/html/ch13.html"
+            },
+            {
+              "n": 14,
+              "title": "Larger Testing",
+              "url": "https://abseil.io/resources/swe-book/html/ch14.html"
+            },
+            {
+              "n": 15,
+              "title": "Deprecation",
+              "url": "https://abseil.io/resources/swe-book/html/ch15.html"
+            }
+          ]
+        },
+        {
+          "part": "Part IV. Tools",
+          "url": "https://abseil.io/resources/swe-book/html/part4.html",
+          "chapters": [
+            {
+              "n": 16,
+              "title": "Version Control and Branch Management",
+              "url": "https://abseil.io/resources/swe-book/html/ch16.html"
+            },
+            {
+              "n": 17,
+              "title": "Code Search",
+              "url": "https://abseil.io/resources/swe-book/html/ch17.html"
+            },
+            {
+              "n": 18,
+              "title": "Build Systems and Build Philosophy",
+              "url": "https://abseil.io/resources/swe-book/html/ch18.html"
+            },
+            {
+              "n": 19,
+              "title": "Critique: Google’s Code Review Tool",
+              "url": "https://abseil.io/resources/swe-book/html/ch19.html"
+            },
+            {
+              "n": 20,
+              "title": "Static Analysis",
+              "url": "https://abseil.io/resources/swe-book/html/ch20.html"
+            },
+            {
+              "n": 21,
+              "title": "Dependency Management",
+              "url": "https://abseil.io/resources/swe-book/html/ch21.html"
+            },
+            {
+              "n": 22,
+              "title": "Large-Scale Changes",
+              "url": "https://abseil.io/resources/swe-book/html/ch22.html"
+            },
+            {
+              "n": 23,
+              "title": "Continuous Integration",
+              "url": "https://abseil.io/resources/swe-book/html/ch23.html"
+            },
+            {
+              "n": 24,
+              "title": "Continuous Delivery",
+              "url": "https://abseil.io/resources/swe-book/html/ch24.html"
+            },
+            {
+              "n": 25,
+              "title": "Compute as a Service",
+              "url": "https://abseil.io/resources/swe-book/html/ch25.html"
+            }
+          ]
+        },
+        {
+          "part": "Part V. Conclusion",
+          "url": "https://abseil.io/resources/swe-book/html/part5.html",
+          "chapters": [
+            {
+              "n": 26,
+              "title": "Afterword",
+              "url": "https://abseil.io/resources/swe-book/html/ch26.html"
+            }
+          ]
+        }
+      ],
+      "summary": "Google 官方免费在线全文，核心命题是「编程（programming）是写代码，软件工程（software engineering）是编程在时间与规模上的整合」——工程的核心变量是时间与变化、规模、权衡三者。全书分五部分：I 论纲（软件工程定义、Hyrum 定律、规模与效率、左移、权衡与成本、政策能否规模化）；II 文化（团队协作、知识共享、公平性、领导力、大规模领导、工程效能度量）；III 流程（风格指南与规则、代码评审、文档、测试总览、单元测试、测试替身、更大范围测试、弃用）；IV 工具（版本控制与分支、代码搜索、构建系统、代码评审工具、静态分析、依赖管理、大规模变更、持续集成、持续交付、计算即服务）；V 结语。标志性概念：Hyrum 定律、shifting left（左移）、one-version rule（单版本）、monorepo、Live at Head、hermetic testing（密闭测试）、DAMP not DRY、测试大小/范围、Beyoncé 规则、弃用（advisory/compulsory）。",
+      "gaps": [
+        "仅取目录与论点摘要，未下载/镜像任何章节正文（遵守版权红线）",
+        "在线版为 CC BY-NC-ND（禁演绎），公开库引用时仅可链接 + 自撰摘要，不得大段译文"
+      ]
+    },
+    {
+      "id": "FO-02",
+      "title": "Site Reliability Engineering: How Google Runs Production Systems",
+      "title_cn": "Google SRE 运维解密",
+      "author": "Betsy Beyer, Chris Jones, Jennifer Petoff, Niall Richard Murphy (Google)",
+      "year": 2016,
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
+      "reachable": true,
+      "channel": "proxy(172.29.0.1:7890)",
+      "http_status": 200,
+      "toc": [
+        {
+          "part": "Front matter",
+          "url": "https://sre.google/sre-book/foreword/",
+          "chapters": [
+            {
+              "title": "Foreword",
+              "url": "https://sre.google/sre-book/foreword/"
+            },
+            {
+              "title": "Preface",
+              "url": "https://sre.google/sre-book/preface/"
+            }
+          ]
+        },
+        {
+          "part": "Part I - Introduction",
+          "url": "https://sre.google/sre-book/part-I-introduction/",
+          "chapters": [
+            {
+              "title": "Introduction",
+              "url": "https://sre.google/sre-book/introduction/"
+            },
+            {
+              "title": "The Production Environment at Google, from the Viewpoint of an SRE",
+              "url": "https://sre.google/sre-book/production-environment/"
+            }
+          ]
+        },
+        {
+          "part": "Part II - Principles",
+          "url": "https://sre.google/sre-book/part-II-principles/",
+          "chapters": [
+            {
+              "title": "Embracing Risk",
+              "url": "https://sre.google/sre-book/embracing-risk/"
+            },
+            {
+              "title": "Service Level Objectives",
+              "url": "https://sre.google/sre-book/service-level-objectives/"
+            },
+            {
+              "title": "Eliminating Toil",
+              "url": "https://sre.google/sre-book/eliminating-toil/"
+            },
+            {
+              "title": "Monitoring Distributed Systems",
+              "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+            },
+            {
+              "title": "The Evolution of Automation at Google",
+              "url": "https://sre.google/sre-book/automation-at-google/"
+            },
+            {
+              "title": "Release Engineering",
+              "url": "https://sre.google/sre-book/release-engineering/"
+            },
+            {
+              "title": "Simplicity",
+              "url": "https://sre.google/sre-book/simplicity/"
+            }
+          ]
+        },
+        {
+          "part": "Part III - Practices",
+          "url": "https://sre.google/sre-book/part-III-practices/",
+          "chapters": [
+            {
+              "title": "Practical Alerting",
+              "url": "https://sre.google/sre-book/practical-alerting/"
+            },
+            {
+              "title": "Being On-Call",
+              "url": "https://sre.google/sre-book/being-on-call/"
+            },
+            {
+              "title": "Effective Troubleshooting",
+              "url": "https://sre.google/sre-book/effective-troubleshooting/"
+            },
+            {
+              "title": "Emergency Response",
+              "url": "https://sre.google/sre-book/emergency-response/"
+            },
+            {
+              "title": "Managing Incidents",
+              "url": "https://sre.google/sre-book/managing-incidents/"
+            },
+            {
+              "title": "Postmortem Culture: Learning from Failure",
+              "url": "https://sre.google/sre-book/postmortem-culture/"
+            },
+            {
+              "title": "Tracking Outages",
+              "url": "https://sre.google/sre-book/tracking-outages/"
+            },
+            {
+              "title": "Testing for Reliability",
+              "url": "https://sre.google/sre-book/testing-reliability/"
+            },
+            {
+              "title": "Software Engineering in SRE",
+              "url": "https://sre.google/sre-book/software-engineering-in-sre/"
+            },
+            {
+              "title": "Load Balancing at the Frontend",
+              "url": "https://sre.google/sre-book/load-balancing-frontend/"
+            },
+            {
+              "title": "Load Balancing in the Datacenter",
+              "url": "https://sre.google/sre-book/load-balancing-datacenter/"
+            },
+            {
+              "title": "Handling Overload",
+              "url": "https://sre.google/sre-book/handling-overload/"
+            },
+            {
+              "title": "Addressing Cascading Failures",
+              "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+            },
+            {
+              "title": "Managing Critical State: Distributed Consensus for Reliability",
+              "url": "https://sre.google/sre-book/managing-critical-state/"
+            },
+            {
+              "title": "Distributed Periodic Scheduling with Cron",
+              "url": "https://sre.google/sre-book/distributed-periodic-scheduling/"
+            },
+            {
+              "title": "Data Processing Pipelines",
+              "url": "https://sre.google/sre-book/data-processing-pipelines/"
+            },
+            {
+              "title": "Data Integrity: What You Read Is What You Wrote",
+              "url": "https://sre.google/sre-book/data-integrity/"
+            },
+            {
+              "title": "Reliable Product Launches at Scale",
+              "url": "https://sre.google/sre-book/reliable-product-launches/"
+            }
+          ]
+        },
+        {
+          "part": "Part IV - Management",
+          "url": "https://sre.google/sre-book/part-IV-management/",
+          "chapters": [
+            {
+              "title": "Accelerating SREs to On-Call and Beyond",
+              "url": "https://sre.google/sre-book/accelerating-sre-on-call/"
+            },
+            {
+              "title": "Dealing with Interrupts",
+              "url": "https://sre.google/sre-book/dealing-with-interrupts/"
+            },
+            {
+              "title": "Embedding an SRE to Recover from Operational Overload",
+              "url": "https://sre.google/sre-book/operational-overload/"
+            },
+            {
+              "title": "Communication and Collaboration in SRE",
+              "url": "https://sre.google/sre-book/communication-and-collaboration/"
+            },
+            {
+              "title": "The Evolving SRE Engagement Model",
+              "url": "https://sre.google/sre-book/evolving-sre-engagement-model/"
+            }
+          ]
+        },
+        {
+          "part": "Part V - Conclusions",
+          "url": "https://sre.google/sre-book/part-V-conclusions/",
+          "chapters": [
+            {
+              "title": "Lessons Learned from Other Industries",
+              "url": "https://sre.google/sre-book/lessons-learned/"
+            },
+            {
+              "title": "Conclusion",
+              "url": "https://sre.google/sre-book/conclusion/"
+            }
+          ]
+        },
+        {
+          "part": "Back matter",
+          "url": "https://sre.google/sre-book/availability-table/",
+          "chapters": [
+            {
+              "title": "Appendix A. Availability Table",
+              "url": "https://sre.google/sre-book/availability-table/"
+            },
+            {
+              "title": "Appendix B. A Collection of Best Practices for Production Services",
+              "url": "https://sre.google/sre-book/service-best-practices/"
+            },
+            {
+              "title": "Appendix C. Example Incident State Document",
+              "url": "https://sre.google/sre-book/incident-document/"
+            },
+            {
+              "title": "Appendix D. Example Postmortem",
+              "url": "https://sre.google/sre-book/example-postmortem/"
+            },
+            {
+              "title": "Appendix E. Launch Coordination Checklist",
+              "url": "https://sre.google/sre-book/launch-checklist/"
+            },
+            {
+              "title": "Appendix F. Example Production Meeting Minutes",
+              "url": "https://sre.google/sre-book/production-meeting/"
+            },
+            {
+              "title": "Bibliography",
+              "url": "https://sre.google/sre-book/bibliography/"
+            }
+          ]
+        }
+      ],
+      "summary": "SRE 学科奠基作。将运维视为软件工程问题，用工程手段（自动化、软件）替代人工操作。全书五部分 34 章：I 导论（SRE 定位、Google 生产环境）；II 原则（拥抱风险、服务等级目标 SLO、消除琐事 toil、分布式系统监控、自动化演进、发布工程、简洁性）；III 实践（实战告警、on-call、有效排障、应急响应、事件管理、无责复盘、故障跟踪、可靠性测试、SRE 中的软件工程、前端/数据中心负载均衡、过载处理、级联故障、分布式共识、Cron 周期调度、数据处理管道、数据完整性、可靠产品发布）；IV 管理（加速 on-call 上手、处理打断、运维过载、沟通协作、SRE 参与模型演进）；V 结论（跨行业经验、结语）+ 6 个附录。核心概念：SLI/SLO/SLA 分层、错误预算（error budget）、toil 上限 50%、无责复盘（blameless postmortem）、发布工程、金丝雀发布、级联故障防护。",
+      "gaps": [
+        "仅取目录与论点摘要，未下载/镜像正文",
+        "访问需经代理，境内直连超时（连接层失败，http_code=000）"
+      ]
+    },
+    {
+      "id": "FO-03",
+      "title": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+      "title_cn": "SRE 工作手册",
+      "author": "Betsy Beyer, Niall Richard Murphy, David K. Rensin, et al. (Google)",
+      "year": 2018,
+      "url": "https://sre.google/workbook/table-of-contents/",
+      "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
+      "reachable": true,
+      "channel": "proxy(172.29.0.1:7890)",
+      "http_status": 200,
+      "toc": [
+        {
+          "part": "Front matter",
+          "url": "https://sre.google/workbook/foreword-I/",
+          "chapters": [
+            {
+              "title": "Foreword I",
+              "url": "https://sre.google/workbook/foreword-I/"
+            },
+            {
+              "title": "Foreword II",
+              "url": "https://sre.google/workbook/foreword-II/"
+            },
+            {
+              "title": "Preface",
+              "url": "https://sre.google/workbook/preface/"
+            },
+            {
+              "title": "How SRE Relates to DevOps",
+              "url": "https://sre.google/workbook/how-sre-relates/"
+            }
+          ]
+        },
+        {
+          "part": "Part I - Foundations",
+          "url": "https://sre.google/workbook/part-I-foundations/",
+          "chapters": [
+            {
+              "title": "Implementing SLOs",
+              "url": "https://sre.google/workbook/implementing-slos/"
+            },
+            {
+              "title": "SLO Engineering Case Studies",
+              "url": "https://sre.google/workbook/slo-engineering-case-studies/"
+            },
+            {
+              "title": "Monitoring",
+              "url": "https://sre.google/workbook/monitoring/"
+            },
+            {
+              "title": "Alerting on SLOs",
+              "url": "https://sre.google/workbook/alerting-on-slos/"
+            },
+            {
+              "title": "Eliminating Toil",
+              "url": "https://sre.google/workbook/eliminating-toil/"
+            },
+            {
+              "title": "Simplicity",
+              "url": "https://sre.google/workbook/simplicity/"
+            }
+          ]
+        },
+        {
+          "part": "Part II - Practices",
+          "url": "https://sre.google/workbook/part-II-practices/",
+          "chapters": [
+            {
+              "title": "On-Call",
+              "url": "https://sre.google/workbook/on-call/"
+            },
+            {
+              "title": "Incident Response",
+              "url": "https://sre.google/workbook/incident-response/"
+            },
+            {
+              "title": "Postmortem Culture: Learning from Failure",
+              "url": "https://sre.google/workbook/postmortem-culture/"
+            },
+            {
+              "title": "Managing Load",
+              "url": "https://sre.google/workbook/managing-load/"
+            },
+            {
+              "title": "Introducing Non-Abstract Large System Design",
+              "url": "https://sre.google/workbook/non-abstract-design/"
+            },
+            {
+              "title": "Data Processing Pipelines",
+              "url": "https://sre.google/workbook/data-processing/"
+            },
+            {
+              "title": "Configuration Design and Best Practices",
+              "url": "https://sre.google/workbook/configuration-design/"
+            },
+            {
+              "title": "Configuration Specifics",
+              "url": "https://sre.google/workbook/configuration-specifics/"
+            },
+            {
+              "title": "Canarying Releases",
+              "url": "https://sre.google/workbook/canarying-releases/"
+            }
+          ]
+        },
+        {
+          "part": "Part III - Processes",
+          "url": "https://sre.google/workbook/part-III-processes/",
+          "chapters": [
+            {
+              "title": "Identifying and Recovering from Overload",
+              "url": "https://sre.google/workbook/overload/"
+            },
+            {
+              "title": "SRE Engagement Model",
+              "url": "https://sre.google/workbook/engagement-model/"
+            },
+            {
+              "title": "SRE: Reaching Beyond Your Walls",
+              "url": "https://sre.google/workbook/reaching-beyond/"
+            },
+            {
+              "title": "SRE Team Lifecycles",
+              "url": "https://sre.google/workbook/team-lifecycles/"
+            },
+            {
+              "title": "Organizational Change Management in SRE",
+              "url": "https://sre.google/workbook/organizational-change/"
+            },
+            {
+              "title": "Conclusion",
+              "url": "https://sre.google/workbook/conclusion/"
+            }
+          ]
+        },
+        {
+          "part": "Back matter",
+          "url": "https://sre.google/workbook/slo-document/",
+          "chapters": [
+            {
+              "title": "Appendix A. Example SLO Document",
+              "url": "https://sre.google/workbook/slo-document/"
+            },
+            {
+              "title": "Appendix B. Example Error Budget Policy",
+              "url": "https://sre.google/workbook/error-budget-policy/"
+            },
+            {
+              "title": "Appendix C. Results of Postmortem Analysis",
+              "url": "https://sre.google/workbook/postmortem-analysis/"
+            },
+            {
+              "title": "Index",
+              "url": "https://sre.google/workbook/index/"
+            },
+            {
+              "title": "About the Editors",
+              "url": "https://sre.google/workbook/editors/"
+            },
+            {
+              "title": "Colophon",
+              "url": "https://sre.google/workbook/colophon/"
+            }
+          ]
+        }
+      ],
+      "summary": "SRE Book 的落地操作手册，把原则变成可执行模板。三部分 21 章：I 基础（SRE 与 DevOps 的关系、实施 SLO、SLO 工程案例、监控、基于 SLO 的告警、消除 toil、简洁性）；II 实践（on-call、事件响应、无责复盘、负载管理、引入非抽象大系统设计 NALSD、数据处理管道、配置设计与最佳实践、配置细节、金丝雀发布）；III 流程（识别与从过载中恢复、SRE 参与模型、超越边界、SRE 团队生命周期、组织变革管理）+ 附录（SLO 文档示例、错误预算政策示例、复盘分析结果）。相较 SRE Book 更偏工程落地：多窗口多燃烧率（multi-window multi-burn-rate）告警、错误预算政策（error budget policy）运作、配置即代码、NALSD 系统设计方法。",
+      "gaps": [
+        "仅取目录与论点摘要，未下载/镜像正文",
+        "访问需经代理，境内直连超时（连接层失败，http_code=000）"
+      ]
+    },
+    {
+      "id": "FO-04",
+      "title": "Domain-Driven Design Reference: Definitions and Pattern Summaries",
+      "title_cn": "领域驱动设计参考（免费精炼版）",
+      "author": "Eric Evans",
+      "year": 2015,
+      "url": "https://domainlanguage.com/ddd/reference/",
+      "final_url": "https://www.domainlanguage.com/ddd/reference/",
+      "toc_url": "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf",
+      "license": "CC BY 4.0（Reference 文档）+ CC BY 3.0（原书摘要）",
+      "reachable": true,
+      "channel": "direct",
+      "http_status": 200,
+      "toc": [
+        {
+          "part": "文档定位",
+          "chapters": [
+            {
+              "title": "DDD 模式与定义速查（作为 Evans 2004 原著所有定义/模式的摘要，另含 3 个未入书的补充模式）",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            }
+          ]
+        },
+        {
+          "part": "摘要来源",
+          "chapters": [
+            {
+              "title": "源自 2004 年《Domain-Driven Design》原著文本，2006 年置入 Creative Commons，编辑精简但未改写",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            }
+          ]
+        },
+        {
+          "part": "覆盖范围（按 DDD 标准模式组织，需 PDF 逐条核验）",
+          "chapters": [
+            {
+              "title": "通用语言与模型驱动设计（Ubiquitous Language / Model-Driven Design / Hands-on Modelers / Refactoring Toward Deeper Insight）",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            },
+            {
+              "title": "构建块（Entities / Value Objects / Services / Modules / Aggregates / Factories / Repositories / Domain Events 等）",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            },
+            {
+              "title": "柔性设计（Supple Design：Intention-Revealing Interfaces / Side-Effect-Free Functions / Assertions / Conceptual Contours / Standalone Classes / Closure of Operations）",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            },
+            {
+              "title": "战略设计（Bounded Context / Context Map / Core Domain / 各类上下文映射模式 / Distillation）",
+              "url": "https://www.domainlanguage.com/ddd/reference/"
+            }
+          ]
+        }
+      ],
+      "summary": "Eric Evans 本人发布的 DDD 官方免费精炼参考，定位为「模式的速查与术语索引」，不含完整讲解，而是对 2004 年原著《Domain-Driven Design: Tackling Complexity in the Heart of Software》中所有定义与模式做摘要，另有三个当年未入书、Evans 现视作 DDD 组成部分的补充模式。摘要文本抽取自原著，2006 年由作者置入 Creative Commons（原书摘要 CC BY 3.0，Reference 文档 CC BY 4.0），鼓励衍生作品。核心价值：作为 DDD 术语的权威词源与交叉验证源，覆盖通用语言、模型驱动设计、构建块（实体/值对象/服务/模块/聚合/工厂/仓储）、柔性设计与战略设计（限界上下文/上下文映射/核心域）等层次。注意：详细模式条目索引位于官方 PDF，本次遵版权与不落盘要求未下载该 PDF。",
+      "gaps": [
+        "详细模式条目（每条定义原文）在官方 PDF 中，本次未下载（遵守不落盘 PDF 全文）；PDF 为 CC 授权，如需可安全提取结构",
+        "上述「覆盖范围」为按 DDD 标准模式的组织索引，尚未与 PDF 逐条核对，条目标题待核（置信 medium）"
+      ]
+    },
+    {
+      "id": "FO-05",
+      "title": "The Twelve-Factor App",
+      "title_cn": "十二要素应用",
+      "author": "Adam Wiggins (Heroku)",
+      "year": 2011,
+      "url": "https://12factor.net/",
+      "license": "官方免费在线（含 ePub 下载）",
+      "reachable": true,
+      "channel": "direct",
+      "http_status": 200,
+      "toc": [
+        {
+          "part": "The Twelve Factors",
+          "url": "https://12factor.net/",
+          "chapters": [
+            {
+              "n": "I",
+              "title": "Codebase",
+              "url": "https://12factor.net/codebase"
+            },
+            {
+              "n": "II",
+              "title": "Dependencies",
+              "url": "https://12factor.net/dependencies"
+            },
+            {
+              "n": "III",
+              "title": "Config",
+              "url": "https://12factor.net/config"
+            },
+            {
+              "n": "IV",
+              "title": "Backing services",
+              "url": "https://12factor.net/backing-services"
+            },
+            {
+              "n": "V",
+              "title": "Build, release, run",
+              "url": "https://12factor.net/build-release-run"
+            },
+            {
+              "n": "VI",
+              "title": "Processes",
+              "url": "https://12factor.net/processes"
+            },
+            {
+              "n": "VII",
+              "title": "Port binding",
+              "url": "https://12factor.net/port-binding"
+            },
+            {
+              "n": "VIII",
+              "title": "Concurrency",
+              "url": "https://12factor.net/concurrency"
+            },
+            {
+              "n": "IX",
+              "title": "Disposability",
+              "url": "https://12factor.net/disposability"
+            },
+            {
+              "n": "X",
+              "title": "Dev/prod parity",
+              "url": "https://12factor.net/dev-prod-parity"
+            },
+            {
+              "n": "XI",
+              "title": "Logs",
+              "url": "https://12factor.net/logs"
+            },
+            {
+              "n": "XII",
+              "title": "Admin processes",
+              "url": "https://12factor.net/admin-processes"
+            }
+          ]
+        }
+      ],
+      "summary": "云原生/SaaS 时代应用架构的奠基方法论。作者基于 Heroku 上成千上万应用的开发与运维经验，总结出面向「以服务形式交付（web app / SaaS）」的十二条规范，目标是：用声明式格式自动化环境搭建、与操作系统保持干净契约以获得可移植性、适配现代云平台部署、最小化开发与生产差异、支持水平扩展而无需改动工具链/架构/实践。十二要素依次为：I Codebase（一份代码库、多次部署）、II Dependencies（显式声明并隔离依赖）、III Config（配置存于环境变量）、IV Backing services（后端服务视为可挂载资源）、V Build/release/run（严格分离构建、发布、运行）、VI Processes（以无状态进程运行）、VII Port binding（通过端口绑定导出服务）、VIII Concurrency（通过进程模型横向扩展）、IX Disposability（快速启动与优雅终止）、X Dev/prod parity（开发与生产环境对等）、XI Logs（日志作为事件流）、XII Admin processes（后台管理任务作为一次性进程运行）。格式受 Fowler 的《企业应用架构模式》与《重构》启发。本地已有 12factor.epub（BK-01）可交叉核验。",
+      "gaps": [
+        "仅取目录与论点摘要，未下载 ePub/正文（本地已有 BK-01 12factor.epub 可交叉核验）"
+      ]
+    }
+  ],
+  "summary": "5 个 free-official 源全部可达：abseil.io、domainlanguage.com、12factor.net 直连 200；sre.google 两源境内直连失败（连接层，http_code=000），经代理 172.29.0.1:7890 得 200。已提取各源完整目录结构与 200-500 字中文核心论点摘要。全程未下载/落盘任何书籍 PDF 或正文，仅提取结构与摘要。",
+  "notes": [
+    "访问日期：2026-09-10；可达性以 curl HTTP 状态码 + 内容字节数为证。",
+    "版权纪律：所有源均以「结构 + 摘要 + 链接」形式记录，正文/PDF 未落盘。"
+  ]
+}

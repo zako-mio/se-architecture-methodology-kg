@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网申填写扩展逆向架构 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GC-CASE.html">案例层</a> <span class="sep">/</span> <span>网申填写扩展逆向架构</span></div><div class="meta">X · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>网申填写扩展逆向架构</h1><div class="en">OpenJobAutofill Reverse Architecture Analysis</div><div class="badges"><span class="badge pr">P1</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge tp">案例</span><span class="badge dm">X · 跨域/其他</span><span class="badge th">质量属性</span><span class="badge grp">GC-CASE · 案例层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">对 Chrome MV3 网申自动填写扩展的逆向<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>分析：梳理 popup、content、background、options 四<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">构建</a>选型。</span></p></div><p class="note">别名：OpenJobAutofill 逆向、Chrome MV3 扩展架构分析、适配器驱动表单填写　|　英文：OpenJobAutofill Reverse Architecture Analysis　|　类型：案例 / case-study</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-360.6 -339 722.1 693.2" role="img" aria-label="网申填写扩展逆向架构 的 1-2 跳邻域关系图"><title>网申填写扩展逆向架构 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="75.3" y1="-271" x2="3.5" y2="-130.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：内聚耦合度量指导边界划分</title></line><line x1="158" y1="-255.6" x2="3.5" y2="-130.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：组织沟通结构约束可行边界</title></line><line x1="3.5" y1="-130.5" x2="-136" y2="-233.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：先划定边界，才能约束依赖方向</title></line><line x1="140.8" y1="-134.5" x2="3.5" y2="-130.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：边界划分是对多重质量属性的权衡</title></line><line x1="18.1" y1="112.3" x2="140.8" y2="-134.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：风格选型本质是以约束换取期望属性</title></line><line x1="17.2" y1="219.3" x2="140.8" y2="-134.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：属性冲突治理依据架构即权衡的本质</title></line><line x1="-75" y1="285.2" x2="18.1" y2="112.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：复杂度阶梯是选型够用原则的时序细化</title></line><line x1="17.2" y1="219.3" x2="18.1" y2="112.3" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：成本与质量冲突约束技术选型</title></line><line x1="89.3" y1="290.2" x2="18.1" y2="112.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：成本量化是选型匹配的前置输入</title></line><line x1="89.3" y1="290.2" x2="17.2" y2="219.3" stroke="#c22836" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>张力冲突（conflicts）：能力与质量提升同成本约束存在张力</title></line><line x1="18.1" y1="112.3" x2="-75" y2="285.2" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：静态选型与动态进阶是同一成本观的两面</title></line><line x1="-55.3" y1="-237.5" x2="15.2" y2="-263.3" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：视图与视角概念是理解架构描述构成与对应关系的前提</title></line><line x1="15.2" y1="-263.3" x2="3.5" y2="-130.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：架构描述记录边界与接口的外部可见属性</title></line><line x1="216.4" y1="10.1" x2="15.2" y2="-263.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：架构描述按干系人关注点组织局部表达</title></line><line x1="0" y1="0" x2="129" y2="-2.5" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以适配器与事件驱动组合出可扩展的架构风格</title></line><line x1="0" y1="0" x2="18.1" y2="112.3" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：零依赖零构建按约束选择刚好够用的技术</title></line><line x1="0" y1="0" x2="3.5" y2="-130.5" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以双通道与密钥隔离划清信任与能力边界</title></line><line x1="-247.7" y1="86.9" x2="-136" y2="-233.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：动态导入切断循环依赖，容器依赖抽象接口</title></line><line x1="-229.3" y1="-138.6" x2="75.3" y2="-271" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以内聚与耦合维度逐点评估通道结构</title></line><line x1="-229.3" y1="-138.6" x2="3.5" y2="-130.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：特化标识由提供者构造期绑定，通用契约零扩展</title></line><line x1="-229.3" y1="-138.6" x2="-136" y2="-233.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：张力：服务定位的隐式依赖与静默短路削弱依赖倒置</title></line><line x1="-208.4" y1="-208.4" x2="3.5" y2="-130.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：双半边架构以同源接口维持清晰边界</title></line><line x1="-208.4" y1="-208.4" x2="-136" y2="-233.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：违背：依赖声明不实（声明一项却消费多项）削弱依赖倒置</title></line><line x1="297.5" y1="-50.9" x2="129" y2="-2.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：分层架构风格的工业级实例</title></line><line x1="157" y1="181.9" x2="18.1" y2="112.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以够用原则选择最小接入组合</title></line><line x1="157" y1="181.9" x2="89.3" y2="290.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：能力成本速度三角下的分级接入</title></line><line x1="157" y1="181.9" x2="140.8" y2="-134.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：选型即权衡，无全能工具</title></line><line x1="-158.1" y1="220.3" x2="18.1" y2="112.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：技术雷达采用环支撑技术选型够用原则</title></line><line x1="-142.2" y1="0" x2="-278.7" y2="-79.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：可修改性战术实现质量属性战术映射方法</title></line><line x1="0" y1="0" x2="-142.2" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：适配器外置站点差异，隔离变化点缩小影响半径</title></line><line x1="-247.7" y1="86.9" x2="-142.2" y2="0" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：schema 单一数据源加严格单向依赖，局部化变更</title></line><line x1="-296.6" y1="4.9" x2="-142.2" y2="0" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：单一契约源与能力注册中心防止涟漪效应</title></line><line x1="-229.3" y1="-138.6" x2="-142.2" y2="0" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：四维耦合分析定位变更影响半径与缝隙</title></line><line x1="157" y1="181.9" x2="-158.1" y2="220.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：带观点的分级接入推荐，与雷达四环同构</title></line><line x1="216.4" y1="10.1" x2="129" y2="-2.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：关注点分离是理解与选择架构风格的认知基础</title></line><line x1="129" y1="-2.5" x2="140.8" y2="-134.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：风格选择是架构权衡的典型对象</title></line><line x1="216.4" y1="10.1" x2="-55.3" y2="-237.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：关注点分离是视图与视角划分的基础</title></line><line x1="-55.3" y1="-237.5" x2="3.5" y2="-130.5" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：视图记录边界与接口的外部可见属性</title></line><line x1="257.2" y1="-140.1" x2="3.5" y2="-130.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：限界上下文依边界与接口隔离原理</title></line><line x1="257.2" y1="-140.1" x2="158" y2="-255.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：DDD 边界与组织结构相互塑造（康威）</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">网申填写扩展逆向架构<title>网申填写扩展逆向架构（CAS-X-02）</title></text><circle cx="3.5" cy="-130.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="3.5" y="-111.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="129" cy="-2.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="129" y="16.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构风格<title>架构风格（ESS-G-05）</title></text><circle cx="18.1" cy="112.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="18.1" y="131.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术选型的够用原则<title>技术选型的够用原则（MTH-O-03）</title></text><circle cx="-142.2" cy="0" r="9.0" fill="#c98a3a" stroke="none"/><text x="-142.2" y="19" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">可修改性战术实现<title>可修改性战术实现（TEC-M-03）</title></text><circle cx="140.8" cy="-134.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="140.8" y="-118.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构即权衡<title>架构即权衡（ESS-O-02）</title></text><circle cx="75.3" cy="-271" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="75.3" y="-255" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">内聚与耦合<title>内聚与耦合（ESS-H-02）</title></text><circle cx="216.4" cy="10.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="216.4" y="26.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">关注点分离<title>关注点分离（ESS-G-01）</title></text><circle cx="-278.7" cy="-79.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-278.7" y="-63.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性战术映射方法<title>质量属性战术映射方法（MTH-M-01）</title></text><circle cx="17.2" cy="219.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="17.2" y="235.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性冲突治理<title>质量属性冲突治理（MTH-O-05）</title></text><circle cx="-229.3" cy="-138.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-229.3" y="-122.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="-136" cy="-233.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-136" y="-217.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">依赖倒置与依赖规则<title>依赖倒置与依赖规则（ESS-G-02）</title></text><circle cx="-55.3" cy="-237.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-55.3" y="-221.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">视图与视角<title>视图与视角（ESS-G-06）</title></text><circle cx="15.2" cy="-263.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="15.2" y="-247.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构描述与对应关系<title>架构描述与对应关系（ESS-G-07）</title></text><circle cx="-247.7" cy="86.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-247.7" y="102.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v3 多模块解耦<title>网申 v3 多模块解耦（CAS-X-03）</title></text><circle cx="-296.6" cy="4.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-296.6" y="20.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text><circle cx="157" cy="181.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="157" y="197.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">MCP 四件套选型对比<title>MCP 四件套选型对比（CAS-X-12）</title></text><circle cx="257.2" cy="-140.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="257.2" y="-124.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">领域驱动战略设计<title>领域驱动战略设计（MTH-G-04）</title></text><circle cx="89.3" cy="290.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="89.3" y="306.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">能力-成本-速度三角<title>能力-成本-速度三角（MTH-O-04）</title></text><circle cx="-208.4" cy="-208.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-208.4" y="-192.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">dsh-manager …<title>dsh-manager 插件深度分析（CAS-X-08）</title></text><circle cx="297.5" cy="-50.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="297.5" y="-34.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Hermes 七层架构总…<title>Hermes 七层架构总览（CAS-X-11）</title></text><circle cx="158" cy="-255.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="158" y="-239.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">康威定律<title>康威定律（ESS-N-01）</title></text><circle cx="-75" cy="285.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-75" y="301.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">复杂度阶梯与演进时机<title>复杂度阶梯与演进时机（MTH-O-08）</title></text><circle cx="-158.1" cy="220.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-158.1" y="236.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">ThoughtWorks…<title>ThoughtWorks 技术雷达（TEC-G-04）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 19 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">逆向一个成品扩展的价值在于还原「为什么这样分层」。</span>该案例的显著主张有三条：其一，把「如何适配不同招聘网站」从核心逻辑中分离为可注册的站点适配器，用域名正则、置信度、探测选择器与容器选择器描述站点差异，运行时评分选择最佳适配器，使新增站点只加数据不改引擎；其二，把「处理页面的能力」与「持有密钥、调用 AI 的能力」拆到不同进程，content 永不接触 API 密钥、background 永不操作 DOM，二者经明确的消息命名空间与统一响应信封通信；其三，隐私优先以脱敏函数在发送前拦截真实简历值，模型只接收字段名与结构。<span class="hl">这种「显式外置」也解释了为何一个<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>看似简单的扩展会有近万行代码：复杂度并未消失，而是被搬到边界与适配层集中管理；反过来说，若把适配逻辑写进引擎、把密钥放进页面脚本、把真值直接发给模型，短期代码更少，长期每一次站点改版、每一次隐私审计都会放大成本。</span></p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">四模块职责清晰：popup 是用户操作入口，经 tabs 通道下发页面级指令；content 是注入页面的引擎，承担表单扫描、字段标签提取、语义桶匹配、候选评分、控件填写与绿橙标记；background 是 Service Worker 中枢，持有<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>、代理 AI 调用、巡检更新并经 runtime 通道路由十余种消息；options 管理结构化简历、AI 接口配置与导入导出。</span><span class="hl">核心机制包括适配器模式（站点探测与统一注入扫描管线）、评分链模式（硬过滤后经文本分、语义桶加分、重复项序号匹配加权，达阈值才自动填写）、双通道协议（页面操作走 tabs、服务调用走 runtime，消息以命名空间隔离）、以及为兼容 React/Vue 受控<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>的原生 setter 加事件派发写入法。</span>值得注意的取舍是「谁来做决策」：站点探测在页面进程做，AI 调用与密钥在后台进程做，二者以消息解耦，使替换 AI 后端或新增站点互不影响；标记系统用颜色把「已自动填写」与「待人工确认」分开，本质上把模型置信度外化为可见信号，而非静默替用户决定。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">工程上以零 package、零 node_modules、零打包器实现，Load unpacked 直接加载，把部署复杂度压到最低，代价是全部逻辑靠手写原生 JS 承载，核心文件达数千行。</span>隐私以「发送前脱敏、提示词只含字段结构」落实，避免简历真值出域；更新检查用定时闹钟加发行接口并配徽标提示；面板状态以会话存储加 LRU 控制上限；填写入口用运行标识双重检查防重入；面板持久化加防抖。文档化方面配套模块依赖与数据流图、核心流程时序图与适配器机制图，把逆向结论沉淀为可复用资料。<span class="hl">整个扩展的可审计性正来自「无构建」：源码即产物，任何人拿到压缩包即可逐行检查其网络请求与数据处理，这对处理敏感简历的工具有现实意义；代价是没有依赖管理，跨文件复用只能靠约定与全局常量，演进到更大规模时需要<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>而非简单加包。</span></p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>零构建选型以<a class="term" href="../14-views/glossary.html#g-121" title="maintainability — 产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性 modularity/reusability/analysability/modifiability/testability。">可维护性</a>换来了交付简单与审计透明：省去工具链却失去类型检查与模块打包，数千行单文件与全局常量使大型化后风险陡增；适配器驱动降低新增站点成本，但适配器质量参差会直接决定填写准确率，且站点改版时适配器需持续维护。</p><p>AI 调用无缓存，每次填写独立请求，准确率提升以用户 API 成本为代价。</p><p>更深的张力在自动化程度：自动填写越激进，用户越省事，误填风险也越大，本案例用阈值加颜色标记把不确定交还用户，是保守但有据的选择；另一个被低估的成本是站点维护，适配器增长后每个都是一条需持续回归的测试路径，缺少自动化站点测试时维护负担会随覆盖站点数上升。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>双通道协议边界清晰，却需要人工维护十余种消息与两端契约，缺少自动化交叉校验时易出现漏接与静默失败。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>隐私脱敏是强承诺，却依赖单点函数正确，漏一个字段即失效。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-01 · 2 跳派生：当前节点 → ESS-G-05 → ESS-G-01</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-03 · 2 跳派生：当前节点 → ESS-G-03 → ESS-G-02</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-04 · 经 TEC-M-03</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-05 · 2 跳派生：当前节点 → ESS-G-03 → ESS-H-02</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-08 · 经 ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div><div class="case-card"><span class="id">CAS-X-09 · 2 跳派生：当前节点 → ESS-G-03 → ESS-G-06</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-10 · 2 跳派生：当前节点 → ESS-G-03 → ESS-G-02</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div><div class="case-card"><span class="id">CAS-X-11 · 经 ESS-G-05</span><h4>Hermes 七层架构总览</h4><p>对八千余文件的工业级 AI Agent 项目做七层架构总览逆向，揭示其「越用越聪明」的自进化闭环如何在层间传导的控制型架构案例。</p></div><div class="case-card"><span class="id">CAS-X-12 · 经 MTH-O-03</span><h4>MCP 四件套选型对比</h4><p>对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → ESS-G-05 → ESS-G-01</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → MTH-O-03 → MTH-O-05</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>LOC-021、BK-007、OFF-002</div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：零依赖零构建必然意味着架构简单、无需设计</span><br>核验结论：该扩展虽无构建与依赖，仍以适配器、评分链、双通道与脱敏等结构承载复杂变化点，架构设计量并未因零构建而减少　<span class="k">[LOC-021]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>→ ESS-G-03</td><td>边界与接口隔离<br><span style="color:var(--dim);font-size:12px">E-943</span></td><td>印证：以双通道与密钥隔离划清信任与能力边界</td></tr><tr><td class="k">案例印证</td><td>→ ESS-G-05</td><td>架构风格<br><span style="color:var(--dim);font-size:12px">E-941</span></td><td>印证：以适配器与事件驱动组合出可扩展的架构风格</td></tr><tr><td class="k">案例印证</td><td>→ MTH-O-03</td><td>技术选型的够用原则<br><span style="color:var(--dim);font-size:12px">E-942</span></td><td>印证：零依赖零构建按约束选择刚好够用的技术</td></tr><tr><td class="k">案例印证</td><td>→ TEC-M-03</td><td>可修改性战术实现<br><span style="color:var(--dim);font-size:12px">E-13</span></td><td>印证：适配器外置站点差异，隔离变化点缩小影响半径</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

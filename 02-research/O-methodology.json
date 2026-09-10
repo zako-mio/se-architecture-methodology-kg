@@ -1,0 +1,1518 @@
+{
+  "topic": "阶段2 O 域 · 方法论主干综合（11 维权衡骨架 + 跨域原则↔反例总表 + 术语一致性裁决）",
+  "generated_by": "方法论综合架构师（自写角色）",
+  "generated_date": "2026-09-10",
+  "phase": "阶段2 O 域（方法论主干综合，对 F–N 做二次归纳，不新增外部检索）",
+  "inputs": [
+    "F-requirements.json",
+    "G-architecture.json",
+    "H-implementation.json",
+    "I-testing.json",
+    "J-deployment.json",
+    "K-operations.json",
+    "L-evolution.json",
+    "M-quality-ility.json",
+    "N-team-conway.json",
+    "C-local-inventory.json（KG-04 = 0813『架构权衡思维 11 维』来源）"
+  ],
+  "framework_inheritance": {
+    "source": "0813-知识库建库工程 第5层『架构权衡思维』（17/18 篇，维度 1–11）",
+    "skeleton": "每维四问：①有什么可权衡 ②如何权衡 ③为何如此权衡 ④你的场景",
+    "adaptation": "原 11 维为 RAG 建库场景的具体权衡轴；本域保持四问骨架与『11 维』规模，将其泛化为软件工程/架构设计主干权衡轴，并在 legacy_dim 字段保留原维溯源。四问改写为 what/how/why/scenario。",
+    "source_note": "C 包未收录 0813 原文，本域直接读取 0813 教材原文（17/18 篇）核对骨架，属对本地信源的二次归纳。"
+  },
+  "tradeoff_dimensions": [
+    {
+      "id": "O-TD-01",
+      "legacy_dim": "0813 维度1 精度 vs 召回",
+      "title": "正确性/收益 vs 完备性/覆盖（不对称代价）",
+      "domains": [
+        "F",
+        "I",
+        "K",
+        "H",
+        "M"
+      ],
+      "what": "同一活动中『宁多勿漏』（高召回/高覆盖）与『宁缺毋滥』（高精度/低噪声）此消彼长：测试覆盖广度 vs 误报噪声；告警 recall vs precision；需求集完整性（complete/consistent）vs 过度约束；知识/模块暴露范围 vs 抽象封装。",
+      "how": "用可度量指标分轴测量、分层处理：需求用响应度量/QA 场景六要素定义『完成』；测试用金字塔分层（底层广覆盖、顶层高保真）；告警用多窗口多燃尽率同时控制 precision/recall/detection/reset；检索按阶段分治（召回宽、排序精）。",
+      "why": "漏失不可补救的代价 > 可过滤噪声的代价；软件本质复杂度（Brooks）无法被单一手段消除，只能在两轴间选点；代价不对称使默认偏向覆盖。",
+      "scenario": "母库面向『不遗漏方法论分支、再以门控精筛』：覆盖层宁多（收录 F–N 全部原则/反例），信源与一致性门控过滤噪声；测试与告警沿用同一原则但须显式定义阈值。",
+      "source_ids": [
+        "STD-011",
+        "OFF-010",
+        "BK-036",
+        "WEB-024",
+        "VEN-017",
+        "BK-025",
+        "BK-026",
+        "PAP-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-02",
+      "legacy_dim": "0813 维度2 摄取时机",
+      "title": "准入/触发时机：人工 vs 自动 vs 半自动",
+      "domains": [
+        "F",
+        "I",
+        "J",
+        "K",
+        "L"
+      ],
+      "what": "何时、由谁触发把产物推进下一环节：需求准入（人工门 vs 自动流转）；CI/CD 触发（每次推送自动构建 vs 人工发布）；治理检查（持续自动 vs 一次性评审）；容量规划（人工调整 vs 意图驱动自动重算）。",
+      "how": "按『可信度门槛 × 频率』选择；用完成信号/决策门作半自动锚点；以自动化优先消除 toil（SRE 运维工作≤50% 的硬约束）。",
+      "why": "本质是质量门槛 vs 便利性的权衡；自动省心但可能放行半成品，人工可控但会漏；半自动兼得。",
+      "scenario": "母库生成物入库半自动（复用留档完成信号 + 人工确认）；架构治理用持续自动 fitness function 守护，但保留架构决策门与人工评估（ATAM）。",
+      "source_ids": [
+        "STD-011",
+        "WEB-030",
+        "VEN-020",
+        "BK-025",
+        "VEN-030",
+        "BK-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-03",
+      "legacy_dim": "0813 维度3 存储选型",
+      "title": "技术/风格/组件选型：够用就好，勿过度",
+      "domains": [
+        "G",
+        "H",
+        "J",
+        "M",
+        "N"
+      ],
+      "what": "在标准/框架/架构风格/编排组件/平台间选择：单体 vs N-tier vs 微服务 vs 事件驱动；一体化框架 vs 轻量自建；可插拔平台 vs 专有组件。",
+      "how": "按适用域与约束匹配（Azure 风格清单给出每风格依赖管理与适配域）；用 ATAM/utility tree 按质量属性场景排序；按子域/bounded context 判断『收益>代价』；宁放松约束不追求架构纯洁。",
+      "why": "每个组件/风格在获得期望属性的同时制造复杂度（服务发现、最终一致性、通信开销、可维护负担）；『能用简单方案解决就不上复杂方案』。",
+      "scenario": "母库自身轻量自建、组件最小化；架构选型以风格-特性权衡 + ATAM 收敛，『够用就好』。",
+      "source_ids": [
+        "VEN-014",
+        "PAP-007",
+        "OFF-002",
+        "BK-008",
+        "BK-031",
+        "BK-009",
+        "WEB-045"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-04",
+      "legacy_dim": "0813 维度4 Embedding 选型",
+      "title": "能力-成本-速度三角（一次性 vs 持续成本）",
+      "domains": [
+        "I",
+        "J",
+        "K",
+        "N"
+      ],
+      "what": "能力/质量 vs 成本 vs 速度/交付频率：测试保真度 vs 成本（larger tests）；双份环境（蓝绿）成本；冗余 N+2；自动化投入 vs 交付速度。",
+      "how": "区分一次性成本与持续成本（离线/预计算可复用 vs 每次调用）；DORA 表明速度与稳定并非取舍、可兼得；先量化再优化。",
+      "why": "硬约束（资源/预算）决定可行域；盲目省一次性成本收益低，持续成本才是优化重点。",
+      "scenario": "架构决策先量化各方案成本（人力/基础设施/持续运维），不凭感觉；成本优化聚焦持续成本与减小变更批量。",
+      "source_ids": [
+        "BK-001",
+        "WEB-032",
+        "VEN-022",
+        "BK-025",
+        "VEN-036"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-05",
+      "legacy_dim": "0813 维度5 成本 vs 质量",
+      "title": "成本/资源 vs 质量成效（质量属性间冲突）",
+      "domains": [
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "M"
+      ],
+      "what": "质量属性间此消彼长：agility↔stability、security↔performance（加密强度）、性能↔可修改性、可靠性↔成本（冗余/双份环境/100% SLO）。",
+      "how": "显式化 tradeoff point（同时影响多个质量属性的敏感点）；用错误预算把『创新 vs 稳定』转为客观决策；定义 fitness function 前先收集干系人 -ilities 并识别冲突；量化后排序。",
+      "why": "质量属性无法同时最优；100% 可靠性既不可达也扼杀变更；约束换属性是架构的本质。",
+      "scenario": "用 ATAM 的 sensitivity/tradeoff point 与错误预算显式记录取舍并写入 ADR；对冲突属性做优先级排序而非『全都要』。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002",
+        "BK-025",
+        "BK-026",
+        "VEN-030",
+        "OFF-025",
+        "BK-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-06",
+      "legacy_dim": "0813 维度6 检索粒度",
+      "title": "粒度与边界：模块/服务/团队",
+      "domains": [
+        "G",
+        "H",
+        "M",
+        "N"
+      ],
+      "what": "模块/服务/知识域/团队粒度与边界：按什么分解（信息隐藏 vs 处理步骤）；深模块 vs 浅模块；微服务粒度；团队认知负荷与 stream-aligned 边界。",
+      "how": "对齐『变更/查询粒度』；按 secret（可能变化的设计决策）分解（Parnas）；用内聚/耦合与 connascence 度量；模块分解与组织分解同步（Conway）；以认知负荷约束团队边界。",
+      "why": "粒度决定理解成本与变更波及面；按流程分解会致核心变更波及所有模块（KWIC 反例）；过度细分（classitis/微服务过细）反而增复杂度。",
+      "scenario": "母库按职责/信息隐藏划分知识点域与模块；架构按变更对齐切分服务，并与团队边界（Conway）同步演化。",
+      "source_ids": [
+        "PAP-002",
+        "BK-008",
+        "WEB-022",
+        "PAP-021",
+        "VEN-014",
+        "OFF-024",
+        "BK-030",
+        "WEB-042"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-07",
+      "legacy_dim": "0813 维度7 抽取方式",
+      "title": "自动化方式：规则/模板 vs 模型生成 vs 人工",
+      "domains": [
+        "F",
+        "I",
+        "J",
+        "L",
+        "N"
+      ],
+      "what": "规则/模板 vs LLM/自动化生成 vs 纯人工：需求规定、测试生成、部署配置生成、治理规则（fitness function）实现、度量自动化。",
+      "how": "按沉淀粒度与可信度门槛选择；模板/规则零成本且可控，模型/自动化适合高频或复杂场景；自动化须配持续执行与反馈闭环。",
+      "why": "结构化沉淀需要抽取但有成本与抽错风险；自动化减少 toil、提升一致性，但过度依赖模型会流失可控性。",
+      "scenario": "母库知识点结构化以模板 + 规则抽取为主、模型辅助；治理用可执行 fitness function 而非纯文档/人工；高级自动化只在量/频足够时引入。",
+      "source_ids": [
+        "BK-036",
+        "WEB-030",
+        "VEN-020",
+        "VEN-030",
+        "BK-011",
+        "VEN-036"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-08",
+      "legacy_dim": "0813 维度8 图谱时机",
+      "title": "复杂度阶梯：何时上高级方案（简单 vs 复杂）",
+      "domains": [
+        "G",
+        "H",
+        "J",
+        "K",
+        "L"
+      ],
+      "what": "简单 vs 复杂方案（单体/模块化单体/微服务/EDA；集中式 vs 分布式；无冗余 vs 多副本）；『能用 ≠ 该用』。",
+      "how": "先问问题性质（单跳 vs 多跳/全局）与数据动态性；微服务需成熟 DevOps 实践；按子域判断；先跑通简单方案，出现明确跨域/规模需求再演进。",
+      "why": "复杂方案的建置/延迟/一致性成本高；Ousterhout 设计根本目标是降低 complexity；能用简单就不上复杂。",
+      "scenario": "母库/系统先上最简单可工作架构，明确需求出现再演进；避免为『未来可能需要』上微服务/图谱（YAGNI）。",
+      "source_ids": [
+        "VEN-014",
+        "PAP-007",
+        "BK-008",
+        "WEB-023",
+        "BK-031",
+        "BK-025",
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-09",
+      "legacy_dim": "0813 维度9 简单 vs 可维护",
+      "title": "简单/透明 vs 可维护（理解成本是真实成本）",
+      "domains": [
+        "G",
+        "H",
+        "L",
+        "M",
+        "N"
+      ],
+      "what": "组件数量 vs 可维护性；抽象层次（黑盒框架 vs 透明自建）；文档完备 vs 文档过载；平台自服务 vs 臃肿平台。",
+      "how": "问『谁维护、维护者理解多少』；每个组件须能说清『为何在、故障怎么查』；按干系人关注点选视图避免过载（V&B）；以认知负荷约束平台与团队。",
+      "why": "理解成本是真实成本；不理解的黑盒出问题比『功能少但透明』更致命；复杂度主要来源于 obscurity。",
+      "scenario": "母库轻量自建、每环可理解；架构文档按用途/干系人裁剪视图；平台遵循 Thinnest Viable Platform。",
+      "source_ids": [
+        "OFF-015",
+        "OFF-016",
+        "BK-013",
+        "BK-008",
+        "WEB-002",
+        "OFF-022",
+        "WEB-045"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-10",
+      "legacy_dim": "0813 维度10 增量更新与一致性",
+      "title": "演化与一致性：增量 vs 全量、变更传播",
+      "domains": [
+        "F",
+        "G",
+        "I",
+        "J",
+        "L"
+      ],
+      "what": "全量重建 vs 增量同步；删除/弃用传播；架构漂移/侵蚀；向后兼容 vs 破坏性变更；技术债偿还节奏。",
+      "how": "增量同步机制（跟踪状态 + 一致标识 + 只重处理受影响项 + 传播删除）；fitness function 持续防漂移；expand/contract、strangler fig 渐进迁移；semver + Deprecation/Sunset 信号分级。",
+      "why": "持续流入使增量从可选变必选；Lehman 复杂度递增/质量下降定律；变更是故障首要来源，小批量更安全。",
+      "scenario": "母库内容演化走增量 + 契约（等价 tracking/删除传播）；架构演化走 strangler fig + fitness function + 弃用信号 + expand/contract。",
+      "source_ids": [
+        "STD-011",
+        "STD-001",
+        "WEB-030",
+        "WEB-032",
+        "WEB-033",
+        "WEB-016",
+        "WEB-019",
+        "PAP-003",
+        "STD-025",
+        "STD-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "O-TD-11",
+      "legacy_dim": "0813 维度11 评估体系",
+      "title": "度量与反馈闭环（可测量才可优化）",
+      "domains": [
+        "G",
+        "I",
+        "K",
+        "L",
+        "N"
+      ],
+      "what": "不度量 vs 人工评估 vs 自动评估；用什么指标（DORA 五指标、SLI/SLO/错误预算、ATAM utility tree、fitness function）；是否持续执行。",
+      "how": "建立典型场景/查询 + 基线；多窗口多燃尽率告警；fitness function 在流水线持续校验；闭环（度量→改进→复测）；警惕 Goodhart 定律与 gaming。",
+      "why": "没有评估所有调参都是瞎调；可测量才可优化；但度量一旦成为目标即失效。",
+      "scenario": "母库建立轻量评估基线（真实查询/场景 + 基线）并配客观门控；架构用 DORA/SLO/fitness function 闭环，防指标 gaming。",
+      "source_ids": [
+        "OFF-002",
+        "VEN-018",
+        "BK-026",
+        "VEN-027",
+        "VEN-030",
+        "BK-011",
+        "VEN-036",
+        "VEN-037"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "principles_counterexamples": [
+    {
+      "id": "O-PC-01",
+      "principle": "信息隐藏 / 优先组合而非继承（encapsulation, favor composition over inheritance）",
+      "counterexample": "脆弱基类（fragile base class）：继承暴露父类实现，基类看似安全的修改经继承传递使派生类故障；‘inheritance breaks encapsulation’。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "PAP-002",
+        "BK-032",
+        "PAP-023"
+      ],
+      "merge_note": "合并 H 包『information hiding↔fragile base class』与『favor composition↔脆弱基类』两条。"
+    },
+    {
+      "id": "O-PC-02",
+      "principle": "封装 / 接口稳定（encapsulation, stable interface）",
+      "counterexample": "抽象泄漏（leaky abstraction）：非平凡抽象无法完全屏蔽底层，性能/故障/边界情况泄漏（TCP/SQL/远程文件）。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "WEB-020",
+        "PAP-002"
+      ]
+    },
+    {
+      "id": "O-PC-03",
+      "principle": "高内聚（high cohesion）",
+      "counterexample": "God object / Large Class / Coincidental cohesion（职责任意堆叠）。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "WEB-022",
+        "VEN-015"
+      ]
+    },
+    {
+      "id": "O-PC-04",
+      "principle": "低耦合（low coupling）",
+      "counterexample": "Content/Common coupling、Feature Envy、Inappropriate Intimacy、Message Chains。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "WEB-022",
+        "VEN-015"
+      ]
+    },
+    {
+      "id": "O-PC-05",
+      "principle": "深模块（deep modules）",
+      "counterexample": "浅模块 / classitis / pass-through methods（接口复杂却功能不足）。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-008"
+      ]
+    },
+    {
+      "id": "O-PC-06",
+      "principle": "DRY（Don't Repeat Yourself）",
+      "counterexample": "过度/错误抽象（over-abstraction / wrong abstraction）：AHA、‘prefer duplication over the wrong abstraction’、Speculative Generality。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-037",
+        "VEN-015"
+      ]
+    },
+    {
+      "id": "O-PC-07",
+      "principle": "YAGNI（You Aren't Gonna Need It）",
+      "counterexample": "Speculative Generality / Inner-platform effect / Abstraction inversion / Reinventing the square wheel。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "WEB-023",
+        "VEN-015"
+      ]
+    },
+    {
+      "id": "O-PC-08",
+      "principle": "设计模式（GoF）",
+      "counterexample": "模式过度使用/额外间接层；GoF 模式自身会出现 bad smells 并加剧结构退化（10 年系统综述）；Singleton 在部分实现下被视为 anti-pattern。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-032",
+        "PAP-022",
+        "VEN-016"
+      ]
+    },
+    {
+      "id": "O-PC-09",
+      "principle": "SRP / 单一变更原因",
+      "counterexample": "Divergent Change（一个类因多种原因变化）、God object。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-020",
+        "VEN-015"
+      ]
+    },
+    {
+      "id": "O-PC-10",
+      "principle": "Clean Code 短函数",
+      "counterexample": "Ousterhout：函数过小导致更多接口/文档、失去独立性，反增复杂度（设计口味分歧，disputed 非事实冲突）。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-020",
+        "BK-008"
+      ]
+    },
+    {
+      "id": "O-PC-11",
+      "principle": "战略式编程（strategic programming，持续设计投入）",
+      "counterexample": "战术龙卷风（tactical tornado）/ Big Ball of Mud / 软件熵累积。",
+      "domains": [
+        "H"
+      ],
+      "source_ids": [
+        "BK-008",
+        "WEB-021"
+      ]
+    },
+    {
+      "id": "O-PC-12",
+      "principle": "模块化（Modularity）并持续维护复杂度、防止架构腐化",
+      "counterexample": "Big Ball of Mud、架构侵蚀/漂移；放任 Lehman『复杂度递增/质量下降』定律。",
+      "domains": [
+        "H",
+        "L"
+      ],
+      "source_ids": [
+        "STD-005",
+        "WEB-021",
+        "PAP-003",
+        "WEB-019"
+      ],
+      "merge_note": "合并 H 包『Modularity↔BBoM/腐化』与 L 包『持续维护复杂度↔Lehman 定律』两条（同一反例族）。"
+    },
+    {
+      "id": "O-PC-13",
+      "principle": "重构须保持可观察行为不变（behavior-preserving）",
+      "counterexample": "以『重构』名义改功能/重写；在无测试的遗留码上直接重构。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "BK-021",
+        "BK-022"
+      ]
+    },
+    {
+      "id": "O-PC-14",
+      "principle": "小步、渐进式演进（重构小步 / strangler fig 渐进现代化）",
+      "counterexample": "一次性整机重写（big rewrite / big-bang）：耗时长、需求难摸清、重建无用行为，‘go down in flames most of the time’。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "WEB-040",
+        "WEB-016"
+      ],
+      "merge_note": "合并 L 包『重构小步↔big rewrite』与『strangler fig↔整机重写』两条。"
+    },
+    {
+      "id": "O-PC-15",
+      "principle": "smell 是启发式信号而非结论",
+      "counterexample": "见 smell 就机械重构（如长函数并不总是问题），制造无谓改动。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "WEB-017"
+      ]
+    },
+    {
+      "id": "O-PC-16",
+      "principle": "技术债应优先偿还高频变更区、逐步还本",
+      "counterexample": "对稳定但 crufty 的代码过度清理（利息未触发、收益低）；或把债当作『永不偿还』的许可。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "WEB-002",
+        "PAP-006"
+      ]
+    },
+    {
+      "id": "O-PC-17",
+      "principle": "技术债是权衡工具而非道德评判",
+      "counterexample": "把一切设计缺陷都斥为『坏』，忽略 prudent/deliberate 债的正当性。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "WEB-013"
+      ]
+    },
+    {
+      "id": "O-PC-18",
+      "principle": "用可执行的 fitness functions 自动化架构治理（持续校验）",
+      "counterexample": "只靠文档/评审一次性把关、或把 fitness function 写成一次性检查 → 架构随日常变更悄然漂移；反之固化过强会 ossify。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "VEN-030",
+        "BK-011"
+      ]
+    },
+    {
+      "id": "O-PC-19",
+      "principle": "改动遗留码前先建立行为安全网（characterization test / seam）",
+      "counterexample": "无特征测试直接修改 → 无回归保护；或把特征测试当正确性测试（它只验证行为是否变化）。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "WEB-041",
+        "BK-022"
+      ]
+    },
+    {
+      "id": "O-PC-20",
+      "principle": "弃用须有信号、通知期与迁移路径",
+      "counterexample": "无通知直接移除（破坏契约）；只 deprecate 不移除（僵尸功能）；无替代/迁移指引即弃用。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "STD-026",
+        "VEN-033",
+        "VEN-032"
+      ]
+    },
+    {
+      "id": "O-PC-21",
+      "principle": "版本语义区分『弃用』与『破坏性变更』",
+      "counterexample": "把破坏性移除塞进 MINOR/PATCH，违反 semver 与 API 契约。",
+      "domains": [
+        "L"
+      ],
+      "source_ids": [
+        "VEN-034",
+        "VEN-032"
+      ]
+    },
+    {
+      "id": "O-PC-22",
+      "principle": "康威定律：组织沟通结构决定系统架构",
+      "counterexample": "开放协作的软件项目系统性违反严格镜像；技术动态产业中部分镜像（partial mirroring）常优于完全镜像；企业可战略性『打破镜像』。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "WEB-042",
+        "PAP-028"
+      ]
+    },
+    {
+      "id": "O-PC-23",
+      "principle": "逆向康威操作（Inverse Conway Maneuver）：改变团队结构以催生目标架构",
+      "counterexample": "对刚性遗留架构仅重组组织不会立即修复，反造成开发者-代码错配与摩擦；且 ICM 常被误用为单纯改组织架构图。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "VEN-035",
+        "WEB-044"
+      ]
+    },
+    {
+      "id": "O-PC-24",
+      "principle": "团队拓扑四类型 + 三种交互模式",
+      "counterexample": "只用模型一部分（如仅套四团队类型）收效有限；四类型/三模式是约束性隐喻而非穷尽现实，复杂组织远超此模型。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "WEB-045",
+        "BK-030"
+      ]
+    },
+    {
+      "id": "O-PC-25",
+      "principle": "平台团队降低 stream-aligned 认知负荷、加速交付",
+      "counterexample": "平台工程可能降低变更稳定性与吞吐；臃肿平台制造更多依赖而非加速（TVP 之动因）。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "BK-030",
+        "WEB-045"
+      ]
+    },
+    {
+      "id": "O-PC-26",
+      "principle": "用 DORA 交付指标度量效能（当前五指标）",
+      "counterexample": "把指标当目标触发 Goodhart 定律与 gaming；跨异质应用比较误导；孤岛式归属引发推责。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "VEN-036",
+        "VEN-037"
+      ]
+    },
+    {
+      "id": "O-PC-27",
+      "principle": "AI 提升开发生产力",
+      "counterexample": "DORA 2024 发现 AI 采用同时降低软件交付稳定性与吞吐。",
+      "domains": [
+        "N"
+      ],
+      "source_ids": [
+        "VEN-038"
+      ]
+    },
+    {
+      "id": "O-PC-28",
+      "principle": "需求应陈述 what 而非 how，且须满足良构需求特性",
+      "counterexample": "需求内嵌设计决策；需求假定未被管理、优先级与难度未评估（2025 INCOSE 审计：29148 合规薄弱点）。",
+      "domains": [
+        "F"
+      ],
+      "source_ids": [
+        "STD-011",
+        "PAP-019",
+        "VEN-012"
+      ],
+      "merge_note": "O 域从 F 包 findings 派生（F 包未提供结构化配对字段）。"
+    },
+    {
+      "id": "O-PC-29",
+      "principle": "测试金字塔：大量低层单元测试 + 少量高层端到端测试",
+      "counterexample": "冰淇淋反模式 / inverted pyramid（过度 e2e）；hourglass（缺中间层集成测试）。",
+      "domains": [
+        "I"
+      ],
+      "source_ids": [
+        "WEB-024",
+        "VEN-017"
+      ],
+      "merge_note": "O 域从 I 包 findings 派生。"
+    },
+    {
+      "id": "O-PC-30",
+      "principle": "质量门控以量化条件阻断不可发布版本",
+      "counterexample": "只基于单一瞬时错误率告警（recall 高但 precision 低、误报频繁）；或 SLO 合规沦为无后果的 KPI（缺错误预算政策）。",
+      "domains": [
+        "I",
+        "K"
+      ],
+      "source_ids": [
+        "VEN-019",
+        "BK-026",
+        "BK-025"
+      ],
+      "merge_note": "O 域从 I/K 包 findings 派生并跨域合并。"
+    },
+    {
+      "id": "O-PC-31",
+      "principle": "断路器 + 超时 + 重试（指数退避 + 抖动、仅幂等操作）",
+      "counterexample": "对非幂等操作重试（重复执行）；无抖动重试形成调用聚簇并放大过载；缺舱壁隔离致级联故障。",
+      "domains": [
+        "K"
+      ],
+      "source_ids": [
+        "WEB-037",
+        "VEN-028",
+        "VEN-025",
+        "BK-025"
+      ],
+      "merge_note": "O 域从 K 包 findings/reliability_tactics 派生。"
+    },
+    {
+      "id": "O-PC-32",
+      "principle": "无指责复盘（blameless postmortem）",
+      "counterexample": "追责文化使问题被掩盖、系统性风险上升（Dekker Bad Apple Theory / Just Culture 批判）。",
+      "domains": [
+        "K"
+      ],
+      "source_ids": [
+        "WEB-039",
+        "BK-025"
+      ],
+      "merge_note": "O 域从 K 包 findings 派生。"
+    },
+    {
+      "id": "O-PC-33",
+      "principle": "不可变基础设施（部署后不再原地修改，只替换实例）",
+      "counterexample": "配置漂移：部署后原地改服务器/运行配置管理工具，导致环境不一致与不可复现。",
+      "domains": [
+        "J"
+      ],
+      "source_ids": [
+        "WEB-034",
+        "VEN-024",
+        "WEB-035"
+      ],
+      "merge_note": "O 域从 J 包 findings 派生。"
+    },
+    {
+      "id": "O-PC-34",
+      "principle": "蓝绿 / 金丝雀降低发布爆炸半径",
+      "counterexample": "有状态数据库 schema 变更未先做 expand/contract 兼容新旧版本；把金丝雀当 A/B 测试（目的混用污染结果）。",
+      "domains": [
+        "J"
+      ],
+      "source_ids": [
+        "WEB-032",
+        "WEB-033",
+        "VEN-021"
+      ],
+      "merge_note": "O 域从 J 包 findings 派生。"
+    },
+    {
+      "id": "O-PC-35",
+      "principle": "质量属性→战术映射（SEI/SAiP）",
+      "counterexample": "追求『全都要』、无视属性冲突（agility↔stability）；或把 tactic 当万能而不看适用边界。",
+      "domains": [
+        "M",
+        "L"
+      ],
+      "source_ids": [
+        "BK-009",
+        "VEN-030"
+      ],
+      "merge_note": "O 域从 M/L 包 findings 派生并跨域合并。"
+    },
+    {
+      "id": "O-PC-36",
+      "principle": "架构风格以约束换取期望质量属性",
+      "counterexample": "过度约束/追求『架构纯洁』形成僵化、阻碍合法演化（over-constrain）；或无视代价盲目套用风格。",
+      "domains": [
+        "G",
+        "L"
+      ],
+      "source_ids": [
+        "VEN-014",
+        "PAP-007",
+        "PAP-008"
+      ],
+      "merge_note": "O 域从 G/L 包 findings 派生并跨域合并。"
+    }
+  ],
+  "terminology_adjudication": [
+    {
+      "term_en": "software engineering",
+      "term_zh": "软件工程",
+      "variants": [
+        {
+          "domain": "A",
+          "definition": "将系统化、规范化、可量化的方法应用于软件的开发、运行与维护；即把工程应用于软件（IEEE 610.12，SWEBOK/SEVOCAB 采用）。",
+          "source_ids": [
+            "STD-010",
+            "OFF-001",
+            "OFF-008"
+          ]
+        },
+        {
+          "domain": "A",
+          "definition": "教材口径：关注软件生产的所有方面，在组织与财务约束下运用理论、方法与工具。",
+          "source_ids": [
+            "BK-004"
+          ]
+        },
+        {
+          "domain": "A",
+          "definition": "产业口径（Google）：不仅写代码，还包括长期构建与维护代码的全部工具与流程，核心是 Programming Over Time。",
+          "source_ids": [
+            "BK-001"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采纳 IEEE 610.12 / SWEBOK 口径为规范定义：把系统化、规范化、可量化的方法应用于软件的开发、运行与维护。产业口径『Programming Over Time』作为互补说明（强调时间与团队维度），不与规范定义冲突。",
+      "basis": "单一权威定义（IEEE 610.12）被 SWEBOK、SEVOCAB、SE2014 一致采纳；其余为同源补充表述。",
+      "source_ids": [
+        "STD-010",
+        "OFF-001",
+        "OFF-008",
+        "BK-001",
+        "OFF-004"
+      ]
+    },
+    {
+      "term_en": "software architecture / architecture",
+      "term_zh": "软件架构（架构）",
+      "variants": [
+        {
+          "domain": "A/B/G",
+          "definition": "ISO/IEC/IEEE 42010:2022 §3.2：系统在其环境中根本性的概念或属性，体现于元素、关系以及设计与演化的原则之中；架构是抽象，不是工件。",
+          "source_ids": [
+            "OFF-001",
+            "STD-001",
+            "STD-001"
+          ]
+        },
+        {
+          "domain": "A/B",
+          "definition": "SEI/经典：系统的单个或多个结构，由软件元素、元素的外部可见属性及元素间关系构成（Bass/Clements/Kazman）。",
+          "source_ids": [
+            "STD-003",
+            "OFF-002"
+          ]
+        },
+        {
+          "domain": "A/B",
+          "definition": "Fowler/Johnson 实用定义：架构是资深开发者对系统设计的共享理解（the important stuff）。",
+          "source_ids": [
+            "WEB-001",
+            "WEB-003"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采纳 42010:2022 定义作为规范定义（架构=抽象的概念/属性），SEI『结构说』作为操作性表述，Fowler『共享理解』作为社会性补充；三者视角不同、不构成事实冲突。统一强调：architecture（架构）≠ architecture description（架构描述/文档），后者是表达前者的工件。",
+      "basis": "42010 为国际标准；SEI 与 Fowler 分别提供操作与社会视角；B/G 包均记录『architecture 即文档』为广泛误用（errata）。",
+      "source_ids": [
+        "OFF-001",
+        "STD-001",
+        "STD-001",
+        "OFF-002",
+        "WEB-001",
+        "STD-001"
+      ]
+    },
+    {
+      "term_en": "maintainability",
+      "term_zh": "可维护性",
+      "variants": [
+        {
+          "domain": "A",
+          "definition": "IEEE 14764：软件产品被修改的能力（capability to be modified），修改含纠错、改进与适配环境/需求变化。",
+          "source_ids": [
+            "OFF-001",
+            "STD-007"
+          ]
+        },
+        {
+          "domain": "H/M",
+          "definition": "ISO/IEC 25010:2023：产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性为 modularity/reusability/analysability/modifiability/testability。",
+          "source_ids": [
+            "STD-005",
+            "OFF-005",
+            "STD-005"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采纳 ISO/IEC 25010:2023 定义（有效性与效率程度）为现行规范；IEEE 14764『被修改的能力』为旧版通用表述，保留为兼容引用。子特性统一为 modularity、reusability、analysability、modifiability、testability 五项。",
+      "basis": "25010:2023 为现行 SQuaRE 版本且给出可操作子特性；A/H/M 三域一致指向同一模型，无实质冲突。",
+      "source_ids": [
+        "STD-005",
+        "OFF-005",
+        "STD-005",
+        "OFF-001"
+      ]
+    },
+    {
+      "term_en": "modularity",
+      "term_zh": "模块化",
+      "variants": [
+        {
+          "domain": "H/M",
+          "definition": "ISO 25010 maintainability 子特性：系统/程序由离散组件构成，使改动一个组件对其它组件影响最小。",
+          "source_ids": [
+            "STD-005",
+            "OFF-005"
+          ]
+        },
+        {
+          "domain": "H",
+          "definition": "Parnas：模块是 responsibility assignment（责任分配）而非子程序；模块化效果取决于划分判据（information hiding）。",
+          "source_ids": [
+            "PAP-002"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "ISO 25010 定义（离散组件 + 改动影响最小）作为标准落点；Parnas 的『责任分配』与『按信息隐藏划分』作为设计方法论依据；两者一为目标一为手段。",
+      "basis": "标准定义与经典设计文献相互兼容，无冲突。",
+      "source_ids": [
+        "STD-005",
+        "OFF-005",
+        "PAP-002"
+      ]
+    },
+    {
+      "term_en": "coupling / cohesion",
+      "term_zh": "耦合 / 内聚",
+      "variants": [
+        {
+          "domain": "H",
+          "definition": "耦合：软件模块间相互依赖的程度，非二元而是多维；类型 Content→Data（高→低）。内聚：模块内部元素隶属同一目标的程度，Coincidental→Functional（差→优）。",
+          "source_ids": [
+            "WEB-022"
+          ]
+        },
+        {
+          "domain": "H",
+          "definition": "connascence：按 strength/locality/degree 三维评估耦合，分静态（编译期）与动态（运行期）。",
+          "source_ids": [
+            "WEB-022"
+          ]
+        },
+        {
+          "domain": "H",
+          "definition": "CK 度量：CBO/RFC 为耦合度量，LCOM 为内聚反向度量。",
+          "source_ids": [
+            "PAP-021"
+          ]
+        },
+        {
+          "domain": "M",
+          "definition": "ISO 25010 通过 modularity（改动影响最小）间接表达低耦合高内聚目标。",
+          "source_ids": [
+            "OFF-005"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "统一为『多维相互依赖程度（耦合）/内部关联程度（内聚）』，强调耦合非二元、有类型谱系；connascence 与 CK 度量为其精细化度量。不给出普适阈值（无标准阈值），阈值依语境。",
+      "basis": "Stevens/Myers/Constantine 原始定义与 ISO/度量文献方向一致；H 包 gap 明确无普适阈值，故不虚构量化判据。",
+      "source_ids": [
+        "WEB-022",
+        "PAP-021",
+        "OFF-005"
+      ]
+    },
+    {
+      "term_en": "technical debt",
+      "term_zh": "技术债",
+      "variants": [
+        {
+          "domain": "B/L",
+          "definition": "Cunningham 隐喻（1992）：首次交付的代码如负债，小额债务及时以重写偿还可加速开发，未偿则成为利息。",
+          "source_ids": [
+            "PAP-006",
+            "PAP-006"
+          ]
+        },
+        {
+          "domain": "B/L",
+          "definition": "Fowler：内部质量缺陷（cruft）造成的额外变更成本；利息按『触及该代码』触发而非按时间。",
+          "source_ids": [
+            "WEB-002",
+            "WEB-002"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "技术债象限：deliberate/inadvertent × prudent/reckless；问题应为『审慎的债还是鲁莽的债』。",
+          "source_ids": [
+            "WEB-013"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "已从隐喻发展为可识别、可度量、可跟踪、可偿还的工程实践。",
+          "source_ids": [
+            "PAP-009"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采纳 Fowler 释义（内部质量缺陷导致的额外变更成本）+ Cunningham 隐喻本源；须附带两条限定：①利息按变更触发、非按时间累积（与金融隐喻不同）；②债是权衡工具而非道德评判（象限分类）。",
+      "basis": "B/L 两域同源（Cunningham→Fowler）；L 包 errata 明确修正『利息随时间累积』的误记。",
+      "source_ids": [
+        "PAP-006",
+        "WEB-002",
+        "PAP-006",
+        "WEB-013",
+        "PAP-009"
+      ]
+    },
+    {
+      "term_en": "extensibility",
+      "term_zh": "可扩展性",
+      "variants": [
+        {
+          "domain": "M",
+          "definition": "工程界通行定义（SEI, Kazman 2022）：可能独立的开发团队通过架构中预置的 extension points，以已知、有计划的方式扩展系统功能或质量特性的能力。",
+          "source_ids": [
+            "OFF-022"
+          ]
+        },
+        {
+          "domain": "M",
+          "definition": "替代定义（Breivold 2007）：使系统以最小影响实现扩展、增加新能力/特性的能力。",
+          "source_ids": [
+            "OFF-022"
+          ]
+        },
+        {
+          "domain": "A/M",
+          "definition": "ISO 25010:2023 无 extensibility 顶层或子层术语；最接近落点为 Flexibility（adaptability/scalability）与 Maintainability（modifiability）。",
+          "source_ids": [
+            "STD-005",
+            "STD-005",
+            "OFF-022"
+          ]
+        }
+      ],
+      "ruling": "disputed",
+      "canonical": "无可裁决的统一权威定义。暂推荐 SEI 操作定义（『已知、有计划的扩展 + 预置扩展点』）作为工程口径，并显式标注：ISO 25010/25019 无此顶层术语，标准落点为 Flexibility 与 Maintainability。不将 extensibility 写入标准术语层。",
+      "basis": "M 包 gap 明确：extensibility 无单一权威标准定义，工程界无共识；A/M 一致确认无 ISO 顶层术语。",
+      "source_ids": [
+        "OFF-022",
+        "STD-005",
+        "STD-005",
+        "OFF-005"
+      ]
+    },
+    {
+      "term_en": "evolvability",
+      "term_zh": "可演化性",
+      "variants": [
+        {
+          "domain": "M",
+          "definition": "学术通行：系统易于容纳变更的能力；Rowe/Leaney/Lowe (1994)：在全生命周期以最低成本容纳需求变更、同时保持架构完整性。",
+          "source_ids": [
+            "PAP-024",
+            "PAP-025"
+          ]
+        },
+        {
+          "domain": "A/M/L",
+          "definition": "ISO 25010/25019 无 evolvability 顶层/子层术语；工程实践中与 flexibility/maintainability/adaptability/modifiability 大量混用近义；演进式架构将 evolvability 作为一等质量属性。",
+          "source_ids": [
+            "OFF-001",
+            "PAP-024",
+            "BK-011"
+          ]
+        }
+      ],
+      "ruling": "disputed",
+      "canonical": "无可裁决的统一权威定义。暂推荐学术定义（全生命周期最低成本容纳变更并保持架构完整性）作为工程口径，须标注：标准无此术语；与 extensibility 的区别仅为『任意需求变更』vs『已知计划扩展』，边界模糊，不得据以做严格区分。",
+      "basis": "M 包 gap 明确 evolvability 无标准定义、工程术语混用；A/M 一致确认无 ISO 落点。",
+      "source_ids": [
+        "PAP-024",
+        "PAP-025",
+        "OFF-001",
+        "OFF-022",
+        "BK-011"
+      ]
+    },
+    {
+      "term_en": "flexibility / portability",
+      "term_zh": "灵活性 / 可移植性",
+      "variants": [
+        {
+          "domain": "A/M",
+          "definition": "ISO/IEC 25010:2023 顶层特性 Flexibility：产品适应需求、使用情境或系统环境变化的能力；子特性 adaptability/scalability/installability/replaceability；由 2011 版 Portability 改名而来。",
+          "source_ids": [
+            "STD-005",
+            "STD-005",
+            "OFF-005"
+          ]
+        },
+        {
+          "domain": "A/M",
+          "definition": "Portability（2011 顶层特性）已废止。",
+          "source_ids": [
+            "OFF-005"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采用 25010:2023 『Flexibility』为现行术语；『Portability』标注为 2011 版旧名、已废止，引用旧文献时须注明版本。",
+      "basis": "25010:2023 官方改名，A/M 两域一致。",
+      "source_ids": [
+        "STD-005",
+        "OFF-005",
+        "STD-005"
+      ]
+    },
+    {
+      "term_en": "testability",
+      "term_zh": "可测试性",
+      "variants": [
+        {
+          "domain": "H/I/M",
+          "definition": "ISO/IEC 25010:2023 Maintainability 子特性：建立系统/产品/组件的测试准则并执行测试以判定准则是否满足的有效性与效率程度。",
+          "source_ids": [
+            "STD-005",
+            "OFF-005",
+            "OFF-005"
+          ]
+        },
+        {
+          "domain": "I",
+          "definition": "SEI 将其视为架构级质量属性，用 stimulus/environment/response 通用场景表达，并配战术集。",
+          "source_ids": [
+            "OFF-021",
+            "BK-009",
+            "BK-009"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "标准定义（25010 maintainability 子特性）+ SEI 架构属性/场景与战术视角并存；三者兼容。",
+      "basis": "H/I/M 三域一致指向 25010，SEI 为其架构化操作。",
+      "source_ids": [
+        "OFF-005",
+        "STD-005",
+        "OFF-005",
+        "OFF-021"
+      ]
+    },
+    {
+      "term_en": "architecture erosion / architecture drift",
+      "term_zh": "架构侵蚀 / 架构漂移",
+      "variants": [
+        {
+          "domain": "B/L",
+          "definition": "Perry & Wolf：erosion 由对架构的违规（violations）引起，导致问题增多与脆化；drift 由对架构的不敏感（insensitivity）引起，导致不适应性、形式失一致。",
+          "source_ids": [
+            "PAP-008",
+            "WEB-019"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "架构腐化（AEr）总称：架构层退化，表现为违规与结构问题，成因兼有技术与非技术因素。",
+          "source_ids": [
+            "PAP-008"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "严区分 erosion（违规驱动→脆化）与 drift（不敏感驱动→不适应性）；『架构腐化』作为二者的上位总称。",
+      "basis": "Perry & Wolf 原始区分 + Li et al. 2022 系统映射一致；L 包 errata 专门修正『erosion=drift』误记。",
+      "source_ids": [
+        "PAP-008",
+        "WEB-019",
+        "PAP-008"
+      ]
+    },
+    {
+      "term_en": "deprecation / sunset / removal",
+      "term_zh": "弃用 / 日落 / 移除",
+      "variants": [
+        {
+          "domain": "L",
+          "definition": "deprecation：对某技术/功能/设计/实践的『劝阻使用』状态，预示未来淘汰，但替换或移除并非必需或紧急（RFC 9745）。",
+          "source_ids": [
+            "STD-026"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "sunset：以 HTTP Sunset 响应头指示 URI 很可能在某未来时点不可响应（RFC 8594）。",
+          "source_ids": [
+            "STD-025"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "移除（removal）为破坏性变更，按 semver 属 MAJOR。",
+          "source_ids": [
+            "VEN-034"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "三级区分：deprecation（劝阻使用，非破坏）→ sunset（给出失效时点）→ removal（破坏性、MAJOR）；逐级须配通知期与迁移路径。",
+      "basis": "RFC 9745 / RFC 8594 标准信号 + semver 2.0.0；L 包 errata 明确『deprecation≠removal』。",
+      "source_ids": [
+        "STD-026",
+        "STD-025",
+        "VEN-034"
+      ]
+    },
+    {
+      "term_en": "quality attribute",
+      "term_zh": "质量属性",
+      "variants": [
+        {
+          "domain": "B/M",
+          "definition": "系统满足干系人已声明与隐含需求所体现的性质；25010 产品模型将其分类为 characteristics 与 sub-characteristics。",
+          "source_ids": [
+            "OFF-005",
+            "OFF-005"
+          ]
+        },
+        {
+          "domain": "F",
+          "definition": "系统可独立选择期望水平的、功能之外的质量维度；定义须可操作（可用 QA 场景六要素表达）。",
+          "source_ids": [
+            "BK-036",
+            "OFF-013"
+          ]
+        },
+        {
+          "domain": "F/M",
+          "definition": "非功能需求（NFR）与质量属性密切相关但用法不同：NFR 是需求类别，QA 是系统属性维度；SEI 用 QA+scenario 将其转化为可验证需求。",
+          "source_ids": [
+            "BK-036",
+            "OFF-025"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "质量属性=功能之外、可独立选择水平的质量维度，须可操作化（SEI QA scenario 六要素）。与 NFR 的关系：NFR 是需求分类称呼，质量属性是其设计/度量侧维度，二者映射但不等同。",
+      "basis": "F/B/M 三域一致；SEI 提供可操作化方法。",
+      "source_ids": [
+        "BK-036",
+        "OFF-005",
+        "OFF-025",
+        "OFF-013"
+      ]
+    },
+    {
+      "term_en": "sensitivity point / tradeoff point",
+      "term_zh": "敏感点 / 权衡点",
+      "variants": [
+        {
+          "domain": "G",
+          "definition": "sensitivity point：对达成某一质量属性响应至关重要的属性；tradeoff point：同时是多个质量属性的敏感点、影响多个属性。",
+          "source_ids": [
+            "OFF-002"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "保持 ATAM 严格区分：sensitivity point 针对单一质量属性；tradeoff point 影响多个属性且对其中多个都是 sensitivity point。二者非同义。",
+      "basis": "SEI CMU/SEI-2000-TR-004 §7.2；G 包 errata 专门修正混用。",
+      "source_ids": [
+        "OFF-002",
+        "OFF-002"
+      ]
+    },
+    {
+      "term_en": "architectural style",
+      "term_zh": "架构风格",
+      "variants": [
+        {
+          "domain": "G",
+          "definition": "定义一类系统的结构组织模式：确定可用的 components 与 connectors 词汇表及其组合约束（可含拓扑约束）。",
+          "source_ids": [
+            "PAP-007"
+          ]
+        },
+        {
+          "domain": "G",
+          "definition": "Azure：风格给出依赖管理方式与适配领域（N-tier/Microservices/Event-driven 等）。",
+          "source_ids": [
+            "VEN-014"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采用 Garlan & Shaw 定义（组件-连接件词汇表 + 组合约束）；风格是对设计的约束，符合约束带来特定属性，同时制造代价。",
+      "basis": "Garlan & Shaw 经典定义 + Azure 官方实践一致。",
+      "source_ids": [
+        "PAP-007",
+        "VEN-014"
+      ]
+    },
+    {
+      "term_en": "microservice",
+      "term_zh": "微服务",
+      "variants": [
+        {
+          "domain": "B",
+          "definition": "将应用设计为可独立部署服务套件的风格；特征含围绕业务能力组织、去中心化数据治理、smart endpoints/dumb pipes、design for failure、evolutionary design；作者声明当时尚无精确定义。",
+          "source_ids": [
+            "WEB-006"
+          ]
+        },
+        {
+          "domain": "G",
+          "definition": "约束为『每服务单一职责、服务相互独立、数据为服务私有且不共享』；收益独立部署/故障隔离，代价为分布式复杂度且需成熟 DevOps。",
+          "source_ids": [
+            "VEN-014"
+          ]
+        }
+      ],
+      "ruling": "disputed",
+      "canonical": "无精确权威定义（原作者明言）。工程口径采用特征清单（Fowler/Lewis 诸特征 + Azure 约束/收益/代价），不主张其为有严格边界的术语。",
+      "basis": "B 包原文作者声明无精确定义；G 包给出操作性约束但不构成定义级共识。",
+      "source_ids": [
+        "WEB-006",
+        "VEN-014"
+      ]
+    },
+    {
+      "term_en": "observability (three pillars)",
+      "term_zh": "可观测性（三支柱）",
+      "variants": [
+        {
+          "domain": "K",
+          "definition": "从系统外部输出推断内部状态、回答 unknown unknowns 与『为什么』的能力；工程界习称三支柱为 metrics/logs/traces。",
+          "source_ids": [
+            "VEN-026"
+          ]
+        },
+        {
+          "domain": "K",
+          "definition": "OTel 官方术语为 Traces/Metrics/Logs/Baggage，并未采用『三支柱』措辞；价值在信号可关联而非数量。",
+          "source_ids": [
+            "VEN-026"
+          ]
+        }
+      ],
+      "ruling": "disputed",
+      "canonical": "可观测性定义可用（能力定义无争议）；但『三支柱』为工程口语，非 OTel 官方术语。glossary 中标注 disputed，正式文本改用 OTel 官方信号清单（Traces/Metrics/Logs/Baggage）并强调信号关联。",
+      "basis": "K 包 gap 明确『三支柱』非标准术语；OTel 官方为权威反证。",
+      "source_ids": [
+        "VEN-026",
+        "VEN-027"
+      ]
+    },
+    {
+      "term_en": "DORA software delivery metrics",
+      "term_zh": "DORA 交付效能指标",
+      "variants": [
+        {
+          "domain": "I/K/N",
+          "definition": "当前五指标：change lead time、deployment frequency、failed deployment recovery time（吞吐）+ change fail rate、deployment rework rate（不稳定）。",
+          "source_ids": [
+            "VEN-018",
+            "VEN-018",
+            "VEN-036"
+          ]
+        },
+        {
+          "domain": "N",
+          "definition": "旧『四键』= deployment frequency、lead time for changes、change fail rate、MTTR（2015–2023 口径）；MTTR 已于 2023 被 failed deployment recovery time 取代。",
+          "source_ids": [
+            "VEN-037"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "现行统一为五指标（3 吞吐 + 2 不稳定）；旧『四键』/MTTR 属历史口径，引用须标注版本。速度与稳定非权衡。",
+      "basis": "DORA 官方 dora.dev + 历史梳理（S3-03）；I/K/N 三域一致。",
+      "source_ids": [
+        "VEN-018",
+        "VEN-018",
+        "VEN-036",
+        "VEN-037"
+      ]
+    },
+    {
+      "term_en": "software life cycle process / stage",
+      "term_zh": "软件生命周期过程 / 阶段",
+      "variants": [
+        {
+          "domain": "A",
+          "definition": "过程：把输入转化为输出的相互关联活动集合，可在不同阶段反复出现；12207 定义过程框架而非固定阶段。",
+          "source_ids": [
+            "STD-004"
+          ]
+        },
+        {
+          "domain": "A",
+          "definition": "阶段：与实体描述/实现状态相关的时期，通常以主决策门结束；示例 concept/development/production/utilization/support/retirement。",
+          "source_ids": [
+            "STD-003"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "过程（process）与阶段（stage）严格区分：标准定义过程而不规定固定阶段；阶段以主决策门划界，过程可在阶段间反复。",
+      "basis": "ISO/IEC/IEEE 12207；A 包一致。",
+      "source_ids": [
+        "STD-004",
+        "STD-003"
+      ]
+    },
+    {
+      "term_en": "refactoring",
+      "term_zh": "重构",
+      "variants": [
+        {
+          "domain": "L",
+          "definition": "对软件内部结构的修改，目的是使其更易理解、更易修改，而不改变其可观察行为（observable behavior）。",
+          "source_ids": [
+            "BK-021"
+          ]
+        },
+        {
+          "domain": "L",
+          "definition": "Refactoring 2e 官方目录共 68 个手法。",
+          "source_ids": [
+            "BK-021"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采用『不改变可观察行为』为硬判据；与重写/改功能区分。",
+      "basis": "Fowler 原始定义；L 包 errata 修正『重构≈重写』误记。",
+      "source_ids": [
+        "BK-021",
+        "BK-021",
+        "WEB-040"
+      ]
+    },
+    {
+      "term_en": "legacy code",
+      "term_zh": "遗留代码",
+      "variants": [
+        {
+          "domain": "L",
+          "definition": "Michael Feathers：遗留代码即『没有测试的代码』（code without tests）——判据在可变更性/可验证性，而非代码年代或技术栈。",
+          "source_ids": [
+            "BK-022"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采用 Feathers 定义（无测试的代码）；不以年代/技术栈判定。",
+      "basis": "Feathers 原书；L 包。",
+      "source_ids": [
+        "BK-022"
+      ]
+    },
+    {
+      "term_en": "complexity (essential/accidental vs cognitive)",
+      "term_zh": "复杂度（本质/偶然 vs 认知）",
+      "variants": [
+        {
+          "domain": "F",
+          "definition": "Brooks：本质复杂度（essential，概念结构固有）vs 偶然复杂度（accidental，表示/映射所致）；不存在单一银弹。",
+          "source_ids": [
+            "PAP-001"
+          ]
+        },
+        {
+          "domain": "H/B",
+          "definition": "Ousterhout：complexity 指使人难以理解与修改之物，主要来源为 information（依赖与 obscurity）；设计根本目标是降低 complexity。",
+          "source_ids": [
+            "BK-008",
+            "BK-008"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "两种含义并存、须消歧：Brooks 的『本质 vs 偶然』用于讨论复杂度可否被消除；Ousterhout 的『认知复杂度（依赖+obscurity）』用于设计目标度量。二者不冲突，写作时须指明采用哪种语义。",
+      "basis": "F/H/B 三域分别持有两种经典语义，指向不同问题。",
+      "source_ids": [
+        "PAP-001",
+        "BK-008",
+        "BK-008"
+      ]
+    },
+    {
+      "term_en": "architecture decision record (ADR)",
+      "term_zh": "架构决策记录",
+      "variants": [
+        {
+          "domain": "B/G",
+          "definition": "记录单个 architecturally significant decision 的短文本文件，含 Title/Context/Decision/Status/Consequences；单调编号、被取代而非改写。",
+          "source_ids": [
+            "WEB-004",
+            "WEB-004"
+          ]
+        },
+        {
+          "domain": "G",
+          "definition": "与 42010 的 Architecture Rationale 概念呼应：记录决策依据与被否决备选。",
+          "source_ids": [
+            "STD-001"
+          ]
+        }
+      ],
+      "ruling": "settled",
+      "canonical": "采用 Nygard 模板（Title/Context/Decision/Status/Consequences），并与 ISO 42010 Architecture Rationale 对齐（记录依据与被否决备选）；被 supersede 而非改写。",
+      "basis": "Nygard 原始出处 + Fowler + 42010；B/G 两域一致。",
+      "source_ids": [
+        "WEB-004",
+        "WEB-004",
+        "WEB-005",
+        "STD-001"
+      ]
+    }
+  ],
+  "gaps": [
+    "11 维权衡骨架由 0813（RAG 建库场景）四问骨架泛化而来，泛化映射为主观综合（medium）；原 11 维与新 11 维为非一一对应，legacy_dim 仅作溯源，不做等价声明。",
+    "需求优先级方法（MoSCoW/Kano/100 美元法）与需求追溯的权威源未采（F 包 gap），故 11 维未单列『优先级取舍』维度，暂并入 TD-05/TD-01。",
+    "现代架构风格权衡矩阵（Richards & Ford《Fundamentals of Software Architecture》风格-特性矩阵）未纳入（G 包 gap），风格代价证据主要来自 Garlan&Shaw(1990s)+Azure(S3)。",
+    "内聚/耦合无普适阈值（H 包 gap），故术语裁决不给出量化判据；connascence/CK 度量提供相对评估框架但需语境校准。",
+    "ISO/IEC/IEEE 29119 正文不可得（I 包 gap），测试层次/技术定义依赖 ISO 摘要 + ISTQB/SWEBOK 交叉，术语裁决对 testability 采用 25010 口径规避 29119 正文缺口。",
+    "extensibility / evolvability 无 ISO 顶层术语、工程界无共识定义（M 包 gap），术语裁决标 disputed 并给出推荐口径而非权威定义。",
+    "『可观测性三支柱』非 OTel 官方术语（K 包 gap），术语裁决标 disputed。",
+    "架构腐化量化检测指标/工具清单未展开（L 包 gap）；ADR supersede 机制与 L 域弃用策略的衔接已在本域术语裁决中统一（ADR 被 supersede 而非改写 vs deprecation→sunset→removal），但跨域工程细节待阶段4 深化。",
+    "团队组织与架构耦合缺 S1 标准（N 包 gap），Conway/Team Topologies 以 S2/S3/S4 支撑，相关原则↔反例属该主题固有证据层级。",
+    "本域仅做二次归纳与术语裁决，未新增外部检索；如需补上述缺口（风格矩阵、优先级方法、erosion 工具），应由后续专项或阶段4 回源。"
+  ],
+  "notes": "本域严守『无源不写』：所有条目 source_ids 均取自 F–N 证据包（域限定符如 H:S2-01），不引入新源。11 维保持四问骨架（what/how/why/scenario）并保留 legacy_dim 溯源。原则↔反例总表合并 H/L/N 结构化字段与 F/I/J/K/M/G 派生条目，去重后 36 条，每条 ≥1 反例。术语裁决 23 条，settled 19 条、disputed 4 条（extensibility、evolvability、microservice、observability，见 glossary）。"
+}

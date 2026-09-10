@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS 良好架构框架 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>AWS 良好架构框架</span></div><div class="meta">technology · G · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>冲突 / 对比表</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>AWS 良好架构框架</h1><div class="en">AWS Well-Architected Framework</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">G · 架构设计</span><span class="badge th">质量属性</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead"><a class="term" href="../14-views/glossary.html#g-149" title="AWS/Google Cloud Well-Architected Framework — 帮助架构师等一致地对照最佳实践度量与改进架构的方法框架；明确定位为「建设性对话」而非审计机制，并随云能力与行业实践持续更新。GCP 原名 Google Cloud Architecture Framework。">AWS</a> <a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">发布</a>的云<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>最佳实践对照框架，以运营卓越、安全、可靠性、性能效率、成本优化、可持续性六大支柱组织设计原则与评审问题，用于一致地度量工作负载与最佳实践的偏差。</span></p></div><p class="note">别名：AWS Well-Architected Framework、AWS WAF、AWS Well-Architected、AWS 六大支柱框架、Q:S3-VEN-02、Q:S3-VEN-03　|　英文：AWS Well-Architected Framework　|　类型：技术 / framework</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -360.7 678 699.7" role="img" aria-label="AWS 良好架构框架 的 1-2 跳邻域关系图"><title>AWS 良好架构框架 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="100.6" y1="24.5" x2="242.7" y2="140.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：效用树把不可直接测量的质量属性操作化为场景</title></line><line x1="100.6" y1="24.5" x2="-116.7" y2="-205.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：敏感点与权衡点分析是架构权衡判断的内核</title></line><line x1="100.6" y1="24.5" x2="-0.9" y2="-135.7" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：效用树构造与敏感点识别细化 ATAM 评估流程的分析环节</title></line><line x1="-44.6" y1="-296.7" x2="146.3" y2="-244.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：决策记录与文档化方法共同承载架构决策与理由</title></line><line x1="146.3" y1="-244.2" x2="-0.9" y2="-135.7" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：架构文档是架构评估流程的输入</title></line><line x1="100.6" y1="24.5" x2="47.1" y2="-255.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：敏感点与权衡点分析为架构风格选型提供判据</title></line><line x1="0" y1="0" x2="-0.9" y2="-135.7" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：AWS 支柱评审落地质量属性场景分析</title></line><line x1="-128" y1="71.7" x2="-0.9" y2="-135.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：GCP 支柱原则承载质量属性场景分析</title></line><line x1="0" y1="0" x2="100.6" y2="24.5" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：AWS 支柱冲突识别支撑效用树权衡点</title></line><line x1="0" y1="0" x2="-128" y2="71.7" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：AWS 与 GCP WAF 支柱同构但绑定不同厂商</title></line><line x1="0" y1="0" x2="-128" y2="71.7" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：多云场景可组合对照两厂商 WAF 建议</title></line><line x1="-44.6" y1="-296.7" x2="-116.7" y2="-205.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：决策记录依架构即权衡，留存取舍与理由</title></line><line x1="-0.9" y1="-135.7" x2="-116.7" y2="-205.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：ATAM 以架构权衡为根本前提</title></line><line x1="47.1" y1="-255.1" x2="-116.7" y2="-205.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：风格选择依质量属性权衡而非对错</title></line><line x1="-0.9" y1="-135.7" x2="-44.6" y2="-296.7" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：识别敏感点与权衡点是记录架构决策的前提</title></line><line x1="-0.9" y1="-135.7" x2="47.1" y2="-255.1" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：质量属性场景与评估是风格权衡选型的前置分析</title></line><line x1="-44.6" y1="-296.7" x2="47.1" y2="-255.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：风格选型结果以 ADR 记录理由与被否决项</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">AWS 良好架构框架<title>AWS 良好架构框架（TEC-G-01）</title></text><circle cx="-0.9" cy="-135.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-0.9" y="-116.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">质量属性场景与ATAM<title>质量属性场景与ATAM（MTH-G-02）</title></text><circle cx="100.6" cy="24.5" r="9.0" fill="#c98a3a" stroke="none"/><text x="100.6" y="43.5" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">效用树与敏感点权衡点分析<title>效用树与敏感点权衡点分析（MTH-G-06）</title></text><circle cx="-128" cy="71.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-128" y="90.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">GCP 良好架构框架<title>GCP 良好架构框架（TEC-G-02）</title></text><circle cx="-116.7" cy="-205.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-116.7" y="-189.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构即权衡<title>架构即权衡（ESS-O-02）</title></text><circle cx="146.3" cy="-244.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="146.3" y="-228.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构文档化方法<title>架构文档化方法（MTH-G-05）</title></text><circle cx="47.1" cy="-255.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="47.1" y="-239.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构风格选择方法<title>架构风格选择方法（MTH-G-03）</title></text><circle cx="242.7" cy="140.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="242.7" y="156.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量属性不可直接测量<title>质量属性不可直接测量（ESS-M-05）</title></text><circle cx="-44.6" cy="-296.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-44.6" y="-280.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构决策记录<title>架构决策记录（MTH-G-01）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 3 个直接邻接、外环 5 个二跳节点，共 9 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">云上<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">架构决策</a>影响面广、取舍多，单靠团队经验容易遗漏关键维度。</span><span class="hl">AWS Well-Architected Framework 把非<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a><a class="term" href="../14-views/glossary.html#g-015" title="concern — 对系统的任何利益/关注；源自 separation of concerns。">关注点</a>归纳为六大支柱，为架构评审提供一套可复用的检查结构：它不规定唯一正确的架构，而是通过一组问题引导团队对照最佳实践、暴露决策中的利弊与风险。</span>其官方定位是建设性对话而非审计（not an audit mechanism）——评审的目的是识别改进项并推动权衡，而不是给出通过或否决。框架还给出六条通用设计原则：停止猜测容量、在生产规模测试、围绕实验做自动化、考虑演化式架构、用数据驱动架构、通过 game day 改进，把持续验证与演进确立为云架构的基本立场。理解这一原则有助于把厂商框架当作对话与学习工具，而不是合规门槛。把六大支柱与通用原则一起使用，才能既覆盖质量维度，又保持对容量、实验与演化的持续关注；若只逐条核对问题而忽略背后的设计立场，评审容易退化为填表。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">框架按支柱→设计原则→最佳实践→评审问题的层次组织。</span><span class="hl">六个支柱分别对应运营卓越、安全、可靠性、性能效率、成本优化与可持续性；每个支柱下有若干设计原则（如运营卓越的围绕业务成果组织团队、实施<a class="term" href="../14-views/glossary.html#g-090" title="（无权威共识，给推荐口径）observability — 从系统外部输出推断内部状态、回答 unknown unknowns 与「为什么」的能力；正式信号清单用 OTel 的 Traces/Metrics/Logs/Baggage。">可观测性</a>、安全地自动化、频繁做小而可逆的变更），之下再展开为可核查的最佳实践与评审问题。</span>评审时团队以工作负载为单位逐项回答，标记为高/中/低风险，并记录改进计划（improvement plan）。<span class="hl">支柱之间并非彼此独立：例如可靠性的冗余会抬高成本，安全的加密会影响性能，因此框架要求同时审视多个支柱，发现并显式处理<a class="term" href="../14-views/glossary.html#g-027" title="tradeoff point — 同时是多个质量属性的敏感点、影响多个属性的属性；与敏感点非同义。">权衡点</a>。</span>可持续性支柱于 2021-12 加入，体现云架构对能耗与环境影响的关注。<span class="hl">这种层次化结构让<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>的质量目标落到可讨论、可跟踪的具体问题上。</span></p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地时通常借助 AWS Well-Architected Tool 建立工作负载档案，按六大支柱完成评审问题清单，产出风险项与改进建议；也在架构评审会议、设计文档模板与团队章程中复用这些检查问题。</span><span class="hl">工程上建议：把评审与迭代节奏结合，针对高风险工作负载定期重评，而不是一次性的合规动作；把识别出的风险转成有负责人、有期限的改进项，并与 ADR 联动记录取舍理由；对同一工作负载在不同<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>用框架做增量对照。</span>框架提供的设计原则可提炼为团队的设计清单，但不应逐条照抄为硬性规范。鉴于其方法论绑定 AWS 服务与云运营模型，跨云或多云场景应先做中立化改写，再结合其他体系使用。由于框架随版本更新（本例为 2024-11），团队还应记录评审所依据的版本，并在框架升级后复核既有改进项的适用性，避免对旧版清单形成路径依赖。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>框架的最大边界在于厂商立场：它是 AWS 官方方法论，最佳实践与设计原则天然指向 AWS 的托管服务与运营模型，使用托管服务等倾向会引导架构向单一云厂商收敛，存在服务绑定与迁移成本风险。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>它也不追求中立或完备：问题清单聚焦 AWS 生态，未必覆盖多云、私有化或强合规场景的关注点；把评审问题当作硬性标准，会抑制合理的架构创新。</li><li>此外，厂商框架面向的是对照最佳实践而非证明架构正确，评审结论不能替代基于场景的架构评估与量化验证。</li><li>因此应把它当作工程落地的补充视角，而非裁决标准；引用时须标注厂商立场与版本。</li><li>跨云团队尤其要警惕把 AWS 术语与默认值直接搬入其他环境：先抽出与厂商无关的架构关注点，再回到具体平台评估服务选项，可减少锁定。</li><li>同时，评审问题应服务于对话，而非成为考核指标，否则团队会倾向于选择容易回答而非真正重要的项。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：AWS 与 GCP WAF 支柱同构但绑定不同厂商</caption><thead><tr><th>对照维度</th><th>AWS 良好架构框架</th><th>GCP 良好架构框架</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>AWS 良好<a class="term" href="../14-views/glossary.html#g-020" title="architecture framework — 为特定域/共同体建立创建、解释、分析、使用架构描述的通用实践（TOGAF、RM-ODP、4+1、MODAF）。">架构框架</a> · AWS Well-Architected Framework</td><td>GCP 良好架构框架 · Google Cloud Well-Architected Framework</td></tr><tr><td class="k">核心定义（原文）</td><td>AWS 发布的云架构最佳实践对照框架，以运营卓越、安全、可靠性、性能效率、成本优化、可持续性六大支柱组织设计原则与评审问题，用于一致地度量工作负载与最佳实践的偏差。</td><td>Google Cloud 发布的云架构建议框架，以运营卓越、安全隐私与合规、可靠性、成本优化、性能优化、可持续性六大支柱及 AI/ML、金融等跨支柱视角，指导设计安全、高效、韧性、高性能且可持续的云拓扑。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>云上架构决策影响面广、取舍多，单靠团队经验容易遗漏关键维度。</td><td>云架构的核心难题不是缺少选项，而是如何在众多服务与<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>间做出可解释、可维护的选择。</td></tr><tr><td class="k">对照关系</td><td>AWS 与 GCP WAF 支柱同构但绑定不同厂商（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>框架的最大边界在于厂商立场：它是 AWS 官方方法论，最佳实践与设计原则天然指向 AWS 的托管服务与运营模型，使用托管服务等倾向会引导架构向单一云厂商收敛，存在服务绑定与迁移成本风险。</td><td>该框架与 AWS 框架高度同构，但同构并不等于可互换：其核心原则明确写入优先使用全托管服务，体现 Google Cloud 的服务导向，会引导架构向 GCP 服务组合收敛，存在厂商绑定风险。</td></tr><tr><td class="k">处置要点（原文）</td><td>落地时通常借助 AWS Well-Architected Tool 建立工作负载档案，按六大支柱完成评审问题清单，产出风险项与改进建议；也在架构评审会议、设计文档模板与团队章程中复用这些检查问题。</td><td>落地时可按支柱建立评审清单，并结合 Google Cloud Architecture Center 的参考架构、决策树与 Well-Architected 评审流程使用。</td></tr></tbody></table></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-01 · 2 跳派生：当前节点 → MTH-G-02 → MTH-G-05</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-09 · 2 跳派生：当前节点 → MTH-G-02 → MTH-G-05</span><h4>harness 源码架构解析</h4><p>对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</p></div><div class="case-card"><span class="id">CAS-X-10 · 2 跳派生：当前节点 → MTH-G-02 → MTH-G-05</span><h4>dsh 插件依赖增量定位</h4><p>以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</p></div><div class="case-card"><span class="id">CAS-X-12 · 2 跳派生：当前节点 → MTH-G-02 → ESS-O-02</span><h4>MCP 四件套选型对比</h4><p>对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</p></div><div class="case-card"><span class="id">CAS-X-13 · 2 跳派生：当前节点 → MTH-G-02 → MTH-G-05</span><h4>Claude Code 架构逆向</h4><p>以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → MTH-G-02 → MTH-G-05</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>2024-11</div><div class="r"><span class="k">规范信源</span>VEN-002、VEN-003</div><div class="r"><span class="k">入口链接</span><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html</a>　<a href="https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf" target="_blank" rel="noopener">https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：AWS Well-Architected Framework 是一套中立的国际标准或审计机制</span><br>核验结论：它是 AWS 官方最佳实践框架，官方定位为架构评审的建设性对话而非审计；其原则与建议绑定 AWS 服务与运营模型，引用时须标注厂商立场　<span class="k">[VEN-002]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：通过 Well-Architected 评审即代表架构合格</span><br>核验结论：评审用于对照最佳实践识别风险与改进项，不构成通过/否决判定，也不能替代基于质量属性场景的架构评估　<span class="k">[VEN-002]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ TEC-G-02</td><td>GCP 良好架构框架<br><span style="color:var(--dim);font-size:12px">E-889</span></td><td>多云场景可组合对照两厂商 WAF 建议</td></tr><tr><td class="k">对照</td><td>→ TEC-G-02</td><td>GCP 良好架构框架<br><span style="color:var(--dim);font-size:12px">E-887</span></td><td>AWS 与 GCP WAF 支柱同构但绑定不同厂商</td></tr><tr><td class="k">实现</td><td>→ MTH-G-02</td><td>质量属性场景与ATAM<br><span style="color:var(--dim);font-size:12px">E-881</span></td><td>AWS 支柱评审落地质量属性场景分析</td></tr><tr><td class="k">实现</td><td>→ MTH-G-06</td><td>效用树与敏感点权衡点分析<br><span style="color:var(--dim);font-size:12px">E-886</span></td><td>AWS 支柱冲突识别支撑效用树权衡点</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

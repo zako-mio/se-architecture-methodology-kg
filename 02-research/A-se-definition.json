@@ -1,0 +1,549 @@
+{
+  "topic": "何为软件工程（Software Engineering）——定义、学科范畴、起源演化、生命周期与质量",
+  "generated_by": "software-engineering-researcher",
+  "sources": [
+    {
+      "id": "OFF-001",
+      "title": "Guide to the Software Engineering Body of Knowledge (SWEBOK Guide V3.0；V4.0 于 2024-10 发布)",
+      "org": "IEEE Computer Society（SWEBOK / ISO/IEC TR 19759）",
+      "year": "2014 (V3) / 2024 (V4)",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SWEBOK 由 ISO/IEC TR 19759 认定为软件工程知识体系基线，由 IEEE 计算机学会出版。",
+        "全书开篇『What is Software Engineering?』引用 SEVOCAB/ISO 定义：软件工程是“the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software; that is, the application of engineering to software”。",
+        "V3 将知识划分为 15 个知识域（KA），含需求、设计、构造、测试、维护、配置管理、工程管理、工程过程、模型与方法、质量、职业实践、经济、计算基础、数学基础、工程基础；V4 扩展为 18 个（新增软件架构、软件工程运维、软件安全等）。",
+        "软件维护 KA 引用 IEEE 14764：maintainability = 软件产品被修改的能力（capability of the software product to be modified），修改含纠错、改进、适配环境与需求变化；维护分类为纠正性、适应性、完善性、预防性。",
+        "维护 KA 指出软件维护在“演化”意义上被研究，维护即演化式开发；运行环境与组织环境是影响维护成本的主要因素。"
+      ],
+      "legacy_id": "S1-01"
+    },
+    {
+      "id": "STD-004",
+      "title": "ISO/IEC/IEEE 12207:2017 — Systems and software engineering — Software life cycle processes",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/63712.html",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "官方摘要：为软件生命周期过程建立共同框架与明确定义的术语，供软件产业引用，包含在软件系统/产品/服务获取中应应用的过程、活动与任务。",
+        "标准定义的是“过程（process）”而非固定的生命周期“阶段（stage）”，且明确不规定具体的生命周期模型、开发方法或建模技术。",
+        "注：iso.org 页面对本机返回 403，正文与摘要经 ISO OBP、IEEE SA 条目与标准门户交叉获取，未逐字核对原文条款。"
+      ],
+      "legacy_id": "S1-02"
+    },
+    {
+      "id": "STD-003",
+      "title": "ISO/IEC/IEEE 12207:2026（最新版）与生命周期过程/阶段划分",
+      "org": "ISO / IEC / IEEE（ISO/IEC JTC 1/SC 7）",
+      "year": "2026",
+      "url": "https://www.iso.org/standard/90219.html",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "2026 版采用与 ISO/IEC/IEEE 15288:2015 完全相同的四组过程：协议（agreement）、组织项目使能（organizational project-enabling）、技术管理（technical management）、技术（technical）过程。",
+        "过程数由 12207 旧版的 43 个统一为 15288 的 30 个，并相应调整质量/质量保证过程的活动与结果。",
+        "区分 stage 与 process：stage 是生命周期中与描述/实现状态相关的时期，通常以“主决策门（primary decision gate）”结束；process 是把输入转化为输出的相互关联活动集合。标准不规定任何特定阶段集，仅举例引用 ISO/IEC TS 24748-1 的阶段（concept, development, production, utilization, support, retirement）。",
+        "注：iso.org 页面 403，内容经 Wikipedia 对 ISO 标准正文的转述与标准门户核验。"
+      ],
+      "legacy_id": "S1-03"
+    },
+    {
+      "id": "STD-005",
+      "title": "ISO/IEC 25010:2023 — Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model",
+      "org": "ISO / IEC",
+      "year": "2023",
+      "url": "https://www.iso.org/standard/78176.html",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "官方摘要：定义一个适用于 ICT 产品与软件产品的产品质量模型，模型由九个特性（characteristics）构成，每特性再细分子特性（subcharacteristics）。",
+        "ISO/IEC 25010 取代 ISO/IEC 9126，是 SQuaRE（ISO/IEC 25000 系列）的质量模型核心。",
+        "相对 2011 版由 8 特性变为 9 特性：Usability→Interaction capability、Portability→Flexibility、新增 Safety 顶层特性，并新增 Security 下 Resistance、Flexibility 下 Scalability 等子特性。",
+        "注：iso.org 页面 403；九特性/子特性内容经 iso25000.com（ISO 25000 官方门户）与该标准 2023 版更新说明交叉核验。"
+      ],
+      "legacy_id": "S1-04"
+    },
+    {
+      "id": "OFF-003",
+      "title": "Software Engineering 2014: Curriculum Guidelines for Undergraduate Degree Programs in Software Engineering (SE2014)",
+      "org": "Joint Task Force, IEEE Computer Society & ACM",
+      "year": "2015（内容 2014）",
+      "url": "https://www.acm.org/binaries/content/assets/education/se2014.pdf",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "明确“软件工程不只是编程”：除编程外还包含对质量、进度、经济目标的关注，开发者需兼具原理知识与实践经验。",
+        "引 IEEE 2010 定义：软件工程是把系统化、规范化、可量化方法应用于软件的开发、运行与维护，即把工程应用于软件。",
+        "列举软件区别于传统工程客体的关键特性：抽象且不可见、兼具静态/动态属性、内在复杂、无通用质量度量、无传统意义的制造阶段、软件不会“磨损”（维护实为演化式设计过程）。",
+        "软件工程既根植于计算机科学，又作为工程学科存在：SE 的基础主要来自计算机科学而非自然科学，使用更多离散数学，聚焦抽象/逻辑实体，维护主要指持续开发（演化）。",
+        "强调工程方法要素：在约束下做权衡决策、量化与验证、使用受控过程、以团队方式工作、复用设计与工件。"
+      ],
+      "legacy_id": "S1-05"
+    },
+    {
+      "id": "OFF-004",
+      "title": "Computer Science Curricula 2023 (CS2023) — Software Engineering (SE) Knowledge Area",
+      "org": "ACM / IEEE-CS / AAAI Joint Task Force",
+      "year": "2023",
+      "url": "https://csed.acm.org/knowledge-areas",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SE 知识域明确区分“编程”与“软件工程”，差异在两个维度：时间（time）与人员（people）。",
+        "引用 Parnas 之说：“Software engineering is the multi-person construction of multi-version programs.”——SE 是团队性、多版本的活动。",
+        "SE 项目有预期生命周期（数月/数年/数十年），需应对特性增删、平台演进、语言变更、依赖升级等“时间带来变化”的问题。",
+        "课程核心主题含：测试、团队协作、沟通、设计、维护与演化（Maintenance and Evolution）、软件工程工具；CS2023 相较 CS2013 更强调软件工作流（版本控制/测试/代码评审/工具）。"
+      ],
+      "legacy_id": "S1-06"
+    },
+    {
+      "id": "OFF-006",
+      "title": "Software Engineering: Report on a conference sponsored by the NATO Science Committee, Garmisch, Germany, 7–11 October 1968（Naur & Randell 编）",
+      "org": "NATO Science Committee",
+      "year": "1969",
+      "url": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1968.PDF",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "1968 年 Garmisch 会议与国家 1969 年罗马会议是软件工程学科的起始事件；“software engineering”作为（故意带挑战性的）会议名称，术语来源归于 F. L. Bauer。",
+        "报告将软件工程议题覆盖软件设计、实现/生产、分发、服务与社会关系等；指出会议聚焦关键问题而非全面综述。",
+        "报告第 7 章记录了与会者对“software crisis / software gap”的争论：承诺与实现之间的鸿沟、成本估算与支出不符、大型软件的不可靠性等。",
+        "原话：“There was a considerable amount of debate on what some members chose to call the 'software crisis' or the 'software gap'.”；与会者对该问题的严重程度意见不一（Hastings 认为不应陷入悲观，Randell 担忧人命关天系统的可靠性）。",
+        "Randell 对“software engineering”一词持保留（更倾向 data systems engineering）；Dijkstra 认为其恰是“数学工程师”的活动。"
+      ],
+      "legacy_id": "S1-07"
+    },
+    {
+      "id": "STD-010",
+      "title": "IEEE Std 610.12-1990 — IEEE Standard Glossary of Software Engineering Terminology",
+      "org": "IEEE",
+      "year": "1990",
+      "url": "https://standards.ieee.org/ieee/610.12/1016/",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "给出被最广泛引用的软件工程定义：“The application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software; that is, the application of engineering to software.”并附第二义：“The study of approaches as in (1).”。",
+        "该定义被 SWEBOK V3、SEBoK 明确采纳为标准定义，并沿用至 ISO/IEC/IEEE 24765 (SEVOCAB)。",
+        "注：IEEE 标准页面对本机 403；定义原文经 SEBoK 词条与 SWEBOK V3 正文完整转引核验。"
+      ],
+      "legacy_id": "S1-08"
+    },
+    {
+      "id": "OFF-008",
+      "title": "ISO/IEC/IEEE 24765:2017 — Systems and software engineering — Vocabulary (SEVOCAB)",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/71952.html",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "SEVOCAB 是软件与系统工程术语的权威汇编，第 1 版为 2010、第 2 版为 2017，由 ISO/IEC JTC 1/SC 7 与 IEEE-CS S2ESC 维护。",
+        "术语条目均注明标准来源，是跨标准术语一致的依据（SWEBOK 对 SE 的定义即标注来自 SEVOCAB）。",
+        "注：iso.org 页面 403；已取得 iTeh 标准预览 PDF（刊头/版权页）核验版本与出版信息，未取得 SE 词条正文全文。"
+      ],
+      "legacy_id": "S1-09"
+    },
+    {
+      "id": "OFF-002",
+      "title": "Carnegie Mellon Software Engineering Institute (SEI) — About",
+      "org": "SEI, Carnegie Mellon University（美国国防部联邦资助研发中心）",
+      "year": "2024",
+      "url": "https://www.sei.cmu.edu/about/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SEI 自述使命：研究复杂软件工程、网络与 AI 问题，创建并测试创新技术，把成熟方案转化为实践。",
+        "SEI 于 1984 年由美国国防部在卡内基梅隆设立，是推动软件工程实践成熟度（CMM/CMMI 源于其软件过程项目）的官方机构。",
+        "作为机构级权威一手源，用于佐证软件工程作为国家/组织级工程实践的定位。"
+      ],
+      "legacy_id": "S1-10"
+    },
+    {
+      "id": "OFF-007",
+      "title": "Manifesto for Agile Software Development（敏捷软件开发宣言）",
+      "org": "17 位署名作者（Beck, Cockburn, Fowler 等）",
+      "year": "2001",
+      "url": "https://agilemanifesto.org/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "四大价值声明：个体与互动 > 流程与工具；可工作软件 > 详尽文档；客户协作 > 合同谈判；响应变化 > 遵循计划。",
+        "附十二条原则，主张通过持续交付、迭代、快速反馈与拥抱变化来开发软件。",
+        "作为范式的第一手声明，用于记述“从瀑布到敏捷”的权威说法（只记概念，不展开方法细节）。"
+      ],
+      "legacy_id": "S1-11"
+    },
+    {
+      "id": "STD-007",
+      "title": "ISO/IEC/IEEE 14764:2022 — Software engineering — Software life cycle processes — Maintenance",
+      "org": "ISO / IEC / IEEE",
+      "year": "2022",
+      "url": "https://www.iso.org/obp/ui/en/#iso:std:80710:en",
+      "tier": "S1",
+      "verified": false,
+      "key_points": [
+        "软件维护的专门国际标准，定义维护过程与维护相关活动。",
+        "SWEBOK V3 转引其定义：maintainability 为软件产品被修改的能力；维护分类为纠正性、适应性、完善性、预防性。",
+        "注：ISO OBP 页面需 JS，未逐条核对；内容经 SWEBOK V3 与 ISO 摘要交叉核验。"
+      ],
+      "legacy_id": "S1-12"
+    },
+    {
+      "id": "BK-004",
+      "title": "Software Engineering（Ian Sommerville 教材）",
+      "org": "Pearson Education",
+      "year": "2007（第 8 版，初版 1982）",
+      "url": "https://www.pearsoned.co.uk/",
+      "tier": "S2",
+      "verified": false,
+      "key_points": [
+        "经典定义：【已按版权红线移出（原引用 210 字）· 出处见 source_id/URL】",
+        "强调两点：(1) 工程学科——在组织与财务约束下运用理论、方法与工具；(2) 软件生产的全部方面——含技术开发、项目管理以及支撑工具/方法/理论的创建。",
+        "注：书籍本体只入本地语料层；本定义经由 Wikipedia 对 Sommerville 教材的转引核验。"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "BK-001",
+      "title": "Software Engineering at Google（Titus Winters, Tom Manshreck, Hyrum Wright 编）",
+      "org": "O'Reilly Media",
+      "year": "2020",
+      "url": "https://abseil.io/resources/swe-book",
+      "tier": "S2",
+      "verified": false,
+      "key_points": [
+        "提出“software engineering 不仅包括写代码，还包括组织用来长期构建与维护代码的全部工具与流程”。",
+        "以“Programming Over Time（跨时间编程）”作为核心视角：关注如何让代码库长期保持价值、如何使工程实践更严谨。",
+        "属经典产业著作（受版权保护），仅作观点转引，不复制全文。"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "OFF-005",
+      "title": "ISO 25000 Portal — ISO/IEC 25010 质量标准门户（AENOR 维护）",
+      "org": "AENOR / iso25000.com",
+      "year": "2024",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "说明产品质量模型是质量评价体系的基石，用于确定评价产品时考虑的质量特性。",
+        "明确“The product quality model defined in ISO/IEC 25010 comprises the nine quality characteristics”：功能适合性、性能效率、兼容性、可用性、可靠性、安全性(security)、可维护性、灵活性、安全(safety)。",
+        "给出各特性及子特性定义（如功能适合性含功能完整性/正确性/适当性；性能效率含时间行为/资源利用/容量；兼容性含共存性/互操作性）。",
+        "作为 ISO 25000 系列官方门户（西班牙标准机构 AENOR 运营），用于核验 ISO 25010 特性清单。"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "WEB-011",
+      "title": "ISO/IEC 25010 Explained: 9 Software Quality Characteristics（Sonar 解释性文章）",
+      "org": "SonarSource",
+      "year": "2024",
+      "url": "https://www.sonarsource.com/resources/library/iso-iec-25010-explained/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "列出 ISO/IEC 25010:2023 的可维护性（Maintainability）子特性：Modularity、Reusability、Analyzability、Modifiability、Testability，并给出简短释义。",
+        "指出 2023 版以 Flexibility 取代 Portability，反映软件需随技术、部署环境与业务需求演化；Flexibility 子特性含 Adaptability、Scalability 等。",
+        "用于交叉核验 ISO 25010:2023 的可维护性/灵活性结构（二手解释性来源，与 S1-04/S2-03 一致）。"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "WEB-012",
+      "title": "Wikipedia 条目组（Software engineering / Software Engineering Body of Knowledge / NATO Software Engineering Conferences / Software crisis / ISO/IEC 12207 / Lehman's laws / ISO/IEC 9126）",
+      "org": "Wikimedia Foundation",
+      "year": "2026（持续更新）",
+      "url": "https://en.wikipedia.org/wiki/Software_engineering",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "作为二手汇总用于交叉核对与线索发现，其每条陈述均回溯至所标注的 S1/一手出处，本证据包不单独依赖其作为唯一权威。",
+        "提供早期术语使用线索：1965 年 Computers and Automation、1966 年 Oettinger 的 ACM 主席信，以及 Margaret Hamilton 在 Apollo 项目中以“软件工程”为学科争取合法性的说法。",
+        "汇总 NATO 1968/1969 会议、software crisis、ISO/IEC 12207 各版本沿革、Lehman 八条演化定律与 ISO/IEC 9126→25010 的演进。"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "PAP-003",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution（Meir M. Lehman，Proc. IEEE 68(9)）",
+      "org": "IEEE（学术论文）",
+      "year": "1980",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "提出八条软件演化定律（1974 起，后续修订）：持续变化、复杂度递增、自我调节、组织稳定性守恒（不变工作量率）、熟悉度守恒、持续增长、质量下降、反馈系统。",
+        "区分 S/P/E 类程序，指出定律适用于嵌入真实世界、需持续适应环境的 E 类系统。",
+        "为“软件必然演化、维护即演化式开发”的核心学术依据；经 Wikipedia 转引与 SWEBOK 维护 KA 的“Laws of Evolution”表述交叉核验，未回源论文原文核对逐字表述。"
+      ],
+      "legacy_id": "S4-01"
+    },
+    {
+      "id": "PAP-004",
+      "title": "Managing the Development of Large Software Systems（Winston W. Royce）",
+      "org": "Proceedings of IEEE WESCON（学术/会议论文）",
+      "year": "1970",
+      "url": "https://en.wikipedia.org/wiki/Waterfall_model",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "被广泛视为“瀑布模型”概念的起源文献，主张按需求→设计→实现→验证→维护的序列推进，并强调必须迭代回上一阶段（常被误读为纯线性一次性流程）。",
+        "用于记述从早期阶段化流程到后续敏捷范式的历史脉络（只记概念，不展开方法细节）。",
+        "注：未回源 Royce 原文，经 Wikipedia Waterfall_model 转述核验。"
+      ],
+      "legacy_id": "S4-02"
+    },
+    {
+      "id": "PAP-005",
+      "title": "Software Engineering Programmes are not Computer Science Programmes（David L. Parnas）",
+      "org": "Annals of Software Engineering（学术论文）",
+      "year": "1998",
+      "url": "https://doi.org/10.1023/A:1018949113292",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "主张不应把软件工程视作计算机科学的子领域，而应视作工程学科集合（与土木、机械、化工、电气工程并列）。",
+        "认为以传统工程学科为蓝本设立受认证的软件工程专业，有助于提升毕业生培养质量与可信软件产品的产出。",
+        "用于记述“软件工程与计算机科学关系”的权威学术观点；经 Wikipedia 与 CS2023 SE KA 转引交叉核验。"
+      ],
+      "legacy_id": "S4-03"
+    },
+    {
+      "id": "PAP-001",
+      "title": "No Silver Bullet — Essence and Accidents of Software Engineering（Frederick P. Brooks, Jr.）",
+      "org": "IEEE Computer（学术/经典论文，后收入《人月神话》纪念版）",
+      "year": "1987",
+      "url": "https://doi.org/10.1109/MC.1987.1663532",
+      "tier": "S4",
+      "verified": false,
+      "key_points": [
+        "提出软件不存在“银弹”：根本困难（本质性复杂度）无法被单一技术或管理突破消除。",
+        "为“软件工程核心关切是应对本质复杂度、控制复杂度与演化”的经典论证。",
+        "注：未回源论文原文；经 SE2014 对 Brooks [1987] 的引用与 Wikipedia 摘要交叉核验。"
+      ],
+      "legacy_id": "S4-04"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "软件工程 (Software Engineering) — IEEE 经典定义",
+      "definition": "将系统化、规范化、可量化的方法应用于软件的开发、运行与维护；即把工程应用于软件。第二义为对上述方法的研究。(The application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software; that is, the application of engineering to software.)",
+      "source_id": "STD-010"
+    },
+    {
+      "term": "软件工程 (Software Engineering) — SWEBOK/SEVOCAB 采用口径",
+      "definition": "SWEBOK 开篇采用 SEVOCAB/ISO 定义，即 IEEE 经典定义；并强调软件工程以计算机科学理解为核心，关注设计、构造与高效经济运行软件系统。",
+      "source_id": "OFF-001"
+    },
+    {
+      "term": "软件工程 (Software Engineering) — 教材口径",
+      "definition": "一门工程学科，关注软件生产的所有方面：从早期系统规格说明到系统投入使用后的维护；强调在组织与财务约束下运用理论、方法与工具，并涵盖技术开发、项目管理及支撑工具/方法/理论的创建。",
+      "source_id": "BK-004"
+    },
+    {
+      "term": "软件生命周期过程 (Software Life Cycle Process)",
+      "definition": "把输入转化为输出的、相互关联或相互作用的活动集合；同一过程可在不同阶段反复出现。ISO/IEC/IEEE 12207 为软件生命周期建立过程框架，定义过程而非固定阶段。",
+      "source_id": "STD-004"
+    },
+    {
+      "term": "阶段 (Stage)",
+      "definition": "生命周期中与实体的描述或实现状态相关的时期，通常是一段时间并以“主决策门”结束；标准不规定任何特定阶段集，举例为 concept、development、production、utilization、support、retirement。",
+      "source_id": "STD-003"
+    },
+    {
+      "term": "软件产品质量 (Software Product Quality)",
+      "definition": "系统满足其各类利益相关者显式与隐式需求、从而提供价值的程度；ISO/IEC 25010 以九大特性及其子特性对该质量进行建模，作为质量评价体系的基石。",
+      "source_id": "STD-005"
+    },
+    {
+      "term": "可维护性 (Maintainability)",
+      "definition": "IEEE 14764 定义：软件产品被修改的能力（capability of the software product to be modified）。修改可包括纠正、改进，或使软件适配环境、需求与功能规格的变化。ISO/IEC 25010 下其子特性含模块性(Modularity)、可复用性(Reusability)、可分析性(Analyzability)、可修改性(Modifiability)、可测试性(Testability)。",
+      "source_id": "OFF-001"
+    },
+    {
+      "term": "软件维护 (Software Maintenance)",
+      "definition": "软件交付后为保持其持续满足用户需求而进行的活动；维护须支持纠错、改进设计、实现增强、与其他软件接口、适配不同运行环境、迁移遗留软件与退役软件。分类为纠正性、适应性、完善性与预防性维护。",
+      "source_id": "OFF-001"
+    },
+    {
+      "term": "软件演化 (Software Evolution)",
+      "definition": "软件在其生命周期中随需求与环境变化而持续变化的过程；Lehman 将其概括为八条演化定律，并把维护视为演化式（继续）开发——大型软件永不完工，且随演化复杂度递增，除非采取措施降低复杂度。",
+      "source_id": "PAP-003"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "软件工程的权威定义为：把系统化、规范化、可量化的方法应用于软件的开发、运行与维护，即把工程应用于软件。该定义由 IEEE 610.12 给出，并被 SWEBOK、SEVOCAB(ISO/IEC/IEEE 24765)、SE2014 采纳。",
+      "source_ids": [
+        "STD-010",
+        "OFF-001",
+        "OFF-008",
+        "OFF-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SWEBOK 是软件工程知识体系的基线标准（ISO/IEC TR 19759），由 IEEE 计算机学会出版；V3 划定 15 个知识域，V4（2024-10）扩展为 18 个（新增软件架构、软件工程运维、软件安全等）。",
+      "source_ids": [
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件工程是一门工程学科且“不只是编程”：除写代码外还包含对质量、进度、经济目标的关注，开发者需兼具原理知识与实践经验。",
+      "source_ids": [
+        "OFF-003",
+        "OFF-004"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件区别于传统工程客体：抽象且不可见、兼具静态/动态属性、内在复杂、缺乏通用质量度量、无传统制造阶段、不会“磨损”（维护实为演化式设计过程）。这些特性要求对工程方法进行适配。",
+      "source_ids": [
+        "OFF-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件工程学科以 1968 年 NATO 软件工程会议（Garmisch）与国家 1969 年罗马会议为起点；“software engineering”术语作为（故意带挑战性的）会议名称，来源归于 F. L. Bauer。",
+      "source_ids": [
+        "OFF-006",
+        "WEB-012"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "“software crisis / software gap”在 1968 会议被明确讨论，表现为成本/进度超支、质量低劣、难以维护、项目失控等；与会者对其严重程度存在分歧（并非一致共识）。",
+      "source_ids": [
+        "OFF-006"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "早期“software engineering”术语使用线索：1965 年 Computers and Automation 服务清单、1966 年 Oettinger 的 ACM 主席信；Margaret Hamilton 在 Apollo 项目中以“软件工程”为学科争取合法性。",
+      "source_ids": [
+        "WEB-012"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "开发范式历时演变：瀑布模型常追溯到 Royce(1970)——按阶段序列推进并需迭代回退；2001 年敏捷宣言提出四大价值与十二原则，标志向迭代、增量、快速反馈、响应变化的范式转向。",
+      "source_ids": [
+        "PAP-004",
+        "OFF-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件工程与计算机科学关系：SE 以 CS 为主要基础（SE2014 指出其最大知识组件为 computing essentials），但不等同于 CS——SE 引入工程流程、团队协作与“时间/变更”维度；Parnas 主张 SE 应作为独立工程学科而非 CS 子领域。",
+      "source_ids": [
+        "OFF-003",
+        "OFF-004",
+        "PAP-005"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "CS2023 将“编程 vs 软件工程”的差异归纳为两个维度：时间（多版本、长期存活）与人员（团队协作）；SE 项目需让软件“持续可用”，而非仅“构建出可用之物”。",
+      "source_ids": [
+        "OFF-004"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件工程的核心关切为质量、成本、进度与演化；Brooks 进一步论证软件不存在“银弹”，本质性复杂度无法被单一技术消除。",
+      "source_ids": [
+        "OFF-003",
+        "OFF-004",
+        "PAP-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 12207 为软件生命周期建立“过程”框架而非固定“阶段”：不规定具体生命周期模型或开发方法；2026 版与 15288 统一为四组过程（协议、组织项目使能、技术管理、技术），过程数由 43 统一为 30。",
+      "source_ids": [
+        "STD-004",
+        "STD-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "生命周期阶段（stage）的权威示例（ISO/IEC TS 24748-1，12207 引用）为：concept、development、production、utilization、support、retirement；阶段通常以主决策门结束，过程可在各阶段反复出现。",
+      "source_ids": [
+        "STD-003"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "ISO/IEC 25010:2023 产品质量模型由九大特性构成，取代 2011 版的八特性：Usability→Interaction capability、Portability→Flexibility、新增 Safety，并增加 Security 下 Resistance、Flexibility 下 Scalability 等子特性。",
+      "source_ids": [
+        "STD-005",
+        "OFF-005",
+        "WEB-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可维护性(maintainability)被 IEEE 14764 定义为软件产品被修改的能力，修改含纠错、改进及适配环境/需求变化；在 ISO/IEC 25010 下其子特性为模块性、可复用性、可分析性、可修改性与可测试性。",
+      "source_ids": [
+        "OFF-001",
+        "STD-007",
+        "WEB-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件维护按意图分类为纠正性、适应性、完善性与预防性维护；其中纠正/预防属“纠正”类，适应/完善属“增强”类。",
+      "source_ids": [
+        "OFF-001",
+        "STD-007"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "维护消耗软件生命周期的主要成本份额：超过 80% 的维护为非纠正性；理解待修改软件约占维护工作量的一半；运行环境与组织环境是影响维护成本的重要因素。",
+      "source_ids": [
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "软件演化具有规律性：Lehman 八条定律（持续变化、复杂度递增、自我调节、组织稳定性守恒、熟悉度守恒、持续增长、质量下降、反馈系统）表明软件必须持续适应，否则满意度与质量下降；维护应被理解为演化式（继续）开发。",
+      "source_ids": [
+        "PAP-003",
+        "OFF-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "产业视角（Google）将软件工程定义为不仅包括写代码，还包括组织用于长期构建与维护代码的全部工具与流程，核心是“Programming Over Time（跨时间编程）”。",
+      "source_ids": [
+        "BK-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "“可扩展性(extensibility)/可演化性(evolvability)”在国际标准中并非独立顶层术语，其权威地位主要体现为 ISO/IEC 25010 的“可修改性(Modifiability)/灵活性(Flexibility)/可复用性(Reusability)”等子特性，以及 SWEBOK 将维护视为“演化式开发/继续开发”的定位。",
+      "source_ids": [
+        "OFF-001",
+        "STD-005",
+        "PAP-003"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "gaps": [
+    "ISO 标准正文（12207:2017/2026、25010:2023、14764:2022、24765:2017）在 iso.org 对本机返回 403，未能逐字核对标准原文条款；相关定义与结构系通过 ISO OBP 摘要、iso.org 搜索结果内容、SWEBOK/SEBoK 转引与标准门户交叉核验。",
+    "SWEBOK V4 (2024) 官方网站 x403/x000，V4 的 18 个知识域清单与定义来自 computer.org 官方条目与 Wikipedia 转述，未取得 V4 正文逐条核对；正文定义主要依据 V3（2014）PDF。",
+    "1969 年罗马会议报告（Software Engineering Techniques）未做文本提取，起源记述主要依据 1968 年 Garmisch 报告。",
+    "Royce 1970、Lehman 1980、Parnas 1998、Brooks 1987 四篇经典论文未回源原文（受付费墙/可得性限制），其观点经 Wikipedia 与 SE2014 转引，置信度按 medium 计。",
+    "CS2023 SE 知识域详细 topics/LO 取自 Beta v2 文本；最终版细节可能调整，未逐条核对最终 PDF。",
+    "“extensibility / evolvability”缺少标准级独立定义，其权威论述多在软件架构文献中（ISO/IEC/IEEE 42010 等），按任务分工由架构 Agent 负责，本包不作独立定义。",
+    "ISO/IEC 25010:2011 八特性与 2023 九特性的完整子特性对照未逐一取得官方原文，子特性清单依赖二手来源（iso25000、Sonar）。"
+  ],
+  "notes": "方法说明：本证据包面向阶段1（据实、不杜撰），采用「LLM 初发现定位 → Tavily 首筛官方源 → curl 回源官方 PDF/页面（境外站点走代理 172.29.0.1:7890）→ 多源交叉验证」链路。已直接回源并文本提取的一手材料包括：SE2014 官方 PDF、CS2023 Beta PDF、NATO 1968 报告原 PDF、SWEBOK V3 PDF、SEI About、敏捷宣言、iso25000.com、Sonar ISO 25010 说明、Wikipedia 条目组。ISO 官方页面因 403 未直接打开，相应来源 verified=false 并在 key_points 注明核验路径。信源分级：S1=国际标准/官方知识体系/官方课程体系/学科原始报告；S2=经典著作与权威二手门户；S4=学术论文。所有 finding 均带 source_ids；关键定义（软件工程、可维护性、25010 质量模型）均以 ≥2 个独立来源交叉验证。已排除“架构设计”主题（软件架构、42010 等）以配合架构 Agent 分工。"
+}

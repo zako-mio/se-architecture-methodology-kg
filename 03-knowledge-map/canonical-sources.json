@@ -1,0 +1,3674 @@
+{
+  "meta": {
+    "title": "软件工程 / 架构设计方法论 · 唯一权威信源主表（canonical sources）",
+    "namespace_version": "1.0.0",
+    "schema_version": "1.0.0",
+    "generated": "2026-09-10",
+    "generator": "16-checkpoint/build_canonical_sources.py",
+    "total": 253,
+    "by_category": {
+      "STD": 28,
+      "OFF": 25,
+      "BK": 38,
+      "WEB": 45,
+      "VEN": 39,
+      "PAP": 28,
+      "COM": 4,
+      "LOC": 39,
+      "XCV": 7
+    },
+    "by_confidence": {
+      "low": 17,
+      "medium": 60,
+      "high": 176
+    },
+    "by_verified": {
+      "False": 17,
+      "cited": 60,
+      "True": 176
+    },
+    "id_rule": "^(STD|OFF|BK|WEB|VEN|PAP|COM|LOC|XCV)-\\d{3}$",
+    "entity_rule": "id-mapping.json entries[].canonical_id 为唯一实体枚举；同实体跨包复用合并，legacy_ids 汇总全部旧 ID",
+    "field_source": "title/org/year/url/tier 优先 knowledge-map.json，回退 14 证据包 sources[]，再回退 id-mapping entity_key；verified 取证据包布尔值，仅阶段1 目录收录标 cited",
+    "confidence_rule": "verified=true→high；cited→medium；false→low",
+    "knowledge_map_relation": "本文件为 253 个 canonical 实体的唯一权威源主表。03-knowledge-map/knowledge-map.json（158 条，含 6 个重复 canonical id，实际 152 个唯一实体）为阶段1 子集视图，其 sources[].id 已按同一 canonical 命名空间标注；本主表覆盖其全部实体并并入 14 个阶段2 证据包 sources[]。两者 ID 命名空间一致，knowledge-map 不再作为 sources[] 解析依据。",
+    "downstream": "节点/边的 sources[] 与 errata[].source_id 一律引用本表 ID；契约 04-migration/canonical-sources.json 为同一逻辑文件的迁移期路径，本文件为当前落点。"
+  },
+  "sources": [
+    {
+      "id": "BK-001",
+      "category": "BK",
+      "title": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+      "org": "O'Reilly（Titus Winters, Tom Manshreck, Hyrum Wright 编）",
+      "year": "2020",
+      "url": "https://abseil.io/resources/swe-book",
+      "tier": "S2",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S2-BK-01",
+        "S2-02",
+        "S2-10"
+      ]
+    },
+    {
+      "id": "BK-002",
+      "category": "BK",
+      "title": "The Mythical Man-Month: Essays on Software Engineering",
+      "org": "Pearson（Frederick P. Brooks Jr.）",
+      "year": "1995",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000009376",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-02"
+      ]
+    },
+    {
+      "id": "BK-003",
+      "category": "BK",
+      "title": "Code Complete: A Practical Handbook of Software Construction",
+      "org": "Microsoft Press（Steve McConnell）",
+      "year": "2004",
+      "url": "https://www.microsoftpressstore.com/store/code-complete-9780735619678",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-03"
+      ]
+    },
+    {
+      "id": "BK-004",
+      "category": "BK",
+      "title": "Software Engineering（Ian Sommerville 教材）",
+      "org": "Pearson（Ian Sommerville）",
+      "year": "2015",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/software-engineering/P200000003290",
+      "tier": "S2",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S2-BK-04",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "BK-005",
+      "category": "BK",
+      "title": "The Pragmatic Programmer: Your Journey to Mastery",
+      "org": "The Pragmatic Bookshelf（David Thomas, Andrew Hunt）",
+      "year": "2019",
+      "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-05"
+      ]
+    },
+    {
+      "id": "BK-006",
+      "category": "BK",
+      "title": "Peopleware: Productive Projects and Teams",
+      "org": "Pearson（Tom DeMarco, Timothy Lister）",
+      "year": "2013",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/peopleware-productive-projects-and-teams/P200000009378",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-06"
+      ]
+    },
+    {
+      "id": "BK-007",
+      "category": "BK",
+      "title": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+      "org": "Pearson（Robert C. Martin）",
+      "year": "2017",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-07",
+        "S2-06"
+      ]
+    },
+    {
+      "id": "BK-008",
+      "category": "BK",
+      "title": "A Philosophy of Software Design",
+      "org": "Yaknyam Press / Stanford（John Ousterhout）",
+      "year": "2021",
+      "url": "https://web.stanford.edu/~ouster/cgi-bin/book.php",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-08",
+        "S2-07",
+        "S2-02"
+      ]
+    },
+    {
+      "id": "BK-009",
+      "category": "BK",
+      "title": "Software Architecture in Practice",
+      "org": "Pearson（Len Bass, Paul Clements, Rick Kazman, SEI）",
+      "year": "2021",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000009173",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-09",
+        "S2-M02"
+      ]
+    },
+    {
+      "id": "BK-010",
+      "category": "BK",
+      "title": "Fundamentals of Software Architecture: A Modern Engineering Approach",
+      "org": "O'Reilly（Mark Richards, Neal Ford）",
+      "year": "2025",
+      "url": "https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-10"
+      ]
+    },
+    {
+      "id": "BK-011",
+      "category": "BK",
+      "title": "Building Evolutionary Architectures: Automated Software Governance",
+      "org": "O'Reilly（Neal Ford, Rebecca Parsons, Patrick Kua, Pramod Sadalage）",
+      "year": "2022",
+      "url": "https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-11",
+        "S2-12",
+        "S2-13"
+      ]
+    },
+    {
+      "id": "BK-012",
+      "category": "BK",
+      "title": "Patterns of Enterprise Application Architecture (PoEAA)",
+      "org": "Addison-Wesley（Martin Fowler 等）",
+      "year": "2002",
+      "url": "https://martinfowler.com/books/eaa.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-12",
+        "S2-05"
+      ]
+    },
+    {
+      "id": "BK-013",
+      "category": "BK",
+      "title": "Documenting Software Architectures: Views and Beyond",
+      "org": "Pearson / SEI（Paul Clements, Felix Bachmann, Len Bass 等）",
+      "year": "2010",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/documenting-software-architectures-views-and-beyond/P200000009174",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-13",
+        "S2-19"
+      ]
+    },
+    {
+      "id": "BK-014",
+      "category": "BK",
+      "title": "Software Architecture: The Hard Parts",
+      "org": "O'Reilly（Neal Ford, Mark Richards, Pramod Sadalage, Zhamak Dehghani）",
+      "year": "2021",
+      "url": "https://www.oreilly.com/library/view/software-architecture-the/9781492086888/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-14"
+      ]
+    },
+    {
+      "id": "BK-015",
+      "category": "BK",
+      "title": "The Software Architect Elevator: Redefining the Architect's Role in the Digital Enterprise",
+      "org": "O'Reilly（Gregor Hohpe）",
+      "year": "2020",
+      "url": "https://www.oreilly.com/library/view/the-software-architect/9781492077541/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-15"
+      ]
+    },
+    {
+      "id": "BK-016",
+      "category": "BK",
+      "title": "Pattern-Oriented Software Architecture, Volume 1: A System of Patterns",
+      "org": "Wiley（F. Buschmann, R. Meunier, H. Rohnert, P. Sommerlad, M. Stal）",
+      "year": "1996",
+      "url": "https://www.wiley.com/en-us/Pattern-Oriented+Software+Architecture%2C+Volume+1%3A+A+System+of+Patterns-p-9780471958697",
+      "tier": "S2",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S2-BK-16",
+        "S2-18"
+      ]
+    },
+    {
+      "id": "BK-017",
+      "category": "BK",
+      "title": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+      "org": "Addison-Wesley（Eric Evans）",
+      "year": "2003",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/domain-driven-design-tackling-complexity-in-the-heart-of-software/P200000009134",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-17"
+      ]
+    },
+    {
+      "id": "BK-018",
+      "category": "BK",
+      "title": "Domain-Driven Design Reference: Definitions and Pattern Summaries",
+      "org": "Domain Language, Inc.（Eric Evans，CC BY 4.0）",
+      "year": "2015（D 记 2014）",
+      "url": "https://domainlanguage.com/ddd/reference/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-18",
+        "S2-08"
+      ]
+    },
+    {
+      "id": "BK-019",
+      "category": "BK",
+      "title": "Implementing Domain-Driven Design",
+      "org": "Addison-Wesley（Vaughn Vernon）",
+      "year": "2013",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/implementing-domain-driven-design/P200000009135",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-19"
+      ]
+    },
+    {
+      "id": "BK-020",
+      "category": "BK",
+      "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+      "org": "Pearson（Robert C. Martin）",
+      "year": "2008",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000009283",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-20",
+        "S2-05"
+      ]
+    },
+    {
+      "id": "BK-021",
+      "category": "BK",
+      "title": "Refactoring: Improving the Design of Existing Code",
+      "org": "Addison-Wesley（Martin Fowler with Kent Beck）",
+      "year": "2018",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/refactoring-improving-the-design-of-existing-code/P200000009306",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-21",
+        "P-S2-07",
+        "S2-04",
+        "S2-05"
+      ]
+    },
+    {
+      "id": "BK-022",
+      "category": "BK",
+      "title": "Working Effectively with Legacy Code",
+      "org": "Pearson（Michael Feathers）",
+      "year": "2004",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/P200000009308",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-22",
+        "S2-09"
+      ]
+    },
+    {
+      "id": "BK-023",
+      "category": "BK",
+      "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+      "org": "O'Reilly（Martin Kleppmann, Chris Riccomini）",
+      "year": "2026",
+      "url": "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-23"
+      ]
+    },
+    {
+      "id": "BK-024",
+      "category": "BK",
+      "title": "Release It! Design and Deploy Production-Ready Software",
+      "org": "The Pragmatic Bookshelf（Michael T. Nygard）",
+      "year": "2018",
+      "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-24",
+        "S2-03"
+      ]
+    },
+    {
+      "id": "BK-025",
+      "category": "BK",
+      "title": "Site Reliability Engineering: How Google Runs Production Systems",
+      "org": "O'Reilly / Google（Betsy Beyer 等）",
+      "year": "2016",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-25",
+        "S2-07",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "BK-026",
+      "category": "BK",
+      "title": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+      "org": "O'Reilly / Google（Betsy Beyer 等）",
+      "year": "2018",
+      "url": "https://sre.google/workbook/table-of-contents/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-26",
+        "S2-02"
+      ]
+    },
+    {
+      "id": "BK-027",
+      "category": "BK",
+      "title": "The DevOps Handbook",
+      "org": "IT Revolution（Gene Kim, Jez Humble, Patrick Debois, John Willis, Nicole Forsgren）",
+      "year": "2021",
+      "url": "https://itrevolution.com/product/the-devops-handbook-second-edition/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-27"
+      ]
+    },
+    {
+      "id": "BK-028",
+      "category": "BK",
+      "title": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+      "org": "Pearson（Jez Humble, David Farley）",
+      "year": "2010",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/P200000009253",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-28"
+      ]
+    },
+    {
+      "id": "BK-029",
+      "category": "BK",
+      "title": "Accelerate: The Science of Lean Software and DevOps",
+      "org": "IT Revolution（Nicole Forsgren, Jez Humble, Gene Kim）",
+      "year": "2018",
+      "url": "https://itrevolution.com/product/accelerate/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-29"
+      ]
+    },
+    {
+      "id": "BK-030",
+      "category": "BK",
+      "title": "Team Topologies: Organizing Business and Technology Teams for Fast Flow",
+      "org": "IT Revolution（Matthew Skelton, Manuel Pais）",
+      "year": "2019",
+      "url": "https://itrevolution.com/product/team-topologies/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-30",
+        "S2-04",
+        "S2-06"
+      ]
+    },
+    {
+      "id": "BK-031",
+      "category": "BK",
+      "title": "The Twelve-Factor App",
+      "org": "Adam Wiggins (Heroku)",
+      "year": "2011",
+      "url": "https://12factor.net/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-31",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "BK-032",
+      "category": "BK",
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "org": "Addison-Wesley（Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides / GoF）",
+      "year": "1994",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009144",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-BK-32",
+        "S2-06"
+      ]
+    },
+    {
+      "id": "BK-033",
+      "category": "BK",
+      "title": "Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions",
+      "org": "Addison-Wesley（Gregor Hohpe, Bobby Woolf）",
+      "year": "2003",
+      "url": "https://www.enterpriseintegrationpatterns.com/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-33"
+      ]
+    },
+    {
+      "id": "BK-034",
+      "category": "BK",
+      "title": "Building Microservices: Designing Fine-Grained Systems",
+      "org": "O'Reilly（Sam Newman）",
+      "year": "2021",
+      "url": "https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-34"
+      ]
+    },
+    {
+      "id": "BK-035",
+      "category": "BK",
+      "title": "Microservices Patterns: With Examples in Java",
+      "org": "Manning（Chris Richardson）",
+      "year": "2018",
+      "url": "https://www.manning.com/books/microservices-patterns",
+      "tier": "S2",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S2-BK-35"
+      ]
+    },
+    {
+      "id": "BK-036",
+      "category": "BK",
+      "title": "Software Architecture in Practice — Chapter 4: Quality Attribute Scenarios（Bass, Clements, Kazman，在线章节节选）",
+      "org": "Addison-Wesley / SEI（作者含 SEI 首席架构师）",
+      "year": "2003 (2nd ed.)",
+      "url": "https://people.ece.ubc.ca/matei/EECE417/BASS/ch04lev1sec3.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-F01"
+      ]
+    },
+    {
+      "id": "BK-037",
+      "category": "BK",
+      "title": "The Pragmatic Programmer — DRY (Don't Repeat Yourself) 原则",
+      "org": "Andy Hunt & Dave Thomas (Addison-Wesley, 1999)",
+      "year": "1999",
+      "url": "https://en.wikipedia.org/wiki/Don%27t_repeat_yourself",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-04"
+      ]
+    },
+    {
+      "id": "BK-038",
+      "category": "BK",
+      "title": "Succeeding with Agile: Software Development Using Scrum（测试金字塔原始模型）",
+      "org": "Mike Cohn（Addison-Wesley）",
+      "year": "2009",
+      "url": "https://www.mountaingoatsoftware.com/books/succeeding-with-agile",
+      "tier": "S2",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S2-BK-30"
+      ]
+    },
+    {
+      "id": "COM-001",
+      "category": "COM",
+      "title": "ICSE — International Conference on Software Engineering",
+      "org": "ACM / IEEE-CS（软件工程顶会）",
+      "year": "annual",
+      "url": "https://conf.researchr.org/series/icse",
+      "tier": "S4",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S4-COM-01"
+      ]
+    },
+    {
+      "id": "COM-002",
+      "category": "COM",
+      "title": "FSE (ESEC/FSE) — ACM International Conference on the Foundations of Software Engineering",
+      "org": "ACM SIGSOFT（软件工程顶会）",
+      "year": "annual",
+      "url": "https://conf.researchr.org/series/fse",
+      "tier": "S4",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S4-COM-02"
+      ]
+    },
+    {
+      "id": "COM-003",
+      "category": "COM",
+      "title": "IEEE Transactions on Software Engineering (TSE)",
+      "org": "IEEE Computer Society（软件工程顶级期刊）",
+      "year": "1975–",
+      "url": "https://www.computer.org/csdl/journal/ts",
+      "tier": "S4",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S4-COM-03"
+      ]
+    },
+    {
+      "id": "COM-004",
+      "category": "COM",
+      "title": "Empirical Software Engineering (EMSE)",
+      "org": "Springer（软件工程权威期刊）",
+      "year": "1996–",
+      "url": "https://link.springer.com/journal/10664",
+      "tier": "S4",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S4-COM-04"
+      ]
+    },
+    {
+      "id": "LOC-001",
+      "category": "LOC",
+      "title": "12 Factor App × 12 Factor Agent 合并方法论知识图谱",
+      "org": "本地留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodology/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-KG-01"
+      ]
+    },
+    {
+      "id": "LOC-002",
+      "category": "LOC",
+      "title": "算法知识图谱",
+      "org": "本地留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0820-algorithm-knowledge-graph/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-KG-02"
+      ]
+    },
+    {
+      "id": "LOC-003",
+      "category": "LOC",
+      "title": "RL/LLM 推理/显存优化面试知识库",
+      "org": "本地留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0826-RL推理显存面试知识库/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-KG-03"
+      ]
+    },
+    {
+      "id": "LOC-004",
+      "category": "LOC",
+      "title": "RAG 建库工程教材 + 第5层『架构权衡思维』11 维权衡矩阵",
+      "org": "本地留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0813-知识库建库工程/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-KG-04"
+      ]
+    },
+    {
+      "id": "LOC-005",
+      "category": "LOC",
+      "title": "kb-construction 知识库构建全流程主入口",
+      "org": "本地 skill",
+      "year": "2026",
+      "url": "~/.config/opencode/skills/kb-construction/SKILL.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-SK-01"
+      ]
+    },
+    {
+      "id": "LOC-006",
+      "category": "LOC",
+      "title": "dag-tutorial-authoring DAG 教程编写方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "url": "~/.config/opencode/skills/dag-tutorial-authoring/SKILL.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-SK-02"
+      ]
+    },
+    {
+      "id": "LOC-007",
+      "category": "LOC",
+      "title": "cytoscape-dag-visualization 交互 DAG 可视化方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "url": "~/.config/opencode/skills/cytoscape-dag-visualization/SKILL.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-SK-03"
+      ]
+    },
+    {
+      "id": "LOC-008",
+      "category": "LOC",
+      "title": "multi-window-dag-delivery 多窗口接力 DAG 分析交付方法论",
+      "org": "本地 skill",
+      "year": "2026",
+      "url": "~/.config/opencode/skills/multi-window-dag-delivery/SKILL.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-SK-04"
+      ]
+    },
+    {
+      "id": "LOC-009",
+      "category": "LOC",
+      "title": "Software Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-software-architect.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-01"
+      ]
+    },
+    {
+      "id": "LOC-010",
+      "category": "LOC",
+      "title": "Backend Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-backend-architect.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-02"
+      ]
+    },
+    {
+      "id": "LOC-011",
+      "category": "LOC",
+      "title": "Multi-Agent Systems Architect 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-multi-agent-systems-architect.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-03"
+      ]
+    },
+    {
+      "id": "LOC-012",
+      "category": "LOC",
+      "title": "Codebase Onboarding Engineer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-codebase-onboarding-engineer.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-04"
+      ]
+    },
+    {
+      "id": "LOC-013",
+      "category": "LOC",
+      "title": "Code Reviewer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-code-reviewer.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-05"
+      ]
+    },
+    {
+      "id": "LOC-014",
+      "category": "LOC",
+      "title": "Minimal Change Engineer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-minimal-change-engineer.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-06"
+      ]
+    },
+    {
+      "id": "LOC-015",
+      "category": "LOC",
+      "title": "Git Workflow Master 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-git-workflow-master.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-07"
+      ]
+    },
+    {
+      "id": "LOC-016",
+      "category": "LOC",
+      "title": "Senior Developer 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-senior-developer.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-08"
+      ]
+    },
+    {
+      "id": "LOC-017",
+      "category": "LOC",
+      "title": "Rapid Prototyper 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/engineering/engineering-rapid-prototyper.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-09"
+      ]
+    },
+    {
+      "id": "LOC-018",
+      "category": "LOC",
+      "title": "Product Manager 角色 prompt",
+      "org": "本地 agency-agents",
+      "year": "2026",
+      "url": "~/.dsh/agency-agents/product/product-manager.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-RL-10"
+      ]
+    },
+    {
+      "id": "LOC-019",
+      "category": "LOC",
+      "title": "项目记忆索引 MEMORY.md（建库/架构/编码纪律条目）",
+      "org": "本地记忆",
+      "year": "2026",
+      "url": "~/.config/opencode/MEMORY.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-MM-01"
+      ]
+    },
+    {
+      "id": "LOC-020",
+      "category": "LOC",
+      "title": "去中心化聊天架构全景分析 + 模块化 DAG（58 份设计文档）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0820-去中心化聊天架构分析/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-01"
+      ]
+    },
+    {
+      "id": "LOC-021",
+      "category": "LOC",
+      "title": "OpenJobAutofill Chrome MV3 扩展逆向架构分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0805-OpenJobAutofill逆向分析/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-02"
+      ]
+    },
+    {
+      "id": "LOC-022",
+      "category": "LOC",
+      "title": "多模块解耦系统架构设计 + 跨模块接口契约（网申 v3）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0812-网申v3调取复制版/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-03"
+      ]
+    },
+    {
+      "id": "LOC-023",
+      "category": "LOC",
+      "title": "网申扩展 v2 深度重构 — 架构设计思路与根因分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0806-网申扩展v2实现/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-04"
+      ]
+    },
+    {
+      "id": "LOC-024",
+      "category": "LOC",
+      "title": "harness preset 通道架构耦合分析（dsh 启动失败修复 N7）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0816-dsh启动失败修复/N7-架构/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-05"
+      ]
+    },
+    {
+      "id": "LOC-025",
+      "category": "LOC",
+      "title": "DeepSeek Harness 插件级 DAG 知识库 RC5→RC7 级联升级",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0819-plugin-dag-rc7/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-06"
+      ]
+    },
+    {
+      "id": "LOC-026",
+      "category": "LOC",
+      "title": "dsh 插件 DAG 知识库 RC7→RC8→rc2 级联升级",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0822-plugin-dag-v0.1.1-rc2/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-07"
+      ]
+    },
+    {
+      "id": "LOC-027",
+      "category": "LOC",
+      "title": "dsh-manager 插件深度分析（依赖/功能/需求溯源/设计问题）— 三硬依据 E1/E2/E3",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0822-dsh-manager-analysis/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-08"
+      ]
+    },
+    {
+      "id": "LOC-028",
+      "category": "LOC",
+      "title": "deepseek-harness 源码解析（官方 architecture.md 镜像 + 模块分层）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0814-deepseek-harness源码解析/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-09"
+      ]
+    },
+    {
+      "id": "LOC-029",
+      "category": "LOC",
+      "title": "dsh-anchored-standard 社区插件依赖位置分析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0818-dsh-anchored-standard-analysis/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-10"
+      ]
+    },
+    {
+      "id": "LOC-030",
+      "category": "LOC",
+      "title": "Hermes Agent 整体架构报告（8251 文件工业级项目，七层架构）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0802-Hermes-Arch/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-11"
+      ]
+    },
+    {
+      "id": "LOC-031",
+      "category": "LOC",
+      "title": "MCP 四件套源码深挖",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0808-MCP四件套源码深挖/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-12"
+      ]
+    },
+    {
+      "id": "LOC-032",
+      "category": "LOC",
+      "title": "Claude Code Agent 架构深度解析",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0808-claude-code-analysis/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-13"
+      ]
+    },
+    {
+      "id": "LOC-033",
+      "category": "LOC",
+      "title": "OpenSpec × Superpower 工具解析（含架构对比图）",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0803-OpenSpec_Superpower解析/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-14"
+      ]
+    },
+    {
+      "id": "LOC-034",
+      "category": "LOC",
+      "title": "Open Code Review（阿里 open-code-review）项目解析知识图谱",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-open-code-review/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-15"
+      ]
+    },
+    {
+      "id": "LOC-035",
+      "category": "LOC",
+      "title": "控制理论 ⊗ Agent 设计知识库",
+      "org": "本地实战留档",
+      "year": "2026-09",
+      "url": "~/opencode/archive/Mission-file/2026-09/0907-控制理论Agent设计知识库/",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-16"
+      ]
+    },
+    {
+      "id": "LOC-036",
+      "category": "LOC",
+      "title": "技术知识中枢方法论（全量版 + 可读 HTML）",
+      "org": "本地实战留档",
+      "year": "2026-09",
+      "url": "~/opencode/archive/Mission-file/2026-09/0910-技术知识中枢主页/methodology/METHODOLOGY-full.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-17"
+      ]
+    },
+    {
+      "id": "LOC-037",
+      "category": "LOC",
+      "title": "AI Agent 架构 DAG 分析项目复盘",
+      "org": "本地实战留档",
+      "year": "2026-08",
+      "url": "~/opencode/archive/Mission-file/2026-08/0818-项目经历撰写/AI Agent 架构 DAG 分析项目复盘.md",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-PA-18"
+      ]
+    },
+    {
+      "id": "LOC-038",
+      "category": "LOC",
+      "title": "12 Factor App 官方电子书（epub/mobi）",
+      "org": "本地语料",
+      "year": "2011",
+      "url": "~/opencode/archive/Mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "tier": "LOCAL",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "L-BK-01",
+        "BK-01"
+      ]
+    },
+    {
+      "id": "LOC-039",
+      "category": "LOC",
+      "title": "AI Agents in Depth（中文版，Agent 工程）",
+      "org": "本地语料",
+      "year": "—",
+      "url": "~/opencode/archive/AI-Agents-in-Depth-zh-CN.pdf",
+      "tier": "LOCAL",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "L-BK-02"
+      ]
+    },
+    {
+      "id": "OFF-001",
+      "category": "OFF",
+      "title": "Guide to the Software Engineering Body of Knowledge (SWEBOK) V3.0 / V4.0",
+      "org": "IEEE Computer Society（ISO/IEC TR 19759 认定的知识体系基线）",
+      "year": "2014（V3）/ 2024（V4）",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-01",
+        "S1-01",
+        "S1-02",
+        "S1-A01"
+      ]
+    },
+    {
+      "id": "OFF-002",
+      "category": "OFF",
+      "title": "Carnegie Mellon Software Engineering Institute (SEI) — 架构定义/架构总览/ATAM 方法",
+      "org": "SEI, Carnegie Mellon University（美国国防部 FFRDC）",
+      "year": "2017-2018 及持续更新",
+      "url": "https://www.sei.cmu.edu/architecture/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-02",
+        "S1-10",
+        "S1-03",
+        "S1-04",
+        "S1-05",
+        "S1-11"
+      ]
+    },
+    {
+      "id": "OFF-003",
+      "category": "OFF",
+      "title": "Software Engineering 2014: Curriculum Guidelines for Undergraduate Degree Programs in Software Engineering (SE2014)",
+      "org": "Joint Task Force, IEEE Computer Society & ACM",
+      "year": "2015（内容 2014）",
+      "url": "https://www.acm.org/binaries/content/assets/education/se2014.pdf",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-03",
+        "S1-05"
+      ]
+    },
+    {
+      "id": "OFF-004",
+      "category": "OFF",
+      "title": "Computer Science Curricula 2023 (CS2023) — Software Engineering Knowledge Area",
+      "org": "ACM / IEEE-CS / AAAI Joint Task Force",
+      "year": "2023",
+      "url": "https://csed.acm.org/knowledge-areas",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-04",
+        "S1-06"
+      ]
+    },
+    {
+      "id": "OFF-005",
+      "category": "OFF",
+      "title": "ISO 25000 Portal — ISO/IEC 25010 质量标准门户",
+      "org": "AENOR（西班牙标准机构）/ iso25000.com",
+      "year": "2024",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-05",
+        "S2-03",
+        "S1-06",
+        "S2-M01"
+      ]
+    },
+    {
+      "id": "OFF-006",
+      "category": "OFF",
+      "title": "Software Engineering: Report on a conference sponsored by the NATO Science Committee, Garmisch, 1968",
+      "org": "NATO Science Committee（Naur & Randell 编）",
+      "year": "1969",
+      "url": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1968.PDF",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-06",
+        "S1-07"
+      ]
+    },
+    {
+      "id": "OFF-007",
+      "category": "OFF",
+      "title": "Manifesto for Agile Software Development（敏捷软件开发宣言）",
+      "org": "17 位署名作者（Beck, Cockburn, Fowler 等）",
+      "year": "2001",
+      "url": "https://agilemanifesto.org/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-07",
+        "S1-11"
+      ]
+    },
+    {
+      "id": "OFF-008",
+      "category": "OFF",
+      "title": "ISO/IEC/IEEE 24765 SEVOCAB 在线术语库（配合 S1-STD-09）",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/71952.html",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-OFF-08",
+        "S1-09"
+      ]
+    },
+    {
+      "id": "OFF-009",
+      "category": "OFF",
+      "title": "Technical Debt: From Metaphor to Theory and Practice（CMU/SEI 资产页，含摘要）",
+      "org": "Carnegie Mellon University, Software Engineering Institute (SEI)",
+      "year": "2012",
+      "url": "https://www.sei.cmu.edu/library/technical-debt-from-metaphor-to-theory-and-practice/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S1-01"
+      ]
+    },
+    {
+      "id": "OFF-010",
+      "category": "OFF",
+      "title": "SWEBOK Guide V4.0 Topics — Chapter 1: Software Requirements Fundamentals（官方目录页快照）",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://web.archive.org/web/20241212105347/https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F01"
+      ]
+    },
+    {
+      "id": "OFF-011",
+      "category": "OFF",
+      "title": "SEBoK — Stakeholder Needs and Requirements (glossary)（干系人需要与需求术语条目）",
+      "org": "BKCASE / SEBoK",
+      "year": "2026（持续更新）",
+      "url": "https://sebokwiki.org/wiki/Stakeholder_Needs_and_Requirements_(glossary)",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F05"
+      ]
+    },
+    {
+      "id": "OFF-012",
+      "category": "OFF",
+      "title": "SEBoK — Stakeholder (glossary)（干系人术语条目）",
+      "org": "BKCASE / SEBoK",
+      "year": "2026（持续更新）",
+      "url": "https://sebokwiki.org/wiki/Stakeholder_(glossary)",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F06"
+      ]
+    },
+    {
+      "id": "OFF-013",
+      "category": "OFF",
+      "title": "SEI — Software Architecture（质量属性与 ATAM 架构评估）",
+      "org": "Carnegie Mellon Software Engineering Institute (SEI)",
+      "year": "2026（访问时）",
+      "url": "https://www.sei.cmu.edu/our-work/software-architecture/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F07"
+      ]
+    },
+    {
+      "id": "OFF-014",
+      "category": "OFF",
+      "title": "SWEBOK Guide V3.0（PDF 镜像，Chapter 1 Software Requirements Fundamentals）",
+      "org": "IEEE Computer Society（镜像：Florida Institute of Technology）",
+      "year": "2014",
+      "url": "https://cs.fit.edu/~kgallagher/Schtick/Serious/SWEBOKv3.pdf",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-F08"
+      ]
+    },
+    {
+      "id": "OFF-015",
+      "category": "OFF",
+      "title": "SEI: Views and Beyond — The SEI Approach to Architecture Documentation（官方方法页，Archive 快照）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "c. 2011 (archived 2011-08-07)",
+      "url": "https://web.archive.org/web/20110807114506/http://www.sei.cmu.edu/architecture/tools/document/viewsandbeyond.cfm",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-09"
+      ]
+    },
+    {
+      "id": "OFF-016",
+      "category": "OFF",
+      "title": "SEI: Methods for Software Architecture Documentation（官方方法页，Archive 快照）",
+      "org": "Carnegie Mellon University, Software Engineering Institute",
+      "year": "c. 2008 (archived 2008-05-13)",
+      "url": "https://web.archive.org/web/20080513033149/http://www.sei.cmu.edu/architecture/documentation_methods.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-10"
+      ]
+    },
+    {
+      "id": "OFF-017",
+      "category": "OFF",
+      "title": "SWEBOK Guide V4.0 — Chapter 5: Software Testing",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-10"
+      ]
+    },
+    {
+      "id": "OFF-018",
+      "category": "OFF",
+      "title": "ISTQB Certified Tester Foundation Level (CTFL) Syllabus v4.0.1",
+      "org": "International Software Testing Qualifications Board (ISTQB)",
+      "year": "2024",
+      "url": "https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-11"
+      ]
+    },
+    {
+      "id": "OFF-019",
+      "category": "OFF",
+      "title": "A Taxonomy of Testing (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Donald Firesmith）",
+      "year": "2015",
+      "url": "https://www.sei.cmu.edu/blog/a-taxonomy-of-testing/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-12"
+      ]
+    },
+    {
+      "id": "OFF-020",
+      "category": "OFF",
+      "title": "Four Types of Shift Left Testing (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Donald Firesmith）",
+      "year": "2015",
+      "url": "https://www.sei.cmu.edu/blog/four-types-of-shift-left-testing/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-13"
+      ]
+    },
+    {
+      "id": "OFF-021",
+      "category": "OFF",
+      "title": "Using Quality Attributes as a Means to Improve Acquisition Strategies (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Lisa Brownsword）",
+      "year": "2014",
+      "url": "https://www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-14"
+      ]
+    },
+    {
+      "id": "OFF-022",
+      "category": "OFF",
+      "title": "Kazman, R., Echeverría, S., & Ivers, J. (2022). Extensibility (CMU/SEI-2022-TR-002)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2022",
+      "url": "https://www.sei.cmu.edu/library/extensibility",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M04"
+      ]
+    },
+    {
+      "id": "OFF-023",
+      "category": "OFF",
+      "title": "Scott, J., & Kazman, R. (2009). Realizing and Refining Architectural Tactics: Availability (CMU/SEI-2009-TR-006)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2009",
+      "url": "https://www.sei.cmu.edu/library/realizing-and-refining-architectural-tactics-availability",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M05"
+      ]
+    },
+    {
+      "id": "OFF-024",
+      "category": "OFF",
+      "title": "Bachmann, F., Bass, L., & Nord, R. (2007). Modifiability Tactics (CMU/SEI-2007-TR-009)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "2007",
+      "url": "https://www.sei.cmu.edu/library/modifiability-tactics",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M06"
+      ]
+    },
+    {
+      "id": "OFF-025",
+      "category": "OFF",
+      "title": "SEI — Reasoning About Software Quality Attributes (Quality Attribute General Scenarios & Attribute Primitives)",
+      "org": "Software Engineering Institute, Carnegie Mellon University",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M07"
+      ]
+    },
+    {
+      "id": "PAP-001",
+      "category": "PAP",
+      "title": "No Silver Bullet — Essence and Accidents of Software Engineering",
+      "org": "IEEE Computer（Frederick P. Brooks, Jr.）；原为 IFIP 1986，收录于《人月神话》周年版第16章",
+      "year": "1987（essay 1986）",
+      "url": "https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-PAP-01",
+        "S4-04"
+      ]
+    },
+    {
+      "id": "PAP-002",
+      "category": "PAP",
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+      "org": "D. L. Parnas, Communications of the ACM",
+      "year": "1972",
+      "url": "https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-PAP-02",
+        "S2-15",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "PAP-003",
+      "category": "PAP",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution",
+      "org": "Meir M. Lehman, Proc. IEEE 68(9)",
+      "year": "1980",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-PAP-03",
+        "P-S4-09",
+        "S4-01",
+        "S4-02"
+      ]
+    },
+    {
+      "id": "PAP-004",
+      "category": "PAP",
+      "title": "Managing the Development of Large Software Systems",
+      "org": "Winston W. Royce, Proc. IEEE WESCON",
+      "year": "1970",
+      "url": "https://web.archive.org/web/2019id_/http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-PAP-04",
+        "S4-02"
+      ]
+    },
+    {
+      "id": "PAP-005",
+      "category": "PAP",
+      "title": "Software Engineering Programmes are not Computer Science Programmes",
+      "org": "David L. Parnas, Annals of Software Engineering",
+      "year": "1998",
+      "url": "https://bioinfo.uib.es/~joemiro/semdoc/PlansEstudis/Bachelor_Masters_Curricula/DParnas.pdf",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-PAP-05",
+        "S4-03"
+      ]
+    },
+    {
+      "id": "PAP-006",
+      "category": "PAP",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham",
+      "year": "1992-03-26",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-PAP-06",
+        "P-S2-03",
+        "S2-03",
+        "S2-02"
+      ]
+    },
+    {
+      "id": "PAP-007",
+      "category": "PAP",
+      "title": "An Introduction to Software Architecture (CMU-CS-94-166 / SEI-94-TR-21)",
+      "org": "David Garlan & Mary Shaw, Carnegie Mellon University / SEI",
+      "year": "1993（book chapter）/ 1994（tech report）",
+      "url": "https://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-PAP-07",
+        "S2-14"
+      ]
+    },
+    {
+      "id": "PAP-008",
+      "category": "PAP",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process",
+      "year": "2022",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-PAP-08",
+        "P-S4-08",
+        "S4-01"
+      ]
+    },
+    {
+      "id": "PAP-009",
+      "category": "PAP",
+      "title": "Technical Debt: From Metaphor to Theory and Practice",
+      "org": "P. Kruchten, R. L. Nord, I. Ozkaya, IEEE Software 29(6):18-21, DOI 10.1109/MS.2012.167",
+      "year": "2012-11",
+      "url": "https://doi.org/10.1109/MS.2012.167",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-01",
+        "S4-03"
+      ]
+    },
+    {
+      "id": "PAP-010",
+      "category": "PAP",
+      "title": "Managing Technical Debt with the SQALE Method",
+      "org": "J.-L. Letouzey, M. Ilkiewicz, IEEE Software 29(6):44-51, DOI 10.1109/MS.2012.129",
+      "year": "2012-11",
+      "url": "https://doi.org/10.1109/MS.2012.129",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-02"
+      ]
+    },
+    {
+      "id": "PAP-011",
+      "category": "PAP",
+      "title": "A systematic mapping study on technical debt and its management",
+      "org": "Z. Li, P. Avgeriou, P. Liang, Journal of Systems and Software 101, DOI 10.1016/j.jss.2014.12.027",
+      "year": "2015-03",
+      "url": "https://doi.org/10.1016/j.jss.2014.12.027",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-03"
+      ]
+    },
+    {
+      "id": "PAP-012",
+      "category": "PAP",
+      "title": "Towards an Ontology of Terms on Technical Debt",
+      "org": "N. S. R. Alves et al., 6th Int'l Workshop on Managing Technical Debt (MTD), DOI 10.1109/MTD.2014.9",
+      "year": "2014-09",
+      "url": "https://doi.org/10.1109/MTD.2014.9",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-04"
+      ]
+    },
+    {
+      "id": "PAP-013",
+      "category": "PAP",
+      "title": "An Overview and Comparison of Technical Debt Measurement Tools",
+      "org": "IEEE Software, DOI 10.1109/MS.2020.3024958",
+      "year": "2020",
+      "url": "https://doi.org/10.1109/MS.2020.3024958",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-05"
+      ]
+    },
+    {
+      "id": "PAP-014",
+      "category": "PAP",
+      "title": "Automatic identification of self-admitted technical debt from four different sources",
+      "org": "Empirical Software Engineering, DOI 10.1007/s10664-023-10297-9",
+      "year": "2023",
+      "url": "https://doi.org/10.1007/s10664-023-10297-9",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-06"
+      ]
+    },
+    {
+      "id": "PAP-015",
+      "category": "PAP",
+      "title": "A systematic literature review on Technical Debt prioritization: Strategies, processes, factors, and tools",
+      "org": "Journal of Systems and Software 171, DOI 10.1016/j.jss.2020.110827",
+      "year": "2020",
+      "url": "https://doi.org/10.1016/j.jss.2020.110827",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-07"
+      ]
+    },
+    {
+      "id": "PAP-016",
+      "category": "PAP",
+      "title": "Software developer productivity loss due to technical debt—A replication and extension study",
+      "org": "Journal of Systems and Software 156, DOI 10.1016/j.jss.2019.06.004",
+      "year": "2019",
+      "url": "https://doi.org/10.1016/j.jss.2019.06.004",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-10"
+      ]
+    },
+    {
+      "id": "PAP-017",
+      "category": "PAP",
+      "title": "Building and evaluating a theory of architectural technical debt in software-intensive systems",
+      "org": "Journal of Systems and Software 176, DOI 10.1016/j.jss.2021.110925",
+      "year": "2021",
+      "url": "https://doi.org/10.1016/j.jss.2021.110925",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-11"
+      ]
+    },
+    {
+      "id": "PAP-018",
+      "category": "PAP",
+      "title": "Identification and measurement of Requirements Technical Debt in software development: A systematic literature review",
+      "org": "Journal of Systems and Software 190, DOI 10.1016/j.jss.2022.111483",
+      "year": "2022",
+      "url": "https://doi.org/10.1016/j.jss.2022.111483",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S4-12"
+      ]
+    },
+    {
+      "id": "PAP-019",
+      "category": "PAP",
+      "title": "The application of ISO 29148 to requirements in NZ infrastructure projects（John Welford，INCOSE NZ Conference 2025）",
+      "org": "INCOSE New Zealand（会议论文/实务审计）",
+      "year": "2025",
+      "url": "http://www.extuitive.co.uk/papers/iso29148NzRequirements.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-F01"
+      ]
+    },
+    {
+      "id": "PAP-020",
+      "category": "PAP",
+      "title": "Towards an Anatomy of Software Requirements（Bertrand Meyer，ETH Zurich）",
+      "org": "ETH Zurich（学术论文）",
+      "year": "2019",
+      "url": "https://se.inf.ethz.ch/~meyer/publications/requirements/requirements_anatomy.pdf",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-F02"
+      ]
+    },
+    {
+      "id": "PAP-021",
+      "category": "PAP",
+      "title": "A Metrics Suite for Object Oriented Design",
+      "org": "S. R. Chidamber, C. F. Kemerer, IEEE Transactions on Software Engineering 20(6):476-493",
+      "year": "1994",
+      "url": "https://doi.org/10.1109/32.295895 ; https://mural.maynoothuniversity.ie/id/eprint/2391/1/JM_NUIM-CS-TR-2006-03.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-01"
+      ]
+    },
+    {
+      "id": "PAP-022",
+      "category": "PAP",
+      "title": "Bad Smells of Gang of Four Design Patterns: A Decade Systematic Literature Review",
+      "org": "S. Almadi, D. Hooshyar, R. B. Ahmad, Sustainability 13(18):10256",
+      "year": "2021",
+      "url": "https://doi.org/10.3390/su131810256",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-02"
+      ]
+    },
+    {
+      "id": "PAP-023",
+      "category": "PAP",
+      "title": "A Study of the Fragile Base Class Problem",
+      "org": "L. Mikhajlov, E. Sekerinski, ECOOP'98 — Object-Oriented Programming, LNCS 1445:355-382",
+      "year": "1998",
+      "url": "https://doi.org/10.1007/BFb0054099",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-03"
+      ]
+    },
+    {
+      "id": "PAP-024",
+      "category": "PAP",
+      "title": "Breivold, H. P. — A Systematic Review of Software Evolvability（IEEE/ICSE 系系统综述）",
+      "org": "ABB Corporate Research / Mälardalen University",
+      "year": "2009 (published)/2012",
+      "url": "https://www.es.mdh.se/pdf_publications/1739.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-M01"
+      ]
+    },
+    {
+      "id": "PAP-025",
+      "category": "PAP",
+      "title": "Rowe, D., Leaney, J., & Lowe, D. (1994). Defining systems evolvability — a taxonomy of change",
+      "org": "IEEE Conference on Computer Based Systems (cited in S4-M01)",
+      "year": "1994",
+      "url": "https://www.researchgate.net/profile/John-Leaney/publication/240718016",
+      "tier": "S4",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S4-M02"
+      ]
+    },
+    {
+      "id": "PAP-026",
+      "category": "PAP",
+      "title": "Glinz, M., et al. (2023). Towards a Modern Quality Framework（IEEE RE Workshops, REW 2023）",
+      "org": "University of Zurich / IEEE",
+      "year": "2023",
+      "url": "https://upcommons.upc.edu/bitstreams/aa5bbbe8-740f-41ac-953a-1b0322541abe/download",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-M03"
+      ]
+    },
+    {
+      "id": "PAP-027",
+      "category": "PAP",
+      "title": "Exploring the duality between product and organizational architectures: A test of the 'mirroring' hypothesis",
+      "org": "Alan MacCormack, Carliss Baldwin, John Rusnak / Research Policy 41(8):1309-1324 (Elsevier)",
+      "year": "2012",
+      "url": "https://ideas.repec.org/a/eee/respol/v41y2012i8p1309-1324.html",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-01"
+      ]
+    },
+    {
+      "id": "PAP-028",
+      "category": "PAP",
+      "title": "The mirroring hypothesis: theory, evidence, and exceptions",
+      "org": "Lyra J. Colfer & Carliss Y. Baldwin / Industrial and Corporate Change 25(5):709-737 (Oxford)",
+      "year": "2016",
+      "url": "https://www.hbs.edu/ris/Publication%20Files/Colfer%20Baldwin%20Mirroring%20Hypothesis%20Ind%20Corp%20Change-2016_8aa320ff-6aa6-42ef-b259-d139012faaf6.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S4-02"
+      ]
+    },
+    {
+      "id": "STD-001",
+      "category": "STD",
+      "title": "Software, systems and enterprise — Architecture description",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2022",
+      "url": "https://www.iso.org/standard/74393.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-01",
+        "S1-01",
+        "S1-07",
+        "S1-08"
+      ]
+    },
+    {
+      "id": "STD-002",
+      "category": "STD",
+      "title": "Systems and software engineering — Architecture description",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2011",
+      "url": "https://www.iso.org/standard/50508.html",
+      "tier": "S1",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S1-STD-02"
+      ]
+    },
+    {
+      "id": "STD-003",
+      "category": "STD",
+      "title": "Systems and software engineering — Software life cycle processes",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2026",
+      "url": "https://www.iso.org/standard/90219.html",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-STD-03",
+        "S1-03"
+      ]
+    },
+    {
+      "id": "STD-004",
+      "category": "STD",
+      "title": "Systems and software engineering — Software life cycle processes",
+      "org": "ISO / IEC / IEEE（JTC 1/SC 7）",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/63712.html",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-STD-04",
+        "S1-02"
+      ]
+    },
+    {
+      "id": "STD-005",
+      "category": "STD",
+      "title": "Systems and software Quality Requirements and Evaluation (SQuaRE) — Product quality model",
+      "org": "ISO / IEC",
+      "year": "2023",
+      "url": "https://www.iso.org/standard/78176.html",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-STD-05",
+        "P-S1-02",
+        "S1-04",
+        "S1-02",
+        "S1-M01"
+      ]
+    },
+    {
+      "id": "STD-006",
+      "category": "STD",
+      "title": "Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models",
+      "org": "ISO / IEC",
+      "year": "2011",
+      "url": "https://www.iso.org/standard/35733.html",
+      "tier": "S1",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S1-STD-06"
+      ]
+    },
+    {
+      "id": "STD-007",
+      "category": "STD",
+      "title": "Software engineering — Software life cycle processes — Maintenance",
+      "org": "ISO / IEC / IEEE",
+      "year": "2022",
+      "url": "https://www.iso.org/standard/80710.html",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-STD-07",
+        "S1-12",
+        "S1-01",
+        "S1-M08"
+      ]
+    },
+    {
+      "id": "STD-008",
+      "category": "STD",
+      "title": "Software Engineering — Software Life Cycle Processes — Maintenance",
+      "org": "ISO / IEC",
+      "year": "2006",
+      "url": "https://www.iso.org/standard/39064.html",
+      "tier": "S1",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S1-STD-08"
+      ]
+    },
+    {
+      "id": "STD-009",
+      "category": "STD",
+      "title": "Systems and software engineering — Vocabulary (SEVOCAB)",
+      "org": "ISO / IEC / IEEE",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/71952.html",
+      "tier": "S1",
+      "verified": "cited",
+      "confidence": "medium",
+      "legacy_ids": [
+        "S1-STD-09"
+      ]
+    },
+    {
+      "id": "STD-010",
+      "category": "STD",
+      "title": "IEEE Standard Glossary of Software Engineering Terminology",
+      "org": "IEEE",
+      "year": "1990",
+      "url": "https://standards.ieee.org/ieee/610.12/1016/",
+      "tier": "S1",
+      "verified": false,
+      "confidence": "low",
+      "legacy_ids": [
+        "S1-STD-10",
+        "S1-08"
+      ]
+    },
+    {
+      "id": "STD-011",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Life cycle processes — Requirements engineering（官方页快照）",
+      "org": "ISO / IEC / IEEE（ISO/IEC JTC 1/SC 7）",
+      "year": "2018",
+      "url": "https://web.archive.org/web/20240116061908/https://www.iso.org/standard/72089.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F02"
+      ]
+    },
+    {
+      "id": "STD-012",
+      "category": "STD",
+      "title": "IEEE SA — IEEE/ISO/IEC P29148（Active PAR，修订项目）",
+      "org": "IEEE Standards Association",
+      "year": "2026（访问时）",
+      "url": "https://standards.ieee.org/ieee/29148/12262",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-F03"
+      ]
+    },
+    {
+      "id": "STD-013",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 42020（Architecture processes）与 42030（Architecture evaluation framework）发布信息",
+      "org": "ISO/IEC/IEEE (iso-architecture.org 新闻)",
+      "year": "2019-07",
+      "url": "http://www.iso-architecture.org/42010/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-12"
+      ]
+    },
+    {
+      "id": "STD-014",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119-1:2022 Software and systems engineering — Software testing — Part 1: General concepts (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20260217124355id_/https://www.iso.org/standard/81291.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-11"
+      ]
+    },
+    {
+      "id": "STD-015",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119-2:2021 Software testing — Part 2: Test processes (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260308093756id_/https://www.iso.org/standard/79428.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-12"
+      ]
+    },
+    {
+      "id": "STD-016",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119-3:2021 Software testing — Part 3: Test documentation (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260217065439id_/https://www.iso.org/standard/79429.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-13"
+      ]
+    },
+    {
+      "id": "STD-017",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119-4:2021 Software testing — Part 4: Test techniques (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260224134336id_/https://www.iso.org/standard/79430.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-14"
+      ]
+    },
+    {
+      "id": "STD-018",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119-5:2024 Software testing — Part 5: Keyword-driven testing (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2024",
+      "url": "https://web.archive.org/web/20250906170532id_/https://www.iso.org/standard/87233.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-15"
+      ]
+    },
+    {
+      "id": "STD-019",
+      "category": "STD",
+      "title": "ISO/IEC TR 29119-6:2021 Software testing — Part 6: Guidelines for the use of ISO/IEC/IEEE 29119 (all parts) in agile projects",
+      "org": "ISO/IEC",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20230607070622id_/https://www.iso.org/standard/81293.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-16"
+      ]
+    },
+    {
+      "id": "STD-020",
+      "category": "STD",
+      "title": "ISO/IEC TR 29119-11:2020 Software testing — Part 11: Guidelines on the testing of AI-based systems",
+      "org": "ISO/IEC",
+      "year": "2020",
+      "url": "https://web.archive.org/web/20260113122913id_/https://www.iso.org/standard/79016.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-17"
+      ]
+    },
+    {
+      "id": "STD-021",
+      "category": "STD",
+      "title": "ISO/IEC TR 29119-13:2022 Software testing — Part 13: Using the ISO/IEC/IEEE 29119 series in the testing of biometric systems",
+      "org": "ISO/IEC",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20231209142936id_/https://www.iso.org/standard/84220.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-18"
+      ]
+    },
+    {
+      "id": "STD-022",
+      "category": "STD",
+      "title": "ISO/IEC 20246:2017 Software and systems engineering — Work product reviews",
+      "org": "ISO/IEC",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/67407.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-19"
+      ]
+    },
+    {
+      "id": "STD-023",
+      "category": "STD",
+      "title": "ISO/IEC 33063:2015 Process assessment model",
+      "org": "ISO/IEC",
+      "year": "2015",
+      "url": "https://www.iso.org/standard/55154.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-STD-20"
+      ]
+    },
+    {
+      "id": "STD-024",
+      "category": "STD",
+      "title": "ISO/IEC/IEEE 29119 Software Testing — official WG26 site",
+      "org": "ISO/IEC JTC 1/SC 7/WG 26 (softwaretestingstandard.org)",
+      "year": "2026",
+      "url": "https://softwaretestingstandard.org/",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-OFF-09"
+      ]
+    },
+    {
+      "id": "STD-025",
+      "category": "STD",
+      "title": "RFC 8594 — The Sunset HTTP Header Field",
+      "org": "IETF (Internet Engineering Task Force)",
+      "year": "2019",
+      "url": "https://www.rfc-editor.org/rfc/rfc8594.txt",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-02"
+      ]
+    },
+    {
+      "id": "STD-026",
+      "category": "STD",
+      "title": "RFC 9745 — The Deprecation HTTP Response Header Field",
+      "org": "IETF (Internet Engineering Task Force)",
+      "year": "2025",
+      "url": "https://www.rfc-editor.org/rfc/rfc9745.txt",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-03"
+      ]
+    },
+    {
+      "id": "STD-027",
+      "category": "STD",
+      "title": "ISO/IEC 25002:2024 Systems and software engineering — SQuaRE — Quality model overview and usage（质量模型总览与使用，第一版）",
+      "org": "ISO/IEC（JTC 1/SC 7）",
+      "year": "2024",
+      "url": "https://www.iso.org/standard/78175.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M02"
+      ]
+    },
+    {
+      "id": "STD-028",
+      "category": "STD",
+      "title": "ISO/IEC 25019:2023 Systems and software engineering — SQuaRE — Quality-in-use model（使用质量模型，第一版）",
+      "org": "ISO/IEC（JTC 1/SC 7）",
+      "year": "2023",
+      "url": "https://www.iso.org/standard/78177.html",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S1-M03"
+      ]
+    },
+    {
+      "id": "VEN-001",
+      "category": "VEN",
+      "title": "Azure Architecture Center — Cloud design patterns (CQRS / Event-driven architecture)",
+      "org": "Microsoft (Microsoft Learn)",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-01",
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-002",
+      "category": "VEN",
+      "title": "AWS Well-Architected Framework — The pillars of the framework（官方文档）",
+      "org": "Amazon Web Services (AWS Documentation)",
+      "year": "2024-11-06",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-02"
+      ]
+    },
+    {
+      "id": "VEN-003",
+      "category": "VEN",
+      "title": "AWS Well-Architected Framework（官方白皮书 PDF，含各支柱定义与设计原则）",
+      "org": "Amazon Web Services",
+      "year": "2024-11-06",
+      "url": "https://docs.aws.amazon.com/pdfs/wellarchitected/latest/framework/wellarchitected-framework.pdf",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-03"
+      ]
+    },
+    {
+      "id": "VEN-004",
+      "category": "VEN",
+      "title": "Google Cloud Well-Architected Framework（原 Google Cloud Architecture Framework，官方枢纽页）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2026-01-28",
+      "url": "https://cloud.google.com/architecture/framework",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-04"
+      ]
+    },
+    {
+      "id": "VEN-005",
+      "category": "VEN",
+      "title": "Google Cloud WAF 支柱页与 What's new（各支柱 core principles 与变更记录）",
+      "org": "Google Cloud (Cloud Architecture Center)",
+      "year": "2024-10 ~ 2026-02",
+      "url": "https://cloud.google.com/architecture/framework/whats-new",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-05"
+      ]
+    },
+    {
+      "id": "VEN-006",
+      "category": "VEN",
+      "title": "Thoughtworks Technology Radar（官方主页，Vol 34 / April 2026）",
+      "org": "Thoughtworks",
+      "year": "2026-04 (Vol 34)",
+      "url": "https://www.thoughtworks.com/radar",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-06"
+      ]
+    },
+    {
+      "id": "VEN-007",
+      "category": "VEN",
+      "title": "Thoughtworks Technology Radar FAQ — 四环与四象限机制（方法论官方说明）",
+      "org": "Thoughtworks",
+      "year": "accessed 2026-09-10",
+      "url": "https://www.thoughtworks.com/radar/faq",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-07"
+      ]
+    },
+    {
+      "id": "VEN-008",
+      "category": "VEN",
+      "title": "Thoughtworks Technology Radar 归档 PDF（Vol 26–34，用于核对第四环 Hold→Caution 演变）",
+      "org": "Thoughtworks",
+      "year": "2022-03 ~ 2026-04",
+      "url": "https://www.thoughtworks.com/radar/archive",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-08"
+      ]
+    },
+    {
+      "id": "VEN-009",
+      "category": "VEN",
+      "title": "Metric definitions（SonarQube Server 官方文档）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "accessed 2026-09-10 (Server 2026.4)",
+      "url": "https://docs.sonarsource.com/sonarqube/latest/user-guide/metric-definitions/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S3-01"
+      ]
+    },
+    {
+      "id": "VEN-010",
+      "category": "VEN",
+      "title": "Viewing and managing rules（SonarQube Server 官方文档，含 issue 类型与 clean code 属性）",
+      "org": "SonarSource (docs.sonarsource.com)",
+      "year": "accessed 2026-09-10 (Server 2026.4)",
+      "url": "https://docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-rules/rules",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S3-02"
+      ]
+    },
+    {
+      "id": "VEN-011",
+      "category": "VEN",
+      "title": "SQALE — Software Quality Assessment based on Lifecycle Expectations（官方站点，Wayback 快照）",
+      "org": "SQALE / inspearit (formerly DNV ITGS France)",
+      "year": "2014（站点）",
+      "url": "https://web.archive.org/web/2016/http://www.sqale.org/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S3-03"
+      ]
+    },
+    {
+      "id": "VEN-012",
+      "category": "VEN",
+      "title": "ISO/IEC/IEEE 29148:2018 Requirements Characteristics（Possession Planning 汇总页）",
+      "org": "Possession Planning（需求管理从业者站点）",
+      "year": "2024",
+      "url": "https://possessionplanning.com/traceability-matrix/iso-iec-ieee-291482018",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-F01"
+      ]
+    },
+    {
+      "id": "VEN-013",
+      "category": "VEN",
+      "title": "ISO 29148 Explained: Requirements Engineering Standard（Modern Requirements 解释页）",
+      "org": "Modern Requirements（需求管理工具厂商）",
+      "year": "2024",
+      "url": "https://www.modernrequirements.com/blogs/iso-29148-explained",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-F02"
+      ]
+    },
+    {
+      "id": "VEN-014",
+      "category": "VEN",
+      "title": "Azure Architecture Center — Architecture Styles（云架构风格清单，每风格含适用性/收益/挑战）",
+      "org": "Microsoft (Microsoft Learn)",
+      "year": "2025-10-14 (last updated)",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-015",
+      "category": "VEN",
+      "title": "Refactoring.Guru — Design Patterns 目录 / Code Smells 目录",
+      "org": "Refactoring.Guru（patterns 与 smells 的工程速查门户）",
+      "year": "2014-2026",
+      "url": "https://refactoring.guru/design-patterns ; https://refactoring.guru/refactoring/smells",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-016",
+      "category": "VEN",
+      "title": "SourceMaking — Design Patterns / AntiPatterns",
+      "org": "SourceMaking",
+      "year": "2007-2026",
+      "url": "https://sourcemaking.com/antipatterns ; https://sourcemaking.com/design_patterns",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-017",
+      "category": "VEN",
+      "title": "Google Testing Blog: Test Sizes (2010) / Just Say No to More End-to-End Tests (2015)",
+      "org": "Google",
+      "year": "2010/2015",
+      "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-02"
+      ]
+    },
+    {
+      "id": "VEN-018",
+      "category": "VEN",
+      "title": "DORA — Software delivery performance metrics (five keys)",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/guides/dora-metrics-four-keys/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-03",
+        "S3-05"
+      ]
+    },
+    {
+      "id": "VEN-019",
+      "category": "VEN",
+      "title": "SonarQube Server Documentation — Understanding quality gates",
+      "org": "SonarSource",
+      "year": "2026",
+      "url": "https://docs.sonarsource.com/sonarqube-server/latest/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-VEN-04"
+      ]
+    },
+    {
+      "id": "VEN-020",
+      "category": "VEN",
+      "title": "DORA — Deployment automation (DevOps capability)",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/devops-capabilities/technical/deployment-automation",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-021",
+      "category": "VEN",
+      "title": "Blue/Green Deployments on AWS (Whitepaper)",
+      "org": "Amazon Web Services",
+      "year": "2021",
+      "url": "https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-022",
+      "category": "VEN",
+      "title": "Architecture strategies for safe deployment practices (Azure Well-Architected Framework)",
+      "org": "Microsoft Azure",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/safe-deployments",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "id": "VEN-023",
+      "category": "VEN",
+      "title": "Kubernetes Documentation — Deployments",
+      "org": "The Kubernetes Authors (CNCF)",
+      "year": "2026",
+      "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-04"
+      ]
+    },
+    {
+      "id": "VEN-024",
+      "category": "VEN",
+      "title": "Cloud Native Glossary — Immutable Infrastructure",
+      "org": "CNCF",
+      "year": "2022",
+      "url": "https://glossary.cncf.io/immutable-infrastructure/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-05"
+      ]
+    },
+    {
+      "id": "VEN-025",
+      "category": "VEN",
+      "title": "Cloud Design Patterns: Circuit Breaker / Bulkhead / Retry",
+      "org": "Microsoft Azure Architecture Center (Microsoft Learn)",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-026",
+      "category": "VEN",
+      "title": "Observability Primer & Signals",
+      "org": "OpenTelemetry (CNCF)",
+      "year": "2026",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-027",
+      "category": "VEN",
+      "title": "Service Level Objectives (SLO) 文档 / What is observability?",
+      "org": "Datadog",
+      "year": "2026",
+      "url": "https://docs.datadoghq.com/service_management/service_level_objectives/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "id": "VEN-028",
+      "category": "VEN",
+      "title": "Exponential Backoff And Jitter",
+      "org": "AWS Architecture Blog（Amazon）",
+      "year": "2015 (updated 2023)",
+      "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-04"
+      ]
+    },
+    {
+      "id": "VEN-029",
+      "category": "VEN",
+      "title": "Architecture strategies for defining reliability targets",
+      "org": "Microsoft Azure Well-Architected Framework",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-06"
+      ]
+    },
+    {
+      "id": "VEN-030",
+      "category": "VEN",
+      "title": "Fitness function-driven development",
+      "org": "Paula Paul & Rosemary Wang, Thoughtworks",
+      "year": "2019-01-11",
+      "url": "https://www.thoughtworks.com/insights/blog/fitness-function-driven-development",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-031",
+      "category": "VEN",
+      "title": "Technology Radar — Architectural fitness function (Techniques, Trial, May 2018)",
+      "org": "Thoughtworks Technology Radar",
+      "year": "2018-05",
+      "url": "https://www.thoughtworks.com/radar/techniques/architectural-fitness-function",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-032",
+      "category": "VEN",
+      "title": "Google AIP-180 — Backwards compatibility（API Improvement Proposals，State: Approved）",
+      "org": "Google (google.aip.dev)",
+      "year": "2019 (updated)",
+      "url": "https://google.aip.dev/180",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "id": "VEN-033",
+      "category": "VEN",
+      "title": "Modern Lifecycle Policy（Microsoft Lifecycle 官方政策）",
+      "org": "Microsoft Learn",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/policies/modern",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-04"
+      ]
+    },
+    {
+      "id": "VEN-034",
+      "category": "VEN",
+      "title": "Semantic Versioning 2.0.0 (spec)",
+      "org": "Tom Preston-Werner (semver.org)",
+      "year": "2013 / spec 2.0.0",
+      "url": "https://semver.org/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-05"
+      ]
+    },
+    {
+      "id": "VEN-035",
+      "category": "VEN",
+      "title": "Inverse Conway Maneuver (Technology Radar)",
+      "org": "Thoughtworks Technology Radar",
+      "year": "2015",
+      "url": "https://www.thoughtworks.com/radar/techniques/inverse-conway-maneuver",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-01"
+      ]
+    },
+    {
+      "id": "VEN-036",
+      "category": "VEN",
+      "title": "DORA's software delivery performance metrics（当前官方口径）",
+      "org": "DORA / Google Cloud",
+      "year": "2026",
+      "url": "https://dora.dev/guides/dora-metrics/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-02"
+      ]
+    },
+    {
+      "id": "VEN-037",
+      "category": "VEN",
+      "title": "A history of DORA's software delivery metrics",
+      "org": "Nathen Harvey / DORA (Google Cloud)",
+      "year": "2026",
+      "url": "https://dora.dev/insights/dora-metrics-history",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-03"
+      ]
+    },
+    {
+      "id": "VEN-038",
+      "category": "VEN",
+      "title": "Accelerate State of DevOps Report 2024（DORA 官方报告页）",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/research/2024/dora-report/",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-04"
+      ]
+    },
+    {
+      "id": "VEN-039",
+      "category": "VEN",
+      "title": "Organizing Agile Teams and ARTs: Team Topologies at Scale",
+      "org": "Scaled Agile Framework (SAFe)",
+      "year": "2026",
+      "url": "https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale",
+      "tier": "S3",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S3-05"
+      ]
+    },
+    {
+      "id": "WEB-001",
+      "category": "WEB",
+      "title": "Software Architecture Guide",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-08-01",
+      "url": "https://martinfowler.com/architecture/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-01",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "WEB-002",
+      "category": "WEB",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-21",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-02",
+        "P-S2-01",
+        "S2-02",
+        "S2-01"
+      ]
+    },
+    {
+      "id": "WEB-003",
+      "category": "WEB",
+      "title": "Who Needs an Architect?",
+      "org": "Martin Fowler, IEEE Software",
+      "year": "2003",
+      "url": "https://martinfowler.com/ieeeSoftware/whoNeedsArchitect.pdf",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-03",
+        "S2-04"
+      ]
+    },
+    {
+      "id": "WEB-004",
+      "category": "WEB",
+      "title": "Documenting Architecture Decisions",
+      "org": "Michael Nygard (Cognitect Blog)",
+      "year": "2011-11-15",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-04",
+        "S2-09"
+      ]
+    },
+    {
+      "id": "WEB-005",
+      "category": "WEB",
+      "title": "Architecture Decision Record (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2026-03-24 (updated)",
+      "url": "https://martinfowler.com/bliki/ArchitectureDecisionRecord.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-05",
+        "S2-10"
+      ]
+    },
+    {
+      "id": "WEB-006",
+      "category": "WEB",
+      "title": "Microservices — a definition of this new architectural term",
+      "org": "James Lewis & Martin Fowler (martinfowler.com)",
+      "year": "2014-03-25",
+      "url": "https://martinfowler.com/articles/microservices.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-06",
+        "S2-11"
+      ]
+    },
+    {
+      "id": "WEB-007",
+      "category": "WEB",
+      "title": "Presentation Domain Data Layering",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2015-08-26",
+      "url": "https://martinfowler.com/bliki/PresentationDomainDataLayering.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-07",
+        "S2-12"
+      ]
+    },
+    {
+      "id": "WEB-008",
+      "category": "WEB",
+      "title": "CQRS (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-07-14",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-08",
+        "S2-13"
+      ]
+    },
+    {
+      "id": "WEB-009",
+      "category": "WEB",
+      "title": "MVC — Xerox PARC 1978-79（作者原始说明）",
+      "org": "Trygve Reenskaug",
+      "year": "1979",
+      "url": "https://folk.universitetetioslo.no/trygver/themes/mvc/mvc-index.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-09",
+        "S2-16"
+      ]
+    },
+    {
+      "id": "WEB-010",
+      "category": "WEB",
+      "title": "GUI Architectures",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-07-18",
+      "url": "https://martinfowler.com/eaaDev/uiArchs.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-10",
+        "S2-17"
+      ]
+    },
+    {
+      "id": "WEB-011",
+      "category": "WEB",
+      "title": "ISO/IEC 25010 Explained: 9 Software Quality Characteristics",
+      "org": "SonarSource",
+      "year": "2024",
+      "url": "https://www.sonarsource.com/resources/library/iso-iec-25010-explained/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-11",
+        "S2-04"
+      ]
+    },
+    {
+      "id": "WEB-012",
+      "category": "WEB",
+      "title": "Wikipedia 条目组（Software engineering / SWEBOK / NATO Conferences / Software crisis / ISO 12207 / Lehman's laws / ISO 9126）",
+      "org": "Wikimedia Foundation",
+      "year": "2026（持续更新）",
+      "url": "https://en.wikipedia.org/wiki/Software_engineering",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-12",
+        "S2-05"
+      ]
+    },
+    {
+      "id": "WEB-013",
+      "category": "WEB",
+      "title": "Technical Debt Quadrant (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2009-10-14",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-02",
+        "S2-03"
+      ]
+    },
+    {
+      "id": "WEB-014",
+      "category": "WEB",
+      "title": "Opportunistic Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2011-11-01",
+      "url": "https://martinfowler.com/bliki/OpportunisticRefactoring.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-04"
+      ]
+    },
+    {
+      "id": "WEB-015",
+      "category": "WEB",
+      "title": "Design Stamina Hypothesis (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2007-06-20",
+      "url": "https://martinfowler.com/bliki/DesignStaminaHypothesis.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-05"
+      ]
+    },
+    {
+      "id": "WEB-016",
+      "category": "WEB",
+      "title": "Strangler Fig (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2024-08-22",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-06",
+        "S2-07"
+      ]
+    },
+    {
+      "id": "WEB-017",
+      "category": "WEB",
+      "title": "Code Smell (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-02-09",
+      "url": "https://martinfowler.com/bliki/CodeSmell.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-08",
+        "S2-03",
+        "S2-06"
+      ]
+    },
+    {
+      "id": "WEB-018",
+      "category": "WEB",
+      "title": "Is High Quality Software Worth the Cost? (article)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-29",
+      "url": "https://martinfowler.com/articles/is-quality-worth-cost.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-09"
+      ]
+    },
+    {
+      "id": "WEB-019",
+      "category": "WEB",
+      "title": "Foundations for the Study of Software Architecture",
+      "org": "D. E. Perry & A. L. Wolf, ACM SIGSOFT Software Engineering Notes 17(4):40-52",
+      "year": "1992-10",
+      "url": "https://users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "P-S2-10",
+        "S2-11"
+      ]
+    },
+    {
+      "id": "WEB-020",
+      "category": "WEB",
+      "title": "The Law of Leaky Abstractions",
+      "org": "Joel Spolsky (Joel on Software)",
+      "year": "2002-11-11",
+      "url": "https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-07"
+      ]
+    },
+    {
+      "id": "WEB-021",
+      "category": "WEB",
+      "title": "Big Ball of Mud",
+      "org": "Brian Foote & Joseph Yoder（PLoP '97, Fourth Conference on Pattern Languages of Programs）",
+      "year": "1997（页面更新 1999-06-26）",
+      "url": "http://www.laputan.org/mud/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-08"
+      ]
+    },
+    {
+      "id": "WEB-022",
+      "category": "WEB",
+      "title": "Structured Design（cohesion / coupling 概念的正式发表）",
+      "org": "W. P. Stevens, G. J. Myers, L. L. Constantine, IBM Systems Journal 13(2):115-139",
+      "year": "1974",
+      "url": "https://doi.org/10.1147/sj.132.0115",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-09"
+      ]
+    },
+    {
+      "id": "WEB-023",
+      "category": "WEB",
+      "title": "You Aren't Gonna Need It (YAGNI) — Extreme Programming",
+      "org": "Ron Jeffries / Kent Beck, Extreme Programming（XP）",
+      "year": "1998/1999",
+      "url": "https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it ; http://ronjeffries.com/xprog/articles/practices/pracnotneed/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-11"
+      ]
+    },
+    {
+      "id": "WEB-024",
+      "category": "WEB",
+      "title": "Test Pyramid (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2012",
+      "url": "https://martinfowler.com/bliki/TestPyramid.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-12"
+      ]
+    },
+    {
+      "id": "WEB-025",
+      "category": "WEB",
+      "title": "The Practical Test Pyramid (martinfowler.com)",
+      "org": "Ham Vocke（Thoughtworks）",
+      "year": "2018",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-13"
+      ]
+    },
+    {
+      "id": "WEB-026",
+      "category": "WEB",
+      "title": "Test Driven Development (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2023",
+      "url": "https://martinfowler.com/bliki/TestDrivenDevelopment.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-14"
+      ]
+    },
+    {
+      "id": "WEB-027",
+      "category": "WEB",
+      "title": "Unit Test (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/UnitTest.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-15"
+      ]
+    },
+    {
+      "id": "WEB-028",
+      "category": "WEB",
+      "title": "Integration Test (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2018",
+      "url": "https://martinfowler.com/bliki/IntegrationTest.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-16"
+      ]
+    },
+    {
+      "id": "WEB-029",
+      "category": "WEB",
+      "title": "Test Double (martinfowler.com bliki)",
+      "org": "Martin Fowler（Gerard Meszaros 词汇）",
+      "year": "2006",
+      "url": "https://martinfowler.com/bliki/TestDouble.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-17"
+      ]
+    },
+    {
+      "id": "WEB-030",
+      "category": "WEB",
+      "title": "Continuous Integration (martinfowler.com)",
+      "org": "Martin Fowler",
+      "year": "2024",
+      "url": "https://martinfowler.com/articles/continuousIntegration.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-18"
+      ]
+    },
+    {
+      "id": "WEB-031",
+      "category": "WEB",
+      "title": "Kent Beck — Software Design Pioneer（个人官网）",
+      "org": "Kent Beck",
+      "year": "2026",
+      "url": "https://kentbeck.com/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-WEB-19"
+      ]
+    },
+    {
+      "id": "WEB-032",
+      "category": "WEB",
+      "title": "Blue Green Deployment (bliki)",
+      "org": "Martin Fowler",
+      "year": "2010",
+      "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-02"
+      ]
+    },
+    {
+      "id": "WEB-033",
+      "category": "WEB",
+      "title": "Canary Release (bliki)",
+      "org": "Danilo Sato / Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/CanaryRelease.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-03"
+      ]
+    },
+    {
+      "id": "WEB-034",
+      "category": "WEB",
+      "title": "Immutable Server (bliki)",
+      "org": "Kief Morris / Martin Fowler",
+      "year": "2013",
+      "url": "https://martinfowler.com/bliki/ImmutableServer.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-04"
+      ]
+    },
+    {
+      "id": "WEB-035",
+      "category": "WEB",
+      "title": "Phoenix Server (bliki)",
+      "org": "Martin Fowler",
+      "year": "2012",
+      "url": "https://martinfowler.com/bliki/PhoenixServer.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-05"
+      ]
+    },
+    {
+      "id": "WEB-036",
+      "category": "WEB",
+      "title": "Deployment Pipeline (bliki)",
+      "org": "Martin Fowler (致谢 Jez Humble)",
+      "year": "2013",
+      "url": "https://martinfowler.com/bliki/DeploymentPipeline.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-06"
+      ]
+    },
+    {
+      "id": "WEB-037",
+      "category": "WEB",
+      "title": "CircuitBreaker (bliki)",
+      "org": "Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-04"
+      ]
+    },
+    {
+      "id": "WEB-038",
+      "category": "WEB",
+      "title": "Principles of Chaos Engineering",
+      "org": "Chaos Engineering Community / CNCF",
+      "year": "2019",
+      "url": "https://principlesofchaos.org/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-05"
+      ]
+    },
+    {
+      "id": "WEB-039",
+      "category": "WEB",
+      "title": "Blameless PostMortems and a Just Culture",
+      "org": "John Allspaw / Etsy Code as Craft（经 web.archive.org 快照）",
+      "year": "2012",
+      "url": "https://web.archive.org/web/2019id_/https://codeascraft.com/2012/05/22/blameless-postmortems/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-06"
+      ]
+    },
+    {
+      "id": "WEB-040",
+      "category": "WEB",
+      "title": "The Second Edition of \"Refactoring\"",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2018",
+      "url": "https://martinfowler.com/articles/refactoring-2nd-ed.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-08"
+      ]
+    },
+    {
+      "id": "WEB-041",
+      "category": "WEB",
+      "title": "characterization tests interactively",
+      "org": "Michael Feathers (silvrback blog)",
+      "year": "2020-09-22",
+      "url": "https://michaelfeathers.silvrback.com/",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-10"
+      ]
+    },
+    {
+      "id": "WEB-042",
+      "category": "WEB",
+      "title": "How Do Committees Invent? (a.k.a. Conway's Law 原文)",
+      "org": "Melvin E. Conway / Datamation, F. D. Thompson Publications",
+      "year": "1968",
+      "url": "https://www.melconway.com/Home/Committees_Paper.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-01"
+      ]
+    },
+    {
+      "id": "WEB-043",
+      "category": "WEB",
+      "title": "Conway's Law（作者本人说明页 + Brooks 命名溯源）",
+      "org": "Melvin E. Conway (melconway.com)",
+      "year": "2010",
+      "url": "https://www.melconway.com/Home/Conways_Law.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-02"
+      ]
+    },
+    {
+      "id": "WEB-044",
+      "category": "WEB",
+      "title": "Conway's Law (bliki)",
+      "org": "Martin Fowler / martinfowler.com",
+      "year": "2022",
+      "url": "https://martinfowler.com/bliki/ConwaysLaw.html",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-03"
+      ]
+    },
+    {
+      "id": "WEB-045",
+      "category": "WEB",
+      "title": "Team Topologies: Key Concepts（作者官方站点）",
+      "org": "Matthew Skelton & Manuel Pais / teamtopologies.com",
+      "year": "2026",
+      "url": "https://teamtopologies.com/key-concepts",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "S2-05"
+      ]
+    },
+    {
+      "id": "XCV-001",
+      "category": "XCV",
+      "title": "Laws of Software Evolution Revisited（Lehman 本人对八条定律的完整复述，含定律演进史）",
+      "org": "M. M. Lehman; Software Process Technology (EWSPT'96), LNCS 1149:108-124, Springer",
+      "year": "1996",
+      "url": "https://www.cs.kent.edu/~jmaletic/cs63902/Papers/Lehman96.pdf",
+      "tier": "S4",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-01"
+      ]
+    },
+    {
+      "id": "XCV-002",
+      "category": "XCV",
+      "title": "Lehman's laws of software evolution（百科条目，交叉验证定律条数与 S/P/E 分类）",
+      "org": "Wikipedia（引 Lehman 1980、Lehman et al. 1997 等）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-02"
+      ]
+    },
+    {
+      "id": "XCV-003",
+      "category": "XCV",
+      "title": "An Overview of the SWEBOK Guide（SEBoK 百科，逐条列出 V4 的 18 KA）",
+      "org": "SEBoK (Guide to the Systems Engineering Body of Knowledge)",
+      "year": "accessed 2026-09-10",
+      "url": "https://sebokwiki.org/wiki/An_Overview_of_the_SWEBOK_Guide",
+      "tier": "S1",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-03",
+        "S1-F04"
+      ]
+    },
+    {
+      "id": "XCV-004",
+      "category": "XCV",
+      "title": "Pattern-Oriented Software Architecture Volume 1 — 官方配套站点（模式目录 + Microkernel 定义）",
+      "org": "software-pattern.org（POSA 系列官方站点，作者维护）",
+      "year": "accessed 2026-09-10",
+      "url": "http://software-pattern.org/Book/30",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-04"
+      ]
+    },
+    {
+      "id": "XCV-005",
+      "category": "XCV",
+      "title": "Waterfall model（百科条目，交叉验证 Royce 五步与迭代原意）",
+      "org": "Wikipedia（引 Royce 1970 及软件工程史文献）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Waterfall_model",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-05"
+      ]
+    },
+    {
+      "id": "XCV-006",
+      "category": "XCV",
+      "title": "No Silver Bullet（百科条目，交叉验证核心论断与本质/偶然复杂度）",
+      "org": "Wikipedia（引 Brooks 1986/1987）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/No_Silver_Bullet",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-06"
+      ]
+    },
+    {
+      "id": "XCV-007",
+      "category": "XCV",
+      "title": "Software Engineering Body of Knowledge（百科条目，交叉验证 SWEBOK V4 发布与 18 KA）",
+      "org": "Wikipedia（引 IEEE Computer Society）",
+      "year": "accessed 2026-09-10",
+      "url": "https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge",
+      "tier": "S2",
+      "verified": true,
+      "confidence": "high",
+      "legacy_ids": [
+        "R-XC-07"
+      ]
+    }
+  ]
+}

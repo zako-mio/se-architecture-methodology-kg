@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封闭构建 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>封闭构建</span></div><div class="meta">methodology · J · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a><a href="#xref"><span class="n">附</span>对照资源</a></nav>
+<article>
+<header class="doc"><h1>封闭构建</h1><div class="en">Hermetic Build</div><div class="badges"><span class="badge pr">P1</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">J · 部署</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">对<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">构建</a>机器已安装的库与软件不敏感、只依赖已知版本编译器与库的自足构建过程，使同一版本在不同机器上构建得到一致结果。</span></p></div><p class="note">别名：hermetic build、密闭构建、可复现构建、自足构建　|　英文：Hermetic Build　|　类型：方法 / practice</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-341.9 -361.2 680.9 700.2" role="img" aria-label="封闭构建 的 1-2 跳邻域关系图"><title>封闭构建 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-3.2" y1="-138.7" x2="-109.8" y2="-260.4" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：三阶段分离是环境一致性的前提</title></line><line x1="-3.2" y1="-138.7" x2="1.9" y2="-297.2" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：运行阶段无变更入口是基础设施不可变的基础</title></line><line x1="87.7" y1="-205.6" x2="-3.2" y2="-138.7" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：部署流水线依据构建发布运行分离</title></line><line x1="0" y1="0" x2="-3.2" y2="-138.7" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：封闭构建依据构建阶段的可复现要求</title></line><line x1="87.7" y1="-205.6" x2="110.9" y2="42.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：部署流水线是发布工程的落地机制</title></line><line x1="0" y1="0" x2="110.9" y2="42.1" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：封闭构建是发布工程的核心实践</title></line><line x1="-121.4" y1="71.6" x2="0" y2="0" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：镜像构建一次并不可变复用</title></line><line x1="-121.4" y1="71.6" x2="-226.6" y2="184.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以实例替换替代就地修改</title></line><line x1="178.2" y1="82.8" x2="87.7" y2="-205.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：部署步骤脚本化与自动执行</title></line><line x1="178.2" y1="82.8" x2="110.9" y2="42.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：可复现部署支撑发布工程</title></line><line x1="-212.6" y1="-6.3" x2="87.7" y2="-205.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：多阶段制品晋级即部署流水线</title></line><line x1="-212.6" y1="-6.3" x2="-226.6" y2="184.3" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：构建一次逐环境晋级解耦发布部署</title></line><line x1="-121.4" y1="71.6" x2="-277.9" y2="101.8" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：不可变制品使整体切换可行</title></line><line x1="-212.6" y1="-6.3" x2="178.2" y2="82.8" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：流水线为部署自动化提供载体</title></line><line x1="-121.4" y1="71.6" x2="-212.6" y2="-6.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：流水线产出不可变制品</title></line><line x1="178.2" y1="82.8" x2="-212.6" y2="-6.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：自动化与流水线配套落地</title></line><line x1="-138.8" y1="244.5" x2="-121.4" y2="71.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以源数据全量重生成替代就地改页面防漂移</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">封闭构建<title>封闭构建（MTH-J-03）</title></text><circle cx="-3.2" cy="-138.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-3.2" y="-119.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">构建发布运行分离<title>构建发布运行分离（ESS-J-01）</title></text><circle cx="110.9" cy="42.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="110.9" y="61.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">发布工程<title>发布工程（MTH-J-02）</title></text><circle cx="-121.4" cy="71.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="-121.4" y="90.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">不可变基础设施实现<title>不可变基础设施实现（TEC-J-02）</title></text><circle cx="-138.8" cy="244.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-138.8" y="260.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="87.7" cy="-205.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="87.7" y="-189.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线<title>部署流水线（MTH-J-01）</title></text><circle cx="-277.9" cy="101.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-277.9" y="117.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">蓝绿部署<title>蓝绿部署（TEC-J-03）</title></text><circle cx="-212.6" cy="-6.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-212.6" y="9.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线工具化<title>部署流水线工具化（TEC-J-06）</title></text><circle cx="-226.6" cy="184.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-226.6" y="200.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">发布与部署解耦<title>发布与部署解耦（MTH-J-06）</title></text><circle cx="178.2" cy="82.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="178.2" y="98.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署自动化<title>部署自动化（TEC-J-05）</title></text><circle cx="-109.8" cy="-260.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-109.8" y="-244.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">开发生产一致性<title>开发生产一致性（ESS-J-02）</title></text><circle cx="1.9" cy="-297.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="1.9" y="-281.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">不可变基础设施<title>不可变基础设施（ESS-J-03）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 3 个直接邻接、外环 8 个二跳节点，共 12 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">如果构建过程依赖宿主机的隐式状态，那么构建结果就不可复现：同一份源码可能因机器、时间或网络差异产出不同制品，回滚与审计随之失去可信基准。</span>可复现构建要求把构建的全部输入显式化并加以锁定，让构建成为一个自足的黑箱——输入确定则输出确定，与在何处构建无关。这是对制品建立信任的技术前提，也是可靠发布与精确回滚的基础。没有可复现的构建，所谓『同一版本』只是一个需要相信而不能被证明的说法，安全核查与合规审计也无从谈起。它把构建从依赖环境与运气的行为，转变为可重复、可验证的确定性过程，从而支撑更高频率、更低风险的交付，也让第三方能够独立复现并验证交付物。对受监管或安全敏感的场景，这种可独立复现与验证的能力往往是合规的硬性要求。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">构建的输入由源码修订、依赖集合与工具链三部分构成。</span>封闭构建把编译器、库与构建工具的版本锁定到已知集合，构建过程不读取未声明的外部状态，也不隐式从网络拉取『最新』依赖。当三部分输入完全确定时，输出制品也应当确定。该过程常与制品签名与内容哈希结合：用唯一哈希标识制品，用签名证明来源，使任何一方都能独立验证所拿到的制品确实由声明的输入构建而来。在需要重建或回滚时，锁定的工具链使重建结果与原始发布保持一致，避免了因工具版本漂移而无法重建历史版本的困境。于是构建从一次性的动作，变成可以被任何人重复验证的确定性函数，使制品成为可被证明而非仅被信任的对象。封闭性还意味着构建过程不应读取未声明的网络资源、环境变量或宿主机上预装的库，因为这些都会让同一修订在不同时刻或不同机器上产出不同结果。当工具链、依赖与源码三者的版本都被完整固定后，重建历史版本才成为可能，回滚与排障才有可靠基准，第三方也能独立复现并核对交付物。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">实践中应使用声明式依赖清单与固定版本的构建工具环境，构建在隔离环境中执行，且不依赖宿主机上预先安装的库。</span>同一修订应在不同机器上重复构建并比对结果，把差异当作需要修复的缺陷而非可接受的噪声。依赖更新与工具升级应作为显式变更走测试，而不是在构建时被动拾取。把构建环境的定义也纳入版本控制，使任何人都能重建出完全相同的构建环境。对既有的、不可复现的构建链，应优先识别并消除其中的隐式状态来源，例如未固定的基础镜像、动态下载的依赖以及依赖本机全局安装的编译器。对关键制品，还可保留构建证明或来源元数据以便日后核查，并定期对最关键的制品做独立重建比对，发现漂移即视为需要调查的信号。落地时应把构建环境的定义本身也当作受测制品管理：基础镜像、编译器与构建工具的版本全部显式声明并锁定，构建在隔离、可重建的环境中进行。对无法立即消除的隐式状态，应记录为已知风险并安排收敛，而不是默认忽略。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row gain"><div class="h">收益 · 正确姿势</div><div class="b"><p>判断投入是否值得的标准，应是可复现性对回滚与审计的实际价值，而非形式上的完全一致。</p></div></div><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>环境隔离与依赖锁定会抬高构建复杂度、镜像体积与初次搭建成本，对快速迭代形成一定摩擦，工具升级也需要额外的维护工作。</p><p>并非所有场景都值得追求逐位级别的可复现，多数业务系统只需在可复现性与成本之间取得平衡。</p><p>因此应先明确可复现的程度要求，再决定锁定的粒度与投入，并为升级保留受控的通道，避免过度工程或名不副实。</p><p>追求逐位可复现往往需要付出镜像体积、构建时间与维护成本，对多数业务系统而言，保证依赖与工具链显式锁定通常已足够，逐位一致可留给安全或合规要求更高的制品。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>反例之一是构建时从网络拉取未锁定版本的依赖，导致同一修订在不同时间构建出不同结果，回滚时无法重建当时的制品。</p><p>反例之二是满足于『已经有自动化构建流水线』，却仍然受宿主机隐式状态的影响，把普通构建误认为可复现构建。</p><p>反例之三是把可复现理解为结果永不变化，于是拒绝任何依赖升级，最终积累大量安全欠账。</p></div></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-06 · 经 TEC-J-02</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → TEC-J-02 → TEC-J-06</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-025、WEB-034、VEN-024</div><div class="r"><span class="k">入口链接</span><a href="https://sre.google/sre-book/release-engineering/" target="_blank" rel="noopener">https://sre.google/sre-book/release-engineering/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：只要用自动化构建流水线就是可复现构建</span><br>核验结论：可复现构建要求对构建机环境不敏感、依赖与工具链版本锁定，且同一修订在不同机器上结果一致；普通自动化构建仍可能受宿主环境与动态依赖影响　<span class="k">[BK-025]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（3 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依据推导</td><td>→ ESS-J-01</td><td>构建发布运行分离<br><span style="color:var(--dim);font-size:12px">E-525</span></td><td>封闭构建依据构建阶段的可复现要求</td></tr><tr><td class="k">实现</td><td>← TEC-J-02</td><td>不可变基础设施实现<br><span style="color:var(--dim);font-size:12px">E-833</span></td><td>镜像构建一次并不可变复用</td></tr><tr><td class="k">细化</td><td>→ MTH-J-02</td><td>发布工程<br><span style="color:var(--dim);font-size:12px">E-530</span></td><td>封闭构建是发布工程的核心实践</td></tr></tbody></table></div></div></details></section>
+<section id="xref"><h2><span class="num">附</span>对照资源 · 12factor 子库</h2><div class="tblwrap"><table><thead><tr><th>12factor 节点</th><th>关系</th><th>对照说明</th></tr></thead><tbody><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-deps.html" target="_blank" rel="noopener">依赖</a> <span class="dim">app-deps</span></td><td>跨体系对照</td><td>显式声明并隔离依赖对应母库『封闭构建』与『依赖倒置/依赖规则』</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-deps.html" target="_blank" rel="noopener">依赖与工具显式化</a> <span class="dim">t-deps</span></td><td>跨体系对照</td><td>显式声明依赖/工具，不隐式依赖环境，对应封闭构建与依赖倒置</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

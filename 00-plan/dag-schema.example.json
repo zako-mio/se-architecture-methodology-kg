@@ -1,0 +1,467 @@
+{
+  "meta": {
+    "title": "软件工程 / 架构设计方法论知识图谱",
+    "subtitle": "三层（本质/方法论/技术实践）× 生命周期域 × 横切主题 × 案例层 —— schema 合法样例",
+    "version": "1.0.0",
+    "schema_version": "1.1.0",
+    "source_namespace_version": "1.0.0",
+    "generated": "2026-09-10",
+    "updated": "2026-09-10",
+    "review_cycle_days": 180,
+    "total_groups": 4,
+    "total_nodes": 5,
+    "total_edges": 5,
+    "total_themes": 2,
+    "total_cases": 1,
+    "layers": [
+      "essence",
+      "methodology",
+      "technology"
+    ],
+    "edge_types": [
+      "derives_from",
+      "implements",
+      "prerequisite",
+      "case_instance",
+      "mitigates"
+    ],
+    "hard_edge_types": [
+      "prerequisite",
+      "dependency",
+      "derives_from",
+      "refines"
+    ],
+    "dag_acyclic": true,
+    "sample_note": "字段合法性示例，非完整图谱；不满足 GR-08（每域三层齐全）、GR-09（案例覆盖≥30%）等全图覆盖类规则。",
+    "license_note": "公开库只承载消化重组后的知识与自研脚本；书籍/标准正文仅入本地语料层，永不进公开仓库。",
+    "retrieval": {
+      "enabled": false,
+      "export_dir": "retrieval/",
+      "chunk_schema_version": "1.0.0",
+      "planned_engine": "sqlite-fts5",
+      "tokenizer": "trigram",
+      "filters": [
+        "layer",
+        "domain",
+        "cross_cutting",
+        "case",
+        "verified",
+        "status"
+      ],
+      "note": "D2=预留不建；阶段5 决策后置 enabled=true 并实现导出脚本"
+    }
+  },
+  "groups": [
+    {
+      "id": "GL-ESSENCE",
+      "name": "本质层",
+      "en": "Essence Layer",
+      "kind": "layer",
+      "domain": "G",
+      "description": "原理与根本概念：回答‘为什么’，换语言/框架/年代仍成立。",
+      "parent": null,
+      "order": 1,
+      "node_ids": [
+        "ESS-G-01",
+        "ESS-L-01"
+      ]
+    },
+    {
+      "id": "GL-METHOD",
+      "name": "方法论层",
+      "en": "Methodology Layer",
+      "kind": "layer",
+      "domain": "G",
+      "description": "跨项目可迁移的过程/方法/决策框架：回答‘怎么做’。",
+      "parent": null,
+      "order": 2,
+      "node_ids": [
+        "MTH-G-01"
+      ]
+    },
+    {
+      "id": "GL-TECH",
+      "name": "技术实践层",
+      "en": "Technology Layer",
+      "kind": "layer",
+      "domain": "H",
+      "description": "有版本号/厂商、可被替代的具体工具与平台：回答‘用什么做’。",
+      "parent": null,
+      "order": 3,
+      "node_ids": [
+        "TEC-H-01"
+      ]
+    },
+    {
+      "id": "GC-CASE",
+      "name": "案例层",
+      "en": "Case Layer",
+      "kind": "case",
+      "domain": "H",
+      "description": "真实案例，经 case_instance 边印证或反证主干节点，不阻塞主干 DAG。",
+      "parent": null,
+      "order": 4,
+      "node_ids": [
+        "CAS-H-01"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "id": "M",
+      "name": "质量属性",
+      "en": "Quality Attributes / ilities",
+      "definition": "系统在功能之外需持续满足的可度量属性（可维护性、性能、安全性等），ISO/IEC 25010 九特性为其标准落点，架构是其首要承载者。",
+      "domains": [
+        "M",
+        "G"
+      ],
+      "sources": [
+        "STD-005",
+        "OFF-002",
+        "PAP-008"
+      ],
+      "order": 1,
+      "related_nodes": [
+        "MTH-G-01",
+        "TEC-H-01"
+      ]
+    },
+    {
+      "id": "P",
+      "name": "技术债",
+      "en": "Technical Debt",
+      "definition": "以短期便利替代更优设计而累积的额外变更成本；未偿还会持续产生‘利息’，是演化未受管理的病变之一。",
+      "domains": [
+        "P",
+        "L"
+      ],
+      "sources": [
+        "WEB-002",
+        "PAP-006",
+        "PAP-008"
+      ],
+      "order": 2,
+      "related_nodes": [
+        "ESS-L-01",
+        "TEC-H-01"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "CAS-H-01",
+      "node_id": "CAS-H-01",
+      "title": "网申扩展 v3 多模块解耦重构",
+      "org": "个人实战留档",
+      "year": "2026",
+      "summary": "将耦合的单体网申扩展按跨模块接口契约拆分为多模块解耦系统，先定义稳定接口再替换实现，降低变更波及面与回归风险。",
+      "outcome": "模块边界清晰、可独立演进，历史耦合点被隔离。",
+      "sources": [
+        "LOC-003"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ESS-G-01",
+      "name": "架构即根本性决策",
+      "en": "Architecture as Fundamental Decisions",
+      "aliases": [
+        "架构定义",
+        "根本性决策"
+      ],
+      "type": "principle",
+      "subtype": "concept",
+      "src": null,
+      "group": "GL-ESSENCE",
+      "layer": "essence",
+      "domain": "G",
+      "stage": "advanced",
+      "priority": "P0",
+      "definition": "架构是系统在环境中的根本性概念或属性，体现于元素、元素间关系及指导其设计与演化的原则，只关心影响全局且对外可见的部分。",
+      "cross_cutting": [],
+      "case": [
+        "CAS-H-01"
+      ],
+      "detail": {
+        "principle": "只有 significant / fundamental 的决策才属于架构；架构只关心元素的 public 侧，内部实现细节不属于架构。",
+        "mechanism": "用元素、关系、原则三要素刻画系统；架构向外确定边界，详细设计向内填充实现。",
+        "engineering": "以 ADR 记录影响结构、非功能特性、依赖、接口或构造技术的决策。",
+        "tradeoff": "过度架构带来前置成本与投机性抽象；架构不足则使质量属性与演化能力失守。"
+      },
+      "sources": [
+        "STD-001",
+        "OFF-002"
+      ],
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-10",
+      "status": "active",
+      "version": null,
+      "deprecated_at": null,
+      "superseded_by": null,
+      "errata": [],
+      "tags": [
+        "ISO42010",
+        "SEI"
+      ],
+      "entry_links": [
+        "https://www.iso.org/standard/74393.html",
+        "https://www.sei.cmu.edu/architecture/"
+      ]
+    },
+    {
+      "id": "MTH-G-01",
+      "name": "ATAM 架构权衡评估",
+      "en": "Architecture Tradeoff Analysis Method",
+      "aliases": [
+        "ATAM",
+        "架构权衡分析"
+      ],
+      "type": "method",
+      "subtype": "process",
+      "src": null,
+      "group": "GL-METHOD",
+      "layer": "methodology",
+      "domain": "G",
+      "stage": "intermediate",
+      "priority": "P1",
+      "definition": "从业务驱动与架构出发，细化为场景与支撑它们的架构决策，分析产出风险、非风险、敏感点、权衡点并归纳为风险主题的架构评估方法。",
+      "cross_cutting": [
+        "M"
+      ],
+      "case": [],
+      "detail": {
+        "principle": "以质量属性场景驱动评估，把隐含假设显式化为可讨论的风险，架构不是对错题而是场景下的权衡。",
+        "mechanism": "收集场景→映射架构决策→标注 sensitivity/tradeoff points→归纳 risk themes。",
+        "engineering": "在里程碑处组织评审，用输出驱动架构迭代与文档更新。",
+        "tradeoff": "评估需要干系人时间与领域知识投入；浅评可能遗漏深层权衡点。"
+      },
+      "sources": [
+        "OFF-002",
+        "PAP-007"
+      ],
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-10",
+      "status": "active",
+      "version": null,
+      "deprecated_at": null,
+      "superseded_by": null,
+      "errata": [],
+      "tags": [
+        "SEI",
+        "QA-scenario"
+      ],
+      "entry_links": [
+        "https://www.sei.cmu.edu/documents/629/2000_005_001_13706.pdf"
+      ]
+    },
+    {
+      "id": "TEC-H-01",
+      "name": "SonarQube 质量门控",
+      "en": "SonarQube Quality Gate",
+      "aliases": [
+        "SQALE",
+        "TDR"
+      ],
+      "type": "technology",
+      "subtype": "tool",
+      "src": null,
+      "group": "GL-TECH",
+      "layer": "technology",
+      "domain": "H",
+      "stage": "intermediate",
+      "priority": "P2",
+      "definition": "以 SQALE 方法量化可维护性并计算技术债比率与质量门控阈值的工程工具实践，将内部质量约束纳入持续集成流水线。",
+      "cross_cutting": [
+        "M",
+        "P"
+      ],
+      "case": [],
+      "detail": {
+        "principle": "把模糊的‘代码质量’转化为可比较、可门控的量化指标。",
+        "mechanism": "规则集扫描→按 SQALE 折算技术债→计算 TDR→与质量门控阈值比对。",
+        "engineering": "接入 CI，在合并前阻断质量门控不达标的变更。",
+        "tradeoff": "阈值过严会阻塞交付并诱发规避；指标本身不能替代架构判断，需防 Goodhart 化。"
+      },
+      "sources": [
+        "VEN-012",
+        "PAP-025"
+      ],
+      "verified": true,
+      "confidence": "medium",
+      "review_date": "2026-09-10",
+      "status": "active",
+      "version": "10.x",
+      "deprecated_at": null,
+      "superseded_by": null,
+      "errata": [],
+      "tags": [
+        "CI",
+        "static-analysis"
+      ],
+      "entry_links": [
+        "https://docs.sonarsource.com/sonarqube-server/latest/"
+      ]
+    },
+    {
+      "id": "ESS-L-01",
+      "name": "技术债",
+      "en": "Technical Debt",
+      "aliases": [
+        "Tech Debt",
+        "技术债务"
+      ],
+      "type": "principle",
+      "subtype": "concept",
+      "src": null,
+      "group": "GL-ESSENCE",
+      "layer": "essence",
+      "domain": "L",
+      "stage": "advanced",
+      "priority": "P0",
+      "definition": "首次交付犹如负债，及时重写可加速开发，未偿则每分钟都成为利息；Fowler 释义为内部质量缺陷带来的额外变更成本。",
+      "cross_cutting": [
+        "P"
+      ],
+      "case": [
+        "CAS-H-01"
+      ],
+      "detail": {
+        "principle": "技术债是演化的常态产物，关键在于是否被管理与适时偿还；区分 deliberate/inadvertent 与 prudent/reckless。",
+        "mechanism": "本金（返工成本）与利息（额外变更成本）随时间累积，未偿还会侵蚀演化能力。",
+        "engineering": "用重构、Strangler Fig、boy-scout rule 等手段按节奏偿还。",
+        "tradeoff": "追求零债务会拖慢交付；放任累积则使交付越来越慢、缺陷增多。"
+      },
+      "sources": [
+        "WEB-002",
+        "PAP-006",
+        "PAP-008"
+      ],
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-10",
+      "status": "active",
+      "version": null,
+      "deprecated_at": null,
+      "superseded_by": null,
+      "errata": [],
+      "tags": [
+        "Cunningham",
+        "Fowler"
+      ],
+      "entry_links": [
+        "https://martinfowler.com/bliki/TechnicalDebt.html"
+      ]
+    },
+    {
+      "id": "CAS-H-01",
+      "name": "网申扩展 v3 解耦",
+      "en": "Job-Application Extension v3 Decoupling",
+      "aliases": [],
+      "type": "case",
+      "subtype": null,
+      "src": null,
+      "group": "GC-CASE",
+      "layer": null,
+      "domain": "H",
+      "stage": "intermediate",
+      "priority": "P2",
+      "definition": "将高耦合的网申扩展按跨模块接口契约拆分为多模块解耦系统的实战案例，用于验证‘先定接口、后换实现’的架构边界价值。",
+      "cross_cutting": [],
+      "case": [],
+      "detail": {
+        "principle": "先冻结跨模块接口契约，再逐模块替换实现，把回归面收敛在单模块内。",
+        "mechanism": "契约文件先行 → 模块化拆分 → 接口回归测试。",
+        "engineering": "以契约文件为唯一接口真相，禁止跨模块直接依赖内部实现。",
+        "tradeoff": "拆分引入接口维护与联调成本，需以变更频率证明其收益。"
+      },
+      "sources": [
+        "LOC-003"
+      ],
+      "verified": true,
+      "confidence": "medium",
+      "review_date": "2026-09-10",
+      "status": "active",
+      "version": null,
+      "deprecated_at": null,
+      "superseded_by": null,
+      "errata": [],
+      "tags": [
+        "本地实战",
+        "解耦"
+      ],
+      "entry_links": [
+        "archive/Mission-file/2026-08/0812-网申v3调取复制版/"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "E-01",
+      "from": "MTH-G-01",
+      "to": "ESS-G-01",
+      "type": "derives_from",
+      "label": "架构评估方法论依据架构根本性定义",
+      "directed": true,
+      "weight": null,
+      "sources": [
+        "STD-001",
+        "OFF-002"
+      ]
+    },
+    {
+      "id": "E-02",
+      "from": "TEC-H-01",
+      "to": "MTH-G-01",
+      "type": "implements",
+      "label": "质量门控工具落地架构权衡评估",
+      "directed": true,
+      "weight": null,
+      "sources": [
+        "VEN-012"
+      ]
+    },
+    {
+      "id": "E-03",
+      "from": "ESS-G-01",
+      "to": "ESS-L-01",
+      "type": "prerequisite",
+      "label": "架构根本性决策是理解技术债的前提",
+      "directed": true,
+      "weight": null,
+      "sources": [
+        "WEB-002",
+        "STD-001"
+      ]
+    },
+    {
+      "id": "E-04",
+      "from": "CAS-H-01",
+      "to": "ESS-G-01",
+      "type": "case_instance",
+      "label": "实战案例印证架构根本性决策",
+      "directed": true,
+      "weight": null,
+      "sources": [
+        "LOC-003",
+        "STD-001"
+      ]
+    },
+    {
+      "id": "E-05",
+      "from": "CAS-H-01",
+      "to": "ESS-L-01",
+      "type": "mitigates",
+      "label": "模块化解耦偿还历史技术债",
+      "directed": true,
+      "weight": null,
+      "sources": [
+        "LOC-003",
+        "WEB-002"
+      ]
+    }
+  ]
+}

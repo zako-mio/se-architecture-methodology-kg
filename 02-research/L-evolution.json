@@ -1,0 +1,874 @@
+{
+  "topic": "演化与弃用（Evolution & Deprecation）——重构 / 技术债 / 架构腐化 / 演进式架构 / 遗留系统 / 弃用",
+  "generated_by": "architecture-evolution-researcher (subagent, self-authored role)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "境内源直连；境外被墙站点经 curl -x http://172.29.0.1:7890 访问。O'Reilly 书页 403，采用作者官方页(nealford.com)+出版社样章(Thoughtworks)核验书内容。",
+  "sources": [
+    {
+      "id": "STD-007",
+      "title": "ISO/IEC/IEEE 14764:2022 — Software engineering — Software life cycle processes — Maintenance",
+      "org": "ISO/IEC/IEEE",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20260819024657/https://www.iso.org/standard/80710.html",
+      "tier": "S1",
+      "verified": true,
+      "cross_ref": "E-iso-standards（14764:2022 条目）",
+      "key_points": [
+        "维护过程建立在 ISO/IEC/IEEE 12207:2017 6.4.13 之上，并在该文件中细化",
+        "确立各类维护（maintenance types）的定义；面向管理者/维护组织/质量经理/用户与采购方",
+        "范围明确包含 12207:2017 6.4.14 所定义的（软件）disposal/retirement（退役/处置）过程",
+        "取代 ISO/IEC 14764:2006；不涉及软件运行职能（备份/恢复/系统管理）"
+      ],
+      "legacy_id": "S1-01"
+    },
+    {
+      "id": "STD-025",
+      "title": "RFC 8594 — The Sunset HTTP Header Field",
+      "org": "IETF (Internet Engineering Task Force)",
+      "year": "2019",
+      "url": "https://www.rfc-editor.org/rfc/rfc8594.txt",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "定义 Sunset HTTP 响应头：指示某个 URI 很可能在指定未来时点变为不可响应",
+        "定义 sunset link relation type，用于链接到提供即将发生的资源/服务 sunset 信息的资源",
+        "Informational RFC，IETF 社区共识，经 IESG 批准发布"
+      ],
+      "legacy_id": "S1-02"
+    },
+    {
+      "id": "STD-026",
+      "title": "RFC 9745 — The Deprecation HTTP Response Header Field",
+      "org": "IETF (Internet Engineering Task Force)",
+      "year": "2025",
+      "url": "https://www.rfc-editor.org/rfc/rfc9745.txt",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Deprecation 响应头用于向资源消费者（以 URI 标识）发出信号：该资源将要或已经被弃用",
+        "deprecation link relation 用于链接到提供计划中/既有弃用的进一步信息，可含迁移指引",
+        "Internet Standards Track 文档（RFC 9745），经 IESG 批准"
+      ],
+      "legacy_id": "S1-03"
+    },
+    {
+      "id": "WEB-002",
+      "title": "Technical Debt (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2019-05-21",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S2-02（复用同一来源）",
+      "key_points": [
+        "technical debt 是 Ward Cunningham 提出的隐喻，用于思考如何应对 cruft（内部质量缺陷）",
+        "因 cruft 而多花的额外时间即 debt 的 interest；清理 cruft 相当于偿还 principal",
+        "利息按‘修改该代码’触发，而非按时间流逝累积——crufty 但稳定的代码可以不动；高频变更区需 zero-tolerance",
+        "成本无法客观度量（CannotMeasureProductivity），通常最优策略是像财务债务一样‘逐步偿还本金’",
+        "内部质量高反而降低后续变更成本（反直觉于‘高质量=高成本’）"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "PAP-006",
+      "title": "The WyCash Portfolio Management System (OOPSLA'92 Experience Report)",
+      "org": "Ward Cunningham (c2.com)",
+      "year": "1992-03-26",
+      "url": "https://c2.com/doc/oopsla92.html",
+      "tier": "S2",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S2-03（复用同一来源）",
+      "key_points": [
+        "技术债隐喻的原始出处：‘Shipping first time code is like going into debt’",
+        "‘A little debt speeds development so long as it is paid back promptly with a rewrite’；危险在于 debt 不被偿还",
+        "‘Every minute spent on not-quite-right code counts as interest on that debt’；未整合实现可拖垮整个工程组织",
+        "作者视其为对 refactoring / 增量成长（consolidation）的辩护；2009 年录 5 分钟视频澄清常见误读"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "WEB-013",
+      "title": "Technical Debt Quadrant (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2009-10-14",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "有两组正交判据：deliberate / inadvertent（是否有意）与 prudent / reckless（是否审慎）",
+        "核心论点：有用的区分不是‘是不是债’，而是‘审慎的债 vs 鲁莽的债’",
+        "prudent-deliberate：明知代价仍为尽早发布而选择短期不可持续设计，需尽快偿还",
+        "reckless：不懂设计实践或明知好坏却‘quick and dirty’，低估 DesignPayoffLine",
+        "prudent-inadvertent 也存在且不可避免：‘交付后回头看，才意识到设计本该如何’"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "BK-021",
+      "title": "Definition Of Refactoring (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2004-09-01",
+      "url": "https://martinfowler.com/bliki/DefinitionOfRefactoring.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Refactoring（名词）：a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior",
+        "Refactoring（动词）：to restructure software by applying a series of refactorings without changing its observable behavior",
+        "关键判据是‘不改变可观察行为（observable behavior）’——这是与重写/改功能的分界"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "BK-021",
+      "title": "Catalog of Refactorings（Refactoring 2nd Edition 官方在线目录）",
+      "org": "Martin Fowler / martinfowler.com (refactoring.com)",
+      "year": "2018 (2nd ed.)",
+      "url": "https://refactoring.com/catalog/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "以卡片形式收录 Refactoring 第二版（及 Ruby Edition）描述的 refactorings，含别名（第一版名称）与草图",
+        "官方标签体系：【已按版权红线移出（原引用 291 字）· 出处见 source_id/URL】",
+        "支持按关键词/书名筛选，固定过滤条件可生成永久链接",
+        "目录是重构手法（mechanics）的权威索引，用于把‘代码坏味道’映射到具体变换"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "WEB-017",
+      "title": "Code Smell (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2006-02-09",
+      "url": "https://martinfowler.com/bliki/CodeSmell.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "code smell 是‘对应系统中更深层问题的表层迹象’，术语由 Kent Beck 在协助编写 Refactoring 时提出",
+        "smell 的定义要点是‘易于察觉（sniffable）’；且 smell 不一定意味着问题——‘smells aren't inherently bad on their own’",
+        "smell 是重构的启发式信号，尤其利于经验不足者发现可改进点（如‘一周一 smell’教学法）"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "WEB-016",
+      "title": "Strangler Fig (bliki)",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2024-08-22",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Strangler Fig 隐喻源自 2001 年昆士兰雨林见闻，2004 年首次成文，用于遗留系统渐进式现代化",
+        "反对‘整机替换’：直接重写一个严肃 IT 系统耗时长、细节难摸清，且常把不必要的行为也一并重建，‘go down in flames most of the time’",
+        "渐进做法：在遗留系统之上/之旁增量建新功能，再逐步把行为迁走；由 Ian Cartwright/Rob Horn/James Lewis 归纳四活动",
+        "四活动：理解期望结果 → 把问题拆小 → 成功交付各部分 → 改造组织以支持持续进行"
+      ],
+      "legacy_id": "S2-07"
+    },
+    {
+      "id": "WEB-040",
+      "title": "The Second Edition of \"Refactoring\"",
+      "org": "Martin Fowler (martinfowler.com)",
+      "year": "2018",
+      "url": "https://martinfowler.com/articles/refactoring-2nd-ed.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "第二版基本结构未变：开篇示例 → 原则章 → code smells 综述 → 测试入门 → 重构目录",
+        "目录共 68 个 refactorings；第一版中的 10 个被移除，新增 17 个",
+        "修订动因：第一版以‘类’为结构中心，现代代码结构中类可来去，重构需弱化以类为中心",
+        "重构目的始终是保持代码健康、持续演进（源自 C3 项目与 Kent Beck 的实践）"
+      ],
+      "legacy_id": "S2-08"
+    },
+    {
+      "id": "BK-022",
+      "title": "Testing Effectively With Legacy Code（Working Effectively with Legacy Code 官方章节节选：Seams / Seam Types）",
+      "org": "Michael Feathers / InformIT (Pearson)",
+      "year": "2005-01-21",
+      "url": "https://www.informit.com/articles/article.aspx?p=359417&seqNum=2",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "‘A seam is a place where you can alter behavior in your program without editing in that place’（接缝是在不改动该处代码的前提下即可改变其行为的位置）",
+        "引入 seam 是为了在不接触难测子系统（如全局函数/外部通信）的前提下把既有代码纳入测试",
+        "Seam Types 依‘程序文本→运行代码’各步骤划分：Preprocessing Seam（预处理/宏）、Link Seam（链接期替换）、Object Seam（对象/多态替换）",
+        "启用接缝的位置叫 enabling point；可用不同编程语言/构建机制实现"
+      ],
+      "legacy_id": "S2-09"
+    },
+    {
+      "id": "WEB-041",
+      "title": "characterization tests interactively",
+      "org": "Michael Feathers (silvrback blog)",
+      "year": "2020-09-22",
+      "url": "https://michaelfeathers.silvrback.com/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "characterization test（特征测试）由 Michael Feathers 提出，用于描述（characterize）既有软件的实际行为，为遗留码变更提供自动化安全网",
+        "与传统断言式测试相反：不是断言单个属性值，而是把被测过程整体结果与上一版本结果比对；即‘把应当保持不变的行为黑名单化’",
+        "用于在缺少充分单元测试的代码上安全地扩展与重构；受输入/输出空间限制，需按判断覆盖已知与边界输入",
+        "与回归测试相近，但特征测试不验证行为‘是否正确’，只验证行为‘是否变了’"
+      ],
+      "legacy_id": "S2-10"
+    },
+    {
+      "id": "WEB-019",
+      "title": "Foundations for the Study of Software Architecture",
+      "org": "D. E. Perry & A. L. Wolf, ACM SIGSOFT Software Engineering Notes 17(4), pp.40-52",
+      "year": "1992-10",
+      "url": "https://users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "提出架构演化中的两大问题：architectural erosion（架构侵蚀）与 architectural drift（架构漂移）",
+        "‘Architectural erosion is due to violations of the architecture’——架构违规，导致系统问题增多与日益脆化（brittleness），如拆承重墙",
+        "‘Architectural drift is due to insensitivity about the architecture’——对架构不敏感，导致不适应性、形式失一致与清晰度下降，进而更易违规",
+        "两者共同造成‘increasing resistance to change’（越来越抗拒变更）；以架构风格作为约束可提高违规与不敏感的可见度"
+      ],
+      "legacy_id": "S2-11"
+    },
+    {
+      "id": "BK-011",
+      "title": "Building Evolutionary Architectures（作者官方书页）",
+      "org": "Neal Ford, Rebecca Parsons, Patrick Kua, Pramod Sadalage (nealford.com / O'Reilly)",
+      "year": "2017 (1st ed.) / 2022 (2nd ed.)",
+      "url": "https://nealford.com/books/buildingevolutionaryarchitectures.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "‘An architectural fitness function provides an objective integrity assessment of some architectural characteristic(s)’（架构适应度函数对某些架构特性提供客观完整性评估）",
+        "fitness functions 的实现机制多样：tests、metrics、monitoring、logging 等，用以保护一个或多个架构维度",
+        "提出 fitness function 的分类维度：triggered vs continual、atomic vs holistic，以及其它多种",
+        "演进式架构：把 ‘evolvability’（可演化性）确立为一等一 -ility；框架为识别重要维度→定义 fitness functions 保证合规→用部署流水线等增量变更实践验证"
+      ],
+      "legacy_id": "S2-12"
+    },
+    {
+      "id": "BK-011",
+      "title": "Building Evolutionary Architectures, Sample Chapter (Chapter 1)",
+      "org": "Neal Ford et al. / Thoughtworks (官方样章 PDF)",
+      "year": "2017",
+      "url": "https://www.thoughtworks.com/content/dam/thoughtworks/documents/books/bk_building_evolutionary_architectures_en.pdf",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "fitness function 分类交叉组合：‘Combine Fitness Function Categories’ 给出 atomic+triggered、holistic+triggered、atomic+continual、holistic+continual 四种典型 mashup",
+        "atomic+triggered：单元/功能测试，开发期验证 + 流水线持续集成保证及时性",
+        "holistic+triggered：集成测试层面运行，验证跨组件特性；holistic+continual：如 Netflix Chaos Monkey，持续运行非按计划触发",
+        "fitness functions 应有客观、可量化结果，并纳入部署流水线分阶段执行；亦支持 manual 阶段（如安全评审/审计）",
+        "Continuous Delivery（Humble & Farley）的 deployment pipeline 是执行 fitness functions 的理想机制"
+      ],
+      "legacy_id": "S2-13"
+    },
+    {
+      "id": "VEN-030",
+      "title": "Fitness function-driven development",
+      "org": "Paula Paul & Rosemary Wang, Thoughtworks",
+      "year": "2019-01-11",
+      "url": "https://www.thoughtworks.com/insights/blog/fitness-function-driven-development",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "引用 Ford/Parsons/Kua（2017）的演进式架构定义：‘An evolutionary architecture supports guided, incremental change as the first principle across multiple dimensions’",
+        "fitness functions 描述架构距离某个架构目标有多近；类似 TDD 但测的是系统与架构目标的一致性",
+        "把架构视作有 user journeys 的产品，从各干系人收集最重要的架构属性（-ilities），归并为主题（弹性/可运维性/稳定性）",
+        "指出属性间冲突：agility/flexibility 与 stability/resiliency 常对立；应把 MTTR 置于 MTBF 之上",
+        "以 fitness functions 持续监控可帮助避免 architectural drift 并客观度量技术债"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "VEN-031",
+      "title": "Technology Radar — Architectural fitness function (Techniques, Trial, May 2018)",
+      "org": "Thoughtworks Technology Radar",
+      "year": "2018-05",
+      "url": "https://www.thoughtworks.com/radar/techniques/architectural-fitness-function",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "架构适应度函数被 Thoughtworks Tech Radar 列为 Techniques 条目（May 2018，状态 Trial）",
+        "定位为用可执行机制持续校验架构约束、避免架构漂移的技术",
+        "2026 年雷达相关条目进一步主张用 fitness functions 在 AI 加速产出时持续强制关键约束"
+      ],
+      "legacy_id": "S3-02"
+    },
+    {
+      "id": "VEN-032",
+      "title": "Google AIP-180 — Backwards compatibility（API Improvement Proposals，State: Approved）",
+      "org": "Google (google.aip.dev)",
+      "year": "2019 (updated)",
+      "url": "https://google.aip.dev/180",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "‘APIs are fundamentally contracts with users’；既有客户端代码不得被 minor/patch 版本变更打破，旧客户端须能对新服务器（同 major）工作",
+        "区分三类兼容：source / semantic / wire 兼容；给出兼容与不兼容变更清单（增删改组件、移动字段、改类型/长度/资源名等）",
+        "是弃用/兼容治理的厂商权威实践（与 RFC 9745 的 deprecation 信号互补）"
+      ],
+      "legacy_id": "S3-03"
+    },
+    {
+      "id": "VEN-033",
+      "title": "Modern Lifecycle Policy（Microsoft Lifecycle 官方政策）",
+      "org": "Microsoft Learn",
+      "year": "n.d. (accessed 2026-09-10)",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/policies/modern",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "Modern Lifecycle Policy：产品/服务持续服务与支持，客户须保持 current 并持有许可证",
+        "变更通知：除非另有说明，要求客户采取行动以避免显著降级时，最少提前 30 天通知",
+        "延续与迁移（continuity and migration）：对受该政策约束的产品，停止支持前提供最少 12 个月通知"
+      ],
+      "legacy_id": "S3-04"
+    },
+    {
+      "id": "VEN-034",
+      "title": "Semantic Versioning 2.0.0 (spec)",
+      "org": "Tom Preston-Werner (semver.org)",
+      "year": "2013 / spec 2.0.0",
+      "url": "https://semver.org/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "版本号 MAJOR.MINOR.PATCH；公共 API 功能被标记为 deprecated 时 MINOR 必须递增（deprecation 是向后兼容的进行时信号）",
+        "引入任何向后不兼容变更时 MAJOR 必须递增；MAJOR 递增时 MINOR/PATCH 归零",
+        "为弃用策略提供版本语义：deprecate 走 MINOR，remove（破坏）走 MAJOR"
+      ],
+      "legacy_id": "S3-05"
+    },
+    {
+      "id": "PAP-008",
+      "title": "Understanding software architecture erosion: A systematic mapping study",
+      "org": "R. Li, P. Liang, M. Soliman, P. Avgeriou, Journal of Software: Evolution and Process, DOI 10.1002/smr.2423",
+      "year": "2022",
+      "url": "https://doi.org/10.1002/smr.2423",
+      "tier": "S4",
+      "verified": true,
+      "cross_ref": "B-architecture-definition.json S4-01（复用同一来源）",
+      "key_points": [
+        "架构腐化（AEr）会对软件开发产生不利影响，近十年受显著关注",
+        "AEr 不仅表现为 architectural violations 与 structural issues，还引发软件质量与演化问题",
+        "成因既有技术因素也有非技术因素，二者应同等重视；存在检测与治理 AEr 的方法/工具/措施谱系",
+        "纳入 73 项研究，归纳三类困难与五类经验教训（摘要经 Crossref 核验）"
+      ],
+      "legacy_id": "S4-01"
+    },
+    {
+      "id": "PAP-003",
+      "title": "Programs, Life Cycles, and Laws of Software Evolution",
+      "org": "M. M. Lehman, Proceedings of the IEEE 68(9), pp.1060-1076, DOI 10.1109/PROC.1980.11805",
+      "year": "1980",
+      "url": "https://doi.org/10.1109/PROC.1980.11805",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "软件演化定律的最初正式发表（后续经 Lehman & Ramil 1997 等修订/扩展为八条）",
+        "Continuing Change：E-type 系统必须持续适配，否则满意度逐步下降",
+        "Increasing Complexity：随演化，系统复杂度会上升，除非做显式工作维持/降低它",
+        "Declining Quality：除非严格维护并适配运行环境变化，系统质量会显得下降",
+        "区分 S/P/E/A-type 程序；定律主要适用于 E-type（嵌入现实世界、需持续适应）"
+      ],
+      "legacy_id": "S4-02"
+    },
+    {
+      "id": "PAP-009",
+      "title": "Technical Debt: From Metaphor to Theory and Practice",
+      "org": "P. Kruchten, R. Nord, I. Ozkaya, IEEE Software 29(6), DOI 10.1109/MS.2012.167",
+      "year": "2012-11",
+      "url": "https://doi.org/10.1109/MS.2012.167",
+      "tier": "S4",
+      "verified": true,
+      "key_points": [
+        "将技术债从 Cunningham 的隐喻推进为可管理的理论与实践：把债显式化、度量并纳入决策",
+        "技术债不是纯粹的‘坏’，而是权衡工具——需与业务目标、可维护性、演化成本联动",
+        "面向实践提出技术债管理（识别/度量/跟踪/偿还）的框架（IEEE Software 技术债专题）"
+      ],
+      "legacy_id": "S4-03"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "refactoring（重构）",
+      "definition": "对软件内部结构的修改，目的是使其更易理解、更易修改，而不改变其可观察行为（observable behavior）。名词指一次这样的修改，动词指通过一系列重构来重构软件。",
+      "source_id": "BK-021"
+    },
+    {
+      "term": "code smell（代码坏味道）",
+      "definition": "对应系统中更深层问题的表层迹象（surface indication）；由易于察觉（sniffable）界定，但 smell 本身不必然意味着问题，是重构的启发式信号而非结论。",
+      "source_id": "WEB-017"
+    },
+    {
+      "term": "technical debt（技术债）",
+      "definition": "Ward Cunningham 提出的隐喻：首次交付的代码如同负债；小额债务在及时以重写偿还时可加速开发，未偿还则每分钟花在‘不够正确’代码上的时间都成为利息。Fowler 释义为内部质量缺陷（cruft）造成的额外变更成本。",
+      "source_id": "PAP-006"
+    },
+    {
+      "term": "technical debt quadrant（技术债象限）",
+      "definition": "以 deliberate/inadvertent（有意/无意）与 prudent/reckless（审慎/鲁莽）两组正交判据区分设计缺陷；有用的问题是‘审慎的债还是鲁莽的债’，而非‘是不是债’。",
+      "source_id": "WEB-013"
+    },
+    {
+      "term": "architecture erosion（架构侵蚀）",
+      "definition": "由对架构的违规（violations of the architecture）引起，导致系统问题增多与系统日益脆化（brittleness）；是演化中‘越来越抗拒变更’的成因之一。",
+      "source_id": "WEB-019"
+    },
+    {
+      "term": "architecture drift（架构漂移）",
+      "definition": "由对架构的不敏感（insensitivity about the architecture）引起，更多导致不适应性，并造成形式失一致与清晰度下降，使架构更易被违规。",
+      "source_id": "WEB-019"
+    },
+    {
+      "term": "software evolution laws（软件演化定律 / Lehman 定律）",
+      "definition": "描述 E-type 软件在演化中应遵循的规律，如‘持续变更’（不持续适配则满意度下降）、‘复杂度递增’（除非显式维护）、‘质量下降’（除非严格维护并适配环境）。",
+      "source_id": "PAP-003"
+    },
+    {
+      "term": "evolutionary architecture（演进式架构）",
+      "definition": "一种支持‘有引导的增量变更’作为多维度首要原则的架构：‘An evolutionary architecture supports guided, incremental change as the first principle across multiple dimensions’。可演化性（evolvability）被作为一等 -ility。",
+      "source_id": "BK-011"
+    },
+    {
+      "term": "architectural fitness function（架构适应度函数）",
+      "definition": "对某些架构特性提供客观完整性评估的机制（any mechanism that provides an objective integrity assessment of some architectural characteristic(s)）；实现机制可为 tests/metrics/monitoring/logging，用于保护架构维度。",
+      "source_id": "BK-011"
+    },
+    {
+      "term": "legacy code（遗留代码）",
+      "definition": "Michael Feathers：遗留代码即‘没有测试的代码’（code without tests）——判据在可变更性/可验证性，而非代码年代或技术栈。",
+      "source_id": "BK-022"
+    },
+    {
+      "term": "seam（接缝）",
+      "definition": "‘A seam is a place where you can alter behavior in your program without editing in that place’——在不改动该处代码的前提下即可改变程序行为的位置；含预处理接缝、链接接缝、对象接缝等类型。",
+      "source_id": "BK-022"
+    },
+    {
+      "term": "characterization test（特征测试 / 金主测试）",
+      "definition": "描述既有软件实际行为、为遗留代码变更提供安全网的自动化测试；它不做‘值是否正确’的断言，而是把被测过程整体结果与上一版本比对，验证行为是否保持不变。",
+      "source_id": "WEB-041"
+    },
+    {
+      "term": "strangler fig pattern（绞杀者无花果模式）",
+      "definition": "遗留系统渐进式现代化的模式：在旧系统之上/之旁增量构建新功能，逐步把行为迁移走，直至旧系统被‘绞杀’替换，而非一次性整机重写。",
+      "source_id": "WEB-016"
+    },
+    {
+      "term": "deprecation（弃用）",
+      "definition": "对某技术/功能/设计/实践的‘劝阻使用’状态，通常因为它相对更优选项已显劣势；意味着未来将淘汰/撤回，但替换或移除并非必需或非紧急。软件中常以 Deprecation 响应头/版本语义等信号表达。",
+      "source_id": "STD-026"
+    },
+    {
+      "term": "sunset（日落 / 停止服务时点）",
+      "definition": "以 HTTP Sunset 响应头指示某 URI 很可能在某指定未来时点变得不可响应；配套 sunset link relation 提供即将 sunset 的信息入口。是弃用→移除的时间维信号。",
+      "source_id": "STD-025"
+    },
+    {
+      "term": "software maintenance & disposal（软件维护与退役）",
+      "definition": "ISO/IEC/IEEE 14764:2022 在 12207:2017 维护过程基础上细化维护活动并确立各类维护定义，且以 12207:2017 中定义的 disposal/retirement 过程覆盖软件退役/处置。",
+      "source_id": "STD-007"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "重构的定义以‘不改变可观察行为’为硬判据：改变内部结构以提升可理解性与可修改性；这把它与重写/改功能区分开。",
+      "source_ids": [
+        "BK-021",
+        "BK-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "重构手法目录（Refactoring 2nd ed）共 68 个 refactorings，第一版中 10 个被移除、新增 17 个；官方以 basic/moving-features/organizing-data 等标签分类，并支持别名映射第一版名称。",
+      "source_ids": [
+        "BK-021",
+        "WEB-040"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "重构的根本目的是保持代码健康、使系统可持续演进；Fowler 指出第一版以‘类’为结构中心，现代重构需弱化以类为中心。",
+      "source_ids": [
+        "WEB-040",
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "code smell 是深层问题的表层迹象且易于察觉，但 smell 不必然代表问题；它被用作重构的启发式信号与教学抓手。",
+      "source_ids": [
+        "WEB-017",
+        "BK-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债源自 Cunningham（1992）：首次交付如负债，及时重写偿还可加速开发；利息按‘触及该代码’触发而非按时间，故 crufty 但稳定的代码可保留，高频变更区需零容忍。",
+      "source_ids": [
+        "PAP-006",
+        "WEB-002"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债应按‘审慎/鲁莽 × 有意/无意’象限分类；争论重点应是债是否审慎而非是否算债，prudent-inadvertent 债务即使优秀团队也不可避免。",
+      "source_ids": [
+        "WEB-013"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "技术债管理已从隐喻发展为可识别、可度量、可跟踪、可偿还的工程实践（IEEE Software 技术债专题）。",
+      "source_ids": [
+        "PAP-009"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构侵蚀（erosion）源于架构违规，导致系统问题增多与脆化；架构漂移（drift）源于对架构不敏感，导致不适应性、形式失一致。",
+      "source_ids": [
+        "WEB-019",
+        "PAP-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构腐化的成因兼有技术与非技术因素，二者同等重要；其表现不仅是违规与结构问题，还引发质量与演化问题，并已有检测/治理的方法与工具谱系。",
+      "source_ids": [
+        "PAP-008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Lehman 定律给出演化系统的三条硬约束信号：不持续变更则满意度下降、不显式维护则复杂度递增、不严格维护则质量下降——为‘持续重构/治理’提供理论根据。",
+      "source_ids": [
+        "PAP-003"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "演进式架构主张把‘有引导的增量变更’作为多维度第一原则，并把可演化性（evolvability）作为一等质量属性。",
+      "source_ids": [
+        "BK-011",
+        "VEN-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构适应度函数对架构特性提供客观完整性评估；可用 tests/metrics/monitoring/logging 等机制实现，并在部署流水线中分阶段、可 manual 地执行。",
+      "source_ids": [
+        "BK-011",
+        "BK-011",
+        "VEN-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "fitness functions 的分类维度含 triggered vs continual、atomic vs holistic 等，并可按 mashup 组合（atomic+triggered / holistic+triggered / atomic+continual / holistic+continual）。",
+      "source_ids": [
+        "BK-011",
+        "BK-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "fitness functions 用于持续监控可帮助避免架构漂移并客观度量技术债，是‘治理自动化’的关键机制。",
+      "source_ids": [
+        "VEN-030",
+        "VEN-031",
+        "BK-011"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "架构属性间存在内在冲突（如 agility/flexibility 与 stability/resiliency 常对立），定义 fitness functions 前须先做干系人属性收集与冲突识别。",
+      "source_ids": [
+        "VEN-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "遗留代码的判据是‘没有测试’而非‘年代久远’；接缝（seam）是在不改动该处代码的前提下改变其行为的位置，含预处理/链接/对象接缝。",
+      "source_ids": [
+        "BK-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "特征测试（characterization test）通过对比新旧版本整体行为、而非断言属性值，为遗留代码变更提供安全网；它不验证行为正确与否，只验证行为是否改变。",
+      "source_ids": [
+        "WEB-041"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "遗留系统现代化应避免整机重写（多数失败），采用 strangler fig 渐进迁移：增量建新、逐步搬走行为；其四活动为理解结果→拆小→交付→改造组织。",
+      "source_ids": [
+        "WEB-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "弃用（deprecation）与日落（sunset）已有标准化的 HTTP 信号：Deprecation 头声明资源将/已被弃用，Sunset 头给出可能失效的未来时点，并有 link relation 指向迁移信息。",
+      "source_ids": [
+        "STD-026",
+        "STD-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "版本语义为弃用策略提供分级：标记 API 功能 deprecated 递增 MINOR（向后兼容的进行时），移除等破坏性变更递增 MAJOR。",
+      "source_ids": [
+        "VEN-034",
+        "STD-026"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "厂商弃用/生命周期实践给出通知期基线：Microsoft Modern Lifecycle 对需客户行动者至少提前 30 天通知、停止支持前至少 12 个月通知；Google AIP-180 把 API 视为契约并给出兼容性变更清单。",
+      "source_ids": [
+        "VEN-033",
+        "VEN-032"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "标准框架把维护视为含‘退役/处置（disposal/retirement）’的完整生命周期过程，退役不是特例而是受标准覆盖的正式阶段。",
+      "source_ids": [
+        "STD-007"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "evolution_mechanisms": [
+    {
+      "mechanism": "重构（Refactoring）",
+      "signal": "代码坏味道（长函数、数据类、重复、条件复杂等）；变更成本上升；结构随需求偏离",
+      "means": "以‘不改变可观察行为’为判据的小步变换序列（68 手法目录）；测试安全网；把 smell 映射到具体 refactoring；持续小步而非一次性大改",
+      "tradeoff": "前期时间投入、估计不准；存在‘错误抽象’风险（过度抽象）；无测试时重构即风险；‘重构’常被误用为改名/重写",
+      "counterexamples": [
+        "把‘refactoring’当成 rewrite/改行为的借口（违反 observable behavior 不变判据）",
+        "在无测试的遗留码上直接重构 → 回归缺陷（需先补特征测试）",
+        "over-abstraction / wrong abstraction（DRY 过度），Sandi Metz: prefer duplication over the wrong abstraction"
+      ],
+      "source_ids": [
+        "BK-021",
+        "BK-021",
+        "WEB-017",
+        "WEB-040"
+      ]
+    },
+    {
+      "mechanism": "技术债管理（Technical Debt）",
+      "signal": "每次加特性因 cruft 多花的时间（利息）；高频变更区变更成本上升；设计缺陷累积",
+      "means": "象限分类（审慎/鲁莽×有意/无意）分诊；逐步偿还本金；优先处理高频变更区（zero-tolerance）；把债显式化、度量、跟踪并纳入业务决策",
+      "tradeoff": "生产率/债无法客观度量，估计精度低；‘先还本金’通常最优但非普适；隐喻易被滥用为‘允许乱写’的挡箭牌；利息不按时间累积（与金融隐喻不完全对应）",
+      "counterexamples": [
+        "把技术债当作‘永远不还’的许可 → 未偿债拖垮团队（Cunningham 警告）",
+        "reckless debt（明知故犯的 quick-and-dirty），低估 DesignPayoffLine",
+        "对稳定但不常改的 crufty 代码过度投入清理（利息未被触发，收益低）"
+      ],
+      "source_ids": [
+        "WEB-002",
+        "PAP-006",
+        "WEB-013",
+        "PAP-009"
+      ]
+    },
+    {
+      "mechanism": "架构腐化治理（Erosion & Drift）",
+      "signal": "架构违规（violations）→ 侵蚀；对架构不敏感 → 漂移；系统日益脆化、抗拒变更、形式失一致",
+      "means": "以架构风格/约束提高违规可见度；架构一致性检查与 fitness functions；持续重构；定期架构评估（如 ATAM）；把技术与非技术成因一并治理（组织/沟通）",
+      "tradeoff": "持续治理有成本；仅靠工具的合规检查会漏掉非技术成因；约束过严会阻碍合法演化；腐化检测的‘违规’定义依赖架构描述质量",
+      "counterexamples": [
+        "只上工具做架构合规、忽视组织/沟通等非技术成因 → 治标不治本",
+        "架构约束过严形成僵化，阻碍必要的演化（over-constrain）",
+        "没有可维护的架构描述 → 无法判定何为‘违规’"
+      ],
+      "source_ids": [
+        "WEB-019",
+        "PAP-008",
+        "VEN-030"
+      ]
+    },
+    {
+      "mechanism": "演进式架构与 fitness function（Evolutionary Architecture）",
+      "signal": "需求/架构目标会独立于功能需求变化；质量属性无自动化守护；架构悄然漂移",
+      "means": "把‘有引导的增量变更’作为多维度首要原则；定义 fitness functions（triggered/continual、atomic/holistic）在部署流水线持续校验；先收集干系人 -ilities 并识别冲突",
+      "tradeoff": "fitness functions 的编写与维护成本；度量本身可能侵蚀架构目标；质量属性互相冲突（agility↔stability）无法同时最优；需要基础设施（流水线/监控）支撑",
+      "counterexamples": [
+        "把 fitness functions 写成一次性检查、缺乏持续执行 → 无法防漂移",
+        "fitness function 固化过强的实现约束 → ossify 架构、阻止演化",
+        "无视属性冲突，追求‘全都要’ → 权衡失焦"
+      ],
+      "source_ids": [
+        "BK-011",
+        "BK-011",
+        "VEN-030",
+        "VEN-031"
+      ]
+    },
+    {
+      "mechanism": "遗留系统改造（Legacy Modernization）",
+      "signal": "无法继续打补丁；缺少测试、难验证变更；行为细节难以摸清；新特性交付受阻",
+      "means": "以 seam 把遗留码纳入测试；用特征测试建立行为安全网；以 strangler fig 增量迁移而非整机重写；理解结果→拆小→交付→改造组织",
+      "tradeoff": "特征测试可能‘冻结’既有缺陷（只固化行为不判对错）；接缝提取有成本；渐进迁移周期长、需组织配套；整机重写看似简单实则高风险",
+      "counterexamples": [
+        "big-bang 整机重写：耗时长、需求难摸清、重建无用行为，‘go down in flames most of the time’",
+        "在无安全网（无特征测试）下改动遗留码",
+        "把特征测试当作‘正确性测试’（它只验证行为是否变化）"
+      ],
+      "source_ids": [
+        "WEB-016",
+        "BK-022",
+        "WEB-041"
+      ]
+    },
+    {
+      "mechanism": "弃用与日落（Deprecation & Sunset）",
+      "signal": "存在更优替代；维护负担/安全风险；技术过时；需收敛公共接口",
+      "means": "Deprecation 头声明弃用 + deprecation link 指向迁移信息；Sunset 头给出失效时点；按 semver 用 MINOR/MAJOR 分级；留足通知期与迁移窗口（Microsoft 30 天/12 个月基线）；API 契约兼容性治理（AIP-180）",
+      "tradeoff": "弃用≠移除：可能长期存在‘僵尸功能’；移除是破坏性变更需 MAJOR；通知期不足会破坏用户；若无替代或迁移路径，用户被卡住",
+      "counterexamples": [
+        "直接移除而不先弃用/通知 → 破坏客户端（违反 API 契约）",
+        "标记 deprecated 后永不移除 → 僵尸功能长期累积",
+        "无迁移指引/替代方案就弃用 → 用户无路可走"
+      ],
+      "source_ids": [
+        "STD-025",
+        "STD-026",
+        "VEN-032",
+        "VEN-033",
+        "VEN-034"
+      ]
+    }
+  ],
+  "principles_counterexamples": [
+    {
+      "principle": "重构须保持可观察行为不变（behavior-preserving）",
+      "counterexample": "以‘重构’名义改功能/重写；无测试直接重构遗留码",
+      "source_ids": [
+        "BK-021",
+        "BK-022"
+      ]
+    },
+    {
+      "principle": "重构是小步、可持续的纪律",
+      "counterexample": "一次性大改（big rewrite）表面快实则风险高、难以回滚",
+      "source_ids": [
+        "WEB-040",
+        "WEB-016"
+      ]
+    },
+    {
+      "principle": "smell 是启发式信号而非结论",
+      "counterexample": "见 smell 就机械重构（如长函数并不总是问题），制造无谓改动",
+      "source_ids": [
+        "WEB-017"
+      ]
+    },
+    {
+      "principle": "技术债应优先偿还高频变更区、逐步还本",
+      "counterexample": "对稳定 crufty 代码过度清理；或把债当‘永不偿还’的许可",
+      "source_ids": [
+        "WEB-002",
+        "PAP-006"
+      ]
+    },
+    {
+      "principle": "技术债是权衡工具而非道德评判",
+      "counterexample": "把一切设计缺陷都斥为‘坏’，忽略 prudent/deliberate 债的正当性",
+      "source_ids": [
+        "WEB-013"
+      ]
+    },
+    {
+      "principle": "持续维护复杂度，防止架构腐化",
+      "counterexample": "放任‘复杂度递增/质量下降’（Lehman 定律），系统日益脆化",
+      "source_ids": [
+        "PAP-003",
+        "WEB-019"
+      ]
+    },
+    {
+      "principle": "用可执行的 fitness functions 自动化架构治理",
+      "counterexample": "只靠文档/评审一次性把关，架构随日常变更悄然漂移",
+      "source_ids": [
+        "VEN-030",
+        "BK-011"
+      ]
+    },
+    {
+      "principle": "遗留系统渐进现代化（strangler fig）",
+      "counterexample": "整机重写/直接替换：‘We've seen this simple-sounding plan go down in flames most of the time’",
+      "source_ids": [
+        "WEB-016"
+      ]
+    },
+    {
+      "principle": "改动遗留码前先建立行为安全网",
+      "counterexample": "无特征测试直接修改 → 无回归保护；或把特征测试当正确性测试",
+      "source_ids": [
+        "WEB-041",
+        "BK-022"
+      ]
+    },
+    {
+      "principle": "弃用须有信号、通知期与迁移路径",
+      "counterexample": "无通知直接移除（破坏契约）；只 deprecate 不移除（僵尸功能）；无替代即弃用",
+      "source_ids": [
+        "STD-026",
+        "VEN-033",
+        "VEN-032"
+      ]
+    },
+    {
+      "principle": "版本语义区分‘弃用’与‘破坏’",
+      "counterexample": "把破坏性移除塞进 MINOR/PATCH，违反 semver 与 API 契约",
+      "source_ids": [
+        "VEN-034",
+        "VEN-032"
+      ]
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "技术债的‘利息’随时间推移累积（金融债务直觉）",
+      "verified": "Fowler 明确指出隐喻在这一点上失效：利息只在‘修改该代码’时触发，crufty 但稳定的代码可以不动",
+      "source_id": "WEB-002"
+    },
+    {
+      "misremembered": "重构（refactoring）约等于重写/清理",
+      "verified": "重构以‘不改变可观察行为’为硬判据；重写/改行为不属重构。Fowler 亦澄清 Cunningham 的债隐喻本意是‘为重构辩护’",
+      "source_id": "BK-021"
+    },
+    {
+      "misremembered": "架构侵蚀与架构漂移是同义词",
+      "verified": "Perry & Wolf 区分：erosion=违规（violations）；drift=不敏感（insensitivity）；后果侧重不同（灾难 vs 不适应性）",
+      "source_id": "WEB-019"
+    },
+    {
+      "misremembered": "弃用（deprecation）即移除（removal）",
+      "verified": "弃用只是‘劝阻使用’并预示未来淘汰，替换/移除并非必需或紧急；移除是破坏性变更，按 semver 属 MAJOR",
+      "source_id": "STD-026"
+    },
+    {
+      "misremembered": "演进式架构/适应度函数是 2017 年后才出现的新概念",
+      "verified": "思想根基更早（Lehman 定律 1974/1980、Perry&Wolf 1992 漂移/侵蚀、持续集成/交付实践），Ford 等 2017 将其系统化为术语与框架",
+      "source_id": "PAP-003"
+    }
+  ],
+  "gaps": [
+    "O'Reilly《Building Evolutionary Architectures》正文 403 未回源：fitness function 定义与分类经作者官方页(nealford.com)、官方样章 PDF(Thoughtworks) 与 Thoughtworks 文章交叉核验，第二版新增的其余 fitness function 分类（如 temporal/intentional 等）未能一手核实，未列入。",
+    "《Refactoring》(2nd ed)、《Working Effectively with Legacy Code》书本体受版权未回源；本包仅引用作者官方页面、官方章节节选(informit)与公开目录，正文页码级引用待用户提供合法本地副本后补。",
+    "ISO/IEC/IEEE 14764:2022 正文付费且 iso.org 403：退役/处置过程范围经 E-iso-standards 的 Wayback 快照 + 12207:2017 引用核验，维护类型的完整清单未逐条获取。",
+    "架构腐化的量化检测手段（erosion metrics）与工具清单未展开：Li et al.(2022) 系统映射的全文未获取，仅用其摘要级结论；具体工具（如 ArchUnit/Sonargraph/Structure101）需后续 F/G/O 域或专项补齐。",
+    "特征测试（characterization test）术语主要归功 Feathers；独立第二源偏弱（Wikipedia 为二手），Meszaros《xUnit Test Patterns》是否为原始定义源待核。",
+    "Deprecation/Sunset 的工程实践样本（Google/Microsoft/AWS 具体 API 迁移案例、通知期统计）未取多源量化数据；RFC 8594 为 Informational、RFC 9745 为 Standards Track，采纳率未知。",
+    "‘软件腐烂/软件熵（software rot/entropy）’术语的权威一手定义未落实（Wikipedia 自身标注争议/需补充来源），本包未将其作为独立定义，仅通过 Lehman 复杂度递增与 Perry&Wolf 漂移/侵蚀间接覆盖。",
+    "架构决策记录（ADR）在演化/弃用中的 supersede 机制（B 包 S2-10）与 L 域弃用策略如何衔接，留给 O 域（方法论主干）统一裁决。"
+  ],
+  "notes": "信源计数：S1=3、S2=13、S3=5、S4=3，共 24 条（S1≥2、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：技术债=Cunningham(S2-02)+Fowler(S2-01)+Kruchten(IEEE Software S4-03)；架构腐化=Perry&Wolf(S2-11)+Li et al.(S4-01)；演进式架构/fitness function=Ford 官方页(S2-12)+官方样章(S2-13)+Thoughtworks(S3-01/S3-02)；弃用/sunset=RFC9745(S1-03)+RFC8594(S1-02)+semver(S3-05)；遗留代码/接缝/特征测试=Feathers 章节(S2-09)+Feathers 博客(S2-10)（同作者，独立性偏弱，见 gaps）。专项门控：产出 6 条‘信号→手段→权衡’演化机制表（重构/技术债/腐化/演进式架构/遗留改造/弃用），每条配 ≥1 反例；另附 11 条‘原则↔反例’配对。跨包复用：Fowler TechnicalDebt、Cunningham OOPSLA'92、Li et al.(2022) 与 B-architecture-definition.json 的同名来源一致（已在 source.cross_ref 标注）。信源分级中 Wikipedia 仅作发现线索/术语旁证，未作为独立权威证据；semver.org 为社区事实标准，列为补充源(S3)。联网策略：martinfowler.com/refactoring.com/c2.com/informit/rfc-editor/nealford 直连；wikipedia/Perry&Wolf/Thoughtworks 样章经代理 172.29.0.1:7890。版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、官方样章、CC 许可规范与公开发表论文。"
+}

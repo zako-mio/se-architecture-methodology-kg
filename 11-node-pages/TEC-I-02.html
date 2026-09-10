@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关键字驱动测试框架 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>关键字驱动测试框架</span></div><div class="meta">technology · I · P2 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>冲突 / 对比表</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>关键字驱动测试框架</h1><div class="en">Keyword-Driven Testing Framework</div><div class="badges"><span class="badge pr">P2</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">I · 测试</span><span class="badge th">质量属性</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">关键字驱动测试（KDT）是 ISO/IEC/IEEE 29119-5 定义的一种自动化测试框架范式：把测试操作<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>为可复用的关键字，测试用例由「关键字＋参数」序列描述，驱动层负责解释执行，从而将测试意图与底层脚本实现分离。</span></p></div><p class="note">别名：keyword-driven testing、KDT、关键字驱动测试、29119-5、表驱动测试　|　英文：Keyword-Driven Testing Framework　|　类型：技术 / framework</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -344.9 678 689.1" role="img" aria-label="关键字驱动测试框架 的 1-2 跳邻域关系图"><title>关键字驱动测试框架 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-3" y1="-132.4" x2="-74.8" y2="-280.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：测试类型设计以可测试性为结构前提</title></line><line x1="31.8" y1="-235.6" x2="-3" y2="-132.4" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：测试层次是应用测试类型的结构前提</title></line><line x1="-215" y1="-27.8" x2="31.8" y2="-235.6" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：测试金字塔按测试层次组织测试分布</title></line><line x1="217.3" y1="6.6" x2="-215" y2="-27.8" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：质量门控依据金字塔分层执行自动化测试</title></line><line x1="217.3" y1="6.6" x2="130.9" y2="-0.7" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：质量门控依赖测试过程模型的管理框架</title></line><line x1="13.7" y1="137.3" x2="217.3" y2="6.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：持续集成服务落地质量门控与持续集成方法</title></line><line x1="0" y1="0" x2="130.9" y2="-0.7" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：29119-5 关键字驱动测试实现分层测试过程模型</title></line><line x1="-122.2" y1="-17" x2="31.8" y2="-235.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：xUnit 框架族支撑组件级单元测试层次</title></line><line x1="-122.2" y1="-17" x2="-215" y2="-27.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：xUnit 单元测试构成测试金字塔底层</title></line><line x1="0" y1="0" x2="-3" y2="-132.4" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：关键字驱动测试作为规格化黑盒测试类型的实现</title></line><line x1="-122.2" y1="-17" x2="13.7" y2="137.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：单元测试框架接入持续集成流水线自动执行</title></line><line x1="0" y1="0" x2="13.7" y2="137.3" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：关键字驱动测试用例在 CI 流水线中调度回归</title></line><line x1="0" y1="0" x2="-122.2" y2="-17" stroke="#a17c00" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>对照（contrasts）：关键字表驱动与代码驱动自动化测试范式对照</title></line><line x1="0" y1="280.2" x2="13.7" y2="137.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：自动全量重生成加多级门控构成验证流水线</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">关键字驱动测试框架<title>关键字驱动测试框架（TEC-I-02）</title></text><circle cx="-3" cy="-132.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="-3" y="-113.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">测试类型<title>测试类型（MTH-I-02）</title></text><circle cx="130.9" cy="-0.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="130.9" y="18.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">软件测试过程模型<title>软件测试过程模型（MTH-I-07）</title></text><circle cx="13.7" cy="137.3" r="9.0" fill="#c98a3a" stroke="none"/><text x="13.7" y="156.3" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">持续集成服务与流水线<title>持续集成服务与流水线（TEC-I-01）</title></text><circle cx="-122.2" cy="-17" r="9.0" fill="#c98a3a" stroke="none"/><text x="-122.2" y="2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">xUnit 测试框架族<title>xUnit 测试框架族（TEC-I-03）</title></text><circle cx="217.3" cy="6.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="217.3" y="22.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量门控与持续集成<title>质量门控与持续集成（MTH-I-06）</title></text><circle cx="0" cy="280.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="0" y="296.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="31.8" cy="-235.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="31.8" y="-219.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试层次<title>测试层次（MTH-I-01）</title></text><circle cx="-215" cy="-27.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-215" y="-11.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">测试金字塔与反模式<title>测试金字塔与反模式（MTH-I-04）</title></text><circle cx="-74.8" cy="-280.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-74.8" y="-264.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可测试性本质<title>可测试性本质（ESS-I-02）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 5 个二跳节点，共 10 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">关键字驱动测试的立足点是把「测试要做什么」与「怎么做」解耦：业务测试意图用关键字序列表达，底层每次点击、输入或接口调用的实现细节封装在关键字库中。</span>这样测试用例不再是难以维护的脚本，而是可读、可评审、可由非程序员编写的数据表。<span class="hl">ISO/IEC/IEEE 29119-5 于 2024 年<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">发布</a>第 2 版，把 KDT 作为标准化测试方法固定下来，给出其框架与使用要求，使其从某类工具的实现上升为可移植的工程范式。</span>它隶属于 29119 系列，与测试过程、文档模板及规格化黑盒测试技术相互衔接，是测试自动化中面向大批量回归场景的规范化路径。其目标不是取代人工探索，而是把重复、稳定、可预先描述的验证交给可维护的自动化资产。标准化的意义在于让 KDT 的实施与评估有共同参照，而不是被单一厂商的实现细节绑定；因此它既是技术选型问题，也是测试资产治理问题。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">KDT 通常分三层运作：底层驱动层实现与系统交互的原语（元素定位、输入、比较等）；关键字层把若干原语封装为语义化、带参数的可复用关键字；测试用例层用「关键字＋数据」表按步骤描述场景。</span>执行时由解释器读取用例表，逐行解析关键字并调用对应实现，收集结果与事件报告。<span class="hl">其<a class="term" href="../14-views/glossary.html#g-121" title="maintainability — 产品/系统被修改以改进、纠错或适应环境与需求变化的有效性与效率程度；子特性 modularity/reusability/analysability/modifiability/testability。">可维护性</a>来自复用：一处关键字修改即可影响所有引用它的用例。</span>29119-5 对关键字、测试用例结构与执行语义给出规范化要求，使同一套用例可跨不同驱动工具迁移；用例数据外置也便于按环境与数据集切换，支撑回归测试的规模化。当关键字命名稳定、数据与逻辑分离时，测试资产可在多项目、多环境间复用，形成区别于一次性脚本的长期收益。关键字库与用例的分层还使变更影响可预测：界面或接口调整通常只改关键字实现，而不波及用例，这种隔离是 KDT 区别于录制回放式脚本的核心优势。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地先建关键字抽象与命名规范，避免把界面细节直接暴露给用例作者；关键字粒度以业务动作为准，既不细碎到绑定控件，也不粗放到不可复用。</span>测试数据外置并与用例分离；关键字库按其依赖的驱动能力分层，保持语义稳定。用例以表或结构化文件维护并纳入版本控制，并建立评审与定期清理机制，淘汰冗余或失修的关键字。<span class="hl">执行侧需与<a class="term" href="../14-views/glossary.html#g-069" title="continuous integration (CI) — 团队成员至少每日把改动合并回主线，每次集成由自动化构建（含测试）验证。">持续集成</a>流水线对接，把 KDT 用例作为回归<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>批量调度，失败时回传可读报告与截图等证据。</span>29119-5 建议结合 29119-2 的测试过程与 29119-3 的文档模板组织 KDT 的规划、设计与报告，并可用 29119 官方站点确认现行版本。团队应明确谁维护关键字库、谁编写用例，并用用例数与维护成本跟踪抽象是否仍然合理。度量上可关注关键字的复用率与用例的维护成本，而不仅是用例数量，以判断抽象是否产生净收益。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>让非技术人员直接编写用例还可能产生大量重复、低价值或语义模糊的用例，反而增加执行与维护成本。</p><p>建立关键字库与解释器需要前期投入，抽象一旦失当，返工成本高于从一开始写脚本；因此应把它视为与代码驱动自动化并列的可选范式，按场景与团队能力选择，而非盲目替换。</p><p>与代码脚本相比，KDT 在跨平台与工具迁移上更灵活，但这份<a class="term" href="../14-views/glossary.html#g-125" title="flexibility — 25010:2023 顶层特性：产品适应需求、使用情境或系统环境变化的能力；子特性 adaptability/scalability/installability/replaceability；由 2011 版 Portability 改名。">灵活性</a>只有在关键字层设计良好时才兑现；反之，糟糕的抽象会让迁移成本转嫁到关键字改造上。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>KDT 的收益依赖关键字层的抽象质量，而抽象本身是有代价的：过度封装会形成新的维护负担与调试障碍，关键字爆炸使定位一次失败需穿透多层；纯表驱动难以表达复杂控制流、组合逻辑与精细断言，遇到这类场景往往需要退回代码脚本。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>此外 KDT 需要稳定的被测算系统与可复用的操作路径，适合重复度高、流程稳定的回归场景；对探索性测试、快速变化的界面或复杂算法验证并不合适。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>冲突 / 对比表</h2><div class="tblwrap"><table class="cmp"><caption>真实 对照 边：关键字表驱动与代码驱动自动化测试范式对照</caption><thead><tr><th>对照维度</th><th>关键字驱动测试框架</th><th>xUnit 测试框架族</th></tr></thead><tbody><tr><td class="k">定位 / 依据层</td><td>关键字驱动测试框架 · Keyword-Driven Testing Framework</td><td>xUnit 测试框架族 · xUnit Test Frameworks</td></tr><tr><td class="k">核心定义（原文）</td><td>关键字驱动测试（KDT）是 ISO/IEC/IEEE 29119-5 定义的一种自动化测试框架范式：把测试操作抽象为可复用的关键字，测试用例由「关键字＋参数」序列描述，驱动层负责解释执行，从而将测试意图与底层脚本实现分离。</td><td>xUnit 测试框架族是按「测试类—测试方法—断言—夹具」结构组织并自动执行<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">单元测试</a>的一类框架，命名源自 JUnit 及其衍生家族；它把测试书写、发现、执行与报告统一为<a class="term" href="../14-views/glossary.html#g-074" title="dev/prod parity — 让开发、预发、生产尽可能相似（时间差/人员差/工具差最小），backing service 同类型同版本。">开发</a>者可直接使用的代码骨架，是单元测试与<a class="term" href="../14-views/glossary.html#g-064" title="test-driven development (TDD) — 先写测试再写实现的技术（Kent Beck），核心为 Red-Green-Refactor 循环。">测试驱动开发</a>的主要工具载体。</td></tr><tr><td class="k">首条机制断言（原文）</td><td>关键字驱动测试的立足点是把「测试要做什么」与「怎么做」解耦：业务测试意图用关键字序列表达，底层每次点击、输入或接口调用的实现细节封装在关键字库中。</td><td>xUnit 框架族解决的是让自动化测试「足够便宜」的问题：框架负责发现测试、建立与拆除夹具、逐条执行、断言判定并汇总报告，开发者只需专注测试逻辑本身。</td></tr><tr><td class="k">对照关系</td><td>关键字表驱动与代码驱动自动化测试范式对照（对照）</td><td>同一条 对照 边的另一端</td></tr><tr><td class="k">典型反例（原文）</td><td>KDT 的收益依赖关键字层的抽象质量，而抽象本身是有代价的：过度封装会形成新的维护负担与调试障碍，关键字爆炸使定位一次失败需穿透多层；纯表驱动难以表达复杂控制流、组合逻辑与精细断言，遇到这类场景往往需要退回代码脚本。</td><td>过度使用<a class="term" href="../14-views/glossary.html#g-068" title="test double — 为测试目的替换生产对象的泛称：Dummy/Fake/Stub/Spy/Mock。">测试替身</a>会让测试断言实现细节而非行为，结构一改就大面积失败，反而抬高维护成本。测试代码同样是生产资产，需要维护与<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>，否则会随系统演化腐化；偶发失败若不被及时处理，会摧毁团队对红灯的信任。</td></tr><tr><td class="k">处置要点（原文）</td><td>落地先建关键字抽象与命名规范，避免把界面细节直接暴露给用例作者；关键字粒度以业务动作为准，既不细碎到绑定控件，也不粗放到不可复用。</td><td>落地应有测试命名与结构规范：一个测试验证一个行为，夹具共享与隔离得当，断言直指结果；可读性优先，让失败信息本身说明问题。</td></tr></tbody></table></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-06 · 经 TEC-I-01</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → MTH-I-07 → MTH-I-06</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → MTH-I-07 → MTH-I-06</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>29119-5:2024</div><div class="r"><span class="k">规范信源</span>STD-018、STD-024、STD-017、OFF-018</div><div class="r"><span class="k">入口链接</span><a href="https://web.archive.org/web/20250906170532id_/https://www.iso.org/standard/87233.html" target="_blank" rel="noopener">https://web.archive.org/web/20250906170532id_/https://www.iso.org/standard/87233.html</a>　<a href="https://softwaretestingstandard.org/" target="_blank" rel="noopener">https://softwaretestingstandard.org/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：关键字驱动测试就是某个具体工具的功能</span><br>核验结论：KDT 是 29119-5 标准化的框架范式，规定关键字、测试用例结构与执行语义；具体工具只是其载体，同一套 KDT 用例原则上可跨工具迁移　<span class="k">[STD-018]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：KDT 可以完全取代代码脚本并让非程序员独立完成所有测试</span><br>核验结论：KDT 仍需底层驱动层实现，且对复杂逻辑、精细断言与探索性测试不适用；非技术人员参与不等于无需工程维护　<span class="k">[STD-024]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ TEC-I-01</td><td>持续集成服务与流水线<br><span style="color:var(--dim);font-size:12px">E-822</span></td><td>关键字驱动测试用例在 CI 流水线中调度回归</td></tr><tr><td class="k">对照</td><td>→ TEC-I-03</td><td>xUnit 测试框架族<br><span style="color:var(--dim);font-size:12px">E-823</span></td><td>关键字表驱动与代码驱动自动化测试范式对照</td></tr><tr><td class="k">实现</td><td>→ MTH-I-02</td><td>测试类型<br><span style="color:var(--dim);font-size:12px">E-820</span></td><td>关键字驱动测试作为规格化黑盒测试类型的实现</td></tr><tr><td class="k">实现</td><td>→ MTH-I-07</td><td>软件测试过程模型<br><span style="color:var(--dim);font-size:12px">E-817</span></td><td>29119-5 关键字驱动测试实现分层测试过程模型</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

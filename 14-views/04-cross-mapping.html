@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨体系对照 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.card h3{font-size:15px;color:var(--accent);margin:0 0 8px;}
+.card p{font-size:13px;color:var(--dim);margin-bottom:10px;}
+.card .go{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:8px;padding:6px 14px;color:#1d4ed8;font-size:13px;text-decoration:none;}
+.stat{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:4px;text-align:center;}
+.stat b{display:block;font-size:22px;color:var(--accent);}
+.stat span{font-size:12px;color:var(--dim);}
+.row{display:flex;align-items:baseline;gap:10px;padding:9px 6px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.row .nm{min-width:200px;flex:0 0 auto;font-size:14px;font-weight:600;}
+.row .brief{flex:1 1 320px;font-size:12.5px;color:var(--dim);min-width:240px;}
+.layer-nav{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;}
+.layer-nav a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;color:var(--text);text-decoration:none;}
+.empty{background:var(--panel);border:1px dashed var(--border);border-radius:8px;padding:24px;color:var(--dim);text-align:center;}
+.sec-card{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:10px 18px;margin:12px 0;}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="index.html">视图入口</a> <span class="sep">/</span> <span>跨体系对照</span></div><div class="meta">母库 ↔ 12factor 子库逐条映射（38 行）。</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>逐条映射表</a></nav>
+<article>
+<header class="doc"><h1>跨体系对照</h1><div class="en">母库 ↔ 12factor 子库逐条映射（38 行）。</div><div class="badges"></div></header>
+<section id="s1"><h2><span class="num">§1</span>逐条映射表</h2><p class="dim">12factor 为母库首个子库/实例库，<b>不内联</b>进母库主 DAG；下表逐行给出 12factor 节点 ↔ 母库节点的映射与关系类型，深链直达子库节点页。</p><div class="tblwrap"><table><thead><tr><th>12factor 节点</th><th>关系类型</th><th>母库节点</th><th>rationale</th></tr></thead><tbody><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-codebase.html" target="_blank" rel="noopener">代码库</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-H-03.html">DRY 单一知识来源</a></td><td>代码库作为版本控制下的单一权威来源，与母库『DRY/单一知识来源』同源</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-deps.html" target="_blank" rel="noopener">依赖</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-J-03.html">封闭构建</a>、<a href="../11-node-pages/ESS-G-02.html">依赖倒置与依赖规则</a></td><td>显式声明并隔离依赖对应母库『封闭构建』与『依赖倒置/依赖规则』</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-config.html" target="_blank" rel="noopener">配置</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-J-04.html">配置外置与显式化</a>、<a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a></td><td>母库『配置外置与显式化』与 12factor『配置』同源；配置差异是环境漂移主因</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-backing.html" target="_blank" rel="noopener">后端服务</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a>、<a href="../11-node-pages/MTH-J-04.html">配置外置与显式化</a></td><td>外部后端资源经窄接口隔离、经配置挂接，才可随时替换</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-build-run.html" target="_blank" rel="noopener">构建·发布·运行</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-01.html">构建发布运行分离</a>、<a href="../11-node-pages/MTH-J-01.html">部署流水线</a></td><td>构建/发布/运行三阶段严格分离，对应母库同源本质与部署流水线</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-processes.html" target="_blank" rel="noopener">进程</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a>、<a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a></td><td>无状态进程即以可替换的实例承载运行，对应不可变基础设施与容错</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-port.html" target="_blank" rel="noopener">端口绑定</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a>、<a href="../11-node-pages/TEC-J-01.html">Kubernetes 部署编排</a></td><td>自含导出服务即边界/接口隔离；容器编排的端口暴露为其技术落地</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-concurrency.html" target="_blank" rel="noopener">并发</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-M-02.html">可演化性与可扩展性</a>、<a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a></td><td>以进程模型横向扩展对应可演化/可扩展性与粒度边界设定方法</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-disposability.html" target="_blank" rel="noopener">可处置性</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a>、<a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a></td><td>快速启动与优雅终止服务容错；进程视为可丢弃的不可变实例</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-dev-prod.html" target="_blank" rel="noopener">开发/线上等价</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a>、<a href="../11-node-pages/MTH-J-01.html">部署流水线</a></td><td>母库『开发生产一致性』与 12factor『开发/线上等价』同源</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-logs.html" target="_blank" rel="noopener">日志</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-03.html">可观测性本质</a>、<a href="../11-node-pages/MTH-K-03.html">四大黄金信号监控方法</a>、<a href="../11-node-pages/TEC-K-02.html">可观测性信号采集</a></td><td>日志即事件流，对应可观测性本质、黄金信号方法与信号采集技术</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/app-admin.html" target="_blank" rel="noopener">管理进程</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-04.html">部署即变更管理</a>、<a href="../11-node-pages/MTH-K-07.html">容量规划与变更管理方法</a></td><td>一次性管理/维护进程属于部署即变更管理与变更管理方法范畴</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-nl2tool.html" target="_blank" rel="noopener">自然语言→工具调用</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a>、<a href="../11-node-pages/MTH-O-07.html">自动化方式选择</a></td><td>自然语言→结构化工具调用是稳定的接口契约，属自动化方式选择</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-prompts.html" target="_blank" rel="noopener">掌控你的 Prompt</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-J-04.html">配置外置与显式化</a>、<a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a></td><td>Prompt 作为代码之外的可变部分，需外置、版本化并保持环境一致</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-context.html" target="_blank" rel="noopener">掌控上下文窗口</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-O-01.html">覆盖与精度的不对称权衡</a></td><td>上下文窗口是受限预算，取舍即母库『覆盖与精度的不对称权衡』</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-tools.html" target="_blank" rel="noopener">工具即结构化输出</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-04.html">模块化与分解</a>、<a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a></td><td>工具即可组合单元，对应模块化分解与粒度/边界设定</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-state.html" target="_blank" rel="noopener">统一执行/业务状态</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-H-03.html">DRY 单一知识来源</a></td><td>执行状态与业务状态统一为单一事实源，等同母库单一知识来源</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-pause.html" target="_blank" rel="noopener">启动/暂停/恢复</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a>、<a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a></td><td>启动/暂停/恢复的生命周期管理对应容错与可替换实例</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-human.html" target="_blank" rel="noopener">工具调用联系人类</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-F-02.html">干系人与需要</a>、<a href="../11-node-pages/MTH-F-03.html">干系人识别与分析</a></td><td>把人类接入作为工具调用、主动寻求批准，对应干系人及其需要</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-control.html" target="_blank" rel="noopener">掌控控制流</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-01.html">关注点分离</a>、<a href="../11-node-pages/MTH-O-07.html">自动化方式选择</a></td><td>控制流由代码决定、LLM 仅作决策点，属关注点分离与自动化方式选择</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-errors.html" target="_blank" rel="noopener">压缩错误进上下文</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-03.html">可观测性本质</a>、<a href="../11-node-pages/MTH-O-11.html">度量与反馈闭环</a>、<a href="../11-node-pages/ESS-K-04.html">度量驱动的反馈闭环</a></td><td>错误压缩回上下文是可观测性本质与度量反馈闭环的具体化</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-small.html" target="_blank" rel="noopener">小而专注的 Agent</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-04.html">模块化与分解</a>、<a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a></td><td>小而专注的 Agent 对应模块化分解与细粒度单元边界</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-trigger.html" target="_blank" rel="noopener">随处触发</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-O-02.html">准入与触发时机选择</a>、<a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a></td><td>随处触发对应准入/触发时机选择与自含入口边界</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/ag-reducer.html" target="_blank" rel="noopener">无状态 Reducer</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a>、<a href="../11-node-pages/ESS-H-03.html">DRY 单一知识来源</a></td><td>无状态 reducer 以不可变演算（state,event)→state 保持单一事实源</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-stateless.html" target="_blank" rel="noopener">无状态性</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a>、<a href="../11-node-pages/ESS-M-04.html">可靠性与可用性</a></td><td>无状态性是传统应用与 Agent 共有的可靠运行基石</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-disposable.html" target="_blank" rel="noopener">生命周期与可处置性</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-02.html">故障不可避免性与容错</a>、<a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a></td><td>进程可处置与 Agent 可暂停恢复本质同源，指向容错与不可变实例</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-config.html" target="_blank" rel="noopener">配置与可变性外置</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-J-04.html">配置外置与显式化</a>、<a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a></td><td>环境变量与 prompt 同为代码之外的可变部分，对应配置外置与环境一致</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-observability.html" target="_blank" rel="noopener">可观测性与错误可见性</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-K-03.html">可观测性本质</a>、<a href="../11-node-pages/ESS-K-04.html">度量驱动的反馈闭环</a>、<a href="../11-node-pages/TEC-K-02.html">可观测性信号采集</a></td><td>传统日志与 Agent 错误压缩共同指向可观测性与信号采集</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-deps.html" target="_blank" rel="noopener">依赖与工具显式化</a></td><td>跨体系对照</td><td><a href="../11-node-pages/MTH-J-03.html">封闭构建</a>、<a href="../11-node-pages/ESS-G-02.html">依赖倒置与依赖规则</a></td><td>显式声明依赖/工具，不隐式依赖环境，对应封闭构建与依赖倒置</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-control.html" target="_blank" rel="noopener">控制流与阶段治理</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-01.html">构建发布运行分离</a>、<a href="../11-node-pages/MTH-O-07.html">自动化方式选择</a></td><td>确定性控制流/阶段分离保证可预测交付，对应阶段分离与自动化选择</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-entry.html" target="_blank" rel="noopener">自含入口与触达</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a>、<a href="../11-node-pages/MTH-O-02.html">准入与触发时机选择</a></td><td>自含导出服务与随处触发都不依赖宿主，对应边界隔离与触发时机</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-scaling.html" target="_blank" rel="noopener">规模化与单元粒度</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-M-02.html">可演化性与可扩展性</a>、<a href="../11-node-pages/MTH-O-06.html">粒度与边界设定</a></td><td>进程模型扩展与小 Agent 组合皆单元化扩展，对应可扩展性与粒度设定</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-human.html" target="_blank" rel="noopener">人为交互边界</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-F-02.html">干系人与需要</a>、<a href="../11-node-pages/MTH-F-03.html">干系人识别与分析</a></td><td>一次性管理任务与人类批准同为协作边界，对应干系人及其需要</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/t-parity.html" target="_blank" rel="noopener">环境一致性</a></td><td>跨体系对照</td><td><a href="../11-node-pages/ESS-J-02.html">开发生产一致性</a>、<a href="../11-node-pages/MTH-J-01.html">部署流水线</a></td><td>开发与生产一致：传统靠环境等价，对应开发生产一致性与流水线</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/tool-create-agent.html" target="_blank" rel="noopener">create-12-factor-agent 脚手架</a></td><td>跨体系对照</td><td><span class="dim">—</span></td><td>12factor Agent 官方脚手架工具，母库技术层暂无 Agent 脚手架类目，无对应节点（标注空）</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/tool-walkthroughgen.html" target="_blank" rel="noopener">Walkthroughgen 教程生成器</a></td><td>跨体系对照</td><td><span class="dim">—</span></td><td>12factor 专属教程生成器，母库无同类工程节点，无对应（标注空）</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/tool-workshops.html" target="_blank" rel="noopener">官方工作坊材料</a></td><td>跨体系对照</td><td><span class="dim">—</span></td><td>12factor 官方工作坊材料，属子库专属资产，母库无对应（标注空）</td></tr><tr><td><a href="https://zako-mio.github.io/12-factor-methodology-kg/02-node-pages/tool-app-site.html" target="_blank" rel="noopener">12factor.net 站点源码</a></td><td>案例印证</td><td><a href="../11-node-pages/ESS-J-03.html">不可变基础设施</a>、<a href="../11-node-pages/MTH-G-05.html">架构文档化方法</a></td><td>12factor.net 站点自身是 App 原则的参考实现（不可变静态构建）与文档化载体</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 视图页由 16-checkpoint/gen-views.py 生成</footer>
+</article>
+</div>
+</body>
+</html>

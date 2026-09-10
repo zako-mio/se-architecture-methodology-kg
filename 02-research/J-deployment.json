@@ -1,0 +1,676 @@
+{
+  "topic": "软件工程/架构设计方法论 — J 域：部署（deployment）",
+  "generated_by": "delivery-deployment-engineer (subagent, 自写角色：交付/部署工程师)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "12factor.net / martinfowler.com / kubernetes.io / docs.aws.amazon.com / cncf.io / dora.dev 直连可达；cloud.google.com、learn.microsoft.com、sre.google 走代理 172.29.0.1:7890；hashicorp.com 直连与代理均返回 429（限流），未回源。全程仅读取公开页面，未下载任何受版权保护正文。12factor.net 与本地 12factor.epub（BK-01）交叉核验一致。",
+  "sources": [
+    {
+      "id": "BK-031",
+      "title": "The Twelve-Factor App",
+      "org": "Adam Wiggins / 12factor.net (Salesforce)",
+      "year": "2017",
+      "url": "https://12factor.net/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "方法论共 12 要素，面向以服务形式交付的 SaaS 应用。",
+        "Factor V：三阶段严格分离 build→release→run；build 把代码库转为可执行 bundle，release 把 build 与当前 config 合并，run 在环境中启动进程。",
+        "release 必须唯一 ID（时间戳或递增号），是 append-only 账本，创建后不可变更，任何改动产生新 release。",
+        "Factor III：config 是与代码严格分离、随部署变化的一切（资源句柄/凭据/主机名），存于环境变量。",
+        "Factor X：dev/staging/prod 尽量一致（缩小时间差/人员差/工具差），backing service 同类型同版本。",
+        "Factor II 显式声明与隔离依赖；Factor IX 快速启动与优雅关闭；Factor VI 无状态进程。",
+        "可在任意语言、任意 backing service 组合上应用。"
+      ],
+      "legacy_id": "S2-01"
+    },
+    {
+      "id": "WEB-032",
+      "title": "Blue Green Deployment (bliki)",
+      "org": "Martin Fowler",
+      "year": "2010",
+      "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "两个尽可能相同的生产环境，任一时刻仅一个（如 blue）承载流量。",
+        "新版本在 green 完成最终测试后，切换路由器把全部流量导向 green；blue 转入空闲/下一轮 staging。",
+        "快速回滚：出问题把路由切回 blue。",
+        "数据库难题：把 schema 变更与应用升级分离——先做兼容新旧版本的数据库重构（expand），验证有回滚点后再部署新版应用，稳定后移除旧版支持（contract）。",
+        "该模式与 hot-standby 同机理，可在每次发布演练容灾。",
+        "名称由 Daniel Terhorst-North 与 Jez Humble 提出；模式本身早已存在。",
+        "变体：同一数据库、只对 web/domain 层做蓝绿切换；或用同一套基础设施重启，而非路由器切换。"
+      ],
+      "legacy_id": "S2-02"
+    },
+    {
+      "id": "WEB-033",
+      "title": "Canary Release (bliki)",
+      "org": "Danilo Sato / Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/CanaryRelease.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "金丝雀发布：先把新版本部署到不接用户的一小部分基础设施，再逐步把少量用户/流量导入，最后全量。",
+        "用户选择策略：随机抽样、先内部员工、按画像/人口统计。",
+        "随信心提升扩大基础设施占比与用户占比；旧基础设施用 Phoenix/Immutable 方式退役。",
+        "回滚 = 把用户重新路由回旧版本（reroute），实现简单。",
+        "优势：在生产环境做容量验证，环境最接近真实；监控业务指标自动回滚即 cluster immune system（IMVU 首创）。",
+        "局限：需同时管理多个版本（应尽量压缩并发版本数）；对安装在用户端/移动端的软件难控升级时机；数据库变更需用 ParallelChange 让 schema 同时兼容两版。",
+        "可与 A/B 测试共用技术实现，但目的不同（金丝雀检测故障/回归，A/B 验证假设），应避免混用。",
+        "亦称 phased rollout / incremental rollout。"
+      ],
+      "legacy_id": "S2-03"
+    },
+    {
+      "id": "WEB-034",
+      "title": "Immutable Server (bliki)",
+      "org": "Kief Morris / Martin Fowler",
+      "year": "2013",
+      "url": "https://martinfowler.com/bliki/ImmutableServer.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "不可变服务器：一旦部署就不再修改，只被新实例替换。",
+        "是 Phoenix Server 思路的逻辑终点：从受测基础镜像启动后不再运行配置管理工具，避免未测试变更。",
+        "所有修复/变更都改基础镜像、经自动化测试、再滚动产出新实例；淘汰无该变更的服务器。",
+        "类比持续交付：同一版本应用只编译一次制品，各环境部署同一制品以保证一致。",
+        "每实例差异应尽量少，且应主要来自服务器外部（平台元数据、Zookeeper 等集中注册表）。",
+        "数据通常不可丢弃：需区分运行时不需的（日志外送）与需复制的，使用共享存储/云盘/托管数据库。",
+        "Netflix 是该模式最早实践者之一（Aminator/AMI）；术语 'Immutable Server' 由 ThoughtWorks 的 Ben Butler-Cole 命名。"
+      ],
+      "legacy_id": "S2-04"
+    },
+    {
+      "id": "WEB-035",
+      "title": "Phoenix Server (bliki)",
+      "org": "Martin Fowler",
+      "year": "2012",
+      "url": "https://martinfowler.com/bliki/PhoenixServer.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "凤凰服务器：定期从零重建，避免配置漂移（configuration drift）。",
+        "自动重放配置只能修复已声明范围内的漂移；从零重建可捕获声明外的漂移。",
+        "术语 'Phoenix Server' 由 Kornelis Sietsma 提出；Netflix Chaos Monkey 随机摧毁服务器以验证韧性。",
+        "重放配置通常更快更少中断，两种策略可并用。"
+      ],
+      "legacy_id": "S2-05"
+    },
+    {
+      "id": "WEB-036",
+      "title": "Deployment Pipeline (bliki)",
+      "org": "Martin Fowler (致谢 Jez Humble)",
+      "year": "2013",
+      "url": "https://martinfowler.com/bliki/DeploymentPipeline.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "部署流水线把构建拆成多个阶段，每阶段提升置信度、通常以更多时间为代价。",
+        "第一阶段做编译并为后续阶段提供二进制制品；后续可含人工检查、并行机器、人工授权门。",
+        "部署到生产通常是流水线的最后一个阶段。",
+        "流水线目标是检出会导致生产问题的变更（性能/安全/可用性），并提供协作与审计轨迹。",
+        "是 Continuous Delivery 的核心组成部分（见《Continuous Delivery》第 5 章）。"
+      ],
+      "legacy_id": "S2-06"
+    },
+    {
+      "id": "BK-025",
+      "title": "Site Reliability Engineering — Chapter 8: Release Engineering",
+      "org": "Google (Dinah McNutt), O'Reilly, CC BY-NC-ND",
+      "year": "2017",
+      "url": "https://sre.google/sre-book/release-engineering/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "发布工程：以可复现、自动化方式构建与交付软件，避免 'unique snowflake'。",
+        "Hermetic builds：对构建机器环境不敏感，依赖已知版本的编译器与库；同一 revision 在不同机器构建结果应一致。",
+        "打包：MPM 包按名称、唯一 hash 版本化并签名；用 build ID 标签唯一引用。",
+        "发布流程含 canary 部署、灰度到多集群、回滚；'Push on Green' 部署每个通过全部测试的构建。",
+        "配置管理多模型：主分支配置、配置随二进制同包、独立配置包（可单独重建）、外部存储动态配置；均存于源码库并强制 code review。",
+        "按服务风险画像调整部署：预发可每小时自动推，大型用户面服务先一个集群再指数扩张，敏感基础设施跨地域拉长数天。",
+        "发布应是自助、高速度、受策略与权限门控的；错误报告随制品归档便于排障。",
+        "Cherry-pick 修复：在相同 revision 重建并附特定变更，工具版本也随之锁定。"
+      ],
+      "legacy_id": "S2-07"
+    },
+    {
+      "id": "VEN-020",
+      "title": "DORA — Deployment automation (DevOps capability)",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/devops-capabilities/technical/deployment-automation",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "部署自动化三大输入：CI 产出的可部署到任意环境（含生产）的包；配置环境/部署包/冒烟测试的脚本；环境相关配置。",
+        "脚本与配置应纳入版本控制；包从制品仓库（Artifact Registry、Nexus、Artifactory）下载。",
+        "最佳实践：每个环境（含生产）用同一部署过程；任何有凭据者可随时全自动部署任意版本制品到任意环境；各环境用同一批包、配置与包分离；环境状态可从版本控制确定性重建。",
+        "部署步骤应尽量幂等（可重复执行）且顺序无关（依赖缺失时降级而非崩溃）。",
+        "反模式：依赖跨服务编排 —— 是紧耦合的创可贴；目标是无编排、可独立部署、向后兼容（API 版本化）。",
+        "度量：统计并减少部署过程中的手工步骤数、提升自动化百分比。",
+        "复杂脆弱的流程被自动化只会得到复杂脆弱的自动化，需先为可部署性重构。"
+      ],
+      "legacy_id": "S3-01"
+    },
+    {
+      "id": "VEN-021",
+      "title": "Blue/Green Deployments on AWS (Whitepaper)",
+      "org": "Amazon Web Services",
+      "year": "2021",
+      "url": "https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "传统部署在相同资源上原地重部署：回滚需从头重装旧版，耗时长、可能长时间不可用，且无法在故障版本上就地调试。",
+        "蓝绿部署：在两个运行不同版本的相同环境间切换流量，提供近零停机与回滚能力。",
+        "隔离性降低部署风险；可在切全量前用测试流量或以很小比例生产流量验证（canary analysis / canary testing）。",
+        "回滚 = 把流量切回 blue，影响限于检测到问题到切回之间的窗口，且只波及导向 green 的那部分流量（缩小爆炸半径）。",
+        "与 CI/CD 配合可减少对既有环境/状态/配置的依赖，降低复杂度。",
+        "成本优势：不受限于同一批底层资源，可按新版性能画像增减/更换资源，部署期间逐级扩缩，成功后退役 blue 停止付费。",
+        "环境边界受应用架构（耦合度）、组织、风险与复杂度、团队能力、流程、成本六类因素影响；微服务边界可更小，单体则更大、测试更重。"
+      ],
+      "legacy_id": "S3-02"
+    },
+    {
+      "id": "VEN-022",
+      "title": "Architecture strategies for safe deployment practices (Azure Well-Architected Framework)",
+      "org": "Microsoft Azure",
+      "year": "2026",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/safe-deployments",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "Safe Deployment Practices (SDP) 四条准则：安全与一致、渐进暴露（progressive exposure）、健康模型、问题检测。",
+        "金丝雀是渐进暴露的常见形态：先小群内部/外部用户，逐级扩大至全量，常用 feature flag 控制。",
+        "蓝绿：两套相同基础设施池，都能承担全量负载；blue 服务当前版本，green 更新并内部测试，再把部分生产流量逐步导入 green，完成后角色互换。",
+        "bake time（烘焙时间）指各 rollout 组之间的观察等待，应以小时/天计，且逐组增加以覆盖不同时区与使用模式。",
+        "健康模型驱动：每阶段须通过健康检查才进入下一阶段；检出问题立即停止 rollout 并启动恢复。",
+        "恢复手段：回滚（撤销变更回到最后已知可用配置）、前滚（热修）、用最后已知可用配置部署新基础设施。",
+        "安全护栏：制品版本化以便回滚/前滚；trunk-based/release flow 而非环境分支；尽可能自动化 SDP；feature flag；staging 镜像生产；预部署检查（代码评审/安全扫描/合规/契约测试/网络策略模拟）；熔断器。",
+        "紧急 SDP 协议：加速审批、加速冒烟/集成测试、缩短 bake time，但仍应尽快补跑质量门。",
+        "退役/下线是最危险变更之一：验证无活动→先快照→先禁用再删除→观察窗口→清理残留引用。",
+        "数据库等有状态变更回滚复杂，需按数据资产设计明确处理；多数 Azure DB 提供 point-in-time restore。"
+      ],
+      "legacy_id": "S3-03"
+    },
+    {
+      "id": "VEN-023",
+      "title": "Kubernetes Documentation — Deployments",
+      "org": "The Kubernetes Authors (CNCF)",
+      "year": "2026",
+      "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "Deployment 以声明式方式创建/更新/回滚；默认策略为 RollingUpdate（'.spec.strategy.type' 默认值），即以滚动方式逐步下线旧 ReplicaSet、上线新 ReplicaSet。",
+        "滚动更新由 maxUnavailable（更新期间最大不可用 Pod 数）与 maxSurge（超出期望副本数可创建的最大 Pod 数）控制，均默认 25%。",
+        "maxUnavailable 为 0 时按百分比向上取整；maxSurge 计算方式类似。",
+        "RollingUpdate 支持同一应用多版本并存；若设 maxUnavailable=0 且 maxSurge 足够，可保证滚动期间可用副本不低于期望。",
+        "滚动期间总 Pod 数可能短暂超过 replicas+maxSurge（受 terminationGracePeriodSeconds 影响）。",
+        "回滚依赖 revisionHistoryLimit 保留历史 ReplicaSet；可回退到先前版本（反向滚动）。"
+      ],
+      "legacy_id": "S3-04"
+    },
+    {
+      "id": "VEN-024",
+      "title": "Cloud Native Glossary — Immutable Infrastructure",
+      "org": "CNCF",
+      "year": "2022",
+      "url": "https://glossary.cncf.io/immutable-infrastructure/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "不可变基础设施指部署后不能再被更改的计算机基础设施（虚拟机、容器、网络设备）。",
+        "可通过自动化过程覆盖未授权变更，或用系统本身拒绝变更来强制。",
+        "容器是典型例子：对容器的持久改动只能通过创建新版本或从镜像重建容器实现。",
+        "防止/识别未授权变更，便于识别与缓解安全风险；运维更简单，因为管理者可对系统作确定假设。",
+        "与 Infrastructure as Code 相辅相成：创建基础设施的全部自动化存于版本控制（如 Git），从而形成每次授权变更的持久审计日志。"
+      ],
+      "legacy_id": "S3-05"
+    },
+    {
+      "id": "LOC-038",
+      "title": "12 Factor App（本地电子书，仅本地语料层）",
+      "org": "Adam Wiggins (local epub)",
+      "year": "2017",
+      "url": "local: ~/opencode/archive/Mission-file/2026-08/0823-12factor项目/12-factor-app/public/12factor.epub",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "用于与 12factor.net 在线版交叉核验。",
+        "实测 epub 内含 'Build, release, run'、'Strictly separate build and run stages'、'Store config in the environment'、'Dev/prod parity' 等要素标题，与在线内容一致。"
+      ],
+      "legacy_id": "BK-01"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "build stage（构建阶段）",
+      "definition": "把代码库转换为可执行 bundle（build）的转换：使用部署流程指定的某次 commit，拉取 vendor 依赖并编译二进制与资源。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S2-07",
+        "S3-01"
+      ]
+    },
+    {
+      "term": "release stage（发布阶段）",
+      "definition": "把 build 与该次部署的当前 config 合并，得到同时含 build 与 config、可在执行环境立即运行的 release。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S2-07",
+        "S3-01"
+      ]
+    },
+    {
+      "term": "run stage（运行阶段 / runtime）",
+      "definition": "在执行环境中针对选定 release 启动一组应用进程；运行时不应有代码变更入口。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S2-07"
+      ]
+    },
+    {
+      "term": "release（发布制品/发布版本）",
+      "definition": "build 与 config 合并的产物，必须具有唯一 release ID（时间戳或递增号）；release 是 append-only 账本，一经创建不可变更，任何更改都产生新 release。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S2-07",
+        "S3-03"
+      ]
+    },
+    {
+      "term": "config（十二要素语境）",
+      "definition": "随部署（staging/production/开发者环境）而变化的一切，包括数据库与 backing service 资源句柄、外部服务凭据、每部署的值（如规范主机名）；须与代码严格分离并存于环境变量。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S3-01",
+        "S2-07"
+      ]
+    },
+    {
+      "term": "dev/prod parity（开发/生产一致性）",
+      "definition": "让开发、预发、生产尽可能相似，缩小时间差、人员差、工具差；所有部署应使用相同类型与版本的 backing service，以支撑持续部署。",
+      "source_id": "BK-031",
+      "cross_refs": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "deployment pipeline（部署流水线）",
+      "definition": "把构建拆为多个阶段、每阶段提升置信度（常以更多时间为代价）的自动化链路；典型首阶段编译并向后续阶段提供二进制制品，部署到生产通常是最后阶段。",
+      "source_id": "WEB-036",
+      "cross_refs": [
+        "S3-01",
+        "S2-07"
+      ]
+    },
+    {
+      "term": "release engineering（发布工程）",
+      "definition": "以可复现、自动化的方式构建并交付软件的工程学科，覆盖源码管理、编译、构建配置、自动化构建、包管理与安装，确保发布可重复而非 'unique snowflake'。",
+      "source_id": "BK-025",
+      "cross_refs": [
+        "S2-06"
+      ]
+    },
+    {
+      "term": "hermetic build（封闭/密闭构建）",
+      "definition": "对构建机器已安装的库与软件不敏感、依赖已知版本编译器和库的自足构建过程；同一 revision 在不同机器上构建应得到一致结果。",
+      "source_id": "BK-025",
+      "cross_refs": [
+        "S2-04"
+      ]
+    },
+    {
+      "term": "immutable infrastructure（不可变基础设施）",
+      "definition": "部署后不能再被更改的计算机基础设施（虚拟机、容器、网络设备）；变更只能通过创建新版本或从镜像重建实例实现，常以自动化覆盖未授权变更或系统拒绝变更来强制。",
+      "source_id": "VEN-024",
+      "cross_refs": [
+        "S2-04",
+        "S3-03"
+      ]
+    },
+    {
+      "term": "immutable server（不可变服务器）",
+      "definition": "一旦部署就不被修改、只被新实例替换的服务器；启动后不再运行配置管理工具，所有变更先改基础镜像并测试，再滚动替换旧实例。",
+      "source_id": "WEB-034",
+      "cross_refs": [
+        "S3-05",
+        "S2-05"
+      ]
+    },
+    {
+      "term": "phoenix server（凤凰服务器）",
+      "definition": "在服务器短暂生命周期内可重放配置的服务器模式；通过频繁从基础镜像销毁并重建，重置全部元素到已知状态，以消除配置漂移。",
+      "source_id": "WEB-035",
+      "cross_refs": [
+        "S2-04"
+      ]
+    },
+    {
+      "term": "blue-green deployment（蓝绿部署）",
+      "definition": "维护两套尽可能相同、均可承担全量负载的生产环境，任一时刻仅一个承载流量；新版本在另一环境（green）测试通过后切换流量，出错可快速切回（blue）。",
+      "source_id": "WEB-032",
+      "cross_refs": [
+        "S3-02",
+        "S3-03"
+      ]
+    },
+    {
+      "term": "canary release（金丝雀发布）",
+      "definition": "把新版本先部署到不接用户的一小部分基础设施，再逐步将少量（或特定画像的）用户/流量导入，随信心提升扩大比例直至全量，以降低引入新版本的风险。",
+      "source_id": "WEB-033",
+      "cross_refs": [
+        "S3-02",
+        "S3-03",
+        "S2-07"
+      ]
+    },
+    {
+      "term": "rolling update（滚动更新）",
+      "definition": "以逐步用新版本实例替换旧版本实例的方式发布，且支持新旧多版本在更新期间并存；由 maxUnavailable 与 maxSurge 控制替换节奏。",
+      "source_id": "VEN-023",
+      "cross_refs": [
+        "S3-03"
+      ]
+    },
+    {
+      "term": "progressive exposure（渐进暴露）",
+      "definition": "把变更分阶段逐步暴露给更大范围用户/基础设施的部署模型（金丝雀、蓝绿均属其形态），每阶段须通过健康检查才推进，检出问题立即停止并恢复。",
+      "source_id": "VEN-022",
+      "cross_refs": [
+        "S2-03",
+        "S2-02"
+      ]
+    },
+    {
+      "term": "bake time（烘焙时间）",
+      "definition": "渐进暴露中各 rollout 组之间的观察等待时间，用于监控健康指标；应以小时/天计且逐组增加，以覆盖不同时区与使用模式。",
+      "source_id": "VEN-022",
+      "cross_refs": []
+    }
+  ],
+  "deployment_strategies": [
+    {
+      "strategy": "Recreate / In-place redeploy（重建/原地重部署，传统）",
+      "mechanism": "停掉旧版本、在同一批资源上重新部署新版本；回滚时从头重装旧版本。",
+      "downtime": "高（切换窗口内不可用）",
+      "rollback": "慢且非原子（重新部署旧版）",
+      "blast_radius": "全量",
+      "cost": "最低（不额外占资源）",
+      "state_complexity": "中",
+      "best_for": "成本敏感、可接受计划内停机、无状态或可停机的小型系统",
+      "tradeoffs": "实现最简单、资源最省；但停机时间长、回滚耗时且无法就地调试故障版本。",
+      "source_ids": [
+        "VEN-021",
+        "VEN-022"
+      ]
+    },
+    {
+      "strategy": "Rolling update（滚动更新）",
+      "mechanism": "逐步以新实例替换旧实例，新旧版本并存；由 maxUnavailable/maxSurge（K8s 默认各 25%）控制节奏。",
+      "downtime": "零停机（保持可用副本）",
+      "rollback": "通过对历史 ReplicaSet 反向滚动，较慢非原子",
+      "blast_radius": "分批扩散（同一时间部分实例运行新版）",
+      "cost": "低-中（可能短暂超出期望副本数）",
+      "state_complexity": "高（新旧并存期间数据/接口须兼容）",
+      "best_for": "容器编排环境（Kubernetes 默认）、无状态服务、资源受限场景",
+      "tradeoffs": "资源开销小、无需双份环境；但切换非原子、更新较慢、缺乏整体流量控制与即时整体回滚，故障影响面随时间扩散。",
+      "source_ids": [
+        "VEN-023",
+        "VEN-022"
+      ]
+    },
+    {
+      "strategy": "Blue-green（蓝绿部署）",
+      "mechanism": "两套相同环境并存，一套（blue）承载全量流量，另一套（green）部署并测试新版本，测试通过后一次性切换流量。",
+      "downtime": "近零停机",
+      "rollback": "极快（切回 blue）",
+      "blast_radius": "切换瞬间可波及全量（依赖验证充分）",
+      "cost": "高（需双份生产环境）",
+      "state_complexity": "高（schema 变更需 expand/contract 兼容新旧版本）",
+      "best_for": "需要快速整体切换与即时回滚、可负担双份基础设施的服务",
+      "tradeoffs": "回滚最快、隔离性最好、每次发布可演练容灾；但资源成本翻倍，且数据库/schema 变更是最难点（须先做兼容性 schema 变更）。",
+      "source_ids": [
+        "WEB-032",
+        "VEN-021",
+        "VEN-022"
+      ]
+    },
+    {
+      "strategy": "Canary / progressive exposure（金丝雀/渐进暴露）",
+      "mechanism": "新版本先服务一小部分用户/流量，随健康指标达标逐步扩大比例直至全量；常配合 feature flag 与自动健康模型。",
+      "downtime": "零停机",
+      "rollback": "快（把流量导回旧版本；可自动回滚）",
+      "blast_radius": "最小（仅受影响的少量用户/流量）",
+      "cost": "中（需流量路由/灰度能力与可观测性）",
+      "state_complexity": "高（多版本并存，schema 需 ParallelChange/expand-contract 兼容）",
+      "best_for": "面向海量用户、风险敏感、具备成熟监控与流量治理的服务",
+      "tradeoffs": "爆炸半径最小、可在生产做容量验证并可自动回滚（cluster immune system）；但需同时管理多个版本、对用户端安装型软件控制力弱、实现与观测成本较高，且不应与 A/B 测试目的混用。",
+      "source_ids": [
+        "WEB-033",
+        "VEN-021",
+        "VEN-022",
+        "BK-025"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "claim": "部署须严格分离 build、release、run 三阶段：build 产出 bundle，release 把 build 与 config 合并为不可变、带唯一 ID 的 release，run 只执行选定 release；运行时不存在把代码改动回传 build 的通道。",
+      "source_ids": [
+        "BK-031",
+        "BK-025"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "release 是 append-only 账本，一经创建不可变更；任何改动都必须生成新 release，从而支持按 release ID 回滚。",
+      "source_ids": [
+        "BK-031",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "配置必须与代码严格分离：与部署相关、随环境变化的配置存于环境变量（或独立配置包/外部存储），判据是代码库能否随时开源而不泄露凭据。",
+      "source_ids": [
+        "BK-031",
+        "VEN-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "每个环境（含生产）应部署同一批不可变制品，环境差异仅由外部配置注入；测试过的包应与上生产的包相同。",
+      "source_ids": [
+        "VEN-020",
+        "BK-031",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "dev/staging/prod 一致性（时间差、人员差、工具差最小化，backing service 同类型同版本）是持续部署的前提；环境分歧会导致测试通过仍在生产失败。",
+      "source_ids": [
+        "BK-031",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "部署过程应尽量幂等（失败可重复执行）且顺序无关（依赖缺失时降级运行），并应避免跨服务编排，追求可独立部署、向后兼容（API 版本化）的服务。",
+      "source_ids": [
+        "VEN-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "不可变基础设施原则：运行中的服务器/容器部署后不再修改，只被新实例替换；变更先落到基础镜像并测试，再滚动替换，从而消除配置漂移。",
+      "source_ids": [
+        "WEB-034",
+        "VEN-024",
+        "WEB-035"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "不可变基础设施与 Infrastructure as Code + 版本控制相辅相成，形成每次授权变更的持久审计日志，便于识别与缓解安全风险。",
+      "source_ids": [
+        "VEN-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "蓝绿部署以两套相同环境 + 流量切换实现近零停机与快速回滚，通过环境隔离限制失败影响；基础设施成本约为双份。",
+      "source_ids": [
+        "WEB-032",
+        "VEN-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "蓝绿部署的最大难点是有状态/数据库变更：应把 schema 变更与应用升级分离，先在兼容新旧两版的前提下做数据库重构（expand），验证有回滚点后再部署新版应用，稳定后移除旧版支持（contract）。",
+      "source_ids": [
+        "WEB-032",
+        "VEN-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "金丝雀发布通过小比例、逐步扩大地导入用户/流量，把爆炸半径降到最小，并能在生产环境验证容量；回滚只需重新路由回旧版本。",
+      "source_ids": [
+        "WEB-033",
+        "VEN-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "金丝雀发布的主要代价是需同时管理多个并发版本，且对分布式到用户端的软件难以控制升级时机；数据库变更需 ParallelChange 让 schema 同时支持两版。",
+      "source_ids": [
+        "WEB-033"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "滚动更新是 Kubernetes Deployment 的默认策略，以 maxUnavailable/maxSurge（默认各 25%）控制节奏，更新期间支持新旧多版本并存。",
+      "source_ids": [
+        "VEN-023"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "滚动更新相比蓝绿不是原子切换、更新较慢，且回滚依赖保留历史 ReplicaSet 的反向滚动，不如蓝绿切换即时。",
+      "source_ids": [
+        "VEN-023",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "渐进暴露须以健康模型与 bake time 驱动：每阶段通过健康检查才推进，检出问题立即停止 rollout 并回滚或前滚；bake time 应以小时/天计并逐组增加。",
+      "source_ids": [
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可复现的封闭构建（hermetic build）与签名、hash 版本化的制品包，是可靠发布与回滚的前提。",
+      "source_ids": [
+        "BK-025",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "部署流水线通过多阶段逐级提升置信度、构建一次并在各环境提升同一制品，生产部署通常是最后阶段；它是持续交付的核心构件。",
+      "source_ids": [
+        "WEB-036",
+        "VEN-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "部署自动化的输入是：可部署到任意环境的 CI 包、部署/配置/冒烟脚本、环境相关配置；脚本与配置应入版本控制，包从制品仓库获取。",
+      "source_ids": [
+        "VEN-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "高发布速度（Push on Green、自助发布、小批量）能减少版本间变更量，使测试与排障更容易，降低单次发布风险。",
+      "source_ids": [
+        "BK-025",
+        "WEB-036"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "有状态（尤其数据库 schema）变更是部署风险的主要来源；除 expand/contract 外，可利用数据库 point-in-time restore 作为回滚手段。",
+      "source_ids": [
+        "WEB-032",
+        "WEB-033",
+        "VEN-022"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "退役/下线是高危且常不可逆的操作，应遵循验证无活动→先快照→先禁用再删除→观察窗口→清理残留引用的安全流程。",
+      "source_ids": [
+        "VEN-022"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "不存在普适最优的部署策略；应按爆炸半径、回滚语义（即时/非原子）、资源成本、流量控制与有状态复杂度选择，且策略常可组合（如蓝绿环境 + 金丝雀导流）。",
+      "source_ids": [
+        "WEB-032",
+        "WEB-033",
+        "VEN-022",
+        "VEN-023"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "errata": [
+    {
+      "misconception": "『不可变基础设施/Immutable Server』由 Netflix 提出。",
+      "verified": "术语 'Immutable Server' 由 ThoughtWorks 的 Ben Butler-Cole 命名；Netflix 是该模式最早的实践者之一（AMI/Aminator），并非命名者。",
+      "source_ids": [
+        "WEB-034"
+      ]
+    },
+    {
+      "misconception": "『蓝绿部署』命名归功于 Martin Fowler。",
+      "verified": "Fowler 页面明确：蓝绿部署的名称由 Daniel Terhorst-North 与 Jez Humble 提出，模式本身早已存在，Fowler 仅作介绍。",
+      "source_ids": [
+        "WEB-032"
+      ]
+    },
+    {
+      "misconception": "《The Twelve-Factor App》是 Heroku 公司官方规范/匿名作品。",
+      "verified": "作者为 Adam Wiggins，内容综合其团队在 Heroku 平台上的经验；方法论本身面向任意语言与 backing service。",
+      "source_ids": [
+        "BK-031"
+      ]
+    },
+    {
+      "misconception": "金丝雀发布可以顺带当作 A/B 测试。",
+      "verified": "Fowler/ Sato 指出二者技术实现相似但目的不同：金丝雀检测故障/回归，A/B 验证假设；混用会干扰 A/B 结果，且 A/B 需达统计显著（天级），金丝雀应在分钟/小时级完成。",
+      "source_ids": [
+        "WEB-033"
+      ]
+    }
+  ],
+  "gaps": [
+    "J 域缺少直接对口的 S1 标准：本轮未核验 ISO/IEC/IEEE 12207:2017（现 12207:2026）的 Transition（转换/部署）过程的原文；其可作为部署活动的标准落点，但现有 E 包仅核验标准版本元数据，未取过程正文。",
+    "《Continuous Delivery》（Humble & Farley, 2010）与《Accelerate》书本体未获取（版权红线），CD/部署流水线概念经 Fowler bliki 与 DORA 官方页转引，非书本体一手核验。",
+    "Hashicorp 官方 'What is immutable infrastructure' 页面直连与代理均返回 429（限流），未能回源；不可变基础设施定义改用 CNCF Glossary + Fowler ImmutableServer 两独立源交叉。",
+    "AWS 蓝绿白皮书的部分章节页（considerations/blue-green-deployment 等）返回空/无效内容，数据层与部分权衡仅取其 Introduction 页；白皮书整体标注 'for historical reference only'（2021 年版），时效性偏旧。",
+    "缺少量化对比数据（各策略的故障率、回滚耗时、成本倍率）；DORA 年度报告正文未逐项抓取，本包不给出量化结论。",
+    "『Recreate/原地重部署』策略未被主流官方源显式命名与系统对比，本包依据 AWS 白皮书对『traditional approach』的描述归纳，权威命名待补。",
+    "金丝雀自动回滚（cluster immune system，IMVU 首创）与 Facebook 多金丝雀策略为 Fowler 页面转引，未回源 IMVU/Facebook 原始博客。",
+    "Kubernetes 滚动更新回滚的精确行为（revisionHistoryLimit 与 rollout undo 语义）来自文档概述与截断抓取，未逐节完整回源验证。"
+  ],
+  "notes": "本包以 S2/S3 为主（J 域无对口 S1 标准）；关键定义（不可变基础设施、蓝绿、金丝雀）均取 ≥2 独立源交叉。12factor.net 在线内容已与本地 12factor.epub（BK-01）逐要素标题核验一致。所有 URL 于 2026-09-10 实测可达（hashicorp 429 除外）；learn.microsoft.com 页面标注 Last updated 2026-06-17。未下载或写入任何书籍/标准正文到公开目录。"
+}

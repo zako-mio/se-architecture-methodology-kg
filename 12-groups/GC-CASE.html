@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例层 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+a.card{display:block;text-decoration:none;}
+.card:hover{border-color:var(--accent);}
+.card h3{font-size:15px;color:var(--accent);margin:0 0 6px;}
+.card .meta{font-size:12px;color:var(--dim);margin-bottom:4px;}
+.stat{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:4px;text-align:center;}
+.stat b{display:block;font-size:22px;color:var(--accent);}
+.stat span{font-size:12px;color:var(--dim);}
+.stage-row .badge{margin-right:6px;}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="index.html">分组目录</a> <span class="sep">/</span> <span>案例层</span></div><div class="meta">案例组 · H · 18 节点</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>组简介</a><a href="#s2"><span class="n">§2</span>成员节点目录</a><a href="#s3"><span class="n">§3</span>组内关系图</a><a href="#s4"><span class="n">§4</span>学习路径提示</a></nav>
+<article>
+<header class="doc"><h1>案例层</h1><div class="en">GC-CASE</div><div class="badges"><span class="badge kind">案例组</span><span class="badge st intermediate">进阶</span><span class="badge st advanced">高级</span><span class="badge cnt">18 节点</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>组简介</h2><div class="treenav"><span class="label">组目录:</span><a href="GL-ESSENCE.html">本质层</a><a href="GL-METHOD.html">方法论层</a><a href="GL-TECHNOLOGY.html">技术实践层</a><a href="GD-F.html">域·概念与需求</a><a href="GD-G.html">域·架构设计</a><a href="GD-H.html">域·实现与构造</a><a href="GD-I.html">域·测试</a><a href="GD-J.html">域·部署</a><a href="GD-K.html">域·运维</a><a href="GD-L.html">域·演化与弃用</a><a href="GD-M.html">域·质量属性</a><a href="GD-N.html">域·团队与康威</a><a href="GD-O.html">域·方法论主干</a><a href="GD-X.html">域·跨域</a><a href="GCC-M.html">横切·质量属性</a><a href="GCC-P.html">横切·技术债</a><a href="GCC-N.html">横切·团队与康威</a><a href="GC-CASE.html">案例层</a></div><p>本组 <strong>18</strong> 个节点，类型为 <strong>案例组</strong>，域 <strong>H</strong>，覆盖阶段 <strong>进阶 / 高级</strong>。</p><div class="navseq"><a class="nav-index" href="index.html"><span class="dir">&#8592; 上一页</span><span class="v">组总索引</span></a><a class="nav-index" href="../13-interactive/index.html"><span class="dir">全局</span><span class="v">交互总览</span></a><a class="nav-index" href="../14-views/index.html"><span class="dir">视图</span><span class="v">视图入口</span></a></div></section>
+<section id="s2"><h2><span class="num">§2</span>成员节点目录</h2><div class="tblwrap"><table><thead><tr><th>节点 ID</th><th>名称</th><th>层/来源</th><th>阶段</th><th>简介</th></tr></thead><tbody><tr><td class="nid"><a href="../11-node-pages/CAS-X-01.html">CAS-X-01</a></td><td><a href="../11-node-pages/CAS-X-01.html" class="nname">去中心化聊天架构逆向</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-02.html">CAS-X-02</a></td><td><a href="../11-node-pages/CAS-X-02.html" class="nname">网申填写扩展逆向架构</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-03.html">CAS-X-03</a></td><td><a href="../11-node-pages/CAS-X-03.html" class="nname">网申 v3 多模块解耦</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-04.html">CAS-X-04</a></td><td><a href="../11-node-pages/CAS-X-04.html" class="nname">网申 v2 深度重构</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-05.html">CAS-X-05</a></td><td><a href="../11-node-pages/CAS-X-05.html" class="nname">preset 通道耦合分析</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-06.html">CAS-X-06</a></td><td><a href="../11-node-pages/CAS-X-06.html" class="nname">插件 DAG RC5→RC7 升级</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-07.html">CAS-X-07</a></td><td><a href="../11-node-pages/CAS-X-07.html" class="nname">插件 DAG 两次级联升级</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-08.html">CAS-X-08</a></td><td><a href="../11-node-pages/CAS-X-08.html" class="nname">dsh-manager 插件深度分析</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-09.html">CAS-X-09</a></td><td><a href="../11-node-pages/CAS-X-09.html" class="nname">harness 源码架构解析</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">对 deepseek-harness 官方源码做分层解析：镜像官方架构文档，按九个层与九十余模块建立文档集群，产出跨层联动矩阵与七条关键路径，并钉住「模型可见即已记录」、能力缝三角等设计不变量。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-10.html">CAS-X-10</a></td><td><a href="../11-node-pages/CAS-X-10.html" class="nname">dsh 插件依赖增量定位</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">以官方插件 DAG 为蓝本，对一个官方清单之外的全新社区插件做功能定位与依赖位置增量分析，产出可下钻交互依赖图与多形态文档的源码级架构逆向案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-11.html">CAS-X-11</a></td><td><a href="../11-node-pages/CAS-X-11.html" class="nname">Hermes 七层架构总览</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">对八千余文件的工业级 AI Agent 项目做七层架构总览逆向，揭示其「越用越聪明」的自进化闭环如何在层间传导的控制型架构案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-12.html">CAS-X-12</a></td><td><a href="../11-node-pages/CAS-X-12.html" class="nname">MCP 四件套选型对比</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">对四个同类 MCP 服务器做源码级能力与成本对比，并以常驻 token 预算为轴给出分级接入策略的技术选型实战案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-13.html">CAS-X-13</a></td><td><a href="../11-node-pages/CAS-X-13.html" class="nname">Claude Code 架构逆向</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">以社区逆向源码、系统提示词与官方文档三源交叉验证，还原一个商业 Agent 的查询引擎、子Agent、工具与权限体系的逆向分析案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-14.html">CAS-X-14</a></td><td><a href="../11-node-pages/CAS-X-14.html" class="nname">OpenSpec 规约驱动解析</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">对比规约驱动开发工具链 OpenSpec 与 Superpower 的元模型、工件依赖 DAG 与安全门控，提炼「规约先于实现」工程形态的解析案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-15.html">CAS-X-15</a></td><td><a href="../11-node-pages/CAS-X-15.html" class="nname">Open Code Review 图谱</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-16.html">CAS-X-16</a></td><td><a href="../11-node-pages/CAS-X-16.html" class="nname">控制理论⊗Agent 设计</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-17.html">CAS-X-17</a></td><td><a href="../11-node-pages/CAS-X-17.html" class="nname">技术知识中枢交付法</a></td><td></td><td><span class="badge st advanced">高级</span></td><td class="brief">从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</td></tr><tr><td class="nid"><a href="../11-node-pages/CAS-X-18.html">CAS-X-18</a></td><td><a href="../11-node-pages/CAS-X-18.html" class="nname">AI Agent 架构 DAG 复盘</a></td><td></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</td></tr></tbody></table></div></section>
+<section id="s3"><h2><span class="num">§3</span>组内关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-351.3 -351.3 702.6 690.3" role="img" aria-label="案例层 组内关系图"><title>案例层 组内关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">去中心化聊天架构逆向<title>去中心化聊天架构逆向（CAS-X-01）</title></text><circle cx="-222.3" cy="173.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-222.3" y="189.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申填写扩展逆向架构<title>网申填写扩展逆向架构（CAS-X-02）</title></text><circle cx="-275.3" cy="82.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-275.3" y="98.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v3 多模块解耦<title>网申 v3 多模块解耦（CAS-X-03）</title></text><circle cx="-287.3" cy="0" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-287.3" y="16" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text><circle cx="-277.5" cy="-74.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-277.5" y="-58.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">preset 通道耦合分…<title>preset 通道耦合分析（CAS-X-05）</title></text><circle cx="-248.8" cy="-143.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-248.8" y="-127.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="-203.2" cy="-203.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-203.2" y="-187.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG 两次级联升…<title>插件 DAG 两次级联升级（CAS-X-07）</title></text><circle cx="-143.7" cy="-248.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-143.7" y="-232.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">dsh-manager …<title>dsh-manager 插件深度分析（CAS-X-08）</title></text><circle cx="-74.4" cy="-277.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-74.4" y="-261.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">harness 源码架构…<title>harness 源码架构解析（CAS-X-09）</title></text><circle cx="0" cy="-287.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="0" y="-271.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">dsh 插件依赖增量定位<title>dsh 插件依赖增量定位（CAS-X-10）</title></text><circle cx="74.4" cy="-277.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="74.4" y="-261.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Hermes 七层架构总…<title>Hermes 七层架构总览（CAS-X-11）</title></text><circle cx="143.7" cy="-248.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="143.7" y="-232.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">MCP 四件套选型对比<title>MCP 四件套选型对比（CAS-X-12）</title></text><circle cx="203.2" cy="-203.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="203.2" y="-187.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Claude Code …<title>Claude Code 架构逆向（CAS-X-13）</title></text><circle cx="248.8" cy="-143.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="248.8" y="-127.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">OpenSpec 规约驱…<title>OpenSpec 规约驱动解析（CAS-X-14）</title></text><circle cx="277.5" cy="-74.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="277.5" y="-58.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Open Code Re…<title>Open Code Review 图谱（CAS-X-15）</title></text><circle cx="287.3" cy="0" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="287.3" y="16" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">控制理论⊗Agent 设…<title>控制理论⊗Agent 设计（CAS-X-16）</title></text><circle cx="275.3" cy="82.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="275.3" y="98.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术知识中枢交付法<title>技术知识中枢交付法（CAS-X-17）</title></text><circle cx="222.3" cy="173.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="222.3" y="189.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">AI Agent 架构 …<title>AI Agent 架构 DAG 复盘（CAS-X-18）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>案例层：组内关系图（全部 18 个成员）：内联 18 个节点、0 条组内边，连线按边类型着色（六类配色见下）；构建期确定性计算，无运行期脚本。</figcaption></figure></section>
+<section id="s4"><h2><span class="num">§4</span>学习路径提示</h2><p class="dim">本组内存在 <strong>0</strong> 条前置依赖边（prerequisite），推荐先掌握前置知识点，再进入依赖它的节点。</p><div class="pathbox"><div class="path-label">推荐阅读顺序（拓扑序）</div><div class="path-seq"><a href="../11-node-pages/CAS-X-01.html">去中心化聊天架构逆向</a> &rarr; <a href="../11-node-pages/CAS-X-02.html">网申填写扩展逆向架构</a> &rarr; <a href="../11-node-pages/CAS-X-03.html">网申 v3 多模块解耦</a> &rarr; <a href="../11-node-pages/CAS-X-04.html">网申 v2 深度重构</a> &rarr; <a href="../11-node-pages/CAS-X-05.html">preset 通道耦合分析</a> &rarr; <a href="../11-node-pages/CAS-X-06.html">插件 DAG RC5→RC7 升级</a> &rarr; <a href="../11-node-pages/CAS-X-07.html">插件 DAG 两次级联升级</a> &rarr; <a href="../11-node-pages/CAS-X-08.html">dsh-manager 插件深度分析</a> &rarr; <a href="../11-node-pages/CAS-X-09.html">harness 源码架构解析</a> &rarr; <a href="../11-node-pages/CAS-X-10.html">dsh 插件依赖增量定位</a> &rarr; <a href="../11-node-pages/CAS-X-11.html">Hermes 七层架构总览</a> &rarr; <a href="../11-node-pages/CAS-X-12.html">MCP 四件套选型对比</a> &rarr; <a href="../11-node-pages/CAS-X-13.html">Claude Code 架构逆向</a> &rarr; <a href="../11-node-pages/CAS-X-14.html">OpenSpec 规约驱动解析</a> &rarr; <a href="../11-node-pages/CAS-X-15.html">Open Code Review 图谱</a> &rarr; <a href="../11-node-pages/CAS-X-16.html">控制理论⊗Agent 设计</a> &rarr; <a href="../11-node-pages/CAS-X-17.html">技术知识中枢交付法</a> &rarr; <a href="../11-node-pages/CAS-X-18.html">AI Agent 架构 DAG 复盘</a></div></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 组页由 16-checkpoint/gen-groups.py 生成 · 组内关系图复用 gen_common 确定性子图构造器</footer>
+</article>
+</div>
+</body>
+</html>

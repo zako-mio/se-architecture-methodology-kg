@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行为保持重构 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>行为保持重构</span></div><div class="meta">methodology · L · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>行为保持重构</h1><div class="en">Behavior-Preserving Refactoring</div><div class="badges"><span class="badge pr">P0</span><span class="badge st basic">基础</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">L · 演化与弃用</span><span class="badge th">技术债</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">在不改变可观察行为的前提下重组软件内部结构，使其更易理解、更易修改；判定<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>是否成立的硬标准是行为不变，治理要点是把小步变换持续进行而非安排一次性大改。</span></p></div><p class="note">别名：refactoring discipline、behavior-preserving、重构纪律、行为保持、小步重构　|　英文：Behavior-Preserving Refactoring　|　类型：方法 / practice</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -364.6 679.9 703.6" role="img" aria-label="行为保持重构 的 1-2 跳邻域关系图"><title>行为保持重构 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-70.8" y1="-220.5" x2="243.1" y2="26.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：单一知识源与高内聚同向协同</title></line><line x1="194.1" y1="-90.3" x2="101.2" y2="-62" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：演化不可逆使技术债必然累积</title></line><line x1="243.1" y1="-187.6" x2="101.2" y2="-62" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：架构侵蚀与漂移是技术债的架构层形态</title></line><line x1="194.1" y1="-90.3" x2="226.9" y2="-31.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：持续演化推动复杂度与变更成本上升</title></line><line x1="243.1" y1="-187.6" x2="226.9" y2="-31.9" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：侵蚀与漂移使系统抗拒变更、抬高变更成本</title></line><line x1="226.9" y1="-31.9" x2="101.2" y2="-62" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：变更成本是技术债利息的可观测落点</title></line><line x1="0" y1="0" x2="101.2" y2="-62" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：行为保持重构是偿还技术债的核心手段</title></line><line x1="15" y1="132" x2="226.9" y2="-31.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：坏味道是变更成本上升的可观察信号</title></line><line x1="-108.8" y1="57.7" x2="101.2" y2="-62" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：债务象限与偿还策略依据技术债本质</title></line><line x1="-134.5" y1="134.5" x2="194.1" y2="-90.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：演进式架构以演化不可逆为前提</title></line><line x1="-90.9" y1="-68.2" x2="226.9" y2="-31.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：遗留治理以降低变更成本为目标</title></line><line x1="-205.2" y1="-68.9" x2="194.1" y2="-90.3" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：弃用策略是演化不可逆下的有序退场</title></line><line x1="15" y1="132" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：坏味道作为启发式信号触发重构</title></line><line x1="-108.8" y1="57.7" x2="0" y2="0" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：债务偿还依靠行为保持重构</title></line><line x1="-90.9" y1="-68.2" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：改动遗留代码前先建立行为安全网</title></line><line x1="-90.9" y1="-68.2" x2="-205.2" y2="-68.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：遗留治理与弃用共享迁移路径设计</title></line><line x1="-108.8" y1="57.7" x2="-134.5" y2="134.5" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：债务治理与演进式架构协同</title></line><line x1="109.2" y1="-165.2" x2="101.2" y2="-62" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：演化定律的复杂度递增是技术债的理论根据</title></line><line x1="243.1" y1="-187.6" x2="109.2" y2="-165.2" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：架构腐化是演化定律在架构层的表现</title></line><line x1="0" y1="0" x2="125.9" y2="69.9" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>跨体系对照（cross_reference）：行为保持纪律与重构手法族分工互补</title></line><line x1="-134.5" y1="134.5" x2="109.2" y2="-165.2" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：演进式架构承接软件必须持续演化的定律</title></line><line x1="139" y1="244.1" x2="243.1" y2="26.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：评审以高内聚低耦合作为结构判据</title></line><line x1="226.6" y1="184.3" x2="139" y2="244.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：持续设计投入与代码评审共同对抗结构腐化</title></line><line x1="226.6" y1="184.3" x2="125.9" y2="69.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：持续设计以重构为日常改进手段</title></line><line x1="139" y1="244.1" x2="125.9" y2="69.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：评审发现的坏味道交由重构手法处理</title></line><line x1="7.3" y1="-141" x2="0" y2="0" stroke="#c2680e" stroke-width="2.0" opacity=".85" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以行为保持为前提重组内部结构</title></line><line x1="7.3" y1="-141" x2="-70.8" y2="-220.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：单一契约源消除接口知识的多份副本</title></line><line x1="7.3" y1="-141" x2="-1.4" y2="-300.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：拒绝静态类型/契约优先是以类型安全换取低部署成本</title></line><line x1="-42.2" y1="252.3" x2="139" y2="244.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：静态分析平台为代码评审提供自动化检查信号</title></line><line x1="-42.2" y1="252.3" x2="15" y2="132" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：规则引擎自动化识别代码坏味道</title></line><line x1="-260.3" y1="162.3" x2="-108.8" y2="57.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为技术债量化与偿还提供方法基础</title></line><line x1="-245.4" y1="55" x2="-108.8" y2="57.7" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务量化支撑按偿还优先级治理技术债</title></line><line x1="-260.3" y1="162.3" x2="-245.4" y2="55" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="-42.2" y1="252.3" x2="-260.3" y2="162.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SonarQube 采用 SQALE 指标命名实现债务度量</title></line><line x1="-42.2" y1="252.3" x2="-245.4" y2="55" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：平台提供技术债量化指标的计算与展示</title></line><line x1="-245.4" y1="55" x2="-42.2" y2="252.3" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：度量指标是工具估算，不等于代码质量真值</title></line><line x1="-201.8" y1="-174.9" x2="-90.9" y2="-68.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：绞杀者渐进替换实现遗留系统渐进治理方法论</title></line><line x1="-201.8" y1="-174.9" x2="-134.5" y2="134.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：绞杀者增量迁移体现有引导的增量演进</title></line><line x1="7.3" y1="-141" x2="93.4" y2="-279.3" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：单一契约源与能力注册中心防止涟漪效应</title></line><line x1="125.9" y1="69.9" x2="243.1" y2="26.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：重构以改善内聚耦合、降低变更成本</title></line><line x1="125.9" y1="69.9" x2="276.9" y2="105.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：重构手法族用于达成信息隐藏分解边界</title></line><line x1="125.9" y1="69.9" x2="276.9" y2="105.2" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：重构手法使信息隐藏在既有代码上可逐步落地</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">行为保持重构<title>行为保持重构（MTH-L-01）</title></text><circle cx="7.3" cy="-141" r="9.0" fill="#c98a3a" stroke="none"/><text x="7.3" y="-122" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">网申 v2 深度重构<title>网申 v2 深度重构（CAS-X-04）</title></text><circle cx="101.2" cy="-62" r="9.0" fill="#c98a3a" stroke="none"/><text x="101.2" y="-43" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术债本质<title>技术债本质（ESS-L-02）</title></text><circle cx="125.9" cy="69.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="125.9" y="88.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">重构手法族<title>重构手法族（MTH-H-01）</title></text><circle cx="15" cy="132" r="9.0" fill="#c98a3a" stroke="none"/><text x="15" y="151" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">代码坏味道启发式<title>代码坏味道启发式（MTH-L-02）</title></text><circle cx="-108.8" cy="57.7" r="9.0" fill="#c98a3a" stroke="none"/><text x="-108.8" y="76.7" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术债象限与偿还策略<title>技术债象限与偿还策略（MTH-L-03）</title></text><circle cx="-90.9" cy="-68.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="-90.9" y="-49.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">遗留系统渐进治理<title>遗留系统渐进治理（MTH-L-06）</title></text><circle cx="243.1" cy="26.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="243.1" y="42.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">内聚与耦合<title>内聚与耦合（ESS-H-02）</title></text><circle cx="-1.4" cy="-300.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-1.4" y="-284.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">权衡的不可消除性<title>权衡的不可消除性（ESS-O-03）</title></text><circle cx="-42.2" cy="252.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-42.2" y="268.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SonarQube 静态…<title>SonarQube 静态分析平台（TEC-H-01）</title></text><circle cx="139" cy="244.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="139" y="260.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码复审与可读性治理<title>代码复审与可读性治理（MTH-H-04）</title></text><circle cx="-134.5" cy="134.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-134.5" y="150.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">演进式架构<title>演进式架构（MTH-L-04）</title></text><circle cx="93.4" cy="-279.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="93.4" y="-263.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可修改性战术实现<title>可修改性战术实现（TEC-M-03）</title></text><circle cx="226.9" cy="-31.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="226.9" y="-15.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">变更成本随复杂度增长<title>变更成本随复杂度增长（ESS-L-05）</title></text><circle cx="-260.3" cy="162.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-260.3" y="178.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="-245.4" cy="55" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-245.4" y="71" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="-70.8" cy="-220.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-70.8" y="-204.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DRY 单一知识来源<title>DRY 单一知识来源（ESS-H-03）</title></text><circle cx="109.2" cy="-165.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="109.2" y="-149.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">软件演化定律<title>软件演化定律（ESS-L-01）</title></text><circle cx="243.1" cy="-187.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="243.1" y="-171.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构侵蚀与漂移<title>架构侵蚀与漂移（ESS-L-03）</title></text><circle cx="194.1" cy="-90.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="194.1" y="-74.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">演化的不可逆性<title>演化的不可逆性（ESS-L-04）</title></text><circle cx="226.6" cy="184.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="226.6" y="200.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">战略式编程与持续设计投入<title>战略式编程与持续设计投入（MTH-H-03）</title></text><circle cx="276.9" cy="105.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="276.9" y="121.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">信息隐藏模块化分解<title>信息隐藏模块化分解（MTH-H-02）</title></text><circle cx="-201.8" cy="-174.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-201.8" y="-158.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">绞杀者渐进式替换<title>绞杀者渐进式替换（TEC-L-02）</title></text><circle cx="-205.2" cy="-68.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-205.2" y="-52.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">弃用与日落策略<title>弃用与日落策略（MTH-L-07）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 6 个直接邻接、外环 17 个二跳节点，共 24 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">重构之所以能安全地偿还结构债，靠的正是「不改变可观察行为」这一约束：它把「改结构」与「改<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>」两种意图分开，使每一步都能被测试验证，从而把高风险的改造拆解为一系列低风险的小步。</span>若允许行为变化，所谓重构就与重写无异，失去了安全网与可回退性。与大改相比，小步重构的收益不在单次效率，而在可持续性：它使代码随时保持在可修改状态，避免债务积累到只能推倒重来的程度。把行为保持写成硬标准还有一层组织价值：它提供了可争议、可验证的共同判据，使关于「这次改动算不算重构」的分歧落在可检验的事实上，而不是各自对「重构」的理解。这也解释了为何重构常与测试驱动紧密结合——没有可自动验证的行为边界，行为保持就只能依赖人工判断。因此重构是一种纪律与习惯，而非危机时刻才启动的专项运动。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">小步变换序列是核心机制：每一次变换只做一件结构上明确的事，若测试通过则保留、失败则回退，风险被限制在单步之内。</span>安全网是前提，没有测试时重构等同于赌博。实践上遵循「先让代码可测，再动结构」的次序：对缺乏测试的代码，先用覆盖既有行为的方式建立保护，再进行重构。重构往往在改动功能前后进行——先做预备性重构使新功能更易加入，或在完成后清理过程中的妥协。识别重构的边界同样重要：一次变换若既改结构又改行为，就无法用「行为不变」来验证，应拆成先后两步——先以行为保持的方式调整结构，再在干净的结构上实现功能变化，把两种意图分离，是让每次改动都保持可回退、可定位的关键所在。<span class="hl">关键是识别何时停止：当结构已足够支撑当前需求时，继续<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>会引入过度设计，反而制造新的维护负担。</span>把变换拆到可命名、可验证的粒度，既是操作要点，也是团队协作的基础——每一步都清晰到可以被他人审阅与接手。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">以行为保持为验收标准：每次变换后<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>测试，确保可观察行为不变。</span><span class="hl">把重构嵌入日常<a class="term" href="../14-views/glossary.html#g-074" title="dev/prod parity — 让开发、预发、生产尽可能相似（时间差/人员差/工具差最小），backing service 同类型同版本。">开发</a>而非单列<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>，在改动代码时顺手清理，使代码始终比接手时更干净。</span>对可测性差的旧代码，先建立覆盖既有行为的保护再动结构。用评审与自动化门控防止「借重构之名改行为」。工程上还可把重构与提交/评审节奏对齐：让纯结构改动与功能改动在提交历史上可区分，便于审阅与回溯；对高风险区域先补充测试再动结构，并把重构范围限制在当前任务相关的小片区域，避免借机扩散成全文件重写。为重构设置范围与退出条件：当发现结构问题超出当前任务范围时，记录债务并克制扩张，而非顺势展开大体量改造，把一次日常改动演变成高风险的重写。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>其四，重构可能滑向过度抽象，制造比重复更难维护的结构。</p><p>行为保持约束本身也有成本：对既有行为有缺陷的代码，执着于「行为不变」会延迟必要的修正，此时应把行为修正与结构重构明确分开、分别验证，而不是混在一次改动里，让风险与意图都变得难以追踪。</p><p>更根本的是，行为保持重构依赖对「可观察行为」边界的界定：若团队对哪些行为算对外承诺缺乏共识，重构的验证范围就会模糊，风险随之上升。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>行为保持重构有其边界与失败模式。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>其一，无测试直接重构会引入回归缺陷，此时应先补安全网。</li><li>其二，行为保持约束假设既有行为正确：若既有行为本身是缺陷，重构会将其固化，这类改动应归为功能修正而非重构。</li><li>其三，小步重构在短期内看似低效，容易在交付压力下被牺牲，而债务恰在此时累积。</li><li>其五，把「重构」当作重写或改行为的借口会破坏安全网与团队信任。</li><li>因此应以测试绿灯与明确范围为前提，并把偿还节奏制度化。</li><li>因此，判断一次重构是否成功，不看它消除了多少坏味道，而看它是否让后续同类变更变得更小、更安全、更可预期。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">MTH-L-02</span><span class="nm">代码坏味道启发式</span></span><span class="arw">→</span><span class="step"><span class="id">MTH-L-06</span><span class="nm">遗留系统渐进治理</span></span><span class="arw">→</span><span class="step cur"><span class="id">MTH-L-01</span><span class="nm">行为保持重构</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-04 · 经 direct</span><h4>网申 v2 深度重构</h4><p>一次由「改一处漏多处」症状触发的深度重构：定位到接口定义散落 12 个文件、存在 7 种接口形态的根因后，以单一契约源、dispatch 消息表与能力注册中心重建三层契约系统，恢复可审计与可校验性。</p></div><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → CAS-X-04 → TEC-M-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-03 · 2 跳派生：当前节点 → CAS-X-04 → ESS-H-03</span><h4>网申 v3 多模块解耦</h4><p>一套面向高可扩展性的网申信息速查扩展架构：以 schema.js 为唯一数据驱动源，把数据模型、存储、纯函数与渲染组织为严格单向依赖的共享层，供 popup 与页面浮层双容器复用，并先立跨模块接口契约。</p></div><div class="case-card"><span class="id">CAS-X-05 · 2 跳派生：当前节点 → MTH-H-01 → ESS-H-02</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → MTH-H-01 → MTH-H-04</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>BK-021、WEB-040、WEB-014、BK-022</div><div class="r"><span class="k">入口链接</span><a href="https://martinfowler.com/bliki/DefinitionOfRefactoring.html" target="_blank" rel="noopener">https://martinfowler.com/bliki/DefinitionOfRefactoring.html</a>　<a href="https://refactoring.com/catalog/" target="_blank" rel="noopener">https://refactoring.com/catalog/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：重构约等于重写或清理代码</span><br>核验结论：重构以不改变可观察行为为硬判据；重写与改功能不属重构，二者以行为是否变化为分界　<span class="k">[BK-021]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：可以在没有测试的代码上直接重构</span><br>核验结论：行为保持依赖可验证性；无测试时重构等于在无保护下改动，应先建立覆盖既有行为的测试再重构　<span class="k">[BK-022]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（6 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">案例印证</td><td>← CAS-X-04</td><td>网申 v2 深度重构<br><span style="color:var(--dim);font-size:12px">E-947</span></td><td>印证：以行为保持为前提重组内部结构</td></tr><tr><td class="k">跨体系对照</td><td>→ MTH-H-01</td><td>重构手法族<br><span style="color:var(--dim);font-size:12px">E-621</span></td><td>行为保持纪律与重构手法族分工互补</td></tr><tr><td class="k">依赖关联</td><td>← MTH-L-03</td><td>技术债象限与偿还策略<br><span style="color:var(--dim);font-size:12px">E-614</span></td><td>债务偿还依靠行为保持重构</td></tr><tr><td class="k">依据推导</td><td>→ ESS-L-02</td><td>技术债本质<br><span style="color:var(--dim);font-size:12px">E-606</span></td><td>行为保持重构是偿还技术债的核心手段</td></tr><tr><td class="k">前置依赖</td><td>← MTH-L-02</td><td>代码坏味道启发式<br><span style="color:var(--dim);font-size:12px">E-613</span></td><td>坏味道作为启发式信号触发重构</td></tr><tr><td class="k">前置依赖</td><td>← MTH-L-06</td><td>遗留系统渐进治理<br><span style="color:var(--dim);font-size:12px">E-615</span></td><td>改动遗留代码前先建立行为安全网</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

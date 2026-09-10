@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>需求获取 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-METHOD.html">方法论层</a> <span class="sep">/</span> <span>需求获取</span></div><div class="meta">methodology · F · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>需求获取</h1><div class="en">Requirements Elicitation</div><div class="badges"><span class="badge pr">P1</span><span class="badge st basic">基础</span><span class="badge ve">verified</span><span class="badge ly">方法论 methodology</span><span class="badge tp">方法</span><span class="badge dm">F · 概念与需求</span><span class="badge grp">GL-METHOD · 方法论层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">系统化地从<a class="term" href="../14-views/glossary.html#g-014" title="stakeholder — 对关注系统持有 Concern（关注点）的个人、群体或组织（含客户、用户、开发/维护者、监管者等）。">干系人</a>、领域文档、现有系统与<a class="term" href="../14-views/glossary.html#g-071" title="build / release / run — build=代码→bundle；release=build+config 合并为不可变、带唯一 ID 的产物；run=执行选定 release，运行时无代码变更入口。">运行</a>环境等来源引出需要与需求的实践；目标不是记录已陈述的诉求，而是发现真实、隐含乃至尚未成形的需要。</span></p></div><p class="note">别名：requirements elicitation、elicitation、需求引出、需求获取　|　英文：Requirements Elicitation　|　类型：方法 / practice</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-369.8 -339 713.7 678" role="img" aria-label="需求获取 的 1-2 跳邻域关系图"><title>需求获取 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="40" y1="-259.5" x2="1.9" y2="-127" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：业务与任务价值是引出干系人需要的上游依据</title></line><line x1="1.9" y1="-127" x2="-79.5" y2="-223.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：干系人需要是界定软件需求的来源</title></line><line x1="-79.5" y1="-223.6" x2="-239" y2="52.9" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：明确需求对象是建立追溯与验证的前提</title></line><line x1="123.8" y1="-21.8" x2="-79.5" y2="-223.6" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：需求工程过程以软件需求为工程对象</title></line><line x1="0" y1="0" x2="1.9" y2="-127" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：需求获取以干系人需要为源头</title></line><line x1="0" y1="135.9" x2="1.9" y2="-127" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：干系人识别与分析以干系人概念为依据</title></line><line x1="-108.4" y1="4.6" x2="-239" y2="52.9" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：规格说明落实可验证与可追溯特性</title></line><line x1="-252.2" y1="-94" x2="40" y2="-259.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：优先级排序服务于业务与任务价值最大化</title></line><line x1="0" y1="135.9" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：先识别干系人再开展需求获取</title></line><line x1="123.8" y1="-21.8" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：需求工程过程包含需求获取活动</title></line><line x1="0" y1="0" x2="-108.4" y2="4.6" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：获取到的需要需经规格化形成信息项</title></line><line x1="-305.8" y1="-7.9" x2="-108.4" y2="4.6" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：需求分类是规格说明的结构化前提</title></line><line x1="-108.4" y1="4.6" x2="-252.2" y2="-94" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：规格化后按属性与优先级管理需求</title></line><line x1="-225.2" y1="157.3" x2="-108.4" y2="4.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：可机器解析的需求规约契约</title></line><line x1="279.9" y1="-70.8" x2="123.8" y2="-21.8" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：双共识与需求收敛过程</title></line><line x1="-178.2" y1="-134.8" x2="-108.4" y2="4.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：追溯与影响分析落地需求规格说明</title></line><line x1="-178.2" y1="-134.8" x2="-252.2" y2="-94" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：需求属性与追踪关系在平台中落地</title></line><line x1="212.6" y1="40.7" x2="-108.4" y2="4.6" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：以规格质量特性识别需求技术债</title></line><line x1="212.6" y1="40.7" x2="123.8" y2="-21.8" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：需求债识别与度量嵌入需求工程过程</title></line><line x1="-178.2" y1="-134.8" x2="212.6" y2="40.7" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：追溯链路为需求债度量提供覆盖缺口</title></line><line x1="-225.2" y1="157.3" x2="-178.2" y2="-134.8" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：requires 工件 DAG 建立需求到实现可追溯链</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">需求获取<title>需求获取（MTH-F-02）</title></text><circle cx="1.9" cy="-127" r="9.0" fill="#c98a3a" stroke="none"/><text x="1.9" y="-108" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">干系人与需要<title>干系人与需要（ESS-F-02）</title></text><circle cx="123.8" cy="-21.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="123.8" y="-2.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">需求工程过程<title>需求工程过程（MTH-F-01）</title></text><circle cx="0" cy="135.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="154.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">干系人识别与分析<title>干系人识别与分析（MTH-F-03）</title></text><circle cx="-108.4" cy="4.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="-108.4" y="23.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">需求规格说明<title>需求规格说明（MTH-F-04）</title></text><circle cx="-225.2" cy="157.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-225.2" y="173.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">OpenSpec 规约驱…<title>OpenSpec 规约驱动解析（CAS-X-14）</title></text><circle cx="-79.5" cy="-223.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-79.5" y="-207.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">软件需求<title>软件需求（ESS-F-01）</title></text><circle cx="-178.2" cy="-134.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-178.2" y="-118.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">需求可追溯性与影响分析<title>需求可追溯性与影响分析（TEC-F-01）</title></text><circle cx="212.6" cy="40.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="212.6" y="56.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">需求技术债识别与度量<title>需求技术债识别与度量（TEC-F-02）</title></text><circle cx="279.9" cy="-70.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="279.9" y="-54.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术知识中枢交付法<title>技术知识中枢交付法（CAS-X-17）</title></text><circle cx="-252.2" cy="-94" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-252.2" y="-78" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">需求属性与优先级<title>需求属性与优先级（MTH-F-06）</title></text><circle cx="-239" cy="52.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-239" y="68.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">需求可追溯性与可验证性<title>需求可追溯性与可验证性（ESS-F-03）</title></text><circle cx="40" cy="-259.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="40" y="-243.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">业务与任务价值<title>业务与任务价值（ESS-F-05）</title></text><circle cx="-305.8" cy="-7.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-305.8" y="8.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">功能与非功能需求分类<title>功能与非功能需求分类（MTH-F-05）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 9 个二跳节点，共 14 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">人们往往说不清自己真正需要什么，或只描述现状中的痛点与拟议解法，而非根本目的。</span>需求获取因此不是被动记录，而是主动发现：从多个来源收集信息，区分「所说的」与「真正需要的」，并把隐含假设显式化。获取的质量决定后续一切工作的上限——若真实需要未被引出，再严谨的规格与验证也只是让错误更精确。有效的获取依赖对语境的理解：系统在什么环境下、由谁使用、与哪些系统交互、受哪些约束，都会改变需求的含义。获取还须覆盖质量诉求与约束，这些往往不会被人主动提出，却常在后期成为成败关键。获取的第一手性也很重要，转述链条越长，原意流失越多，因此应尽量让真正了解现场的人参与其中。获取的另一层意义是建立信任：当干系人感到自己的诉求被认真对待，后续的确认与变更协作会更顺畅，也更愿意在早期暴露那些可能带来返工的真实顾虑。获取还应关注未被说出口的痛点，因为最影响成败的约束常常不被主动提及，却在实际使用中成为关键障碍。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">获取通过多样化的信息渠道与提问方式运作：直接与干系人交流以获得显式期望，观察实际工作以发现未言明的实践，借助原型与场景促进反馈，查阅文档与既有系统以获取背景与约束。</span>不同渠道互补，单一渠道容易遗漏。获取还是迭代过程：早期获得粗线条的认识，随着理解加深再细化，并在产出可体验的中间物后重新确认。其核心动作是把模糊愿望转译为可判定的需求，同时记录来源与依据。<span class="hl">对相互冲突的诉求，获取<a class="term" href="../14-views/glossary.html#g-003" title="stage — 生命周期中与实体描述/实现状态相关的时期，通常以「主决策门」结束；权威示例：concept/development/production/utilization/support/retirement。">阶段</a>先如实记录而非急于调和。</span>记录遗漏与未知项本身就是产出，用以指导后续获取，而非假装已经完备。获取还应区分事实、假设与期望，三者混淆会把推测当成既定条件带入设计。为减少误读，可在每次获取后以简短回读或草图交换理解，尽早发现偏差，而不是等到规格成文才发现方向不同，那时修正的代价往往已经成倍上升。对同一需要可通过不同途径交叉验证，以减少单一渠道带来的系统性遗漏，并对相互矛盾的信息保留判断余地。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">实践中为每次获取活动确定目标、参与者与产出物，避免无准备的泛泛座谈。</span>综合使用多种手段，并对关键需要从不同来源交叉确认。让工程师与使用者直接接触，减少层层转述造成的信息损耗。对复杂领域使用场景或故事叙述帮助干系人表达，再用原型验证理解。边获取边整理为需求草稿，及时回读确认，而非积累大量原始记录到最后。明确记录仍未解决的问题与假设，作为后续跟踪项。注意避免只访谈有话语权者，而遗漏实际操作者与受影响的边缘角色。对获取到的信息应保留来源与置信度，使后续在信息冲突时能够判断应以哪一条为准。把获取产出的原始素材与整理后的需求分开保管，可在需要时回溯原话，判断争议究竟源于表达不清还是理解不同，从而针对性地澄清而非反复争论结论。对关键结论可安排二次复核或回访，避免个别访谈的偶然性主导整体判断，使需求结论更具稳健性。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row cost"><div class="h">代价 · 风险</div><div class="b"><p>获取投入与收益并非线性：过度广泛的收集会消耗大量时间并产生冗余信息，使团队淹没在细节中而失去重点；获取不足则会在实现阶段暴露关键缺失，代价更高。</p><p>因此需要按风险选择手段组合，而不迷信任一方法。</p><p>获取的深度应与需求风险匹配：高风险、认知分歧大的领域值得深入发掘，成熟且稳定的领域则可依赖既有资料快速推进，避免在所有领域平均用力而拖慢整体节奏。</p></div></div><div class="row counter"><div class="h">反例 · 误区</div><div class="b"><p>另一常见反例是只获取<a class="term" href="../14-views/glossary.html#g-038" title="functional / nonfunctional requirements — 功能需求=软件须执行的功能/行为；非功能需求=功能之外的质量约束与属性（另列技术约束与 QoS 约束）。">功能</a>而忽略<a class="term" href="../14-views/glossary.html#g-024" title="quality attribute — 功能之外、可独立选择期望水平的质量维度，须可操作化（SEI QA 场景）；NFR 是需求分类称呼、质量属性是设计/度量维度。">质量属性</a>与约束，导致系统在非功能层面不达标。</p></div></div><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>不同手段各有偏差：交流受被访者表达与记忆限制，观察耗时且可能因被观察而失真，原型可能过早锚定方案、抑制对根本问题的讨论。</li><li>获取还受组织政治影响，强势角色可能压制真实诉求，应通过多来源覆盖缓解，而非假定单一来源可信；获取记录也不应过早定型，以免扼杀后续澄清的可能。</li><li>获取活动应留有记录与追溯，使后续争议能够回到原始语境判断，而不是依赖参与者的回忆还原当时情形。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">MTH-F-03</span><span class="nm">干系人识别与分析</span></span><span class="arw">→</span><span class="step"><span class="id">MTH-F-01</span><span class="nm">需求工程过程</span></span><span class="arw">→</span><span class="step cur"><span class="id">MTH-F-02</span><span class="nm">需求获取</span></span><span class="arw">→</span><span class="step"><span class="id">MTH-F-04</span><span class="nm">需求规格说明</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-01 · 2 跳派生：当前节点 → MTH-F-01 → TEC-F-02</span><h4>去中心化聊天架构逆向</h4><p>对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。</p></div><div class="case-card"><span class="id">CAS-X-14 · 经 MTH-F-04</span><h4>OpenSpec 规约驱动解析</h4><p>对比规约驱动开发工具链 OpenSpec 与 Superpower 的元模型、工件依赖 DAG 与安全门控，提炼「规约先于实现」工程形态的解析案例。</p></div><div class="case-card"><span class="id">CAS-X-17 · 经 MTH-F-01</span><h4>技术知识中枢交付法</h4><p>从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>medium</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>OFF-010、OFF-011、OFF-012、STD-011</div><div class="r"><span class="k">入口链接</span><a href="https://sebokwiki.org/wiki/Stakeholder_Needs_and_Requirements_(glossary)" target="_blank" rel="noopener">https://sebokwiki.org/wiki/Stakeholder_Needs_and_Requirements_(glossary)</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：需求获取就是把用户说的话逐条记下来</span><br>核验结论：获取是对 needs/wants/desires/expectations 与感知约束的主动引出与发现，而非被动记录已陈述诉求　<span class="k">[OFF-011]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依据推导</td><td>→ ESS-F-02</td><td>干系人与需要<br><span style="color:var(--dim);font-size:12px">E-307</span></td><td>需求获取以干系人需要为源头</td></tr><tr><td class="k">前置依赖</td><td>← MTH-F-01</td><td>需求工程过程<br><span style="color:var(--dim);font-size:12px">E-312</span></td><td>需求工程过程包含需求获取活动</td></tr><tr><td class="k">前置依赖</td><td>→ MTH-F-04</td><td>需求规格说明<br><span style="color:var(--dim);font-size:12px">E-313</span></td><td>获取到的需要需经规格化形成信息项</td></tr><tr><td class="k">前置依赖</td><td>← MTH-F-03</td><td>干系人识别与分析<br><span style="color:var(--dim);font-size:12px">E-311</span></td><td>先识别干系人再开展需求获取</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

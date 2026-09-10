@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>组织-架构同态 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-ESSENCE.html">本质层</a> <span class="sep">/</span> <span>组织-架构同态</span></div><div class="meta">essence · N · P0 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>学习路径条</a><a href="#s8"><span class="n">§8</span>案例带</a><a href="#s9"><span class="n">§9</span>信源与核验</a><a href="#s10"><span class="n">§10</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>组织-架构同态</h1><div class="en">Organizational-Architectural Homomorphism</div><div class="badges"><span class="badge pr">P0</span><span class="badge st intermediate">进阶</span><span class="badge ve">verified</span><span class="badge ly">本质 essence</span><span class="badge tp">方法原则</span><span class="badge dm">N · 横切·团队与康威</span><span class="badge th">团队与康威</span><span class="badge grp">GL-ESSENCE · 本质层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">组织沟通结构与其所设计系统的<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>之间存在保结构的同态关系：沟通密集处趋于高<a class="term" href="../14-views/glossary.html#g-043" title="cohesion — 模块内部元素彼此关联/隶属同一目标的程度；序数型，Coincidental→Functional。">内聚</a>，沟通稀疏处趋于系统边界；若每个子系统各有独立设计组，两种结构几乎完全一致。</span></p></div><p class="note">别名：conway homomorphism、组织架构同态、结构对应、同态映射　|　英文：Organizational-Architectural Homomorphism　|　类型：方法原则 / concept</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -340.7 678 679.7" role="img" aria-label="组织-架构同态 的 1-2 跳邻域关系图"><title>组织-架构同态 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="0" y1="-141.8" x2="-67.3" y2="-276.7" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：组织沟通结构约束可行边界</title></line><line x1="0" y1="-141.8" x2="0" y2="0" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：康威定律是组织-架构同态关系的原始表述</title></line><line x1="0" y1="0" x2="122.4" y2="1.8" stroke="#2563eb" stroke-width="2.0" opacity=".85"><title>前置依赖（prerequisite）：同态关系是团队-架构边界耦合的理论基础</title></line><line x1="205.6" y1="-90.5" x2="122.4" y2="1.8" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：认知负荷是划定团队边界的依据</title></line><line x1="0" y1="0" x2="19.9" y2="128" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>细化（refines）：同态机制细化了组织即设计系统的论断</title></line><line x1="19.9" y1="128" x2="205.6" y2="-90.5" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：组织设计须管理团队的认知负荷</title></line><line x1="-130.9" y1="-0.8" x2="0" y2="0" stroke="#7c3aed" stroke-width="2.0" opacity=".85"><title>依据推导（derives_from）：逆向康威操作依据组织-架构同态关系</title></line><line x1="-215" y1="13" x2="205.6" y2="-90.5" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：团队拓扑四类型依据认知负荷约束</title></line><line x1="224.7" y1="4.9" x2="122.4" y2="1.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：交互模式设计依据团队边界耦合</title></line><line x1="16.8" y1="268.2" x2="19.9" y2="128" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：交付效能指标度量组织作为设计系统的产出</title></line><line x1="205.6" y1="102.1" x2="122.4" y2="1.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：团队边界治理依据边界耦合关系</title></line><line x1="-130.9" y1="-0.8" x2="-215" y2="13" stroke="#2563eb" stroke-width="1.2" opacity=".45"><title>前置依赖（prerequisite）：逆向康威操作以团队拓扑为结构模板</title></line><line x1="-215" y1="13" x2="224.7" y2="4.9" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：团队类型须以交互模式定义协作</title></line><line x1="205.6" y1="102.1" x2="-215" y2="13" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：边界治理以团队拓扑为参照</title></line><line x1="16.8" y1="268.2" x2="205.6" y2="102.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：交付效能指标为边界治理提供反馈信号</title></line><line x1="-215" y1="13" x2="205.6" y2="102.1" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：约束性模板与持续边界治理的张力</title></line><line x1="67.3" y1="-276.7" x2="-67.3" y2="-276.7" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：限界上下文依边界与接口隔离原理</title></line><line x1="67.3" y1="-276.7" x2="0" y2="-141.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：DDD 边界与组织结构相互塑造（康威）</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">组织-架构同态<title>组织-架构同态（ESS-N-02）</title></text><circle cx="0" cy="-141.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-122.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">康威定律<title>康威定律（ESS-N-01）</title></text><circle cx="122.4" cy="1.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="122.4" y="20.8" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">团队边界与架构边界耦合<title>团队边界与架构边界耦合（ESS-N-03）</title></text><circle cx="19.9" cy="128" r="9.0" fill="#c98a3a" stroke="none"/><text x="19.9" y="147" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">组织即设计系统<title>组织即设计系统（ESS-N-05）</title></text><circle cx="-130.9" cy="-0.8" r="9.0" fill="#c98a3a" stroke="none"/><text x="-130.9" y="18.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">逆向康威操作<title>逆向康威操作（MTH-N-01）</title></text><circle cx="-67.3" cy="-276.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-67.3" y="-260.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">边界与接口隔离<title>边界与接口隔离（ESS-G-03）</title></text><circle cx="-215" cy="13" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-215" y="29" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">团队拓扑四类型<title>团队拓扑四类型（MTH-N-02）</title></text><circle cx="205.6" cy="-90.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="205.6" y="-74.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">认知负荷约束<title>认知负荷约束（ESS-N-04）</title></text><circle cx="67.3" cy="-276.7" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="67.3" y="-260.7" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">领域驱动战略设计<title>领域驱动战略设计（MTH-G-04）</title></text><circle cx="16.8" cy="268.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="16.8" y="284.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DORA 交付效能指标<title>DORA 交付效能指标（MTH-N-05）</title></text><circle cx="205.6" cy="102.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="205.6" y="118.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">团队边界治理<title>团队边界治理（MTH-N-06）</title></text><circle cx="224.7" cy="4.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="224.7" y="20.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">团队交互模式<title>团队交互模式（MTH-N-03）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 7 个二跳节点，共 12 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead"><a class="term" href="../14-views/glossary.html#g-131" title="Conway&#x27;s Law — 设计系统的组织会产出结构复制其沟通结构的设计；用同态描述系统图与组织图的保结构对应。">康威定律</a>的内核不是一句戏谑，而是一个关于结构约束的观察。</span>设计组织可以被表示为一张线性图，系统架构亦可表示为一张线性图；两者之间存在一个保持连接的映射，即同态。<span class="hl">当一组人负责一个子系统，组织图上的一个节点就对应系统图上的一个<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>；当多组人共享同一模块或同一组人负责多个子系统，组织图是系统图的坍缩版本。</span>该映射之所以成立，是因为模块之间能够正确对接的前提，是负责它们的人能够就接口达成一致；共识只能在沟通可达的范围内形成，因此接口边界必然落在沟通边界上。这也解释了为何组织划分本身就已排除了部分设计备选：一旦把人分成若干组，某些跨组的设计方案就从未进入讨论。同态这一概念借自数学：它不要求两个结构逐元素相等，只要求映射保持关系结构；正因如此，组织与架构之间可以存在粒度差异，一个团队可对应一个模块，也可对应一组模块，而整体对应关系仍然成立。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">同态关系可沿三个层次观察。</span>第一，接口层面：两个模块若需协同，其设计者之间就必须存在沟通路径；沟通路径越短、带宽越高，接口越可能被细化与反复协商，反之则趋于简化、稳定甚至消失。第二，模块层面：沟通密集的群体自然形成高内聚单元，因为频繁交流使共享上下文的成本低，而跨群沟通昂贵，于是系统沿沟通缝隙切分。第三，组织层面：管理层级会碎片化通信结构，当层级加深、部门墙增厚，系统结构也随之碎化为难以整合的局部。三者叠加，使组织形态对系统形态产生持续而系统的塑形作用，而非偶然相关。值得强调的是，真正起作用的是实际的信息流动，而非名义上的汇报关系：谁在什么问题上找谁、哪些决策需要谁点头，才构成有效带宽；非正式网络与协作工具都能改变它，仅看组织架构图常会误判真实结构。这一结构对应还有一条更基础的推论：只有当系统节点存在分支、需要协商接口规格时，两个设计组之间才必须建立沟通；若两个子系统无需共享接口，则两组可以互不通信。<span class="hl">换言之，接口不是被<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>地决定的，而是被需要协商的范围决定的。</span>大型系统若在早期过度增员、以层级割裂沟通、再让同态把碎片复制进系统结构，就会沿这三步逐步崩解。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">工程实践上，同态关系提示两类动作。</span>其一是识别：在规划模块边界前，先画出真实的沟通结构——谁与谁频繁协作、哪些团队几乎不交流，再对照拟定的架构边界，检查二者是否错位。其二是设计：若希望系统朝某一目标结构演化，可先调整协作关系与团队归属，让沟通结构先行变化，再让架构跟随。相应地，应把跨团队接口视为需要持续协商的社会技术界面，而不是纯技术契约；接口的稳定性与团队关系的稳定性往往同呼吸。对于无法改变团队结构的存量系统，应把边界设计为与既有沟通结构相容，而不是强行施加一个无人负责的架构。在实践中，可借助代码共同修改记录、评审参与与沟通往来等痕迹近似还原协作网络，用经验证据补充架构图所看不到的一面。<span class="hl">管理层的推论是：应按沟通需要来组织设计活动，而非按职能或产出形式；同时保持组织精简而有弹性，因为首版设计几乎从不是最优的，组织<a class="term" href="../14-views/glossary.html#g-125" title="flexibility — 25010:2023 顶层特性：产品适应需求、使用情境或系统环境变化的能力；子特性 adaptability/scalability/installability/replaceability；由 2011 版 Portability 改名。">灵活性</a>本身就是有效设计的条件。</span><span class="hl">工程上还应保留可重组的余地，例如把边界与所有权设计得便于随目标调整，避免用不可逆的<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>锁死未来的组织选择。</span></p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>同态关系是趋势而非宿命。</li><li>其一，它是约束性的：组织划分会限制可被考虑的设计空间，但并未指定唯一架构，因此不能把任何糟糕架构都归咎于组织。</li><li>其二，镜像并非越完全越好：在技术快速变化的场景，知识边界宽于运营边界常常更优；开放协作项目也可能系统性地偏离严格镜像；企业还可通过模块化分区或跨边界契约，刻意打破镜像。</li><li>其三，同态只在需要组织化沟通的规模上显著，小团队可凭非正式沟通自然产出与其结构不同的设计，此时该原理不必驱动决策。</li><li>其四，强行依据目标架构调整组织，若不同步改变代码与流程，只会制造人与代码的错配与额外摩擦。</li><li>归根到底，它描述的是统计趋势，具体系统的偏离完全可能，因此不宜把它当作对单个<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">架构决策</a>的预言，而应作为提示：当架构与真实协作网络严重不符时，多半存在需要处理的结构性张力。</li><li>还需注意同态的适用规模：它主要在需要组织化沟通的规模上显现，小型团队可凭非正式沟通自然产出与其结构不同的设计，此时不必让该原理驱动决策。</li><li><a class="term" href="../14-views/glossary.html#g-132" title="mirroring hypothesis — 组织连接对应技术依赖，是 Conway&#x27;s Law 在组织设计领域的名称，不规定因果方向。">镜像假说</a>本身也不规定因果方向，组织与技术的相互塑造可能双向发生，因此不宜把同态当作对单个架构结果的确定预测。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>学习路径条</h2><div class="pathbar"><span class="step"><span class="id">ESS-N-01</span><span class="nm">康威定律</span></span><span class="arw">→</span><span class="step cur"><span class="id">ESS-N-02</span><span class="nm">组织-架构同态</span></span><span class="arw">→</span><span class="step"><span class="id">ESS-N-03</span><span class="nm">团队边界与架构边界耦合</span></span></div></section>
+<section id="s8"><h2><span class="num">§8</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-02 · 2 跳派生：当前节点 → ESS-N-01 → ESS-G-03</span><h4>网申填写扩展逆向架构</h4><p>对 Chrome MV3 网申自动填写扩展的逆向架构分析：梳理 popup、content、background、options 四模块职责，解剖 12 个站点适配器、双通道消息协议与隐私脱敏机制，并评估其零依赖零构建选型。</p></div><div class="case-card"><span class="id">CAS-X-05 · 2 跳派生：当前节点 → ESS-N-01 → ESS-G-03</span><h4>preset 通道耦合分析</h4><p>对 harness「委派工具层→续用管理器→preset 服务→MCP 服务器」这条通道做耦合分析：识别契约、服务定位、数据契约、组合语义、路径与装配一致性六类耦合点，定位「静默丢弃特化」与「装配漂移」两处实质缝隙。</p></div><div class="case-card"><span class="id">CAS-X-08 · 2 跳派生：当前节点 → ESS-N-01 → ESS-G-03</span><h4>dsh-manager 插件深度分析</h4><p>以「编译依赖、运行时注入、组合装配」三硬依据加源码行号，对第三方插件做依赖、功能、需求溯源与设计问题裁决，并复用上游 DAG 知识库节点标识，使分析结果可与主图互查。</p></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-09-10</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">规范信源</span>WEB-042、WEB-043、PAP-028、BK-030</div><div class="r"><span class="k">入口链接</span><a href="https://www.melconway.com/Home/Committees_Paper.html" target="_blank" rel="noopener">https://www.melconway.com/Home/Committees_Paper.html</a>　<a href="https://martinfowler.com/bliki/ConwaysLaw.html" target="_blank" rel="noopener">https://martinfowler.com/bliki/ConwaysLaw.html</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：康威定律只是一句玩笑式的经验之谈，没有理论依据</span><br>核验结论：它由同态这一保结构映射论证，并被镜像假说的多项实证研究支持，但属普遍模式而非普适规律，开放协作与快速变化场景存在例外　<span class="k">[PAP-028]</span></div></div></div></section>
+<section id="s10"><h2><span class="num">§10</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">依据推导</td><td>← MTH-N-01</td><td>逆向康威操作<br><span style="color:var(--dim);font-size:12px">E-646</span></td><td>逆向康威操作依据组织-架构同态关系</td></tr><tr><td class="k">前置依赖</td><td>← ESS-N-01</td><td>康威定律<br><span style="color:var(--dim);font-size:12px">E-641</span></td><td>康威定律是组织-架构同态关系的原始表述</td></tr><tr><td class="k">前置依赖</td><td>→ ESS-N-03</td><td>团队边界与架构边界耦合<br><span style="color:var(--dim);font-size:12px">E-642</span></td><td>同态关系是团队-架构边界耦合的理论基础</td></tr><tr><td class="k">细化</td><td>→ ESS-N-05</td><td>组织即设计系统<br><span style="color:var(--dim);font-size:12px">E-644</span></td><td>同态机制细化了组织即设计系统的论断</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

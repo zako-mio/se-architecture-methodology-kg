@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技术实践层 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+a.card{display:block;text-decoration:none;}
+.card:hover{border-color:var(--accent);}
+.card h3{font-size:15px;color:var(--accent);margin:0 0 6px;}
+.card .meta{font-size:12px;color:var(--dim);margin-bottom:4px;}
+.stat{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:4px;text-align:center;}
+.stat b{display:block;font-size:22px;color:var(--accent);}
+.stat span{font-size:12px;color:var(--dim);}
+.stage-row .badge{margin-right:6px;}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="index.html">分组目录</a> <span class="sep">/</span> <span>技术实践层</span></div><div class="meta">层组 · H · 31 节点</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>组简介</a><a href="#s2"><span class="n">§2</span>成员节点目录</a><a href="#s3"><span class="n">§3</span>组内关系图</a><a href="#s4"><span class="n">§4</span>学习路径提示</a></nav>
+<article>
+<header class="doc"><h1>技术实践层</h1><div class="en">GL-TECHNOLOGY</div><div class="badges"><span class="badge kind">层组</span><span class="badge st basic">基础</span><span class="badge st intermediate">进阶</span><span class="badge st advanced">高级</span><span class="badge cnt">31 节点</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>组简介</h2><div class="treenav"><span class="label">组目录:</span><a href="GL-ESSENCE.html">本质层</a><a href="GL-METHOD.html">方法论层</a><a href="GL-TECHNOLOGY.html">技术实践层</a><a href="GD-F.html">域·概念与需求</a><a href="GD-G.html">域·架构设计</a><a href="GD-H.html">域·实现与构造</a><a href="GD-I.html">域·测试</a><a href="GD-J.html">域·部署</a><a href="GD-K.html">域·运维</a><a href="GD-L.html">域·演化与弃用</a><a href="GD-M.html">域·质量属性</a><a href="GD-N.html">域·团队与康威</a><a href="GD-O.html">域·方法论主干</a><a href="GD-X.html">域·跨域</a><a href="GCC-M.html">横切·质量属性</a><a href="GCC-P.html">横切·技术债</a><a href="GCC-N.html">横切·团队与康威</a><a href="GC-CASE.html">案例层</a></div><p>本组 <strong>31</strong> 个节点，类型为 <strong>层组</strong>，域 <strong>H</strong>，覆盖阶段 <strong>基础 / 进阶 / 高级</strong>。</p><div class="navseq"><a class="nav-index" href="index.html"><span class="dir">&#8592; 上一页</span><span class="v">组总索引</span></a><a class="nav-index" href="../13-interactive/index.html"><span class="dir">全局</span><span class="v">交互总览</span></a><a class="nav-index" href="../14-views/index.html"><span class="dir">视图</span><span class="v">视图入口</span></a></div></section>
+<section id="s2"><h2><span class="num">§2</span>成员节点目录</h2><div class="tblwrap"><table><thead><tr><th>节点 ID</th><th>名称</th><th>层/来源</th><th>阶段</th><th>简介</th></tr></thead><tbody><tr><td class="nid"><a href="../11-node-pages/TEC-F-01.html">TEC-F-01</a></td><td><a href="../11-node-pages/TEC-F-01.html" class="nname">需求可追溯性与影响分析</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">以需求库为中枢，把需求条目、属性与上下游制品（干系人需求、系统需求、设计、测试、代码）建立可查询的追踪关系，并以结构化查询支持变更影响分析的需求管理平台化落地。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-F-02.html">TEC-F-02</a></td><td><a href="../11-node-pages/TEC-F-02.html" class="nname">需求技术债识别与度量</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">识别并度量需求技术债——理想规格与实际实现之间的差距——的技术做法，把需求层的债务纳入技术债管理（TDM）的识别与度量阶段，使需求质量缺口可被发现与跟踪。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-N-01.html">TEC-N-01</a></td><td><a href="../11-node-pages/TEC-N-01.html" class="nname">交付效能度量与仪表化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">把交付效能指标的采集、聚合与呈现平台化：从版本控制与流水线事件自动计算并持续反馈，并以治理机制约束指标被博弈（gaming）的风险，使度量服务于改进而非考核。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-N-02.html">TEC-N-02</a></td><td><a href="../11-node-pages/TEC-N-02.html" class="nname">团队拓扑落地与规模化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">在规模化组织中落地团队拓扑四类型与三交互模式，以认知负荷管理与快速流动为约束、显式定义团队交互方式的组织实践，用于把团队结构与被期望的架构对齐。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-G-01.html">TEC-G-01</a></td><td><a href="../11-node-pages/TEC-G-01.html" class="nname">AWS 良好架构框架</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">AWS 发布的云架构最佳实践对照框架，以运营卓越、安全、可靠性、性能效率、成本优化、可持续性六大支柱组织设计原则与评审问题，用于一致地度量工作负载与最佳实践的偏差。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-G-02.html">TEC-G-02</a></td><td><a href="../11-node-pages/TEC-G-02.html" class="nname">GCP 良好架构框架</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">Google Cloud 发布的云架构建议框架，以运营卓越、安全隐私与合规、可靠性、成本优化、性能优化、可持续性六大支柱及 AI/ML、金融等跨支柱视角，指导设计安全、高效、韧性、高性能且可持续的云拓扑。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-G-03.html">TEC-G-03</a></td><td><a href="../11-node-pages/TEC-G-03.html" class="nname">Azure 架构中心</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st basic">基础</span></td><td class="brief">Microsoft 维护的 Azure 架构中心，汇集云架构风格目录（N 层、微服务、事件驱动等，含适用性、收益与挑战）与安全部署实践，指导按业务驱动与非功能需求选择风格并安全发布变更。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-G-04.html">TEC-G-04</a></td><td><a href="../11-node-pages/TEC-G-04.html" class="nname">ThoughtWorks 技术雷达</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">Thoughtworks 技术咨询委员会每年发布两次的技术快照，以技术/方法条目（blip）经四象限与四环（Adopt/Trial/Assess/Caution）组织，表达对技术采用程度的带观点推荐，并明确不追求全面、不接受厂商付费影响。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-H-01.html">TEC-H-01</a></td><td><a href="../11-node-pages/TEC-H-01.html" class="nname">SonarQube 静态分析平台</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">SonarQube Server 是面向持续集成的静态代码分析平台，以规则引擎自动检测代码坏味道、缺陷与安全热点，并通过质量门控把分析度量转化为变更准入判断，同时区分整体代码与新代码以支撑增量治理。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-H-02.html">TEC-H-02</a></td><td><a href="../11-node-pages/TEC-H-02.html" class="nname">SQALE 技术债评估方法</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">SQALE 是一套以生命周期期望为基准、力求客观可复现地评估源代码质量并量化技术债的方法，由若干基本原则与质量模型、分析模型、指数、指标等组件构成，供组织与厂商实现。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-H-03.html">TEC-H-03</a></td><td><a href="../11-node-pages/TEC-H-03.html" class="nname">技术债量化度量指标</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">技术债量化度量把代码缺陷折算为可计算的债务规模与比率：以修复成本累加得到技术债额，用技术债比率（债务与开发成本之比）映射可维护性评级，并区分整体代码与新代码以支撑增量治理。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-I-01.html">TEC-I-01</a></td><td><a href="../11-node-pages/TEC-I-01.html" class="nname">持续集成服务与流水线</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">持续集成服务与流水线是把「频繁合并回主线、每次合并自动构建并运行测试」制度化的技术载体：由单一代码主线、自动化构建与测试执行、结果回传与即时反馈构成，使集成错误在产生后最短窗口内暴露。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-I-02.html">TEC-I-02</a></td><td><a href="../11-node-pages/TEC-I-02.html" class="nname">关键字驱动测试框架</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">关键字驱动测试（KDT）是 ISO/IEC/IEEE 29119-5 定义的一种自动化测试框架范式：把测试操作抽象为可复用的关键字，测试用例由「关键字＋参数」序列描述，驱动层负责解释执行，从而将测试意图与底层脚本实现分离。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-I-03.html">TEC-I-03</a></td><td><a href="../11-node-pages/TEC-I-03.html" class="nname">xUnit 测试框架族</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">xUnit 测试框架族是按「测试类—测试方法—断言—夹具」结构组织并自动执行单元测试的一类框架，命名源自 JUnit 及其衍生家族；它把测试书写、发现、执行与报告统一为开发者可直接使用的代码骨架，是单元测试与测试驱动开发的主要工具载体。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-01.html">TEC-J-01</a></td><td><a href="../11-node-pages/TEC-J-01.html" class="nname">Kubernetes 部署编排</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">Kubernetes 是容器编排平台，其 Deployment 控制器以声明式方式管理无状态工作负载的创建、扩缩与更新，默认采用滚动更新策略，并通过保留历史 ReplicaSet 支持版本回退。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-02.html">TEC-J-02</a></td><td><a href="../11-node-pages/TEC-J-02.html" class="nname">不可变基础设施实现</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">不可变基础设施实现指部署后的实例不再被就地修改，任何变更都通过从受测基础镜像重建新实例并替换旧实例来完成，从而消除运行期配置漂移。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-03.html">TEC-J-03</a></td><td><a href="../11-node-pages/TEC-J-03.html" class="nname">蓝绿部署</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">蓝绿部署维护两套尽可能相同、均可承担全量负载的生产环境，任一时刻仅一套承载流量；新版本在另一套环境验证通过后整体切换流量，异常时切回原环境实现快速回滚。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-04.html">TEC-J-04</a></td><td><a href="../11-node-pages/TEC-J-04.html" class="nname">金丝雀发布</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">金丝雀发布先把新版本部署到不接用户或仅接少量用户的基础设施上，再按健康指标逐步放大流量与用户比例直至全量，从而把新版本故障的爆炸半径限制在受影响的小范围内。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-05.html">TEC-J-05</a></td><td><a href="../11-node-pages/TEC-J-05.html" class="nname">部署自动化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">部署自动化把从构建产物到各环境的部署过程脚本化、参数化并纳入版本控制，使任何持有凭据者都能把任意已构建制品一致地部署到任意环境，且过程尽量幂等、可重复。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-J-06.html">TEC-J-06</a></td><td><a href="../11-node-pages/TEC-J-06.html" class="nname">部署流水线工具化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st basic">基础</span></td><td class="brief">部署流水线把从提交到生产的构建过程拆分为多个置信度递增的自动化阶段，前一阶段产出的制品供后续阶段逐级晋级，生产部署通常是流水线的最后一个阶段。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-01.html">TEC-K-01</a></td><td><a href="../11-node-pages/TEC-K-01.html" class="nname">断路器与重试退避</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">断路器、超时与重试是一组协同的远程调用稳定性实现：超时限制等待，断路器在失败达阈值后快速失败以阻止级联，重试仅针对幂等操作的瞬时故障并以指数退避加抖动控制节奏。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-02.html">TEC-K-02</a></td><td><a href="../11-node-pages/TEC-K-02.html" class="nname">可观测性信号采集</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">通过 traces、metrics、logs 等信号从系统外部推断内部状态，以回答未知未知与为何发生；工程界习称三支柱，其价值关键在于信号可关联而非数量多少。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-03.html">TEC-K-03</a></td><td><a href="../11-node-pages/TEC-K-03.html" class="nname">服务等级目标与错误预算</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">用 SLI（好事件/总事件）度量服务水平，设定小于 100% 的 SLO 目标，并以错误预算等于 100% 减 SLO 驱动发布与加固决策；SLA 则是含后果的对外契约。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-04.html">TEC-K-04</a></td><td><a href="../11-node-pages/TEC-K-04.html" class="nname">混沌工程实践</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">在生产中对系统做受控实验以建立对其抵御动荡条件能力的信心：定义稳态、提出假设、注入真实事件、比较对照组与实验组以证伪，并最小化爆炸半径。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-05.html">TEC-K-05</a></td><td><a href="../11-node-pages/TEC-K-05.html" class="nname">无指责复盘实践</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">事故发生后的书面复盘，记录影响、缓解、根因与行动项，其文化内核是聚焦导致事件的系统性原因与当时决策情境，而非追责任何个人或团队。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-K-06.html">TEC-K-06</a></td><td><a href="../11-node-pages/TEC-K-06.html" class="nname">DORA 交付指标</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st basic">基础</span></td><td class="brief">用一组软件交付效能指标衡量组织的交付吞吐与稳定性；当前官方口径为五项指标，由早期四键扩展而来，并已用失败部署恢复时间取代平均修复时间。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-L-01.html">TEC-L-01</a></td><td><a href="../11-node-pages/TEC-L-01.html" class="nname">架构适应度函数工具化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">把架构约束与质量目标转写为可自动执行、可量化判定的校验，并借助测试、静态分析、监控与部署流水线门禁等机制持续运行，使架构意图不再依赖人的记忆与自觉。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-L-02.html">TEC-L-02</a></td><td><a href="../11-node-pages/TEC-L-02.html" class="nname">绞杀者渐进式替换</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">在遗留系统之上或之旁增量构建新实现，通过可切换的接缝与路由逐步把功能与数据迁移过去，逐步替代旧系统，而非一次性整机重写。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-M-01.html">TEC-M-01</a></td><td><a href="../11-node-pages/TEC-M-01.html" class="nname">质量模型工具化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">把 SQuaRE 系列标准的质量特性与子特性框架落为可操作的检查表、需求模板与评价工具，使质量关切在需求、设计与评价之间以同一坐标被规定、测量与比较。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-M-02.html">TEC-M-02</a></td><td><a href="../11-node-pages/TEC-M-02.html" class="nname">可维护性量化</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st advanced">高级</span></td><td class="brief">把可维护性与技术债转写为可计算指标：以修复违规的成本估计债务本金、按对可维护性的影响折算利息，沿质量子特性组织规则与评分，使变更成本可比较、可追踪。</td></tr><tr><td class="nid"><a href="../11-node-pages/TEC-M-03.html">TEC-M-03</a></td><td><a href="../11-node-pages/TEC-M-03.html" class="nname">可修改性战术实现</a></td><td><span class="badge ly">技术实践 technology</span></td><td><span class="badge st intermediate">进阶</span></td><td class="brief">把推迟绑定时间、局部化变更与防止涟漪效应三类设计决策落到具体结构机制（接口与间接层、易变决策封装、依赖方向约束与依赖反转），以缩小每次修改的影响半径。</td></tr></tbody></table></div></section>
+<section id="s3"><h2><span class="num">§3</span>组内关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-354.3 -354.3 753.3 693.3" role="img" aria-label="技术实践层 组内关系图"><title>技术实践层 组内关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="289.7" y1="0" x2="335" y2="0" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：仪表化平台区别于指标口径定义</title></line><line x1="289.7" y1="0" x2="215" y2="-0.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：度量反馈与团队拓扑落地协同</title></line><line x1="-242.4" y1="142.3" x2="-288.4" y2="46.3" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：AWS 与 GCP WAF 支柱同构但绑定不同厂商</title></line><line x1="-290.3" y1="-38.3" x2="-264.1" y2="-109.6" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：Azure 稳定工程清单对照雷达时效快照</title></line><line x1="-242.4" y1="142.3" x2="-288.4" y2="46.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：多云场景可组合对照两厂商 WAF 建议</title></line><line x1="-290.3" y1="-38.3" x2="-264.1" y2="-109.6" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：风格目录与技术雷达组合用于技术选型</title></line><line x1="-174.9" y1="-227.9" x2="-109.6" y2="-264.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="-227.9" y1="-174.9" x2="-174.9" y2="-227.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SonarQube 采用 SQALE 指标命名实现债务度量</title></line><line x1="-227.9" y1="-174.9" x2="-109.6" y2="-264.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：平台提供技术债量化指标的计算与展示</title></line><line x1="-109.6" y1="-264.1" x2="-227.9" y2="-174.9" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：度量指标是工具估算，不等于代码质量真值</title></line><line x1="109.6" y1="-264.1" x2="-38.3" y2="-290.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：单元测试框架接入持续集成流水线自动执行</title></line><line x1="38.3" y1="-290.3" x2="-38.3" y2="-290.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：关键字驱动测试用例在 CI 流水线中调度回归</title></line><line x1="38.3" y1="-290.3" x2="109.6" y2="-264.1" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：关键字表驱动与代码驱动自动化测试范式对照</title></line><line x1="211.2" y1="-173.9" x2="274.2" y2="-129.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：不可变制品使整体切换可行</title></line><line x1="230.1" y1="147" x2="280.8" y2="95.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：流水线为部署自动化提供载体</title></line><line x1="274.2" y1="-129.3" x2="282.6" y2="-95.9" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：整体切换与逐步导流的取舍对照</title></line><line x1="171.9" y1="-232.6" x2="282.6" y2="-95.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：编排层承载金丝雀流量切分</title></line><line x1="171.9" y1="-232.6" x2="274.2" y2="-129.3" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：编排层支撑蓝绿双环境编排</title></line><line x1="211.2" y1="-173.9" x2="230.1" y2="147" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：流水线产出不可变制品</title></line><line x1="280.8" y1="95.9" x2="230.1" y2="147" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：自动化与流水线配套落地</title></line><line x1="0" y1="0" x2="123.6" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：可观测信号使 SLO 可度量</title></line><line x1="0" y1="0" x2="0" y2="135.9" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：可观测稳态为混沌实验提供判据</title></line><line x1="0" y1="-130.2" x2="0" y2="135.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：容错机制可由混沌实验验证</title></line><line x1="0" y1="135.9" x2="-141.8" y2="0" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：实验发现的弱点进入复盘与修复闭环</title></line><line x1="123.6" y1="0" x2="335" y2="0" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：错误预算与交付指标共同度量稳定与吞吐</title></line><line x1="0" y1="-130.2" x2="0" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：熔断与重试事件需被可观测信号捕获</title></line><line x1="123.6" y1="0" x2="0" y2="135.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：错误预算界定混沌实验可接受的爆炸半径</title></line><line x1="0" y1="0" x2="-141.8" y2="0" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：可观测信号是事故复盘的时间线证据</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">可观测性信号采集<title>可观测性信号采集（TEC-K-02）</title></text><circle cx="-242.4" cy="142.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-242.4" y="158.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">AWS 良好架构框架<title>AWS 良好架构框架（TEC-G-01）</title></text><circle cx="-288.4" cy="46.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-288.4" y="62.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">GCP 良好架构框架<title>GCP 良好架构框架（TEC-G-02）</title></text><circle cx="-290.3" cy="-38.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-290.3" y="-22.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Azure 架构中心<title>Azure 架构中心（TEC-G-03）</title></text><circle cx="-264.1" cy="-109.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-264.1" y="-93.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">ThoughtWorks…<title>ThoughtWorks 技术雷达（TEC-G-04）</title></text><circle cx="-227.9" cy="-174.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-227.9" y="-158.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SonarQube 静态…<title>SonarQube 静态分析平台（TEC-H-01）</title></text><circle cx="-174.9" cy="-227.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-174.9" y="-211.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="-109.6" cy="-264.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-109.6" y="-248.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="-38.3" cy="-290.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-38.3" y="-274.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">持续集成服务与流水线<title>持续集成服务与流水线（TEC-I-01）</title></text><circle cx="38.3" cy="-290.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="38.3" y="-274.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">关键字驱动测试框架<title>关键字驱动测试框架（TEC-I-02）</title></text><circle cx="109.6" cy="-264.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="109.6" y="-248.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">xUnit 测试框架族<title>xUnit 测试框架族（TEC-I-03）</title></text><circle cx="171.9" cy="-232.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="171.9" y="-216.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Kubernetes 部…<title>Kubernetes 部署编排（TEC-J-01）</title></text><circle cx="211.2" cy="-173.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="211.2" y="-157.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">不可变基础设施实现<title>不可变基础设施实现（TEC-J-02）</title></text><circle cx="274.2" cy="-129.3" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="274.2" y="-113.3" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">蓝绿部署<title>蓝绿部署（TEC-J-03）</title></text><circle cx="282.6" cy="-95.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="282.6" y="-79.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">金丝雀发布<title>金丝雀发布（TEC-J-04）</title></text><circle cx="280.8" cy="95.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="280.8" y="111.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署自动化<title>部署自动化（TEC-J-05）</title></text><circle cx="230.1" cy="147" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="230.1" y="163" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">部署流水线工具化<title>部署流水线工具化（TEC-J-06）</title></text><circle cx="0" cy="-130.2" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="-111.2" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">断路器与重试退避<title>断路器与重试退避（TEC-K-01）</title></text><circle cx="123.6" cy="0" r="9.0" fill="#c98a3a" stroke="none"/><text x="123.6" y="19" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">服务等级目标与错误预算<title>服务等级目标与错误预算（TEC-K-03）</title></text><circle cx="0" cy="135.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="0" y="154.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">混沌工程实践<title>混沌工程实践（TEC-K-04）</title></text><circle cx="-141.8" cy="0" r="9.0" fill="#c98a3a" stroke="none"/><text x="-141.8" y="19" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">无指责复盘实践<title>无指责复盘实践（TEC-K-05）</title></text><circle cx="335" cy="0" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="335" y="16" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">DORA 交付指标<title>DORA 交付指标（TEC-K-06）</title></text><circle cx="289.7" cy="0" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="289.7" y="16" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">交付效能度量与仪表化<title>交付效能度量与仪表化（TEC-N-01）</title></text><circle cx="215" cy="-0.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="215" y="15.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">团队拓扑落地与规模化<title>团队拓扑落地与规模化（TEC-N-02）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>技术实践层：组内关系图（组内共 31 个成员，按度数裁剪展示 24 个）：内联 24 个节点、28 条组内边，连线按边类型着色（六类配色见下）；构建期确定性计算，无运行期脚本。</figcaption></figure></section>
+<section id="s4"><h2><span class="num">§4</span>学习路径提示</h2><p class="dim">本组内存在 <strong>0</strong> 条前置依赖边（prerequisite），推荐先掌握前置知识点，再进入依赖它的节点。</p><div class="pathbox"><div class="path-label">推荐阅读顺序（拓扑序）</div><div class="path-seq"><a href="../11-node-pages/TEC-F-01.html">需求可追溯性与影响分析</a> &rarr; <a href="../11-node-pages/TEC-F-02.html">需求技术债识别与度量</a> &rarr; <a href="../11-node-pages/TEC-G-01.html">AWS 良好架构框架</a> &rarr; <a href="../11-node-pages/TEC-G-02.html">GCP 良好架构框架</a> &rarr; <a href="../11-node-pages/TEC-G-03.html">Azure 架构中心</a> &rarr; <a href="../11-node-pages/TEC-G-04.html">ThoughtWorks 技术雷达</a> &rarr; <a href="../11-node-pages/TEC-H-01.html">SonarQube 静态分析平台</a> &rarr; <a href="../11-node-pages/TEC-H-02.html">SQALE 技术债评估方法</a> &rarr; <a href="../11-node-pages/TEC-H-03.html">技术债量化度量指标</a> &rarr; <a href="../11-node-pages/TEC-I-01.html">持续集成服务与流水线</a> &rarr; <a href="../11-node-pages/TEC-I-02.html">关键字驱动测试框架</a> &rarr; <a href="../11-node-pages/TEC-I-03.html">xUnit 测试框架族</a> &rarr; <a href="../11-node-pages/TEC-J-01.html">Kubernetes 部署编排</a> &rarr; <a href="../11-node-pages/TEC-J-02.html">不可变基础设施实现</a> &rarr; <a href="../11-node-pages/TEC-J-03.html">蓝绿部署</a> &rarr; <a href="../11-node-pages/TEC-J-04.html">金丝雀发布</a> &rarr; <a href="../11-node-pages/TEC-J-05.html">部署自动化</a> &rarr; <a href="../11-node-pages/TEC-J-06.html">部署流水线工具化</a> &rarr; <a href="../11-node-pages/TEC-K-01.html">断路器与重试退避</a> &rarr; <a href="../11-node-pages/TEC-K-02.html">可观测性信号采集</a> &rarr; <a href="../11-node-pages/TEC-K-03.html">服务等级目标与错误预算</a> &rarr; <a href="../11-node-pages/TEC-K-04.html">混沌工程实践</a> &rarr; <a href="../11-node-pages/TEC-K-05.html">无指责复盘实践</a> &rarr; <a href="../11-node-pages/TEC-K-06.html">DORA 交付指标</a> &rarr; <a href="../11-node-pages/TEC-L-01.html">架构适应度函数工具化</a> &rarr; <a href="../11-node-pages/TEC-L-02.html">绞杀者渐进式替换</a> &rarr; <a href="../11-node-pages/TEC-M-01.html">质量模型工具化</a> &rarr; <a href="../11-node-pages/TEC-M-02.html">可维护性量化</a> &rarr; <a href="../11-node-pages/TEC-M-03.html">可修改性战术实现</a> &rarr; <a href="../11-node-pages/TEC-N-01.html">交付效能度量与仪表化</a> &rarr; <a href="../11-node-pages/TEC-N-02.html">团队拓扑落地与规模化</a></div></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 组页由 16-checkpoint/gen-groups.py 生成 · 组内关系图复用 gen_common 确定性子图构造器</footer>
+</article>
+</div>
+</body>
+</html>

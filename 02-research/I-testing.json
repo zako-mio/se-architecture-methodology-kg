@@ -1,0 +1,796 @@
+{
+  "topic": "软件测试方法论：测试层次 / 测试驱动开发 / 测试金字塔与反模式 / 可测试性 / 质量门控与 CI / ISO-IEC-IEEE 29119",
+  "generated_by": "software-testing-researcher (subagent)",
+  "accessed": "2026-09-10",
+  "retrieval_note": "iso.org 直连/代理均被 WAF 返回 403（与 E 包一致），ISO 29119 系列元数据全部经 web.archive.org 快照（2025–2026 时间点）核实；29119 官方 WG26 站点 softwaretestingstandard.org、ISTQB 官方 syllabus、SEI 官方博客、martinfowler.com、abseil.io（SWE at Google 免费 HTML）可直连/走代理访问。未下载或写入任何标准正文文件。",
+  "sources": [
+    {
+      "id": "STD-014",
+      "title": "ISO/IEC/IEEE 29119-1:2022 Software and systems engineering — Software testing — Part 1: General concepts (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20260217124355id_/https://www.iso.org/standard/81291.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "Part 1 规定软件测试的一般概念，并为 29119 系列其余部分提供关键概念与词汇",
+        "Edition 2，官方标题为 'General concepts'（官方站点记作 'Concepts and Definitions'，两者不一致，已入 errata）",
+        "摘要原文：'This document specifies general concepts in software testing and presents key concepts for the ISO/IEC/IEEE 29119 series.'"
+      ],
+      "legacy_id": "S1-STD-11"
+    },
+    {
+      "id": "STD-015",
+      "title": "ISO/IEC/IEEE 29119-2:2021 Software testing — Part 2: Test processes (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260308093756id_/https://www.iso.org/standard/79428.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "规定可用于治理、管理与实施软件测试的测试过程（organizational / test management / dynamic test process 三个层级）",
+        "摘要原文：'This document specifies test processes that can be used to govern, manage and implement software testing for any organization, project or testing activity.'",
+        "提供过程图，可配合任意软件开发生命周期模型使用"
+      ],
+      "legacy_id": "S1-STD-12"
+    },
+    {
+      "id": "STD-016",
+      "title": "ISO/IEC/IEEE 29119-3:2021 Software testing — Part 3: Test documentation (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260217065439id_/https://www.iso.org/standard/79429.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "为任意组织/项目/测试活动规定软件测试文档模板",
+        "模板覆盖 Part 2 的三个过程层级：组织级（测试方针/组织测试策略）、管理级（测试计划/测试状态/测试完成）、动态级（测试设计/用例/规程/数据/环境/结果/事件报告）",
+        "摘要原文：'This document specifies software test documentation templates ... an output of the processes specified in ISO/IEC/IEEE 29119-2.'"
+      ],
+      "legacy_id": "S1-STD-13"
+    },
+    {
+      "id": "STD-017",
+      "title": "ISO/IEC/IEEE 29119-4:2021 Software testing — Part 4: Test techniques (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20260224134336id_/https://www.iso.org/standard/79430.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "规定测试设计技术（测试用例设计技术/测试方法）及相应覆盖度量",
+        "技术分三类：specification-based（黑盒）、structure-based（白盒）、experience-based（经验型）",
+        "摘要原文：'This document defines test design techniques that can be used during the test design and implementation process that is defined in ISO/IEC/IEEE 29119-2.'"
+      ],
+      "legacy_id": "S1-STD-14"
+    },
+    {
+      "id": "STD-018",
+      "title": "ISO/IEC/IEEE 29119-5:2024 Software testing — Part 5: Keyword-driven testing (Edition 2)",
+      "org": "ISO/IEC/IEEE",
+      "year": "2024",
+      "url": "https://web.archive.org/web/20250906170532id_/https://www.iso.org/standard/87233.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "关键字驱动测试（KDT）标准，Edition 2 于 2024-12 发布",
+        "Wikipedia 旧列表未收录该版；官方站点确认其为 29119 系列现行第 5 部分"
+      ],
+      "legacy_id": "S1-STD-15"
+    },
+    {
+      "id": "STD-019",
+      "title": "ISO/IEC TR 29119-6:2021 Software testing — Part 6: Guidelines for the use of ISO/IEC/IEEE 29119 (all parts) in agile projects",
+      "org": "ISO/IEC",
+      "year": "2021",
+      "url": "https://web.archive.org/web/20230607070622id_/https://www.iso.org/standard/81293.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "技术报告（TR）：指导在敏捷生命周期中应用 29119 全部部分",
+        "面向 tester、test manager、业务分析师、产品负责人、Scrum master、开发者",
+        "摘要原文：'This document provides guidance for the application of ISO/IEC/IEEE 29119 (all parts) in agile life cycles.'"
+      ],
+      "legacy_id": "S1-STD-16"
+    },
+    {
+      "id": "STD-020",
+      "title": "ISO/IEC TR 29119-11:2020 Software testing — Part 11: Guidelines on the testing of AI-based systems",
+      "org": "ISO/IEC",
+      "year": "2020",
+      "url": "https://web.archive.org/web/20260113122913id_/https://www.iso.org/standard/79016.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "TR，针对 AI 系统测试的指南；ISO 官方标注可免费获取（freely available）",
+        "AI 系统复杂（深度神经网络）、数据驱动、规格常不充分、可能非确定性，带来新测试挑战"
+      ],
+      "legacy_id": "S1-STD-17"
+    },
+    {
+      "id": "STD-021",
+      "title": "ISO/IEC TR 29119-13:2022 Software testing — Part 13: Using the ISO/IEC/IEEE 29119 series in the testing of biometric systems",
+      "org": "ISO/IEC",
+      "year": "2022",
+      "url": "https://web.archive.org/web/20231209142936id_/https://www.iso.org/standard/84220.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "TR，指导在生物特征系统测试中使用 29119 系列",
+        "官方站点记作 'Part 13: Testing of Biometric Systems'，ISO 官方标题更完整（已入 errata 参考）"
+      ],
+      "legacy_id": "S1-STD-18"
+    },
+    {
+      "id": "STD-022",
+      "title": "ISO/IEC 20246:2017 Software and systems engineering — Work product reviews",
+      "org": "ISO/IEC",
+      "year": "2017",
+      "url": "https://www.iso.org/standard/67407.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "支撑标准：工作产品评审（静态测试技术）",
+        "由 29119 官方站点列为 supporting standard"
+      ],
+      "legacy_id": "S1-STD-19"
+    },
+    {
+      "id": "STD-023",
+      "title": "ISO/IEC 33063:2015 Process assessment model",
+      "org": "ISO/IEC",
+      "year": "2015",
+      "url": "https://www.iso.org/standard/55154.html",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "支撑标准：过程评估模型，用于对照 29119-2 测试过程评估成熟度",
+        "原为 29119 第 5 部分候选，最终独立为 33063"
+      ],
+      "legacy_id": "S1-STD-20"
+    },
+    {
+      "id": "STD-024",
+      "title": "ISO/IEC/IEEE 29119 Software Testing — official WG26 site",
+      "org": "ISO/IEC JTC 1/SC 7/WG 26 (softwaretestingstandard.org)",
+      "year": "2026",
+      "url": "https://softwaretestingstandard.org/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "WG26 官方站点，确认 29119 系列现行共 8 个部分：Part 1/2/3/4/5/6/11/13",
+        "Part 1 与 Part 11 可免费从 ISO 获取",
+        "29119 取代 IEEE 829（测试文档）、IEEE 1008（单元测试）、BS 7925-1（词汇）、BS 7925-2（软件组件测试）",
+        "支撑标准为 ISO/IEC 20246:2017 与 ISO/IEC 33063:2015"
+      ],
+      "legacy_id": "S1-OFF-09"
+    },
+    {
+      "id": "OFF-017",
+      "title": "SWEBOK Guide V4.0 — Chapter 5: Software Testing",
+      "org": "IEEE Computer Society",
+      "year": "2024",
+      "url": "https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "SWEBOK V4 含 18 个知识域，第 5 章为软件测试（Software Testing）",
+        "V4 新增三个知识域：软件架构、软件工程运维、软件安全",
+        "V4 全面纳入敏捷与 DevOps，退役过时主题；正文需 IEEE-CS 登录下载（gated）"
+      ],
+      "legacy_id": "S1-OFF-10"
+    },
+    {
+      "id": "OFF-018",
+      "title": "ISTQB Certified Tester Foundation Level (CTFL) Syllabus v4.0.1",
+      "org": "International Software Testing Qualifications Board (ISTQB)",
+      "year": "2024",
+      "url": "https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "定义 5 个测试层次：component、component integration、system、system integration、acceptance",
+        "定义 4 个测试类型：functional、non-functional、black-box、white-box（可应用于所有层次）",
+        "给出 7 条测试原则（含 Buxton 1970/Manna 1978/Boehm 1981/Enders 1975/Beizer 1990/Kaner 2011 一手引证）",
+        "定义 TDD/ATDD/BDD 并引用 Beck 2003、Chelimsky 2010、Gärtner 2011",
+        "第 5.1.6 节定义测试金字塔，引 Cohn 2009 原始三层（unit/service/UI）"
+      ],
+      "legacy_id": "S1-OFF-11"
+    },
+    {
+      "id": "OFF-005",
+      "title": "ISO 25000 Portal — ISO/IEC 25010 quality model",
+      "org": "AENOR / iso25000.com",
+      "year": "2024",
+      "url": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25010?start=5",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "ISO/IEC 25010:2023 产品质量模型九特性：Functional Suitability、Performance Efficiency、Compatibility、Interaction Capability、Reliability、Security、Maintainability、Flexibility、Safety",
+        "Maintainability 子特性：Modularity、Reusability、Analysability、Modifiability、Testability",
+        "Testability 定义：'Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.'",
+        "与 E 包 S1-OFF-05 同源，本域用于可测试性（测试性）的标准落点"
+      ],
+      "legacy_id": "S1-OFF-05"
+    },
+    {
+      "id": "OFF-019",
+      "title": "A Taxonomy of Testing (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Donald Firesmith）",
+      "year": "2015",
+      "url": "https://www.sei.cmu.edu/blog/a-taxonomy-of-testing/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "测试类型的分类学；指出许多测试程序只覆盖 unit/integration/system/acceptance 这一小部分",
+        "不同测试类型揭示不同缺陷、有不同缺陷移除率（DRR）；忽略相关类型会增加残留缺陷",
+        "验证方法传统上分为 analysis、demonstration、inspection、testing 四类"
+      ],
+      "legacy_id": "S1-OFF-12"
+    },
+    {
+      "id": "OFF-020",
+      "title": "Four Types of Shift Left Testing (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Donald Firesmith）",
+      "year": "2015",
+      "url": "https://www.sei.cmu.edu/blog/four-types-of-shift-left-testing/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "shift left = 尽早开始测试；缺陷发现越晚修复越贵",
+        "四种 shift left：Traditional（下移强调 unit/integration）、Incremental（增量 V）、Agile/DevOps（短迭代+CT）、Model-Based（测试可执行需求/架构/设计模型）",
+        "45%–65% 缺陷在需求、架构、设计活动中引入 → 支持尽早（含评审/静态测试）"
+      ],
+      "legacy_id": "S1-OFF-13"
+    },
+    {
+      "id": "OFF-021",
+      "title": "Using Quality Attributes as a Means to Improve Acquisition Strategies (SEI Blog)",
+      "org": "CMU Software Engineering Institute（Lisa Brownsword）",
+      "year": "2014",
+      "url": "https://www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies/",
+      "tier": "S1",
+      "verified": true,
+      "key_points": [
+        "质量属性以三要素场景表达：stimulus（刺激）/ environment（环境）/ response（响应）",
+        "该 SEI 框架源自软件架构质量属性场景（quality attribute scenario）的原始研究",
+        "可测试性属此类可用场景刻画的质量属性（quality attribute）"
+      ],
+      "legacy_id": "S1-OFF-14"
+    },
+    {
+      "id": "WEB-024",
+      "title": "Test Pyramid (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2012",
+      "url": "https://martinfowler.com/bliki/TestPyramid.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "测试金字塔：更多低层 UnitTests，更少高层 BroadStackTests（GUI 端到端）",
+        "端到端 UI 测试慢、贵、脆（brittle），易退化为 ice-cream cone",
+        "中间层建议服务层测试（subcutaneous tests）；金字塔成立前提是端到端测试较慢/贵/脆，若高层测试快而可靠则不必需要低层测试"
+      ],
+      "legacy_id": "S2-WEB-12"
+    },
+    {
+      "id": "WEB-025",
+      "title": "The Practical Test Pyramid (martinfowler.com)",
+      "org": "Ham Vocke（Thoughtworks）",
+      "year": "2018",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "系统化落地方案：unit、integration（含 database/separate service/contract tests）、UI、end-to-end、acceptance、exploratory",
+        "区分 sociable vs solitary unit；mock/stub 使用；contract tests（consumer/provider）",
+        "强调避免测试重复、写干净测试代码、纳入 deployment pipeline"
+      ],
+      "legacy_id": "S2-WEB-13"
+    },
+    {
+      "id": "WEB-026",
+      "title": "Test Driven Development (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2023",
+      "url": "https://martinfowler.com/bliki/TestDrivenDevelopment.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "TDD 由 Kent Beck 在 1990 年代末作为 Extreme Programming 的一部分提出",
+        "三步循环：写测试→写代码使测试通过→重构（Red-Green-Refactor）",
+        "先写测试（Test-First Programming）好处：获得 SelfTestingCode；迫使先思考接口"
+      ],
+      "legacy_id": "S2-WEB-14"
+    },
+    {
+      "id": "WEB-027",
+      "title": "Unit Test (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2014",
+      "url": "https://martinfowler.com/bliki/UnitTest.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "'unit test' 术语本身定义松散、历史上争论多（有 24 种定义之说法）",
+        "与 xUnit 工具族和 Extreme Programming 强相关，并催生 TDD",
+        "测试专家对 XP 的 unit 用词曾有争议"
+      ],
+      "legacy_id": "S2-WEB-15"
+    },
+    {
+      "id": "WEB-028",
+      "title": "Integration Test (martinfowler.com bliki)",
+      "org": "Martin Fowler",
+      "year": "2018",
+      "url": "https://martinfowler.com/bliki/IntegrationTest.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "集成测试判定独立开发的软件单元连接后是否正确协同工作",
+        "术语边界模糊：集成测试可窄可宽，并非必然大范围/端到端"
+      ],
+      "legacy_id": "S2-WEB-16"
+    },
+    {
+      "id": "WEB-029",
+      "title": "Test Double (martinfowler.com bliki)",
+      "org": "Martin Fowler（Gerard Meszaros 词汇）",
+      "year": "2006",
+      "url": "https://martinfowler.com/bliki/TestDouble.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Test Double 泛指为测试替换生产对象的任何情况",
+        "五类：Dummy、Fake、Stub、Spy、Mock",
+        "术语来自 Gerard Meszaros 的 xUnit 测试模式"
+      ],
+      "legacy_id": "S2-WEB-17"
+    },
+    {
+      "id": "WEB-030",
+      "title": "Continuous Integration (martinfowler.com)",
+      "org": "Martin Fowler",
+      "year": "2024",
+      "url": "https://martinfowler.com/articles/continuousIntegration.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "CI 定义：团队成员至少每天把改动合并回代码主线，每次集成由自动化构建（含测试）验证以及早发现集成错误",
+        "实践清单：单一版本控制主线、自动化构建、使构建自测试、每人每日推主线、每次推送触发构建、立即修复坏构建、保持构建快、克隆生产环境测试、人人可见、自动化部署",
+        "构建自测试（make the build self-testing）是质量门控的实践原点"
+      ],
+      "legacy_id": "S2-WEB-18"
+    },
+    {
+      "id": "WEB-031",
+      "title": "Kent Beck — Software Design Pioneer（个人官网）",
+      "org": "Kent Beck",
+      "year": "2026",
+      "url": "https://kentbeck.com/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "Kent Beck 自述为 Extreme Programming 与 Test-Driven Development 的创造者",
+        "著有 Tidy First?、TDD by Example 等；官网确认其 TDD 作者身份，作为 TDD 归属的一手佐证"
+      ],
+      "legacy_id": "S2-WEB-19"
+    },
+    {
+      "id": "BK-001",
+      "title": "Software Engineering at Google, Ch.11 Testing Overview; Ch.14 Larger Testing",
+      "org": "Titus Winters, Tom Manshreck, Hyrum Wright（Google，abseil.io 免费 HTML）",
+      "year": "2020",
+      "url": "https://abseil.io/resources/swe-book/html/ch14.html",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "测试的两大动机：防止 bug 逃逸；支持变更能力（可放心重构与迭代）",
+        "写测试即代码的第一批用户，能暴露紧耦合、API 不足等设计问题",
+        "Larger tests 的价值是 fidelity（对真实行为的保真度）；生产环境保真度最高但成本与风险最大",
+        "Google 测试尺寸：Small（单线程/单进程/单机）、Medium、Large；large 测试可能慢、非 hermetic、非确定性"
+      ],
+      "legacy_id": "S2-BK-01"
+    },
+    {
+      "id": "BK-009",
+      "title": "Software Architecture in Practice, 4th Edition（SAiP 4e）Ch.12 Testability",
+      "org": "Len Bass, Paul Clements, Rick Kazman（Addison-Wesley）",
+      "year": "2021",
+      "url": "https://www.informit.com/store/software-architecture-in-practice-9780136886099",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "第 12 章结构：12.1 Testability General Scenario、12.2 Tactics for Testability、12.3 Tactics-Based Questionnaire、12.4 Patterns for Testability",
+        "把可测试性作为架构级质量属性，用通用场景（general scenario）+ 战术（tactics）来处理",
+        "书本体为 paid，仅作来源索引，正文待本地语料层（契约 §5 红线）"
+      ],
+      "legacy_id": "S2-BK-09"
+    },
+    {
+      "id": "BK-028",
+      "title": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+      "org": "Jez Humble, David Farley（Addison-Wesley）",
+      "year": "2010",
+      "url": "https://www.informit.com/store/continuous-delivery-9780321601919",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "提出 deployment pipeline（部署流水线）与质量门控/自动化验收检查的经典工程范式",
+        "书本体为 paid，仅作来源索引与概念锚点（阶段4 复核）"
+      ],
+      "legacy_id": "S2-BK-28"
+    },
+    {
+      "id": "BK-029",
+      "title": "Accelerate: The Science of Lean Software and DevOps（DORA 四指标原始研究）",
+      "org": "Nicole Forsgren, Jez Humble, Gene Kim（IT Revolution）",
+      "year": "2018",
+      "url": "https://dora.dev/",
+      "tier": "S2",
+      "verified": true,
+      "key_points": [
+        "提出原始 DORA 四指标（deployment frequency、lead time for changes、change failure rate、MTTR）",
+        "DORA 后续演进为五指标模型（见 S3-VEN-03）",
+        "书本体为 paid，仅作来源索引"
+      ],
+      "legacy_id": "S2-BK-29"
+    },
+    {
+      "id": "BK-038",
+      "title": "Succeeding with Agile: Software Development Using Scrum（测试金字塔原始模型）",
+      "org": "Mike Cohn（Addison-Wesley）",
+      "year": "2009",
+      "url": "https://www.mountaingoatsoftware.com/books/succeeding-with-agile",
+      "tier": "S2",
+      "verified": false,
+      "key_points": [
+        "原始测试金字塔三层：unit tests / service tests / UI tests（经 ISTQB 5.1.6 与 Fowler 引用转述）",
+        "经交叉转引确认，未回源原文；标 cited"
+      ],
+      "legacy_id": "S2-BK-30"
+    },
+    {
+      "id": "VEN-017",
+      "title": "Google Testing Blog: Test Sizes (2010) / Just Say No to More End-to-End Tests (2015)",
+      "org": "Google",
+      "year": "2010/2015",
+      "url": "https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "Test Sizes 数据驱动命名：Small（无网络/DB/文件/外部系统，≤60s）、Medium（localhost/DB/文件，≤300s）、Large（外部系统/多线程/睡眠，≥900s）",
+        "Small≈unit、Medium≈integration、Large≈end-to-end/system",
+        "建议 70/20/10 拆分：70% unit、20% integration、10% e2e",
+        "反模式：inverted pyramid/ice cream cone（过度依赖 e2e）、hourglass（缺中间层集成测试）"
+      ],
+      "legacy_id": "S3-VEN-02"
+    },
+    {
+      "id": "VEN-018",
+      "title": "DORA — Software delivery performance metrics (five keys)",
+      "org": "DORA / Google Cloud",
+      "year": "2024",
+      "url": "https://dora.dev/guides/dora-metrics-four-keys/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "当前为五指标模型，由原四指标演进而来",
+        "Throughput：change lead time、deployment frequency、failed deployment recovery time",
+        "Instability：change fail rate、deployment rework rate",
+        "研究结论：速度与稳定性并非权衡（tradeoff），顶级团队在全部指标上表现好"
+      ],
+      "legacy_id": "S3-VEN-03"
+    },
+    {
+      "id": "VEN-019",
+      "title": "SonarQube Server Documentation — Understanding quality gates",
+      "org": "SonarSource",
+      "year": "2026",
+      "url": "https://docs.sonarsource.com/sonarqube-server/latest/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates/",
+      "tier": "S3",
+      "verified": true,
+      "key_points": [
+        "质量门控（quality gate）用一组条件在分析时度量代码，回答'项目是否可发布'",
+        "条件作用于 new code 或 overall code；任一条件不满足则门控失败",
+        "状态可上报 CI 流水线以决定是否阻断构建；PR 上可阻断合并",
+        "内置 Sonar way 默认门控；支持自定义门控"
+      ],
+      "legacy_id": "S3-VEN-04"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "software testing（软件测试）",
+      "definition": "一组以发现缺陷、评估质量为目的的测试活动；ISO/IEC/IEEE 29119-1:2022 为整个 29119 系列规定其一般概念与关键概念。",
+      "source_id": "STD-014",
+      "cross_source_ids": [
+        "S1-OFF-11",
+        "S1-OFF-12"
+      ]
+    },
+    {
+      "term": "test level（测试层次）",
+      "definition": "组织并一起管理的测试活动分组；每个测试层次是测试过程的一次实例，针对开发生命周期某阶段，从单个组件到完整系统（乃至系统之系统）。",
+      "source_id": "OFF-018",
+      "cross_source_ids": [
+        "S1-STD-12"
+      ]
+    },
+    {
+      "term": "test type（测试类型）",
+      "definition": "与特定质量特性相关的一组测试活动；大多数测试类型可在每个测试层次执行。",
+      "source_id": "OFF-018"
+    },
+    {
+      "term": "component / unit testing（组件/单元测试）",
+      "definition": "聚焦于在隔离状态下测试组件；通常需要测试桩/单元测试框架，由开发者在开发环境执行。",
+      "source_id": "OFF-018",
+      "cross_source_ids": [
+        "S2-WEB-15",
+        "S3-VEN-02"
+      ]
+    },
+    {
+      "term": "integration testing（集成测试）",
+      "definition": "判定独立开发的软件单元在被连接后是否正确协同工作；可窄可宽，并非必然大范围。",
+      "source_id": "WEB-028",
+      "cross_source_ids": [
+        "S1-OFF-11"
+      ]
+    },
+    {
+      "term": "system testing（系统测试）",
+      "definition": "聚焦于整个系统或产品的整体行为与能力，常含端到端功能测试与非功能质量特性测试，可由独立测试团队在代表性环境中执行。",
+      "source_id": "OFF-018"
+    },
+    {
+      "term": "acceptance testing（验收测试）",
+      "definition": "聚焦验证（validation）与演示部署就绪，即系统满足用户业务需要；理想由预期用户执行，含 UAT、运维验收、合同验收、法规验收、alpha/beta 等形式。",
+      "source_id": "OFF-018",
+      "cross_source_ids": [
+        "S2-WEB-13"
+      ]
+    },
+    {
+      "term": "test-driven development（TDD，测试驱动开发）",
+      "definition": "一种先写测试再写实现、以测试引导开发的技术；由 Kent Beck 于 1990 年代末作为 Extreme Programming 的一部分提出，核心为 Red-Green-Refactor 三步循环。",
+      "source_id": "WEB-026",
+      "cross_source_ids": [
+        "S1-OFF-11",
+        "S2-WEB-19"
+      ]
+    },
+    {
+      "term": "test pyramid（测试金字塔）",
+      "definition": "一个模型，表明不同测试具有不同粒度：底层应为大量小、隔离、快速、覆盖小功能的单元测试，顶层为少量复杂、高层、端到端的测试。",
+      "source_id": "OFF-018",
+      "cross_source_ids": [
+        "S2-WEB-12",
+        "S3-VEN-02"
+      ]
+    },
+    {
+      "term": "ice cream cone / inverted pyramid（冰淇淋反模式）",
+      "definition": "测试反模式：团队主要依赖端到端测试，只有很少集成测试与更少单元测试，形成倒置的金字塔（冰淇淋甜筒）。",
+      "source_id": "VEN-017",
+      "cross_source_ids": [
+        "S2-WEB-12"
+      ]
+    },
+    {
+      "term": "testability（可测试性/测试性）",
+      "definition": "建立系统/产品/组件测试准则，并执行测试以判定这些准则是否满足的有效性与效率程度（ISO/IEC 25010:2023，Maintainability 的子特性）。",
+      "source_id": "OFF-005",
+      "cross_source_ids": [
+        "S2-BK-09",
+        "S1-OFF-14"
+      ]
+    },
+    {
+      "term": "test double（测试替身）",
+      "definition": "为测试目的替换生产对象的任一情况的泛称；分 Dummy、Fake、Stub、Spy、Mock 五类（Meszaros 词汇）。",
+      "source_id": "WEB-029"
+    },
+    {
+      "term": "continuous integration（CI，持续集成）",
+      "definition": "软件开发的实践：团队每个成员至少每天把改动与其同事的改动合并回同一代码主线，每次集成由自动化构建（含测试）验证，以及早发现集成错误。",
+      "source_id": "WEB-030",
+      "cross_source_ids": [
+        "S2-BK-01",
+        "S1-OFF-11"
+      ]
+    },
+    {
+      "term": "quality gate（质量门控）",
+      "definition": "用一组在分析时度量的条件来判定项目是否可发布；任一条件不满足则失败，可上报 CI 流水线以阻断构建或阻断 PR 合并。",
+      "source_id": "VEN-019",
+      "cross_source_ids": [
+        "S2-WEB-18",
+        "S2-BK-28"
+      ]
+    },
+    {
+      "term": "DORA metrics（交付效能指标）",
+      "definition": "衡量软件交付绩效的指标集，当前为五指标：change lead time、deployment frequency、failed deployment recovery time（吞吐）+ change fail rate、deployment rework rate（不稳定）。",
+      "source_id": "VEN-018",
+      "cross_source_ids": [
+        "S2-BK-29"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "claim": "测试金字塔的权威表述由 Fowler 给出（2012）：应有多得多的低层单元测试，高层宽栈/端到端测试要少；端到端 UI 测试慢、贵、脆，易退化为 'ice-cream cone'。金字塔成立的前提是高层测试较慢/较贵/较脆；若高层测试快、可靠且易改，则低层测试不再必需。",
+      "source_ids": [
+        "WEB-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Google 给出数据驱动的测试尺寸与经验配比：Small/Medium/Large 对应 unit/integration/e2e，并建议 70/20/10；明确列出两种反模式——inverted pyramid/ice cream cone（过度 e2e）与 hourglass（缺中间层集成测试）。",
+      "source_ids": [
+        "VEN-017"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISTQB CTFL v4.0.1 将测试层次定为五个：component（unit）、component integration、system、system integration、acceptance；测试类型为 functional、non-functional、black-box、white-box，且四类测试类型可应用于所有测试层次。",
+      "source_ids": [
+        "OFF-018"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISTQB 引 Mike Cohn 2009 的原始测试金字塔为三层：unit tests / service tests / UI tests；并说明层次的数量与命名可变，另有 unit-integration-e2e 的流行版本。",
+      "source_ids": [
+        "OFF-018",
+        "BK-038"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "TDD 由 Kent Beck 于 1990 年代末作为 Extreme Programming 的一部分提出；核心为 Red-Green-Refactor 循环，先写测试的两个主要好处是获得自测试代码（SelfTestingCode）与迫使先思考接口。",
+      "source_ids": [
+        "WEB-026",
+        "WEB-031"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISTQB 将 TDD、ATDD、BDD 并列为'以测试驱动开发'的方法，均践行早期测试与 shift left；TDD 直接由测试用例驱动编码（Beck 2003），测试先于代码，测试与代码随后重构。",
+      "source_ids": [
+        "OFF-018"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 29119 系列当前共 8 个部分（Part 1/2/3/4/5/6/11/13），其中 Part 6/11/13 为 TR；Part 1:2022 与 Part 11:2020 可从 ISO 免费获取；29119 取代 IEEE 829、IEEE 1008、BS 7925-1/-2；支撑标准为 ISO/IEC 20246:2017 与 33063:2015。",
+      "source_ids": [
+        "STD-024"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "29119-2:2021 用组织级、测试管理（项目）级、动态测试过程级三个层级刻画通用测试过程模型；29119-3:2021 的文档模板严格映射到这三个层级。",
+      "source_ids": [
+        "STD-015",
+        "STD-016"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "29119-4:2021 将测试设计技术分为 specification-based（黑盒）、structure-based（白盒）、experience-based 三类，并定义对应覆盖度量。",
+      "source_ids": [
+        "STD-017",
+        "OFF-018"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SWEBOK V4.0 含 18 个知识域，第 5 章为 Software Testing；V4 新增软件架构、软件工程运维、软件安全三个 KA，并全面纳入敏捷/DevOps。",
+      "source_ids": [
+        "OFF-017"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "可测试性是 ISO/IEC 25010:2023 中 Maintainability 的子特性，标准定义为'建立测试准则并执行测试判定其是否满足的有效性与效率程度'；SEI 把可测试性视为架构级质量属性，用 stimulus/environment/response 三要素通用场景表达。",
+      "source_ids": [
+        "OFF-005",
+        "OFF-021"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "SEI 测试分类学指出：许多测试程序只覆盖 unit/integration/system/acceptance 一小部分；不同测试类型揭示不同缺陷、缺陷移除率不同，忽略相关类型会增加残留缺陷。",
+      "source_ids": [
+        "OFF-019"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "shift left 有四种基本做法：Traditional（下移强调 unit/integration）、Incremental（增量 V 模型）、Agile/DevOps（短冲刺 + continuous testing）、Model-Based（测试可执行需求/架构/设计模型）；45%–65% 缺陷在需求/架构/设计阶段引入。",
+      "source_ids": [
+        "OFF-020"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "CI 的经典定义与十项实践由 Fowler 给出（2024）：至少每日合并回主线、自动化构建、使构建自测试、每次推送触发构建、立即修复坏构建、保持构建快、克隆生产环境测试、人人可见、自动化部署。",
+      "source_ids": [
+        "WEB-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "质量门控（quality gate）以一组量化条件判定'是否可发布'，可由 CI 上报以阻断构建/合并；这是把自动化测试检查制度化为发布闸门的主流工程实现。",
+      "source_ids": [
+        "VEN-019",
+        "WEB-030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "DORA 交付效能指标当前为五指标（三吞吐 + 两不稳定），由 Accelerate 2018 的原始四指标演进；DORA 研究结论是速度与稳定性并非取舍关系。",
+      "source_ids": [
+        "VEN-018",
+        "BK-029"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Google 的 larger tests 概念强调 fidelity（对真实行为的保真度）与成本/风险的权衡：生产环境保真度最高，但单元测试与生产运行方式差异大；升保真度伴随成本与失败风险上升。",
+      "source_ids": [
+        "BK-001"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ISO/IEC/IEEE 29119 自 2014 年起遭到部分测试从业者与组织（如 Association for Software Testing、International Society for Software Testing）反对，理由包括缺乏真正共识、过度强调文档、不符合认知性工作的实际、边缘化 context-driven testing、过度规范。",
+      "source_ids": [
+        "STD-024"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "SAiP 4e 第 12 章以 'Testability General Scenario' 与 'Tactics for Testability' 组织可测试性，说明可测试性可分解为场景与架构战术；其战术清单具体条目需以书本体为准（未回源）。",
+      "source_ids": [
+        "BK-009"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "errata": [
+    {
+      "misremembered": "ISO/IEC/IEEE 29119 系列只有 Part 1–5（Wikipedia 'most recent versions' 列表口径）",
+      "corrected": "WG26 官方站点（2026）确认现行共 8 个部分：Part 1/2/3/4/5/6/11/13；其中 Part 6:2021、Part 11:2020、Part 13:2022 为 TR",
+      "basis": "S1-OFF-09（官方站点）+ S1-STD-16/17/18（ISO 快照标题）"
+    },
+    {
+      "misremembered": "29119-1:2022 名称为 'Concepts and definitions'（官方站点与部分二手来源）",
+      "corrected": "ISO 官方页面标题为 'Part 1: General concepts'（Edition 2, 2022）",
+      "basis": "S1-STD-11（ISO 快照 <title> 与摘要）"
+    },
+    {
+      "misremembered": "DORA 指标体系为固定'四指标'（含 MTTR）",
+      "corrected": "DORA 现有五指标：change lead time、deployment frequency、failed deployment recovery time、change fail rate、deployment rework rate；由原四指标演进（MTTR → Failed Deployment Recovery Time，并新增 Deployment Rework Rate）",
+      "basis": "S3-VEN-03（dora.dev 官方指南）"
+    },
+    {
+      "misremembered": "ISO/IEC 25010:2023 仍沿用 2011 的 'Usability/Portability' 顶层特性名",
+      "corrected": "25010:2023 九特性中，Usability 已改称 Interaction Capability，Portability 已改称 Flexibility，并新增 Safety；Maintainability 子特性含 Testability",
+      "basis": "S1-OFF-05（iso25000.com 官方门户）+ S1-OFF-11（ISTQB 括号注明）"
+    }
+  ],
+  "gaps": [
+    "ISO/IEC/IEEE 29119 各部分的正文（含 29119-1 中 test level/test type 的官方原句、29119-4 完整技术清单）因 iso.org WAF 403 与付费墙不可得，本包定义以 ISO 摘要 + ISTQB/SWEBOK 权威转述交叉构建。",
+    "SWEBOK V4 第 5 章 Software Testing 正文需 IEEE-CS 登录，未取得；仅确认章名/KA 结构，具体知识点条目待补。",
+    "Mike Cohn 2009《Succeeding with Agile》原始三层测试金字塔未回源（cited），仅有 Fowler 与 ISTQB 的转引。",
+    "SAiP 4e 第 12.2 节 'Tactics for Testability' 的完整战术枚举（如 Control and Observe System State / Limit Complexity 下的具体条目）未逐条回源，待本地语料层补齐后核实。",
+    "Continuous Delivery（S2-BK-28）与 Accelerate（S2-BK-29）正文为 paid，本包仅作概念锚点，具体页码级证据待补。",
+    "29119-13:2022 的 ISO 摘要未提取到（快照为 60.60 元数据），仅凭官方站点与标题确认。",
+    "可测试性战术的 SEI 原始公开页面（历史版 quality attribute tactics 表）已从 sei.cmu.edu 现行站点下线，未找到可直连的一手战术表。"
+  ],
+  "notes": "本域按 GAP-12 要求加大信源密度（共 32 条，其中 S1 标准 10 + S1 官方 6 + S2 著作/文章 13 + S3 官方工程 3）。关键定义（test level / test type / TDD / test pyramid / testability / CI / quality gate / DORA）均 ≥2 独立源交叉验证。GAP-12 中提到的 ISTQB 测试专文与 Fowler 测试专文已补齐；可测试性标准落点（ISO 25010:2023 Maintainability→Testability）与 SEI 质量属性场景口径已建立。"
+}
