@@ -71,7 +71,7 @@ SUB_LIB_ROOT = "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodolog
   | `34510503610` | 首次 import | 全量导入 + build/deploy |
   | `34510696621` | Pages 设置文档 | build/deploy |
   | `34513853599` | Actions 大版本升级 | build/deploy；**Node 20 废弃警告归零** |
-- **公开集本地仓**：`MISSION_ROOT/_publish/`（独立 `.git`，分支 `main`），HEAD `a39d6e4`，与 `origin/main` 一致。
+- **公开集本地仓**：`MISSION_ROOT/_publish/`（独立 `.git`，分支 `main`），HEAD `cb5dafc`，与 `origin/main` 一致。
 - **12factor 姊妹仓**：`zako-mio/12-factor-methodology-kg`（默认分支 **master**，Pages **built**；38 节点页，生成链 `SUB_LIB_ROOT/07-checkpoint`）。
 
 ### C.3 数据规模（实测真值）
@@ -189,7 +189,7 @@ MISSION_ROOT/
 
 ### F.1 Actions 大版本升级（消除 Node 20 废弃警告）
 
-文件：`MISSION_ROOT/_publish/.github/workflows/rebuild.yml`（提交 `a39d6e4`，已推送）。
+文件：`MISSION_ROOT/_publish/.github/workflows/rebuild.yml`（提交 `cb5dafc`，已推送）。
 
 | action | 旧版本 | 新版本 |
 |---|---|---|
@@ -258,6 +258,7 @@ MISSION_ROOT/
 - **现状**：VLM 支路目前只对 **6 张截图**做粗检（`--vlm-manifest` / `--vlm-result` 接口已留）。
 - **建议修法**：扩展 VLM 覆盖面（更多页 × 视口），或引入更精确的 SVG 标签避让检测（与 G.1 联动）。
 - **注意**：VLM 对术语表「容器内横向滚动」判 WARN 属契约 §7 **允许行为，非缺陷**，不要当作 bug 修。
+- **已知脆弱点（本轮实测）**：`agent-browser` 偶发渲染瞬态 —— 页面被渲染为**纯白**（截图 255/255/255、page-height 577）且视口切换未生效，会使 `pixel.*` 出现**假 FAIL**（本轮实测 1 次；随后同一配置交替重跑 4 次均稳定复现预期结果）。**观察到 L4 FAIL 时先重跑一次确认，不要立即当作页面缺陷上报**。建议后续在 `gate_visual.py` 加「白页/零墨迹 → 自动重试一次」机制。
 - **成本**：低–中。
 - **需用户提供材料**：否。
 
@@ -274,7 +275,7 @@ MISSION_ROOT/
 7. **本地归档仓**（`~` 路径见文首）：
    - 阶段5 冻结基线 `e16244a`；阶段6 完成快照 `f4fc157`；归档索引提交（本轮读取时 `git log --oneline` 头）`efbd186`。
    - ✅ 本轮 L4 改造的 `16-checkpoint/gate_visual.py` 已提交并推送：本地归档仓 commit `9645256`；公开仓随「leftovers」批次推送（同一提交含 `README.md` / `quality-gate.md` / `report.md` / `report.html` / `00-plan/NEXT-SESSION-HANDOFF.md` 的 L4 口径同步）。**接手时无需再处理该改动的去向。**
-   - 公开集为**独立仓** `MISSION_ROOT/_publish/`，HEAD `a39d6e4`（已推送 `origin/main`）。
+   - 公开集为**独立仓** `MISSION_ROOT/_publish/`，HEAD `cb5dafc`（已推送 `origin/main`）。
 8. **编码安全**：中文用 `edit`/`write`（勿用 shell echo/管道）；产出 **UTF-8 无 BOM、无 U+FFFD**；改 JSON 后必验合法性与零悬挂。
 9. **命令与工具**：只读优先 `glob`/`grep`；不重复检索已采集内容；子Agent 提示词引用**短路径 + 生产简报**，禁内联长契约。
 10. **Variant 继承**：复杂度沿用 `[COMPLEXITY: 19/20] → Deep`（全程 Deep 推理）。

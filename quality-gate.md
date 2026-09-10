@@ -51,6 +51,7 @@
 >
 > **L4 口径**：`gate_visual.py --check all` 的**仅自动判据（像素 + DOM 运行态）**为 **272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP**，判定 **PASS**；并入外部 VLM 支路结果（`16-checkpoint/_render-shots/visual/vlm-result.json`，5 PASS + 1 WARN）后为 **278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP**，综合判定 **WARN**（阈值规则：无 FAIL → 退出码 0；存在 FAIL 或全 SKIP → 1）。唯一 WARN 为 VLM 对 `14-views/glossary.html`「超宽表格在 `overflow-x:auto` 容器内横向滚动」的粗检提示，属契约 §7 明确允许的行为，**不是缺陷**，故不判 FAIL。
 >
+> **已知脆弱点（诚实披露）**：`agent-browser` 偶发渲染瞬态（页面渲染为纯白、视口切换未生效），会使 `pixel.*` 产生**假 FAIL**（本轮实测 1 次，随后 4 次交替重跑稳定复现预期结果）。**观察到 L4 FAIL 时应先重跑一次确认**，不要立即当作页面缺陷上报；建议后续在 `gate_visual.py` 增加「白页/零墨迹 → 自动重试一次」机制。
 > **本轮改造要点**：旧 1D 像素判据「同行两段墨迹被 1–3px 背景隔断」被量化证伪（正常排版 `GL-ESSENCE@1280` 命中 40 行，gap 分布 `{1px:25, 2px:14, 3px:2}` 全为中文正常字距）→ 换为 **DOM Range 紧致文本盒 2D 真实相交**（`ox>1px && oy>1px && 相交面积>6px²`，含祖先/后代、同父内联片段、overflow 裁切、显式 z-index 分层排除）；旧像素判据退役为 DOM 不可用时的降级提示并记 `SKIP`。负向测试已通过（注入绝对定位覆盖层可被抓出）。
 
 ---
