@@ -165,17 +165,26 @@ cp 20-agent-skill/*.md ~/.config/opencode/skills/architecture-judgment/
 | **L1** 分片自验证 | JSON/schema/枚举/信源/边/无环 | `validate_graph.py --shard <分片>` | 23 个分片 `errors=0` | **PASS** |
 | **L2** 全图审计 | 字段/ID/计数一致/无环 | `validate_graph.py --graph ...` | `nodes=167 edges=360 kahn=167/167 errors=0 warnings=0` | **PASS** |
 | **L3** 结构 + 断链 | UTF-8/空文件/空正文/内部断链 | `kb_gate.py --root . --layers structure,links` | structure **401 项 0 问题**；links **5134 项 0 问题** | **PASS** |
-| **L4** 视觉 | 位图渲染无截断、中文完整（像素计数 + VLM） | `gate_visual.py --check all` | **262 项检查 0 FAIL / 15 WARN** | **PASS**（详见下） |
+| **L4** 视觉 | DOM 紧致文本盒 2D 相交 + 像素计数 + headless 运行态 + VLM 交叉 | `gate_visual.py --check all`（+ `--vlm-result` 回流 VLM） | 仅自动判据 **272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP**；并入 VLM 后 **278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP** | **PASS → WARN**（均无 FAIL，非阻断） |
 | **L5** 渲染 | headless Chromium 实渲染 canvas 计数/JS 错误/边端点 | `gate_render.py` | 7 用例全 PASS；`skipped=0`；JS 错误 0；悬空端点 0 | **PASS** |
 | **L6** 覆盖度 | manifest + 四向覆盖 + GR-08 + GR-09 | `gate_coverage.py` | manifest **362/362=100%**；四向 **100%**；GR-08 PASS；GR-09 **11/31=35.48%** | **PASS** |
 | **L7** 信源 | canonical 解析/可溯源率/`verified`/disputed | `gate_sources.py` | 悬挂 **0**；可溯源 **100%**；`verified=true` **89.22%**；disputed 漏标 **0** | **PASS** |
 | **L8** 版式 | 关系图/摘要卡/权衡卡/TOC/术语/自包含/编码/深链/双轨 | `gate_layout.py --check all` | 综合覆盖率 **2124/2124 = 100.00%**，问题 **0** | **PASS** |
 | **方法论专项** | 层边界 / 术语一致 / 原则↔反例 / 11 维权衡 | `gate_methodology.py --check all` | 4 项全 PASS（含 O-PC **36/36**、O-TD **11/11**） | **PASS（4/4）** |
 
-> **L4 说明**：本审计轮次首次实装视觉门控（像素计数 + VLM 交叉），结果为 **262 项检查
-> 0 FAIL / 15 WARN**；15 条 WARN 为可接受的非阻断项（14 条为启发式「同行墨迹近邻」探针，误报率高，
-> 仅告警不阻断；1 条为术语表超宽表格在 `overflow-x:auto` 容器内滚动，属设计允许行为）。
-> `report.md` / `report.html` / `quality-gate.md` 已按同一口径更新为**阶段 1–6 全周期**版本，数字一致。
+> **L4 说明**：本审计轮次首次实装视觉门控（像素计数 + headless 运行态 + 外部 VLM 交叉）。
+> **仅自动判据（像素 + DOM 运行态）** 实测 **272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP**，
+> 判定 **PASS**；**并入 VLM 支路后**（`--vlm-result`，5 PASS + 1 WARN）实测 **278 项 /
+> 217 PASS / 0 FAIL / 1 WARN / 60 SKIP**，判定 **WARN（无 FAIL）**。唯一 WARN 为 VLM 对
+> `14-views/glossary.html`「超宽表格在 `overflow-x:auto` 容器内横向滚动」的粗检提示，属契约
+> `00-plan/stage6-content-ia-spec.md §7` 明确允许的行为，**不是缺陷**；因脚本判定规则为
+> 「存在 FAIL 才判 FAIL，WARN 仅拉低到 WARN」，故不因此判 FAIL。
+> **本轮改造要点**：旧 1D 像素判据「同行两段墨迹被 1–3px 背景隔断」被量化证伪（正常排版
+> `GL-ESSENCE@1280` 命中 40 行，gap 分布 `{1px:25, 2px:14, 3px:2}` 全为中文正常字距）→ 换为
+> **DOM Range 紧致文本盒 2D 真实相交**（`ox>1px && oy>1px && 相交面积>6px²`，含祖先/后代、
+> 同父内联片段、overflow 裁切、显式 z-index 分层排除）；旧像素判据退役为 DOM 不可用时的降级
+> 提示并记 `SKIP`。负向测试已通过（注入绝对定位覆盖层可被抓出）。
+> `report.md` / `report.html` / `quality-gate.md` 已按同一口径更新，数字一致。
 > **L5 说明**：交互图正确性由真实浏览器实渲染覆盖（7 用例含默认组级 + 6 个下钻组）。
 
 ### CI 中的门控（重要：L4 / L5 显式 SKIPPED）

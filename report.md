@@ -144,7 +144,7 @@
 
 - **版式缺陷 → 结构化改造**：改进前 `MTH-F-02.html` 仅 1 `<p>` / 24 `<div>` / 6 `<h2>` / 0 图 0 表 / 无 TOC；改造后每节点页含内联关系 SVG、`defcard`、权衡卡、TOC+§锚点、信源证据区，L8 版式门控综合 **2124/2124 = 100.00%（问题 0）**。
 - **权衡卡严格归栏**：`gate_layout.py` 对 `detail.tradeoff` 三栏（收益/代价/反例）做**逐句显式标记词**校验（反例：反例/误区/失败/反面；代价：代价/成本/风险/过度/不足；收益：收益/好处/价值），无标记句进中性「原文要点」，文本逐字引用——167/167 通过、问题 0。
-- **视觉门控首实装**：L4 `gate_visual.py` 像素 + 运行时 + VLM 三支路共 **262 项检查 / 0 FAIL / 15 WARN / 44 SKIP**，综合判定 **WARN**（无 FAIL）；WARN 均为可接受的版式提示（VLM 支路 5 PASS + 1 WARN：glossary 超宽表格在 `overflow-x:auto` 容器内横向滚动）。
+- **视觉门控首实装**：L4 `gate_visual.py` 像素 + DOM 运行态 + VLM 三支路，**仅自动判据 272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP（PASS）**，**并入 VLM（5 PASS + 1 WARN）后 278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP（WARN，无 FAIL）**。唯一 WARN 为 VLM 对 glossary 超宽表格在 `overflow-x:auto` 容器内横向滚动的粗检提示，属契约 §7 明确允许行为，**不是缺陷**。
 - **数据契约不动**：全量重生后 `methodology-dag.json` 仍为 167 节点 / 360 边、Kahn 167/167 无环、`validate_graph` errors=0 warnings=0，SHA-256 指纹未变。
 
 ### 3.3 遇到的问题及处置
@@ -219,7 +219,7 @@
 | L1 分片自验证 | 分片 `errors=0`（阶段5 全量通过，阶段6 未改数据） | **PASS** |
 | L2 全图审计 | `nodes=167 edges=360 kahn_visited=167/167`，`errors=0 warnings=0` | **PASS** |
 | L3 结构 + 断链（母库口径） | structure 检查项 **412** / 问题 **0**；links 检查项 **5134** / 问题 **0** | **PASS** |
-| L4 视觉（首实装） | **262 项检查 / 0 FAIL / 15 WARN / 44 SKIP**（像素+运行时 256，VLM 支路 5 PASS + 1 WARN） | **WARN**（无 FAIL） |
+| L4 视觉（首实装） | 仅自动判据 **272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP（PASS）**；并入 VLM（5 PASS + 1 WARN）后 **278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP（WARN）** | **PASS → WARN**（无 FAIL） |
 | L5 渲染（headless Chromium） | **7 用例全 PASS**；`skipped=0`；JS 错误 0；悬空端点 0 | **PASS** |
 | L6 覆盖度 | manifest **363/363 = 100%**；四向 **100%**；GR-08 PASS；GR-09 **11/31 = 35.48%** | **PASS** |
 | L7 信源 | canonical 引用 1446（node 605 / errata 222 / edge 619），悬挂 **0**；可溯源 **100%**；`verified=true` **89.22%**；disputed 漏标 **0** | **PASS** |
@@ -227,7 +227,9 @@
 | 方法论专项 | layer-boundary / glossary / principle-counterexample **36/36** / tradeoff-11 **11/11** | **4/4 PASS** |
 | 回放四硬指标 | 覆盖度 100% / 门控全过 / 可溯源 100% / 抽查无重大语义错误 | **达标** |
 
-> **L4 口径说明**：`gate_visual.py --check all` 的像素+运行时支路为 **256 项 / 0 FAIL / 14 WARN / 44 SKIP**；并入外部 VLM 支路（`_render-shots/visual/vlm-result.json`，5 PASS + 1 WARN）后为 **262 项 / 0 FAIL / 15 WARN / 44 SKIP**。综合判定 **WARN**，无 FAIL。唯一 VLM WARN 为 glossary 超宽表格的容器内滚动（契约 §7 允许）。
+> **L4 口径说明**：`gate_visual.py --check all` 的**仅自动判据（像素 + DOM 运行态）**为 **272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP**，判定 **PASS**；并入外部 VLM 支路（`_render-shots/visual/vlm-result.json`，5 PASS + 1 WARN）后为 **278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP**，综合判定 **WARN**（无 FAIL）。唯一 VLM WARN 为 glossary 超宽表格在 `overflow-x:auto` 容器内横向滚动，属契约 §7 明确允许的行为，**不是缺陷**，故不判 FAIL。
+>
+> **本轮改造要点**：旧 1D 像素判据「同行两段墨迹被 1–3px 背景隔断」被量化证伪（正常排版 `GL-ESSENCE@1280` 命中 40 行，gap 分布 `{1px:25, 2px:14, 3px:2}` 全为中文正常字距）→ 换为 **DOM Range 紧致文本盒 2D 真实相交**（`ox>1px && oy>1px && 相交面积>6px²`，含祖先/后代、同父内联片段、overflow 裁切、显式 z-index 分层排除），旧像素判据退役为 DOM 不可用时的降级提示并记 `SKIP`；负向测试已通过（注入绝对定位覆盖层可被抓出）。
 >
 > **CI 说明**：L4 / L5 因 CI runner 缺 Pillow/numpy/agent-browser，在 CI 中**显式 SKIPPED**，日志打印跳过原因，**绝不伪装 PASS**。
 
@@ -258,7 +260,7 @@
 | 版权红线复验（远端原文） | `02-research/E-iso-standards.json` 占位符 14 处、残留 ISO 正文行 **0**；`01-books/` 仅 5 个元数据文件 |
 | 公开集体量 | 505 文件 / 19 MB |
 | CI 首次失败点与处置 | `configure-pages` 的 `enablement: true` 因 `GITHUB_TOKEN` 无权创建 Pages 站点而失败（**其前置 13 个步骤全绿**）；改为用 CLI 一次性启用 Pages（`gh api -X POST .../pages -f build_type=workflow`）+ 工作流内注释化说明前置条件 |
-| 遗留（透明披露） | Node 20 废弃警告（action 大版本可日后升级）；L4 15 条 WARN 均为非阻断项；检索层 D2 与 12factor 反向深链未做（用户已决定不做） |
+| 遗留（透明披露） | Node 20 废弃警告（action 大版本可日后升级）；L4 自动判据 0 WARN、并入 VLM 仅 1 条非阻断 WARN；检索层 D2 与 12factor 反向深链未做（用户已决定不做） |
 
 ### 4.6 暂停点 4 的裁决结果（已执行）
 
@@ -276,7 +278,7 @@
 
 3. **门控自身要可机检——把「保真红线」写成逐句标记词校验**。权衡卡归栏最容易在「看起来合理」处失真，因此不写成文字约定，而写成 `gate_layout.py` 的**逐句显式标记词校验**（无证据不得归栏）。这让「保真」从主观承诺变为可证明、可回归的机器判据。
 
-4. **视觉门控中像素重叠探针误报率高，只作 WARN**。L4 的 `pixel.overlap-suspect` 在 14 条 WARN 中占绝大多数（密集文本行被 ≤3px 背景隔断即触发），属启发式粗检；因此其定位是**提示而非阻断**，真正阻断的是 FAIL。对 grep 类启发式应以「粗筛 + 人工/VLM 复核」而非「一票否决」对待。
+4. **视觉重叠判据从「1D 像素启发式」升级为「DOM 紧致盒 2D 相交」，并以数据证伪旧判据**。旧 `pixel.overlap-suspect`（同行两段墨迹被 1–3px 背景隔断即触发）在正常排版 `GL-ESSENCE@1280` 命中 40 行，gap 分布 `{1px:25, 2px:14, 3px:2}`——全为中文正常字距，与「重叠」无因果关系，属系统性误报；新判据改用 `Range.getClientRects()` 的紧致文本行盒做真实 2D 相交（`ox>1px && oy>1px && 相交面积>6px²`），并排除祖先/后代、同父内联片段、overflow 裁切与显式 z-index 分层。旧判据退役为 DOM 不可用时的降级提示（记 `SKIP`）。改造后仅自动判据 272 项 0 WARN，且负向测试（注入绝对定位覆盖层）可稳定命中——**启发式阈值应先被数据证伪再替换，而非反复调参**。
 
 5. **子Agent 自述必须回盘复验——本轮 3 次复验抓出误判**。三次误判（权衡卡疑越栏、疑无标记句归栏、`verified` 真值口径）均由「回盘实测」纠正，其中一次是**主Agent 自己的错误结论**。这说明：**任何结论都必须以新鲜的一手数据复算**，接力文档与子Agent 自述都不能直接采信；`skipped`/`WARN` 也要如实标注，不得伪装 PASS。
 
@@ -284,7 +286,7 @@
 
 7. **遗留与建议（交由后续阶段决策）**：
    - **`needs_review` 已裁决（撤回原建议）**：`02-research/E-iso-standards.json` **保留脱敏版**——ISO 正文性字段（`scope_en/zh` 等 14 个，最长 2507 字）已全部移出，余下标准号/版本/状态/URL 属不受版权保护的事实元数据，对读者有价值。
-   - **L4 / L5 已在本地补跑并留档**：`gate_visual.py --check all` → 262 项 / 0 FAIL / 15 WARN；`gate_render.py` → 7 用例全 PASS；CI 无法覆盖故在 `rebuild.yml` 中显式 SKIPPED。
+   - **L4 / L5 已在本地补跑并留档**：`gate_visual.py --check all` → 272 项 / 0 FAIL / 0 WARN（PASS），加 `--vlm-result` → 278 项 / 0 FAIL / 1 WARN（非阻断）；`gate_render.py` → 7 用例全 PASS；CI 无法覆盖故在 `rebuild.yml` 中显式 SKIPPED。
    - **12factor 反向深链未做**：当前仅母库→子库单向；建议补子库→母库回链形成双向导航。
    - **30 本付费书语料待用户提供**（`01-books/gap-request.md`，P0 14 / P1 10 / P2 6），提供后走 pdf-worker 解析。
    - **检索层 D2 挂起**：预留接口不建，建库后再定（轻量 FTS5 为候选）。

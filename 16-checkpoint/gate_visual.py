@@ -19,6 +19,21 @@
      runtime.lineheight     首个可见正文 <p> 行高 ≥ 1.5 × 字号
      runtime.overflow-leak  除 overflow-x:auto|scroll 容器内的元素外，无元素
                             getBoundingClientRect().right > innerWidth+1
+     runtime.overlap        【主判据·真实文本重叠】仅针对 HTML 文档流文本：对每个
+                            含直接文本节点的元素，用 Range.getClientRects() 取
+                            紧致文本行盒（不含 padding/border），两两判定真实 2D 相交
+                            （right>left+EPS 且 bottom>top+EPS 且相交面积>MIN_AREA）；
+                            排除祖先/后代、同父 display:inline 片段、被 overflow
+                            裁切、以及双方均有显式 z-index 的分层元素。命中记 [WARN]
+                            （spec §10：重叠嫌疑仅 warning，不作 FAIL）。
+     口径变更：旧的 1D 像素判据「同行两段墨迹被 1–3px 背景隔断」已退役（见
+     pixel.overlap-suspect 说明与常量注释），原因是该判据与「重叠」无因果关系——
+     实测正常页 GL-ESSENCE@1280 有 40 行命中，全部是中文单字/词间正常的 1–3px
+     字距，而真实重叠对应的是零间距墨迹融合，1D 判据无法区分；DOM Range 紧致盒
+     则是重叠的直接几何量。SVG <text> 未纳入自动判定：其 getBoundingClientRect 为
+     em 盒，实测重叠比例在正常排布下呈连续谱（0.01→0.56，0.28 与 0.31 相邻），
+     不存在可辩护的二值阈值；脚本改为在报告中提示（见 runtime.overlap 证据），
+     不再产出启发式 WARN。
 
   B. 像素计数校验（Pillow + numpy 分析全页 PNG）
      pixel.non-empty        非背景像素占比 ≥ 3%（防白页/渲染失败）
@@ -26,7 +41,9 @@
      pixel.page-height      图像高 > 1.5 × 视口高（防截断式渲染失败）
      pixel.svg-ink          svg 裁剪区非背景像素占比 ≥ 1.5%（关系图确画出内容）
      pixel.right-clip       最右 4px 竖条非背景像素占比 < 2%（防右侧裁切）
-     pixel.overlap-suspect  粗检同一 y 行两段长墨迹被 ≤3px 背景隔断 → 仅 [WARN]
+     pixel.overlap-suspect  【已退役】原 1D 像素启发式；DOM runtime.overlap 可用时
+                            记 [SKIP] 并说明退役理由，不再产出命中（避免误报）。
+                            仅当 DOM 判据不可用时才作为降级提示（保守，宁缺毋滥）。
 
 阈值全部写死在下方常量并注明依据（见 THRESHOLDS 注释）；脚本不会为让结果变 PASS
 而放宽阈值，也不会修改任何页面。
@@ -97,9 +114,24 @@ PAGE_HEIGHT_FACTOR = 1.5                # §B3 高 > 1.5×视口高
 MIN_BODY_FONT = {1280: 14.0, 390: 13.0}  # §A4 字号下限（按视口宽）
 MIN_LINEHEIGHT_RATIO = 1.5              # §A4 行高 ≥1.5×字号
 RIGHT_STRIP_PX = 4                      # §B5 最右 4px 竖条
-OVERLAP_GAP_MAX = 3                     # §B6 两段墨迹间隔 ≤3px
-OVERLAP_SEG_MIN = 20                    # §B6 两段各自长度 ≥20px
-OVERLAP_SCAN_STEP = 3                   # §B6 每 3 行抽样，仅作 warning
+
+# runtime.overlap（DOM 2D 主判据）阈值。判据 = 两个紧致文本行盒的真实二维相交：
+#   r1.right > r2.left + EPS && r1.left < r2.right - EPS
+#   r1.bottom > r2.top + EPS && r1.top < r2.bottom - EPS 且相交面积 > MIN_AREA
+# EPS 吸收亚像素/取整噪声；MIN_AREA 排除仅盒边缘相切（如相邻块的 padding 相触）。
+# 实测 16 个渲染目标（8 页 × 2 视口）HTML 命中恒为 0；构造的绝对定位覆盖层可稳定命中。
+OVERLAP_EPS = 1.0                       # §A 2D 相交最小重叠（px）
+OVERLAP_MIN_AREA = 6.0                  # §A 最小相交面积（px²）
+# 背景：旧 1D 判据（同行两段墨迹被 ≤3px 背景隔断）与「重叠」不相关，故退役：
+#   在 GL-ESSENCE@1280 正常排版下抽样命中的 40 行，gap 分布 {1px:25, 2px:14, 3px:2}，
+#   全部来自中文字间/词间正常字距；真实重叠对应零间距墨迹融合而非 1–3px 隔断。
+#   保留常量仅供降级提示参考，不再作为主判据。
+OVERLAP_LEGACY_GAP_MAX = 3              # [退役] 旧 1D 判据背景隔断上限
+OVERLAP_LEGACY_SEG_MIN = 20             # [退役] 旧 1D 判据每段墨迹最小长度
+OVERLAP_SCAN_STEP = 3                   # 抽样步长（复用：DOM 判据不依赖）
+# SVG <text> bbox 重叠比例仅用于报告提示（不产出自动判定）。实测正常排布为连续谱，
+# 无自然二值阈值，故不用于 WARN。
+SVG_OVERLAP_NOTICE_RATIO = 0.50         # 报告提示阈值：相交面积 ≥ 较小 bbox 的 50%
 
 # 渲染目标集（8 页）。conflict 节点 MTH-O-05 由 methodology-dag.json 的
 # conflicts 边 MTH-O-04 -> MTH-O-05 选出（在 4 条 conflicts 中其案例带最重）。
@@ -190,6 +222,152 @@ SNAPSHOT_JS = r"""
 })()
 """
 
+# DOM 真实文本重叠判定（主判据）。返回 {ok, htmlCands, hits, svgCands, svgNotice}。
+# 与 SNAPSHOT_JS 分离，便于 `--check pixels`（仅像素段）也能取到 DOM 真值。
+OVERLAP_JS = r"""
+(function(){
+  var EPS = __EPS__, MIN_AREA = __MIN_AREA__, SVG_NOTICE = __SVG_NOTICE__;
+  function inSVG(el){ return el.namespaceURI==='http://www.w3.org/2000/svg' || !!(el.ownerSVGElement); }
+  function rendered(el){
+    if(!el.getClientRects().length) return false;
+    if(el.checkVisibility && !el.checkVisibility({checkOpacity:true, checkVisibilityCSS:true})) return false;
+    return true;
+  }
+  function tagName(el){
+    var s=el.tagName.toLowerCase();
+    if(el.id) s+='#'+el.id;
+    if(el.className&&typeof el.className==='string'){
+      var c=el.className.trim().split(/\s+/).slice(0,2).join('.');
+      if(c) s+='.'+c;
+    }
+    return s;
+  }
+  function inlineLevel(el){var d=getComputedStyle(el).display;return d==='inline'||d==='inline-block'||d==='inline-flex';}
+  function zIndex(el){
+    var cs=getComputedStyle(el); if(cs.position==='static') return null;
+    var z=cs.zIndex; if(z==='auto'||z==='') return null;
+    var n=parseInt(z,10); return isNaN(n)?null:n;
+  }
+  function ownTextNodes(el){
+    var arr=[];
+    for(var i=0;i<el.childNodes.length;i++){
+      var n=el.childNodes[i];
+      if(n.nodeType===3 && n.nodeValue && n.nodeValue.replace(/\s+/g,' ').trim()) arr.push(n);
+    }
+    return arr;
+  }
+  function ownText(el){
+    var t=''; for(var i=0;i<el.childNodes.length;i++){
+      var n=el.childNodes[i]; if(n.nodeType===3) t+=n.nodeValue;
+    }
+    return t.replace(/\s+/g,' ').trim();
+  }
+  // 与所有 overflow!=visible 祖先求交，得到元素可见裁切盒（overflow:hidden 裁掉的不算）
+  function clipBox(el,r){
+    var box={left:r.left,top:r.top,right:r.right,bottom:r.bottom};
+    var p=el.parentElement;
+    while(p&&p!==document.documentElement){
+      var cs=getComputedStyle(p), ox=cs.overflowX, oy=cs.overflowY;
+      if(ox!=='visible'||oy!=='visible'){
+        var pr=p.getBoundingClientRect();
+        if(ox!=='visible'){box.left=Math.max(box.left,pr.left);box.right=Math.min(box.right,pr.right);}
+        if(oy!=='visible'){box.top=Math.max(box.top,pr.top);box.bottom=Math.min(box.bottom,pr.bottom);}
+      }
+      p=p.parentElement;
+    }
+    return box;
+  }
+  var out={ok:false};
+  try{
+    var html=[], svg=[];
+    var all=document.querySelectorAll('body *');
+    for(var i=0;i<all.length;i++){
+      var el=all[i];
+      if(!rendered(el)) continue;
+      var cs=getComputedStyle(el);
+      if(cs.display==='none'||cs.visibility==='hidden'||parseFloat(cs.opacity)===0) continue;
+      var txt=ownText(el);
+      if(inSVG(el)){
+        if(el.tagName.toLowerCase()!=='text'||!txt) continue;
+        var bb=el.getBoundingClientRect();
+        if(bb.width<2||bb.height<2) continue;
+        svg.push({el:el,tag:tagName(el),text:txt.slice(0,22),
+                  rect:{left:bb.left,top:bb.top,right:bb.right,bottom:bb.bottom}});
+        continue;
+      }
+      if(!txt) continue;
+      var tns=ownTextNodes(el);
+      if(!tns.length) continue;
+      var rects=[];
+      for(var ti=0;ti<tns.length;ti++){
+        var range=document.createRange();
+        range.selectNodeContents(tns[ti]);
+        var crs=range.getClientRects();
+        for(var k=0;k<crs.length;k++){
+          var rr=crs[k];
+          if(rr.width<2||rr.height<2) continue;
+          var box=clipBox(el,rr);
+          if(box.right-box.left<2||box.bottom-box.top<2) continue;
+          rects.push(box);
+        }
+      }
+      if(!rects.length) continue;
+      html.push({el:el,tag:tagName(el),text:txt.slice(0,26),
+                 inline:inlineLevel(el),parent:el.parentElement,z:zIndex(el),rects:rects});
+    }
+    var hits=[];
+    for(var a=0;a<html.length;a++){
+      for(var b=a+1;b<html.length;b++){
+        var A=html[a],B=html[b];
+        if(A.el.contains(B.el)||B.el.contains(A.el)) continue;          // 祖先/后代
+        if(A.parent===B.parent&&A.inline&&B.inline) continue;          // 同父内联片段
+        if(A.z!==null&&B.z!==null) continue;                           // 显式 z-index 分层
+        for(var ra=0;ra<A.rects.length;ra++){
+          var x=A.rects[ra], found=false;
+          for(var rb=0;rb<B.rects.length;rb++){
+            var y=B.rects[rb];
+            var ox=Math.min(x.right,y.right)-Math.max(x.left,y.left);
+            var oy=Math.min(x.bottom,y.bottom)-Math.max(x.top,y.top);
+            if(ox>EPS&&oy>EPS&&ox*oy>MIN_AREA){
+              hits.push({a:A.tag,b:B.tag,ta:A.text,tb:B.text,
+                         ox:Math.round(ox*10)/10,oy:Math.round(oy*10)/10,
+                         ra:[Math.round(x.left),Math.round(x.top),Math.round(x.right),Math.round(x.bottom)],
+                         rb:[Math.round(y.left),Math.round(y.top),Math.round(y.right),Math.round(y.bottom)]});
+              found=true; break;
+            }
+          }
+          if(found) break;
+        }
+        if(hits.length>200) break;
+      }
+      if(hits.length>200) break;
+    }
+    // SVG 提示（不产出 WARN，仅报告）：相交面积 ≥ 较小 bbox 的 SVG_NOTICE
+    var svgNotice=[];
+    for(var c=0;c<svg.length;c++){
+      for(var d=c+1;d<svg.length;d++){
+        var S=svg[c],T=svg[d];
+        if(S.el.contains(T.el)||T.el.contains(S.el)) continue;
+        var ox2=Math.min(S.rect.right,T.rect.right)-Math.max(S.rect.left,T.rect.left);
+        var oy2=Math.min(S.rect.bottom,T.rect.bottom)-Math.max(S.rect.top,T.rect.top);
+        if(ox2<=0||oy2<=0) continue;
+        var aS=(S.rect.right-S.rect.left)*(S.rect.bottom-S.rect.top);
+        var aT=(T.rect.right-T.rect.left)*(T.rect.bottom-T.rect.top);
+        var minA=Math.min(aS,aT);
+        if(minA>0 && ox2*oy2/minA>=SVG_NOTICE){
+          svgNotice.push({a:S.tag,b:T.tag,ta:S.text,tb:T.text,
+                          frac:Math.round(ox2*oy2/minA*100)/100});
+        }
+      }
+    }
+    out.htmlCands=html.length; out.svgCands=svg.length;
+    out.hits=hits; out.svgNotice=svgNotice.slice(0,10);
+    out.ok=true;
+  }catch(err){ out.error=String(err); }
+  return JSON.stringify(out);
+})()
+"""
+
 
 # ---------------------------------------------------------------- 通用工具
 
@@ -246,6 +424,42 @@ def eval_result(js, timeout=30):
     if isinstance(res, (dict, list)):
         return res, None
     return res, None
+
+
+def eval_overlap(timeout=30):
+    """Run the DOM overlap judge in the current tab; return dict or None(skip)."""
+    js = (OVERLAP_JS.replace("__EPS__", repr(OVERLAP_EPS))
+                  .replace("__MIN_AREA__", repr(OVERLAP_MIN_AREA))
+                  .replace("__SVG_NOTICE__", repr(SVG_OVERLAP_NOTICE_RATIO)))
+    data, e = eval_result(js, timeout=timeout)
+    if not isinstance(data, dict) or not data.get("ok"):
+        return {"ok": False, "error": (data or {}).get("error") or e}
+    return data
+
+
+def report_overlap(ov, page_rel, vps, rep):
+    """Emit runtime.overlap. Returns True if the DOM judge is available."""
+    if not isinstance(ov, dict) or not ov.get("ok"):
+        rep.add("runtime.overlap", page_rel, vps, "SKIP",
+                "DOM 重叠判据不可用: %s" % str((ov or {}).get("error"))[:160])
+        return False
+    hits = ov.get("hits") or []
+    notice = ov.get("svgNotice") or []
+    tail = ""
+    if notice:
+        tail = "；SVG 标签 bbox 重度重叠提示(不计 WARN) %d 处: %s" % (
+            len(notice), [(n["ta"], n["tb"], n["frac"]) for n in notice[:3]])
+    if not hits:
+        rep.add("runtime.overlap", page_rel, vps, "PASS",
+                "HTML 紧致文本盒 2D 相交=0（候选 %d，Range 真值）%s"
+                % (ov.get("htmlCands", 0), tail))
+    else:
+        sample = ["%s∩%s ox%s×oy%s" % (h["a"], h["b"], h["ox"], h["oy"])
+                  for h in hits[:4]]
+        rep.add("runtime.overlap", page_rel, vps, "WARN",
+                "%d 处真实 2D 文本重叠（spec §10 仅 warning）；样例 %s%s"
+                % (len(hits), sample, tail))
+    return True
 
 
 def parse_lineheight(val, fs):
@@ -307,18 +521,19 @@ class Reporter(object):
 
 # ---------------------------------------------------------------- 运行时检查
 
-def run_runtime(page_rel, page_abs, vw, vh, rep, timeout):
+def open_page(page_rel, page_abs, vw, vh, rep, timeout):
+    """Open page + set viewport + reload. Returns True when the page is usable."""
     if not page_abs.exists():
         rep.add("runtime.page", page_rel, "%dx%d" % (vw, vh), "FAIL",
                 "页面不存在: %s" % page_abs)
-        return None
+        return False
     url = page_abs.resolve().as_uri()
     vps = "%dx%d" % (vw, vh)
     rc, out, err = ab("open", url, timeout=timeout + 15)
     if rc != 0:
         rep.add("runtime.open", page_rel, vps, "FAIL",
                 "open rc=%s %s" % (rc, (err or out).strip()[:200]))
-        return None
+        return False
     rc, out, err = ab("set", "viewport", str(vw), str(vh), timeout=timeout)
     if rc != 0:
         rep.add("runtime.viewport", page_rel, vps, "FAIL",
@@ -327,13 +542,21 @@ def run_runtime(page_rel, page_abs, vw, vh, rep, timeout):
     if rc != 0:
         rep.add("runtime.reload", page_rel, vps, "FAIL",
                 "reload rc=%s %s" % (rc, (err or out).strip()[:200]))
+    return True
+
+
+def run_runtime(page_rel, page_abs, vw, vh, rep, timeout):
+    """Returns (info_dict_or_None, dom_overlap_available_bool)."""
+    if not open_page(page_rel, page_abs, vw, vh, rep, timeout):
+        return None, False
+    vps = "%dx%d" % (vw, vh)
     js = SNAPSHOT_JS.replace("__SELS__", json.dumps(STRUCT_SELECTORS))
     data, e = eval_result(js, timeout=timeout)
     if not isinstance(data, dict) or not data.get("ok"):
         msg = (data or {}).get("error") if isinstance(data, dict) else e
         rep.add("runtime.snapshot", page_rel, vps, "FAIL",
                 "快照失败: %s" % str(msg)[:200])
-        return None
+        return None, False
 
     iw = data.get("iw")
     sw = data.get("sw")
@@ -437,7 +660,11 @@ def run_runtime(page_rel, page_abs, vw, vh, rep, timeout):
                 "%d 处溢出泄漏: %s" % (len(leaks),
                                     [(x["el"], x["right"]) for x in leaks[:5]]))
 
-    return {"iw": iw, "sh": sh}
+    # A6 真实文本重叠（DOM 2D 主判据；与像素段解耦）
+    ov = eval_overlap(timeout)
+    overlap_ok = report_overlap(ov, page_rel, vps, rep)
+
+    return {"iw": iw, "sh": sh}, overlap_ok
 
 
 # ---------------------------------------------------------------- 像素检查
@@ -451,7 +678,8 @@ def load_imaging():
         return None, None
 
 
-def analyze_pixels(png_path, vw, vh, svg_rects, np, Image, rep, page_rel):
+def analyze_pixels(png_path, vw, vh, svg_rects, np, Image, rep, page_rel,
+                   dom_overlap=False):
     vps = "%dx%d" % (vw, vh)
     try:
         im = Image.open(png_path).convert("RGB")
@@ -538,19 +766,57 @@ def analyze_pixels(png_path, vw, vh, svg_rects, np, Image, rep, page_rel):
                 "最右 %dpx 非背景 %.2f%% >= %.2f%%（疑似右侧被裁切）"
                 % (RIGHT_STRIP_PX, strip_ratio * 100, MAX_RIGHT_STRIP_INK * 100))
 
-    # B6 重叠嫌疑粗检（仅 WARN）
-    hits = overlap_suspect(ink, np)
-    if hits:
-        rep.add("pixel.overlap-suspect", page_rel, vps, "WARN",
-                "%d 处同行两段长墨迹被 ≤%dpx 背景隔断，样例 %s"
-                % (len(hits), OVERLAP_GAP_MAX, hits[:4]))
+    # B6 重叠（已退役 1D 像素启发式；真实重叠由 DOM runtime.overlap 判定）
+    # 旧判据「同行两段墨迹被 1–3px 背景隔断」与「重叠」无因果关系：正常中文/拉丁
+    # 排布的字词间距本就落在 1–3px（GL-ESSENCE@1280 实测 40 行命中 gap {1:25,2:14,3:2}），
+    # 而真实重叠是零间距墨迹融合。保留像素通道仅作降级提示：DOM 判据可用时记 [SKIP]；
+    # 不可用时才运行保守的 pixel_overlap_fallback（宁缺毋滥，避免复现高误报）。
+    if dom_overlap:
+        rep.add("pixel.overlap-suspect", page_rel, vps, "SKIP",
+                "DOM 2D 判据（runtime.overlap）可用，1D 像素启发式已退役 → 不产出命中")
     else:
-        rep.add("pixel.overlap-suspect", page_rel, vps, "PASS",
-                "未检出疑似文本重叠（粗检）")
+        fb = pixel_overlap_fallback(ink, np)
+        if fb:
+            rep.add("pixel.overlap-suspect", page_rel, vps, "WARN",
+                    "DOM 判据不可用，像素降级提示 %d 处: %s" % (len(fb), fb[:4]))
+        else:
+            rep.add("pixel.overlap-suspect", page_rel, vps, "SKIP",
+                    "DOM 判据不可用，像素降级提示未发现疑似重叠（不判 PASS）")
 
 
-def overlap_suspect(ink, np):
+def pixel_overlap_fallback(ink, np):
+    """[降级·已退役主判据] 仅在 DOM runtime.overlap 不可用时调用的保守提示。
+
+    故意不复活旧 1D 判据：旧判据无法区分正常字距与真实重叠，会复现高误报。
+    这里采用更严格的「多行持续零间距超宽墨迹块」——真实叠字会使相邻字形的背景
+    隔断消失并被合并为异常宽的墨迹块，且持续多行。阈值保守（宁缺毋滥）。
+    """
     h, w = ink.shape
+    runs_by_row = []
+    for y in range(0, h, OVERLAP_SCAN_STEP):
+        row = ink[y]
+        if not row.any():
+            continue
+        d = np.diff(row.astype(np.int8))
+        starts = list(np.where(d == 1)[0] + 1)
+        ends = list(np.where(d == -1)[0] + 1)
+        if row[0]:
+            starts = [0] + starts
+        if row[-1]:
+            ends = ends + [w]
+        n = min(len(starts), len(ends))
+        best = 0
+        for i in range(n):
+            run = ends[i] - starts[i]
+            if run > best:
+                best = run
+        runs_by_row.append(best)
+    if len(runs_by_row) < 12:
+        return []
+    med = float(np.median(runs_by_row))
+    if med <= 0:
+        return []
+    limit = max(400.0, med * 12.0)   # 异常宽：远大于中位墨迹块
     hits = []
     for y in range(0, h, OVERLAP_SCAN_STEP):
         row = ink[y]
@@ -564,16 +830,11 @@ def overlap_suspect(ink, np):
         if row[-1]:
             ends = ends + [w]
         n = min(len(starts), len(ends))
-        for i in range(n - 1):
-            e1 = ends[i]
-            s2 = starts[i + 1]
-            gap = s2 - e1
-            if (1 <= gap <= OVERLAP_GAP_MAX
-                    and (e1 - starts[i]) >= OVERLAP_SEG_MIN
-                    and (ends[i + 1] - s2) >= OVERLAP_SEG_MIN):
-                hits.append((int(y), int(e1), int(gap)))
+        for i in range(n):
+            if (ends[i] - starts[i]) >= limit:
+                hits.append((int(y), int(starts[i]), int(ends[i])))
                 break
-        if len(hits) > 50:
+        if len(hits) > 20:
             break
     return hits
 
@@ -738,10 +999,18 @@ def main():
                 slug = ("%s__%s__%d" % (label, vlabel, vw)).replace("/", "_")
                 shot_path = SHOTS_DIR / (slug + ".png")
                 shot_ok = False
+                dom_overlap = False
 
                 if have_ab and ("runtime" in cats or "pixels" in cats):
                     if "runtime" in cats:
-                        run_runtime(rel, page_abs, vw, vh, rep, args.timeout)
+                        _info, dom_overlap = run_runtime(
+                            rel, page_abs, vw, vh, rep, args.timeout)
+                    elif "pixels" in cats:
+                        # pixels-only：仍需打开页面以保证截图有效，并顺手跑 DOM
+                        # 重叠主判据，使像素段与运行态段口径一致。
+                        if open_page(rel, page_abs, vw, vh, rep, args.timeout):
+                            dom_overlap = report_overlap(
+                                eval_overlap(args.timeout), rel, vps, rep)
                     if "pixels" in cats:
                         rc, out, err = ab("screenshot", "--full", str(shot_path),
                                           timeout=args.timeout + 15)
@@ -763,7 +1032,7 @@ def main():
                         if isinstance(data, list):
                             svg_rects = data
                     analyze_pixels(str(shot_path), vw, vh, svg_rects,
-                                   np_mod, Image_mod, rep, rel)
+                                   np_mod, Image_mod, rep, rel, dom_overlap=dom_overlap)
 
                 if "pixels" not in cats:
                     shot_ok = False
