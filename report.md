@@ -132,7 +132,7 @@
 - 结构块全量落地：局部关系 SVG（167/167）、摘要 `defcard`（167/167）、权衡卡（167/167）、TOC/锚点、`pathbar` 学习路径条（prerequisite 74 节点）、冲突/对比表（34 节点）、案例带、信源证据区；
 - 新增 `gate_layout.py`（L8）与 `gate_visual.py`（L4 首实装）；`10-dag-data` 数据指纹保持不变（I1）。
 
-**W4 · 版权审计与脱敏**：`audit_publish.py` 扫描 64 份原件，分级 A=30 / B=14 / C=20 / D=0；**长引移出 42 处 / 20493 字**（最长 2507 字），**本机路径脱敏 209 处**，疑似凭据 0 处；产出 `PUBLISH-MANIFEST.md` + `AUDIT-REPORT.json`；暂停点 3 审阅，`needs_review` 1 项（`E-iso-standards.json` 移出占比 56%）待裁决。
+**W4 · 版权审计与脱敏**：`audit_publish.py` 扫描 64 份原件，分级 A=30 / B=14 / C=20 / D=0；**长引移出 42 处 / 20493 字**（最长 2507 字），**本机路径脱敏 209 处**，疑似凭据 0 处；产出 `PUBLISH-MANIFEST.md` + `AUDIT-REPORT.json`；暂停点 3 审阅，`needs_review` 1 项（`E-iso-standards.json` 移出占比 56%）**经用户在暂停点 3 裁决为「保留脱敏版」**，详见 4.6。
 
 **W5 · 公开集装配**：装配 `_publish/`（自包含公开交付集），含 `README.md`（阶段6 口径权威）、`LICENSE`（MIT）、`.gitignore`、`.nojekyll`；装配阶段另发现并改写 4 处残留（见 §4.4）。
 

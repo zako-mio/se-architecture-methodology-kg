@@ -352,7 +352,7 @@
         <li><strong>W1 设计选型</strong>：以 <code>MTH-F-02</code>（文档页）与 <code>MTH-O-04</code>（冲突页）为样本，产出 A/B/C 三套候选与 <code>compare.html</code> / <code>gallery.html</code> / <code>rationale.md</code>；暂停点 1 选定 A 单套 + 文档页浅色/交互图暗色。</li>
         <li><strong>W2 契约与样板</strong>：落盘权威契约 <code>stage6-content-ia-spec.md</code>（不变式 I1–I7、浅色 Codex token、§1–§11 块序列、局部 SVG 规则、权衡卡保真红线、术语内联、跨库深链、无溢出、MD 镜像、门控点位）。</li>
         <li><strong>W3 全量重构与门控实装</strong>：改造生成链并重生 167 节点页 + 19 组页 + 7 视图（含新增 <code>14-views/glossary.html</code>）+ 167 MD + 根入口；结构块全量落地；新增 <code>gate_layout.py</code>（L8）与 <code>gate_visual.py</code>（L4 首实装）；<code>10-dag-data</code> 指纹不变。</li>
-        <li><strong>W4 版权审计与脱敏</strong>：<code>audit_publish.py</code> 扫描 64 份原件（分级 A=30 / B=14 / C=20 / D=0）；<strong>长引移出 42 处 / 20493 字</strong>（最长 2507 字），<strong>本机路径脱敏 209 处</strong>，疑似凭据 0；<code>needs_review</code> 1 项待裁决。</li>
+        <li><strong>W4 版权审计与脱敏</strong>：<code>audit_publish.py</code> 扫描 64 份原件（分级 A=30 / B=14 / C=20 / D=0）；<strong>长引移出 42 处 / 20493 字</strong>（最长 2507 字），<strong>本机路径脱敏 209 处</strong>，疑似凭据 0；<code>needs_review</code> 1 项 <strong>经用户在暂停点 3 裁决为「保留脱敏版」</strong>（详见「暂停点 4 的裁决结果」）。</li>
         <li><strong>W5 公开集装配</strong>：装配 <code>_publish/</code>，含 README（阶段6 口径权威）、LICENSE（MIT）、<code>.gitignore</code>、<code>.nojekyll</code>。</li>
         <li><strong>W6 Agent 能力包 + CI</strong>：<code>20-agent-skill/</code>（5 文件，轻量速查 + 路径路由）；<code>rebuild.yml</code>（重建 → 漂移检测 → 门控 → L4/L5 显式 SKIP → Pages 部署）。</li>
         <li><strong>W7 推送前复核</strong>：<code>_publish/</code> 全量残差复扫为 0；统一 README / 报告 / 门控三方口径；本报告与 <code>quality-gate.md</code> 升级为阶段1–6 口径。</li>
