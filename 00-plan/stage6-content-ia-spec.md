@@ -140,3 +140,39 @@
 1. 改生成链 → 改 `16-checkpoint/*.py` 源码；重生后 `10-dag-data` 指纹必须不变。
 2. 重生后必须跑：`validate_graph.py`（errors=0）、`kb_gate.py --layers structure,links`（0 错）、`gate_coverage.py`、`gate_sources.py`。
 3. 回归失败即回滚：`git -C $MROOT checkout <baseline> -- 11-node-pages 12-groups 14-views 15-md index.html`。
+
+## 12. C-lite：书证核验版式契约（阶段7 追加）
+
+> 上游：`00-plan/stage7-book-absorption-plan.md` §3.3#5 / §4.7；`01-books/_verify/_meta/verify-contract.md` §9。
+> 数据源（公开安全投影）：`10-dag-data/book-verification.json`（由 `16-checkpoint/derive_verification.py` 确定性生成）。
+
+### 12.1 节点页 §10「信源与核验」书证锚行
+
+| 项 | 规定 |
+|---|---|
+| 位置 | `§10 信源与核验` 区块内，「规范信源」行之后、「入口链接」行之前 |
+| 标签 | `书证核验`（`.evidence .r > .k`，与「规范信源」同款式） |
+| 格式 | `书证核验：BK-007 Ch5.2（direct）、Ch11（partial）；BK-009 Ch3.2（partial）` |
+| 粒度 | **仅章节级锚**：`Ch<chapter>` 或 `Ch<section>`；同一节点内按 `source_id` 升序，锚按自然序（`_nat_key`）升序 |
+| 强度 | 同一锚取最高优先级（`contradicted > direct > partial > inferred`）标注 |
+| 条件渲染 | 该节点在投影 `by_node` 中**无记录则不渲染该行**（节点页保持原样） |
+| 禁止 | 页码、页码区间、原文摘句、`claim` / `evidence_note` / `page_anchor_private` / `record_id` 一律不得出现 |
+| 镜像 | `15-md/nodes/<id>.md` 同步输出 `- 书证核验：<同上纯文本>`，保证双轨一致 |
+
+### 12.2 `14-views/06-book-verification.html` 块序列（唯一顺序）
+
+| # | 块 | 数据来源 | 渲染形态 |
+|---|---|---|---|
+| §1 | 书籍 ↔ 节点对照矩阵 | `by_node` | 按层分组的多张表：行 = 参考书（BK-007/BK-009/BK-023，按 `source_id` 升序），列 = 该层被核验节点（含节点页链接）；格 = 强度徽标 + 章级锚 |
+| §2 | 覆盖统计 | `by_node` | 每本书覆盖节点数、`direct/partial/inferred/contradicted` 分布、正向/反向分布；含合计行 |
+| §3 | 反向发现缺口（阶段3 输入） | `gaps` | 表：`gap_id` / 类型 / 书 / 锚 / 目标 / 改写摘要 / 建议动作 |
+
+- 视图入口 `14-views/index.html` 由 `config.py` 的 `views` 清单自动生成 06 卡片（标题「书籍↔节点对照」）。
+- 数据源缺失时优雅降级为空状态页并打印 `[SKIP]`，不得崩溃。
+
+### 12.3 公开字段白名单（`10-dag-data/book-verification.json`）
+
+- `by_node[node_id][]` 允许字段：`source_id` / `book` / `chapter` / `section` / `section_title` / `evidence_strength` / `direction` / `second_pass` / `review_date`。
+- `gaps[]` 允许字段：`gap_id` / `kind` / `book_source_id` / `chapter` / `section` / `target` / `summary` / `proposed_action` / `evidence_strength`（`summary` 为改写摘要，不属书正文）。
+- **禁止字段**：`claim` / `evidence_note` / `page_anchor_private` / `record_id` / `claim_id` / 页码区间。
+- 排序确定性：`by_node` 按 `node_id` 升序、节点内按 `(source_id, chapter, section)` 稳定排序；`gaps` 按 `gap_id` 升序；`meta.generated` 取冻结常量。

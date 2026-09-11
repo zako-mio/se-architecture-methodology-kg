@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段7 参考书吸收与知识库融合（阶段1 核验升级）</title>
+<style>
+  :root {
+    --blue-900: #1b2a41;
+    --blue-700: #2f4a70;
+    --blue-500: #4a6fa5;
+    --blue-300: #8fabce;
+    --blue-050: #eef3fa;
+    --slate-700: #3a4657;
+    --slate-500: #5c6b7f;
+    --slate-200: #dde3ec;
+    --slate-100: #f4f6f9;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #232b36;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC",
+      sans-serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 22px 72px; }
+  header.doc {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 34px 34px 30px;
+    box-shadow: 0 8px 26px rgba(27, 42, 65, .18);
+  }
+  header.doc h1 {
+    margin: 0 0 18px;
+    font-size: 1.56rem;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .meta { list-style: none; margin: 0; padding: 0; }
+  .meta li {
+    margin: 7px 0;
+    padding-left: 14px;
+    position: relative;
+    font-size: .93rem;
+    line-height: 1.7;
+    color: #dbe4f2;
+  }
+  .meta li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .68em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-300);
+  }
+  .meta strong { color: #fff; font-weight: 600; }
+  .meta code {
+    background: rgba(255,255,255,.14);
+    color: #eaf0fa;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: .86em;
+  }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin: 22px 0 0;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: .95rem;
+    color: var(--slate-500);
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+  nav.toc ol { margin: 0; padding-left: 22px; }
+  nav.toc li { margin: 5px 0; }
+  nav.toc a { color: var(--blue-700); text-decoration: none; }
+  nav.toc a:hover { color: var(--blue-500); text-decoration: underline; }
+  main { margin-top: 30px; }
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 26px 30px 22px;
+    margin: 0 0 22px;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+    scroll-margin-top: 20px;
+  }
+  section.card > h2 {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-050);
+    font-size: 1.28rem;
+    color: var(--blue-900);
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  section.card > h2::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 1.05em;
+    margin-right: 12px;
+    vertical-align: -3px;
+    border-radius: 3px;
+    background: var(--blue-500);
+  }
+  section.card h3 {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: var(--blue-900); font-weight: 600; }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: var(--slate-100);
+    color: #2d3b52;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: .87em;
+    border: 1px solid var(--slate-200);
+    word-break: break-all;
+  }
+  ol, ul { margin: 0 0 14px; padding-left: 26px; }
+  li { margin: 8px 0; }
+  ol li::marker { color: var(--blue-500); font-weight: 600; }
+  ul li::marker { color: var(--blue-300); }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 18px;
+    background: var(--blue-050);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 8px 8px 0;
+    color: var(--slate-700);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 9px; border: 1px solid var(--slate-200); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; background: #fff; }
+  thead th {
+    background: var(--blue-700);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 15px;
+    border-top: 1px solid var(--slate-200);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:nth-child(even) { background: var(--slate-100); }
+  tbody tr:hover { background: var(--blue-050); }
+  .tag {
+    display: inline-block;
+    background: #e4f3e8;
+    color: #2b7a3f;
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: .8em;
+    font-weight: 600;
+  }
+  footer.doc {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--slate-500);
+    font-size: .82rem;
+  }
+  @media (max-width: 640px) {
+    body { font-size: 15.5px; }
+    .wrap { padding: 22px 14px 48px; }
+    header.doc { padding: 24px 20px 20px; }
+    header.doc h1 { font-size: 1.3rem; }
+    section.card { padding: 20px 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <h1>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段7 参考书吸收与知识库融合（阶段1 核验升级）</h1>
+    <ul class="meta">
+      <li><strong>日期</strong>：2026-09-11</li>
+      <li><strong>任务目录</strong>：<code>~/opencode/archive/Mission-file/2026-09/0910-软件工程架构方法论/</code></li>
+      <li><strong>GATE</strong>：范围=5 深度=5 操作=5 风险=4 → 19 → Deep（<code>[COMPLEXITY: 19/20]</code> 继承，全程 Deep 推理）</li>
+      <li><strong>本次完成</strong>：阶段7（阶段1 核验升级）——用书籍正文对图谱存量 BK 引用做主张级书证核验，产出章节锚 + 缺口 + 可审计证据链，并确定性派生回图谱状态字段</li>
+      <li><strong>规模</strong>：167 节点 / 360 边 / 144 核验记录 / 35 覆盖节点 / 26 升级节点 / 28 反向缺口</li>
+    </ul>
+  </header>
+
+  <nav class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#situation">1. 当时情况</a></li>
+      <li><a href="#plan">2. 制定计划</a></li>
+      <li><a href="#execution">3. 执行情况</a></li>
+      <li><a href="#completion">4. 完成情况</a></li>
+      <li><a href="#reflection">5. 反思 / 分析 / 建议</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section class="card" id="situation">
+      <h2>1. 当时情况</h2>
+
+      <h3>1.1 母任务与用户诉求</h3>
+      <p>母任务 <code>0910-软件工程架构方法论</code> 阶段1–6 已全部完成并上线：母库 <strong>167 节点 / 360 边 / 18 组 / 18 案例</strong>，公开仓 <code>zako-mio/se-architecture-methodology-kg</code> + GitHub Pages + Actions 全绿。用户随后提出本轮原始诉求，原话为：「<strong>之前下载了部分书目，在知识库完成后，还未吸收参考书中内容，故需要计划吸收参考书并融入知识库</strong>」。</p>
+      <p>该诉求的时间序倒置是阶段7 的起点：知识库先建成，参考书语料后到位。</p>
+
+      <h3>1.2 核心缺口：书语料晚于知识库定稿</h3>
+      <ul>
+        <li>30 本 paid/user-copy 经典著作（DDIA、Clean Architecture、Software Architecture in Practice 等）的语料直到 <strong>2026-09-11</strong> 才全部落入私有语料层 <code>01-books/_files/</code>（<strong>75 文件 / 290MB</strong>；含 35 PDF + 13 EPUB + DDIA 26 个中文全文 MD），并配套 <code>acquired-manifest.json</code> / <code>download-log.md</code>。</li>
+        <li>而图谱（<code>methodology-dag.json</code>）与信源主表（<code>canonical-sources.json</code>）在 <strong>2026-09-10 前</strong>即已定稿：现有 <strong>106/167 节点引用 BK 信源</strong>（BK 引用合计 159 处），但节点的 <code>verified</code>（布尔 <code>true</code> <strong>149</strong> / 字符串 <code>"cited"</code> <strong>18</strong>）与 <code>confidence</code>（<code>high</code> 151 / <code>medium</code> 16）<strong>全部来自公开线索、官方目录与作者博客的间接核验，从未读过书籍正文</strong>。</li>
+        <li>结论：<strong>当前的「已验证」是名义状态，不是书证状态</strong>。阶段7 要做的，就是把「名义 verified」升级为「带章节锚、可审计的书证核验」。</li>
+      </ul>
+
+      <h3>1.3 环境约束</h3>
+      <blockquote>
+        <p>图谱冻结指纹 <code>58a7e3c3…</code>（阶段5 起未变），<code>canonical-sources.json</code> 指纹 <code>e7cd0eb7…</code>；生成链仅 Python 标准库、幂等、<strong>无时间戳</strong>，CI 用 <code>git diff --exit-code</code> 做漂移检测；沙箱禁 <code>git push</code>（公开仓须走 GitHub Git Data API）、禁 <code>python -c</code>、禁 <code>rm -rf</code>；版权红线要求书籍正文只入私有语料层。</p>
+      </blockquote>
+    </section>
+
+    <section class="card" id="plan">
+      <h2>2. 制定计划</h2>
+
+      <h3>2.1 11 轮拷问收敛</h3>
+      <p>计划轮以 <strong>11 轮拷问</strong> 逐步收敛（其中一次由用户主动要求「<strong>先做工程权衡分析</strong>」再决策）。收敛过程中不预设结论，而是把「落盘层」与「证据模型」两个核心问题分别交给架构裁决流程。</p>
+
+      <h3>2.2 ADR-001：私有核验层为唯一真相源</h3>
+      <p>委派 <code>architect-worker</code> 产 ADR-001，经 <code>gate_architecture.py --kind adr</code> <strong>机检 6/6 PASS</strong>，用户裁决采纳方案 A：</p>
+      <ul>
+        <li><strong>私有核验层为唯一真相源（SSOT）</strong>：记录 节点 ↔ 信源 ↔ 章节锚 ↔ 证据强度 ↔ 复核元数据。</li>
+        <li>节点与信源表的 <code>verified</code> / <code>confidence</code> / <code>review_date</code> / <code>errata</code> <strong>一律由确定性派生脚本生成</strong>，禁手改生成物；派生脚本对「<strong>无锚点升级</strong>」判 FAIL。</li>
+        <li><strong>版权粒度裁定</strong>：<strong>章节级结构锚</strong>（BK 号 + 章/节编号与标题 + 证据强度 + 处理日期）<strong>可经脱敏门控进公开层</strong>；<strong>页码区间与原文摘句仅留私有层</strong>。</li>
+        <li>多维权衡矩阵（9 维）加权：<strong>A 4.28 &gt; B 3.72 &gt; C 3.02 &gt; D 2.20</strong>。B/C 因「保留未与书证联动的公开 verified → 双真相」否决，D 因「页码/摘句进公开图谱 → 触版权红线」否决；仅 A 通过全部否决项。</li>
+      </ul>
+
+      <h3>2.3 ADR-002：主张级四级强度 + 双向</h3>
+      <p>委派 <code>architect-worker</code> 产 ADR-002，同样 <strong>机检 6/6 PASS</strong>，用户裁决采纳方案 A + 指标解耦：</p>
+      <ul>
+        <li><strong>主张级四级强度 + 双向（正向回验 + 反向发现）</strong>：拆原子主张——<code>definition</code> 1 条 + <code>detail</code> 四段各 ≥1 条 + 每条 <code>errata</code> 1 条，<strong>单节点主张上限 8 条</strong>（封顶成本）。</li>
+        <li>强度为<strong>封闭枚举</strong>：<code>direct</code>（书中明确支持）/ <code>partial</code>（支持部分要素或需一步推断）/ <code>inferred</code>（概念相关但书未直陈）/ <code>contradicted</code>（与书相悖）。</li>
+        <li>方向 <code>direction</code>：<code>forward</code>（回验存量引用）/ <code>reverse</code>（发现应引未引、覆盖缺口）。</li>
+        <li><strong>节点升级判据</strong>：<code>≥1 条 direct</code> <strong>且</strong> <code>0 条 contradicted</code>；出现 <code>contradicted</code> 即产出 <code>errata</code> 并阻止升级。</li>
+        <li><strong>指标解耦</strong>：核心主判据保留「可溯源率」；新指标「<strong>直接锚定覆盖率</strong>」<strong>只报告不判</strong> FAIL/WARN。</li>
+        <li>多维权衡矩阵（9 维）加权：<strong>A 3.92 &gt; D 3.51 &gt; B 3.10 &gt; C 3.07</strong>；D 因「不驱动升级」、C 因「无法定位到哪句话被支持」否决。</li>
+      </ul>
+
+      <h3>2.4 收敛决策与复杂度</h3>
+      <p>本计划轮共收敛 <strong>11 条决策</strong>，要点包括：pilot 选 <strong>3 本</strong>（DDIA 反向 / CleanArch 3 个正向目标 / SAiP 15 个正向目标）、阅读策略<strong>分层混合</strong>、质检<strong>单路核验 + 程序化回盘 + 高风险项第二路独立复核</strong>、交付边界<strong>全链路含公开层</strong>、派生作用域<strong>增量式</strong>、指标解耦、公开呈现 <strong>C-lite</strong>（新增视图 06 + 节点页一行章节锚，不新增整块）。复杂度评估 <strong><code>[COMPLEXITY: 19/20]</code> → Deep</strong>（Build 阶段沿用，不得重新评估）。最终产出计划文档 <a href="00-plan/stage7-book-absorption-plan.md"><code>00-plan/stage7-book-absorption-plan.md</code></a>（<strong>432 行 / 9 节</strong>）。</p>
+    </section>
+
+    <section class="card" id="execution">
+      <h2>3. 执行情况</h2>
+
+      <h3>3.1 七路委派</h3>
+      <p>本阶段按 DAG 委派 <strong>7 路</strong>工作：<strong>W1 契约骨架</strong>（核验层 schema + 目录 + 三重隔离）→ <strong>W2a DDIA 反向</strong> / <strong>W2b CleanArch</strong> / <strong>W2c SAiP</strong>（三路并行核验）→ <strong>W3 第二路复核</strong>（verifier-worker 独立视角）→ <strong>W4 + W4b 派生接入与纠偏</strong>（<code>derive_verification.py</code> + <code>aggregate.py</code> 接入）→ <strong>W5 生成链改造</strong>（视图 06 + 节点页锚行 + deliverables）→ <strong>W6 门控</strong>（新增 <code>gate_verification.py</code> + L1–L8）→ <strong>W7 公开层</strong>（装配 + 推送 + Pages 复验）。</p>
+
+      <h3>3.2 执行中挖出并修复的两处根因缺陷</h3>
+      <ol>
+        <li><strong>运行时钟污染幂等</strong>：<code>aggregate.py:308/337</code> 用 <code>datetime.date.today()</code> 写 <code>meta.updated</code> → <strong>跨日重聚合即改 SHA</strong>，与「幂等 + 无时间戳」口径冲突 → 改为从 <code>_base.json</code> 冻结常量读取日期。</li>
+        <li><strong>派生循环依赖</strong>：派生器从<strong>派生后 dag</strong> 回读「原值」→ <strong>循环依赖</strong>（失去资格的节点无法回退，<code>CAS-X-02</code> 会错误停在 <code>true</code>）→ 引入 <code>10-dag-data/_verification-baseline.json</code>（从 git HEAD 冻结快照，167 节点）使派生成为 <code>(baseline, ledger)</code> 的<strong>纯函数</strong>。</li>
+      </ol>
+
+      <h3>3.3 主Agent 回盘复验抓出的关键事实</h3>
+      <p>三路子Agent 均自报 <code>success</code>，但主Agent 独立复算发现：</p>
+      <ul>
+        <li><strong>DDIA 正向引用 = 0</strong>：原选书未意识到 DDIA 在现图谱中没有任何正向引用，随即把 pilot 调整为 <strong>3 本覆盖双方向</strong>。</li>
+        <li><strong>18 个 <code>cited</code> 节点全部是 CAS-X-* 自研案例</strong>，仅 <code>CAS-X-02</code> 引 CleanArch。</li>
+        <li><strong>第二路复核实测 FP 率 18.75%</strong>：96 条 <code>direct</code> 中有 <strong>18 条假阳性</strong>被独立复核抓出并保守降级为 <code>partial</code>。</li>
+      </ul>
+
+      <h3>3.4 子Agent 权限事实</h3>
+      <ul>
+        <li><code>architect-worker</code> 沙箱 <strong>bash 全禁</strong>，故架构门控须由主Agent 亲跑（不得由其自报 PASS）。</li>
+        <li><code>general</code> 子Agent 可执行 <code>python3 script.py</code>，但读私有语料 + 写分片的唯一写入方约束仍须保持。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="completion">
+      <h2>4. 完成情况</h2>
+
+      <h3>4.1 门控实测（L1–L8 + 方法论四项 + G-V1..G-V8）</h3>
+      <p>全部现场实测，<strong>全 PASS</strong>：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>门控</th><th>实测摘要</th><th>结论</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>L1 分片自验证</td><td>23 分片 errors=0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L2 全图审计</td><td>nodes=167 edges=360 kahn=167/167，errors=0 warnings=0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L3 结构 + 断链</td><td>structure 427/0；links 5189/0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L4 视觉</td><td>272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L5 渲染</td><td>7 用例 0 悬空</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L6 覆盖度</td><td>manifest 365/365 = 100%</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L7 信源</td><td>悬挂 0 + 可溯源 100%</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>L8 版式</td><td>2128/2128 = 100%</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>方法论四项</td><td>layer-boundary / glossary / principle-counterexample 36/36 / tradeoff-11 11/11</td><td><span class="tag">4/4 PASS</span></td></tr>
+            <tr><td>G-V1..G-V8</td><td>核验层 schema / 枚举 / 锚点 / 无锚点升级 0 / 改写红线 / 编码 / 幂等 / 对账</td><td><span class="tag">8/8 PASS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.2 幂等自证</h3>
+      <ul>
+        <li><code>build.py</code> 连跑生成物哈希一致 <code>303991d7…</code>。</li>
+        <li><code>aggregate.py</code> 连跑 SHA 稳定（<code>git diff --exit-code</code> 为空）。</li>
+      </ul>
+
+      <h3>4.3 核验数据</h3>
+      <ul>
+        <li><strong>144 条核验记录</strong>：<code>direct</code> <strong>78</strong> / <code>partial</code> <strong>59</strong> / <code>inferred</code> <strong>7</strong> / <code>contradicted</code> <strong>0</strong>。</li>
+        <li><strong>35 覆盖节点</strong>、<strong>26 升级节点</strong>（G-V4 口径：≥1 <code>direct</code> 且 0 <code>contradicted</code>）。</li>
+        <li><strong>28 条反向缺口</strong>：<code>coverage_hole</code> 10 / <code>concept_missing</code> 10 / <code>missed_citation</code> 8。</li>
+        <li>第二路复核 96 条 <code>direct</code> → <strong>18 条假阳性降级</strong>，FP 率 <strong>18.75%</strong>。</li>
+        <li><strong>本轮 <code>verified</code> 零翻转</strong>（维持 149/18），<strong><code>contradicted</code> = 0 无新勘误</strong>——真实产出是章节锚 + 缺口 + 可审计证据链。</li>
+      </ul>
+
+      <h3>4.4 指纹与公开层</h3>
+      <ul>
+        <li>图谱指纹：<code>58a7e3c3…</code> → <strong><code>9ae4cc01…</code></strong>（一次性变更：日期坑修复 + 覆盖应用）。</li>
+        <li>公开层：<code>_publish</code> <strong>528 文件</strong> → 远端提交 <code>08e0ef9</code>；CI run <strong><code>34596436302</code></strong> success；Pages <strong>6 URL 全 200</strong>；公开面本机路径 <code>~</code> 命中 <strong>0</strong>；导出 <strong>527 件 / 18.46MB</strong>，无 PDF/EPUB。</li>
+        <li><code>canonical-sources.json</code> 指纹 <code>e7cd0eb7…</code> <strong>未变</strong>。</li>
+      </ul>
+
+      <h3>4.5 交付物清单</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>交付物</th><th>规模</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>架构决策</td><td>ADR-001 / ADR-002 + matrix ×2</td><td>4 文件（均机检 6/6 PASS）</td></tr>
+            <tr><td>计划文档</td><td><code>00-plan/stage7-book-absorption-plan.md</code></td><td>432 行 / 9 节</td></tr>
+            <tr><td>核验层（私有 SSOT）</td><td><code>01-books/_verify/</code>：契约 / 分片 / ledger / claims / toc / gaps / 第二路复核 / 抽文本</td><td>全套</td></tr>
+            <tr><td>派生链路</td><td><code>derive_verification.py</code> / <code>gate_verification.py</code> + 3 个 json（baseline/overrides/book-verification）</td><td>2 脚本 + 3 json</td></tr>
+            <tr><td>生成链改造</td><td><code>gen-views</code> / <code>gen-nodes</code> / <code>gen-md</code> / <code>aggregate</code> / <code>config</code> / <code>gen_common</code> / <code>deliverables</code> + 新视图 06 + 35 节点页锚行</td><td>7 文件 + 生成物</td></tr>
+            <tr><td>基线</td><td><code>00-plan/stage7-baseline.md</code></td><td>1</td></tr>
+            <tr><td>公开层</td><td><code>_publish/</code>（528 文件）→ 远端 <code>08e0ef9</code></td><td>1 集</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.6 改动明细</h3>
+      <ul>
+        <li><strong>新增</strong>：<code>01-books/_verify/</code> 全套、<code>10-dag-data/_verification-baseline.json</code>、<code>_verification-overrides.json</code>、<code>book-verification.json</code>、<code>16-checkpoint/derive_verification.py</code>、<code>16-checkpoint/gate_verification.py</code>、<code>14-views/06-book-verification.html</code>、<code>00-plan/stage7-baseline.md</code>。</li>
+        <li><strong>修改</strong>：<code>aggregate.py</code>（日期坑修复 + 应用覆盖）、<code>gen-views.py</code> / <code>gen-nodes.py</code> / <code>gen-md.py</code> / <code>gen_common.py</code> / <code>config.py</code> / <code>deliverables.json</code>、<code>publish-manifest.json</code>（<code>private</code> 类 + <code>private_probe</code>）、<code>_publish/.gitignore</code>、<code>_base.json</code>（冻结日期常量）、<code>methodology-dag.json</code> / <code>node-content.json</code>（再生）。</li>
+        <li><strong>未改</strong>：<code>canonical-sources.json</code> 指纹不变。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="reflection">
+      <h2>5. 反思 / 分析 / 建议</h2>
+
+      <h3>5.1 关键认知</h3>
+      <ol>
+        <li><strong>ADR-002 对 FP 的估计（≤5%）严重偏乐观，实测 18.75%</strong>。这证明「高风险项第二路独立复核」<strong>不是可选项而是必需项</strong>。且 FP 形态高度一致——<strong>claim 是「书中原句 + 我们的推断扩展」的复合主张</strong>，扩展部分被误判为 <code>direct</code>。</li>
+        <li><strong>pilot 的「核验升级」产出为 0 次 <code>verified</code> 翻转</strong>，真实产出是<strong>章节锚 + 缺口 + 可审计证据链</strong> → 说明「吸收」的价值主要在<strong>证据可审计</strong>与<strong>覆盖发现</strong>，而非状态翻转。</li>
+        <li><strong>循环依赖是「派生型 SSOT」的典型陷阱</strong>：真相源之外若有第二个可变来源（派生后的产物被回读），派生即不纯；解法是引入<strong>冻结基线</strong>使派生成为纯函数。</li>
+        <li><strong>运行时钟是幂等口径的隐形杀手</strong>，且只在「跨日重跑」时暴露，日常测试不触发。</li>
+        <li><strong>子Agent 自述仍不可信</strong>：本轮 3 路子Agent 全报 success，但独立复算修正了选书前提、发现 FP、并揪出两处根因缺陷。</li>
+      </ol>
+
+      <h3>5.2 改进建议</h3>
+      <ol>
+        <li>阶段2 应把「<strong>第二路复核</strong>」内建进流水线，而非事后抽查。</li>
+        <li>主张拆分时应显式标注「<strong>书中直陈部分 vs 我们推断部分</strong>」，从源头降低 FP。</li>
+        <li>阶段2/3 的准入判据可直接复用 <code>reverse-gaps.json</code>。</li>
+        <li>建议把 <code>gate_verification.py</code> 的 <strong>G-V5（改写红线）扩展为 claim 级复合性检测</strong>，对「直陈 + 推断」复合主张主动告警。</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="doc">
+    Mission 报告 · 阶段7 参考书吸收与知识库融合（阶段1 核验升级）· 144 核验记录 / 35 覆盖节点 / 26 升级节点 / 28 反向缺口 ·
+    Markdown 镜像：<a href="report-phase7.md">report-phase7.md</a> · 计划：<a href="00-plan/stage7-book-absorption-plan.md">stage7-book-absorption-plan.md</a> · 基线：<a href="00-plan/stage7-baseline.md">stage7-baseline.md</a> · 决策：ADR-001 / ADR-002（见 <a href="00-plan/stage7-book-absorption-plan.md">stage7-book-absorption-plan.md</a> §3.1–§3.2；ADR 原件属私有设计档案，不公开）
+  </footer>
+</div>
+</body>
+</html>

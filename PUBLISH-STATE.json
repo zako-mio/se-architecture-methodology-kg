@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated_by": "assemble_publish.py",
   "manifest_version": "1.0",
-  "file_count": 522,
+  "file_count": 527,
   "files": {
     "00-plan/01-alignment.md": {
       "sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386",
@@ -95,10 +95,22 @@
       "src_sha256": "7a5d74abce7276addcc041b66cad9785607076442608c7986533c26553d4f238"
     },
     "00-plan/stage6-content-ia-spec.md": {
-      "sha256": "1347ac38f652626876434f5a354a3b962c05a0f60690dab5faf378cb9b7c3882",
+      "sha256": "75bfe892c9bebca923e9f610ab7e18f1257eb618198076e87cddf846790f21e3",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage6-content-ia-spec.md",
-      "src_sha256": "1347ac38f652626876434f5a354a3b962c05a0f60690dab5faf378cb9b7c3882"
+      "src_sha256": "75bfe892c9bebca923e9f610ab7e18f1257eb618198076e87cddf846790f21e3"
+    },
+    "00-plan/stage7-baseline.md": {
+      "sha256": "3d925d2e8d7ca37ea4b60aab2d5c323f8d642f841dbb4ec02d46ea90b86c4a01",
+      "class": "sanitize",
+      "src": "_publish-staging/00-plan/stage7-baseline.md",
+      "src_sha256": "3d925d2e8d7ca37ea4b60aab2d5c323f8d642f841dbb4ec02d46ea90b86c4a01"
+    },
+    "00-plan/stage7-book-absorption-plan.md": {
+      "sha256": "8e824315d2b6b8d844740c88bc05ddce4c25a20692e3c3e0530e866755fa9bb2",
+      "class": "sanitize",
+      "src": "_publish-staging/00-plan/stage7-book-absorption-plan.md",
+      "src_sha256": "8e824315d2b6b8d844740c88bc05ddce4c25a20692e3c3e0530e866755fa9bb2"
     },
     "01-books/D-book-candidates.json": {
       "sha256": "dde3a75fceed3be47d5c853fcbb5da8680ae6fa04098a78b7683f64968978ac3",
@@ -2825,10 +2837,10 @@
       "src_sha256": "599b14698d677ed1ed6e230cbdbf4bc6f4dddabf7f01c301c27235ceafc3110b"
     },
     "16-checkpoint/audit_publish.py": {
-      "sha256": "f177bd53387a6bd25a9f74098c1066d566aeec62a4cea8e4ac3c9785a4916e75",
+      "sha256": "ad14232c24b99b6f437bbefd395d7bb37a262133688658c45602b883f0e04332",
       "class": "mask",
       "src": "16-checkpoint/audit_publish.py",
-      "src_sha256": "038618011509baad8c0d3a3bd1e306d08f8835398405ba8bd78d7a86ab3df739"
+      "src_sha256": "b109a802f63c863c965c829dba7802c012a8be8fd9d79cf3765446e5e5d67d9c"
     },
     "16-checkpoint/backup-manifest.txt": {
       "sha256": "d111aae699074af7318b44aedf3b767dd9a25f816bd18dab4bf163da061b6e1a",
@@ -2913,6 +2925,12 @@
       "class": "mask",
       "src": "16-checkpoint/gate_render.py",
       "src_sha256": "8660b688291138a5db666f2b8f3677021cdb0d00b600d12608c1188b2e6f05b8"
+    },
+    "16-checkpoint/gate_report.py": {
+      "sha256": "dc8188fc158a079b28b75a08a28ae432d3fbcb443cb88f264d987c8cc447642b",
+      "class": "mask",
+      "src": "16-checkpoint/gate_report.py",
+      "src_sha256": "dc8188fc158a079b28b75a08a28ae432d3fbcb443cb88f264d987c8cc447642b"
     },
     "16-checkpoint/gate_sources.py": {
       "sha256": "84b9a1741ede7d1a6d751721dc4392fd15c9203a51ab5e0f09e532ebed17efc2",
@@ -3005,10 +3023,10 @@
       "src_sha256": "801541fc483c8bbc24b9913f8182c9cab066c688681c6860f6739b2fd2dd4006"
     },
     "16-checkpoint/publish-manifest.json": {
-      "sha256": "e18f757e0dbdf9efe877951ed78b2af575ef06097b24d94b5f0577ce76b1efa0",
+      "sha256": "429cb16451902840b286c6d2aae8424e4a5229ca57d0befc4a8ec503f64e9cc2",
       "class": "mask",
       "src": "16-checkpoint/publish-manifest.json",
-      "src_sha256": "e18f757e0dbdf9efe877951ed78b2af575ef06097b24d94b5f0577ce76b1efa0"
+      "src_sha256": "429cb16451902840b286c6d2aae8424e4a5229ca57d0befc4a8ec503f64e9cc2"
     },
     "16-checkpoint/validate_graph.py": {
       "sha256": "6e4b46101784bdb7669141a7486e02a3da30d1dded92fc63462251884676d199",
@@ -3123,6 +3141,18 @@
       "class": "sanitize",
       "src": "_publish-staging/quality-gate.md",
       "src_sha256": "787d5744ef809d41bdf661fab32b8976660c38023953e496e91b17e3a49db982"
+    },
+    "report-phase7.html": {
+      "sha256": "07daad62dab6d7ca936d336bedc1834630734db6e9e34da773d85c64898933f6",
+      "class": "sanitize",
+      "src": "_publish-staging/report-phase7.html",
+      "src_sha256": "07daad62dab6d7ca936d336bedc1834630734db6e9e34da773d85c64898933f6"
+    },
+    "report-phase7.md": {
+      "sha256": "d754af336bf23bc6e3c428fae96cab12d7c68325dd840bc110674f3a08212f6e",
+      "class": "sanitize",
+      "src": "_publish-staging/report-phase7.md",
+      "src_sha256": "d754af336bf23bc6e3c428fae96cab12d7c68325dd840bc110674f3a08212f6e"
     },
     "report.html": {
       "sha256": "4e0666d51919639669eb13cdc668822e3f670fe32f347974b49029b230fb9881",

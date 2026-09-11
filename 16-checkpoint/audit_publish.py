@@ -45,7 +45,7 @@ MROOT = os.path.dirname(SCRIPT_DIR)
 STAGING = os.path.join(MROOT, "_publish-staging")
 
 SCAN_DIRS = ("00-plan", "01-books", "02-research", "03-knowledge-map")
-SCAN_ROOT_FILES = ("report.md", "report.html", "quality-gate.md")
+SCAN_ROOT_FILES = ("report.md", "report.html", "report-phase7.md", "report-phase7.html", "quality-gate.md")
 
 # 未纳入公开集的目录（供清单说明）
 EXCLUDED_SCOPE = [
@@ -56,6 +56,7 @@ EXCLUDED_SCOPE = [
     ("01-books/_files/", "书籍语料本体（私有本地语料层，含来源受限副本），永不进公开仓"),
     ("01-books/download-log.md", "采集日志（含影子库/网盘线索），仅本地私有"),
     ("01-books/acquired-manifest.json", "语料清单（含来源受限源 URL），仅本地私有"),
+    ("01-books/_verify/", "阶段7 私有核验层 SSOT（claim/锚点/页码/摘句），永不进公开仓"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -66,6 +67,7 @@ HARD_EXCLUDE_PREFIXES = (
     "01-books/_files/",
     "01-books/download-log.md",
     "01-books/acquired-manifest.json",
+    "01-books/_verify/",
 )
 
 # 明确的二进制扩展名（防止 is_binary_file 的 NUL 启发式漏判，例如前 8KB 无 NUL 的 PDF）
