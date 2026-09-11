@@ -91,6 +91,17 @@ jobs:
           echo "which is not available on the stock GitHub runner."
           echo "It is NOT reported as PASS. Run locally: python3 16-checkpoint/gate_render.py"
 
+      - name: Publish state reconciliation (public mirror vs PUBLISH-STATE.json)
+        run: python3 16-checkpoint/assemble_publish.py --check-public
+
+      - name: Gate — disclosure wording
+        run: python3 16-checkpoint/gate_disclosure.py --root . --quiet
+
+      - name: Build Pages artifact (whitelist export)
+        run: |
+          python3 16-checkpoint/assemble_publish.py --export .pages-export
+          python3 16-checkpoint/assemble_publish.py --assert-clean .pages-export
+
       - name: Setup Pages
         # 前置条件（仅首次）：仓库需已启用 Pages 且 Source = GitHub Actions。
         #   因 GITHUB_TOKEN 无权限创建 Pages 站点，本步骤不做自启用（enablement: true
@@ -101,7 +112,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: .
+          path: .pages-export
 
   deploy:
     needs: build

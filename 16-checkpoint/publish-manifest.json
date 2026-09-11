@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "root": ".",
+  "staging_dir": "_publish-staging",
+  "target_dir": "_publish",
+  "classes": {
+    "private": [
+      "01-books/_files/",
+      "01-books/download-log.md",
+      "01-books/acquired-manifest.json"
+    ],
+    "never": [
+      "_publish/",
+      "_publish-staging/",
+      "_backup-idmigration/",
+      "18-design/",
+      "16-checkpoint/_render-shots/",
+      "__pycache__/",
+      "ARCHIVE-INDEX.md",
+      ".git/",
+      "00-plan/stage2-book-collection.md",
+      "16-checkpoint/publish-reconcile-report.md"
+    ],
+    "preserve": [
+      "LICENSE",
+      "README.md",
+      ".nojekyll",
+      ".gitignore",
+      ".github/",
+      "PUBLISH-STATE.json",
+      "AUDIT-REPORT.json",
+      "PUBLISH-MANIFEST.md"
+    ],
+    "sanitize": [
+      "00-plan/",
+      "01-books/",
+      "02-research/",
+      "03-knowledge-map/",
+      "report.md",
+      "report.html",
+      "quality-gate.md"
+    ],
+    "mirror": [
+      "11-node-pages/",
+      "12-groups/",
+      "13-interactive/",
+      "14-views/",
+      "15-md/",
+      "index.html",
+      "20-agent-skill/"
+    ],
+    "mask": [
+      "10-dag-data/",
+      {
+        "path": "16-checkpoint/",
+        "exclude": [
+          "merge_pilot.py",
+          "validate_pilot_merge.py",
+          "_render-shots/"
+        ]
+      }
+    ]
+  },
+  "binary_allowlist": [
+    "00-plan/diagrams/"
+  ],
+  "private_probe": [
+    "01-books/_files",
+    "download-log.md",
+    "acquired-manifest.json"
+  ],
+  "binary_exts": [
+    ".pdf",
+    ".epub",
+    ".mobi",
+    ".azw3",
+    ".djvu",
+    ".zip",
+    ".gz",
+    ".7z",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".webp",
+    ".ico",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".otf",
+    ".mp3",
+    ".mp4",
+    ".xlsx",
+    ".docx",
+    ".pptx"
+  ],
+  "notes": [
+    "相对契约 §3 的追加①：MROOT 顶层条目 `index.html` 未被任何类声明（默认拒绝覆盖检查会失败），已归入 mirror。理由：它是公开站点顶层入口，与 `_publish/index.html` 字节一致（sha256 相同）；且不在 audit_publish.py 的 SCAN_ROOT_FILES（report.md/report.html/quality-gate.md）内，故不应走 sanitize，按原样镜像最忠实。",
+    "追加②（主Agent 裁决，2026-09-11）：`10-dag-data/` 与 `16-checkpoint/` 由 mirror 改归 **mask** 类 —— 实测公开仓这两处的内容是「源 + 本机路径脱敏」的产物（`10-dag-data` 3 文件、`16-checkpoint/audit_publish.py`）。其中 audit_publish.py 的手工变体已按「可机械派生的逆向吸收回源」原则在源侧修掉（HOME_PATH_RE 改为 /home/ + $USER，docstring 去字面量），故 mask 对其为幂等空操作。mask 类与 audit 链共用同一组正则（import audit_publish），保证规则同源。",
+    "追加③：新增 `binary_allowlist`，解决 P3 冲突 —— 公开站点引用的 `00-plan/diagrams/stage4-architecture.png`（被 `_publish/00-plan/NEXT-SESSION-HANDOFF.md` 引用）是合法站点资产，故显式放行 `00-plan/diagrams/`；未列入 allowlist 的二进制仍然 FAIL（保持 fail-closed）。",
+    "追加④：新增两条 `never` —— `00-plan/stage2-book-collection.md` 与 `16-checkpoint/publish-reconcile-report.md` 属内部运维记录，不进公开仓（前者含采集渠道细节，已由披露口径门控命中验证）。"
+  ]
+}

@@ -3,3 +3,9 @@ __pycache__/
 _render-shots/
 .DS_Store
 Thumbs.db
+
+# 本地语料层（0910 采集补丁）：书籍全文与采集日志永不进公开仓
+#  配套：本地仓 .gitignore 同步排除；改后必须跑 git check-ignore 验证
+01-books/_files/
+01-books/download-log.md
+01-books/acquired-manifest.json

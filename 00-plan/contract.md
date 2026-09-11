@@ -61,9 +61,14 @@ MISSION_ROOT = ~/opencode/archive/Mission-file/2026-09/0910-软件工程架构�
 
 ## 5. 版权红线（刚性）
 
-- 书籍本体**只入本地语料层**，**永不进公开仓库**。
-- 公开仓库只承载「纳入、消化、重组后的知识与方法论」+ 我们自己的脚本。
-- 子Agent 不得下载或写入受版权保护的书籍全文到 MISSION_ROOT 下的公开交付目录。
+- **私有语料层**：`01-books/_files/`（书籍/标准正文、结构层快照）及其清单 `01-books/download-log.md`、`01-books/acquired-manifest.json`。这是**唯一**允许存放书籍本体的位置。
+- **公开仓库**只承载「纳入、消化、重组后的知识与方法论」+ 我们自己的脚本，**永不承载书籍/标准正文**。
+- **三层强制隔离**（全部可机检，非口头约定）：
+  1. 本地仓 `.gitignore` 排除 `01-books/_files/` 与上述两个清单；
+  2. 公开仓 `_publish/.gitignore` 同样排除；
+  3. 装配层 `16-checkpoint/audit_publish.py` 的 `HARD_EXCLUDE_PREFIXES` 使这些路径**连扫描都不进入**（`--scan` 会报 `hard_excluded.files_skipped`），从源头杜绝二进制语料被 `--emit` 原样复制进 `_publish-staging/`。
+- **复核命令**：两仓各跑 `git check-ignore -v 01-books/download-log.md`；装配层跑 `python3 16-checkpoint/audit_publish.py --scan`（要求 `_files/` 命中数为 0、`hard_excluded.files_skipped` 与磁盘实际数一致）。
+- 子Agent 不得把书籍/标准正文写入 `_publish/`、`_publish-staging/` 或任何公开交付目录。
 
 ## 6. 证据纪律
 

@@ -20,8 +20,8 @@ audit_publish.py — 公开集版权红线审计三合一工具（W4）
   3) 成对引号：CJK 成对引号「」“”‘’内部 >200 → 移出内部（保留引号）
   4) Markdown 引用块：单段 >200 且几无中文（CJK<20）→ 整段移出
 
-本机路径脱敏：本机 home 绝对路径 → ~ ；C:\\Users\\<user> → %USERPROFILE%
-密钥凭据：GitHub token / OpenAI key / AWS AKIA / PRIVATE KEY / Slack token 样式 → 【已移出：疑似凭据】
+本机路径脱敏：本机 home 绝对前缀（/home/<user>）→ ~ ；C:\\Users\\<user> → %USERPROFILE%
+密钥凭据：gho_/ghp_/github_pat_/sk-/AKIA/PRIVATE KEY/xox[bp]- → 【已移出：疑似凭据】
 
 诚实性刚性：任何改写/剔除均在 AUDIT-REPORT.json 中可追溯（位置 + 处理方式 + 原因），不记录被移出的正文。
 """
@@ -53,7 +53,37 @@ EXCLUDED_SCOPE = [
     ("18-design/", "设计候选与截图（含大体积 png），非交付正文"),
     ("16-checkpoint/_render-shots/", "门控渲染截图中间产物，体积大且可重生成"),
     ("__pycache__/", "Python 字节码缓存（本就不应入库）"),
+    ("01-books/_files/", "书籍语料本体（私有本地语料层，含来源受限副本），永不进公开仓"),
+    ("01-books/download-log.md", "采集日志（含影子库/网盘线索），仅本地私有"),
+    ("01-books/acquired-manifest.json", "语料清单（含来源受限源 URL），仅本地私有"),
 ]
+
+# ---------------------------------------------------------------------------
+# 硬排除：这些前缀下的文件**连扫描都不进入**（区别于 EXCLUDED_SCOPE 的说明性登记）
+# 与 .gitignore（本地仓 + _publish 仓）构成双保险；改动后必须跑 --scan 复核
+# ---------------------------------------------------------------------------
+HARD_EXCLUDE_PREFIXES = (
+    "01-books/_files/",
+    "01-books/download-log.md",
+    "01-books/acquired-manifest.json",
+)
+
+# 明确的二进制扩展名（防止 is_binary_file 的 NUL 启发式漏判，例如前 8KB 无 NUL 的 PDF）
+BINARY_EXTS = {".pdf", ".epub", ".mobi", ".azw3", ".djvu", ".zip", ".gz", ".7z",
+               ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".woff", ".woff2",
+               ".ttf", ".otf", ".mp3", ".mp4", ".xlsx", ".docx", ".pptx"}
+
+
+def is_hard_excluded(rel):
+    """rel 为相对 MROOT 的路径（posix 风格）。命中原样跳过。"""
+    rel = rel.replace(os.sep, "/")
+    for p in HARD_EXCLUDE_PREFIXES:
+        if p.endswith("/"):
+            if rel.startswith(p):
+                return True
+        elif rel == p:
+            return True
+    return False
 
 # ---------------------------------------------------------------------------
 # 规则常量（可配置）
@@ -68,15 +98,16 @@ MARKER_QUOTE = "【已按版权红线移出（原引用 {n} 字）· 出处见 s
 MARKER_CRED = "【已移出：疑似凭据】"
 
 CRED_RES = [
-    # 前缀以拼接方式构造，避免本文件自身被凭据扫描命中（功能等价）
-    re.compile("g" + "ho_[A-Za-z0-9]+"),
-    re.compile("g" + "hp_[A-Za-z0-9]+"),
+    re.compile(r"gho_[A-Za-z0-9]+"),
+    re.compile(r"ghp_[A-Za-z0-9]+"),
     re.compile(r"github_pat_[A-Za-z0-9_]+"),
     re.compile(r"sk-[A-Za-z0-9]{20,}"),
     re.compile(r"AKIA[0-9A-Z]{16}"),
     re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     re.compile(r"xox[bp]-[A-Za-z0-9-]+"),
 ]
+# 本行刻意不含裸 home 路径字面量：使「本地源 → 公开仓」可**机械派生**
+# （否则公开副本需手工改写，形成不可再生的手工变体 → 漂移根因）
 HOME_PATH_RE = re.compile("/home/" + re.escape(os.environ.get("USER", "user")))
 WIN_PATH_RE = re.compile(r"[A-Za-z]:\\Users\\[^\\\s\"']+")
 
@@ -98,7 +129,9 @@ TEXT_EXTS = {".md", ".json", ".html", ".htm", ".txt", ".drawio", ".xml",
 # 基础工具
 # ---------------------------------------------------------------------------
 def collect_inputs():
+    """返回 (待扫描文件列表, 被硬排除的文件列表)。"""
     items = []
+    excluded = []
     for d in SCAN_DIRS:
         base = os.path.join(MROOT, d)
         if not os.path.isdir(base):
@@ -106,10 +139,18 @@ def collect_inputs():
         for root, dirs, files in os.walk(base):
             dirs.sort()
             for f in sorted(files):
-                items.append(os.path.join(root, f))
+                p = os.path.join(root, f)
+                if is_hard_excluded(relpath(p)):
+                    excluded.append(relpath(p))
+                    continue
+                items.append(p)
     for f in SCAN_ROOT_FILES:
-        items.append(os.path.join(MROOT, f))
-    return items
+        p = os.path.join(MROOT, f)
+        if is_hard_excluded(relpath(p)):
+            excluded.append(relpath(p))
+            continue
+        items.append(p)
+    return items, excluded
 
 
 def relpath(p):
@@ -117,14 +158,27 @@ def relpath(p):
 
 
 def is_binary_file(path):
-    with open(path, "rb") as fh:
-        chunk = fh.read(8192)
+    # 明确的二进制扩展名优先（NUL 启发式对前 8KB 无 \x00 的 PDF 会漏判）
+    if os.path.splitext(path)[1].lower() in BINARY_EXTS:
+        return True
+    try:
+        with open(path, "rb") as fh:
+            chunk = fh.read(8192)
+    except OSError:
+        return True
     return b"\x00" in chunk
 
 
 def read_text(path):
-    with open(path, encoding="utf-8", errors="strict") as fh:
-        return fh.read()
+    try:
+        with open(path, encoding="utf-8", errors="strict") as fh:
+            return fh.read()
+    except UnicodeDecodeError as e:
+        raise BinaryLikeDecodeError(path) from e
+
+
+class BinaryLikeDecodeError(Exception):
+    """文本层无法按 UTF-8 解码：视为二进制处理，而非让整条流水线崩溃。"""
 
 
 def write_text(path, text):
@@ -191,7 +245,7 @@ def mask_sensitive(text, location, rel, changes, counts, line_mode=False):
             "location": (f"line {line_of(text, m.start())}" if line_mode else location),
             "kind": "path_mask",
             "removed_chars": 0,
-            "reason": r"C:\Users\<user> → %USERPROFILE%（保留目录语义）",
+            "reason": r"%USERPROFILE% → %USERPROFILE%（保留目录语义）",
         })
         counts["path_mask"] += 1
     text = WIN_PATH_RE.sub("%USERPROFILE%", text)
@@ -470,7 +524,14 @@ def analyze_file(abs_path):
                       "counts": {"binary": True}, "is_binary": True})
         return entry, {"binary": True}, None, []
 
-    raw = read_text(abs_path)
+    try:
+        raw = read_text(abs_path)
+    except BinaryLikeDecodeError:
+        # 无 \x00 但非 UTF-8（例如前 8KB 无 NUL 的 PDF/压缩流）：按二进制处理，不让流水线崩溃
+        entry.update({"level": "B", "action": "原样复制",
+                      "counts": {"binary": True}, "is_binary": True,
+                      "notes": "文本层无法 UTF-8 解码，按二进制对待（未做脱敏）"})
+        return entry, {"binary": True}, None, []
     entry["total_chars"] = len(raw)
     is_json = rel.lower().endswith(".json")
 
@@ -531,7 +592,7 @@ def walk_paths(o, path=""):
 # 汇总
 # ---------------------------------------------------------------------------
 def run_scan(write_outputs=False):
-    inputs = collect_inputs()
+    inputs, hard_excluded = collect_inputs()
     entries = []
     all_changes = []
     levels = {"A": 0, "B": 0, "C": 0, "D": 0}
@@ -613,6 +674,10 @@ def run_scan(write_outputs=False):
         "needs_review": needs_review,
         "retained_long_text": retained_long,
         "excluded_scope": [{"path": p, "reason": r} for p, r in EXCLUDED_SCOPE],
+        "hard_excluded": {
+            "prefixes": list(HARD_EXCLUDE_PREFIXES),
+            "files_skipped": len(hard_excluded),
+        },
     }
 
     if write_outputs:
@@ -894,6 +959,9 @@ def print_scan(report):
     print(f"长引移出: {s['long_quotes_removed']} 处 / {s['long_quote_removed_chars']} 字 "
           f"(最长 {s['longest_quote_chars']})")
     print(f"路径脱敏: {s['paths_masked']}  凭据: {s['credential_hits']}")
+    he = report.get("hard_excluded", {})
+    print(f"硬排除（私有语料层）: 跳过 {he.get('files_skipped', 0)} 个文件，"
+          f"前缀 {he.get('prefixes', [])}")
     print("-" * 68)
     for f in report["files"]:
         cnt = f.get("counts", {})
