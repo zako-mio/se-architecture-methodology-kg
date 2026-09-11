@@ -148,9 +148,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：STD-001、BK-013、OFF-015、OFF-016、STD-013
+- 书证核验：BK-007 Ch21.1（partial）
 - 入口链接：http://www.iso-architecture.org/ieee-1471/cm/
 - 入口链接：https://www.iso.org/standard/74393.html
 - 勘误：常见误解「架构就是架构文档，二者是同一事物」→ 核验结论「架构是抽象（概念或感知），架构描述（AD）是表达该架构的工件；二者不可混同，描述可能遗漏或滞后于真实架构」（STD-001）

@@ -140,9 +140,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：LOC-021、BK-007、OFF-002
+- 书证核验：BK-007 Ch17（partial），Ch17.5（partial），Ch18.1（inferred），Ch22.1（inferred），Ch24（inferred），Ch24.1（inferred），Ch24.2（partial），Ch34.5（inferred）
 - 勘误：常见误解「零依赖零构建必然意味着架构简单、无需设计」→ 核验结论「该扩展虽无构建与依赖，仍以适配器、评分链、双通道与脱敏等结构承载复杂变化点，架构设计量并未因零构建而减少」（LOC-021）
 
 ## §9 原始关系清单

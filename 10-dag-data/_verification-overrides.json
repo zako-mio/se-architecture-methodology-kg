@@ -1,0 +1,433 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "generated": "2026-09-11",
+    "source_of_truth": true
+  },
+  "overrides": {
+    "CAS-X-02": {
+      "verified": "cited",
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-017",
+        "VR-CA-018",
+        "VR-CA-019",
+        "VR-CA-020",
+        "VR-CA-021",
+        "VR-CA-022",
+        "VR-CA-023",
+        "VR-CA-024"
+      ]
+    },
+    "ESS-G-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-001",
+        "VR-CA-002",
+        "VR-CA-003",
+        "VR-CA-004",
+        "VR-CA-005",
+        "VR-CA-006",
+        "VR-CA-007",
+        "VR-CA-008"
+      ]
+    },
+    "ESS-G-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-009",
+        "VR-CA-010",
+        "VR-CA-011",
+        "VR-CA-012",
+        "VR-CA-013",
+        "VR-CA-014",
+        "VR-CA-015",
+        "VR-CA-016"
+      ]
+    },
+    "ESS-G-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-026"
+      ]
+    },
+    "ESS-G-04": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-013"
+      ]
+    },
+    "ESS-G-07": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-027"
+      ]
+    },
+    "ESS-H-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-025"
+      ]
+    },
+    "ESS-I-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-029",
+        "VR-SAIP-007",
+        "VR-SAIP-008",
+        "VR-SAIP-009",
+        "VR-SAIP-010",
+        "VR-SAIP-011",
+        "VR-SAIP-012"
+      ]
+    },
+    "ESS-K-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-001"
+      ]
+    },
+    "ESS-K-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-002"
+      ]
+    },
+    "ESS-L-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-011"
+      ]
+    },
+    "ESS-M-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-006"
+      ]
+    },
+    "ESS-M-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-005"
+      ]
+    },
+    "ESS-M-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-007",
+        "VR-SAIP-013",
+        "VR-SAIP-014",
+        "VR-SAIP-015",
+        "VR-SAIP-016",
+        "VR-SAIP-017",
+        "VR-SAIP-018"
+      ]
+    },
+    "ESS-M-04": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-003"
+      ]
+    },
+    "ESS-M-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-019",
+        "VR-SAIP-020",
+        "VR-SAIP-021",
+        "VR-SAIP-022",
+        "VR-SAIP-023",
+        "VR-SAIP-024",
+        "VR-SAIP-025"
+      ]
+    },
+    "ESS-O-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-028",
+        "VR-DDIA-008"
+      ]
+    },
+    "ESS-O-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-CA-030",
+        "VR-DDIA-009",
+        "VR-SAIP-001",
+        "VR-SAIP-002",
+        "VR-SAIP-003",
+        "VR-SAIP-004",
+        "VR-SAIP-005",
+        "VR-SAIP-006"
+      ]
+    },
+    "ESS-O-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-010",
+        "VR-SAIP-051",
+        "VR-SAIP-052",
+        "VR-SAIP-053",
+        "VR-SAIP-054",
+        "VR-SAIP-055",
+        "VR-SAIP-056"
+      ]
+    },
+    "MTH-G-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-083",
+        "VR-SAIP-084",
+        "VR-SAIP-085",
+        "VR-SAIP-086",
+        "VR-SAIP-087",
+        "VR-SAIP-088",
+        "VR-SAIP-089",
+        "VR-SAIP-090"
+      ]
+    },
+    "MTH-G-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-091",
+        "VR-SAIP-092",
+        "VR-SAIP-093",
+        "VR-SAIP-094",
+        "VR-SAIP-095",
+        "VR-SAIP-096"
+      ]
+    },
+    "MTH-G-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-069",
+        "VR-SAIP-070",
+        "VR-SAIP-071",
+        "VR-SAIP-072",
+        "VR-SAIP-073",
+        "VR-SAIP-074",
+        "VR-SAIP-075",
+        "VR-SAIP-076"
+      ]
+    },
+    "MTH-K-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-014"
+      ]
+    },
+    "MTH-M-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-026",
+        "VR-SAIP-027",
+        "VR-SAIP-028",
+        "VR-SAIP-029",
+        "VR-SAIP-030",
+        "VR-SAIP-031"
+      ]
+    },
+    "MTH-M-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-032",
+        "VR-SAIP-033",
+        "VR-SAIP-034",
+        "VR-SAIP-035",
+        "VR-SAIP-036",
+        "VR-SAIP-037"
+      ]
+    },
+    "MTH-M-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-004",
+        "VR-SAIP-038",
+        "VR-SAIP-039",
+        "VR-SAIP-040",
+        "VR-SAIP-041",
+        "VR-SAIP-042",
+        "VR-SAIP-043",
+        "VR-SAIP-044"
+      ]
+    },
+    "MTH-M-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-045",
+        "VR-SAIP-046",
+        "VR-SAIP-047",
+        "VR-SAIP-048",
+        "VR-SAIP-049",
+        "VR-SAIP-050"
+      ]
+    },
+    "MTH-O-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-057",
+        "VR-SAIP-058",
+        "VR-SAIP-059",
+        "VR-SAIP-060",
+        "VR-SAIP-061",
+        "VR-SAIP-062"
+      ]
+    },
+    "MTH-O-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-063",
+        "VR-SAIP-064",
+        "VR-SAIP-065",
+        "VR-SAIP-066",
+        "VR-SAIP-067",
+        "VR-SAIP-068"
+      ]
+    },
+    "MTH-O-09": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-012"
+      ]
+    },
+    "MTH-O-10": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-017"
+      ]
+    },
+    "MTH-O-11": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-016"
+      ]
+    },
+    "TEC-K-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-018"
+      ]
+    },
+    "TEC-K-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-DDIA-015"
+      ]
+    },
+    "TEC-M-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-09-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SAIP-077",
+        "VR-SAIP-078",
+        "VR-SAIP-079",
+        "VR-SAIP-080",
+        "VR-SAIP-081",
+        "VR-SAIP-082"
+      ]
+    }
+  }
+}

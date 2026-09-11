@@ -160,9 +160,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-002、BK-025、BK-026、VEN-030、OFF-025、BK-009
+- 书证核验：BK-009 Ch3.2（direct），Ch21.4（partial），Ch21.5（partial）
 - 入口链接：https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes
 - 勘误：常见误解「只要投入足够资源，所有质量属性都能同时达到最优」→ 核验结论「质量属性常由同一设计决策驱动且方向相反，只能在给定语境下选择彼此相容的一组目标并对冲突做显式取舍」（OFF-025）
 

@@ -148,9 +148,10 @@ ATAM 由九步组成，可分四组：陈述（介绍方法、陈述业务驱动
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-002、BK-009、PAP-007、STD-005
+- 书证核验：BK-009 Ch3.3（direct），Ch19.4（direct），Ch20.5（partial），Ch21.1（direct），Ch21.5（direct）
 - 入口链接：https://www.sei.cmu.edu/architecture/
 - 勘误：常见误解「ATAM 是一次性的瀑布式评审」→ 核验结论「ATAM 九步分为陈述/调查分析/测试/报告四组，但步骤非严格顺序、可迭代；架构评估应在里程碑处反复进行」（OFF-002）
 - 勘误：常见误解「敏感点与权衡点是同义词」→ 核验结论「sensitivity point 针对单一质量属性；tradeoff point 同时是多个质量属性的敏感点、影响多个属性，二者须严格区分」（OFF-002）

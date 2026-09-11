@@ -98,9 +98,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-005、OFF-023、STD-005
+- 书证核验：BK-023 Ch2.3（direct）
 - 入口链接：https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
 - 入口链接：https://www.sei.cmu.edu/library/realizing-and-refining-architectural-tactics-availability
 - 勘误：常见误解「可用性就是系统从不宕机」→ 核验结论「可用性是可被正常使用的时间比例；系统可在部分功能降级下仍算可用，且过高目标的边际成本极高，百分之百并非合理目标」（OFF-005）

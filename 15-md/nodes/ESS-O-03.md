@@ -154,9 +154,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-002、BK-009、BK-036、OFF-025、PAP-001
+- 书证核验：BK-009 Ch3.2（direct），Ch3.4（partial），Ch20.5（partial），Ch21.5（direct）；BK-023 Ch4.1（direct）
 - 入口链接：https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes
 - 勘误：常见误解「足够好的设计可以让所有质量属性同时达到最优」→ 核验结论「质量属性相互牵制，设计是在给定语境下选择彼此相容的一组目标并对冲突做显式取舍，不存在所有属性同时最优的方案」（BK-036）
 

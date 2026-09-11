@@ -97,10 +97,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 版本：2012 (Allspaw / Etsy) / 2016-2018 (Google SRE)
 - 规范信源：WEB-039、BK-025、BK-026
+- 书证核验：BK-023 Ch2.3（direct）
 - 入口链接：https://web.archive.org/web/2019id_/https://codeascraft.com/2012/05/22/blameless-postmortems/
 - 入口链接：https://sre.google/sre-book/table-of-contents/
 - 勘误：常见误解「无指责复盘意味着不追究任何责任、也不得出任何约束性结论」→ 核验结论「无指责指聚焦系统性原因与决策情境，而非免除责任；Just Culture 仍区分可接受与不可接受的行为」（WEB-039）

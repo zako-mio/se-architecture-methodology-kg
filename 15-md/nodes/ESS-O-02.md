@@ -149,9 +149,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-002、BK-010、BK-009
+- 书证核验：BK-007 Ch26.1（partial）；BK-009 Ch3.2（direct），Ch20.5（partial），Ch21.5（direct）；BK-023 Ch1.1（direct）
 - 入口链接：https://www.sei.cmu.edu/architecture/
 - 入口链接：https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/
 

@@ -147,9 +147,10 @@ Brooks 指出，软件实体的本质复杂度具有四个固有属性：复杂�
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：PAP-001、BK-002、BK-008
+- 书证核验：BK-007 Ch6.3（partial）；BK-023 Ch2.5（direct）
 - 入口链接：https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf
 - 勘误：常见误解「No Silver Bullet 的「四要素」是本质复杂度与偶然复杂度各四项」→ 核验结论「complexity/conformity/changeability/invisibility 是本质复杂度（essence）的四个固有属性；essence vs accident 是另一维二分」（PAP-001）
 

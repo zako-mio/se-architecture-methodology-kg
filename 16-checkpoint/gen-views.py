@@ -16,13 +16,16 @@
 import argparse
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_common import (build_graph, sections, esc, topo_sort, stage_badge,
                         layer_badge, src_badge, domain_badge, page_shell,
                         STAGE_STYLE, LAYER_STYLE, EDGE_STYLE,
-                        LAYER_ORDER, add_common_args, config_from_args)
+                        LAYER_ORDER, add_common_args, config_from_args,
+                        load_book_verification, BOOK_VERIFICATION_FILE,
+                        _anchor_label, _STRENGTH_RANK)
 
 EXTRA_CSS = """
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
@@ -40,6 +43,17 @@ EXTRA_CSS = """
 .layer-nav a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;color:var(--text);text-decoration:none;}
 .empty{background:var(--panel);border:1px dashed var(--border);border-radius:8px;padding:24px;color:var(--dim);text-align:center;}
 .sec-card{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:10px 18px;margin:12px 0;}
+.bv-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 0;}
+.bv-legend .k{display:inline-flex;align-items:center;gap:5px;}
+.bv-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid transparent;}
+.bv-badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11.5px;font-weight:600;border:1px solid var(--border);}
+.bv-direct{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.bv-partial{color:#8a5a12;border-color:#e0c79a;background:#fbf3e6;}
+.bv-inferred{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+.bv-contradicted{color:#a01f2c;border-color:#e0b0b0;background:#fbeeee;}
+.bv-cell{min-width:92px;}
+.bv-anchor{display:inline-block;font-family:Georgia,serif;font-size:11.5px;color:var(--dim);margin:1px 5px 1px 0;}
+.bv-target{font-family:Consolas,monospace;font-size:12px;}
 """
 
 
@@ -378,6 +392,197 @@ def view_cases(g):
     return shell(g, "案例视图", "案例节点及其 case_instance 印证关系。", [("案例清单", body)], _stat_badges(g))
 
 
+# ---------------------------------------------------------------- book-verification
+_BV_KIND_LABEL = {
+    "missed_citation": "应引未引",
+    "coverage_hole": "覆盖盲区",
+    "concept_missing": "概念缺口",
+}
+_BV_STRENGTH_LABEL = {
+    "direct": "direct",
+    "partial": "partial",
+    "inferred": "inferred",
+    "contradicted": "contradicted",
+}
+_BV_LAYER_GROUPS = [
+    ("essence", "本质 essence"),
+    ("methodology", "方法论 methodology"),
+    ("technology", "技术实践 technology"),
+    (None, "其他 / 案例"),
+]
+
+
+def _bv_natkey(value):
+    parts = re.split(r"(\d+)", str(value or ""))
+    return [(0, int(p), "") if p.isdigit() else (1, 0, p) for p in parts]
+
+
+def _bv_legend():
+    items = [("direct", "#1f6f5c"), ("partial", "#8a5a12"),
+             ("inferred", "#6f6656"), ("contradicted", "#a01f2c")]
+    cells = "".join('<span class="k"><i style="background:%s"></i>%s</span>' % (c, esc(name))
+                    for name, c in items)
+    return '<div class="bv-legend">%s</div>' % cells
+
+
+def _bv_books(by_node):
+    names = {}
+    for recs in by_node.values():
+        for r in recs:
+            sid = r.get("source_id") or ""
+            if sid and r.get("book"):
+                names.setdefault(sid, r["book"])
+            elif sid:
+                names.setdefault(sid, "")
+    return [(sid, names.get(sid, "")) for sid in sorted(names)]
+
+
+def _bv_cell(recs):
+    if not recs:
+        return '<span class="dim">—</span>'
+    best = max(recs, key=lambda r: _STRENGTH_RANK.get(r.get("evidence_strength"), -1))
+    strength = best.get("evidence_strength") or ""
+    labels = sorted({_anchor_label(r) for r in recs if _anchor_label(r)}, key=_bv_natkey)
+    badge = '<span class="bv-badge bv-%s">%s</span>' % (esc(strength), esc(strength))
+    anchors = "".join('<span class="bv-anchor">%s</span>' % esc(x) for x in labels)
+    return badge + ("<br>" + anchors if anchors else "")
+
+
+def _bv_matrix(g, by_node, books):
+    nodes_dir = g.cfg["out_dirs"]["nodes"]
+    grouped = {}
+    for nid in sorted(by_node):
+        layer = (g.by_id.get(nid) or {}).get("layer")
+        grouped.setdefault(layer, []).append(nid)
+    tables = []
+    for layer, label in _BV_LAYER_GROUPS:
+        ids = grouped.get(layer) or []
+        if not ids:
+            continue
+        head = "".join(
+            '<th><a href="../%s/%s.html">%s</a><br><span class="dim">%s</span></th>'
+            % (esc(nodes_dir), esc(nid), esc(nid),
+               esc((g.by_id.get(nid) or {}).get("name", "")))
+            for nid in ids)
+        rows = []
+        for sid, bname in books:
+            cells = []
+            for nid in ids:
+                recs = [r for r in by_node.get(nid, []) if r.get("source_id") == sid]
+                cells.append('<td class="bv-cell">%s</td>' % _bv_cell(recs))
+            rows.append('<tr><td>%s<br><span class="dim">%s</span></td>%s</tr>'
+                        % (esc(sid), esc(bname), "".join(cells)))
+        table = ('<div class="tblwrap"><table><caption style="text-align:left;color:var(--dim);'
+                 'font-size:12.5px;padding:6px 0">%s（%d 个被核验节点）</caption>'
+                 '<thead><tr><th>书 \\ 节点</th>%s</tr></thead><tbody>%s</tbody></table></div>'
+                 % (esc(label), len(ids), head, "".join(rows)))
+        tables.append(table)
+    if not tables:
+        return empty("投影中暂无可展示的节点书证记录。")
+    return _bv_legend() + "".join(tables)
+
+
+def _bv_stats(by_node, books):
+    if not by_node:
+        return empty("无可统计的核验记录。")
+    strengths = ["direct", "partial", "inferred", "contradicted"]
+    rows = []
+    totals = {"nodes": set(), "direct": 0, "partial": 0, "inferred": 0,
+              "contradicted": 0, "forward": 0, "reverse": 0}
+    for sid, bname in books:
+        nodes = set()
+        sc = {s: 0 for s in strengths}
+        forward = reverse = 0
+        for nid, recs in by_node.items():
+            for r in recs:
+                if r.get("source_id") != sid:
+                    continue
+                nodes.add(nid)
+                if r.get("evidence_strength") in sc:
+                    sc[r["evidence_strength"]] += 1
+                if r.get("direction") == "forward":
+                    forward += 1
+                elif r.get("direction") == "reverse":
+                    reverse += 1
+        totals["nodes"] |= nodes
+        for s in strengths:
+            totals[s] += sc[s]
+        totals["forward"] += forward
+        totals["reverse"] += reverse
+        rows.append("<tr><td>%s<br><span class='dim'>%s</span></td><td>%d</td>%s"
+                    "<td>%d</td><td>%d</td></tr>"
+                    % (esc(sid), esc(bname), len(nodes),
+                       "".join("<td>%d</td>" % sc[s] for s in strengths),
+                       forward, reverse))
+    rows.append("<tr><td><b>合计</b></td><td><b>%d</b></td>%s<td><b>%d</b></td>"
+                "<td><b>%d</b></td></tr>"
+                % (len(totals["nodes"]),
+                   "".join("<td><b>%d</b></td>" % totals[s] for s in strengths),
+                   totals["forward"], totals["reverse"]))
+    head = ("<th>书</th><th>覆盖节点</th><th>direct</th><th>partial</th>"
+            "<th>inferred</th><th>contradicted</th><th>正向</th><th>反向</th>")
+    return ('<div class="tblwrap"><table><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>'
+            % (head, "".join(rows)))
+
+
+def _bv_gaps(g, gaps):
+    if not gaps:
+        return empty("反向发现缺口清单为空。")
+    rows = []
+    for gp in gaps:
+        existing = (gp.get("target") or {}).get("existing_node_id")
+        proposed = (gp.get("target") or {}).get("proposed_node")
+        if existing and existing in g.by_id:
+            target = node_link(g, existing)
+        elif existing:
+            target = '<span class="bv-target">%s</span>' % esc(existing)
+        else:
+            target = '<span class="dim">—</span>'
+        if proposed:
+            target += '<br><span class="dim">提案：%s</span>' % esc(proposed)
+        sid = gp.get("book_source_id") or ""
+        anchor = "Ch%s" % (gp.get("section") or gp.get("chapter") or "")
+        rows.append(
+            "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>"
+            "<td>%s</td><td>%s</td></tr>"
+            % (esc(gp.get("gap_id", "")),
+               esc(_BV_KIND_LABEL.get(gp.get("kind"), gp.get("kind", ""))),
+               esc(sid), esc(anchor), target,
+               esc(gp.get("summary", "")),
+               esc(gp.get("proposed_action", ""))))
+    head = ("<th>gap</th><th>类型</th><th>书</th><th>锚</th><th>目标</th>"
+            "<th>改写摘要</th><th>建议动作</th>")
+    note = ('<p class="dim">缺口为阶段3 结构扩展的输入导航；<code>summary</code> 与 '
+            '<code>proposed_action</code> 为改写摘要，非书籍原文。仅展示章节级锚。</p>')
+    return note + ('<div class="tblwrap"><table><thead><tr>%s</tr></thead><tbody>%s</tbody>'
+                   '</table></div>' % (head, "".join(rows)))
+
+
+def view_book_verification(g):
+    doc = load_book_verification(g.cfg)
+    by_node = doc.get("by_node") or {}
+    gaps = doc.get("gaps") or []
+    if not by_node and not gaps:
+        msg = "[SKIP] 06-book-verification: 10-dag-data/%s 缺失或为空" % BOOK_VERIFICATION_FILE
+        print(msg)
+        return shell(g, "书籍↔节点对照", "书证核验的公开安全投影。",
+                     [("说明", empty("数据源 10-dag-data/%s 缺失或为空"
+                                     "（由 derive_verification.py 生成）。"
+                                     % BOOK_VERIFICATION_FILE))])
+    books = _bv_books(by_node)
+    secs = [
+        ("书籍 ↔ 节点对照矩阵",
+         '<p class="dim">行 = 参考书，列 = 被核验节点（按层分组）；格 = 证据强度徽标'
+         '（取该节点 × 该书记录的最高优先级）与章级锚，点击节点 ID 进入节点页。</p>'
+         + _bv_matrix(g, by_node, books)),
+        ("覆盖统计", _bv_stats(by_node, books)),
+        ("反向发现缺口（阶段3 输入）", _bv_gaps(g, gaps)),
+    ]
+    return shell(g, "书籍↔节点对照",
+                 "书证的公开安全投影：书籍 ↔ 节点强度矩阵、覆盖统计与反向缺口。",
+                 secs, _stat_badges(g))
+
+
 _DISPATCH = {
     "views-index": view_views_index,
     "stage": view_stage,
@@ -386,6 +591,7 @@ _DISPATCH = {
     "decision-matrix": view_decision_matrix,
     "cross-mapping": view_cross_mapping,
     "cases": view_cases,
+    "book-verification": view_book_verification,
 }
 
 

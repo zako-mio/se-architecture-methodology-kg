@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>书籍↔节点对照 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:12px 0;}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.card h3{font-size:15px;color:var(--accent);margin:0 0 8px;}
+.card p{font-size:13px;color:var(--dim);margin-bottom:10px;}
+.card .go{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:8px;padding:6px 14px;color:#1d4ed8;font-size:13px;text-decoration:none;}
+.stat{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:4px;text-align:center;}
+.stat b{display:block;font-size:22px;color:var(--accent);}
+.stat span{font-size:12px;color:var(--dim);}
+.row{display:flex;align-items:baseline;gap:10px;padding:9px 6px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.row .nm{min-width:200px;flex:0 0 auto;font-size:14px;font-weight:600;}
+.row .brief{flex:1 1 320px;font-size:12.5px;color:var(--dim);min-width:240px;}
+.layer-nav{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;}
+.layer-nav a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;color:var(--text);text-decoration:none;}
+.empty{background:var(--panel);border:1px dashed var(--border);border-radius:8px;padding:24px;color:var(--dim);text-align:center;}
+.sec-card{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:10px 18px;margin:12px 0;}
+.bv-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 0;}
+.bv-legend .k{display:inline-flex;align-items:center;gap:5px;}
+.bv-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid transparent;}
+.bv-badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11.5px;font-weight:600;border:1px solid var(--border);}
+.bv-direct{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.bv-partial{color:#8a5a12;border-color:#e0c79a;background:#fbf3e6;}
+.bv-inferred{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+.bv-contradicted{color:#a01f2c;border-color:#e0b0b0;background:#fbeeee;}
+.bv-cell{min-width:92px;}
+.bv-anchor{display:inline-block;font-family:Georgia,serif;font-size:11.5px;color:var(--dim);margin:1px 5px 1px 0;}
+.bv-target{font-family:Consolas,monospace;font-size:12px;}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="index.html">视图入口</a> <span class="sep">/</span> <span>书籍↔节点对照</span></div><div class="meta">书证的公开安全投影：书籍 ↔ 节点强度矩阵、覆盖统计与反向缺口。</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>书籍 ↔ 节点对照矩阵</a><a href="#s2"><span class="n">§2</span>覆盖统计</a><a href="#s3"><span class="n">§3</span>反向发现缺口（阶段3 输入）</a></nav>
+<article>
+<header class="doc"><h1>书籍↔节点对照</h1><div class="en">书证的公开安全投影：书籍 ↔ 节点强度矩阵、覆盖统计与反向缺口。</div><div class="badges"><span class="badge">167 节点</span><span class="badge">18 组</span><span class="badge">360 边</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>书籍 ↔ 节点对照矩阵</h2><p class="dim">行 = 参考书，列 = 被核验节点（按层分组）；格 = 证据强度徽标（取该节点 × 该书记录的最高优先级）与章级锚，点击节点 ID 进入节点页。</p><div class="bv-legend"><span class="k"><i style="background:#1f6f5c"></i>direct</span><span class="k"><i style="background:#8a5a12"></i>partial</span><span class="k"><i style="background:#6f6656"></i>inferred</span><span class="k"><i style="background:#a01f2c"></i>contradicted</span></div><div class="tblwrap"><table><caption style="text-align:left;color:var(--dim);font-size:12.5px;padding:6px 0">本质 essence（18 个被核验节点）</caption><thead><tr><th>书 \ 节点</th><th><a href="../11-node-pages/ESS-G-01.html">ESS-G-01</a><br><span class="dim">关注点分离</span></th><th><a href="../11-node-pages/ESS-G-02.html">ESS-G-02</a><br><span class="dim">依赖倒置与依赖规则</span></th><th><a href="../11-node-pages/ESS-G-03.html">ESS-G-03</a><br><span class="dim">边界与接口隔离</span></th><th><a href="../11-node-pages/ESS-G-04.html">ESS-G-04</a><br><span class="dim">模块化与分解</span></th><th><a href="../11-node-pages/ESS-G-07.html">ESS-G-07</a><br><span class="dim">架构描述与对应关系</span></th><th><a href="../11-node-pages/ESS-H-02.html">ESS-H-02</a><br><span class="dim">内聚与耦合</span></th><th><a href="../11-node-pages/ESS-I-02.html">ESS-I-02</a><br><span class="dim">可测试性本质</span></th><th><a href="../11-node-pages/ESS-K-01.html">ESS-K-01</a><br><span class="dim">可靠性即风险管理</span></th><th><a href="../11-node-pages/ESS-K-02.html">ESS-K-02</a><br><span class="dim">故障不可避免性与容错</span></th><th><a href="../11-node-pages/ESS-L-05.html">ESS-L-05</a><br><span class="dim">变更成本随复杂度增长</span></th><th><a href="../11-node-pages/ESS-M-01.html">ESS-M-01</a><br><span class="dim">可维护性本质</span></th><th><a href="../11-node-pages/ESS-M-02.html">ESS-M-02</a><br><span class="dim">可演化性与可扩展性</span></th><th><a href="../11-node-pages/ESS-M-03.html">ESS-M-03</a><br><span class="dim">性能效率本质</span></th><th><a href="../11-node-pages/ESS-M-04.html">ESS-M-04</a><br><span class="dim">可靠性与可用性</span></th><th><a href="../11-node-pages/ESS-M-05.html">ESS-M-05</a><br><span class="dim">质量属性不可直接测量</span></th><th><a href="../11-node-pages/ESS-O-01.html">ESS-O-01</a><br><span class="dim">本质复杂度与偶然复杂度</span></th><th><a href="../11-node-pages/ESS-O-02.html">ESS-O-02</a><br><span class="dim">架构即权衡</span></th><th><a href="../11-node-pages/ESS-O-03.html">ESS-O-03</a><br><span class="dim">权衡的不可消除性</span></th></tr></thead><tbody><tr><td>BK-007<br><span class="dim">Clean Architecture</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch4</span><span class="bv-anchor">Ch15.5</span><span class="bv-anchor">Ch17.3</span><span class="bv-anchor">Ch19</span><span class="bv-anchor">Ch22</span><span class="bv-anchor">Ch22.1</span><span class="bv-anchor">Ch24</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch11</span><span class="bv-anchor">Ch11.2</span><span class="bv-anchor">Ch14.4</span><span class="bv-anchor">Ch14.5</span><span class="bv-anchor">Ch22.1</span><span class="bv-anchor">Ch23.4</span><span class="bv-anchor">Ch34.3</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch14.1</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch21.1</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch13.4</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch23.1</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch6.3</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch26.1</span></td><td class="bv-cell"><span class="dim">—</span></td></tr><tr><td>BK-009<br><span class="dim">Software Architecture in Practice</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch12.1</span><span class="bv-anchor">Ch12.2</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch9</span><span class="bv-anchor">Ch9.1</span><span class="bv-anchor">Ch9.2</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch3.3</span><span class="bv-anchor">Ch19.4</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch20.5</span><span class="bv-anchor">Ch21.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch3.4</span><span class="bv-anchor">Ch20.5</span><span class="bv-anchor">Ch21.5</span></td></tr><tr><td>BK-023<br><span class="dim">Designing Data-Intensive Applications</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.4</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.4</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.2</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch1.1</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch4.1</span></td></tr></tbody></table></div><div class="tblwrap"><table><caption style="text-align:left;color:var(--dim);font-size:12.5px;padding:6px 0">方法论 methodology（13 个被核验节点）</caption><thead><tr><th>书 \ 节点</th><th><a href="../11-node-pages/MTH-G-02.html">MTH-G-02</a><br><span class="dim">质量属性场景与ATAM</span></th><th><a href="../11-node-pages/MTH-G-03.html">MTH-G-03</a><br><span class="dim">架构风格选择方法</span></th><th><a href="../11-node-pages/MTH-G-06.html">MTH-G-06</a><br><span class="dim">效用树与敏感点权衡点分析</span></th><th><a href="../11-node-pages/MTH-K-06.html">MTH-K-06</a><br><span class="dim">混沌工程方法</span></th><th><a href="../11-node-pages/MTH-M-01.html">MTH-M-01</a><br><span class="dim">质量属性战术映射方法</span></th><th><a href="../11-node-pages/MTH-M-02.html">MTH-M-02</a><br><span class="dim">可修改性战术应用</span></th><th><a href="../11-node-pages/MTH-M-03.html">MTH-M-03</a><br><span class="dim">可用性战术应用</span></th><th><a href="../11-node-pages/MTH-M-06.html">MTH-M-06</a><br><span class="dim">质量属性权衡决策方法</span></th><th><a href="../11-node-pages/MTH-O-03.html">MTH-O-03</a><br><span class="dim">技术选型的够用原则</span></th><th><a href="../11-node-pages/MTH-O-05.html">MTH-O-05</a><br><span class="dim">质量属性冲突治理</span></th><th><a href="../11-node-pages/MTH-O-09.html">MTH-O-09</a><br><span class="dim">理解成本优先的简单原则</span></th><th><a href="../11-node-pages/MTH-O-10.html">MTH-O-10</a><br><span class="dim">增量演化与一致性治理</span></th><th><a href="../11-node-pages/MTH-O-11.html">MTH-O-11</a><br><span class="dim">度量与反馈闭环</span></th></tr></thead><tbody><tr><td>BK-007<br><span class="dim">Clean Architecture</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td></tr><tr><td>BK-009<br><span class="dim">Software Architecture in Practice</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.3</span><span class="bv-anchor">Ch19.4</span><span class="bv-anchor">Ch20.5</span><span class="bv-anchor">Ch21.1</span><span class="bv-anchor">Ch21.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch3.4</span><span class="bv-anchor">Ch20.3</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch19.4</span><span class="bv-anchor">Ch20.5</span><span class="bv-anchor">Ch21.5</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.4</span><span class="bv-anchor">Ch3.5</span><span class="bv-anchor">Ch3.6</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch8.2</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch4.2</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch20.3</span><span class="bv-anchor">Ch20.5</span><span class="bv-anchor">Ch21.4</span><span class="bv-anchor">Ch21.5</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.4</span><span class="bv-anchor">Ch20.3</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch3.2</span><span class="bv-anchor">Ch21.4</span><span class="bv-anchor">Ch21.5</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td></tr><tr><td>BK-023<br><span class="dim">Designing Data-Intensive Applications</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.4</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch13.1</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch2.2</span></td></tr></tbody></table></div><div class="tblwrap"><table><caption style="text-align:left;color:var(--dim);font-size:12.5px;padding:6px 0">技术实践 technology（3 个被核验节点）</caption><thead><tr><th>书 \ 节点</th><th><a href="../11-node-pages/TEC-K-01.html">TEC-K-01</a><br><span class="dim">断路器与重试退避</span></th><th><a href="../11-node-pages/TEC-K-05.html">TEC-K-05</a><br><span class="dim">无指责复盘实践</span></th><th><a href="../11-node-pages/TEC-M-03.html">TEC-M-03</a><br><span class="dim">可修改性战术实现</span></th></tr></thead><tbody><tr><td>BK-007<br><span class="dim">Clean Architecture</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td></tr><tr><td>BK-009<br><span class="dim">Software Architecture in Practice</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="dim">—</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch8.2</span></td></tr><tr><td>BK-023<br><span class="dim">Designing Data-Intensive Applications</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch9.2</span></td><td class="bv-cell"><span class="bv-badge bv-direct">direct</span><br><span class="bv-anchor">Ch2.3</span></td><td class="bv-cell"><span class="dim">—</span></td></tr></tbody></table></div><div class="tblwrap"><table><caption style="text-align:left;color:var(--dim);font-size:12.5px;padding:6px 0">其他 / 案例（1 个被核验节点）</caption><thead><tr><th>书 \ 节点</th><th><a href="../11-node-pages/CAS-X-02.html">CAS-X-02</a><br><span class="dim">网申填写扩展逆向架构</span></th></tr></thead><tbody><tr><td>BK-007<br><span class="dim">Clean Architecture</span></td><td class="bv-cell"><span class="bv-badge bv-partial">partial</span><br><span class="bv-anchor">Ch17</span><span class="bv-anchor">Ch17.5</span><span class="bv-anchor">Ch18.1</span><span class="bv-anchor">Ch22.1</span><span class="bv-anchor">Ch24</span><span class="bv-anchor">Ch24.1</span><span class="bv-anchor">Ch24.2</span><span class="bv-anchor">Ch34.5</span></td></tr><tr><td>BK-009<br><span class="dim">Software Architecture in Practice</span></td><td class="bv-cell"><span class="dim">—</span></td></tr><tr><td>BK-023<br><span class="dim">Designing Data-Intensive Applications</span></td><td class="bv-cell"><span class="dim">—</span></td></tr></tbody></table></div></section>
+<section id="s2"><h2><span class="num">§2</span>覆盖统计</h2><div class="tblwrap"><table><thead><tr><th>书</th><th>覆盖节点</th><th>direct</th><th>partial</th><th>inferred</th><th>contradicted</th><th>正向</th><th>反向</th></tr></thead><tbody><tr><td>BK-007<br><span class='dim'>Clean Architecture</span></td><td>9</td><td>6</td><td>17</td><td>7</td><td>0</td><td>24</td><td>6</td></tr><tr><td>BK-009<br><span class='dim'>Software Architecture in Practice</span></td><td>15</td><td>60</td><td>36</td><td>0</td><td>0</td><td>96</td><td>0</td></tr><tr><td>BK-023<br><span class='dim'>Designing Data-Intensive Applications</span></td><td>18</td><td>12</td><td>6</td><td>0</td><td>0</td><td>0</td><td>18</td></tr><tr><td><b>合计</b></td><td><b>35</b></td><td><b>78</b></td><td><b>59</b></td><td><b>7</b></td><td><b>0</b></td><td><b>120</b></td><td><b>24</b></td></tr></tbody></table></div></section>
+<section id="s3"><h2><span class="num">§3</span>反向发现缺口（阶段3 输入）</h2><p class="dim">缺口为阶段3 结构扩展的输入导航；<code>summary</code> 与 <code>proposed_action</code> 为改写摘要，非书籍原文。仅展示章节级锚。</p><div class="tblwrap"><table><thead><tr><th>gap</th><th>类型</th><th>书</th><th>锚</th><th>目标</th><th>改写摘要</th><th>建议动作</th></tr></thead><tbody><tr><td>GAP-CA-001</td><td>覆盖盲区</td><td>BK-007</td><td>Ch13.4</td><td><a href="../11-node-pages/ESS-H-02.html">内聚与耦合</a><br><span class="dim">提案：MTH-G-07</span></td><td>书中以三原则刻画组件级内聚：复用/发布等价、共同闭包、共同复用，并给出三者相互拉扯的张力图与随成熟度动态平衡的规律；图谱现有内聚耦合节点偏模块层级，未单列组件级内聚原则。</td><td>新增节点（组件内聚三原则与张力平衡），并在 ESS-H-02 与组件/边界节点间补边</td></tr><tr><td>GAP-CA-002</td><td>覆盖盲区</td><td>BK-007</td><td>Ch14.4</td><td><a href="../11-node-pages/ESS-G-03.html">边界与接口隔离</a><br><span class="dim">提案：MTH-G-08</span></td><td>书中给出组件依赖治理的完整方法族：无环依赖原则、稳定依赖原则、稳定抽象原则，以及入/出耦合、抽象度与主序列距离等度量；图谱边界节点未覆盖依赖环治理与稳定性度量这类可操作方法。</td><td>新增节点（组件依赖管理与度量方法），并与 ESS-G-02、ESS-G-03 补边</td></tr><tr><td>GAP-CA-003</td><td>概念缺口</td><td>BK-007</td><td>Ch21.1</td><td><a href="../11-node-pages/ESS-G-07.html">架构描述与对应关系</a><br><span class="dim">提案：ESS-G-08</span></td><td>书中主张架构应把用例与领域意图喊出来，让系统结构本身可读地说明业务，而非被框架或技术分层淹没；图谱有架构描述节点，却无「架构表意/意图可见」这一独立概念。</td><td>新增节点（架构表意与意图可见性），从 ESS-G-07 与 MTH-G-05 建立依据推导边</td></tr><tr><td>GAP-CA-004</td><td>概念缺口</td><td>BK-007</td><td>Ch6.3</td><td><a href="../11-node-pages/ESS-O-01.html">本质复杂度与偶然复杂度</a><br><span class="dim">提案：ESS-O-04</span></td><td>书中把函数式范式的不可变性提升为架构约束，主张把可变状态隔离到少数受控位置并以事件溯源等结构承载状态变化，以此抑制并发与状态带来的复杂度；图谱缺少不可变性与可变隔离概念。</td><td>新增节点（不可变性与可变隔离），与 ESS-O-01、ESS-G-01 建立前置/组合边</td></tr><tr><td>GAP-CA-005</td><td>概念缺口</td><td>BK-007</td><td>Ch23.1</td><td><a href="../11-node-pages/ESS-I-02.html">可测试性本质</a><br><span class="dim">提案：TEC-I-04</span></td><td>书中以谦卑对象模式在边界处把难测行为压缩为极简外壳，并以 Presenter/View、数据库网关、数据映射与服务监听器等实例承载，使可测试性成为边界设计的直接产物；图谱可测试性节点未覆盖该模式族。</td><td>新增节点（谦卑对象与测试边界模式），从 ESS-I-02 与边界节点建立实现/依据推导边</td></tr><tr><td>GAP-CA-006</td><td>覆盖盲区</td><td>BK-007</td><td>Ch26.1</td><td><a href="../11-node-pages/ESS-O-02.html">架构即权衡</a><br><span class="dim">提案：MTH-G-09</span></td><td>书中系统论证数据库、Web 与框架皆为可推迟的细节，主张核心策略不依赖这些选择，并把组合装配点（Main）视为终极细节；图谱缺少「细节可推迟」与组合根这一治理视角。</td><td>新增节点（细节可推迟与组合根），与 ESS-G-02、MTH-J-04 补引并建立依赖关联</td></tr><tr><td>GAP-DDIA-001</td><td>应引未引</td><td>BK-023</td><td>Ch2.3</td><td><a href="../11-node-pages/ESS-K-01.html">可靠性即风险管理</a></td><td>该节点主张可靠性是在风险与稳定之间做显式管理；DDIA 第2章把可靠性界定为出故障时仍持续正确工作，并区分局部故障与整体失效，可作为其定义性上游来源，但节点现未引用本书。</td><td>为该节点补引 BK-023 第2章「可靠性与容错」，作为可靠性定义与故障/失效区分的来源。</td></tr><tr><td>GAP-DDIA-002</td><td>应引未引</td><td>BK-023</td><td>Ch2.4</td><td><a href="../11-node-pages/ESS-M-02.html">可演化性与可扩展性</a></td><td>该节点把可演化性界定为低代价适应变化；DDIA 第2章对可伸缩性给出「先描述负载、再评估资源与性能关系」的界定，并单列可演化性，直接支撑该节点主张，但未被引用。</td><td>为该节点补引 BK-023 第2章「可伸缩性」与「可演化性」小节。</td></tr><tr><td>GAP-DDIA-003</td><td>应引未引</td><td>BK-023</td><td>Ch2.5</td><td><a href="../11-node-pages/ESS-O-01.html">本质复杂度与偶然复杂度</a></td><td>该节点区分问题固有的本质复杂度与工具所致的偶然复杂度；DDIA 第2章在讨论简单性时直接采用这一划分并指出两者边界随工具演进而移动，可佐证此节点但未被引用。</td><td>为该节点补引 BK-023 第2章「简单性：管理复杂度」小节。</td></tr><tr><td>GAP-DDIA-004</td><td>应引未引</td><td>BK-023</td><td>Ch2.3</td><td><a href="../11-node-pages/MTH-K-06.html">混沌工程方法</a></td><td>该节点把混沌工程表述为在生产中做受控实验；DDIA 第2章介绍故障注入并明确定义混沌工程为借实验增强对容错机制信心的学科，直接支持该节点但现未引用。</td><td>为该节点补引 BK-023 第2章「容错」小节中的故障注入与混沌工程论述。</td></tr><tr><td>GAP-DDIA-005</td><td>应引未引</td><td>BK-023</td><td>Ch2.4</td><td><a href="../11-node-pages/ESS-G-04.html">模块化与分解</a></td><td>该节点主张把系统分解为边界清晰、可独立变更的模块；DDIA 第2章把「拆成可相对独立运行的小组件」列为通用伸缩原则，同时强调分解边界的判断困难，直接支撑该节点但未被引用。</td><td>为该节点补引 BK-023 第2章「可伸缩性原则」小节。</td></tr><tr><td>GAP-DDIA-006</td><td>覆盖盲区</td><td>BK-023</td><td>Ch4.1</td><td><span class="dim">—</span><br><span class="dim">提案：ESS-H-10</span></td><td>DDIA 第4章系统讲解存储引擎与索引结构（日志结构存储、B 树、列式存储、二级索引与全文检索），并指出索引在读写之间的固有取舍。现有图谱缺少对应的存储引擎/索引本质节点。</td><td>新增节点（提案：ESS-H-10 存储引擎与索引结构，待评审）并补边至质量属性权衡相关节点。</td></tr><tr><td>GAP-DDIA-007</td><td>覆盖盲区</td><td>BK-023</td><td>Ch6.1</td><td><span class="dim">—</span><br><span class="dim">提案：MTH-G-07</span></td><td>DDIA 第6章比较单主、多主与无主三类复制算法，讨论同步/异步、故障切换、复制延迟、冲突处理与仲裁一致性等取舍。现有图谱在分布式数据复制域没有对应方法论节点。</td><td>新增节点（提案：MTH-G-07 数据复制策略，待评审）。</td></tr><tr><td>GAP-DDIA-008</td><td>覆盖盲区</td><td>BK-023</td><td>Ch7.1</td><td><span class="dim">—</span><br><span class="dim">提案：MTH-G-08</span></td><td>DDIA 第7章讨论分片（分区）的动机与代价、键范围与哈希分片、负载偏斜与热点缓解、再平衡与请求路由、以及二级索引的分片方式。现有图谱缺少数据分区与再平衡的方法论节点。</td><td>新增节点（提案：MTH-G-08 数据分区与再平衡，待评审）。</td></tr><tr><td>GAP-DDIA-009</td><td>覆盖盲区</td><td>BK-023</td><td>Ch8.2</td><td><span class="dim">—</span><br><span class="dim">提案：ESS-H-11</span></td><td>DDIA 第8章从事务 ACID 语义出发，系统讨论读已提交、快照隔离、丢失更新、写偏斜与幻读等异常，以及可串行化、两阶段锁、串行执行与分布式事务。现有图谱缺少事务与隔离级别节点。</td><td>新增节点（提案：ESS-H-11 事务与隔离级别，待评审）。</td></tr><tr><td>GAP-DDIA-010</td><td>覆盖盲区</td><td>BK-023</td><td>Ch10.1</td><td><span class="dim">—</span><br><span class="dim">提案：ESS-G-09</span></td><td>DDIA 第10章给出线性一致性的新鲜度语义、其与可串行化的区别、实现代价，并以逻辑时钟、全序广播、共识算法与协调服务展开分布式一致性与共识。现有图谱缺少该一致性模型与共识节点。</td><td>新增节点（提案：ESS-G-09 分布式一致性模型与共识，待评审）。</td></tr><tr><td>GAP-DDIA-011</td><td>覆盖盲区</td><td>BK-023</td><td>Ch11.1</td><td><span class="dim">—</span><br><span class="dim">提案：MTH-G-09</span></td><td>DDIA 第11、12章分别讨论批处理与流处理数据流：把输入视为不可变、以确定性纯函数派生输出，以及无界事件、事件时间与窗口、流连接与容错。现有图谱缺少批/流数据处理的方法论节点。</td><td>新增节点（提案：MTH-G-09 批处理与流处理数据流，待评审）。</td></tr><tr><td>GAP-DDIA-012</td><td>概念缺口</td><td>BK-023</td><td>Ch8.3</td><td><span class="dim">—</span><br><span class="dim">提案：ESS-H-12</span></td><td>「可串行化快照隔离（SSI）」这一概念在图谱中缺失：它是在快照隔离之上做乐观冲突检测、以较小性能代价换取完整可串行化的并发控制机制，DDIA 第8章有专节论述。</td><td>新增节点（提案：ESS-H-12 可串行化快照隔离，待评审），并关联事务与隔离级别节点。</td></tr><tr><td>GAP-DDIA-013</td><td>概念缺口</td><td>BK-023</td><td>Ch10.3</td><td><a href="../11-node-pages/MTH-O-10.html">增量演化与一致性治理</a></td><td>「全序广播」概念在图谱中缺失：决定事件全序的问题与共识等价，多数共识系统以共享日志形式提供全序广播，用于状态机复制与衍生数据一致性。该概念应在增量演化与一致性治理节点中补充。</td><td>新增术语条目并补挂至 MTH-O-10，说明全序广播与共识、状态机复制的关系。</td></tr><tr><td>GAP-DDIA-014</td><td>概念缺口</td><td>BK-023</td><td>Ch12.3</td><td><a href="../11-node-pages/TEC-K-01.html">断路器与重试退避</a></td><td>「幂等性」与「确定性重放」概念在图谱中缺失：可安全重试、多次执行效果等同的操作是分布式与流处理容错的基础，也使基于日志的衍生数据在故障后可恢复。应在重试退避相关节点补充该概念。</td><td>新增术语条目并补挂至 TEC-K-01，说明重试与幂等性的配套关系。</td></tr><tr><td>GAP-DDIA-015</td><td>概念缺口</td><td>BK-023</td><td>Ch1.1</td><td><span class="dim">—</span><br><span class="dim">提案：ESS-H-13</span></td><td>「权威记录系统与衍生数据系统」这一对概念在图谱中缺失：按数据是否为首要权威源区分记录系统与派生系统，是梳理多组件数据架构数据流与集成方式的基本视角，DDIA 第1、13章反复使用。</td><td>新增节点（提案：ESS-H-13 记录系统与衍生数据，待评审）。</td></tr><tr><td>GAP-SAIP-001</td><td>应引未引</td><td>BK-009</td><td>Ch3.4</td><td><a href="../11-node-pages/ESS-G-05.html">架构风格</a></td><td>该书以专节讨论架构模式与风格如何打包战术并影响多个质量属性，而现有节点「架构风格」未把该书列为其信源，属应补引的漏引。</td><td>在 ESS-G-05 的规范信源中补充 BK-009，并补一条指向该书第3章的直接证据。</td></tr><tr><td>GAP-SAIP-002</td><td>应引未引</td><td>BK-009</td><td>Ch22.3</td><td><a href="../11-node-pages/MTH-G-05.html">架构文档化方法</a></td><td>该书第22章系统论述架构文档化（视图、跨视图信息与理由记录），是架构文档化方法的核心来源，但节点 MTH-G-05 未将该书列为其直接信源。</td><td>在 MTH-G-05 中补引 BK-009 第22章，并标注视图组织与理由文档化的直接证据。</td></tr><tr><td>GAP-SAIP-003</td><td>概念缺口</td><td>BK-009</td><td>Ch19.1</td><td><span class="dim">—</span><br><span class="dim">提案：架构上重要的需求 (Architecturally Significant Requirements, ASR)</span></td><td>该书把「架构上重要的需求」提升为独立主题，论述从需求文档、干系人访谈与业务目标三条途径收集 ASR，并指出其驱动架构决策；现有 167 节点中缺少该概念节点。</td><td>新增节点 ASR，挂接现有需求工程节点（MTH-F-01..06）与 MTH-G-02，补入其与该书的边。</td></tr><tr><td>GAP-SAIP-004</td><td>概念缺口</td><td>BK-009</td><td>Ch20.1</td><td><span class="dim">—</span><br><span class="dim">提案：属性驱动设计 (Attribute-Driven Design, ADD)</span></td><td>该书以整章给出属性驱动设计的七步迭代流程，把驱动转化为结构与接口；现有图中只有战术映射与 ATAM 评估，缺少这一与评估配对的架构设计方法节点。</td><td>新增节点 ADD，作为 MTH-G-02（评估）与 MTH-M-01（战术映射）的伴生设计方法，并补入与该书的边。</td></tr><tr><td>GAP-SAIP-005</td><td>覆盖盲区</td><td>BK-009</td><td>Ch10.2</td><td><a href="../11-node-pages/MTH-M-01.html">质量属性战术映射方法</a></td><td>该书对可用性、可部署性、能效、可集成性、安全性、保密性、可测试性、易用性各设独立章节并给出战术集；现有图仅覆盖可用性、可修改性等少数属性的战术应用节点，安全、能效、可部署性、可集成性、易用性等属性缺乏对应的战术应用节点。</td><td>以 MTH-M-01 为母节点，为缺失属性补充战术应用子节点（或扩展现有 MTH-M-01 的细化边），至少覆盖安全、能效、可部署性、可集成性与易用性。</td></tr><tr><td>GAP-SAIP-006</td><td>应引未引</td><td>BK-009</td><td>Ch23.1</td><td><a href="../11-node-pages/MTH-L-03.html">技术债象限与偿还策略</a></td><td>该书第23章专论架构债的识别、热点发现与自动化治理，与技术债相关节点高度相关，但 MTH-L-03 未把该书列为其信源，且「架构债」作为技术债在架构层的特定形态未被单独刻画。</td><td>在 MTH-L-03 补引 BK-009 第23章；如需要，可另立「架构债」节点以区别于一般技术债。</td></tr><tr><td>GAP-SAIP-007</td><td>概念缺口</td><td>BK-009</td><td>Ch24.3</td><td><span class="dim">—</span><br><span class="dim">提案：架构师角色与架构能力建设</span></td><td>该书第24、25章讨论架构师在项目中的角色（与项目经理分工、增量架构、敏捷与分布式开发）以及个人与组织的架构能力建设，现有图在团队与康威域有组织节点，但缺少「架构师角色/架构能力」这一角色与能力维度节点。</td><td>新增节点「架构师角色与架构能力」，挂接 ESS-N-* 团队域与 MTH-N-* 方法论节点，并补入与该书的边。</td></tr></tbody></table></div></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 视图页由 16-checkpoint/gen-views.py 生成</footer>
+</article>
+</div>
+</body>
+</html>

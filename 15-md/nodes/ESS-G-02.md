@@ -135,9 +135,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-007、BK-008、WEB-001
+- 书证核验：BK-007 Ch11（direct），Ch11.2（partial），Ch14.4（direct），Ch14.5（partial），Ch22.1（direct），Ch23.4（partial），Ch34.3（partial）
 - 入口链接：https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282
 
 ## §10 原始关系清单

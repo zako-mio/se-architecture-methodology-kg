@@ -148,9 +148,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：WEB-022、VEN-015、PAP-002
+- 书证核验：BK-007 Ch13.4（partial）
 - 入口链接：https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf
 
 ## §10 原始关系清单

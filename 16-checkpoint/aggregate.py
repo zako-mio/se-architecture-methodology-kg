@@ -23,7 +23,6 @@ aggregate.py — 通用、幂等、确定性重建母库主图
   python3 16-checkpoint/aggregate.py --repo-root <MISSION_ROOT> --data-dir <10-dag-data>
 """
 import argparse
-import datetime
 import glob
 import json
 import os
@@ -150,6 +149,55 @@ def backfill_case(nodes, edges):
         n["case"] = sorted(incoming.get(n["id"], set()))
 
 
+def _errata_key(item):
+    if isinstance(item, dict):
+        return (str(item.get("source_id", "")), str(item.get("misconception", "")))
+    return (str(item), str(item))
+
+
+def apply_verification_overrides(nodes, path):
+    """应用核验层派生覆盖集（确定性、幂等、向后兼容）。
+
+    - 文件不存在 → 打印 SKIP 并跳过；
+    - 按 sorted(node_id) 稳定遍历；
+    - verified / confidence / review_date：patch 存在则覆盖；
+    - errata：patch 中非空列表则追加去重（既有顺序在前，追加项按 source_id+misconception 排序）；
+    - 不把 _evidence 写入节点（仅核验层内部对账用）。
+    """
+    if not os.path.exists(path):
+        print("[SKIP] 无 _verification-overrides.json")
+        return 0, 0
+    data = load(path)
+    overrides = data.get("overrides", {}) or {}
+    by_id = {n["id"]: n for n in nodes}
+    applied = 0
+    skipped = 0
+    for node_id, patch in sorted(overrides.items()):
+        node = by_id.get(node_id)
+        if node is None:
+            print("[WARN] override 节点不存在: %s" % node_id)
+            skipped += 1
+            continue
+        for field in ("verified", "confidence", "review_date"):
+            if field in patch:
+                node[field] = patch[field]
+        incoming = patch.get("errata")
+        if isinstance(incoming, list) and incoming:
+            existing = list(node.get("errata", []) or [])
+            seen = {_errata_key(e) for e in existing}
+            additions = []
+            for e in incoming:
+                k = _errata_key(e)
+                if k not in seen:
+                    seen.add(k)
+                    additions.append(e)
+            additions.sort(key=lambda e: _errata_key(e))
+            node["errata"] = existing + additions
+        applied += 1
+    print("overrides: applied=%d skipped=%d" % (applied, skipped))
+    return applied, skipped
+
+
 def kahn(nodes, edges):
     ids = [n["id"] for n in nodes]
     id_set = set(ids)
@@ -171,7 +219,7 @@ def kahn(nodes, edges):
     return order
 
 
-def build_node_content(nodes, run_date):
+def build_node_content(nodes, generated_date):
     content_nodes = []
     for n in nodes:
         d = n.get("detail", {}) or {}
@@ -199,7 +247,7 @@ def build_node_content(nodes, run_date):
         "meta": {
             "title": "母库节点·五段式内容镜像",
             "schema_version": "1.1.0",
-            "generated": run_date,
+            "generated": generated_date,
             "node_count": len(content_nodes),
             "section_schema": ["definition", "principle", "mechanism", "engineering", "tradeoff"],
             "note": "每节点五段式镜像（定义/原理/机制/工程/权衡），与 methodology-dag.json 节点内联 detail 逐字一致；本文件为可独立渲染的派生镜像。",
@@ -305,8 +353,6 @@ def main():
     out_content = os.path.join(data_dir, "node-content.json")
     out_stats = os.path.join(data_dir, "stats.md")
 
-    run_date = datetime.date.today().isoformat()
-
     base = load(base_path)
     nodes = list(base.get("nodes", []))
     edges = list(base.get("edges", []))
@@ -324,6 +370,8 @@ def main():
         merge_unique(nodes, part.get("nodes", []), "node", seen_n)
         merge_unique(edges, part.get("edges", []), "edge", seen_e)
 
+    apply_verification_overrides(nodes, os.path.join(data_dir, "_verification-overrides.json"))
+
     groups = recompute_groups(groups, nodes)
 
     cases = derive_cases(nodes)
@@ -334,8 +382,6 @@ def main():
     assert acyclic, "hard-dependency graph has a cycle"
 
     meta["version"] = "0.3.0"
-    meta["updated"] = run_date
-    meta.setdefault("generated", run_date)
     meta["total_nodes"] = len(nodes)
     meta["total_edges"] = len(edges)
     meta["total_groups"] = len(groups)
@@ -356,7 +402,7 @@ def main():
         graph[key] = val
     dump(out_graph, graph)
 
-    dump(out_content, build_node_content(nodes, run_date))
+    dump(out_content, build_node_content(nodes, meta.get("generated", "")))
 
     stats = build_stats(nodes, edges, groups, themes, cases, order,
                         canonical_total(repo_root, fallback=0))

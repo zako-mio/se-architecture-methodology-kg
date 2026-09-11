@@ -110,9 +110,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-005、BK-009、STD-005
+- 书证核验：BK-009 Ch9（direct），Ch9.1（direct），Ch9.2（direct）；BK-023 Ch2.2（direct）
 - 入口链接：https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
 - 入口链接：https://people.ece.ubc.ca/matei/EECE417/BASS/ch05lev1sec1.html
 - 勘误：常见误解「性能效率就是响应时间越短越好」→ 核验结论「性能效率包含时间行为、资源利用与容量三方面，须在给定资源与负载下综合看待，而非单一追求最短延迟」（OFF-005）

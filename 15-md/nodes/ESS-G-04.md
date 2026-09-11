@@ -154,9 +154,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：PAP-002、BK-008、STD-005、OFF-001、OFF-002、PAP-021
+- 书证核验：BK-023 Ch2.4（direct）
 - 入口链接：https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf
 - 入口链接：https://web.stanford.edu/~ouster/cgi-bin/book.php
 - 入口链接：https://www.iso.org/standard/78176.html

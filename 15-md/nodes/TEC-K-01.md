@@ -122,10 +122,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 版本：2026 (Azure Cloud Design Patterns) / 2015-updated-2023 (AWS backoff) / 2018 (Release It! 2e)
 - 规范信源：VEN-025、WEB-037、VEN-028、BK-024
+- 书证核验：BK-023 Ch9.2（partial）
 - 入口链接：https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker
 - 入口链接：https://learn.microsoft.com/en-us/azure/architecture/patterns/retry
 - 入口链接：https://martinfowler.com/bliki/CircuitBreaker.html

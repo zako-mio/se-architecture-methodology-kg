@@ -164,9 +164,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：VEN-014、PAP-007、OFF-002、BK-008、BK-031、BK-009、WEB-045
+- 书证核验：BK-009 Ch3.4（partial），Ch20.3（direct）
 - 入口链接：https://learn.microsoft.com/azure/architecture/guide/architecture-styles/
 - 勘误：常见误解「采用更先进、能力更全的架构风格必然更好」→ 核验结论「每种风格在带来期望属性的同时制造新的复杂度；选型应按质量属性场景与约束匹配，选择刚好满足需求的方案，额外能力即额外代价」（VEN-014）
 

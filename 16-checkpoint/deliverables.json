@@ -34,9 +34,16 @@
     {
       "id": "views",
       "pattern": "14-views/*.html",
-      "expected": 7,
+      "expected": 8,
       "kind": "count",
-      "desc": "01-layer / 02-learning-path / 03-decision-matrix / 04-cross-mapping / 05-cases / glossary + index.html"
+      "desc": "01-layer / 02-learning-path / 03-decision-matrix / 04-cross-mapping / 05-cases / 06-book-verification / glossary + index.html"
+    },
+    {
+      "id": "06-book-verification",
+      "pattern": "14-views/06-book-verification.html",
+      "expected": 1,
+      "kind": "count",
+      "desc": "书籍↔节点对照视图（书证核验公开安全投影）"
     },
     {
       "id": "interactive",

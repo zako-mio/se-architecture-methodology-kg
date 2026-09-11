@@ -102,9 +102,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-024、BK-025、VEN-025、VEN-028
+- 书证核验：BK-023 Ch2.3（direct）
 - 入口链接：https://pragprog.com/titles/mnee2/release-it-second-edition/
 - 入口链接：https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker
 - 勘误：常见误解「重试总能提高可用性」→ 核验结论「重试仅对瞬时故障且幂等操作安全；缺少退避与上限的重试会放大过载，把局部故障升级为级联故障」（BK-024）

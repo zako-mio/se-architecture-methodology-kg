@@ -137,10 +137,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 版本：2007
 - 规范信源：OFF-024、BK-009、STD-005
+- 书证核验：BK-009 Ch8.2（direct）
 - 入口链接：https://www.sei.cmu.edu/library/modifiability-tactics
 - 入口链接：https://www.pearson.com/en-us/subject-catalog/p/software-architecture-in-practice/P200000009173
 - 勘误：常见误解「可修改性只需多加抽象层即可解决」→ 核验结论「可修改性战术分三类（推迟绑定时间、局部化变更、防止涟漪效应），分别从绑定时机、变化集中位置与影响传播三个维度降低变更成本；无约束地增加抽象层会引入间接复杂度，可能阻碍而非促进演进」（OFF-024）

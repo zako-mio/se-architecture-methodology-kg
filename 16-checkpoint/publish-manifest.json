@@ -7,7 +7,8 @@
     "private": [
       "01-books/_files/",
       "01-books/download-log.md",
-      "01-books/acquired-manifest.json"
+      "01-books/acquired-manifest.json",
+      "01-books/_verify/"
     ],
     "never": [
       "_publish/",
@@ -67,7 +68,8 @@
   "private_probe": [
     "01-books/_files",
     "download-log.md",
-    "acquired-manifest.json"
+    "acquired-manifest.json",
+    "01-books/_verify"
   ],
   "binary_exts": [
     ".pdf",

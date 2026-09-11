@@ -119,9 +119,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-023、BK-009
+- 书证核验：BK-009 Ch4.2（direct）；BK-023 Ch2.3（partial）
 - 入口链接：https://www.sei.cmu.edu/library/realizing-and-refining-architectural-tactics-availability
 - 勘误：常见误解「增加冗余实例即可保证高可用」→ 核验结论「冗余须隔离故障域；若多个副本共享同一依赖、数据或基础设施，真实故障中会同时失效，形成伪冗余，检测/恢复/预防三类战术须协同才能控制故障影响」（OFF-023）
 

@@ -82,9 +82,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-022、PAP-024、PAP-025、STD-005
+- 书证核验：BK-023 Ch2.4（direct）
 - 入口链接：https://www.sei.cmu.edu/library/extensibility
 - 入口链接：https://www.iso.org/standard/78176.html
 - 勘误：常见误解「可扩展性与可演化性是标准中的顶层质量特性」→ 核验结论「二者均无标准顶层术语落点；标准侧最接近的是灵活性（适应需求/情境/环境变化）与可维护性下的可修改性，工程界与学术界分别给出独立定义」（STD-005）

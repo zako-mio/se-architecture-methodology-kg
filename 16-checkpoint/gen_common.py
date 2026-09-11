@@ -109,6 +109,74 @@ def load_content(cfg):
     return {"nodes": []}
 
 
+# ---------------------------------------------------------------- 书证核验投影
+
+BOOK_VERIFICATION_FILE = "book-verification.json"
+
+
+def load_book_verification(cfg):
+    """读 10-dag-data/book-verification.json（公开安全投影）；缺失/损坏 → {}。"""
+    dd = cfg.get("data_dir")
+    if not dd:
+        return {}
+    path = os.path.join(dd, BOOK_VERIFICATION_FILE)
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _anchor_label(rec):
+    """章节锚标签：有 section 用 Ch<section>，否则 Ch<chapter>。"""
+    section = rec.get("section") or ""
+    chapter = rec.get("chapter") or ""
+    if section:
+        return "Ch%s" % section
+    if chapter:
+        return "Ch%s" % chapter
+    return ""
+
+
+_STRENGTH_RANK = {"contradicted": 3, "direct": 2, "partial": 1, "inferred": 0}
+
+
+def _strongest(recs):
+    """取证据强度优先级最高者（contradicted > direct > partial > inferred）。"""
+    return max(recs, key=lambda r: _STRENGTH_RANK.get(r.get("evidence_strength"), -1))
+
+
+def book_evidence_line(by_node, nid):
+    """节点页/镜像 §10 的书证核验行文本（仅章节级，按 source_id 升序）。
+
+    返回纯文本锚串，例如 ``BK-007 Ch5.2（direct）、Ch11（partial）``；无记录返回 ""。
+    """
+    recs = by_node.get(nid) or []
+    if not recs:
+        return ""
+    grouped = {}
+    for r in recs:
+        label = _anchor_label(r)
+        if label:
+            grouped.setdefault((r.get("source_id") or "", label), []).append(r)
+    by_src = {}
+    for (sid, label), group in grouped.items():
+        by_src.setdefault(sid, []).append(
+            (label, _strongest(group).get("evidence_strength", "")))
+    parts = []
+    for sid in sorted(by_src):
+        cells = ["%s（%s）" % (label, strength)
+                 for label, strength in sorted(by_src[sid], key=lambda t: _nat_key(t[0]))]
+        parts.append("%s %s" % (sid, "，".join(cells)))
+    return "；".join(parts)
+
+
+def _nat_key(label):
+    parts = re.split(r"(\d+)", str(label or ""))
+    return [(0, int(p), "") if p.isdigit() else (1, 0, p) for p in parts]
+
+
 class Graph(object):
     """规范化后的图数据，渲染器统一消费对象。"""
 
@@ -163,6 +231,7 @@ class Graph(object):
         self.has_src = any(n.get("src") for n in nodes)
         self.has_cross_ref = any(e["type"] == "cross_reference" for e in edges)
         self.has_cases = bool([n for n in nodes if n["type"] == "case"]) or bool(self.cases)
+        self.book_verification = load_book_verification(cfg).get("by_node") or {}
 
     @staticmethod
     def _norm_node(raw, content):

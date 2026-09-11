@@ -150,9 +150,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-036、OFF-025、OFF-013、BK-009
+- 书证核验：BK-009 Ch3.2（direct），Ch3.3（direct），Ch19.4（partial）
 - 入口链接：https://people.ece.ubc.ca/matei/EECE417/BASS/ch04lev1sec3.html
 - 入口链接：https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes
 - 勘误：常见误解「质量属性只要用高、快、稳定等形容词描述即可作为需求」→ 核验结论「质量属性不可直接测量，必须转写为含刺激源、刺激、环境、制品、响应与响应度量的具体场景，才可设计、验证与验收」（BK-036）

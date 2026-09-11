@@ -1,0 +1,678 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "note": "阶段7 前（阶段5 冻结）基线：节点原始 verified/confidence。派生器以此计算『保持原值』，使派生成为 (baseline, ledger) 的纯函数，避免从派生后 dag 回读造成的循环依赖。",
+    "source": "git HEAD:10-dag-data/methodology-dag.json",
+    "source_sha256": "58a7e3c397dc772344d71d8f98dd107ad5ac54a607bcea956a6a8994a258a390"
+  },
+  "nodes": {
+    "CAS-X-01": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-02": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-03": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-04": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-05": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-06": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-07": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-08": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-09": {
+      "verified": "cited",
+      "confidence": "high"
+    },
+    "CAS-X-10": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-11": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-12": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-13": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-14": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-15": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-16": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-17": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "CAS-X-18": {
+      "verified": "cited",
+      "confidence": "medium"
+    },
+    "ESS-F-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-F-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-F-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-F-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-F-05": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "ESS-G-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-G-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-08": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-H-09": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-I-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-I-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-I-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-I-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-J-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-J-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-J-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-J-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-K-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-K-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-K-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-K-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-L-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-L-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-L-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-L-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-L-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-M-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-M-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-M-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-M-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-M-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-N-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-N-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-N-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-N-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-N-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-O-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-O-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "ESS-O-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-F-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-F-02": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "MTH-F-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-F-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-F-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-F-06": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "MTH-G-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-G-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-G-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-G-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-G-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-G-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-H-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-H-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-H-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-H-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-I-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-J-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-04": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "MTH-K-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-K-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-L-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-M-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-N-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-07": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-08": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-09": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-10": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "MTH-O-11": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-F-01": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "TEC-F-02": {
+      "verified": true,
+      "confidence": "medium"
+    },
+    "TEC-G-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-G-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-G-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-G-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-H-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-H-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-H-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-I-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-I-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-I-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-J-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-04": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-05": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-K-06": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-L-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-L-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-M-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-M-02": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-M-03": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-N-01": {
+      "verified": true,
+      "confidence": "high"
+    },
+    "TEC-N-02": {
+      "verified": true,
+      "confidence": "high"
+    }
+  }
+}

@@ -1,0 +1,2057 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "generated": "2026-09-11",
+    "note": "书证核验的公开安全投影：仅章节级引用元数据（信源 id + 章/节编号与标题 + 强度 + 方向 + 复核状态 + 日期）。不含 claim 文本、页码、摘句；gaps.summary 为改写摘要。"
+  },
+  "by_node": {
+    "CAS-X-02": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Boundaries: Drawing Lines",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "17",
+        "section": "17.5",
+        "section_title": "Plugin Architecture",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "18",
+        "section": "18.1",
+        "section_title": "Boundary Crossing",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "22.1",
+        "section_title": "The Dependency Rule",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "24",
+        "section": "",
+        "section_title": "Partial Boundaries",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "24",
+        "section": "24.1",
+        "section_title": "Skip the Last Step",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "24",
+        "section": "24.2",
+        "section_title": "One-Dimensional Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "34",
+        "section": "34.5",
+        "section_title": "The Devil Is in the Implementation Details",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-01": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "4",
+        "section": "",
+        "section_title": "Structured Programming",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "15",
+        "section": "15.5",
+        "section_title": "Keeping Options Open",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "17",
+        "section": "17.3",
+        "section_title": "Which Lines Do You Draw, and When Do You Draw Them?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "19",
+        "section": "",
+        "section_title": "Policy and Level",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "",
+        "section_title": "The Clean Architecture",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "22.1",
+        "section_title": "The Dependency Rule",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "22.1",
+        "section_title": "The Dependency Rule",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "24",
+        "section": "",
+        "section_title": "Partial Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-02": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "11",
+        "section": "",
+        "section_title": "DIP: The Dependency Inversion Principle",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "11",
+        "section": "11.2",
+        "section_title": "Factories",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "14",
+        "section": "14.4",
+        "section_title": "The Stable Abstractions Principle",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "14",
+        "section": "14.5",
+        "section_title": "Conclusion",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "22.1",
+        "section_title": "The Dependency Rule",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "22",
+        "section": "22.1",
+        "section_title": "The Dependency Rule",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "23",
+        "section": "23.4",
+        "section_title": "Database Gateways",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "34",
+        "section": "34.3",
+        "section_title": "Ports and Adapters",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-03": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "14",
+        "section": "14.1",
+        "section_title": "The Acyclic Dependencies Principle",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-04": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-07": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "21",
+        "section": "21.1",
+        "section_title": "The Theme of an Architecture",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-H-02": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "13",
+        "section": "13.4",
+        "section_title": "The Tension Diagram for Component Cohesion",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-I-02": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "23",
+        "section": "23.1",
+        "section_title": "The Humble Object Pattern",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.1",
+        "section_title": "Testability General Scenario",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.2",
+        "section_title": "Tactics for Testability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.2",
+        "section_title": "Tactics for Testability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.2",
+        "section_title": "Tactics for Testability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.2",
+        "section_title": "Tactics for Testability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "12",
+        "section": "12.2",
+        "section_title": "Tactics for Testability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-K-01": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-K-02": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-L-05": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-M-01": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-M-02": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-M-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "",
+        "section_title": "",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "",
+        "section_title": "",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "",
+        "section_title": "",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "9.1",
+        "section_title": "Performance General Scenario",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "9.2",
+        "section_title": "Tactics for Performance",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "9",
+        "section": "9.2",
+        "section_title": "Tactics for Performance",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.2",
+        "section_title": "描述性能",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-M-04": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-M-05": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Specifying Quality Attribute Requirements: Quality Attribute Scenarios",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Specifying Quality Attribute Requirements: Quality Attribute Scenarios",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Specifying Quality Attribute Requirements: Quality Attribute Scenarios",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "19",
+        "section": "19.4",
+        "section_title": "Capturing ASRs in a Utility Tree",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-O-01": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "6",
+        "section": "6.3",
+        "section_title": "Segregation of Mutability",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-O-02": [
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "26",
+        "section": "26.1",
+        "section_title": "The Ultimate Detail",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.5",
+        "section_title": "More on ADD Step 6: Creating Preliminary Documentation during the Design",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "1",
+        "section": "1.1",
+        "section_title": "分析型与事务型系统",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-O-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.5",
+        "section_title": "More on ADD Step 6: Creating Preliminary Documentation during the Design",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "4",
+        "section": "4.1",
+        "section_title": "OLTP 系统的存储与索引",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-G-02": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Specifying Quality Attribute Requirements: Quality Attribute Scenarios",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "19",
+        "section": "19.4",
+        "section_title": "Capturing ASRs in a Utility Tree",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.5",
+        "section_title": "More on ADD Step 6: Creating Preliminary Documentation during the Design",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.1",
+        "section_title": "Evaluation as a Risk Reduction Activity",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-G-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-G-06": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "19",
+        "section": "19.4",
+        "section_title": "Capturing ASRs in a Utility Tree",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "19",
+        "section": "19.4",
+        "section_title": "Capturing ASRs in a Utility Tree",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "19",
+        "section": "19.4",
+        "section_title": "Capturing ASRs in a Utility Tree",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.5",
+        "section_title": "More on ADD Step 6: Creating Preliminary Documentation during the Design",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-K-06": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-M-01": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.5",
+        "section_title": "Designing with Tactics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.5",
+        "section_title": "Designing with Tactics",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.6",
+        "section_title": "Analyzing Quality Attribute Design Decisions: Tactics-Based Questionnaires",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.6",
+        "section_title": "Analyzing Quality Attribute Design Decisions: Tactics-Based Questionnaires",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-M-02": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-M-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Tactics for Availability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-M-06": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.5",
+        "section_title": "More on ADD Step 6: Creating Preliminary Documentation during the Design",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.4",
+        "section_title": "Contextual Factors",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-O-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.4",
+        "section_title": "Achieving Quality Attributes through Architectural Patterns and Tactics",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "20",
+        "section": "20.3",
+        "section_title": "More on ADD Step 4: Choose One or More Design Concepts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-O-05": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Quality Attribute Considerations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.4",
+        "section_title": "Contextual Factors",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "21",
+        "section": "21.5",
+        "section_title": "The Architecture Tradeoff Analysis Method",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-O-09": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-O-10": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "13",
+        "section": "13.1",
+        "section_title": "数据集成",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-O-11": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.2",
+        "section_title": "描述性能",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "TEC-K-01": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "9",
+        "section": "9.2",
+        "section_title": "不可靠的网络",
+        "evidence_strength": "partial",
+        "direction": "reverse",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "TEC-K-05": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      }
+    ],
+    "TEC-M-03": [
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-009",
+        "book": "Software Architecture in Practice",
+        "chapter": "8",
+        "section": "8.2",
+        "section_title": "Tactics for Modifiability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-09-11"
+      }
+    ]
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP-CA-001",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-007",
+      "chapter": "13",
+      "section": "13.4",
+      "target": {
+        "existing_node_id": "ESS-H-02",
+        "proposed_node": "MTH-G-07"
+      },
+      "summary": "书中以三原则刻画组件级内聚：复用/发布等价、共同闭包、共同复用，并给出三者相互拉扯的张力图与随成熟度动态平衡的规律；图谱现有内聚耦合节点偏模块层级，未单列组件级内聚原则。",
+      "proposed_action": "新增节点（组件内聚三原则与张力平衡），并在 ESS-H-02 与组件/边界节点间补边",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CA-002",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-007",
+      "chapter": "14",
+      "section": "14.4",
+      "target": {
+        "existing_node_id": "ESS-G-03",
+        "proposed_node": "MTH-G-08"
+      },
+      "summary": "书中给出组件依赖治理的完整方法族：无环依赖原则、稳定依赖原则、稳定抽象原则，以及入/出耦合、抽象度与主序列距离等度量；图谱边界节点未覆盖依赖环治理与稳定性度量这类可操作方法。",
+      "proposed_action": "新增节点（组件依赖管理与度量方法），并与 ESS-G-02、ESS-G-03 补边",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CA-003",
+      "kind": "concept_missing",
+      "book_source_id": "BK-007",
+      "chapter": "21",
+      "section": "21.1",
+      "target": {
+        "existing_node_id": "ESS-G-07",
+        "proposed_node": "ESS-G-08"
+      },
+      "summary": "书中主张架构应把用例与领域意图喊出来，让系统结构本身可读地说明业务，而非被框架或技术分层淹没；图谱有架构描述节点，却无「架构表意/意图可见」这一独立概念。",
+      "proposed_action": "新增节点（架构表意与意图可见性），从 ESS-G-07 与 MTH-G-05 建立依据推导边",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CA-004",
+      "kind": "concept_missing",
+      "book_source_id": "BK-007",
+      "chapter": "6",
+      "section": "6.3",
+      "target": {
+        "existing_node_id": "ESS-O-01",
+        "proposed_node": "ESS-O-04"
+      },
+      "summary": "书中把函数式范式的不可变性提升为架构约束，主张把可变状态隔离到少数受控位置并以事件溯源等结构承载状态变化，以此抑制并发与状态带来的复杂度；图谱缺少不可变性与可变隔离概念。",
+      "proposed_action": "新增节点（不可变性与可变隔离），与 ESS-O-01、ESS-G-01 建立前置/组合边",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CA-005",
+      "kind": "concept_missing",
+      "book_source_id": "BK-007",
+      "chapter": "23",
+      "section": "23.1",
+      "target": {
+        "existing_node_id": "ESS-I-02",
+        "proposed_node": "TEC-I-04"
+      },
+      "summary": "书中以谦卑对象模式在边界处把难测行为压缩为极简外壳，并以 Presenter/View、数据库网关、数据映射与服务监听器等实例承载，使可测试性成为边界设计的直接产物；图谱可测试性节点未覆盖该模式族。",
+      "proposed_action": "新增节点（谦卑对象与测试边界模式），从 ESS-I-02 与边界节点建立实现/依据推导边",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CA-006",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-007",
+      "chapter": "26",
+      "section": "26.1",
+      "target": {
+        "existing_node_id": "ESS-O-02",
+        "proposed_node": "MTH-G-09"
+      },
+      "summary": "书中系统论证数据库、Web 与框架皆为可推迟的细节，主张核心策略不依赖这些选择，并把组合装配点（Main）视为终极细节；图谱缺少「细节可推迟」与组合根这一治理视角。",
+      "proposed_action": "新增节点（细节可推迟与组合根），与 ESS-G-02、MTH-J-04 补引并建立依赖关联",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-DDIA-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-023",
+      "chapter": "2",
+      "section": "2.3",
+      "target": {
+        "existing_node_id": "ESS-K-01",
+        "proposed_node": null
+      },
+      "summary": "该节点主张可靠性是在风险与稳定之间做显式管理；DDIA 第2章把可靠性界定为出故障时仍持续正确工作，并区分局部故障与整体失效，可作为其定义性上游来源，但节点现未引用本书。",
+      "proposed_action": "为该节点补引 BK-023 第2章「可靠性与容错」，作为可靠性定义与故障/失效区分的来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-023",
+      "chapter": "2",
+      "section": "2.4",
+      "target": {
+        "existing_node_id": "ESS-M-02",
+        "proposed_node": null
+      },
+      "summary": "该节点把可演化性界定为低代价适应变化；DDIA 第2章对可伸缩性给出「先描述负载、再评估资源与性能关系」的界定，并单列可演化性，直接支撑该节点主张，但未被引用。",
+      "proposed_action": "为该节点补引 BK-023 第2章「可伸缩性」与「可演化性」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-023",
+      "chapter": "2",
+      "section": "2.5",
+      "target": {
+        "existing_node_id": "ESS-O-01",
+        "proposed_node": null
+      },
+      "summary": "该节点区分问题固有的本质复杂度与工具所致的偶然复杂度；DDIA 第2章在讨论简单性时直接采用这一划分并指出两者边界随工具演进而移动，可佐证此节点但未被引用。",
+      "proposed_action": "为该节点补引 BK-023 第2章「简单性：管理复杂度」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-023",
+      "chapter": "2",
+      "section": "2.3",
+      "target": {
+        "existing_node_id": "MTH-K-06",
+        "proposed_node": null
+      },
+      "summary": "该节点把混沌工程表述为在生产中做受控实验；DDIA 第2章介绍故障注入并明确定义混沌工程为借实验增强对容错机制信心的学科，直接支持该节点但现未引用。",
+      "proposed_action": "为该节点补引 BK-023 第2章「容错」小节中的故障注入与混沌工程论述。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-023",
+      "chapter": "2",
+      "section": "2.4",
+      "target": {
+        "existing_node_id": "ESS-G-04",
+        "proposed_node": null
+      },
+      "summary": "该节点主张把系统分解为边界清晰、可独立变更的模块；DDIA 第2章把「拆成可相对独立运行的小组件」列为通用伸缩原则，同时强调分解边界的判断困难，直接支撑该节点但未被引用。",
+      "proposed_action": "为该节点补引 BK-023 第2章「可伸缩性原则」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-006",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "4",
+      "section": "4.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-10"
+      },
+      "summary": "DDIA 第4章系统讲解存储引擎与索引结构（日志结构存储、B 树、列式存储、二级索引与全文检索），并指出索引在读写之间的固有取舍。现有图谱缺少对应的存储引擎/索引本质节点。",
+      "proposed_action": "新增节点（提案：ESS-H-10 存储引擎与索引结构，待评审）并补边至质量属性权衡相关节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-007",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "6",
+      "section": "6.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-G-07"
+      },
+      "summary": "DDIA 第6章比较单主、多主与无主三类复制算法，讨论同步/异步、故障切换、复制延迟、冲突处理与仲裁一致性等取舍。现有图谱在分布式数据复制域没有对应方法论节点。",
+      "proposed_action": "新增节点（提案：MTH-G-07 数据复制策略，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-008",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "7",
+      "section": "7.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-G-08"
+      },
+      "summary": "DDIA 第7章讨论分片（分区）的动机与代价、键范围与哈希分片、负载偏斜与热点缓解、再平衡与请求路由、以及二级索引的分片方式。现有图谱缺少数据分区与再平衡的方法论节点。",
+      "proposed_action": "新增节点（提案：MTH-G-08 数据分区与再平衡，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-009",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "8",
+      "section": "8.2",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-11"
+      },
+      "summary": "DDIA 第8章从事务 ACID 语义出发，系统讨论读已提交、快照隔离、丢失更新、写偏斜与幻读等异常，以及可串行化、两阶段锁、串行执行与分布式事务。现有图谱缺少事务与隔离级别节点。",
+      "proposed_action": "新增节点（提案：ESS-H-11 事务与隔离级别，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-010",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "10",
+      "section": "10.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-G-09"
+      },
+      "summary": "DDIA 第10章给出线性一致性的新鲜度语义、其与可串行化的区别、实现代价，并以逻辑时钟、全序广播、共识算法与协调服务展开分布式一致性与共识。现有图谱缺少该一致性模型与共识节点。",
+      "proposed_action": "新增节点（提案：ESS-G-09 分布式一致性模型与共识，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-011",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-023",
+      "chapter": "11",
+      "section": "11.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-G-09"
+      },
+      "summary": "DDIA 第11、12章分别讨论批处理与流处理数据流：把输入视为不可变、以确定性纯函数派生输出，以及无界事件、事件时间与窗口、流连接与容错。现有图谱缺少批/流数据处理的方法论节点。",
+      "proposed_action": "新增节点（提案：MTH-G-09 批处理与流处理数据流，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-012",
+      "kind": "concept_missing",
+      "book_source_id": "BK-023",
+      "chapter": "8",
+      "section": "8.3",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-12"
+      },
+      "summary": "「可串行化快照隔离（SSI）」这一概念在图谱中缺失：它是在快照隔离之上做乐观冲突检测、以较小性能代价换取完整可串行化的并发控制机制，DDIA 第8章有专节论述。",
+      "proposed_action": "新增节点（提案：ESS-H-12 可串行化快照隔离，待评审），并关联事务与隔离级别节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-013",
+      "kind": "concept_missing",
+      "book_source_id": "BK-023",
+      "chapter": "10",
+      "section": "10.3",
+      "target": {
+        "existing_node_id": "MTH-O-10",
+        "proposed_node": null
+      },
+      "summary": "「全序广播」概念在图谱中缺失：决定事件全序的问题与共识等价，多数共识系统以共享日志形式提供全序广播，用于状态机复制与衍生数据一致性。该概念应在增量演化与一致性治理节点中补充。",
+      "proposed_action": "新增术语条目并补挂至 MTH-O-10，说明全序广播与共识、状态机复制的关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-014",
+      "kind": "concept_missing",
+      "book_source_id": "BK-023",
+      "chapter": "12",
+      "section": "12.3",
+      "target": {
+        "existing_node_id": "TEC-K-01",
+        "proposed_node": null
+      },
+      "summary": "「幂等性」与「确定性重放」概念在图谱中缺失：可安全重试、多次执行效果等同的操作是分布式与流处理容错的基础，也使基于日志的衍生数据在故障后可恢复。应在重试退避相关节点补充该概念。",
+      "proposed_action": "新增术语条目并补挂至 TEC-K-01，说明重试与幂等性的配套关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDIA-015",
+      "kind": "concept_missing",
+      "book_source_id": "BK-023",
+      "chapter": "1",
+      "section": "1.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-13"
+      },
+      "summary": "「权威记录系统与衍生数据系统」这一对概念在图谱中缺失：按数据是否为首要权威源区分记录系统与派生系统，是梳理多组件数据架构数据流与集成方式的基本视角，DDIA 第1、13章反复使用。",
+      "proposed_action": "新增节点（提案：ESS-H-13 记录系统与衍生数据，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-009",
+      "chapter": "3",
+      "section": "3.4",
+      "target": {
+        "existing_node_id": "ESS-G-05",
+        "proposed_node": null
+      },
+      "summary": "该书以专节讨论架构模式与风格如何打包战术并影响多个质量属性，而现有节点「架构风格」未把该书列为其信源，属应补引的漏引。",
+      "proposed_action": "在 ESS-G-05 的规范信源中补充 BK-009，并补一条指向该书第3章的直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-009",
+      "chapter": "22",
+      "section": "22.3",
+      "target": {
+        "existing_node_id": "MTH-G-05",
+        "proposed_node": null
+      },
+      "summary": "该书第22章系统论述架构文档化（视图、跨视图信息与理由记录），是架构文档化方法的核心来源，但节点 MTH-G-05 未将该书列为其直接信源。",
+      "proposed_action": "在 MTH-G-05 中补引 BK-009 第22章，并标注视图组织与理由文档化的直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-003",
+      "kind": "concept_missing",
+      "book_source_id": "BK-009",
+      "chapter": "19",
+      "section": "19.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "架构上重要的需求 (Architecturally Significant Requirements, ASR)"
+      },
+      "summary": "该书把「架构上重要的需求」提升为独立主题，论述从需求文档、干系人访谈与业务目标三条途径收集 ASR，并指出其驱动架构决策；现有 167 节点中缺少该概念节点。",
+      "proposed_action": "新增节点 ASR，挂接现有需求工程节点（MTH-F-01..06）与 MTH-G-02，补入其与该书的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-004",
+      "kind": "concept_missing",
+      "book_source_id": "BK-009",
+      "chapter": "20",
+      "section": "20.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "属性驱动设计 (Attribute-Driven Design, ADD)"
+      },
+      "summary": "该书以整章给出属性驱动设计的七步迭代流程，把驱动转化为结构与接口；现有图中只有战术映射与 ATAM 评估，缺少这一与评估配对的架构设计方法节点。",
+      "proposed_action": "新增节点 ADD，作为 MTH-G-02（评估）与 MTH-M-01（战术映射）的伴生设计方法，并补入与该书的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-005",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-009",
+      "chapter": "10",
+      "section": "10.2",
+      "target": {
+        "existing_node_id": "MTH-M-01",
+        "proposed_node": null
+      },
+      "summary": "该书对可用性、可部署性、能效、可集成性、安全性、保密性、可测试性、易用性各设独立章节并给出战术集；现有图仅覆盖可用性、可修改性等少数属性的战术应用节点，安全、能效、可部署性、可集成性、易用性等属性缺乏对应的战术应用节点。",
+      "proposed_action": "以 MTH-M-01 为母节点，为缺失属性补充战术应用子节点（或扩展现有 MTH-M-01 的细化边），至少覆盖安全、能效、可部署性、可集成性与易用性。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-006",
+      "kind": "missed_citation",
+      "book_source_id": "BK-009",
+      "chapter": "23",
+      "section": "23.1",
+      "target": {
+        "existing_node_id": "MTH-L-03",
+        "proposed_node": null
+      },
+      "summary": "该书第23章专论架构债的识别、热点发现与自动化治理，与技术债相关节点高度相关，但 MTH-L-03 未把该书列为其信源，且「架构债」作为技术债在架构层的特定形态未被单独刻画。",
+      "proposed_action": "在 MTH-L-03 补引 BK-009 第23章；如需要，可另立「架构债」节点以区别于一般技术债。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SAIP-007",
+      "kind": "concept_missing",
+      "book_source_id": "BK-009",
+      "chapter": "24",
+      "section": "24.3",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "架构师角色与架构能力建设"
+      },
+      "summary": "该书第24、25章讨论架构师在项目中的角色（与项目经理分工、增量架构、敏捷与分布式开发）以及个人与组织的架构能力建设，现有图在团队与康威域有组织节点，但缺少「架构师角色/架构能力」这一角色与能力维度节点。",
+      "proposed_action": "新增节点「架构师角色与架构能力」，挂接 ESS-N-* 团队域与 MTH-N-* 方法论节点，并补入与该书的边。",
+      "evidence_strength": "partial"
+    }
+  ]
+}

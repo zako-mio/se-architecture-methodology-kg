@@ -19,6 +19,7 @@ from gen_common import (build_graph, sections, esc,
                         stage_badge, layer_badge, src_badge, type_badge,
                         group_badge, domain_badge, theme_badge,
                         priority_badge, verified_badge,
+                        book_evidence_line,
                         BASE_CSS, EDGE_STYLE, TYPE_LABELS,
                         neighborhood_svg, nbhd_legend, nbhd_caption,
                         term_matcher_for, inline_terms, render_rich_paragraph,
@@ -107,7 +108,7 @@ def _case_band(items):
     return '<div class="case-band">%s</div>' % "".join(cards)
 
 
-def _evidence(node):
+def _evidence(g, node):
     def kv(k, val):
         if val in (None, "", [], {}):
             return ""
@@ -125,6 +126,9 @@ def _evidence(node):
     if node.get("sources"):
         rows.append('<div class="r"><span class="k">规范信源</span>%s</div>'
                     % esc("、".join(node["sources"])))
+    book_ev = book_evidence_line(g.book_verification, node.get("id"))
+    if book_ev:
+        rows.append('<div class="r"><span class="k">书证核验</span>%s</div>' % esc(book_ev))
     links = []
     for u in node.get("entry_links") or []:
         if str(u).startswith("http"):
@@ -206,7 +210,7 @@ def _render_block(g, block, matcher, used):
     if k == "cases":
         return _case_band(block["items"])
     if k == "evidence":
-        return _evidence(block["node"])
+        return _evidence(g, block["node"])
     if k == "relations":
         return _relations(g, block["nid"], block["edges"])
     return ""

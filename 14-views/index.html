@@ -263,6 +263,17 @@ td.brief{font-size:12.5px;color:var(--dim);}
 .layer-nav a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;color:var(--text);text-decoration:none;}
 .empty{background:var(--panel);border:1px dashed var(--border);border-radius:8px;padding:24px;color:var(--dim);text-align:center;}
 .sec-card{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:10px 18px;margin:12px 0;}
+.bv-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 0;}
+.bv-legend .k{display:inline-flex;align-items:center;gap:5px;}
+.bv-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid transparent;}
+.bv-badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11.5px;font-weight:600;border:1px solid var(--border);}
+.bv-direct{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.bv-partial{color:#8a5a12;border-color:#e0c79a;background:#fbf3e6;}
+.bv-inferred{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+.bv-contradicted{color:#a01f2c;border-color:#e0b0b0;background:#fbeeee;}
+.bv-cell{min-width:92px;}
+.bv-anchor{display:inline-block;font-family:Georgia,serif;font-size:11.5px;color:var(--dim);margin:1px 5px 1px 0;}
+.bv-target{font-family:Consolas,monospace;font-size:12px;}
 
 </style>
 </head>
@@ -273,8 +284,8 @@ td.brief{font-size:12.5px;color:var(--dim);}
 <article>
 <header class="doc"><h1>视图入口</h1><div class="en">三层（本质 / 方法论 / 技术实践）× 生命周期域 × 横切主题 × 案例层</div><div class="badges"><span class="badge">167 节点</span><span class="badge">18 组</span><span class="badge">360 边</span></div></header>
 <section id="s1"><h2><span class="num">§1</span>核心统计</h2><div class="stat"><b>167</b><span>节点</span></div><div class="stat"><b>18</b><span>组</span></div><div class="stat"><b>360</b><span>关系边</span></div></section>
-<section id="s2"><h2><span class="num">§2</span>视图入口</h2><div class="card"><h3>分层视图</h3><p>按本质 / 方法论 / 技术实践三层浏览，含 implements / derives_from 层间边</p><a class="go" href="01-layer.html">打开</a></div><div class="card"><h3>学习路径</h3><p>按 prerequisite 拓扑与 stage / priority 生成的学习顺序</p><a class="go" href="02-learning-path.html">打开</a></div><div class="card"><h3>决策矩阵</h3><p>生命周期域 × 层 × 横切主题的落点矩阵与权衡要点</p><a class="go" href="03-decision-matrix.html">打开</a></div><div class="card"><h3>跨体系对照</h3><p>母库 ↔ 12factor 子库的 cross_reference 对照</p><a class="go" href="04-cross-mapping.html">打开</a></div><div class="card"><h3>案例视图</h3><p>案例节点及其 case_instance 印证关系</p><a class="go" href="05-cases.html">打开</a></div><div class="card"><h3>全局术语表</h3><p>11 分区术语裁决表；为节点页术语内联提供锚点目标（g-001…）</p><a class="go" href="glossary.html">打开</a></div><div class="card"><h3>交互 DAG 总览</h3><p>组级视图 + 点击下钻 + 数据驱动渲染。</p><a class="go" href="../13-interactive/index.html">打开交互总览</a></div></section>
-<section id="s3"><h2><span class="num">§3</span>快速开始</h2><ul style="padding-left:22px;"><li><b>总览</b>：交互 DAG 总览查看 18 组、167 节点在拓扑中的分布，点击组节点可下钻组内 DAG。</li><li><b>分面浏览</b>：分层视图 / 学习路径 / 决策矩阵 / 跨体系对照 / 案例视图 / 全局术语表。</li><li><b>深读</b>：任一视图中点击节点名进入节点详情页，可读定义 / 原理 / 机制 / 工程 / 权衡与信源。</li><li><b>机读</b>：Markdown 镜像供 AI 按路径索引调用。</li></ul></section>
+<section id="s2"><h2><span class="num">§2</span>视图入口</h2><div class="card"><h3>分层视图</h3><p>按本质 / 方法论 / 技术实践三层浏览，含 implements / derives_from 层间边</p><a class="go" href="01-layer.html">打开</a></div><div class="card"><h3>学习路径</h3><p>按 prerequisite 拓扑与 stage / priority 生成的学习顺序</p><a class="go" href="02-learning-path.html">打开</a></div><div class="card"><h3>决策矩阵</h3><p>生命周期域 × 层 × 横切主题的落点矩阵与权衡要点</p><a class="go" href="03-decision-matrix.html">打开</a></div><div class="card"><h3>跨体系对照</h3><p>母库 ↔ 12factor 子库的 cross_reference 对照</p><a class="go" href="04-cross-mapping.html">打开</a></div><div class="card"><h3>案例视图</h3><p>案例节点及其 case_instance 印证关系</p><a class="go" href="05-cases.html">打开</a></div><div class="card"><h3>书籍↔节点对照</h3><p>书证核验的公开安全投影：书籍 ↔ 节点强度矩阵、覆盖统计与反向缺口</p><a class="go" href="06-book-verification.html">打开</a></div><div class="card"><h3>全局术语表</h3><p>11 分区术语裁决表；为节点页术语内联提供锚点目标（g-001…）</p><a class="go" href="glossary.html">打开</a></div><div class="card"><h3>交互 DAG 总览</h3><p>组级视图 + 点击下钻 + 数据驱动渲染。</p><a class="go" href="../13-interactive/index.html">打开交互总览</a></div></section>
+<section id="s3"><h2><span class="num">§3</span>快速开始</h2><ul style="padding-left:22px;"><li><b>总览</b>：交互 DAG 总览查看 18 组、167 节点在拓扑中的分布，点击组节点可下钻组内 DAG。</li><li><b>分面浏览</b>：分层视图 / 学习路径 / 决策矩阵 / 跨体系对照 / 案例视图 / 书籍↔节点对照 / 全局术语表。</li><li><b>深读</b>：任一视图中点击节点名进入节点详情页，可读定义 / 原理 / 机制 / 工程 / 权衡与信源。</li><li><b>机读</b>：Markdown 镜像供 AI 按路径索引调用。</li></ul></section>
 <footer>软件工程 / 架构设计方法论知识图谱 · 视图页由 16-checkpoint/gen-views.py 生成</footer>
 </article>
 </div>

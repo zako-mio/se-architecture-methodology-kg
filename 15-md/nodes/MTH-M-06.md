@@ -136,9 +136,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-036、OFF-025、OFF-022、BK-009、PAP-026
+- 书证核验：BK-009 Ch3.2（direct），Ch20.3（partial），Ch20.5（partial），Ch21.4（partial），Ch21.5（direct）
 - 入口链接：https://people.ece.ubc.ca/matei/EECE417/BASS/ch04lev1sec3.html
 - 入口链接：https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes
 - 勘误：常见误解「架构的目标是让所有质量属性同时达到最优」→ 核验结论「质量属性相互牵制，架构设计是在给定语境下选择彼此相容的目标并对冲突处做显式取舍，不存在所有属性同时最优的方案」（BK-036）

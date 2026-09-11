@@ -148,9 +148,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-008、STD-001、BK-007
+- 书证核验：BK-007 Ch4（inferred），Ch15.5（partial），Ch17.3（direct），Ch19（direct），Ch22（direct），Ch22.1（partial），Ch24（partial）
 - 入口链接：https://www.iso.org/standard/74393.html
 
 ## §10 原始关系清单

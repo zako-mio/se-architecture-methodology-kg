@@ -110,9 +110,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-005、BK-009、OFF-021、OFF-020
+- 书证核验：BK-007 Ch23.1（partial）；BK-009 Ch12.1（direct），Ch12.2（direct）
 - 入口链接：https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
 - 入口链接：https://www.sei.cmu.edu/blog/using-quality-attributes-as-a-means-to-improve-acquisition-strategies/
 - 勘误：常见误解「可测试性只是测试人员关心的事，与系统设计无关」→ 核验结论「可测试性是系统结构赋予的属性，属可维护性的一项子特性，也在架构层面作为质量属性以场景与战术处理，其高低决定测试的成本与可行性」（OFF-005）

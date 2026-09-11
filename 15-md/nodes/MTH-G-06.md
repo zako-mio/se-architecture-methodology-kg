@@ -138,9 +138,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：OFF-002、BK-009、BK-036、OFF-025、PAP-007
+- 书证核验：BK-009 Ch19.4（direct），Ch20.5（partial），Ch21.5（direct）
 - 入口链接：https://www.sei.cmu.edu/architecture/
 - 入口链接：https://www.sei.cmu.edu/library/reasoning-about-software-quality-attributes
 - 勘误：常见误解「敏感点与权衡点是同义词」→ 核验结论「sensitivity point 针对单一质量属性；tradeoff point 同时是多个质量属性的敏感点、影响多个属性，二者须严格区分」（OFF-002）

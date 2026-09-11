@@ -9,3 +9,7 @@ Thumbs.db
 01-books/_files/
 01-books/download-log.md
 01-books/acquired-manifest.json
+
+# 阶段7 私有核验层（SSOT）：claim/锚点/页码/摘句，永不进公开仓
+#  配套：本地仓 .gitignore 整体忽略 01-books/；装配层 publish-manifest.json 显式列入 private
+01-books/_verify/

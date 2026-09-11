@@ -25,7 +25,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_common import (build_graph, topo_sort, esc, STAGE_STYLE, LAYER_STYLE,
                         TYPE_LABELS, EDGE_STYLE, KIND_STYLE, LAYER_ORDER,
                         derive_node_blocks, split_tradeoff, neighborhood,
-                        load_xref_index, add_common_args, config_from_args)
+                        load_xref_index, book_evidence_line,
+                        add_common_args, config_from_args)
 
 STAGE_LABEL = {"basic": "基础 basic", "intermediate": "进阶 intermediate", "advanced": "高级 advanced"}
 
@@ -124,6 +125,9 @@ def _md_block(g, node, block):
                 out.append("- %s：%s" % (k, _cell(n.get(key))))
         if n.get("sources"):
             out.append("- 规范信源：%s" % "、".join(n["sources"]))
+        book_ev = book_evidence_line(g.book_verification, n.get("id"))
+        if book_ev:
+            out.append("- 书证核验：%s" % book_ev)
         for u in n.get("entry_links") or []:
             if str(u).startswith("http"):
                 out.append("- 入口链接：%s" % u)

@@ -126,9 +126,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：STD-005、OFF-005、STD-007、PAP-024
+- 书证核验：BK-023 Ch2.5（direct）
 - 入口链接：https://www.iso.org/standard/78176.html
 - 入口链接：https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
 - 入口链接：https://www.iso.org/standard/80710.html
