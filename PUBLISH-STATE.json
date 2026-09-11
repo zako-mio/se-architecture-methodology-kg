@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated_by": "assemble_publish.py",
   "manifest_version": "1.0",
-  "file_count": 506,
+  "file_count": 516,
   "files": {
     "00-plan/01-alignment.md": {
       "sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386",
@@ -2987,10 +2987,10 @@
       "src_sha256": "d4d19c27921a552f3d4184270fba60b62b3c2aeda197aa25bd3644d3df33a3a6"
     },
     "20-agent-skill/SKILL.md": {
-      "sha256": "17bb38715543eec8dd997552f3e5a80d15c1852305016f2ce3399377344080ab",
+      "sha256": "e08e4a6397a881b33c081eb8cff85675d1598f19baaed09630d2837789429baf",
       "class": "mirror",
       "src": "20-agent-skill/SKILL.md",
-      "src_sha256": "17bb38715543eec8dd997552f3e5a80d15c1852305016f2ce3399377344080ab"
+      "src_sha256": "e08e4a6397a881b33c081eb8cff85675d1598f19baaed09630d2837789429baf"
     },
     "20-agent-skill/cheatsheet.md": {
       "sha256": "b26560fd815c2621582c8b7aa4ba97a8702ffd2b3b87a557cdd072cafae76ca4",
@@ -2998,11 +2998,23 @@
       "src": "20-agent-skill/cheatsheet.md",
       "src_sha256": "b26560fd815c2621582c8b7aa4ba97a8702ffd2b3b87a557cdd072cafae76ca4"
     },
+    "20-agent-skill/checklist.md": {
+      "sha256": "3be0dc956439509753a6aab2353fdcf52c0ee3543c058e396234e0fa7fe8baf5",
+      "class": "mirror",
+      "src": "20-agent-skill/checklist.md",
+      "src_sha256": "3be0dc956439509753a6aab2353fdcf52c0ee3543c058e396234e0fa7fe8baf5"
+    },
     "20-agent-skill/decision-matrix.md": {
       "sha256": "af357c5aa654759623e1427096b2d5a90c92e9263e6449d411c86199d65e6358",
       "class": "mirror",
       "src": "20-agent-skill/decision-matrix.md",
       "src_sha256": "af357c5aa654759623e1427096b2d5a90c92e9263e6449d411c86199d65e6358"
+    },
+    "20-agent-skill/integrations/openspec-design.md": {
+      "sha256": "f86e102328a950e41f16140ff0efe0a75a521803a00bcd49d4de9cfbd76a0c5f",
+      "class": "mirror",
+      "src": "20-agent-skill/integrations/openspec-design.md",
+      "src_sha256": "f86e102328a950e41f16140ff0efe0a75a521803a00bcd49d4de9cfbd76a0c5f"
     },
     "20-agent-skill/node-index.md": {
       "sha256": "468a8b2450c66db34ac1f642c530145540727cbf4741b292f9ff6c6a3e3241dc",
@@ -3011,10 +3023,58 @@
       "src_sha256": "468a8b2450c66db34ac1f642c530145540727cbf4741b292f9ff6c6a3e3241dc"
     },
     "20-agent-skill/routing.md": {
-      "sha256": "b6fa5a102943a0b3251a639dc429736febd3ba01d04199648114073d9e9a34b1",
+      "sha256": "21bc51ba3a884a2f385ed49f72657b6a901b6a403f7daa982c397f3a4d7e8fca",
       "class": "mirror",
       "src": "20-agent-skill/routing.md",
-      "src_sha256": "b6fa5a102943a0b3251a639dc429736febd3ba01d04199648114073d9e9a34b1"
+      "src_sha256": "21bc51ba3a884a2f385ed49f72657b6a901b6a403f7daa982c397f3a4d7e8fca"
+    },
+    "20-agent-skill/schemas/adr.schema.json": {
+      "sha256": "24c4f33da9baaaa9a5193090bbf1dd4c569b3daaf2c101353d32edd043d4c426",
+      "class": "mirror",
+      "src": "20-agent-skill/schemas/adr.schema.json",
+      "src_sha256": "24c4f33da9baaaa9a5193090bbf1dd4c569b3daaf2c101353d32edd043d4c426"
+    },
+    "20-agent-skill/schemas/boundary.schema.json": {
+      "sha256": "2cef49e6d461871bb7b45779592bf1b56fb020338e883a575010b8fd9674577f",
+      "class": "mirror",
+      "src": "20-agent-skill/schemas/boundary.schema.json",
+      "src_sha256": "2cef49e6d461871bb7b45779592bf1b56fb020338e883a575010b8fd9674577f"
+    },
+    "20-agent-skill/templates/adr.md": {
+      "sha256": "adbbb44f7e7128c95c1bf41c50be1caf15aa245b9c6da75a9515a98436d119a0",
+      "class": "mirror",
+      "src": "20-agent-skill/templates/adr.md",
+      "src_sha256": "adbbb44f7e7128c95c1bf41c50be1caf15aa245b9c6da75a9515a98436d119a0"
+    },
+    "20-agent-skill/templates/boundary.md": {
+      "sha256": "251d8296bbb00a7dac4404993a4987f452ab0e5318d65eab957d8a5d63b8e846",
+      "class": "mirror",
+      "src": "20-agent-skill/templates/boundary.md",
+      "src_sha256": "251d8296bbb00a7dac4404993a4987f452ab0e5318d65eab957d8a5d63b8e846"
+    },
+    "20-agent-skill/templates/matrix.md": {
+      "sha256": "bd289d3ddf1877c7336bbabd703442149fcbea45783209010fe2dd89dda35c98",
+      "class": "mirror",
+      "src": "20-agent-skill/templates/matrix.md",
+      "src_sha256": "bd289d3ddf1877c7336bbabd703442149fcbea45783209010fe2dd89dda35c98"
+    },
+    "20-agent-skill/templates/review.md": {
+      "sha256": "571e53944e4a3ef18f2c8f1b1da667b28c891d8dd320a664f73ff3f952e14fe3",
+      "class": "mirror",
+      "src": "20-agent-skill/templates/review.md",
+      "src_sha256": "571e53944e4a3ef18f2c8f1b1da667b28c891d8dd320a664f73ff3f952e14fe3"
+    },
+    "20-agent-skill/templates/tech-debt.md": {
+      "sha256": "8315e99710435031323f47d5dd17a1ed08b3d9bca5706599c59f4e9927a179c5",
+      "class": "mirror",
+      "src": "20-agent-skill/templates/tech-debt.md",
+      "src_sha256": "8315e99710435031323f47d5dd17a1ed08b3d9bca5706599c59f4e9927a179c5"
+    },
+    "20-agent-skill/workflow.md": {
+      "sha256": "9975c58625563ed81a130fb14772f80fbd13af3b45a1fc28106a1b601c88b1a5",
+      "class": "mirror",
+      "src": "20-agent-skill/workflow.md",
+      "src_sha256": "9975c58625563ed81a130fb14772f80fbd13af3b45a1fc28106a1b601c88b1a5"
     },
     "index.html": {
       "sha256": "814e429a19f0c31f9ae551b750b570245227e3e1601b1b615822e105b5d44248",

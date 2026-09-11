@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "architecture-judgment/adr.schema.json",
+  "title": "架构决策记录（ADR）结构化契约",
+  "description": "architecture-judgment 能力包的可机检产出契约。方法论层/本质层节点引用进 graph_refs；技术实践层节点一律仅作选型标尺，只能进 standards_refs，不得出现在 decision/rationale 的推荐位。",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status",
+    "context",
+    "quality_scenarios",
+    "options",
+    "decision",
+    "rationale",
+    "consequences",
+    "graph_refs",
+    "sources"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ADR-\\d{3}$",
+      "description": "ADR 编号，如 ADR-001"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "superseded", "deprecated"]
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "description": "问题背景与约束"
+    },
+    "quality_scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "description": "至少 1 条质量属性场景，measure 必须可度量",
+      "items": {
+        "type": "object",
+        "required": ["stimulus", "response", "measure"],
+        "properties": {
+          "stimulus": { "type": "string", "minLength": 1 },
+          "response": { "type": "string", "minLength": 1 },
+          "measure": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "description": "备选方案至少 2 个，每个须含非空 pros/cons",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "pros", "cons"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "pros": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "cons": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 1,
+      "description": "选定方案；不得直接推荐技术实践层具体技术（禁出现 TEC- 节点 id）"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "决策理由；须含至少 1 个图谱节点 id 引用；不得直接推荐技术实践层具体技术"
+    },
+    "consequences": {
+      "type": "object",
+      "required": ["positive", "negative", "risks"],
+      "properties": {
+        "positive": { "type": "array", "items": { "type": "string" } },
+        "negative": { "type": "array", "items": { "type": "string" } },
+        "risks": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "sensitive_points": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "敏感点：一动即影响多个质量属性的设计点"
+    },
+    "tradeoff_points": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "权衡点：多个质量属性在此互相牵制"
+    },
+    "reversal_cost": {
+      "type": "string",
+      "description": "回退条件与成本"
+    },
+    "graph_refs": {
+      "type": "array",
+      "minItems": 1,
+      "description": "支撑节点引用，仅允许本质层(ESS)与方法论层(MTH)；须能在 methodology-dag.json 解析",
+      "items": {
+        "type": "string",
+        "pattern": "^(ESS|MTH)-[A-Z]{1,2}-\\d{2}$"
+      }
+    },
+    "standards_refs": {
+      "type": "array",
+      "description": "技术实践层节点引用（仅作选型标尺佐证），须能在 methodology-dag.json 解析",
+      "items": {
+        "type": "string",
+        "pattern": "^TEC-[A-Z]{1,2}-\\d{2}$"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "溯源：须能解析到 canonical 信源或图谱节点的 sources[]"
+    }
+  }
+}

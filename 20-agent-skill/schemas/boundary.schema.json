@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "architecture-judgment/boundary.schema.json",
+  "title": "边界/模块设计说明结构化契约",
+  "description": "architecture-judgment 能力包的可机检产出契约（kind=boundary）。描述 ADR 决策落地后的模块边界与信息隐藏设计：每个模块须显式声明职责/接口/隐藏的信息；模块间边界须引用存在的模块。方法论层/本质层节点引用进 graph_refs；技术实践层节点一律仅作选型标尺，只能进 standards_refs。对应图谱：ESS-G-04（模块化与分解）/ ESS-H-01（信息隐藏）/ MTH-H-02（信息隐藏模块化分解）/ MTH-O-06（粒度与边界设定）。",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "context",
+    "adr_ref",
+    "modules",
+    "graph_refs",
+    "sources"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^BD-\\d{3}$",
+      "description": "边界说明编号，如 BD-001"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "description": "问题背景与约束；叙述位不得出现 TEC- 节点 id"
+    },
+    "adr_ref": {
+      "type": "string",
+      "pattern": "^ADR-\\d{3}$",
+      "description": "关联的 ADR 编号（回链），本边界说明落地的是该决策"
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "description": "模块清单；每个模块须声明职责、接口与隐藏的信息（模块化三要素）",
+      "items": {
+        "type": "object",
+        "required": ["name", "responsibility", "interface", "info_hidden"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "responsibility": {
+            "type": "string",
+            "minLength": 1,
+            "description": "职责：该模块负责什么"
+          },
+          "interface": {
+            "type": "string",
+            "minLength": 1,
+            "description": "接口契约：对外暴露什么（不得出现 TEC- 节点 id）"
+          },
+          "info_hidden": {
+            "type": "string",
+            "minLength": 1,
+            "description": "信息隐藏：该模块封装/不外泄的内部细节（对应 MTH-H-02）"
+          }
+        }
+      }
+    },
+    "boundaries": {
+      "type": "array",
+      "description": "模块间边界；from/to 必须是 modules[].name 中存在的模块名（引用一致性）",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "contract"],
+        "properties": {
+          "from": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "contract": {
+            "type": "string",
+            "minLength": 1,
+            "description": "跨边界交互契约 / 依赖方向约束"
+          }
+        }
+      }
+    },
+    "graph_refs": {
+      "type": "array",
+      "minItems": 1,
+      "description": "支撑节点引用，仅允许本质层(ESS)与方法论层(MTH)；须能在 methodology-dag.json 解析",
+      "items": {
+        "type": "string",
+        "pattern": "^(ESS|MTH)-[A-Z]{1,2}-\\d{2}$"
+      }
+    },
+    "standards_refs": {
+      "type": "array",
+      "description": "技术实践层节点引用（仅作选型标尺佐证），须能在 methodology-dag.json 解析",
+      "items": {
+        "type": "string",
+        "pattern": "^TEC-[A-Z]{1,2}-\\d{2}$"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "溯源：须能解析到 canonical 信源或图谱节点的 sources[]"
+    }
+  }
+}
