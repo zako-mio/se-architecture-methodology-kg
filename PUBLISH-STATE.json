@@ -11,10 +11,10 @@
       "src_sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386"
     },
     "00-plan/NEXT-SESSION-HANDOFF.md": {
-      "sha256": "b299e88585047850224e2a73eb345b5c692349ec2cb3d28ff4bbbf33d8fde30c",
+      "sha256": "be7c819bcd703dfbb3a09846f855fbda9661b8076f0ce0246ab3e08e79a19945",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/NEXT-SESSION-HANDOFF.md",
-      "src_sha256": "b299e88585047850224e2a73eb345b5c692349ec2cb3d28ff4bbbf33d8fde30c"
+      "src_sha256": "be7c819bcd703dfbb3a09846f855fbda9661b8076f0ce0246ab3e08e79a19945"
     },
     "00-plan/contract.md": {
       "sha256": "a2cc4f962fe3573874a5fcf21e86ac92c0788625531b768a1df182f8db34e958",

@@ -62,7 +62,7 @@ SUB_LIB_ROOT = "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodolog
 
 - **公开仓**：`zako-mio/se-architecture-methodology-kg`（PUBLIC，默认分支 `main`）
   - https://github.com/zako-mio/se-architecture-methodology-kg
-  - 文件数实测 **505**（`find _publish -type f -not -path '*/.git/*' | wc -l`）
+  - 文件数实测 **512**（`find _publish -type f -not -path '*/.git/*' | wc -l`；装配期望集 506 + 6 个 preserve 专有件）
 - **Pages 站点**：https://zako-mio.github.io/se-architecture-methodology-kg/
   - 首页 / 节点页 / 组页 / 术语表 / MD 镜像 / 交互图 / Agent skill 均 HTTP 200
 - **Actions 最近 3 次 run（全部 success）**：
@@ -71,7 +71,8 @@ SUB_LIB_ROOT = "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodolog
   | `34510503610` | 首次 import | 全量导入 + build/deploy |
   | `34510696621` | Pages 设置文档 | build/deploy |
   | `34513853599` | Actions 大版本升级 | build/deploy；**Node 20 废弃警告归零** |
-- **公开集本地仓**：`MISSION_ROOT/_publish/`（独立 `.git`，分支 `main`），HEAD `cb5dafc`，与 `origin/main` 一致。
+  | `34567350520` | 公开仓装配流水线 + 披露门控 | build/deploy 全绿，**新增三步（对账/披露门控/白名单导出）均 success** |
+- **公开集本地仓**：`MISSION_ROOT/_publish/`（独立 `.git`，分支 `main`），本地 HEAD `8173855`；**远端 `origin/main` = `82f5acf`**（经 Git Data API 推送，两侧 tree 同为 `2e64dfe4`，仅提交元数据不同 → 内容逐字节一致）。
 - **12factor 姊妹仓**：`zako-mio/12-factor-methodology-kg`（默认分支 **master**，Pages **built**；38 节点页，生成链 `SUB_LIB_ROOT/07-checkpoint`）。
 
 ### C.3 数据规模（实测真值）
@@ -147,7 +148,7 @@ MISSION_ROOT/
 ├── 20-agent-skill/                   # Agent 能力包（SKILL / cheatsheet / routing / decision-matrix / node-index）
 ├── _backup-idmigration/              # ID 迁移回滚备份（勿删；**不公开**）
 ├── _publish-staging/                 # 脱敏中间产物（64 原件副本 + AUDIT-REPORT.json + PUBLISH-MANIFEST.md；**不公开**）
-├── _publish/                         # ★★ 公开集组装目录（独立 git 仓，505 文件，已推送 GitHub）
+├── _publish/                         # ★★ 公开集组装目录（独立 git 仓，512 文件；**只能经 assemble_publish.py 写入**）
 │   ├── 00-plan/ … 16-checkpoint/ 20-agent-skill/  （与母库同源、已脱敏）
 │   ├── 10-dag-data/ … 15-md/ / index.html / README.md / LICENSE / .nojekyll
 │   └── .github/workflows/rebuild.yml # CI：重建 + 漂移检测 + L2/L3/L6/L7/L8 + 方法论；L4/L5 显式 SKIPPED → Pages
@@ -189,7 +190,7 @@ MISSION_ROOT/
 
 ### F.1 Actions 大版本升级（消除 Node 20 废弃警告）
 
-文件：`MISSION_ROOT/_publish/.github/workflows/rebuild.yml`（提交 `cb5dafc`，已推送）。
+文件：`MISSION_ROOT/_publish/.github/workflows/rebuild.yml`（远端提交 `82f5acf`，已推送；含对账/披露门控/白名单导出三步）。
 
 | action | 旧版本 | 新版本 |
 |---|---|---|
@@ -213,6 +214,23 @@ MISSION_ROOT/
 - **改造后实测（L4）**：**仅自动判据 272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP → PASS**；**并入 VLM 后 278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP → WARN**（唯一 WARN = glossary 容器内滚动，契约 §7 允许，非缺陷）。
 
 > 输出口径：**这是「换了判据 + 量化证明旧判据无效」，不是「放宽阈值让结果变绿」** —— 旧阈值常量在源码中标注 `[退役]` 保留供降级参考。
+
+### F.3 公开仓装配流水线（声明式分区 + 唯一入口 + 对账，2026-09-11）
+
+**解决的问题**：`_publish/` 原先靠**手工装配**，且公开侧存在**手工维护变体**（`16-checkpoint/audit_publish.py` 被手改为 `re.compile("/home/" + os.environ["USER"])`）→ 一是漂移不可检（本次实测 2 处同名不同内容），二是存在**无法机械派生**的公开件。
+
+**建成物**：
+- `16-checkpoint/publish-manifest.json` —— 六类分区（`private/never/preserve/sanitize/mirror/mask`）+ `binary_allowlist`；**默认拒绝**（MROOT 顶层条目未被声明即 FAIL）。
+- `16-checkpoint/assemble_publish.py` —— **唯一装配入口**：`--check`（对账）/`--apply`（预检 P1–P5 后落盘）/`--dry-run`/`--check-public`（CI 无 MROOT 模式）/`--export DIR`（Pages 白名单）+`--assert-clean DIR`；**幂等**（产物无时间戳）。
+- `_publish/PUBLISH-STATE.json` —— 506 文件 `path→{sha256,class,src,src_sha256}` 对账状态（须随公开仓提交，否则 CI `--check-public` FAIL）。
+- `16-checkpoint/gate_disclosure.py` + `disclosure-allowlist.txt` + `00-plan/public-wording-policy.md` —— 披露口径门控（词表分片构造，脚本自身零明文）。
+- CI 新增三步：对账 → 披露门控 → 白名单导出；上传路径 `path: .` → `path: .pages-export`。
+
+**关键原则**：①单一真相源 ②默认拒绝 ③**可机械派生**（公开侧不得有手工变体；发现即逆向吸收回源）④二进制需显式放行。
+
+**验收（实测）**：`--check` 0/0/0；预检 P1–P5 全 OK；连跑两次 `--apply` 逐字节一致（幂等）；公开面 `~` 命中 **0**；`--check-public` OK；`--export`+`--assert-clean` OK（512 文件/19MB，放行二进制 1）；CI run `34567350520` 全 18 步 success。
+
+**注意**：`10-dag-data/` 与 `16-checkpoint/` 归 **`mask`** 类（非 `mirror`）——实测其公开副本是「源 + 本机路径脱敏」产物，用 `mask(src)==dst` 复算验证得出，不可凭直觉归类。
 
 ---
 
@@ -245,13 +263,12 @@ MISSION_ROOT/
 - **成本**：中。
 - **需用户提供材料**：否；**需用户决策是否启用**。
 
-### G.4 30 本付费书语料 —— **阻塞在用户**
+### G.4 30 本付费书语料 —— ✅ **已解决（2026-09-11）**
 
-- **现状**：`MISSION_ROOT/01-books/gap-request.md`（**P0 14 / P1 10 / P2 6**，候选共 35，其中 5 本 free-official 已直取）。书本体概念原句需本地副本方可一手核验。
-- **证据**：清单含每本的书名/作者/版次/官方渠道/免费线索；最小可行集 = P0 14 本。
-- **建议修法**：用户提供**合法拥有**的本地副本（PDF/EPUB/MOBI 或路径）后，有文本层走 `pdf-worker`、扫描件走 `pdf-ocr` → 摘要落 `02-research/`；**原文只入本地语料层，不进公开仓**。
-- **成本**：高（取决于册数）。
-- **需用户提供材料**：**是**（硬阻塞）。
+- **现状**：30 本**已全部采集落盘**至私有语料层 `01-books/_files/`（75 文件 / 290MB；官方结构层快照另 11 源 613 文件）。逐文件来源/版次/许可登记在私有清单（`download-log.md` / `acquired-manifest.json`，均不进公开仓）。
+- **口径已更新**：`gap-request.md` 转为「来源与渠道的历史登记（已履行）」；`contract.md §5` 改为「三层强制隔离」。
+- **不在公开仓**：语料与两个清单已由「本地仓 .gitignore + 公开仓 .gitignore + 装配层 `HARD_EXCLUDE_PREFIXES`」三重隔离；披露口径由 `gate_disclosure.py` 把关。
+- **后续可选**：阶段2 后续可启动「目录/TOC 结构化提取 + 摘要落 `02-research/`」，以 `acquired-manifest.json` 为输入清单。
 
 ### G.5 L4 视觉门控可继续增强（可选）
 
@@ -275,7 +292,7 @@ MISSION_ROOT/
 7. **本地归档仓**（`~` 路径见文首）：
    - 阶段5 冻结基线 `e16244a`；阶段6 完成快照 `f4fc157`；归档索引提交（本轮读取时 `git log --oneline` 头）`efbd186`。
    - ✅ 本轮 L4 改造的 `16-checkpoint/gate_visual.py` 已提交并推送：本地归档仓 commit `9645256`；公开仓随「leftovers」批次推送（同一提交含 `README.md` / `quality-gate.md` / `report.md` / `report.html` / `00-plan/NEXT-SESSION-HANDOFF.md` 的 L4 口径同步）。**接手时无需再处理该改动的去向。**
-   - 公开集为**独立仓** `MISSION_ROOT/_publish/`，HEAD `cb5dafc`（已推送 `origin/main`）。
+   - 公开集为**独立仓** `MISSION_ROOT/_publish/`，远端 `origin/main` = `82f5acf`（已推送）；本地 HEAD `8173855`，两侧 tree 同为 `2e64dfe4`（内容一致，仅提交元数据不同）。
 8. **编码安全**：中文用 `edit`/`write`（勿用 shell echo/管道）；产出 **UTF-8 无 BOM、无 U+FFFD**；改 JSON 后必验合法性与零悬挂。
 9. **命令与工具**：只读优先 `glob`/`grep`；不重复检索已采集内容；子Agent 提示词引用**短路径 + 生产简报**，禁内联长契约。
 10. **Variant 继承**：复杂度沿用 `[COMPLEXITY: 19/20] → Deep`（全程 Deep 推理）。
