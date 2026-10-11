@@ -5,198 +5,181 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段1–6 完成</title>
 <style>
-  :root {
-    --blue-900: #1b2a41;
-    --blue-700: #2f4a70;
-    --blue-500: #4a6fa5;
-    --blue-300: #8fabce;
-    --blue-050: #eef3fa;
-    --slate-700: #3a4657;
-    --slate-500: #5c6b7f;
-    --slate-200: #dde3ec;
-    --slate-100: #f4f6f9;
-    --bg: #f7f9fc;
-    --card: #ffffff;
-    --text: #232b36;
+:root{
+  --bg:#F7F9FC; --surface:#FFFFFF; --text:#1F2933; --text-muted:#4E5A68;
+  --accent:#1D4ED8; --on-accent:#FFFFFF; --control-border:#6B7280; --focus-ring:#0B57D0;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
+  --radius-sm:6px; --radius-md:12px; --radius-lg:16px;
+  --fs-base:16px; --fs-lg:20px; --fs-xl:27px;
+  --measure:66ch;
+  --shadow-1:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.09);
+  --shadow-2:0 10px 24px rgba(15,23,42,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1216; --surface:#181C22; --text:#EDEEF0; --text-muted:#B6BAC2;
+    --accent:#8FB4FF; --on-accent:#0B1020; --control-border:#8A9099; --focus-ring:#9EC1FF;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC",
-      sans-serif;
-    font-size: 16.5px;
-    line-height: 1.85;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 22px 72px; }
-  header.doc {
-    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
-    color: #fff;
-    border-radius: 14px;
-    padding: 34px 34px 30px;
-    box-shadow: 0 8px 26px rgba(27, 42, 65, .18);
-  }
-  header.doc h1 {
-    margin: 0 0 18px;
-    font-size: 1.56rem;
-    line-height: 1.5;
-    font-weight: 700;
-    letter-spacing: .01em;
-  }
-  .meta { list-style: none; margin: 0; padding: 0; }
-  .meta li {
-    margin: 7px 0;
-    padding-left: 14px;
-    position: relative;
-    font-size: .93rem;
-    line-height: 1.7;
-    color: #dbe4f2;
-  }
-  .meta li::before {
-    content: "";
-    position: absolute;
-    left: 0; top: .68em;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--blue-300);
-  }
-  .meta strong { color: #fff; font-weight: 600; }
-  .meta code {
-    background: rgba(255,255,255,.14);
-    color: #eaf0fa;
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-size: .86em;
-  }
-  nav.toc {
-    background: var(--card);
-    border: 1px solid var(--slate-200);
-    border-radius: 12px;
-    padding: 18px 24px;
-    margin: 22px 0 0;
-    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
-  }
-  nav.toc h2 {
-    margin: 0 0 10px;
-    font-size: .95rem;
-    color: var(--slate-500);
-    font-weight: 600;
-    letter-spacing: .06em;
-  }
-  nav.toc ol { margin: 0; padding-left: 22px; }
-  nav.toc li { margin: 5px 0; }
-  nav.toc a { color: var(--blue-700); text-decoration: none; }
-  nav.toc a:hover { color: var(--blue-500); text-decoration: underline; }
-  main { margin-top: 30px; }
-  section.card {
-    background: var(--card);
-    border: 1px solid var(--slate-200);
-    border-radius: 12px;
-    padding: 26px 30px 22px;
-    margin: 0 0 22px;
-    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
-    scroll-margin-top: 20px;
-  }
-  section.card > h2 {
-    margin: 0 0 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--blue-050);
-    font-size: 1.28rem;
-    color: var(--blue-900);
-    font-weight: 700;
-    letter-spacing: .01em;
-  }
-  section.card > h2::before {
-    content: "";
-    display: inline-block;
-    width: 5px; height: 1.05em;
-    margin-right: 12px;
-    vertical-align: -3px;
-    border-radius: 3px;
-    background: var(--blue-500);
-  }
-  section.card h3 {
-    margin: 22px 0 10px;
-    font-size: 1.05rem;
-    color: var(--blue-700);
-    font-weight: 700;
-  }
-  p { margin: 0 0 14px; }
-  strong { color: var(--blue-900); font-weight: 600; }
-  code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    background: var(--slate-100);
-    color: #2d3b52;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: .87em;
-    border: 1px solid var(--slate-200);
-    word-break: break-all;
-  }
-  ol, ul { margin: 0 0 14px; padding-left: 26px; }
-  li { margin: 8px 0; }
-  ol li::marker { color: var(--blue-500); font-weight: 600; }
-  ul li::marker { color: var(--blue-300); }
-  blockquote {
-    margin: 16px 0;
-    padding: 12px 18px;
-    background: var(--blue-050);
-    border-left: 4px solid var(--blue-500);
-    border-radius: 0 8px 8px 0;
-    color: var(--slate-700);
-  }
-  blockquote p:last-child { margin-bottom: 0; }
-  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 9px; border: 1px solid var(--slate-200); }
-  table { border-collapse: collapse; width: 100%; font-size: .93rem; background: #fff; }
-  thead th {
-    background: var(--blue-700);
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-    padding: 12px 15px;
-    white-space: nowrap;
-  }
-  tbody td {
-    padding: 11px 15px;
-    border-top: 1px solid var(--slate-200);
-    vertical-align: top;
-    line-height: 1.65;
-  }
-  tbody tr:nth-child(even) { background: var(--slate-100); }
-  tbody tr:hover { background: var(--blue-050); }
-  .tag {
-    display: inline-block;
-    background: #e4f3e8;
-    color: #2b7a3f;
-    border-radius: 20px;
-    padding: 1px 9px;
-    font-size: .8em;
-    font-weight: 600;
-  }
-  .tag.warn {
-    background: #fdeede;
-    color: #9a5b12;
-  }
-  footer.doc {
-    margin-top: 30px;
-    text-align: center;
-    color: var(--slate-500);
-    font-size: .82rem;
-  }
-  @media (max-width: 640px) {
-    body { font-size: 15.5px; }
-    .wrap { padding: 22px 14px 48px; }
-    header.doc { padding: 24px 20px 20px; }
-    header.doc h1 { font-size: 1.3rem; }
-    section.card { padding: 20px 18px 16px; }
-  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1216; --surface:#181C22; --text:#EDEEF0; --text-muted:#B6BAC2;
+  --accent:#8FB4FF; --on-accent:#0B1020; --control-border:#8A9099; --focus-ring:#9EC1FF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  font-size:var(--fs-base);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:60rem;margin-inline:auto;padding:var(--space-5) var(--space-4) var(--space-6)}
+p,li,blockquote{max-inline-size:66ch}
+h1,h2,h3{line-height:1.35;overflow-wrap:anywhere}
+h1{font-size:clamp(1.6rem,1.15rem + 2vw,2.05rem);letter-spacing:.01em}
+h2{font-size:var(--fs-xl)}
+h3{font-size:var(--fs-lg)}
+strong{font-weight:700}
+a{color:var(--accent);overflow-wrap:anywhere}
+a,button{transition:color .15s ease,background-color .15s ease,border-color .15s ease}
+:focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px;border-radius:var(--radius-sm)}
+.skip-link{
+  position:absolute;top:var(--space-2);left:var(--space-2);z-index:100;
+  transform:translateY(-300%);
+  background:var(--accent);color:var(--on-accent);
+  padding:var(--space-2) var(--space-4);border-radius:var(--radius-sm);
+  text-decoration:none;font-weight:600;
+}
+.skip-link:focus{transform:translateY(0)}
+header.doc{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--focus-ring) 100%);
+  color:var(--on-accent);
+  border-radius:var(--radius-lg);
+  padding:var(--space-6) var(--space-5);
+  box-shadow:var(--shadow-2);
+}
+header.doc h1{margin:0 0 var(--space-4)}
+.meta{list-style:none;margin:0;padding:0}
+.meta li{margin:var(--space-2) 0;font-size:.95rem;color:var(--on-accent)}
+.meta strong{color:var(--on-accent)}
+.meta code{color:var(--on-accent);background:transparent;border-color:var(--on-accent)}
+.theme-toggle{
+  margin-top:var(--space-4);
+  min-height:44px;
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--control-border);border-radius:var(--radius-sm);
+  padding:var(--space-2) var(--space-4);
+  font:inherit;font-weight:600;cursor:pointer;
+}
+.theme-toggle svg{width:20px;height:20px;flex:none}
+nav.toc{
+  background:var(--surface);
+  border:1px solid var(--control-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-4) var(--space-5);
+  margin-top:var(--space-5);
+  box-shadow:var(--shadow-1);
+}
+nav.toc h2{margin:0 0 var(--space-3);font-size:var(--fs-base);color:var(--text-muted);letter-spacing:.06em}
+nav.toc ol{margin:0;padding-inline-start:var(--space-5)}
+nav.toc li{margin:var(--space-1) 0}
+main{margin-top:var(--space-5)}
+.card{
+  background:var(--surface);
+  border:1px solid var(--control-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-5);
+  margin:0 0 var(--space-5);
+  box-shadow:var(--shadow-1);
+  scroll-margin-top:var(--space-4);
+}
+.card>h2{
+  margin:0 0 var(--space-4);
+  padding-bottom:var(--space-3);
+  border-bottom:2px solid var(--control-border);
+}
+.card h3{margin:var(--space-5) 0 var(--space-2)}
+p{margin:0 0 var(--space-3)}
+code{
+  font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;
+  font-size:.9em;
+  background:var(--bg);color:var(--text);
+  border:1px solid var(--control-border);
+  border-radius:var(--radius-sm);
+  padding:.05em .35em;
+  overflow-wrap:anywhere;
+}
+ol,ul{margin:0 0 var(--space-3);padding-inline-start:var(--space-6)}
+li{margin:var(--space-2) 0}
+blockquote{
+  margin:var(--space-4) 0;
+  padding:var(--space-3) var(--space-4);
+  background:var(--bg);
+  border-inline-start:4px solid var(--accent);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  color:var(--text);
+}
+blockquote p:last-child{margin-bottom:0}
+.table-scroll{
+  overflow-x:auto;
+  margin:var(--space-4) 0;
+  border:1px solid var(--control-border);
+  border-radius:var(--radius-sm);
+}
+table{border-collapse:collapse;width:100%;font-size:.95rem;background:var(--surface)}
+caption{text-align:left;padding:var(--space-2) var(--space-3);color:var(--text-muted);font-size:.9rem}
+thead th{
+  background:var(--accent);color:var(--on-accent);
+  font-weight:600;text-align:left;
+  padding:var(--space-3) var(--space-4);
+  white-space:nowrap;
+}
+tbody td{padding:var(--space-3) var(--space-4);border-top:1px solid var(--control-border);vertical-align:top}
+tbody tr:nth-child(even){background:var(--bg)}
+.tag{
+  display:inline-block;
+  border:1px solid currentColor;border-radius:999px;
+  padding:.05rem .55rem;
+  font-size:.8rem;font-weight:600;
+  color:var(--accent);
+  overflow-wrap:normal;
+}
+.tag-warn{color:var(--text-muted)}
+footer.doc{
+  margin-top:var(--space-5);
+  text-align:center;
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding:var(--space-4) var(--space-3) var(--space-5)}
+  header.doc{padding:var(--space-5) var(--space-4)}
+  .card{padding:var(--space-4)}
+  h2{font-size:var(--fs-lg)}
+  ol,ul{padding-inline-start:var(--space-5)}
+}
+@media (min-width:1024px){
+  .wrap{padding:var(--space-6) var(--space-5)}
+  .card{padding:var(--space-6)}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
 </style>
 </head>
 <body>
+<a class="skip-link" id="cta" href="#main">跳到主内容</a>
+
 <div class="wrap">
 
   <header class="doc">
@@ -208,9 +191,16 @@
       <li><strong>本次完成</strong>：阶段6 内容版式重构 + 版权审计与脱敏公开集 + Agent 能力包 + CI/Pages；阶段1–5（建库）此前已完成并冻结</li>
       <li><strong>规模</strong>：167 节点 / 360 边 / 18 组 / 18 案例 / 253 canonical 信源；167 节点页 + 167 MD + 7 视图</li>
     </ul>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+      </svg>
+      <span class="theme-toggle-label">主题</span>
+    </button>
   </header>
 
-  <nav class="toc">
+  <nav class="toc" aria-label="页内目录">
     <h2>目录</h2>
     <ol>
       <li><a href="#situation">一、当时情况</a></li>
@@ -221,10 +211,10 @@
     </ol>
   </nav>
 
-  <main>
+  <main id="main">
 
-    <section class="card" id="situation">
-      <h2>一、当时情况</h2>
+    <section class="card" id="situation" aria-labelledby="situation-h">
+      <h2 id="situation-h">一、当时情况</h2>
       <p>用户要建立一座<strong>软件工程 / 架构设计方法论母库</strong>，兼作两用：①自己学习（<strong>人读图谱</strong>）；②为 <strong>Agent 加持架构判断力</strong>（可机读、可检索、可深链）。核心理念：软件工程 = 理解业务需求 → 可维护可扩展的架构设计 → 落地运维 → 持续对抗技术债的全生命周期管理；<strong>库自身也要体现良好架构设计</strong>——数据与渲染解耦、单一数据源、可重复生成、门控可追溯。</p>
 
       <h3>阶段1–5 已完成事实（继承基线）</h3>
@@ -237,10 +227,11 @@
 
       <h3>阶段6 的起点</h3>
       <p>阶段5 交付的母库在<strong>内容正确性</strong>上达标（门控全过），但<strong>内容版式</strong>存在系统性缺陷。用户明确指出：<strong>「问题最大的不是视觉设计，而是内容排版」</strong>——即每个节点的详情区没有为阅读与扫读服务。对改造对象 <code>MTH-F-02.html</code> 的实测（阶段6 基线 §4b）量化如下：</p>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="阶段6 改造对象 MTH-F-02.html 改进前版式实测">
         <table>
+          <caption>阶段6 改造对象 MTH-F-02.html 改进前版式实测</caption>
           <thead>
-            <tr><th>指标</th><th>改进前实测</th></tr>
+            <tr><th scope="col">指标</th><th scope="col">改进前实测</th></tr>
           </thead>
           <tbody>
             <tr><td>全页 <code>&lt;p&gt;</code> 数</td><td><strong>1</strong></td></tr>
@@ -260,17 +251,18 @@
       </blockquote>
     </section>
 
-    <section class="card" id="plan">
-      <h2>二、制定计划</h2>
+    <section class="card" id="plan" aria-labelledby="plan-h">
+      <h2 id="plan-h">二、制定计划</h2>
 
       <h3>主线性重定位</h3>
       <p>阶段6 主线明确重定位为 <strong>内容版式架构（Content IA）</strong>，而非视觉皮肤：<strong>皮肤只是版式的载体</strong>。目标是让 167 个节点页从「一段段长卡片」变成「有编号、有锚点、有结构化块、有可溯源证据区的技术文档」，并把该规范同时写入<strong>生成链</strong>与<strong>门控</strong>。</p>
 
       <h3>四个暂停点（人工把关）</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="四个暂停点与裁决内容">
         <table>
+          <caption>四个暂停点与裁决内容</caption>
           <thead>
-            <tr><th>#</th><th>暂停点</th><th>裁决内容</th></tr>
+            <tr><th scope="col">#</th><th scope="col">暂停点</th><th scope="col">裁决内容</th></tr>
           </thead>
           <tbody>
             <tr><td>1</td><td><strong>设计选型</strong></td><td>3 套版式+皮肤候选横评后，用户选定「仅 A 单套落地」+「文档页浅色 / 交互图保持暗色」</td></tr>
@@ -282,10 +274,11 @@
       </div>
 
       <h3>W0–W7 波次设计</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="W0–W7 波次设计与产物">
         <table>
+          <caption>W0–W7 波次设计与产物</caption>
           <thead>
-            <tr><th>波次</th><th>目标</th><th>产物 / 证据</th></tr>
+            <tr><th scope="col">波次</th><th scope="col">目标</th><th scope="col">产物 / 证据</th></tr>
           </thead>
           <tbody>
             <tr><td><strong>W0</strong></td><td>基线冻结与回滚锚点</td><td><code>00-plan/stage6-baseline.md</code>（SHA-256 指纹、输入完整性清单、纠偏记录、自决项 17–23）</td></tr>
@@ -302,10 +295,11 @@
 
       <h3>版式与皮肤一体出 3 套候选（设计选型过程）</h3>
       <p>3 套候选<strong>共用同一数据契约</strong>，但 IA 立场与皮肤一体设计，供横评（痛点权重：结构化表达 4 &gt; 可扫读性 3 &gt; 层级导航 2 &gt; 连贯行文 1）：</p>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="三套版式与皮肤候选横评">
         <table>
+          <caption>三套版式与皮肤候选横评</caption>
           <thead>
-            <tr><th>候选</th><th>IA 立场</th><th>皮肤</th><th>适用</th></tr>
+            <tr><th scope="col">候选</th><th scope="col">IA 立场</th><th scope="col">皮肤</th><th scope="col">适用</th></tr>
           </thead>
           <tbody>
             <tr><td><strong>A 文档流</strong></td><td>节点=技术文档，结构化块作文中嵌图/嵌表</td><td><strong>浅色 Codex</strong>（纸感暖底 <code>#f5f1e8</code>、衬线标题、琥珀强调）</td><td>精读、教学、打印/导出、无障碍</td></tr>
@@ -317,10 +311,11 @@
       <p><strong>实际选定结果（用户裁决）</strong>：<strong>仅 A 单套落地</strong>——文档页采用 <strong>A 文档流 · 浅色 Codex</strong>，以换取最强的<strong>连贯行文 + 层级导航（TOC/§/锚点）+ 打印导出</strong>能力；<strong>交互图（<code>13-interactive</code>）保持暗色</strong>不动，形成「暗色总览 ↔ 浅色精读」的互补心智。设计参考实现留档于 <code>18-design/cand-A/</code>（非生成物）。</p>
 
       <h3>执行层自决项（主Agent 承担，可被否决）</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="执行层自决项 17–23">
         <table>
+          <caption>执行层自决项 17–23</caption>
           <thead>
-            <tr><th>#</th><th>决策</th></tr>
+            <tr><th scope="col">#</th><th scope="col">决策</th></tr>
           </thead>
           <tbody>
             <tr><td>17</td><td>新增 <code>16-checkpoint/gate_layout.py</code> 版式门控（结构块存在性 / SVG 内联有效 / 术语链接数 / 对比表布尔）</td></tr>
@@ -343,8 +338,8 @@
       <p><strong>刚性约定</strong>：<code>skipped ≠ PASS</code>（环境或产物缺失须显式记录）；无新鲜验证证据不得声称完成。<strong>L4 / L5 在 CI 中显式 SKIPPED（不伪装 PASS）</strong>。</p>
     </section>
 
-    <section class="card" id="execution">
-      <h2>三、执行情况</h2>
+    <section class="card" id="execution" aria-labelledby="execution-h">
+      <h2 id="execution-h">三、执行情况</h2>
 
       <h3>各波委派与产物</h3>
       <ul>
@@ -367,10 +362,11 @@
       </ul>
 
       <h3>遇到的问题及处置</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="阶段6 遇到的问题及处置">
         <table>
+          <caption>阶段6 遇到的问题及处置</caption>
           <thead>
-            <tr><th>#</th><th>问题</th><th>处置</th></tr>
+            <tr><th scope="col">#</th><th scope="col">问题</th><th scope="col">处置</th></tr>
           </thead>
           <tbody>
             <tr><td>1</td><td>权衡卡归栏<strong>第一次口径澄清</strong>：怀疑实现「越栏」</td><td>实测证明原实现即严格标记词驱动，不存在越栏；以「仅按显式标记词归栏」固化并写入 <code>gate_layout.py</code> 强校验</td></tr>
@@ -392,14 +388,15 @@
       <p>阶段1–5 关键处置：历史边 id <code>EB-P##</code> 11 条归一为 <code>E-101..111</code>；契约路径漂移以「新增 §〇.1 权威修正」对齐；O-PC 覆盖升级为 <code>opc-mapping.json</code> 显式映射（36 行）；Wave 0 骨架 11 种子节点由 281–424 字补齐至 1604–1772 字（全库 &lt;1500 字 = 0）。</p>
     </section>
 
-    <section class="card" id="completion">
-      <h2>四、完成情况</h2>
+    <section class="card" id="completion" aria-labelledby="completion-h">
+      <h2 id="completion-h">四、完成情况</h2>
 
       <h3>最终交付物清单</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="阶段1–6 最终交付物清单">
         <table>
+          <caption>阶段1–6 最终交付物清单</caption>
           <thead>
-            <tr><th>类别</th><th>交付物</th><th>规模</th></tr>
+            <tr><th scope="col">类别</th><th scope="col">交付物</th><th scope="col">规模</th></tr>
           </thead>
           <tbody>
             <tr><td>主图谱</td><td><code>10-dag-data/methodology-dag.json</code></td><td>167 节点 / 360 边 / 18 组 / 18 案例</td></tr>
@@ -424,16 +421,17 @@
       <p><strong>167 节点 / 360 边 / 18 组 / 3 横切主题 / 18 案例</strong>；孤立节点 0，<code>nodes &lt; 1500 字</code> = 0。layer = essence <strong>51</strong> + methodology <strong>67</strong> + technology <strong>31</strong> + case(layer=null) <strong>18</strong>。域分布：F13 · G17 · H16 · I14 · J17 · K17 · L14 · M14 · N13 · O14 · X18(cases)。边类型：<code>case_instance</code> 69、<code>derives_from</code> 69、<code>implements</code> 59、<code>prerequisite</code> 58、<code>combination</code> 36、<code>dependency</code> 24、<code>contrasts</code> 14、<code>enables</code> 13、<code>refines</code> 13、<code>conflicts</code> 4、<code>cross_reference</code> 1。正文长度 min 1501 / 中位 1536 / max 1813 字；canonical 253；<code>verified</code> 分布 <code>true</code> 149 / <code>"cited"</code> 18，占比 <strong>89.22%</strong>，可溯源率 <strong>100%</strong>。</p>
 
       <h3>阶段6 门控结果（全部现场实测）</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="阶段6 门控结果（现场实测）">
         <table>
+          <caption>阶段6 门控结果（现场实测）</caption>
           <thead>
-            <tr><th>门控</th><th>实测</th><th>结论</th></tr>
+            <tr><th scope="col">门控</th><th scope="col">实测</th><th scope="col">结论</th></tr>
           </thead>
           <tbody>
             <tr><td>L1 分片自验证</td><td>23 个分片 errors=0（阶段5 全量通过，阶段6 未改数据）</td><td><span class="tag">PASS</span></td></tr>
             <tr><td>L2 全图审计</td><td>nodes=167 edges=360 kahn 167/167，errors=0 warnings=0</td><td><span class="tag">PASS</span></td></tr>
             <tr><td>L3 结构 + 断链（母库口径）</td><td>structure 412 / 问题 0；links 5134 / 问题 0</td><td><span class="tag">PASS</span></td></tr>
-            <tr><td>L4 视觉（首实装）</td><td>仅自动判据 272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP（PASS）；并入 VLM（5 PASS + 1 WARN）后 278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP（WARN）</td><td><span class="tag warn">PASS → WARN（无 FAIL）</span></td></tr>
+            <tr><td>L4 视觉（首实装）</td><td>仅自动判据 272 项 / 212 PASS / 0 FAIL / 0 WARN / 60 SKIP（PASS）；并入 VLM（5 PASS + 1 WARN）后 278 项 / 217 PASS / 0 FAIL / 1 WARN / 60 SKIP（WARN）</td><td><span class="tag tag-warn">PASS → WARN（无 FAIL）</span></td></tr>
             <tr><td>L5 渲染（headless Chromium）</td><td>7 用例全 PASS；skipped=0；JS 错误 0；悬空端点 0</td><td><span class="tag">PASS</span></td></tr>
             <tr><td>L6 覆盖度</td><td>manifest 363/363=100%；四向 100%；GR-08 PASS；GR-09 11/31=35.48%</td><td><span class="tag">PASS</span></td></tr>
             <tr><td>L7 信源</td><td>引用 1446（605/222/619）；悬挂 0；可溯源 100%；verified=true 89.22%；disputed 漏标 0</td><td><span class="tag">PASS</span></td></tr>
@@ -463,10 +461,11 @@
       </ol>
 
       <h3>上线结果（公开仓 · 现场实测）</h3>
-      <div class="table-wrap">
+      <div class="table-scroll" role="region" tabindex="0" aria-label="公开仓上线结果（现场实测）">
         <table>
+          <caption>公开仓上线结果（现场实测）</caption>
           <thead>
-            <tr><th>项</th><th>实测值</th></tr>
+            <tr><th scope="col">项</th><th scope="col">实测值</th></tr>
           </thead>
           <tbody>
             <tr><td>公开仓</td><td><code>zako-mio/se-architecture-methodology-kg</code>（<strong>PUBLIC</strong>，默认分支 <code>main</code>）</td></tr>
@@ -491,8 +490,8 @@
       </ul>
     </section>
 
-    <section class="card" id="reflection">
-      <h2>五、反思 / 分析 / 建议</h2>
+    <section class="card" id="reflection" aria-labelledby="reflection-h">
+      <h2 id="reflection-h">五、反思 / 分析 / 建议</h2>
       <ol>
         <li><strong>内容版式缺陷的根因是「结构化缺失」，而非视觉不美</strong>。改进前 <code>MTH-F-02.html</code> 一页仅 <strong>1 个 <code>&lt;p&gt;</code>、24 个 <code>&lt;div&gt;</code>、6 个 <code>&lt;h2&gt;</code>、0 图 0 表、无 TOC/锚点</strong>，每个 <code>detail</code> 字段被压成 <strong>400–600 字不间断卡片</strong>——信息没有被「分块、编号、定位、图示」。修复的抓手是把 §1–§11 块序列<strong>数据驱动</strong>地写进生成链，而不是调 CSS，印证了用户的判断：<strong>内容排版才是主矛盾</strong>。</li>
         <li><strong>先落契约再并行委派 = 长 prompt 不截断、零返工</strong>。先落盘 <code>stage6-content-ia-spec.md</code>（版式契约）与 <code>stage6-baseline.md</code>（事实基线），使多路并行子Agent 只需引用短路径契约，避免长 prompt 被截断导致的约定漂移；生成链与门控共享同一块序列定义，保证双轨一致。</li>
@@ -516,5 +515,28 @@
 
   <footer class="doc">Mission 报告 · 阶段1–6 完成 · 167 节点 / 360 边 / 18 组 / 253 canonical 信源 · 生成于 0910-软件工程架构方法论</footer>
 </div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById("theme-toggle");
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  var current = mq.matches ? "dark" : "light";
+  function apply(mode) {
+    if (mode === "dark") {
+      root.dataset.theme = "dark";
+      btn.setAttribute("aria-pressed", "true");
+    } else {
+      root.dataset.theme = "light";
+      btn.setAttribute("aria-pressed", "false");
+    }
+  }
+  apply(current);
+  btn.addEventListener("click", function () {
+    current = current === "dark" ? "light" : "dark";
+    apply(current);
+  });
+})();
+</script>
 </body>
 </html>

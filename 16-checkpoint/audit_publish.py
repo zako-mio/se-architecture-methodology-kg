@@ -45,7 +45,8 @@ MROOT = os.path.dirname(SCRIPT_DIR)
 STAGING = os.path.join(MROOT, "_publish-staging")
 
 SCAN_DIRS = ("00-plan", "01-books", "02-research", "03-knowledge-map")
-SCAN_ROOT_FILES = ("report.md", "report.html", "report-phase7.md", "report-phase7.html", "quality-gate.md")
+SCAN_ROOT_FILES = ("report.md", "report.html", "report-phase7.md", "report-phase7.html",
+                    "report-phase7p2-plan.md", "report-phase7p2-plan.html", "quality-gate.md")
 
 # 未纳入公开集的目录（供清单说明）
 EXCLUDED_SCOPE = [

@@ -296,6 +296,61 @@
         "section": "2.4",
         "section_title": "可伸缩性",
         "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "可伸缩性",
+        "evidence_strength": "direct",
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
@@ -427,6 +482,61 @@
         "section": "2.3",
         "section_title": "可靠性与容错",
         "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
@@ -440,12 +550,122 @@
         "section": "2.5",
         "section_title": "可维护性",
         "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
       }
     ],
     "ESS-M-01": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
       {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",
@@ -467,6 +687,61 @@
         "section_title": "可伸缩性",
         "evidence_strength": "direct",
         "direction": "reverse",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "partial",
+        "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-09-11"
       }
@@ -551,6 +826,61 @@
       }
     ],
     "ESS-M-04": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
       {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",
@@ -646,12 +976,67 @@
       {
         "source_id": "BK-007",
         "book": "Clean Architecture",
+        "chapter": "1",
+        "section": "1.1",
+        "section_title": "The Goal?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "2",
+        "section": "2.2",
+        "section_title": "Architecture",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
         "chapter": "6",
         "section": "6.3",
         "section_title": "Segregation of Mutability",
         "evidence_strength": "partial",
         "direction": "reverse",
         "second_pass": "none",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "15",
+        "section": "15.4",
+        "section_title": "Maintenance",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "17",
+        "section": "17.1",
+        "section_title": "A Couple of Sad Stories",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-007",
+        "book": "Clean Architecture",
+        "chapter": "17",
+        "section": "17.2",
+        "section_title": "FitNesse",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
         "review_date": "2026-09-11"
       },
       {
@@ -1537,6 +1922,61 @@
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "可维护性",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
       }
     ],
     "MTH-O-10": [
@@ -1579,6 +2019,61 @@
       }
     ],
     "TEC-K-05": [
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-023",
+        "book": "Designing Data-Intensive Applications",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "可靠性与容错",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-09-11"
+      },
       {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段7 阶段2「内容增密」方案（Plan 周期）</title>
+<style>
+  :root {
+    --blue-900: #1b2a41;
+    --blue-700: #2f4a70;
+    --blue-500: #4a6fa5;
+    --blue-300: #8fabce;
+    --blue-050: #eef3fa;
+    --slate-700: #3a4657;
+    --slate-500: #5c6b7f;
+    --slate-200: #dde3ec;
+    --slate-100: #f4f6f9;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #232b36;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC",
+      sans-serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 22px 72px; }
+  header.doc {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 34px 34px 30px;
+    box-shadow: 0 8px 26px rgba(27, 42, 65, .18);
+  }
+  header.doc h1 {
+    margin: 0 0 18px;
+    font-size: 1.56rem;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .meta { list-style: none; margin: 0; padding: 0; }
+  .meta li {
+    margin: 7px 0;
+    padding-left: 14px;
+    position: relative;
+    font-size: .93rem;
+    line-height: 1.7;
+    color: #dbe4f2;
+  }
+  .meta li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .68em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-300);
+  }
+  .meta strong { color: #fff; font-weight: 600; }
+  .meta code {
+    background: rgba(255,255,255,.14);
+    color: #eaf0fa;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: .86em;
+  }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin: 22px 0 0;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: .95rem;
+    color: var(--slate-500);
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+  nav.toc ol { margin: 0; padding-left: 22px; }
+  nav.toc li { margin: 5px 0; }
+  nav.toc a { color: var(--blue-700); text-decoration: none; }
+  nav.toc a:hover { color: var(--blue-500); text-decoration: underline; }
+  main { margin-top: 30px; }
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 26px 30px 22px;
+    margin: 0 0 22px;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+    scroll-margin-top: 20px;
+  }
+  section.card > h2 {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-050);
+    font-size: 1.28rem;
+    color: var(--blue-900);
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  section.card > h2::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 1.05em;
+    margin-right: 12px;
+    vertical-align: -3px;
+    border-radius: 3px;
+    background: var(--blue-500);
+  }
+  section.card h3 {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: var(--blue-900); font-weight: 600; }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: var(--slate-100);
+    color: #2d3b52;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: .87em;
+    border: 1px solid var(--slate-200);
+    word-break: break-all;
+  }
+  ol, ul { margin: 0 0 14px; padding-left: 26px; }
+  li { margin: 8px 0; }
+  ol li::marker { color: var(--blue-500); font-weight: 600; }
+  ul li::marker { color: var(--blue-300); }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 18px;
+    background: var(--blue-050);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 8px 8px 0;
+    color: var(--slate-700);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 9px; border: 1px solid var(--slate-200); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; background: #fff; }
+  thead th {
+    background: var(--blue-700);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 15px;
+    border-top: 1px solid var(--slate-200);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:nth-child(even) { background: var(--slate-100); }
+  tbody tr:hover { background: var(--blue-050); }
+  .tag {
+    display: inline-block;
+    background: #e4f3e8;
+    color: #2b7a3f;
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: .8em;
+    font-weight: 600;
+  }
+  footer.doc {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--slate-500);
+    font-size: .82rem;
+  }
+  @media (max-width: 640px) {
+    body { font-size: 15.5px; }
+    .wrap { padding: 22px 14px 48px; }
+    header.doc { padding: 24px 20px 20px; }
+    header.doc h1 { font-size: 1.3rem; }
+    section.card { padding: 20px 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="doc">
+    <h1>Mission 报告：软件工程 / 架构设计方法论母库 · 阶段7 阶段2「内容增密」方案（Plan 周期）</h1>
+    <ul class="meta">
+      <li><strong>日期</strong>：2026-09-11</li>
+      <li><strong>任务目录</strong>：<code>~/opencode/archive/Mission-file/2026-09/0910-软件工程架构方法论/</code></li>
+      <li><strong>GATE（本轮 Plan 周期）</strong>：范围=4 深度=4 操作=5 风险=3 → <strong>16 → Deep</strong></li>
+      <li><strong>本轮性质</strong>：<strong>只做方案设计，不执行改写</strong>（决策 #11）——Build 周期另立窗口</li>
+      <li><strong>本次完成阶段</strong>：<strong>阶段7 · 阶段2（内容增密）方案定稿</strong>——以核验层主张锚定位，用一手书证深化 26 个有 <code>direct</code> 锚节点的五段正文</li>
+      <li><strong>关联文档</strong>：<a href="00-plan/stage7-phase2-content-densification-plan.md"><code>00-plan/stage7-phase2-content-densification-plan.md</code></a>（本轮主交付，454 行 / 9 节）、<a href="00-plan/stage7-book-absorption-plan.md"><code>00-plan/stage7-book-absorption-plan.md</code></a>（§5.1 为本轮接口）、<a href="00-plan/NEXT-SESSION-HANDOFF.md"><code>00-plan/NEXT-SESSION-HANDOFF.md</code></a>（接力输入）</li>
+    </ul>
+  </header>
+
+  <nav class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#situation">1. 当时情况</a></li>
+      <li><a href="#plan">2. 制定计划</a></li>
+      <li><a href="#execution">3. 执行情况</a></li>
+      <li><a href="#completion">4. 完成情况</a></li>
+      <li><a href="#reflection">5. 反思 / 分析 / 建议</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section class="card" id="situation">
+      <h2>1. 当时情况</h2>
+
+      <h3>1.1 母任务与阶段7 进度</h3>
+      <p>母任务 <code>0910-软件工程架构方法论</code> 阶段1–6 已全部完成并上线（母库 <strong>167 节点 / 360 边 / 18 组 / 18 案例</strong>；公开仓 + Pages + Actions 全绿）。<strong>阶段7 阶段1（核验升级）</strong> 亦已完成并上线：私有核验层 <code>01-books/_verify/</code> 成为唯一真相源（SSOT），<code>derive_verification.py</code> 确定性派生、<code>gate_verification.py</code> 的 G-V1..G-V8 全 PASS，公开侧 C-lite 投影（06 视图 + 节点页「书证核验」锚行）已推送。</p>
+
+      <h3>1.2 本轮起点与用户诉求</h3>
+      <p>本轮由接力文档 <a href="00-plan/NEXT-SESSION-HANDOFF.md"><code>00-plan/NEXT-SESSION-HANDOFF.md</code></a> 启动，用户原始诉求原话为「<strong>接续任务，了解并计划接续第二阶段</strong>」。</p>
+      <p>接力文档 §G.1 已把「阶段2 · 内容增密」列为<strong>推荐下一轮主任务</strong>，并预留接口（<code>claim_id</code> / <code>anchor</code> / <code>direction</code> + <code>node-claim-map.json</code> 的主张拆分），但<strong>未展开实现</strong>——本轮的职责正是把这个预留接口落成可执行方案。</p>
+
+      <h3>1.3 现状实测（回盘复验，非采信接力文档自述）</h3>
+      <p>主Agent 独立复算得出：</p>
+      <ul>
+        <li>图谱指纹 <code>9ae4cc01…</code>（与 <code>stage7-baseline.md</code> 一致）；本地归档仓 HEAD <code>8ec6a41</code>、工作树干净。</li>
+        <li>核验层 <strong>144 条记录</strong>：<code>direct 78 / partial 59 / inferred 7 / contradicted 0</code>；<code>forward 120 / reverse 24</code>；第二路 <code>passed 78 / disputed 18 / none 48</code>。</li>
+        <li>覆盖 <strong>35 节点</strong>，其中 <strong>26 个有 <code>direct</code> 锚</strong>、<strong>9 个仅有 partial/inferred</strong>。</li>
+        <li><code>node-claim-map.json</code> = <strong>18 节点 / 120 条主张</strong>；<strong>26 个参与节点中有 9 个（reverse-only，各仅 1 条记录）尚无主张拆分</strong>——这是本轮成本的关键隐蔽项。</li>
+        <li><code>reverse-gaps.json</code> = <strong>28 条</strong>（<code>coverage_hole 10 / concept_missing 10 / missed_citation 8</code>）。</li>
+        <li>节点正文 <strong>1501–1813 字</strong>（中位数 1536），契约区间 1500–3000 字。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="plan">
+      <h2>2. 制定计划</h2>
+
+      <h3>2.1 以拷问式收敛替代「拍脑袋」</h3>
+      <p>本轮采用逐分支拷问（grill-me）而非直接出稿：每个分支先摆<strong>多维权衡矩阵</strong>，再请用户裁决。共收敛 <strong>12 个分支</strong>，全部有明确出处与理由。</p>
+      <p>用户在过程中两次主动要求「<strong>先权衡再决策</strong>」，因此自 Q4 起每个分支都先给出「并发安全 / 保真度 / 成本 / 可续跑 / 可机检」等维度的量化对比，再提问。</p>
+
+      <h3>2.2 最关键的一次权衡：SSOT 回写口径</h3>
+      <p>三个候选是「段级锁定 + 新事实强制回写」「句级全量映射」「等价重述优先」。权衡结论：</p>
+      <ul>
+        <li><strong>句级全量映射</strong>：溯源最细，但「实质句」<strong>无法定义</strong> → 判据不可机检、易假 FAIL、且会灌入无意义 claim；</li>
+        <li><strong>等价重述优先</strong>：默认零新增 claim，成本最低，但<strong>无法引入书证的机制/权衡/案例</strong> → 与「增密」目标根本相悖；</li>
+        <li><strong>段级锁定</strong>：claim 的 <code>origin</code> 本就映射五段（<code>definition/principle/mechanism/engineering/tradeoff</code>），<strong>粒度天然对齐</strong>、可机检、成本可控。</li>
+      </ul>
+      <p>关键洞察：<strong>保守项不是竞争项而是分支</strong>——「无新事实时本就不必新增 claim」。最终口径 = <strong>段级强制 + 无新事实豁免 + 句级降级为抽检 WARN + 改写前 claim 完整性前置核查</strong>。</p>
+
+      <h3>2.3 其余关键收敛</h3>
+      <ul>
+        <li><strong>范围与顺序 = 先窄后宽</strong>：本轮只做 3 本 pilot 覆盖节点；剩余 27 本另立批次。</li>
+        <li><strong>生产拓扑 = 两段式</strong>：按书「证据展开」（只写各自分片）→ 按节点「唯一写入方」综合改写。此举同时解决 5 个多书节点（<code>ESS-O-02</code> 等）的并发写冲突与跨书综合质量问题。</li>
+        <li><strong>增密强度 = 双驱动</strong>：2400–3000 字 + 「每 +200 字 ≥1 条 claim」的注水比机检，把「涨了」与「涨得有依据」同时变成可对账判据。</li>
+        <li><strong>门控 = 双脚本按域拆分</strong>：新建 <code>gate_densify.py</code>（G-D1..G-D5），并把「<strong>正文 vs 书原文 ≥20 字子串</strong>」这一版权红线从 ledger <code>claim</code> 扩展到节点正文；核验域新增 G-V9（回写完整性）。</li>
+        <li><strong>质检 = 双层复核</strong>：除「新增 claim 全量第二路判级」外，<strong>新增一层「正文 vs 证据素材」保真复核</strong>——它不重读全书即可拦住「素材→正文」的电话游戏失真。</li>
+      </ul>
+
+      <h3>2.4 复杂度</h3>
+      <p>本轮完成方案文档 <a href="00-plan/stage7-phase2-content-densification-plan.md"><code>00-plan/stage7-phase2-content-densification-plan.md</code></a>（454 行 / 9 节）。其描述的<strong>执行阶段</strong>复杂度记为 <strong><code>[COMPLEXITY: 18/20]</code> → Deep</strong>（较阶段7 阶段1 的 19/20 略降：无新增 ADR 选型，范围收敛至 26 节点），Build 周期须沿用、不得重新评估。</p>
+    </section>
+
+    <section class="card" id="execution">
+      <h2>3. 执行情况</h2>
+
+      <h3>3.1 回盘核验先行</h3>
+      <p>在提出任何问题之前，主Agent 已完成：读接力文档全文（536 行）→ 读阶段7 计划全文（431 行）→ 用独立脚本复算核验层分布、覆盖节点、主张拆分、缺口、正文字数 → 校验指纹与 git 状态。</p>
+      <p>这一步直接产出了两个「接力文档未写、但影响方案」的事实：<strong>9 个 reverse-only 参与节点缺主张拆分</strong>、<strong>26 个参与节点的 exact 名单与分层分布</strong>。</p>
+
+      <h3>3.2 证据素材落盘与隔离的实测确认</h3>
+      <p>为避免方案在隔离层留下隐患，主Agent 预先实测：</p>
+      <ul>
+        <li><code>git check-ignore -v 01-books/_verify/_densify/evidence-saip.json</code> → 命中 <code>.gitignore:13:01-books/</code>；</li>
+        <li><code>publish-manifest.json</code> 的 <code>classes.private</code> 含 <code>"01-books/_verify/"</code>、<code>private_probe</code> 含 <code>"01-books/_verify"</code>。</li>
+      </ul>
+      <p>结论：新增 <code>_densify/</code> <strong>三重隔离零改动</strong>，方案中无需新增隔离配置——这条事实被写入方案 §4.3。</p>
+
+      <h3>3.3 未执行项（明确声明）</h3>
+      <p>本轮<strong>未</strong>改写任何节点正文、<strong>未</strong>运行任何门控、<strong>未</strong>推送公开仓、<strong>未</strong>处理 Reflection 队列（waiting 2 按用户裁决留给 <code>/reflection</code>）。所有「执行」类描述均属 Build 周期的方案约定，不得被误读为已完成。</p>
+    </section>
+
+    <section class="card" id="completion">
+      <h2>4. 完成情况</h2>
+
+      <h3>4.1 交付物清单</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>交付物</th><th>规模/状态</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>阶段2 方案文档</td><td><a href="00-plan/stage7-phase2-content-densification-plan.md"><code>00-plan/stage7-phase2-content-densification-plan.md</code></a></td><td>454 行 / 32.5KB / 9 节 / <code>accepted</code></td></tr>
+            <tr><td>留档报告（AI 友好）</td><td><code>report-phase7p2-plan.md</code></td><td>本文件</td></tr>
+            <tr><td>留档报告（人读入口）</td><td><code>report-phase7p2-plan.html</code></td><td>过 <code>16-checkpoint/gate_report.py</code> R1–R5</td></tr>
+            <tr><td>定稿状态变更</td><td>方案文档头部 <code>draft</code> → <code>accepted</code></td><td>1 处编辑</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.2 12 项决策清单</h3>
+      <ol>
+        <li>范围与顺序 = <strong>先窄后宽</strong>（本轮 3 本 pilot 覆盖节点；剩余 27 本另立批次）</li>
+        <li>落点形态 = <strong>改写深化五段</strong>（不扩 schema、不新增小节）</li>
+        <li>SSOT 回写 = 段级 claim 锁定（强制）+ 无新事实豁免 + 句级抽检 WARN + 前置完整性核查</li>
+        <li>生产拓扑 = <strong>两段式</strong>（按书证据展开 → 按节点唯一写入方）</li>
+        <li>增密强度 = <strong>双驱动</strong>（2400–3000 字 + 注水比机检）</li>
+        <li>交付边界 = <strong>全链路含公开层</strong></li>
+        <li>9 个无 <code>direct</code> 锚节点 = <strong>本轮排除</strong>（G-D5 硬拦越界）</li>
+        <li>门控 = <strong>双脚本按域拆分</strong>（<code>gate_densify.py</code> G-D1..G-D5 + <code>gate_verification.py</code> G-V9）</li>
+        <li>公开呈现 = <strong>零新增元素</strong>（正文变厚即成果）</li>
+        <li>质检 = <strong>双层复核</strong>（claim 判级 + 正文 vs 素材保真）</li>
+        <li>本轮交付物 = <strong>只出方案文档</strong>（Build 另开周期）</li>
+        <li>阶段3 不入本轮；Reflection 队列留给用户 <code>/reflection</code></li>
+      </ol>
+
+      <h3>4.3 自检结果</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>检查项</th><th>实测</th><th>结论</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>方案文档编码</td><td>UTF-8 无 BOM、U+FFFD 计数 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>方案文档结构</td><td>9 节齐全、含 <code>[COMPLEXITY: 18/20]</code></td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>方案文档本机路径</td><td>本机绝对路径前缀命中 0</td><td><span class="tag">PASS</span></td></tr>
+            <tr><td>报告门控</td><td><code>gate_report.py</code> R1–R5</td><td>见 §4.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.4 与上游决策的一致性声明</h3>
+      <ul>
+        <li>复用 <strong>ADR-001</strong>（私有核验层为唯一真相源）→ 本轮新增实质表述必须回写核验层，否则 G-V9 FAIL。</li>
+        <li>复用 <strong>ADR-002</strong>（主张级四级强度 + 双向）→ 新增 <code>direct</code> 仍走第二路复核。</li>
+        <li>复用原计划决策 <strong>3.3#4</strong>（增量式派生作用域）→ 仅 26 节点被写，其余 141 节点零改动。</li>
+        <li>复用全局决策 <strong>14</strong>（内容逐字保真）→ 改写发生在<strong>数据作者层</strong>，生成链仍逐字搬运，二者不冲突。</li>
+        <li>复用阶段1 <strong>§F.4 根因教训</strong> → 派生原值只读 <code>_verification-baseline.json</code>（冻结，不覆盖）。</li>
+      </ul>
+
+      <h3>4.5 改动明细</h3>
+      <ul>
+        <li><strong>新增</strong>：<code>00-plan/stage7-phase2-content-densification-plan.md</code>、<code>report-phase7p2-plan.md</code>、<code>report-phase7p2-plan.html</code>。</li>
+        <li><strong>修改</strong>：方案文档头状态行（<code>draft</code> → <code>accepted</code>）。</li>
+        <li><strong>未改</strong>：<code>methodology-dag.json</code>（指纹仍 <code>9ae4cc01…</code>）、核验层任何既有文件、生成链任何脚本、公开仓。</li>
+        <li><strong>未提交</strong>：本地归档仓未 <code>git commit</code>（用户未要求）。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="reflection">
+      <h2>5. 反思 / 分析 / 建议</h2>
+
+      <h3>5.1 关键认知</h3>
+      <ol>
+        <li><strong>「增密」的真实风险不在"写得少"而在"写得越界"</strong>。阶段1 的 FP 率为 18.75%，其形态是「书中原句 + 我们的推断扩展」被误判；阶段2 要写 40–70% 新正文，同类失真只会放大。因此<strong>质检设计必须先于内容设计</strong>——本轮把「正文 vs 素材」保真复核列为强制第二层，是直接针对该形态的对策。</li>
+        <li><strong>SSOT 的敌人不是"不写回"，而是"回写的粒度选错"</strong>。句级映射看似最严，实则因判据不可定义而形同虚设；段级之所以成立，是因为阶段1 的 <code>claim.origin</code> 恰好按五段切分——<strong>前一轮的数据设计决定了后一轮的可机检上限</strong>。</li>
+        <li><strong>范围收敛本身就是风险控制</strong>。排除 9 个无 <code>direct</code> 锚节点，表面是"少做 9 个"，实质是拆除「为凑覆盖而注水」的诱因；配合 G-D5 对账，使"越界改写"从语义问题变成机检问题。</li>
+        <li><strong>接力文档的自述仍需回盘</strong>。接力文档未记录「9 个 reverse-only 参与节点缺主张拆分」，该事实由独立复算得出，并直接改变了步骤 0 的设计（前置完整性核查从"优化项"变为"必需项"）。</li>
+      </ol>
+
+      <h3>5.2 建议</h3>
+      <ol>
+        <li><strong>Build 周期先小批验证再全量</strong>：先做 3–4 个节点跑通「证据展开 → 改写 → 双层复核 → 门控」全链，确认 L8 版式与 G-D4 红线口径无误后再放开 26 节点。</li>
+        <li><strong>G-V5 可顺势升级为复合主张检测</strong>（阶段1 已提此建议）：对「直陈 + 推断」复合主张主动告警，与 G-D4 形成互补。</li>
+        <li><strong>证据展开素材可沉淀为阶段3 候选池</strong>：<code>_densify/</code> 中按书整理的素材天然是「补引 / 新增节点」的输入，阶段3 规划时可直接消费，避免二次阅读。</li>
+        <li><strong>剩余 27 本核验宜分批推进</strong>：每批完成后立即对该批新覆盖节点增密，避免"核验完再统一增密"造成的长尾等待与同一节点二次改动。</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="doc">
+    Mission 报告 · 阶段7 阶段2「内容增密」方案（Plan 周期）· 454 行 / 9 节 / <code>accepted</code> ·
+    Markdown 镜像：<code>report-phase7p2-plan.md</code> · 主交付：<a href="00-plan/stage7-phase2-content-densification-plan.md">stage7-phase2-content-densification-plan.md</a> · 接口：<a href="00-plan/stage7-book-absorption-plan.md">stage7-book-absorption-plan.md</a> · 接力：<a href="00-plan/NEXT-SESSION-HANDOFF.md">NEXT-SESSION-HANDOFF.md</a>
+  </footer>
+</div>
+</body>
+</html>

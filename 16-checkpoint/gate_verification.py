@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-gate_verification.py — 阶段7 核验层门控（G-V1 … G-V8）
+gate_verification.py — 阶段7 核验层门控（G-V1 … G-V9）
 
 用法：
     python3 16-checkpoint/gate_verification.py --check all [--root <MROOT>]
     python3 16-checkpoint/gate_verification.py --check G-V1,G-V4
 
 判据：
-    G-V1 核验层 JSON 合法 + 必填字段齐全（含 id 格式、单节点主张 ≤8）
+    G-V1 核验层 JSON 合法 + 必填字段齐全（含 id 格式、单节点主张上限）
+         —— 上限按节点分档（ADR-003）：阶段2 参与节点 ≤16，其余节点 ≤8
     G-V2 evidence_strength / direction / gap.kind 封闭枚举
     G-V3 记录 anchor 存在；chapter 非空（例外：inferred 且书无章节结构）
     G-V4 「无锚点升级」= 0（升级节点 direct 记录须有 anchor+direction）
@@ -16,6 +17,9 @@ gate_verification.py — 阶段7 核验层门控（G-V1 … G-V8）
     G-V6 编码 UTF-8 无 BOM、无 U+FFFD
     G-V7 幂等：derive_verification.py --check 连跑两次一致
     G-V8 对账：overrides 节点集 == ledger 应覆盖节点集
+    G-V9 阶段2 新增 claim 回写完整性：必有 anchor + direction +
+         second_pass ∈ {passed,disputed}（不得 none）；claim_id 全局唯一；
+         origin ∈ 封闭枚举。无新增记录时 SKIP（不伪装 PASS）
 
 私有核验层不存在时整体 SKIP 并打印 SKIPPED（退出码 0），不得伪装 PASS。
 """
@@ -39,17 +43,29 @@ GAPS_REL = os.path.join(VERIFY_DIR, "reverse-gaps.json")
 CLAIMS_REL = os.path.join(VERIFY_DIR, "node-claim-map.json")
 OVERRIDES_REL = os.path.join("10-dag-data", "_verification-overrides.json")
 
-ALL_CRITERIA = ["G-V1", "G-V2", "G-V3", "G-V4", "G-V5", "G-V6", "G-V7", "G-V8"]
+ALL_CRITERIA = ["G-V1", "G-V2", "G-V3", "G-V4", "G-V5", "G-V6", "G-V7", "G-V8", "G-V9"]
 
 NODE_RE = re.compile(r"^(ESS|MTH|TEC|CAS)-[A-Z]{1,2}-\d{2}$")
-RECORD_RE = re.compile(r"^VR-(DDIA|CA|SAIP)-\d{3}$")
+RECORD_RE = re.compile(r"^VR-(DDIA|CA|SAIP|D2)-\d{3}$")
 SOURCE_RE = re.compile(r"^BK-\d{3}$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ORIGINS = {"definition", "principle", "mechanism", "engineering", "tradeoff", "errata"}
 STRENGTH = {"direct", "partial", "inferred", "contradicted"}
 DIRECTIONS = {"forward", "reverse"}
 GAP_KINDS = {"missed_citation", "coverage_hole", "concept_missing"}
-CLAIM_CAP = 8
+CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）
+CLAIM_CAP_DENSIFY = 16           # ADR-003：阶段2 参与节点上限（场景限定）
+# ADR-003：阶段2 参与节点集合（封闭；与 00-plan/stage7-phase2-content-densification-plan.md §2.2 一致）
+DENSIFY_NODES = {
+    "ESS-G-01", "ESS-G-02", "ESS-G-04", "ESS-I-02", "ESS-K-02", "ESS-L-05",
+    "ESS-M-01", "ESS-M-02", "ESS-M-03", "ESS-M-04", "ESS-M-05",
+    "ESS-O-01", "ESS-O-02", "ESS-O-03",
+    "MTH-G-02", "MTH-G-03", "MTH-G-06", "MTH-M-01", "MTH-M-02", "MTH-M-03",
+    "MTH-M-06", "MTH-O-03", "MTH-O-05", "MTH-O-09",
+    "TEC-K-05", "TEC-M-03",
+}
+# 阶段2 新增记录识别：record_id 前缀（主Agent 回写时使用，见 densify-contract.md §4.1）
+DENSIFY_RECORD_PREFIX = "VR-D2-"
 LCSUB_MIN = 20
 
 
@@ -107,9 +123,13 @@ def check_gv1(ctx):
     counts = {}
     for r in records:
         counts[r.get("node_id")] = counts.get(r.get("node_id"), 0) + 1
-    over = [n for n, c in counts.items() if c > CLAIM_CAP]
-    for n in over:
-        problems.append("%s 记录数 %d 超上限 %d" % (n, counts[n], CLAIM_CAP))
+    over = []
+    for n, c in sorted(counts.items()):
+        cap = CLAIM_CAP_DENSIFY if n in DENSIFY_NODES else CLAIM_CAP
+        if c > cap:
+            over.append((n, c, cap))
+    for n, c, cap in over:
+        problems.append("%s 记录数 %d 超上限 %d" % (n, c, cap))
     for g in ctx["gaps"]:
         gid = g.get("gap_id", "?")
         for key in ("gap_id", "kind", "book_source_id", "anchor", "target",
@@ -305,6 +325,63 @@ def check_gv8(ctx):
     return result("PASS" if not missing and not extra else "FAIL", lines)
 
 
+def check_gv9(ctx):
+    """G-V9 阶段2 新增 claim 回写完整性（ADR-003 / densify-contract.md §6）。
+
+    识别：record_id 以 DENSIFY_RECORD_PREFIX（VR-D2-）开头者为阶段2 新增记录。
+    无新增记录 → SKIP（不伪装 PASS）。
+    """
+    records = ctx["records"]
+    new = [r for r in records if str(r.get("record_id", "")).startswith(DENSIFY_RECORD_PREFIX)]
+    if not new:
+        return result("SKIP", ["无阶段2 新增记录（record_id 前缀 %s）" % DENSIFY_RECORD_PREFIX])
+
+    problems = []
+    for r in new:
+        rid = r.get("record_id", "?")
+        anchor = r.get("anchor")
+        if not isinstance(anchor, dict) or not anchor.get("chapter"):
+            problems.append("%s anchor 缺失或 chapter 为空" % rid)
+        if r.get("direction") not in DIRECTIONS:
+            problems.append("%s direction 非法/缺失: %r" % (rid, r.get("direction")))
+        rev = r.get("review")
+        sp = rev.get("second_pass") if isinstance(rev, dict) else None
+        if sp not in ("passed", "disputed"):
+            problems.append("%s second_pass=%r（须为 passed/disputed，不得 none）" % (rid, sp))
+        cid = str(r.get("claim_id", ""))
+        nid = str(r.get("node_id", ""))
+        if nid and not re.match(r"^%s#(%s)#\d+$" % (re.escape(nid), "|".join(ORIGINS)), cid):
+            problems.append("%s claim_id 非法或 origin 非封闭枚举: %s" % (rid, cid))
+        if nid and nid not in DENSIFY_NODES:
+            problems.append("%s node_id 不在阶段2 参与节点集: %s" % (rid, nid))
+
+    # claim_id 唯一性：**阶段2 新增记录**不得与任何既有记录冲突（FAIL）；
+    # 非阶段2 记录之间的历史重复只报 WARN（属阶段1 数据修复，另案处理，不在本判据范围）
+    seen = {}
+    for r in records:
+        cid = r.get("claim_id")
+        if cid:
+            seen.setdefault(cid, []).append(r.get("record_id"))
+    dup_new, dup_legacy = [], []
+    for c, rs in sorted(seen.items()):
+        if len(rs) <= 1:
+            continue
+        if any(str(x).startswith(DENSIFY_RECORD_PREFIX) for x in rs):
+            dup_new.append((c, rs))
+        else:
+            dup_legacy.append((c, rs))
+    for c, rs in dup_new[:ctx["show"]]:
+        problems.append("阶段2 claim_id 与既有记录冲突: %s (%s)" % (c, ", ".join(rs)))
+
+    lines = ["阶段2 新增记录 %d 条；与阶段2 冲突 %d 组；阶段1 遗留重复 %d 组"
+             % (len(new), len(dup_new), len(dup_legacy))]
+    for c, rs in dup_legacy[:ctx["show"]]:
+        lines.append("  ~ [WARN/阶段1遗留] claim_id 重复: %s (%s)" % (c, ", ".join(rs)))
+    for p in problems[:ctx["show"]]:
+        lines.append("  ! " + p)
+    return result("PASS" if not problems else "FAIL", lines)
+
+
 CHECKS = {
     "G-V1": check_gv1,
     "G-V2": check_gv2,
@@ -314,6 +391,7 @@ CHECKS = {
     "G-V6": check_gv6,
     "G-V7": check_gv7,
     "G-V8": check_gv8,
+    "G-V9": check_gv9,
 }
 
 
@@ -339,7 +417,7 @@ def build_ctx(root):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="阶段7 核验层门控 G-V1..G-V8")
+    ap = argparse.ArgumentParser(description="阶段7 核验层门控 G-V1..G-V9")
     ap.add_argument("--check", default="all", help="all 或逗号分隔的判据名，如 G-V1,G-V4")
     ap.add_argument("--root", default=ROOT_DEFAULT, help="母库 root（默认脚本上级目录）")
     ap.add_argument("--show", type=int, default=20)
