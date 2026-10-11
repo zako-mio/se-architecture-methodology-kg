@@ -78,16 +78,21 @@ def main():
             data = f.read()
         b64 = base64.b64encode(data).decode("ascii")
         payload = json.dumps({"content": b64, "encoding": "base64"})
-        for attempt in range(5):
+        # 追加⑥-c（2026-10-11）：实测 GitHub blobs API 会瞬时 `EOF`（并发上传时尤甚），
+        # 原实现只在 rate limit 时重试 → 单次 EOF 即整轮推送失败。改为：
+        # **认证/权限类错误立即失败**（不重试），其余（EOF/超时/5xx/限流）退避重试。
+        last = None
+        for attempt in range(6):
             try:
                 sha = gh(["api", "repos/%s/%s/git/blobs" % (OWNER, REPO),
-                          "-X", "POST", "--input", "-", "--jq", ".sha"], inp=payload, retries=1)
+                          "-X", "POST", "--input", "-", "--jq", ".sha"], inp=payload, retries=2)
                 return {"path": rel, "mode": "100644", "type": "blob", "sha": sha}
             except RuntimeError as e:
-                if "rate limit" in str(e) and attempt < 4:
-                    time.sleep(20 * (attempt + 1)); continue
-                raise
-        raise RuntimeError("blob upload failed: %s" % rel)
+                last = str(e)
+                if any(k in last for k in ("Bad credentials", "401", "403", "Not Found", "404")):
+                    raise
+                time.sleep(4 * (attempt + 1))
+        raise RuntimeError("blob upload failed after 6 attempts: %s\n%s" % (rel, last))
 
     tree = []
     done = 0
