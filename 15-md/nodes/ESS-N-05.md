@@ -105,9 +105,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：WEB-042、WEB-044、WEB-045、BK-030
+- 书证核验：BK-030 Ch1（direct），Ch8（direct）
 - 入口链接：https://www.melconway.com/Home/Committees_Paper.html
 - 入口链接：https://teamtopologies.com/key-concepts
 - 勘误：常见误解「组织只是架构的给定背景，不属于设计对象」→ 核验结论「组织通过结构、边界、沟通与激励四类机制系统性塑造架构，应与技术架构同步设计与调整」（WEB-042）

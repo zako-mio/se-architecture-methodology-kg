@@ -95,6 +95,210 @@
         "review_date": "2026-09-11"
       }
     ],
+    "CAS-X-05": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Code-Based Fitness Functions",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.3",
+        "section_title": "Afferent and Efferent Coupling",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.11",
+        "section_title": "Package dependencies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "5",
+        "section": "5.15",
+        "section_title": "Contracts",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "5",
+        "section": "5.15",
+        "section_title": "Contracts",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.13",
+        "section_title": "Appropriate Coupling and Cohesion",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "CAS-X-06": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Deployment Pipelines",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.24",
+        "section_title": "Mitigate External Change",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.25",
+        "section_title": "Updating Libraries Versus Frameworks",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.25",
+        "section_title": "Updating Libraries Versus Frameworks",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.26",
+        "section_title": "Version Services Internally",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "8",
+        "section": "8.15",
+        "section_title": "Summary",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "CAS-X-07": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "Cadence: Triggered Versus Continual Versus Temporal",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "3",
+        "section": "3.2",
+        "section_title": "Deployment Pipelines",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.4",
+        "section_title": "Abstractness, Instability, and Distance from the Main Sequence",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "5",
+        "section": "5.7",
+        "section_title": "Architectural Quanta and Granularity",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.24",
+        "section_title": "Mitigate External Change",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.38",
+        "section_title": "Adaptation versus evolution",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "ESS-G-01": [
       {
         "source_id": "BK-007",
@@ -542,6 +746,131 @@
         "review_date": "2026-09-11"
       }
     ],
+    "ESS-L-01": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.1",
+        "section_title": "The Challenges of Evolving Software",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.1",
+        "section_title": "The Challenges of Evolving Software",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.9",
+        "section_title": "Summary",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.18",
+        "section_title": "Guidelines for Building Evolutionary Architectures",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.33",
+        "section_title": "Predictable versus evolvable",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-L-04": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.6",
+        "section_title": "How Is Long-Term Planning Possible When Everything Changes All the Time?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.6",
+        "section_title": "How Is Long-Term Planning Possible When Everything Changes All the Time?",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.7",
+        "section_title": "Once I’ve Built an Architecture, How Can I Prevent It from Degrading Over Time?",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "5",
+        "section": "5.15",
+        "section_title": "Contracts",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.3",
+        "section_title": "Architect and Develop for Evolvability",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.13",
+        "section_title": "Appropriate Coupling and Cohesion",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "ESS-L-05": [
       {
         "source_id": "BK-023",
@@ -972,6 +1301,423 @@
         "review_date": "2026-09-11"
       }
     ],
+    "ESS-N-01": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-N-02": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-N-03": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-N-04": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-N-05": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "1",
+        "section": "",
+        "section_title": "The Problem with Org Charts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "ESS-O-01": [
       {
         "source_id": "BK-007",
@@ -1378,6 +2124,74 @@
         "review_date": "2026-09-11"
       }
     ],
+    "MTH-G-04": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-G-06": [
       {
         "source_id": "BK-009",
@@ -1479,6 +2293,186 @@
         "direction": "reverse",
         "second_pass": "disputed",
         "review_date": "2026-09-11"
+      }
+    ],
+    "MTH-L-04": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.2",
+        "section_title": "Evolutionary Architecture",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.2",
+        "section_title": "Evolutionary Architecture",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "1",
+        "section": "1.3",
+        "section_title": "Guided Change",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.7",
+        "section_title": "Mechanics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.8",
+        "section_title": "Step 1: Identify Dimensions Affected by Evolution",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.12",
+        "section_title": "Retrofitting Existing Architectures",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.41",
+        "section_title": "Other architectural characteristics dominate",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-L-05": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.1",
+        "section_title": "What Is a Fitness Function?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.1",
+        "section_title": "What Is a Fitness Function?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.3",
+        "section_title": "Scope: Atomic Versus Holistic",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "Cadence: Triggered Versus Continual Versus Temporal",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.1",
+        "section_title": "Fitness Functions as Architectural Governance",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.2",
+        "section_title": "Code-Based Fitness Functions",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.14",
+        "section_title": "Fitness Functions as Experimental Media",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
       }
     ],
     "MTH-M-01": [
@@ -1775,6 +2769,357 @@
         "review_date": "2026-09-11"
       }
     ],
+    "MTH-N-02": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-N-03": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-N-04": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-N-06": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "2",
+        "section": "",
+        "section_title": "Conway’s Law and Why It Matters",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-O-02": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "Cadence: Triggered Versus Continual Versus Temporal",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.5",
+        "section_title": "Case Study: Triggered or Continuous?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.7",
+        "section_title": "Invocation: Automated Versus Manual",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Case Study: Adding Fitness Functions to PenultimateWidgets’ Invoicing Service",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "3",
+        "section": "3.3",
+        "section_title": "Case Study: Adding Fitness Functions to PenultimateWidgets’ Invoicing Service",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-O-03": [
       {
         "source_id": "BK-009",
@@ -1911,6 +3256,142 @@
         "review_date": "2026-09-11"
       }
     ],
+    "MTH-O-06": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Choose Team-First Boundaries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-O-07": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.1",
+        "section_title": "What Is a Fitness Function?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "Cadence: Triggered Versus Continual Versus Temporal",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.7",
+        "section_title": "Invocation: Automated Versus Manual",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.11",
+        "section_title": "Where Is My Fitness Function Testing Framework?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.9",
+        "section_title": "Step 2: Define Fitness Function(s) for Each Dimension",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.29",
+        "section_title": "Fitness Functions Using AI",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-O-09": [
       {
         "source_id": "BK-023",
@@ -1993,6 +3474,83 @@
       }
     ],
     "MTH-O-11": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.12",
+        "section_title": "Summary",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.1",
+        "section_title": "Fitness Functions as Architectural Governance",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.8",
+        "section_title": "Step 1: Identify Dimensions Affected by Evolution",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.10",
+        "section_title": "Step 3: Use Deployment Pipelines to Automate Fitness Functions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.13",
+        "section_title": "Hypothesis- and Data-Driven Development",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "9",
+        "section": "9.13",
+        "section_title": "Hypothesis- and Data-Driven Development",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
       {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",
@@ -2086,6 +3644,85 @@
         "review_date": "2026-09-11"
       }
     ],
+    "TEC-L-01": [
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.1",
+        "section_title": "What Is a Fitness Function?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.1",
+        "section_title": "What Is a Fitness Function?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "2",
+        "section": "2.4",
+        "section_title": "Cadence: Triggered Versus Continual Versus Temporal",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.28",
+        "section_title": "Fitness Functions as a Checklist, Not a Stick",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "4",
+        "section": "4.29",
+        "section_title": "Documenting Fitness Functions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-011",
+        "book": "Building Evolutionary Architectures",
+        "chapter": "7",
+        "section": "7.9",
+        "section_title": "Step 2: Define Fitness Function(s) for Each Dimension",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "TEC-M-03": [
       {
         "source_id": "BK-009",
@@ -2152,6 +3789,85 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      }
+    ],
+    "TEC-N-02": [
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Team-First Thinking",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "5",
+        "section": "",
+        "section_title": "The Four Fundamental Team Topologies",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "7",
+        "section": "",
+        "section_title": "Team Interaction Modes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-030",
+        "book": "Team Topologies",
+        "chapter": "8",
+        "section": "",
+        "section_title": "Evolve Team Structures with Organizational Sensing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
       }
     ]
   },
@@ -2451,6 +4167,230 @@
       "evidence_strength": "direct"
     },
     {
+      "gap_id": "GAP-EA-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-011",
+      "chapter": "1",
+      "section": "1.4",
+      "target": {
+        "existing_node_id": "MTH-O-10",
+        "proposed_node": null
+      },
+      "summary": "本书把演化式架构定义为「跨多个维度的、有引导的增量变更」，并在第1章逐段拆解这三段含义：变更须小步进行，且必须由客观机制引导，否则只剩被动应付式的改动；第3章再把增量变更区分为开发侧与部署侧两个面向。图谱该节点已主张用增量方式与校验机制治理演化中的一致性，却未引用本书这一原则的原始出处。",
+      "proposed_action": "为该节点补引 BK-011 第1章定义段与 1.3/1.4 节，作为「有引导的增量变更」原则及其两段含义的来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-011",
+      "chapter": "3",
+      "section": "3.2",
+      "target": {
+        "existing_node_id": "MTH-J-01",
+        "proposed_node": null
+      },
+      "summary": "本书把部署流水线确立为执行架构校验的载体：多阶段、逐级提升置信度，每次变更都统一触发原子级与整体级校验；并区分持续集成服务器与多阶段流水线在任务分离度与反馈质量上的差异，指出前者常不足以支撑架构级验证。图谱该节点的现有来源未包含本书。",
+      "proposed_action": "为该节点补引 BK-011 第3章 3.2 节，作为「流水线作为架构校验执行机制」的出处，并补一条指向架构适应度函数节点的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-011",
+      "chapter": "7",
+      "section": "7.16",
+      "target": {
+        "existing_node_id": "MTH-L-06",
+        "proposed_node": null
+      },
+      "summary": "本书第7章把单体向服务化的迁移写成可执行步骤：先按业务功能、事务边界与部署目标确定服务边界，用内聚度度量（CK 度量族中的方法内聚缺失指标）判断共享模块应拆分还是复制，再分离界面层、引入服务发现与防腐层，并主张分若干轮渐进分解而非一次到位；同时提醒事务耦合往往比类级耦合更难拆。图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-011 第7章 7.12 与 7.15–7.17 节，作为迁移步骤与共享模块处置判据的来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-011",
+      "chapter": "5",
+      "section": "5.6",
+      "target": {
+        "existing_node_id": "MTH-G-04",
+        "proposed_node": null
+      },
+      "summary": "本书把限界上下文与耦合局部性原则接在一起：把实现耦合限制在尽可能小的范围内，是限界上下文与耦合局部性两条线索共同指向的同一结论；第9章进一步给出在既有分层架构与集成架构中切出限界上下文、并用可执行校验阻止跨上下文耦合的具体做法。图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-011 第5章 5.6 节与第9章 9.21 节，作为限界上下文与耦合局部性同源的论证及落地做法来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-011",
+      "chapter": "5",
+      "section": "5.15",
+      "target": {
+        "existing_node_id": "ESS-H-02",
+        "proposed_node": null
+      },
+      "summary": "本书把契约定义为架构各部分之间传递信息或依赖的格式，并给出从最严格（远程方法调用、附带模式的 JSON）到最宽松（纯名值对）的连续谱：越严格越使集成架构脆化，越宽松越需要另设校验来补偿确定性；同章还点出把消费方用不到的字段一并写进契约的邮票式耦合反模式。图谱该节点只给出耦合的一般判据，缺少契约松紧这一可操作维度。",
+      "proposed_action": "为该节点补引 BK-011 第5章 5.15 节，补充契约松紧谱与邮票式耦合的判据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-006",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "5",
+      "section": "5.2",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-H-05"
+      },
+      "summary": "本书用五个小节展开「共生耦合」这一概念：把耦合细分为源码层的静态类型（名称、类型、含义、位置、算法）与运行时的动态类型（执行、时序、值、身份），并给出三个度量属性——强度（重构难度）、局部性（元素间距）、度（影响范围），配套「把强形式改成弱形式」「距离越远用越弱形式」两条改造规则，以及把跨封装边界的耦合降到最低、把封装内部的耦合提到最高的三条准则。图谱只有一般性的内聚耦合本质节点，没有这套可直接指导重构的耦合词汇表与判据。",
+      "proposed_action": "新增节点（提案 MTH-H-05 共生耦合分析，待评审），补边至内聚与耦合本质节点、重构手法族节点与演进式架构节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-007",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "5",
+      "section": "5.7",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-G-07"
+      },
+      "summary": "本书定义「架构量子」为可独立部署、功能内聚度高、静态耦合高且运行时以同步耦合为主的单元，并把数据库、界面、编排器等共享耦合点一并计入量子边界：共用数据库或与界面强耦合会把分布式架构压回单一量子，只有互不共享耦合点时才形成多量子。量子大小决定增量变更的下限，量子数量与单位成本之间存在最优点，且不同量子可各自选择适配的技术架构与质量特性。图谱没有任何节点刻画这一结构单位及其计数与判定方式。",
+      "proposed_action": "新增节点（提案 MTH-G-07 架构量子与量子粒度，待评审），补边至内聚与耦合本质节点、粒度与边界设定节点、演进式架构节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-008",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "5",
+      "section": "5.11",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-G-08"
+      },
+      "summary": "本书把量子之间的运行时耦合刻画为三个相互牵制的维度：通信取同步还是异步、一致性取原子事务还是最终一致、协调取编排还是协同；三者不能孤立决定，事务性偏向同步加编排，高规模偏向异步加最终一致加协同，取舍需放在同一决策空间里权衡。图谱缺少这一组运行时耦合的取舍框架，现有节点只覆盖质量属性层面的冲突治理与可靠性实现。",
+      "proposed_action": "新增节点（提案 MTH-G-08 动态量子耦合三维决策，待评审），补边至架构量子节点、质量属性冲突治理节点与契约松紧相关节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-009",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "6",
+      "section": "6.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-L-08"
+      },
+      "summary": "本书用整章处理数据这一维度：模式变更应与代码同样受测、纳入版本控制、以小步迁移脚本增量施加，且迁移一经执行即视为不可改写，需以新增迁移而非修改历史迁移来撤销；把数据库当集成点会冻结模式，需借「扩展—收缩」过渡态（必要时加触发器做双向同步）化解；此外还讨论了两阶段提交、引用完整性、数据重复取舍、用代码替换触发器与存储过程、以及数据团队工程实践滞后的成因。图谱没有任何数据层演化节点，这一整类工程做法无处挂载。",
+      "proposed_action": "新增节点（提案 MTH-L-08 演进式数据库设计与模式迁移，待评审），补边至演进式架构节点、增量演化与一致性治理节点、部署流水线节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-010",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "8",
+      "section": "8.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-L-09"
+      },
+      "summary": "本书用整章区分「陷阱」（看似可行却立刻显形）与「反模式」（起初像好主意、事后才发现是错的，且存在更好替代），并逐一给出会伤害可演化性的清单：低代码/无代码的最后百分之十陷阱、以厂商产品为架构中心、简历驱动开发、把共享组件养成瓶颈的复用反模式、因共享资源旧账而失当的治理、报表直接耦合到记录系统、为销售做无限定制与永久特性开关、过长规划周期与对手工文档的非理性依恋。图谱只有一般性的模式与反模式概念节点，没有这组针对可演化性的具体清单。",
+      "proposed_action": "新增节点（提案 MTH-L-09 演化式架构反模式与陷阱，待评审），补边至设计模式与反模式本质节点、演进式架构节点与遗留系统渐进治理节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-011",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "4",
+      "section": "4.1",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-L-10"
+      },
+      "summary": "本书主张把架构治理从评审会与人工检查转为可执行校验：企业架构师不再指定技术选型，而是以校验机制约束平台能力与跨项目关切；安全等职能可在各项目流水线中保留自己的检查位，遇到零日漏洞时统一插入排查；同时提出「够用治理」——按简单、中等、复杂三档给出技术栈选项，让团队按问题规模选择，而不是在全组织统一技术栈上过度加码，也避免用统一选型把最复杂场景的负担压给所有项目。图谱缺少这一治理模型节点。",
+      "proposed_action": "新增节点（提案 MTH-L-10 自动化架构治理与够用治理，待评审），补边至架构适应度函数节点、适应度函数工具化节点与部署流水线节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-012",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "7",
+      "section": "7.23",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-L-11"
+      },
+      "summary": "本书主张在某些情境下主动构建「用完即弃」的架构：先用最省资源的方式验证市场或概念，成功后再另建更合适的架构，而不去演化初版；书中以电商与社交产品的多次重写说明该策略对存活的价值，并把它列为不采用演化式架构的正当理由之一，同时提醒成功之后必须真正拨出资源重建，否则会长期停留在临时方案上。图谱的弃用与日落节点处理的是既有能力如何退场，缺少「一开始就计划替换」这一决策。",
+      "proposed_action": "新增节点（提案 MTH-L-11 牺牲型架构，待评审），补边至弃用与日落策略节点、演进式架构节点与复杂度阶梯与演进时机节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-013",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "9",
+      "section": "9.13",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-O-12"
+      },
+      "summary": "本书把需求改写成可检验的假设：写清待验假设、验证实验与验证通过后的意义，再借助并行版本与流量路由做对照实验，让真实用户行为进入反馈闭环，而不是先收集需求再实现功能；并把校验机制当作实验媒介，用可量化指标回答架构假设（例如自定义监控丢失消息的比例、生产环境真实并发水位），据结果决定是否更换实现。图谱的度量与反馈闭环节点只覆盖指标驱动的闭环，没有假设与对照实验这一支。",
+      "proposed_action": "新增节点（提案 MTH-O-12 假设驱动开发与实验性校验，待评审），补边至度量与反馈闭环节点、渐进暴露部署策略节点与架构适应度函数节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-014",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "4",
+      "section": "4.4",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "TEC-H-04"
+      },
+      "summary": "本书给出一组可自动校验的代码结构度量：传入与传出耦合、抽象度与不稳定度，以及由后两者合成的归一化「距主序列距离」，并用「无用区」与「痛苦区」解释偏离方向及其修复动作；还给出圈复杂度阈值与「渐进收紧」做法——先告警、后报错，让团队在受控节奏内偿还存量债务，并用 CK 度量族中的内聚缺失指标判断模块是否该拆分。图谱的技术债量化节点未覆盖这组结构度量与渐进收紧机制。",
+      "proposed_action": "新增节点（提案 TEC-H-04 代码结构度量与渐进收紧治理，待评审），补边至静态分析平台节点、技术债量化度量节点与架构适应度函数工具化节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-015",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-011",
+      "chapter": "3",
+      "section": "3.4",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "TEC-L-03"
+      },
+      "summary": "本书把「消费者驱动契约」当作集成架构上的原子校验：由消费方编写自己所需信息的测试并交给提供方，提供方承诺长期保持这些测试通过，于是可以在不破坏集成点的前提下任意演进内部实现；书中给出把设计期的接口描述校验、沙箱功能验证与跨服务契约验证串成多段流水线的完整示例，并把这类做法称为工程安全网。图谱没有契约测试或消费者驱动契约节点。",
+      "proposed_action": "新增节点（提案 TEC-L-03 消费者驱动契约与契约测试，待评审），补边至部署流水线节点、架构适应度函数工具化节点与边界与接口隔离本质节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-EA-016",
+      "kind": "concept_missing",
+      "book_source_id": "BK-011",
+      "chapter": "7",
+      "section": "7.22",
+      "target": {
+        "existing_node_id": "ESS-G-03",
+        "proposed_node": null
+      },
+      "summary": "图谱缺少「防腐层」这一概念：本书主张在项目与外部库、消息中间件、厂商产品之间放一层隔离，把所需语义收敛到自己定义的接口上，使日后替换实现成为机械操作；并给出「即时防腐层」的做法——平时不必预先抽象，确需替换时再由工具抽出接口，以免为抽象而抽象反而损害可读性；第8章还把它列为摆脱厂商绑定反模式的对策。该概念应补挂在边界与接口隔离节点之下。",
+      "proposed_action": "新增术语条目并补挂至 ESS-G-03，说明防腐层、即时防腐层与外部依赖替换成本之间的关系，并补边至抽象泄漏本质节点。",
+      "evidence_strength": "direct"
+    },
+    {
       "gap_id": "GAP-SAIP-001",
       "kind": "missed_citation",
       "book_source_id": "BK-009",
@@ -2547,6 +4487,230 @@
       "summary": "该书第24、25章讨论架构师在项目中的角色（与项目经理分工、增量架构、敏捷与分布式开发）以及个人与组织的架构能力建设，现有图在团队与康威域有组织节点，但缺少「架构师角色/架构能力」这一角色与能力维度节点。",
       "proposed_action": "新增节点「架构师角色与架构能力」，挂接 ESS-N-* 团队域与 MTH-N-* 方法论节点，并补入与该书的边。",
       "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-TT-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "2",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-N-01",
+        "proposed_node": null
+      },
+      "summary": "该节点主张主动调整团队与组织结构，使沟通结构先于软件成形而对应目标架构。本书第2章以专节论述这一手法的动机、操作步骤与组织阻力，并引证同行的大样本研究说明高绩效组织普遍采用，可作为该节点最直接的上游出处，但图谱现未引用本书。",
+      "proposed_action": "为该节点补引 BK-030 第2章，作为逆向康威操作的定义、实施路径与效果证据来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "7",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-N-03",
+        "proposed_node": null
+      },
+      "summary": "该节点把团队间交互归纳为限时高带宽协作、清晰边界的服务消费与教练式促进三种模式。本书第7章为这三种模式各设专节，给出适用情境、对应的团队行为风格、优势与代价，并指明四类团队各自的主要交互组合，是该节点的原始来源，图谱却未引用。",
+      "proposed_action": "为该节点补引 BK-030 第7章，作为三种交互模式的定义、行为规范与选择判据来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-N-04",
+        "proposed_node": null
+      },
+      "summary": "该节点要求以产品方式经营平台团队，把通用能力封装为可自助使用的内部产品以降低流对齐团队的认知负荷。本书第5章平台团队一节界定了该团队类型的使命、期望行为与「平台刚好够大」的规模判断，并指出平台本身可由多个基本团队类型嵌套构成，图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-030 第5章平台团队与「平台刚好够大」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "3",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-N-04",
+        "proposed_node": null
+      },
+      "summary": "该节点指出团队能承载的复杂度有限，每项新增工具、职责或领域都消耗心智带宽。本书第3章把团队认知负荷细分为任务固有的、环境附加的与学习增益的三类，并给出「压缩固有、消除附加、留出增益」的处置方向，还讨论了以人类群体规模上限约束团队与团队集合大小，图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-030 第3章「良好边界降低认知负荷」与「以小规模长寿命团队为标准」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "2",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-N-02",
+        "proposed_node": null
+      },
+      "summary": "该节点陈述组织沟通结构与其所设计系统架构之间存在保结构的对应关系。本书第2章综述了支持这一同态效应的多项实证研究，并给出「组织架构与系统架构相冲突时，组织架构胜出」的现代表述，以及沟通路径如何限制组织可探索的设计空间，图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-030 第2章，作为同态效应的实证证据与现代表述来源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-006",
+      "kind": "missed_citation",
+      "book_source_id": "BK-030",
+      "chapter": "6",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-N-03",
+        "proposed_node": null
+      },
+      "summary": "该节点主张团队负责范围须与模块边界对齐，错位会以接口复杂度与协调成本的形式反噬。本书第6章以团队优先的边界选取为主线，论证边界含糊如何导致高耦合与责任真空，并给出多种可用于对齐的切分依据与判定启发式，图谱该节点未引用本书。",
+      "proposed_action": "为该节点补引 BK-030 第6章「团队优先的软件职责与边界」小节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-007",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-07"
+      },
+      "summary": "流对齐团队是本书拓扑体系中的主团队类型：围绕单条价值流组建（可以是单一产品、单组特性、单条用户旅程或单一用户画像），具备从需求探索到生产运行的多学科能力，并尽量不把工作移交给其他团队。图谱只有一个概括四类型的节点，没有刻画这一主类型的独立节点，其定义、能力清单、期望行为与衡量方式均无处挂载。",
+      "proposed_action": "新增节点（提案 MTH-N-07 流对齐团队，待评审），并补边至团队拓扑四类型节点与团队边界治理节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-008",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-08"
+      },
+      "summary": "赋能团队以短期介入的方式帮助流对齐团队补齐能力缺口：由某一技术或产品领域的专家组成，先理解对方的具体问题再给建议，不以代劳为目的，并主动避免成为发号施令的知识象牙塔。图谱缺少该团队类型的节点，其与常设的跨团队实践社群之间的分工差异也无处体现。",
+      "proposed_action": "新增节点（提案 MTH-N-08 赋能团队，待评审），并补边至团队拓扑四类型节点与教练式促进交互模式。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-009",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-09"
+      },
+      "summary": "复杂子系统团队为依赖高度专门知识、多数成员须是该领域专家的子系统而设，其成立依据是团队认知负荷而非组件复用机会，因此数量应远少于传统按共享组件划分的团队。图谱缺少该类型节点，导致「何时应为专门知识单独建队」这一判断依据在图谱中没有承载概念。",
+      "proposed_action": "新增节点（提案 MTH-N-09 复杂子系统团队，待评审），并补边至团队拓扑四类型节点与服务消费交互模式。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-010",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "3",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-10"
+      },
+      "summary": "团队接口把接口设计从代码层扩展到整个团队：除运行时端点与客户端库外，还包括版本承诺、文档与操作指南、团队工作方式与原则、沟通渠道，以及当前与近期工作信息，并要求团队持续定义、公示、检验与演进这一接口。图谱缺少该概念节点，团队对外的可交互面因此没有承载点。",
+      "proposed_action": "新增节点（提案 MTH-N-10 团队接口，待评审），并补边至团队交互模式与平台团队节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-011",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "6",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-11"
+      },
+      "summary": "本书第6章提出以「断裂面」寻找系统中的天然接缝，把业务限界上下文列为首选依据，并给出合规监管、变更节奏、团队所在地、风险、性能隔离、技术栈与用户画像等多类可组合的备选依据，附以适用性检验；同章还归纳了多种不易察觉的隐性单体形态。图谱缺少这套按团队认知负荷选取软件边界的方法节点。",
+      "proposed_action": "新增节点（提案 MTH-N-11 断裂面与团队尺度软件边界，待评审），并补边至领域驱动战略设计与粒度边界设定节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-012",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "8",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-12"
+      },
+      "summary": "本书第8章把稳定的团队及其交互通道视为组织的感官，用它们持续探测平台、接口与协作关系是否失效，并给出一组触发拓扑调整的可观测征兆，例如系统已超出单团队可承载的规模、交付节奏持续变慢、多项高层业务服务依赖一大片底层服务。图谱缺少这一「以团队交互为传感器驱动结构调整」的方法节点。",
+      "proposed_action": "新增节点（提案 MTH-N-12 组织感知与拓扑演化触发条件，待评审），并补边至团队边界治理与度量反馈闭环节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-013",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-030",
+      "chapter": "4",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-N-13"
+      },
+      "summary": "本书第4章引入作者维护的团队拓扑目录，把它作为讨论团队职责、接口与协作方式的对话起点，并归纳两类常见的团队形成反模式：临时拼凑式组队与频繁打散重组；同时强调同一拓扑在不同组织规模、工程成熟度与文化下成败迥异，不存在普适最优形态。图谱缺少这一「拓扑目录与团队反模式」的方法节点。",
+      "proposed_action": "新增节点（提案 MTH-N-13 团队拓扑目录与团队反模式，待评审），并补边至团队拓扑四类型与团队边界治理节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-014",
+      "kind": "concept_missing",
+      "book_source_id": "BK-030",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-N-04",
+        "proposed_node": null
+      },
+      "summary": "「最薄可行平台」这一概念在图谱中缺失：它要求在保持平台精简与确实加速交付之间取得平衡，并指出平台形态可从一页组件清单一路演进到由多个内部团队构成的多层平台，只有当底层基座足够复杂时组建常设平台团队才合算。该规模判据应在平台团队节点下补充。",
+      "proposed_action": "新增术语条目并补挂至 MTH-N-04，说明平台规模的最小充分判据及其形态演进谱系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-015",
+      "kind": "concept_missing",
+      "book_source_id": "BK-030",
+      "chapter": "7",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-N-03",
+        "proposed_node": null
+      },
+      "summary": "「承诺理论」在图谱中缺失：它主张团队间关系应以各方自愿作出的承诺来构造，而非以命令或可强制执行的契约来构造，例如按语义化版本号的含义承诺不破坏下游依赖。该概念为服务消费型交互提供了理论依据与可检验的承诺清单，应补挂在团队交互模式节点下。",
+      "proposed_action": "新增术语条目并补挂至 MTH-N-03，说明承诺式协作与服务消费模式、接口版本承诺之间的关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-TT-016",
+      "kind": "concept_missing",
+      "book_source_id": "BK-030",
+      "chapter": "8",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-O-11",
+        "proposed_node": null
+      },
+      "summary": "「把运行与维护活动当作开发的高保真感官输入、从而形成可自我导向的控制论闭环」在图谱中缺失：本书主张不要另设只做维护与常规运营的团队，让构建者对同一系统的新功能与存量维护并行负责，使运行信号持续回流并校正设计。该机制应在度量与反馈闭环节点下补充。",
+      "proposed_action": "新增术语条目并补挂至 MTH-O-11，说明以运行信号驱动设计校正的组织级反馈闭环及其反模式。",
+      "evidence_strength": "direct"
     }
   ]
 }

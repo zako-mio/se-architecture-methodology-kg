@@ -2,7 +2,7 @@
   "topic": "质量模型与 ilities（ISO/IEC 25010:2023 九特性 / SQuaRE 重构 / 可维护性子特性 / 可扩展性与可演化性术语归位 / 质量属性→战术映射）",
   "generated_by": "software-quality-model-researcher (subagent, self-authored role)",
   "accessed": "2026-09-10",
-  "retrieval_note": "iso.org 直连/代理均被 WAF 403（E 包已证），本标准元数据与 scope 经：①ISO OBP 页面经搜索引擎索引返回的正文片段（Tavily，标注 unverified_direct）；②iTeh Standards 官方样页 PDF（含封面/目录/scope/术语节）；③iso25000.com 门户（ISO 25000 项目官方门户）；④SEI 官方报告 PDF。未下载或写入任何标准正文到公开交付目录。境外源走代理 172.29.0.1:7890。",
+  "retrieval_note": "iso.org 直连/代理均被 WAF 403（E 包已证），本标准元数据与 scope 经：①ISO OBP 页面经搜索引擎索引返回的正文片段（Tavily，标注 unverified_direct）；②iTeh Standards 官方样页 PDF（含封面/目录/scope/术语节）；③iso25000.com 门户（ISO 25000 项目官方门户）；④SEI 官方报告 PDF。未下载或写入任何标准正文到公开交付目录。境外源走代理 <private-host>。",
   "sources": [
     {
       "id": "STD-005",
@@ -640,5 +640,5 @@
     "SEI 战术集在各报告版本间持续演化（如 availability 目录已更新），本包采用的 modifiability 三分类来自 2007/2009 报告，与 SAiP 第 4 版可能已有措辞调整，未逐版比对。",
     "未获取 ISO/IEC 25010:2023 的 Annex C（测量）与 25019 的 Annex A（与 2011 使用质量模型对照）正文，版本映射细节留待核实。"
   ],
-  "notes": "所有标准 scope/前言文本取自 iTeh Standards 官方样页 PDF 与 ISO OBP 片段，未下载标准正文入库；SEI 报告 PDF 为公开分发（Distribution Statement A），仅提取论点未整段复制。境外源经代理 172.29.0.1:7890；国内 iso25000.com 直连。"
+  "notes": "所有标准 scope/前言文本取自 iTeh Standards 官方样页 PDF 与 ISO OBP 片段，未下载标准正文入库；SEI 报告 PDF 为公开分发（Distribution Statement A），仅提取论点未整段复制。境外源经代理 <private-host>；国内 iso25000.com 直连。"
 }

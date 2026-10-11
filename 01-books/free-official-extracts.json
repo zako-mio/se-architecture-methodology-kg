@@ -194,7 +194,7 @@
       "url": "https://sre.google/sre-book/table-of-contents/",
       "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
       "reachable": true,
-      "channel": "proxy(172.29.0.1:7890)",
+      "channel": "proxy(<private-host>)",
       "http_status": 200,
       "toc": [
         {
@@ -427,7 +427,7 @@
       "url": "https://sre.google/workbook/table-of-contents/",
       "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
       "reachable": true,
-      "channel": "proxy(172.29.0.1:7890)",
+      "channel": "proxy(<private-host>)",
       "http_status": 200,
       "toc": [
         {
@@ -736,7 +736,7 @@
       ]
     }
   ],
-  "summary": "5 个 free-official 源全部可达：abseil.io、domainlanguage.com、12factor.net 直连 200；sre.google 两源境内直连失败（连接层，http_code=000），经代理 172.29.0.1:7890 得 200。已提取各源完整目录结构与 200-500 字中文核心论点摘要。全程未下载/落盘任何书籍 PDF 或正文，仅提取结构与摘要。",
+  "summary": "5 个 free-official 源全部可达：abseil.io、domainlanguage.com、12factor.net 直连 200；sre.google 两源境内直连失败（连接层，http_code=000），经代理 <private-host> 得 200。已提取各源完整目录结构与 200-500 字中文核心论点摘要。全程未下载/落盘任何书籍 PDF 或正文，仅提取结构与摘要。",
   "notes": [
     "访问日期：2026-09-10；可达性以 curl HTTP 状态码 + 内容字节数为证。",
     "版权纪律：所有源均以「结构 + 摘要 + 链接」形式记录，正文/PDF 未落盘。"

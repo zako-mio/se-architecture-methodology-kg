@@ -681,5 +681,5 @@
     "Fowler 的 Evolutionary Architecture 独立页面（bliki/articles 路径）返回 404，演进式架构的一手 Fowler 文本待补（当前用其 Software Architecture Guide 与 PoEAA 替代）。",
     "事件驱动架构主要依据 Garlan & Shaw 的 event-based/implicit invocation 与 Azure 官方条目，未取得 Fowler 专文（EDA bliki 404）。"
   ],
-  "notes": "信源计数：S1=7、S2=18、S3=1、S4=1，共 27 条（S1≥5、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：架构定义 = ISO 42010（S1-01/07）+ SEI（S1-03）+ Garlan&Shaw（S2-14）+ Fowler（S2-01/04）；质量属性 = ISO 25010（S1-06）+ SEI ATAM（S1-05）；架构决策/ADR = Nygard（S2-09）+ Fowler（S2-10）。S5 来源（无出处二手博客/AI 内容/营销软文）未采用。联网策略：境内/可达站点直连，iso-architecture.org 与 raw.githubusercontent.com 经代理 172.29.0.1:7890 访问。书籍版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、CC-BY 许可的 DDD Reference 与公开发表论文。"
+  "notes": "信源计数：S1=7、S2=18、S3=1、S4=1，共 27 条（S1≥5、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：架构定义 = ISO 42010（S1-01/07）+ SEI（S1-03）+ Garlan&Shaw（S2-14）+ Fowler（S2-01/04）；质量属性 = ISO 25010（S1-06）+ SEI ATAM（S1-05）；架构决策/ADR = Nygard（S2-09）+ Fowler（S2-10）。S5 来源（无出处二手博客/AI 内容/营销软文）未采用。联网策略：境内/可达站点直连，iso-architecture.org 与 raw.githubusercontent.com 经代理 <private-host> 访问。书籍版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、CC-BY 许可的 DDD Reference 与公开发表论文。"
 }

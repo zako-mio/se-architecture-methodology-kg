@@ -116,9 +116,10 @@ Conway 用同态来刻画这种关系：若每个子系统都有独立的设计�
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：WEB-042、BK-030、PAP-028
+- 书证核验：BK-030 Ch2（direct）
 - 入口链接：https://itrevolution.com/product/team-topologies/
 - 勘误：常见误解「Conway 本人命名了 Conway's Law」→ 核验结论「Conway 未命名；名称由 Fred Brooks 在《The Mythical Man-Month》(1975) 引用时给出」（WEB-042）
 

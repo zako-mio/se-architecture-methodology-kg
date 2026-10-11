@@ -2,7 +2,7 @@
   "topic": "概念与需求（Concept & Requirements）——软件工程定义补全（SWEBOK V4 KA1）、软件危机与本质复杂度、需求工程过程（ISO/IEC/IEEE 29148:2018）、干系人识别、质量属性需求（QA scenario / SEI）",
   "generated_by": "requirements-engineering-researcher (subagent, F 域)",
   "accessed": "2026-09-10",
-  "retrieval_note": "联网直连为主，境外/被墙站点走代理 172.29.0.1:7890。iso.org 实测 WAF 403（与 E 包结论一致），ISO 29148:2018 元数据与 abstract 经 web.archive.org 快照获取；computer.org 直连 403，SWEBOK V4 目录经 Wayback 快照获取；SEBoK 直连 200。未下载任何标准正文入库。SWEBOK 定义原句经 Tavily 返回的 PDF 文本快照与学术转引交叉核验（V3 官方 PDF 镜像下载损坏，见 gaps）。",
+  "retrieval_note": "联网直连为主，境外/被墙站点走代理 <private-host>。iso.org 实测 WAF 403（与 E 包结论一致），ISO 29148:2018 元数据与 abstract 经 web.archive.org 快照获取；computer.org 直连 403，SWEBOK V4 目录经 Wayback 快照获取；SEBoK 直连 200。未下载任何标准正文入库。SWEBOK 定义原句经 Tavily 返回的 PDF 文本快照与学术转引交叉核验（V3 官方 PDF 镜像下载损坏，见 gaps）。",
   "sources": [
     {
       "id": "STD-003",

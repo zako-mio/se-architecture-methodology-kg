@@ -21,7 +21,8 @@
       ".git/",
       "00-plan/stage2-book-collection.md",
       "16-checkpoint/publish-reconcile-report.md",
-      "report.original.html"
+      "report.original.html",
+      "00-plan/NEXT-ROUND-PROMPT.md"
     ],
     "preserve": [
       "LICENSE",
@@ -44,6 +45,8 @@
       "report-phase7.html",
       "report-phase7p2-plan.md",
       "report-phase7p2-plan.html",
+      "report-phase7p2.md",
+      "report-phase7p2.html",
       "quality-gate.md"
     ],
     "mirror": [
@@ -106,6 +109,9 @@
     "追加②（主Agent 裁决，2026-09-11）：`10-dag-data/` 与 `16-checkpoint/` 由 mirror 改归 **mask** 类 —— 实测公开仓这两处的内容是「源 + 本机路径脱敏」的产物（`10-dag-data` 3 文件、`16-checkpoint/audit_publish.py`）。其中 audit_publish.py 的手工变体已按「可机械派生的逆向吸收回源」原则在源侧修掉（HOME_PATH_RE 改为 /home/ + $USER，docstring 去字面量），故 mask 对其为幂等空操作。mask 类与 audit 链共用同一组正则（import audit_publish），保证规则同源。",
     "追加③：新增 `binary_allowlist`，解决 P3 冲突 —— 公开站点引用的 `00-plan/diagrams/stage4-architecture.png`（被 `_publish/00-plan/NEXT-SESSION-HANDOFF.md` 引用）是合法站点资产，故显式放行 `00-plan/diagrams/`；未列入 allowlist 的二进制仍然 FAIL（保持 fail-closed）。",
     "追加④：新增两条 `never` —— `00-plan/stage2-book-collection.md` 与 `16-checkpoint/publish-reconcile-report.md` 属内部运维记录，不进公开仓（前者含采集渠道细节，已由披露口径门控命中验证）。",
-    "追加⑤（阶段2 执行轮，2026-10-11）：`classes.sanitize` 新增 `report-phase7p2-plan.md` / `.html`（阶段2 方案周期报告，公开件）；`audit_publish.py` 的 SCAN_ROOT_FILES 同步扩展以纳入脱敏机检。`report.original.html` 为历史备份，归入 `never`（不公开）。"
+    "追加⑤（阶段2 执行轮，2026-10-11）：`classes.sanitize` 新增 `report-phase7p2-plan.md` / `.html`（阶段2 方案周期报告，公开件）；`audit_publish.py` 的 SCAN_ROOT_FILES 同步扩展以纳入脱敏机检。`report.original.html` 为历史备份，归入 `never`（不公开）。",
+    "追加⑥（阶段7 轨B 轮，2026-10-11）：**修前置缺陷** —— 上一轮提交了 `report-phase7p2.md` / `.html`（阶段2 执行报告双版本）却未在任何类声明，导致 `assemble_publish.py --check` 的 P1「默认拒绝覆盖检查」FAIL（未声明 2 项）。现补入 `classes.sanitize`，并同步扩展 `audit_publish.py` 的 SCAN_ROOT_FILES。",
+    "追加⑥-a（2026-10-11）：**内网地址脱敏** —— 实测 `00-plan/stage2-search-plan.md` 与 `00-plan/contract.md` 的公开副本含**定向代理地址**（上一轮遗留，具体字面量见 `audit_publish.py` 的 `INFRA_RE`）。`audit_publish.py` 新增 `INFRA_RE`（机械派生、与 mask 链同源），统一替换为 `<private-host>`。",
+    "追加⑥-b（2026-10-11）：`classes.never` 新增 `00-plan/NEXT-ROUND-PROMPT.md` —— 该件是**窗口间内部交接 Prompt**（含子 Agent 能力、协作纪律、环境约束等内部运维细节），与已列入 never 的 `00-plan/stage2-book-collection.md` 同类，不进公开站点。"
   ]
 }

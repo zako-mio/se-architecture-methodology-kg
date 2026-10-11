@@ -2,7 +2,7 @@
   "topic": "K 运维（operations）：可靠性与容错、可观测性、SLI/SLO/错误预算、事件响应与复盘、混沌工程、容量与变更管理",
   "generated_by": "reliability-engineer (subagent, 自写角色)",
   "accessed": "2026-09-10",
-  "retrieval_note": "sre.google 直连超时，全部经代理 http://172.29.0.1:7890 + 浏览器 UA 直取；Azure/MS Learn、OTel、Datadog、AWS、DORA、principlesofchaos 经代理可达；Etsy Code as Craft 被反爬，改用 web.archive.org 快照。Release It! 为版权书，仅引用官方出版页目录核对模式名，未提取正文。",
+  "retrieval_note": "sre.google 直连超时，全部经代理 <private-host> + 浏览器 UA 直取；Azure/MS Learn、OTel、Datadog、AWS、DORA、principlesofchaos 经代理可达；Etsy Code as Craft 被反爬，改用 web.archive.org 快照。Release It! 为版权书，仅引用官方出版页目录核对模式名，未提取正文。",
   "sources": [
     {
       "id": "BK-025",
@@ -653,7 +653,7 @@
     ]
   },
   "gaps": [
-    "sre.google 直连超时，依赖代理 172.29.0.1:7890；若代理不可用则该域采集失败（本次已成功）。",
+    "sre.google 直连超时，依赖代理 <private-host>；若代理不可用则该域采集失败（本次已成功）。",
     "Release It! 为受版权保护的付费书，契约 §5 红线禁止下载正文，故书中稳定性反模式/模式仅能引用官方出版页目录核对名称，未提取作者原句定义；书本体待用户提供合法本地副本后入本地语料层解析。",
     "无指责复盘 / Just Culture 的一手学术源（Sidney Dekker 原著）未获取，本次仅用 Allspaw 实践者文章（S2-06）+ SRE Book；建议回源 Dekker《Just Culture》《Behind Human Error》。",
     "「可观测性三支柱」为工程口语而非标准术语：OTel 官方并未使用该措辞（列 Traces/Metrics/Logs/Baggage），术语未统一，勿写入 glossary 为规范定义。",

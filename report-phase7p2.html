@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission 报告：软件工程/架构设计方法论 · 阶段7 阶段2「内容增密」执行</title>
+<style>
+
+  :root {
+    --blue-900: #1b2a41;
+    --blue-700: #2f4a70;
+    --blue-500: #4a6fa5;
+    --blue-300: #8fabce;
+    --blue-050: #eef3fa;
+    --slate-700: #3a4657;
+    --slate-500: #5c6b7f;
+    --slate-200: #dde3ec;
+    --slate-100: #f4f6f9;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #232b36;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC",
+      sans-serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 22px 72px; }
+  header.doc {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 34px 34px 30px;
+    box-shadow: 0 8px 26px rgba(27, 42, 65, .18);
+  }
+  header.doc h1 {
+    margin: 0 0 18px;
+    font-size: 1.56rem;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .meta { list-style: none; margin: 0; padding: 0; }
+  .meta li {
+    margin: 7px 0;
+    padding-left: 14px;
+    position: relative;
+    font-size: .93rem;
+    line-height: 1.7;
+    color: #dbe4f2;
+  }
+  .meta li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .68em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-300);
+  }
+  .meta strong { color: #fff; font-weight: 600; }
+  .meta code {
+    background: rgba(255,255,255,.14);
+    color: #eaf0fa;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: .86em;
+  }
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin: 22px 0 0;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: .95rem;
+    color: var(--slate-500);
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+  nav.toc ol { margin: 0; padding-left: 22px; }
+  nav.toc li { margin: 5px 0; }
+  nav.toc a { color: var(--blue-700); text-decoration: none; }
+  nav.toc a:hover { color: var(--blue-500); text-decoration: underline; }
+  main { margin-top: 30px; }
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 26px 30px 22px;
+    margin: 0 0 22px;
+    box-shadow: 0 2px 10px rgba(27, 42, 65, .05);
+    scroll-margin-top: 20px;
+  }
+  section.card > h2 {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-050);
+    font-size: 1.28rem;
+    color: var(--blue-900);
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  section.card > h2::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 1.05em;
+    margin-right: 12px;
+    vertical-align: -3px;
+    border-radius: 3px;
+    background: var(--blue-500);
+  }
+  section.card h3 {
+    margin: 22px 0 10px;
+    font-size: 1.05rem;
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: var(--blue-900); font-weight: 600; }
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: var(--slate-100);
+    color: #2d3b52;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: .87em;
+    border: 1px solid var(--slate-200);
+    word-break: break-all;
+  }
+  ol, ul { margin: 0 0 14px; padding-left: 26px; }
+  li { margin: 8px 0; }
+  ol li::marker { color: var(--blue-500); font-weight: 600; }
+  ul li::marker { color: var(--blue-300); }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 18px;
+    background: var(--blue-050);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 8px 8px 0;
+    color: var(--slate-700);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 9px; border: 1px solid var(--slate-200); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; background: #fff; }
+  thead th {
+    background: var(--blue-700);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 15px;
+    border-top: 1px solid var(--slate-200);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:nth-child(even) { background: var(--slate-100); }
+  tbody tr:hover { background: var(--blue-050); }
+  .tag {
+    display: inline-block;
+    background: #e4f3e8;
+    color: #2b7a3f;
+    border-radius: 20px;
+    padding: 1px 9px;
+    font-size: .8em;
+    font-weight: 600;
+  }
+  footer.doc {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--slate-500);
+    font-size: .82rem;
+  }
+  @media (max-width: 640px) {
+    body { font-size: 15.5px; }
+    .wrap { padding: 22px 14px 48px; }
+    header.doc { padding: 24px 20px 20px; }
+    header.doc h1 { font-size: 1.3rem; }
+    section.card { padding: 20px 18px 16px; }
+  }
+
+.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>阶段7 · 阶段2「内容增密」执行报告</h1>
+<blockquote>母任务：0910-软件工程架构方法论 ｜ 执行日期：2026-10-11 ｜ 执行人：主Agent<br>状态：<strong>已完成并上线</strong> ｜ 复杂度：19/20（影响范围 5 · 逻辑深度 5 · 操作数量 5 · 风险精度 4）<br>基线：<code>00-plan/stage7p2-baseline.md</code>（新指纹 <code>865e6a3d…</code>）<br>公开仓：<code>zako-mio/se-architecture-methodology-kg</code> @ <code>560236a7</code></blockquote>
+<hr>
+<h2>1. 当时情况</h2>
+<p>接手时实测（全部一手复算）：</p>
+<ul><li><strong>阶段1 基线完好</strong>：8/8 关键文件 SHA-256 与 <code>stage7-baseline.md</code> <strong>逐字节一致</strong>；</li></ul>
+<p>  图谱指纹 <code>9ae4cc01…96eba1</code>；167 节点 / 360 边；<code>gate_verification.py</code> <strong>PASS 8/8</strong>；   <code>validate_graph.py</code> errors=0；L6 覆盖度 100%。</p>
+<ul><li><strong>阶段2 一行未执行</strong>：<code>_densify/</code>、<code>derive_densify.py</code>、<code>gate_densify.py</code> 均不存在；</li></ul>
+<p>  26 个参与节点正文 <strong>0/26</strong> 落在 2400–3000 字区间（实测 1501–1813）。</p>
+<ul><li><strong>两份既有文档与现实不符</strong>（本轮纠正）：</li><li>接力文档称「子 Agent 可执行 <code>python3 script.py</code>」——<strong>实测子 Agent 无任何 shell</strong>，但有 <code>write</code>。</li><li>阶段2 方案 §4.4 称正文写回点全在 <code>10-dag-data/_parts/*.json</code>——**实测 4 个节点</li></ul>
+<p>     （<code>ESS-G-01</code> <code>ESS-G-02</code> <code>ESS-O-01</code> <code>ESS-O-02</code>）在 <code>_base.json</code>**。</p>
+<p><strong>用户诉求</strong>：了解现状、制定完善计划、尽可能用好子 Agent 并行（并发 ≤5）。</p>
+<hr>
+<h2>2. 制定计划</h2>
+<p>经规模三问定档为<strong>产出级</strong>（命中 Q2 跨模块传播 / Q3 反转成本），产出 <code>00-plan/stage7-completion-roadmap.md</code>：四轨完工路线图（A 阶段2 增密 / B 剩余 27 本核验 / C 阶段3 结构扩展 / D 能力包同步）+ 阶段2 可执行细则。用户裁决： 「全链路路线图 + 阶段2 细则」且<strong>本会话直接开工</strong>；轨B「按价值判断，高价值优先，不必全量」； 阶段3「等阶段2 完成，下一轮窗口」。</p>
+<p><strong>执行中实测发现四处方案级缺陷，均先取证再请用户裁决：</strong></p>
+<div class="tw"><table><thead><tr><th>#</th><th>缺陷</th><th>实测</th><th>裁决</th></tr></thead><tbody><tr><td>1</td><td><code>CLAIM_CAP=8</code> 与 2400 字目标在 5 个节点上<strong>数学互斥</strong></td><td>满额节点新增主张容量 = 0，而需 4–5 条</td><td>上限 8→16，补 <strong>ADR-003</strong></td></tr><tr><td>2</td><td>G-D2 注水比按 <code>new_claims</code> 计数，与契约 <code>provenance</code> 定义不符</td><td>精化既有主张被误判注水</td><td>改按 <strong>provenance 的 distinct claim_id</strong> 计数</td></tr><tr><td>3</td><td>9 个 reverse-only 节点在 G-D2 下<strong>硬顶 1707–2172 字</strong></td><td><code>Δ ≤ 200 × distinct claims</code>，各仅 1–2 条</td><td><strong>扩产证据</strong>（每节点 5 条新主张）</td></tr><tr><td>4</td><td>契约漏写 <code>claims-&lt;slug&gt;.json</code> 落点</td><td><code>node-claim-map.json</code> 由 <code>claims-*</code> 派生（非 ledger），且<strong>首 slug 优先</strong></td><td>补「双落点」硬约束</td></tr></tbody></table></div>
+<hr>
+<h2>3. 执行情况</h2>
+<h3>3.1 基础设施（全部实跑验证）</h3>
+<ul><li><strong>ADR-003</strong>（主张上限 8→16）→ <code>gate_architecture.py --kind adr</code> <strong>PASS 6/6</strong>。</li><li><strong><code>gate_verification.py</code></strong> 实装分层 <code>CLAIM_CAP</code> + <strong>G-V9</strong> → <strong>PASS=9 FAIL=0</strong>。</li><li><strong>7 个新脚本</strong>（均 fail-closed）：<code>derive_densify.py</code>（<code>--precheck</code> 26/26 解析、<code>--check</code> 幂等）、</li></ul>
+<p>  <code>gate_densify.py</code>（G-D1..G-D5）、<code>merge_densify.py</code>、<code>assemble_write_docs.py</code>、   <code>register_densify_claims.py</code>、<code>check_corpus_overlap.py</code>、<code>negative_test_densify.py</code>、   <code>gen_densify_briefs.py</code>、<code>push_publish.py</code>。</p>
+<ul><li><strong>负向测试 11/11 如期</strong>：8 个违规全部被拦（空 provenance / 幽灵 claim / 注水 / 字数不足 /</li></ul>
+<p>  排除节点被改 / 正文命中原文 / 变更集不符 / <code>second_pass=none</code>），3 个正例 PASS。   <strong>判据可证伪，非恒真。</strong></p>
+<h3>3.2 证据层（W1）</h3>
+<p><strong>173 条证据素材 / 8 分片 / 版权命中 0</strong>： DDIA 13 + CleanArch 19 + SAiP 96 + reverse-only 扩产 45。 SAiP 首轮失败（96 记录超上下文）→ 拆 3 分片重跑成功。 实测扩产后 <strong>26/26 节点可达 ≥2707 字</strong>，缺陷 3 解决。</p>
+<h3>3.3 内容生成（W2）—— 三次尝试，一次定位根因</h3>
+<div class="tw"><table><thead><tr><th>轮次</th><th>方法</th><th>实测结果</th><th>工人自报</th></tr></thead><tbody><tr><td>1</td><td>整文件 <code>write</code></td><td>1/15 达标</td><td>虚高 41–118%</td></tr><tr><td>2</td><td>分段小文件</td><td>0/15 达标（1186–2048）</td><td>虚高 41–118%</td></tr><tr><td>3</td><td>就地追加</td><td>0/15 达标（1524–1646）</td><td>虚高 60–70%</td></tr></tbody></table></div>
+<p><strong>根因定位（关键）</strong>：<code>bytes/chars = 3.00</code> 整、CJK 完整、句子正常收尾 → <strong><code>write</code> 未截断</strong>。 真实原因是<strong>子 Agent 字数自证系统性虚高</strong>——其自报值恒落在目标区间（2400–2900）， 与机器实测（1186–2048）无关。子 Agent 无 shell，无法 <code>wc</code> 自检， 「读回后人工计数」这一自证手段被三轮 20+ 工人证伪。</p>
+<p><strong>修复（用户批准的方案 A 变体）</strong>：<strong>计数权收回主Agent</strong>——我用 <code>assemble_write_docs.py --check</code> 输出<strong>逐段机器实测差值</strong>（如「需 +303 字」）， 派回工人做<strong>定向追加</strong>，工人<strong>不再自报数字</strong>。此闭环下 26 节点一次性全部达标。</p>
+<h3>3.4 合并回写与派生（W3）</h3>
+<ul><li><code>register_densify_claims.py</code>：9 个 reverse-only 节点的 <strong>45 条新 claim</strong> 登记为 <code>new_claims</code>。</li><li><code>merge_densify.py --apply</code>：<strong>45 条 ledger 记录 + 45 条 claims 条目</strong>（双落点）+ 26 节点正文写回 11 个分片。</li><li><code>derive_verification.py</code> → <code>--check</code> 幂等 PASS；<code>derive_densify.py</code> → 0 问题；<code>aggregate.py</code> 连跑 3 次指纹不变。</li></ul>
+<h3>3.5 门控全绿（W5，<strong>全部主Agent 亲跑</strong>）</h3>
+<div class="tw"><table><thead><tr><th>判据</th><th>结果</th></tr></thead><tbody><tr><td><strong>G-D1..G-D5</strong></td><td><strong>PASS 5/5</strong></td></tr><tr><td><strong>G-V1..G-V9</strong></td><td><strong>PASS 9/9</strong>（G-V9 报阶段1 遗留重复 1 组为 WARN）</td></tr><tr><td>L2 全图审计</td><td><code>nodes=167 edges=360 kahn=167/167 errors=0 warnings=0</code> <strong>PASS</strong></td></tr><tr><td>L3 结构 + 断链</td><td>structure <strong>434</strong>/0；links <strong>5208</strong>/0 <strong>PASS</strong></td></tr><tr><td>L6 覆盖度</td><td>100% / 100% / GR-08 PASS / GR-09 PASS</td></tr><tr><td>L7 信源</td><td>悬挂 0；可溯源 100%；<code>verified=true</code> <strong>89.22%</strong>（与阶段1 持平）</td></tr><tr><td>L8 版式</td><td><strong>2128/2128 = 100.00%</strong>，问题 0</td></tr><tr><td>方法论专项</td><td>层边界 / 术语 / 原则↔反例 / 11 维权衡 <strong>4/4 PASS</strong></td></tr><tr><td>幂等</td><td>build / aggregate / derive_verification / derive_densify 连跑 diff 为空</td></tr></tbody></table></div>
+<p><strong>过程中修复的 4 个真实缺陷</strong>：</p>
+<ol><li><code>derive_densify</code> / <code>gate_densify</code> 未加载 <code>sparse-*.json</code> → 45 条悬挂证据。</li><li><code>definition</code> 段超 300 字上限（GR-03 报 26 errors）→ 按句边界把溢出并入 <code>principle</code> 段，总量不变。</li><li><code>TEC-K-05</code> 正文与证据共 3 处 ≥20 字命中书原文 → 逐处改写（G-D4/G-V5 转 PASS）。</li><li>G-V9 误把<strong>阶段1 遗留</strong>的 claim_id 重复判 FAIL → 收敛为「只对阶段2 记录判 FAIL，遗留报 WARN」。</li></ol>
+<h3>3.6 公开层（W6）</h3>
+<ul><li><code>publish-manifest.json</code> <code>classes.sanitize</code> 新增 <code>report-phase7p2-plan.{md,html}</code>；</li></ul>
+<p>  <code>report.original.html</code> 归 <code>never</code>；<code>audit_publish.py</code> 的 <code>SCAN_ROOT_FILES</code> 同步扩展。</p>
+<ul><li><code>assemble_publish.py --check</code> = <strong>0/0/0</strong>，P1–P5 全 OK；<code>gate_disclosure.py</code> = <strong>PASS（0 hit / 501 files）</strong>。</li><li>推送（沙箱禁 <code>git push</code>）→ <code>push_publish.py</code> 走 <strong>GitHub Git Data API</strong></li></ul>
+<p>  （545 blob 并发上传 + 限流退避）→ 远端 HEAD <strong><code>560236a74099</code></strong>。</p>
+<ul><li>对账：远端 blob <strong>545</strong> == 本地 <code>git ls-files</code> <strong>545</strong>；<code>PUBLISH-STATE.json</code> <code>file_count=539</code>。</li><li>CI run <strong><code>38134616240</code></strong> = <strong>success</strong>（28s）。</li><li>Pages 复验 9 类页面（首页 / 节点页 ×2 / 组页 / 术语表 / MD 镜像 / 交互图 / 06 视图 / 新报告）</li></ul>
+<p>  <strong>全部 HTTP 200</strong>。</p>
+<hr>
+<h2>4. 完成情况</h2>
+<div class="tw"><table><thead><tr><th>项</th><th>状态</th></tr></thead><tbody><tr><td>完工路线图 + 阶段2 细则</td><td>✅ <code>00-plan/stage7-completion-roadmap.md</code></td></tr><tr><td>ADR-003 + 门控升级</td><td>✅ 6/6、9/9 PASS</td></tr><tr><td>9 个新脚本（派生/门控/合并/装配/登记/版权/负向/简报/推送）</td><td>✅ 全部实跑验证</td></tr><tr><td>证据层 173 条</td><td>✅ 0 版权命中</td></tr><tr><td><strong>26 节点正文深化</strong></td><td>✅ <strong>1501–1813 → 2423–2998 字</strong>，26/26 达标</td></tr><tr><td>核验层回写</td><td>✅ 45 条新 claim（双落点）；ledger 144 → 189</td></tr><tr><td>门控</td><td>✅ G-D 5/5 + G-V 9/9 + L2/L3/L6/L7/L8/方法论全 PASS</td></tr><tr><td>幂等</td><td>✅ 四个派生器连跑 diff 为空</td></tr><tr><td>公开层</td><td>✅ 推送 <code>560236a7</code>；CI success；Pages 200</td></tr><tr><td>基线冻结</td><td>✅ <code>00-plan/stage7p2-baseline.md</code>（新指纹 <code>865e6a3d…</code>）</td></tr><tr><td>本地归档提交</td><td>✅ <code>0ad8cf7</code> <code>fa2be84</code> <code>1c5c8cc</code> <code>89324a3</code></td></tr></tbody></table></div>
+<p><strong>验收判据全部达成</strong>（结构 / 数据 / 增密三件套 / 门控 / 质检 / 幂等 / 版权 / 公开层 / 装配 / 报告）。</p>
+<p><strong>未做（明确超出本阶段范围）</strong>：</p>
+<ul><li>轨B 剩余 27 本核验（用户裁决「不必全量」，价值排序已交付，见 §5）。</li><li>轨C 阶段3 结构扩展（用户裁决「等阶段2 完成，下一轮窗口」）。</li><li>阶段1 遗留重复 claim_id 修复（已记为 WARN，另案）。</li><li>L4 / L5 本地补跑（需 headless 浏览器；CI 中显式 SKIPPED，<strong>未伪装 PASS</strong>）。</li></ul>
+<hr>
+<h2>5. 反思 / 分析 / 建议</h2>
+<h3>5.1 最重要的教训：委托链上的「自证」必须收回</h3>
+<p>本轮最大收获不是增密本身，而是<strong>定位了一条隐蔽的失败模式</strong>：</p>
+<blockquote>子 Agent 无 shell 无法自检，其「读回后人工计数」<strong>不是测量，而是断言</strong>——<br>三轮 20+ 工人自报字数恒落在目标区间，与机器实测毫无关系。</blockquote>
+<p>这个模式极其危险，因为<strong>每个工人都回报 <code>success</code></strong>，若主Agent 采信自述， 残缺内容会直接进入 SSOT 并污染公开层。<strong>防线是 fail-closed 的门控</strong>： G-D3 与装配器当场拦住了全部 26 个不达标稿，未让任何残缺内容落盘。</p>
+<p><strong>建议固化为纪律</strong>：凡子 Agent 产出<strong>可机械度量</strong>的产物（字数、行数、条目数、哈希）， <strong>度量权一律归主Agent</strong>，工人只产出内容、不报数字。</p>
+<h3>5.2 判据可信度：负向测试是本轮最值得保留的资产</h3>
+<p><code>negative_test_densify.py</code> 是本项目<strong>首次对增密门控做可证伪性验证</strong>（11/11 如期）。 它当场证明了 G-D3（字数）与 G-D4（版权）<strong>真的拦得住</strong>——而这正是本轮 W2 的实际失败模式。 建议纳入常态回归：<strong>新增或修改任何门控，必须同时提交负例</strong>。</p>
+<h3>5.3 方法论层面：本次增密是「纯内容深化」</h3>
+<p>26 节点 <code>verified</code> / <code>confidence</code> <strong>值零翻转</strong>（G-D5 实测），<code>verified=true</code> 占比 <strong>89.22% 与阶段1 完全持平</strong>。即本轮<strong>未借增密之名改动核验结论</strong>——这验证了 「增量式回写 + 保守终裁」的架构是稳的。</p>
+<h3>5.4 轨B 建议（价值优先，不必全量）</h3>
+<p>实测引用密度排序，<strong>T1 高价值 5 本占总引用密度一半以上</strong>：</p>
+<div class="tw"><table><thead><tr><th>BK</th><th>引用</th><th>书</th><th>抽文本</th></tr></thead><tbody><tr><td><code>BK-025</code></td><td><strong>46</strong></td><td>Site Reliability Engineering</td><td>❌ 需解析</td></tr><tr><td><code>BK-008</code></td><td><strong>37</strong></td><td>A Philosophy of Software Design</td><td>❌ 需解析</td></tr><tr><td><code>BK-030</code></td><td><strong>31</strong></td><td>Team Topologies</td><td>✅ <code>p1-23</code>（已有）</td></tr><tr><td><code>BK-011</code></td><td><strong>23</strong></td><td>Building Evolutionary Architectures</td><td>✅ <code>p1-18</code>（已有）</td></tr><tr><td><code>BK-026</code></td><td><strong>22</strong></td><td>The SRE Workbook</td><td>❌ 需解析</td></tr></tbody></table></div>
+<p><strong>建议顺序</strong>：① <code>BK-030</code> <code>BK-011</code>（零解析成本）→ ② <code>BK-025</code> <code>BK-008</code> <code>BK-026</code>（换最高引用覆盖） → ③ T2 中已有抽文本者（<code>BK-021</code> <code>BK-031</code> <code>BK-001</code> 等）。<strong>T3/T4 尾部（引用 ≤9）不建议启动。</strong></p>
+<h3>5.5 下一窗口的入口</h3>
+<ol><li><strong>阶段3 前置</strong>：需先补 <strong>ADR-004</strong>（新节点 ID 分配 + 组归属 + <code>partial</code> 缺口是否可建节点），</li></ol>
+<p>   过 <code>gate_architecture.py --kind adr</code> 后方可动结构。缺口清单 28 条中 <strong>10 条 direct 具备准入资格</strong>，    且须先与现有 167 节点做<strong>去重比对</strong>（避免重复造节点，如 <code>ESS-H-02</code> 已含内聚耦合）。</p>
+<ol><li><strong>基线已冻结</strong>：<code>865e6a3d…</code>；CI 漂移检测以本值为预期。</li><li><strong>接力文档已更新</strong>：<code>00-plan/NEXT-SESSION-HANDOFF.md</code> §C.1.1 记录阶段2 要点与三项遗留。</li></ol>
+<hr>
+<h2>附：本报告依据的实测数据</h2>
+<div class="tw"><table><thead><tr><th>指标</th><th>阶段1</th><th>阶段2</th></tr></thead><tbody><tr><td>图谱指纹</td><td><code>9ae4cc01…</code></td><td><strong><code>865e6a3d…</code></strong></td></tr><tr><td>节点 / 边</td><td>167 / 360</td><td>167 / 360（不变）</td></tr><tr><td>26 参与节点字数</td><td>1501–1813（0/26 达标）</td><td><strong>2423–2998（26/26 达标）</strong></td></tr><tr><td>核验记录</td><td>144</td><td><strong>189</strong>（+45 <code>VR-D2-</code>）</td></tr><tr><td><code>direct</code> / <code>partial</code> / <code>inferred</code></td><td>78 / 59 / 7</td><td><strong>117 / 63 / 9</strong></td></tr><tr><td><code>verified=true</code> 占比</td><td>89.22%</td><td><strong>89.22%</strong>（持平，零翻转）</td></tr><tr><td>可溯源率</td><td>100%</td><td><strong>100%</strong></td></tr><tr><td>版权命中</td><td>0</td><td><strong>0</strong></td></tr><tr><td>公开仓 HEAD</td><td><code>187baf1</code></td><td><strong><code>560236a7</code></strong></td></tr><tr><td>远端 blob / 本地受控</td><td>533 / 533</td><td><strong>545 / 545</strong></td></tr><tr><td>CI</td><td>success</td><td><strong>success</strong>（<code>38134616240</code>）</td></tr></tbody></table></div>
+</main>
+</body>
+</html>

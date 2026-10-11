@@ -2,7 +2,7 @@
   "topic": "N 团队与康威定律：Conway's Law 原始表述、Inverse Conway Maneuver、团队拓扑四类型与交互模式、团队边界-架构耦合、DORA 交付效能指标（四键→五指标演进）",
   "generated_by": "org-architecture-researcher (subagent, 自写角色)",
   "accessed": "2026-09-10",
-  "retrieval_note": "境外源全部经代理 http://172.29.0.1:7890 + 浏览器 UA。melconway.com / martinfowler.com / teamtopologies.com / dora.dev / thoughtworks.com / scaledagile 直取成功；RePEc 元数据、HBS 工作论文 PDF（Colfer & Baldwin 2016）直取成功。Melvin Conway 1968 原文《How Do Committees Invent?》逐段回源核对（含缺省被引的 thesis 第三段结论）。DORA 口径以 dora.dev 官方页面 + Nathen Harvey 2026-01-02《A history of DORA's software delivery metrics》原文为准。书籍本体（Team Topologies 2019、Accelerate、Mythical Man-Month）仅核对官方出版页/作者页的目录与论点，未提取正文。",
+  "retrieval_note": "境外源全部经代理 <private-host> + 浏览器 UA。melconway.com / martinfowler.com / teamtopologies.com / dora.dev / thoughtworks.com / scaledagile 直取成功；RePEc 元数据、HBS 工作论文 PDF（Colfer & Baldwin 2016）直取成功。Melvin Conway 1968 原文《How Do Committees Invent?》逐段回源核对（含缺省被引的 thesis 第三段结论）。DORA 口径以 dora.dev 官方页面 + Nathen Harvey 2026-01-02《A history of DORA's software delivery metrics》原文为准。书籍本体（Team Topologies 2019、Accelerate、Mythical Man-Month）仅核对官方出版页/作者页的目录与论点，未提取正文。",
   "sources": [
     {
       "id": "WEB-042",

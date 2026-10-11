@@ -19,7 +19,7 @@
 | `user-copy` | 需用户提供本地副本 |
 | `unknown` | 待核 |
 
-> 实测说明（2026-09-10）：`abseil.io`、`12factor.net`、`domainlanguage.com`、`enterpriseintegrationpatterns.com`、`aosabook.org` 直连 HTTP 200；`sre.google` 为 Google 域，直连超时，经代理 `172.29.0.1:7890` 实测 200。
+> 实测说明（2026-09-10）：`abseil.io`、`12factor.net`、`domainlanguage.com`、`enterpriseintegrationpatterns.com`、`aosabook.org` 直连 HTTP 200；`sre.google` 为 Google 域，直连超时，经代理 `<private-host>` 实测 200。
 
 ---
 

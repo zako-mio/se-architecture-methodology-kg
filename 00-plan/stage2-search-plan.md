@@ -73,7 +73,7 @@
 
 - **目标问题**：可靠性与容错（反模式/断路器/舱壁）；可观测性（日志/指标/追踪）；SLI/SLO/错误预算；事件响应与复盘；容量与变更管理。
 - **Query 策略**：`site reliability engineering SLI SLO error budget`、`release it stability anti-patterns`、`observability three pillars`、`incident response postmortem blameless`、`chaos engineering principles`；中文 `可靠性 可观测性 SRE 事件响应`。
-- **权威源限定**：sre.google（SRE Book/Workbook，**直连超时，走代理 172.29.0.1:7890**）、Nygard《Release It!》、Google SRE 官方、CNCF/OpenTelemetry 官方。
+- **权威源限定**：sre.google（SRE Book/Workbook，**直连超时，走代理 <private-host>**）、Nygard《Release It!》、Google SRE 官方、CNCF/OpenTelemetry 官方。
 - **信源优先级**：S1 > S2 > S3 > S4。
 - **预期产物**：可靠性战术清单、SLI/SLO 定义模板、可观测性信号表、gaps。
 
@@ -168,7 +168,7 @@
 | 书 | URL | 获取方式 |
 |---|---|---|
 | Software Engineering at Google | https://abseil.io/resources/swe-book | 在线 HTML 章节按需读取、提取论点 |
-| Google SRE Book | https://sre.google/sre-book/table-of-contents/ | 直连超时，**走代理** `curl -x http://172.29.0.1:7890` 或 browser |
+| Google SRE Book | https://sre.google/sre-book/table-of-contents/ | 直连超时，**走代理** `curl -x <private-host>` 或 browser |
 | SRE Workbook | https://sre.google/workbook/table-of-contents/ | 同上 |
 | DDD Reference (Evans) | https://domainlanguage.com/ddd/reference/ | 官方 PDF 术语速查，直取 |
 | The Twelve-Factor App | https://12factor.net/ | 直取；与本地 `12factor.epub` 交叉核验（BK-01） |
@@ -222,7 +222,7 @@
 | 风险 | 影响 | 对策 |
 |---|---|---|
 | iso.org 403（WAF） | 标准正文不可达 | 已实测：**不再重试**，走 Wayback 快照 + committee.iso.org + iso25000.com（`iso-access-notes.md`） |
-| 境外源直连超时（sre.google 等） | 采集失败 | 走代理 `curl -x http://172.29.0.1:7890` 或 browser-harness；国内源直连 |
+| 境外源直连超时（sre.google 等） | 采集失败 | 走代理 `curl -x <private-host>` 或 browser-harness；国内源直连 |
 | 12207:2026 scope 无快照 | 时效结论降级 | 标 medium，标注"定稿 scope 待补"，不伪装 high |
 | 书籍版权 | 违规风险 | 严守红线：只入本地语料层，公开库只放消化重组知识 |
 | 搜索广度 vs 预算 | 成本失控 | 每域 query 上限（≤8 主查询 + ≤6 补查）；每波前读盘、不重复检索；子Agent 优先国内源直连 |

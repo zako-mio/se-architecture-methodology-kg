@@ -140,10 +140,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 版本：2018-05
 - 规范信源：VEN-030、VEN-031、BK-011
+- 书证核验：BK-011 Ch2.1（direct），Ch2.4（direct），Ch4.28（partial），Ch4.29（direct），Ch7.9（direct）
 - 入口链接：https://www.thoughtworks.com/radar/techniques/architectural-fitness-function
 - 入口链接：https://www.thoughtworks.com/insights/blog/fitness-function-driven-development
 - 入口链接：https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/

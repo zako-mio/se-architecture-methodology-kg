@@ -100,9 +100,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：WEB-042、WEB-043、PAP-028、BK-030
+- 书证核验：BK-030 Ch2（direct），Ch7（direct）
 - 入口链接：https://www.melconway.com/Home/Committees_Paper.html
 - 入口链接：https://martinfowler.com/bliki/ConwaysLaw.html
 - 勘误：常见误解「康威定律只是一句玩笑式的经验之谈，没有理论依据」→ 核验结论「它由同态这一保结构映射论证，并被镜像假说的多项实证研究支持，但属普遍模式而非普适规律，开放协作与快速变化场景存在例外」（PAP-028）

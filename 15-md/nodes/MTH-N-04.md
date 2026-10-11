@@ -108,9 +108,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-030、WEB-045、VEN-038
+- 书证核验：BK-030 Ch5（direct）
 - 入口链接：https://teamtopologies.com/key-concepts
 - 入口链接：https://dora.dev/research/2024/dora-report/
 - 勘误：常见误解「平台团队的首要目标是标准化与降低成本」→ 核验结论「平台团队的首要目标是降低流对齐团队的认知负荷并加速交付，需作为产品经营并以最薄可行平台约束规模」（BK-030）

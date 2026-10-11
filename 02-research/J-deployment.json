@@ -2,7 +2,7 @@
   "topic": "软件工程/架构设计方法论 — J 域：部署（deployment）",
   "generated_by": "delivery-deployment-engineer (subagent, 自写角色：交付/部署工程师)",
   "accessed": "2026-09-10",
-  "retrieval_note": "12factor.net / martinfowler.com / kubernetes.io / docs.aws.amazon.com / cncf.io / dora.dev 直连可达；cloud.google.com、learn.microsoft.com、sre.google 走代理 172.29.0.1:7890；hashicorp.com 直连与代理均返回 429（限流），未回源。全程仅读取公开页面，未下载任何受版权保护正文。12factor.net 与本地 12factor.epub（BK-01）交叉核验一致。",
+  "retrieval_note": "12factor.net / martinfowler.com / kubernetes.io / docs.aws.amazon.com / cncf.io / dora.dev 直连可达；cloud.google.com、learn.microsoft.com、sre.google 走代理 <private-host>；hashicorp.com 直连与代理均返回 429（限流），未回源。全程仅读取公开页面，未下载任何受版权保护正文。12factor.net 与本地 12factor.epub（BK-01）交叉核验一致。",
   "sources": [
     {
       "id": "BK-031",

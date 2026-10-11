@@ -104,10 +104,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 版本：2026
 - 规范信源：VEN-039、WEB-045、BK-030
+- 书证核验：BK-030 Ch3（direct），Ch5（partial），Ch7（direct），Ch8（direct）
 - 入口链接：https://teamtopologies.com/key-concepts
 - 入口链接：https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale
 - 勘误：常见误解「团队拓扑就是画出一张四类型组织架构图并照此重组」→ 核验结论「官方强调它是思考模型而非画组织架构图的方法，不能只用模型的一部分（如仅套四类型）；须整体使用团队类型、三交互模式与认知负荷管理，团队关系是随目标变化的时点快照」（WEB-045）

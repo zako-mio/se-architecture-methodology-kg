@@ -106,9 +106,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-030、WEB-044、PAP-028
+- 书证核验：BK-030 Ch2（direct），Ch3（direct），Ch6（direct）
 - 入口链接：https://martinfowler.com/bliki/ConwaysLaw.html
 - 入口链接：https://teamtopologies.com/key-concepts
 - 勘误：常见误解「只要把系统拆成微服务，团队边界就自然清晰」→ 核验结论「边界清晰取决于所有权与沟通结构是否对齐，单纯服务拆分可能产生分布式单体与责任模糊」（WEB-044）

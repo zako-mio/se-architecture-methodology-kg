@@ -46,7 +46,8 @@ STAGING = os.path.join(MROOT, "_publish-staging")
 
 SCAN_DIRS = ("00-plan", "01-books", "02-research", "03-knowledge-map")
 SCAN_ROOT_FILES = ("report.md", "report.html", "report-phase7.md", "report-phase7.html",
-                    "report-phase7p2-plan.md", "report-phase7p2-plan.html", "quality-gate.md")
+                    "report-phase7p2-plan.md", "report-phase7p2-plan.html",
+                    "report-phase7p2.md", "report-phase7p2.html", "quality-gate.md")
 
 # 未纳入公开集的目录（供清单说明）
 EXCLUDED_SCOPE = [
@@ -113,6 +114,12 @@ CRED_RES = [
 # （否则公开副本需手工改写，形成不可再生的手工变体 → 漂移根因）
 HOME_PATH_RE = re.compile("/home/" + re.escape(os.environ.get("USER", "user")))
 WIN_PATH_RE = re.compile(r"[A-Za-z]:\\Users\\[^\\\s\"']+")
+# 内网基础设施标识（非凭据，但不该出现在公开站点）：境外源采集所用的定向代理。
+# 追加⑥-a（2026-10-11 轨B 轮）：实测 `00-plan/stage2-search-plan.md` / `contract.md`
+# 已把该定向代理地址带进公开副本（前置缺陷）；此处按**机械派生**口径统一脱敏。
+# 注：本注释刻意不写字面地址，避免脱敏器「漏掉自身」。
+INFRA_RE = re.compile(r"(?:https?://)?\b172\.29\.0\.1(?::\d{2,5})?")
+INFRA_REPL = "<private-host>"
 
 CJK_CHAR = re.compile(
     r"[\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uffef]"
@@ -252,6 +259,16 @@ def mask_sensitive(text, location, rel, changes, counts, line_mode=False):
         })
         counts["path_mask"] += 1
     text = WIN_PATH_RE.sub("%USERPROFILE%", text)
+    for m in INFRA_RE.finditer(text):
+        changes.append({
+            "file": rel,
+            "location": (f"line {line_of(text, m.start())}" if line_mode else location),
+            "kind": "infra_mask",
+            "removed_chars": 0,
+            "reason": "内网基础设施地址（定向代理）→ <private-host>",
+        })
+        counts["infra_mask"] = counts.get("infra_mask", 0) + 1
+    text = INFRA_RE.sub(INFRA_REPL, text)
     return text
 
 

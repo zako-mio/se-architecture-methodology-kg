@@ -976,7 +976,7 @@
       "status": "官方免费在线全文",
       "url": "https://sre.google/sre-book/table-of-contents/",
       "urls": [],
-      "access": "free-official（sre.google 需走代理 172.29.0.1:7890）",
+      "access": "free-official（sre.google 需走代理 <private-host>）",
       "scope": "SRE 学科奠基之作，提出 SLI/SLO/错误预算、减少琐事、发布工程等实践。",
       "availability": "free-official",
       "priority": "必入",

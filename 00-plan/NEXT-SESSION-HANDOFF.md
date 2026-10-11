@@ -1,9 +1,39 @@
-# 接力 Prompt：软件工程 / 架构设计方法论母库 · 阶段7 阶段2「内容增密」执行（按计划）
+# 接力 Prompt：软件工程 / 架构设计方法论母库 · 阶段7（阶段2 已完成 → 轨B 已核验 5 本 → 阶段3 待启动）
 
 > 用途：跨窗口接续任务。把本文档**整段**交给下一个会话的主Agent 作为任务输入即可。
 > 生成：2026-09-11（阶段2 方案定稿 + 留档报告 + 门控 5/5 后）　生成者：上一窗口主Agent
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
+
+## ⚠️ 本轮增量（2026-10-11 · 阶段7 **轨B 高价值书核验**）—— 本节优先于下方 §A 的旧任务陈述
+
+**阶段7 阶段2（内容增密）已于 2026-10-11 完成上线**（26 节点正文 2423–2998 字）。
+**本轮执行的是轨B：核验 Team Topologies（BK-030）与 Building Evolutionary Architectures（BK-011）**，
+并产出 **ADR-004**（阶段3 前置，门控级）。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| 已核验书 | **5 本**（原 3 本 + BK-030 + BK-011）；`_parts/` 现有 **5 个 slug** |
+| 核验记录 | **341 条**（原 189 + 152） |
+| 覆盖节点 | **57 个**（原 35 + 23，含 1 个重叠） |
+| 升级节点（≥1 direct 且 0 contradicted） | **45 个** |
+| 缺口清单 | **60 条**（原 28 + 32） |
+| 图谱指纹 | `865e6a3d…4e915` → **`b11eae6c…c197789`**（**仅 23 个节点的 `review_date`**，零语义翻转） |
+| 门控 | `gate_verification` **9/9 PASS**；`check_corpus_overlap` **0 命中**；G-D 5/5；方法论 4/4；L6/L7 PASS |
+| ADR-004 | `18-design/adr/ADR-004.{json,md}`，`gate_architecture --kind adr` **6/6 PASS** |
+
+**🔴 必须知道的一处前提纠正**：旧接力文档称 BK-030/BK-011「已有抽文本、零解析成本」——**实测证伪**：
+`_files/_structure/*/source.txt` 全部 11 个都是 **284–372 字节的官网爬取元数据桩**（非书正文）。
+两本实属「需先抽文本」，本轮已补做 EPUB 抽取（工具 `16-checkpoint/extract_book_text.py`）。
+
+**下一窗口的输入件**：
+- 缺口与阶段3 准入资格 → `MISSION_ROOT/00-plan/stage7p3-trackB-gap-handoff.md`
+- ADR-004 输入数据包（机器实测） → `MISSION_ROOT/18-design/adr/ADR-004-inputs.md`
+- 本轮基线 → `MISSION_ROOT/00-plan/stage7p3-baseline.md`
+
+**下一步（阶段3）**：须先消费 ADR-004 的准入与 ID 分配规则，再做结构改动；
+最高引用密度（BK-025 SRE 46 引用 / BK-026 22 引用）**语料仍不存在** —— 若要覆盖，第一步是**采集**而非核验。
+
 
 路径约定（全文只在此处声明一次，正文一律写 `MISSION_ROOT/...` / `SUB_LIB_ROOT/...`）：
 
@@ -102,7 +132,28 @@ SUB_LIB_ROOT = "~/opencode/archive/Mission-file/2026-08/0823-12factor-methodolog
 | 遗留处理轮 | ✅ | Actions 大版本升级（Node 20 警告归零）+ L4 重叠探针改造（14 WARN → 0） |
 | 阶段7 · 阶段1（核验升级） | ✅ | 核验层（144 记录 / 28 缺口）、ADR-001/002、派生链与两处根因修复、G-V1..G-V8、C-lite 公开投影、报告双版本 |
 | **阶段7 · 阶段2（内容增密）方案** | ✅ | `stage7-phase2-content-densification-plan.md`（454 行 / 9 节 / `accepted`）+ `report-phase7p2-plan.{md,html}`（门控 5/5） |
-| **阶段7 · 阶段2（内容增密）执行** | ⏳ **本窗口主任务** | 见 §F、§G |
+| **阶段7 · 阶段2（内容增密）执行** | ✅ **已完成并上线**（2026-10-11） | 26 节点正文 1501–1813 → **2423–2998 字**；45 条新 claim；G-D 5/5 + G-V 9/9 + L2/L3/L6/L7/L8/方法论全 PASS；推送 `560236a7`；CI success；Pages 200。**基线见 `00-plan/stage7p2-baseline.md`** |
+| **阶段7 · 阶段3（结构扩展）** | ⏳ **下一窗口** | 需先补 **ADR-004**（新节点 ID 分配与组归属）并过 `gate_architecture.py`；缺口清单 28 条（10 条 direct 具备准入资格） |
+
+### C.1.1 阶段2 执行要点（供下一窗口承接）
+
+- **新指纹**：`865e6a3d649281930b80107e8348f420ed51eb650be75f17e8a96fedbef4e915`（`methodology-dag.json`）。
+- **新增脚本**（`16-checkpoint/`，均已提交）：`derive_densify.py` / `gate_densify.py` / `merge_densify.py` /
+  `assemble_write_docs.py` / `register_densify_claims.py` / `check_corpus_overlap.py` /
+  `negative_test_densify.py` / `gen_densify_briefs.py` / `push_publish.py`。
+- **ADR-003**：主张上限 8→16（阶段2 参与节点），已过 `gate_architecture.py` **6/6**。
+- **关键环境事实（本轮实测，纠正旧记录）**：
+  1. 子 Agent **无任何 shell**（不可跑 `python3`），但**有 `write`/`edit`**。
+  2. 🔴 **子 Agent 的字数自证系统性虚高 40–70%**——三轮 20+ 工人自报 2400–2900，
+     机器实测恒为 1186–2048。**教训：计数权必须收回主Agent**（用 `assemble_write_docs.py --check`），
+     工人只写文本、不自报数字。这是本轮唯一可靠的协作模式。
+  3. `write` 工具**不截断**（`bytes/chars = 3.00` 整，CJK 完整）——旧「大负载截断」判断**已证伪**。
+  4. 子 Agent **并发上限 5**（用户约束）。
+- **G-V9 已收敛**：只对**阶段2 新增记录**（`VR-D2-` 前缀）的 claim_id 冲突判 FAIL；
+  阶段1 遗留重复（`ESS-O-02#principle#1` = VR-CA-030 + VR-DDIA-009）报 **WARN**，待另案修复。
+- **待办遗留**：① 轨B 剩余 27 本核验（价值排序已实测：T1 = `BK-025`46 / `BK-008`37 / `BK-030`31 /
+  `BK-011`23 / `BK-026`22；其中 `BK-030` `BK-011` 已有抽文本，零解析成本）；② 阶段3 需 ADR-004；
+  ③ 阶段1 遗留重复 claim_id 修复。
 
 ### C.2 上一窗口（阶段2 方案）交付
 

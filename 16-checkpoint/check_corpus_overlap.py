@@ -30,6 +30,9 @@ SEGMENTS = ("definition", "principle", "mechanism", "engineering", "tradeoff")
 CORPUS = [
     os.path.join("01-books", "_verify", "_text", "clean-architecture.txt"),
     os.path.join("01-books", "_verify", "_text", "saip.txt"),
+    # 阶段7 轨B：新增核验书语料（BK-030 / BK-011）——证据素材亦须过版权红线
+    os.path.join("01-books", "_verify", "_text", "team-topologies.txt"),
+    os.path.join("01-books", "_verify", "_text", "evolutionary-arch.txt"),
 ]
 CORPUS_GLOB = os.path.join("01-books", "_files", "P0-11", "ddia-zh-src", "*.md")
 

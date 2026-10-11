@@ -75,7 +75,7 @@ MISSION_ROOT = ~/opencode/archive/Mission-file/2026-09/0910-软件工程架构�
 - 每条 finding 必须带 source_ids；无源不写。
 - 一手源（标准原文、官方页面）优先于二手转述。
 - 无法核验的写进 `gaps`，不伪装成事实。
-- 联网优先直连国内可达源；境外被墙站点用 `curl -x http://172.29.0.1:7890 <url>`。
+- 联网优先直连国内可达源；境外被墙站点用 `curl -x <private-host> <url>`。
 
 ## 7. 返回格式（所有子Agent）
 

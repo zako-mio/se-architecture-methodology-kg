@@ -123,9 +123,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-030、WEB-045、VEN-039
+- 书证核验：BK-030 Ch5（direct）
 - 入口链接：https://teamtopologies.com/key-concepts
 - 入口链接：https://framework.scaledagile.com/organizing-agile-teams-and-arts-team-topologies-at-scale
 - 勘误：常见误解「四种团队类型是组织设计的完整分类，现实团队必须归入其一」→ 核验结论「四类型是约束性模板而非穷尽分类，复杂组织远超此模型，其价值在于限制随意性并引导流动」（WEB-045）

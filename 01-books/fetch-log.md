@@ -10,8 +10,8 @@
 | # | ID | 书 | 可达 | 渠道 | HTTP | 结构规模 |
 |:--:|:--:|---|:--:|---|:--:|---|
 | 1 | FO-01 | Software Engineering at Google | ✅ | 直连 | 200 | 5 部分 / 26 章 |
-| 2 | FO-02 | Google SRE Book | ✅ | 代理 172.29.0.1:7890 | 200 | 5 部分 + 前后附件 / 43 条目（34 章） |
-| 3 | FO-03 | SRE Workbook | ✅ | 代理 172.29.0.1:7890 | 200 | 3 部分 + 前后附件 / 31 条目（21 章） |
+| 2 | FO-02 | Google SRE Book | ✅ | 代理 <private-host> | 200 | 5 部分 + 前后附件 / 43 条目（34 章） |
+| 3 | FO-03 | SRE Workbook | ✅ | 代理 <private-host> | 200 | 3 部分 + 前后附件 / 31 条目（21 章） |
 | 4 | FO-04 | DDD Reference (Evans) | ✅ | 直连 | 200 | 3 组 / 6 条目（详细模式索引在 CC 授权 PDF） |
 | 5 | FO-05 | The Twelve-Factor App | ✅ | 直连 | 200 | 12 要素 |
 
@@ -38,8 +38,8 @@
 ## 2. Google SRE Book（FO-02）
 
 - **URL**：https://sre.google/sre-book/table-of-contents/
-- **可达性**：可达（经代理）。**境内直连失败**——连接层失败，`curl` 返回 `http_code=000`（域为 Google，境内超时）；经 `curl -x http://172.29.0.1:7890 -A "<browser UA>"` 得 **HTTP 200**，字节数 21,203。
-- **渠道**：代理 `172.29.0.1:7890`（HTTP/SOCKS5 混合端口）。
+- **可达性**：可达（经代理）。**境内直连失败**——连接层失败，`curl` 返回 `http_code=000`（域为 Google，境内超时）；经 `curl -x <private-host> -A "<browser UA>"` 得 **HTTP 200**，字节数 21,203。
+- **渠道**：代理 `<private-host>`（HTTP/SOCKS5 混合端口）。
 - **许可**：CC BY-NC-ND 4.0。
 - **目录结构**（5 部分 / 34 章 + 前后附件）：
   - **Front**：Foreword / Preface
@@ -55,7 +55,7 @@
 
 - **URL**：https://sre.google/workbook/table-of-contents/
 - **可达性**：可达（经代理）。同 FO-02：境内直连失败（`http_code=000`），经代理 **HTTP 200**，字节数 15,448。
-- **渠道**：代理 `172.29.0.1:7890`。
+- **渠道**：代理 `<private-host>`。
 - **许可**：CC BY-NC-ND 4.0。
 - **目录结构**（3 部分 / 21 章 + 前后附件）：
   - **Front**：Foreword I / Foreword II / Preface / 1 How SRE Relates to DevOps
@@ -101,7 +101,7 @@
 ## 6. 采集方法与证据口径
 
 - 可达性判定：`curl -sS -o <file> -w "%{http_code}"`，并核对落盘字节数（非空即视为内容层成功）；连接层失败记为 `000`。
-- SRE 两源必须加浏览器 UA（`-A`），且经代理 `172.29.0.1:7890`；其余三源直连。
+- SRE 两源必须加浏览器 UA（`-A`），且经代理 `<private-host>`；其余三源直连。
 - 结构提取：解析落地页/目录页 HTML 的 `<a href>` 锚点，按 Part/Chapter 层级归一；每个条目保留官方 URL 便于深链。
 - 摘要为**自撰中文归纳**（基于目录结构 + 公开定位），非原文翻译；字数控制在 200–500 之间。
 - 可溯源：每条 `source.url` 可解析且为本轮实测；`channel` / `http_status` 显式记录。

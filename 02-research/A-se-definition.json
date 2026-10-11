@@ -545,5 +545,5 @@
     "“extensibility / evolvability”缺少标准级独立定义，其权威论述多在软件架构文献中（ISO/IEC/IEEE 42010 等），按任务分工由架构 Agent 负责，本包不作独立定义。",
     "ISO/IEC 25010:2011 八特性与 2023 九特性的完整子特性对照未逐一取得官方原文，子特性清单依赖二手来源（iso25000、Sonar）。"
   ],
-  "notes": "方法说明：本证据包面向阶段1（据实、不杜撰），采用「LLM 初发现定位 → Tavily 首筛官方源 → curl 回源官方 PDF/页面（境外站点走代理 172.29.0.1:7890）→ 多源交叉验证」链路。已直接回源并文本提取的一手材料包括：SE2014 官方 PDF、CS2023 Beta PDF、NATO 1968 报告原 PDF、SWEBOK V3 PDF、SEI About、敏捷宣言、iso25000.com、Sonar ISO 25010 说明、Wikipedia 条目组。ISO 官方页面因 403 未直接打开，相应来源 verified=false 并在 key_points 注明核验路径。信源分级：S1=国际标准/官方知识体系/官方课程体系/学科原始报告；S2=经典著作与权威二手门户；S4=学术论文。所有 finding 均带 source_ids；关键定义（软件工程、可维护性、25010 质量模型）均以 ≥2 个独立来源交叉验证。已排除“架构设计”主题（软件架构、42010 等）以配合架构 Agent 分工。"
+  "notes": "方法说明：本证据包面向阶段1（据实、不杜撰），采用「LLM 初发现定位 → Tavily 首筛官方源 → curl 回源官方 PDF/页面（境外站点走代理 <private-host>）→ 多源交叉验证」链路。已直接回源并文本提取的一手材料包括：SE2014 官方 PDF、CS2023 Beta PDF、NATO 1968 报告原 PDF、SWEBOK V3 PDF、SEI About、敏捷宣言、iso25000.com、Sonar ISO 25010 说明、Wikipedia 条目组。ISO 官方页面因 403 未直接打开，相应来源 verified=false 并在 key_points 注明核验路径。信源分级：S1=国际标准/官方知识体系/官方课程体系/学科原始报告；S2=经典著作与权威二手门户；S4=学术论文。所有 finding 均带 source_ids；关键定义（软件工程、可维护性、25010 质量模型）均以 ≥2 个独立来源交叉验证。已排除“架构设计”主题（软件架构、42010 等）以配合架构 Agent 分工。"
 }

@@ -2,7 +2,7 @@
   "topic": "演化与弃用（Evolution & Deprecation）——重构 / 技术债 / 架构腐化 / 演进式架构 / 遗留系统 / 弃用",
   "generated_by": "architecture-evolution-researcher (subagent, self-authored role)",
   "accessed": "2026-09-10",
-  "retrieval_note": "境内源直连；境外被墙站点经 curl -x http://172.29.0.1:7890 访问。O'Reilly 书页 403，采用作者官方页(nealford.com)+出版社样章(Thoughtworks)核验书内容。",
+  "retrieval_note": "境内源直连；境外被墙站点经 curl -x <private-host> 访问。O'Reilly 书页 403，采用作者官方页(nealford.com)+出版社样章(Thoughtworks)核验书内容。",
   "sources": [
     {
       "id": "STD-007",
@@ -870,5 +870,5 @@
     "‘软件腐烂/软件熵（software rot/entropy）’术语的权威一手定义未落实（Wikipedia 自身标注争议/需补充来源），本包未将其作为独立定义，仅通过 Lehman 复杂度递增与 Perry&Wolf 漂移/侵蚀间接覆盖。",
     "架构决策记录（ADR）在演化/弃用中的 supersede 机制（B 包 S2-10）与 L 域弃用策略如何衔接，留给 O 域（方法论主干）统一裁决。"
   ],
-  "notes": "信源计数：S1=3、S2=13、S3=5、S4=3，共 24 条（S1≥2、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：技术债=Cunningham(S2-02)+Fowler(S2-01)+Kruchten(IEEE Software S4-03)；架构腐化=Perry&Wolf(S2-11)+Li et al.(S4-01)；演进式架构/fitness function=Ford 官方页(S2-12)+官方样章(S2-13)+Thoughtworks(S3-01/S3-02)；弃用/sunset=RFC9745(S1-03)+RFC8594(S1-02)+semver(S3-05)；遗留代码/接缝/特征测试=Feathers 章节(S2-09)+Feathers 博客(S2-10)（同作者，独立性偏弱，见 gaps）。专项门控：产出 6 条‘信号→手段→权衡’演化机制表（重构/技术债/腐化/演进式架构/遗留改造/弃用），每条配 ≥1 反例；另附 11 条‘原则↔反例’配对。跨包复用：Fowler TechnicalDebt、Cunningham OOPSLA'92、Li et al.(2022) 与 B-architecture-definition.json 的同名来源一致（已在 source.cross_ref 标注）。信源分级中 Wikipedia 仅作发现线索/术语旁证，未作为独立权威证据；semver.org 为社区事实标准，列为补充源(S3)。联网策略：martinfowler.com/refactoring.com/c2.com/informit/rfc-editor/nealford 直连；wikipedia/Perry&Wolf/Thoughtworks 样章经代理 172.29.0.1:7890。版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、官方样章、CC 许可规范与公开发表论文。"
+  "notes": "信源计数：S1=3、S2=13、S3=5、S4=3，共 24 条（S1≥2、S2≥4 均满足）。关键定义均 ≥2 独立源交叉验证：技术债=Cunningham(S2-02)+Fowler(S2-01)+Kruchten(IEEE Software S4-03)；架构腐化=Perry&Wolf(S2-11)+Li et al.(S4-01)；演进式架构/fitness function=Ford 官方页(S2-12)+官方样章(S2-13)+Thoughtworks(S3-01/S3-02)；弃用/sunset=RFC9745(S1-03)+RFC8594(S1-02)+semver(S3-05)；遗留代码/接缝/特征测试=Feathers 章节(S2-09)+Feathers 博客(S2-10)（同作者，独立性偏弱，见 gaps）。专项门控：产出 6 条‘信号→手段→权衡’演化机制表（重构/技术债/腐化/演进式架构/遗留改造/弃用），每条配 ≥1 反例；另附 11 条‘原则↔反例’配对。跨包复用：Fowler TechnicalDebt、Cunningham OOPSLA'92、Li et al.(2022) 与 B-architecture-definition.json 的同名来源一致（已在 source.cross_ref 标注）。信源分级中 Wikipedia 仅作发现线索/术语旁证，未作为独立权威证据；semver.org 为社区事实标准，列为补充源(S3)。联网策略：martinfowler.com/refactoring.com/c2.com/informit/rfc-editor/nealford 直连；wikipedia/Perry&Wolf/Thoughtworks 样章经代理 <private-host>。版权红线遵守：未下载/写入任何受版权保护的书籍全文，仅引用作者官方页面、官方样章、CC 许可规范与公开发表论文。"
 }

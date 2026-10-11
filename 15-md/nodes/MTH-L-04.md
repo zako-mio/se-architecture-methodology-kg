@@ -127,9 +127,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-011、VEN-030、VEN-031、WEB-019
+- 书证核验：BK-011 Ch1.2（direct），Ch1.3（direct），Ch4.28（partial），Ch7.7（direct），Ch7.8（direct），Ch7.12（direct），Ch9.41（partial）
 - 入口链接：https://nealford.com/books/buildingevolutionaryarchitectures.html
 - 勘误：常见误解「演进式架构等于放弃前期架构设计，边写边改」→ 核验结论「演进式架构强调「有引导」的增量变更：仍需识别关键架构维度并定义可执行约束，只是把架构维护贯穿生命周期而非一次到位」（BK-011）
 - 勘误：常见误解「只要定义了架构约束，就自然能实现演进式架构」→ 核验结论「约束必须在交付流程中持续执行、且配合增量交付实践才能兑现；缺乏执行的约束无法防止架构漂移」（VEN-030）

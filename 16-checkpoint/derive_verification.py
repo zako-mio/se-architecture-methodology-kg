@@ -28,8 +28,11 @@ sys.stdout.reconfigure(encoding="utf-8")
 HERE = os.path.dirname(os.path.abspath(__file__))
 GENERATED = "2026-09-11"          # 冻结常量：禁止 datetime.date.today() / time.time()
 SCHEMA_VERSION = "1.0.0"
-SLUG_ORDER = ("clean-architecture", "ddia", "saip")  # 仅用于遍历；输出按 source_id/node_id 排序
-SLUG_SOURCE = {"ddia": "BK-023", "clean-architecture": "BK-007", "saip": "BK-009"}
+# slug 发现改为**数据驱动**（阶段7 轨B：新书不得因硬编码而被静默排除）。
+# 语义：扫描 _parts/ 下 {ledger,claims,toc,gaps}-<slug>.json 的文件名取 slug 并稳定排序；
+# 排序沿用 slug 名字典序——既有三本 clean-architecture < ddia < saip 的相对顺序不变，
+# 故 `build_claims` 的「首 slug 优先」合并语义对既有节点**逐字节不变**。
+PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 
 LEDGER_DIR = os.path.join("01-books", "_verify")
 PARTS_DIR = os.path.join(LEDGER_DIR, "_parts")
@@ -73,10 +76,32 @@ def load_opt(path):
         return json.load(f)
 
 
-def load_parts(root, prefix):
+def discover_slugs(root):
+    """从 `_parts/*.json` 文件名发现 slug（数据驱动，稳定排序，无硬编码）。"""
+    parts = resolve(root, PARTS_DIR)
+    slugs = set()
+    if os.path.isdir(parts):
+        for fn in os.listdir(parts):
+            m = PART_FILE_RE.match(fn)
+            if m:
+                slugs.add(m.group(2))
+    return tuple(sorted(slugs))
+
+
+def slug_source_map(root, slugs):
+    """slug → source_id，取该 slug 的 `toc-<slug>.json`（缺 toc 则不入表）。"""
+    out = {}
+    for slug in slugs:
+        doc = load_opt(os.path.join(resolve(root, PARTS_DIR), "toc-%s.json" % slug))
+        if isinstance(doc, dict) and doc.get("source_id"):
+            out[slug] = doc["source_id"]
+    return out
+
+
+def load_parts(root, prefix, slugs):
     """返回 {slug: doc}，仅含存在的分片。"""
     out = {}
-    for slug in SLUG_ORDER:
+    for slug in slugs:
         p = os.path.join(resolve(root, PARTS_DIR), "%s-%s.json" % (prefix, slug))
         doc = load_opt(p)
         if doc is not None:
@@ -91,10 +116,10 @@ def meta(with_sot):
     return m
 
 
-def build_ledger(ledger_parts):
+def build_ledger(ledger_parts, slugs):
     records = []
     seen = set()
-    for slug in SLUG_ORDER:
+    for slug in slugs:
         doc = ledger_parts.get(slug)
         if doc is None:
             continue
@@ -108,9 +133,9 @@ def build_ledger(ledger_parts):
     return {"meta": meta(True), "records": records}
 
 
-def build_claims(claims_parts):
+def build_claims(claims_parts, slugs):
     nodes = {}
-    for slug in SLUG_ORDER:
+    for slug in slugs:
         doc = claims_parts.get(slug)
         if doc is None:
             continue
@@ -125,13 +150,13 @@ def build_claims(claims_parts):
     return {"meta": meta(False), "nodes": ordered}
 
 
-def build_toc(toc_parts):
+def build_toc(toc_parts, slugs):
     books = {}
-    for slug in SLUG_ORDER:
+    for slug in slugs:
         doc = toc_parts.get(slug)
         if doc is None:
             continue
-        sid = doc.get("source_id") or SLUG_SOURCE.get(slug, "")
+        sid = doc.get("source_id") or ""
         books[sid] = {
             "book": doc.get("book", ""),
             "edition": doc.get("edition", ""),
@@ -143,10 +168,10 @@ def build_toc(toc_parts):
     return {"meta": meta(False), "books": ordered}
 
 
-def build_gaps(gaps_parts):
+def build_gaps(gaps_parts, slugs):
     gaps = []
     seen = set()
-    for slug in SLUG_ORDER:
+    for slug in slugs:
         doc = gaps_parts.get(slug)
         if doc is None:
             continue
@@ -288,10 +313,11 @@ def build_overrides(records, baseline):
 
 def build_outputs(root):
     """返回 (outputs: {relpath: text}, has_data: bool)。无任何分片 → has_data=False。"""
-    ledger_parts = load_parts(root, "ledger")
-    claims_parts = load_parts(root, "claims")
-    toc_parts = load_parts(root, "toc")
-    gaps_parts = load_parts(root, "gaps")
+    slugs = discover_slugs(root)
+    ledger_parts = load_parts(root, "ledger", slugs)
+    claims_parts = load_parts(root, "claims", slugs)
+    toc_parts = load_parts(root, "toc", slugs)
+    gaps_parts = load_parts(root, "gaps", slugs)
     if not (ledger_parts or claims_parts or toc_parts or gaps_parts):
         return {}, False
 
@@ -300,16 +326,16 @@ def build_outputs(root):
     toc_doc = None
     gaps_doc = None
     if ledger_parts:
-        ledger = build_ledger(ledger_parts)
+        ledger = build_ledger(ledger_parts, slugs)
         records = ledger["records"]
         outputs[OUT_LEDGER] = dumps(ledger)
     if claims_parts:
-        outputs[OUT_CLAIMS] = dumps(build_claims(claims_parts))
+        outputs[OUT_CLAIMS] = dumps(build_claims(claims_parts, slugs))
     if toc_parts:
-        toc_doc = build_toc(toc_parts)
+        toc_doc = build_toc(toc_parts, slugs)
         outputs[OUT_TOC] = dumps(toc_doc)
     if gaps_parts:
-        gaps_doc = build_gaps(gaps_parts)
+        gaps_doc = build_gaps(gaps_parts, slugs)
         outputs[OUT_GAPS] = dumps(gaps_doc)
     if records:
         outputs[OVERRIDES_PATH] = dumps(build_overrides(records, graph_baseline(root)))

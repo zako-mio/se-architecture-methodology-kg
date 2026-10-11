@@ -46,13 +46,39 @@ OVERRIDES_REL = os.path.join("10-dag-data", "_verification-overrides.json")
 ALL_CRITERIA = ["G-V1", "G-V2", "G-V3", "G-V4", "G-V5", "G-V6", "G-V7", "G-V8", "G-V9"]
 
 NODE_RE = re.compile(r"^(ESS|MTH|TEC|CAS)-[A-Z]{1,2}-\d{2}$")
-RECORD_RE = re.compile(r"^VR-(DDIA|CA|SAIP|D2)-\d{3}$")
 SOURCE_RE = re.compile(r"^BK-\d{3}$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ORIGINS = {"definition", "principle", "mechanism", "engineering", "tradeoff", "errata"}
 STRENGTH = {"direct", "partial", "inferred", "contradicted"}
 DIRECTIONS = {"forward", "reverse"}
 GAP_KINDS = {"missed_citation", "coverage_hole", "concept_missing"}
+# 书 slug → record_id 前缀（**新增书必须在此登记**；未登记的书若出现在 _parts/ 中，
+# G-V1 会显式 FAIL，而不是静默放过——fail-closed）。
+SLUG_RECORD_PREFIX = {
+    "clean-architecture": "CA",
+    "ddia": "DDIA",
+    "saip": "SAIP",
+    "team-topologies": "TT",
+    "evolutionary-arch": "EA",
+}
+RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
+RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
+    sorted(set(SLUG_RECORD_PREFIX.values()) | set(RECORD_PREFIX_EXTRA))))
+# 书 slug → 私有语料（G-V5 改写红线机检用；缺书文本 → 该源记 SKIP，不伪装 PASS）
+SLUG_TEXT = {
+    "clean-architecture": "clean-architecture.txt",
+    "saip": "saip.txt",
+    "team-topologies": "team-topologies.txt",
+    "evolutionary-arch": "evolutionary-arch.txt",
+}
+# 信源 id → slug（BK-023 走 glob 特例，不在此表）
+SOURCE_SLUG = {
+    "BK-007": "clean-architecture",
+    "BK-009": "saip",
+    "BK-030": "team-topologies",
+    "BK-011": "evolutionary-arch",
+}
+PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）
 CLAIM_CAP_DENSIFY = 16           # ADR-003：阶段2 参与节点上限（场景限定）
 # ADR-003：阶段2 参与节点集合（封闭；与 00-plan/stage7-phase2-content-densification-plan.md §2.2 一致）
@@ -87,6 +113,9 @@ def result(status, lines):
 
 def check_gv1(ctx):
     problems = []
+    # fail-closed：_parts/ 出现未登记前缀的新书 → 显式 FAIL（不得静默绕过）
+    for slug in ctx.get("unregistered_slugs", []):
+        problems.append("未登记的书 slug 出现在 _parts/：%s（须在 SLUG_RECORD_PREFIX 登记其 record_id 前缀）" % slug)
     records = ctx["records"]
     for r in records:
         rid = r.get("record_id", "?")
@@ -146,7 +175,6 @@ def check_gv1(ctx):
     if len(problems) > ctx["show"]:
         lines.append("  ...(共 %d)" % len(problems))
     return result("PASS" if ok else "FAIL", lines)
-
 
 def check_gv2(ctx):
     problems = []
@@ -211,15 +239,19 @@ def strip_ws(s):
 
 
 def book_text(root, source_id):
-    """返回 (kind, text)；kind ∈ {'text','missing'}。"""
+    """返回 (kind, text)；kind ∈ {'text','missing'}。
+
+    信源 → 私有语料映射（新增书须登记；未登记者返回 missing → G-V5 记 SKIP，
+    不得伪装 PASS）。
+    """
     if source_id == "BK-023":
         paths = sorted(glob.glob(os.path.join(root, "01-books", "_files", "P0-11", "ddia-zh-src", "*.md")))
-    elif source_id == "BK-007":
-        paths = [os.path.join(root, VERIFY_DIR, "_text", "clean-architecture.txt")]
-    elif source_id == "BK-009":
-        paths = [os.path.join(root, VERIFY_DIR, "_text", "saip.txt")]
     else:
-        return "missing", ""
+        slug = SOURCE_SLUG.get(source_id)
+        fname = SLUG_TEXT.get(slug) if slug else None
+        if not fname:
+            return "missing", ""
+        paths = [os.path.join(root, VERIFY_DIR, "_text", fname)]
     chunks = []
     for p in paths:
         if os.path.isfile(p):
@@ -406,6 +438,15 @@ def build_ctx(root):
     if isinstance(toc, dict):
         toc_by_source = {k: (v.get("toc") if isinstance(v, dict) else None)
                          for k, v in (toc.get("books") or {}).items()}
+    # 数据驱动：发现 _parts/ 中的 slug，标出未登记前缀者
+    slugs = set()
+    parts_dir = resolve(root, os.path.join(VERIFY_DIR, "_parts"))
+    if os.path.isdir(parts_dir):
+        for fn in os.listdir(parts_dir):
+            m = PART_FILE_RE.match(fn)
+            if m:
+                slugs.add(m.group(2))
+    unregistered = sorted(s for s in slugs if s not in SLUG_RECORD_PREFIX)
     return {
         "root": root,
         "ledger": ledger,
@@ -413,6 +454,7 @@ def build_ctx(root):
         "gaps": (gaps_doc or {}).get("gaps", []) or [],
         "toc_by_source": toc_by_source,
         "overrides": overrides,
+        "unregistered_slugs": unregistered,
     }, None
 
 

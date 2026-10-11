@@ -118,9 +118,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-030、WEB-044、WEB-045
+- 书证核验：BK-030 Ch2（partial），Ch7（partial），Ch8（direct）
 - 入口链接：https://teamtopologies.com/key-concepts
 - 入口链接：https://martinfowler.com/bliki/ConwaysLaw.html
 - 勘误：常见误解「团队边界确定后应保持固定以减少动荡」→ 核验结论「边界需随价值流与依赖变化持续校准，但调整应小步、可回退并有信号依据，稳定与灵活需动态平衡」（BK-030）

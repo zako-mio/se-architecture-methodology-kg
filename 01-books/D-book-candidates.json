@@ -472,7 +472,7 @@
     }
   ],
   "notes": [
-    "可得性据 2026-09-10 实测：abseil.io、12factor.net、domainlanguage.com、enterpriseintegrationpatterns.com、aosabook.org 直连 200；sre.google 为 Google 域，需经代理 172.29.0.1:7890 访问（实测 200），境内直连可能超时。",
+    "可得性据 2026-09-10 实测：abseil.io、12factor.net、domainlanguage.com、enterpriseintegrationpatterns.com、aosabook.org 直连 200；sre.google 为 Google 域，需经代理 <private-host> 访问（实测 200），境内直连可能超时。",
     "教材级版本时效：FSA 第2版=2025-03；DDIA 第2版=2026-02（O'Reilly，Kleppmann+Riccomini 合著）；DevOps Handbook 第2版=2021-11；SAIP 最新为第4版=2021。",
     "免费官方源（free-official）可直接作为知识库公开层引用链接；paid/user-copy 书本体仅供本地语料层，公开库须用消化重组后的知识。"
   ]
