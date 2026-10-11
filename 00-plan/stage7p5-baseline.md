@@ -258,12 +258,12 @@ NO DRIFT (exit 0) —— 与 CI 漂移检测等价
 
 | 项 | 值 |
 |---|---|
-| 装配 | `--apply --refresh-sanitize` → 写入 560 文件，删除 0，自检三类差异均 0 |
-| `_publish` git | commit **`030f12a`**；`git ls-files` = **566** |
-| 远端 commit | **`d1d64ec5ceb884f67435fb89b1474f57a70a75a2`**（parent `ebb9066953149df9652434de8d538d5f1298cf29`） |
-| 远端 tree | **566 blobs == 本地 `ls-files` 566** |
-| CI | run **`38156480019`** → **success**（`workflow_dispatch` 手动触发，原因见下） |
-| Pages | `/`、`/11-node-pages/ESS-K-01.html`、`/15-md/nodes/ESS-K-01.md`、`/10-dag-data/book-verification.json` 均 **HTTP 200**；页面**已含 BK-025/BK-026 书证** |
+| 装配 | `--apply --refresh-sanitize` → 写入 **561** 文件，删除 0，自检三类差异均 0 |
+| `_publish` git | commit **`52f09c9`**；`git ls-files` = **567** |
+| 远端 commit | **`6be855eec127b93c66d4e1dbd159dded5ef5f0c3`**（推送链：`ebb90669` → `d1d64ec5` → `6be855ee`） |
+| 远端 tree | **567 blobs == 本地 `ls-files` 567** |
+| CI | run **`38157173094`** → **success**（`workflow_dispatch`；前次 `38156480019` 亦 success） |
+| Pages | `/`、`/11-node-pages/ESS-K-01.html`、`/15-md/nodes/ESS-K-01.md`、`/10-dag-data/book-verification.json`、`/00-plan/stage7p5-baseline.md`、`/00-plan/NEXT-SESSION-HANDOFF.md` 均 **HTTP 200**；节点页**已含 BK-025/BK-026 书证** |
 | 导出目录 | `_pages-export/` 用后即删（已清理） |
 
 ### 🔴 公开层两次推送与 CI 漂移的真实过程（留痕）
@@ -284,6 +284,8 @@ NO DRIFT (exit 0) —— 与 CI 漂移检测等价
 ---
 
 ## 9. 回滚路径
+
+**本轮本地归档提交**：`da6c9e0`（parent `f023353`）；42 个文件变更（含 3 个新脚本、2 个新文档、16 个再生节点页/MD、核验层派生件）。
 
 ```bash
 # 本地归档仓：回滚到本轮开工前
