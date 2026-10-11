@@ -260,9 +260,9 @@ NO DRIFT (exit 0) —— 与 CI 漂移检测等价
 |---|---|
 | 装配 | `--apply --refresh-sanitize` → 写入 **561** 文件，删除 0，自检三类差异均 0 |
 | `_publish` git | commit **`52f09c9`**；`git ls-files` = **567** |
-| 远端 commit | **`6be855eec127b93c66d4e1dbd159dded5ef5f0c3`**（推送链：`ebb90669` → `d1d64ec5` → `6be855ee`） |
+| 远端 commit | **`212dd0a0940059ab4834abdde7b33e6acb0ec9f7`**（推送链：`ebb90669` → `d1d64ec5` → `6be855ee` → `212dd0a0`） |
 | 远端 tree | **567 blobs == 本地 `ls-files` 567** |
-| CI | run **`38157173094`** → **success**（`workflow_dispatch`；前次 `38156480019` 亦 success） |
+| CI | run **`38157550356`** → **success**（`workflow_dispatch`；`38156480019` / `38157173094` 亦 success） |
 | Pages | `/`、`/11-node-pages/ESS-K-01.html`、`/15-md/nodes/ESS-K-01.md`、`/10-dag-data/book-verification.json`、`/00-plan/stage7p5-baseline.md`、`/00-plan/NEXT-SESSION-HANDOFF.md` 均 **HTTP 200**；节点页**已含 BK-025/BK-026 书证** |
 | 导出目录 | `_pages-export/` 用后即删（已清理） |
 

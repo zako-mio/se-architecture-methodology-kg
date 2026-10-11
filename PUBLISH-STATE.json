@@ -149,10 +149,10 @@
       "src_sha256": "2a3b939423397e77c2c0ce826e469fa71478529dc45f9ea8e043b572a473f924"
     },
     "00-plan/stage7p5-baseline.md": {
-      "sha256": "aa056a0517490c7b2b9096f7153d8d675ad5377a33697f37af1338d3c155429e",
+      "sha256": "c692a1262c4a80640feea854eefded0e7fd0e99e2a499f739a94984089565854",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage7p5-baseline.md",
-      "src_sha256": "aa056a0517490c7b2b9096f7153d8d675ad5377a33697f37af1338d3c155429e"
+      "src_sha256": "c692a1262c4a80640feea854eefded0e7fd0e99e2a499f739a94984089565854"
     },
     "01-books/D-book-candidates.json": {
       "sha256": "f63d7237040ab102621df588d18a0ce94db4a8289b17337da9e95e6cf2c3269d",
