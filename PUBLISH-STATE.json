@@ -3173,10 +3173,10 @@
       "src_sha256": "801541fc483c8bbc24b9913f8182c9cab066c688681c6860f6739b2fd2dd4006"
     },
     "16-checkpoint/publish-manifest.json": {
-      "sha256": "a6e583c2a2c9f1d59dcded677f14d2764374aee309de981a446e978ba1bdd2c8",
+      "sha256": "0a36d9ddf9c7433867da9ebd1e951dcd429ae44b2c47c50ea7e5ab173ed19e1e",
       "class": "mask",
       "src": "16-checkpoint/publish-manifest.json",
-      "src_sha256": "a6e583c2a2c9f1d59dcded677f14d2764374aee309de981a446e978ba1bdd2c8"
+      "src_sha256": "0a36d9ddf9c7433867da9ebd1e951dcd429ae44b2c47c50ea7e5ab173ed19e1e"
     },
     "16-checkpoint/push_publish.py": {
       "sha256": "3e937ce4200ac75f876fede7dceb50f088562d37ed580f860d310c9c9942d1ae",

@@ -22,7 +22,8 @@
       "00-plan/stage2-book-collection.md",
       "16-checkpoint/publish-reconcile-report.md",
       "report.original.html",
-      "00-plan/NEXT-ROUND-PROMPT.md"
+      "00-plan/NEXT-ROUND-PROMPT.md",
+      "00-plan/NEXT-ROUND-PROMPT-2.md"
     ],
     "preserve": [
       "LICENSE",
@@ -112,6 +113,7 @@
     "追加⑤（阶段2 执行轮，2026-10-11）：`classes.sanitize` 新增 `report-phase7p2-plan.md` / `.html`（阶段2 方案周期报告，公开件）；`audit_publish.py` 的 SCAN_ROOT_FILES 同步扩展以纳入脱敏机检。`report.original.html` 为历史备份，归入 `never`（不公开）。",
     "追加⑥（阶段7 轨B 轮，2026-10-11）：**修前置缺陷** —— 上一轮提交了 `report-phase7p2.md` / `.html`（阶段2 执行报告双版本）却未在任何类声明，导致 `assemble_publish.py --check` 的 P1「默认拒绝覆盖检查」FAIL（未声明 2 项）。现补入 `classes.sanitize`，并同步扩展 `audit_publish.py` 的 SCAN_ROOT_FILES。",
     "追加⑥-a（2026-10-11）：**内网地址脱敏** —— 实测 `00-plan/stage2-search-plan.md` 与 `00-plan/contract.md` 的公开副本含**定向代理地址**（上一轮遗留，具体字面量见 `audit_publish.py` 的 `INFRA_RE`）。`audit_publish.py` 新增 `INFRA_RE`（机械派生、与 mask 链同源），统一替换为 `<private-host>`。",
-    "追加⑥-b（2026-10-11）：`classes.never` 新增 `00-plan/NEXT-ROUND-PROMPT.md` —— 该件是**窗口间内部交接 Prompt**（含子 Agent 能力、协作纪律、环境约束等内部运维细节），与已列入 never 的 `00-plan/stage2-book-collection.md` 同类，不进公开站点。"
+    "追加⑥-b（2026-10-11）：`classes.never` 新增 `00-plan/NEXT-ROUND-PROMPT.md` —— 该件是**窗口间内部交接 Prompt**（含子 Agent 能力、协作纪律、环境约束等内部运维细节），与已列入 never 的 `00-plan/stage2-book-collection.md` 同类，不进公开站点。",
+    "追加⑦（2026-10-12，阶段3 续做轮）：`classes.never` 新增 `00-plan/NEXT-ROUND-PROMPT-2.md` —— 同 `NEXT-ROUND-PROMPT.md`，为窗口间内部交接 Prompt（含子 Agent 工具集不稳定、CI 触发路径过滤、私有层旧版漂移等内部运维细节），不进公开站点。"
   ]
 }
