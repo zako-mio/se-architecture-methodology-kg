@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated_by": "assemble_publish.py",
   "manifest_version": "1.0",
-  "file_count": 560,
+  "file_count": 561,
   "files": {
     "00-plan/01-alignment.md": {
       "sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386",
@@ -11,10 +11,10 @@
       "src_sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386"
     },
     "00-plan/NEXT-SESSION-HANDOFF.md": {
-      "sha256": "3bcffca1f70f01fa38e87cd93eb617475169c782951b8bfdedb1619f6de561fd",
+      "sha256": "ff2fa5cea39e975a7312ca2b48b612a0c05a91bc7f3b87d117ab49bee080595c",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/NEXT-SESSION-HANDOFF.md",
-      "src_sha256": "3bcffca1f70f01fa38e87cd93eb617475169c782951b8bfdedb1619f6de561fd"
+      "src_sha256": "ff2fa5cea39e975a7312ca2b48b612a0c05a91bc7f3b87d117ab49bee080595c"
     },
     "00-plan/contract.md": {
       "sha256": "f35b271848dd07d5292fefbbf57c2fcfe7dc44b804a5dbe5cc016d7fb50e4170",
@@ -147,6 +147,12 @@
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage7p4-baseline.md",
       "src_sha256": "2a3b939423397e77c2c0ce826e469fa71478529dc45f9ea8e043b572a473f924"
+    },
+    "00-plan/stage7p5-baseline.md": {
+      "sha256": "d3f2a3517ce8b5d975aa215027ba82e78dfca7d03b024e54a27eaaf35d35113f",
+      "class": "sanitize",
+      "src": "_publish-staging/00-plan/stage7p5-baseline.md",
+      "src_sha256": "d3f2a3517ce8b5d975aa215027ba82e78dfca7d03b024e54a27eaaf35d35113f"
     },
     "01-books/D-book-candidates.json": {
       "sha256": "f63d7237040ab102621df588d18a0ce94db4a8289b17337da9e95e6cf2c3269d",

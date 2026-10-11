@@ -61,6 +61,51 @@
    许可为 **ND**，须先裁决「SRE 派生的节点正文是否进公开层」；建议先只做私有层采集 + 核验。
 4. `BK-008`（APoSD）语料不足（本地仅 20 页无文本层），需 OCR 或补采集。
 
+---
+
+## ✅ 本轮增量（2026-10-12 · 阶段7 **阶段3 续做：P0 缺口号回写 + P1 T2 晋升评估 + P2 SRE 私有层采集**）—— 本节优先于上方 §「本轮增量（2026-10-11 …）」与 §A
+
+**三轨全部完成**：P0（ADR-004 §决定三要求的旧缺口 `proposed_node` 回写）、
+P1（T2 候选册晋升评估 → **0 晋升**）、P2（BK-025/BK-026 私有层采集 + 核验 + 第二路复核）。
+**图谱零变更**（168/364/18 未动）；本轮是**纯核验层扩展 + 缺口号一致性回写**。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **P0 回写** | **16 条**缺口 `target` 按 ADR-004 `id_status` 回写（新增 `16-checkpoint/writeback_gap_ids.py`）；映射报告 `01-books/_verify/_meta/gap-id-writeback.json` |
+| **P0 判据修复** | `replay_admission.py` 的概念集判据由「`proposed_node` 非空」改为「裁决表 `tier ∈ T1/T2/T3`」——**回写暴露了口径缺陷**（见基线 §4） |
+| **P1 晋升评估** | 新增 `replay_admission.py --scan-promotion`：候选 **30** 条，**可晋升 0 条**（全部单源）；负例 **3/3**；报告 `_meta/t2-promotion-scan.json` |
+| **P2 采集** | BK-025 **42 章**（1 075 398 字符）/ BK-026 **29 章**（925 151 字符）；**直连 200、无需代理**（推翻 fetch-log 旧结论）；CC BY-NC-ND 4.0 **仅私有层** |
+| **P2 核验** | 记录 **+122**（BK-025 78 / BK-026 44）；覆盖节点 **64→78**；已核验书 **8→10** 本 |
+| **P2 第二路复核** | direct **360/360 全覆盖**；本轮降级 **5** 条（`VR-SRE-105/110/119/129/137`）；`anchor_locatable=false` 3 条 |
+| 缺口全表 | **106 → 119**（+13：`GAP-SRE-*` 7 / `GAP-SREW-*` 6） |
+| 图谱指纹 | **未变**（`f1f09a9b…87303a39`） |
+| 核验层指纹 | ledger `a2e87bfe…` → **`ab276405…`**；overrides 64→**78** 节点；book-verification `dfbdd6b1…` |
+| 门控 | `gate_verification` **9/9 PASS**；validate_graph errors=0；L2/L3/L6/L7/L8 + 方法论 4/4 + G-D 5/5 + `kb_gate` 2/2 全 PASS；版权 **0 命中**；负例 11/11 + 6/6 |
+| **L4/L5（本轮纠正）** | 旧记录称「缺 `agent-browser`」**有误**：`agent-browser 0.34.0` 在 nvm bin，宿主 PATH 缺 nvm 导致解析失败。PATH 引导后 **L4 PASS（212/272，fail 0）/ L5 PASS（7/7，skip 0）** |
+| 公开层 | 远端 commit **`d1d64ec5…`**，**566 blobs == 本地 `ls-files`**；CI run **`38156480019` success**；Pages 200 且已含新书证 |
+| 基线 | `MISSION_ROOT/00-plan/stage7p5-baseline.md` |
+
+**🔴 本轮四条必继承的教训**：
+
+1. **动核验层就必须跑 `build.py`**：第一次推送因节点页未再生而 **CI Drift FAIL**；
+   且「只改生成物不改数据/脚本」的提交**不触发 CI**（`paths` 过滤）⇒ 须 `gh workflow run rebuild.yml` 手动触发并确认 success。
+2. **`proposed_node` 的语义是「号分配状态」，不是「是否概念提案」**：任何以它作概念集判据的逻辑都会在号回写后失效。
+3. **暂存分片前缀不得互为前缀**（`sre` ⊂ `srew`）：`gaps-<prefix>*.json` 会串号；已改为精确双模式 glob。
+4. **子 Agent 工具集不稳定**：首名工人**无 `write`**，其余有。派活前先做能力探针，或统一用 `subagent`。
+
+**下一窗口的输入件**：
+- 本轮基线（指纹 + 门控全表 + 公开层对账 + 回滚路径 + 待裁决） → `MISSION_ROOT/00-plan/stage7p5-baseline.md`
+- P0 回写映射 → `MISSION_ROOT/01-books/_verify/_meta/gap-id-writeback.json`
+- P1 晋升扫描 → `MISSION_ROOT/01-books/_verify/_meta/t2-promotion-scan.json`
+
+**下一步建议（按优先级）**：
+1. **K 域记录上限裁决**：ADR-003 的 8 条上限迫使本轮裁掉 **42 条合法 direct 证据**（14 个 K 域节点实有 10–12 条）。
+   建议走一次 ADR 把 K 域纳入 `DENSIFY_NODES`（上限 16）——实测纳入后**不超限**。
+2. **T2 晋升**：取得第二独立信源前不动；扫描器已就绪（`--scan-promotion`）。
+3. **`build_claims()` 跨书覆盖缺陷**（新发现）：`derive_verification.py` 对同一节点跨书**只保留首个 slug 的 claims**，
+   导致 `ESS-O-02` 的 clean-architecture 主张丢失（`ESS-O-02#principle#1` 重复的根因）。
+4. **轨B 剩余书核验**：除 SRE 两本外，多需 PDF→OCR，边际成本高。
+
 
 
 路径约定（全文只在此处声明一次，正文一律写 `MISSION_ROOT/...` / `SUB_LIB_ROOT/...`）：
