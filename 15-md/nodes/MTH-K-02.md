@@ -118,6 +118,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-026、BK-025、VEN-027
+- 书证核验：BK-025 ChBenefits（direct），ChForming Your Error Budget（direct），ChMotivation for Error Budgets（direct）；BK-026 Ch4: Alert on Burn Rate（direct），Ch6: Multiwindow, Multi-Burn-Rate Alerts（direct），ChEstablishing an Error Budget Policy（direct）
 - 入口链接：https://sre.google/workbook/table-of-contents/
 - 勘误：常见误解「告警应基于瞬时错误率，越敏感越好」→ 核验结论「瞬时错误率往往误报率高或过于迟钝；多窗口、多燃尽率告警能同时兼顾误报、漏报、检测与恢复四个维度」（BK-026）
 

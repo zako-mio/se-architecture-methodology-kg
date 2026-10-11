@@ -98,6 +98,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：VEN-026、VEN-027、BK-025
+- 书证核验：BK-025 ChBlack-Box Versus White-Box（direct），ChDefinitions（direct），ChPractical Alerting from Time-Series Data（direct）；BK-026 ChImplementing Purposeful Metrics（direct），ChMonitoring（direct），ChSources of Monitoring Data（partial）
 - 入口链接：https://opentelemetry.io/docs/concepts/observability-primer/
 - 入口链接：https://www.datadoghq.com/knowledge-center/observability/
 - 勘误：常见误解「可观测性就是多采集日志和指标」→ 核验结论「可观测性是从系统输出推断内部状态、回答未知未知的能力；缺少统一标识与因果上下文时，再多数据也无法回答新问题」（VEN-026）

@@ -101,6 +101,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：VEN-036、VEN-037、VEN-038
+- 书证核验：BK-025 ChHigh Velocity（direct），ChRelationships Between Testing and Mean Time to Repair（direct）；BK-026 ChAutomate This Year’s Job Away（direct），ChShare Ownership with Developers（direct），ChThe Wisdom of Production（direct），ChUse the Same Tooling, Regardless of Function or Job Title（direct）
 - 入口链接：https://dora.dev/guides/dora-metrics/
 - 入口链接：https://dora.dev/insights/dora-metrics-history
 - 勘误：常见误解「DORA 的经典口径是固定的「四键」」→ 核验结论「现行官方为五指标（三吞吐加两不稳定）；原四键为历史口径，其中 MTTR 已被失败部署恢复时间取代，并新增部署返工率」（VEN-037）

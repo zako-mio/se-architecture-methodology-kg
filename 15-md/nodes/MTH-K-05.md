@@ -114,6 +114,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-025、BK-026、WEB-039
+- 书证核验：BK-025 ChCollaborate and Share Knowledge（direct），ChGoogle’s Postmortem Philosophy（direct），ChLive Incident State Document（direct），ChRecursive Separation of Responsibilities（direct），ChWhat to Do When Systems Break（direct），ChWhen to Declare an Incident（direct）；BK-026 ChIncident Command System（direct），ChMain Roles in Incident Response（direct）
 - 入口链接：https://sre.google/sre-book/postmortem-culture/
 - 入口链接：https://web.archive.org/web/2019id_/https://codeascraft.com/2012/05/22/blameless-postmortems/
 - 勘误：常见误解「无指责复盘等于不追究任何责任」→ 核验结论「无指责聚焦系统性成因并鼓励如实陈述，与区分鲁莽行为的公正文化并用，而非取消问责」（BK-025）

@@ -98,6 +98,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：VEN-026、VEN-027
+- 书证核验：BK-025 ChAlerting（direct），ChBlack-Box Monitoring（direct），ChBlack-Box Versus White-Box（direct），ChDefinitions（direct）；BK-026 ChImprove both logs and metrics（direct），ChMonitoring（direct），ChTesting Alerting Logic（direct）
 - 入口链接：https://opentelemetry.io/docs/concepts/observability-primer/
 - 入口链接：https://www.datadoghq.com/knowledge-center/observability/
 - 勘误：常见误解「可观测性等于 metrics/logs/traces 三支柱」→ 核验结论「三支柱为工程口语，非统一标准术语；某些规范在追踪、指标、日志之外还列上下文传播等信号，价值关键在信号可关联而非类别数量」（VEN-026）

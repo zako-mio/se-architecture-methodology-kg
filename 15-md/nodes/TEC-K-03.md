@@ -114,6 +114,7 @@ SLI 推荐以好事件数除以总事件数表达（如成功请求数/总请求
 - 生命周期：active
 - 版本：2026 (Azure WAF / Datadog) / 2016-2018 (Google SRE)
 - 规范信源：VEN-029、VEN-027、BK-025、BK-026
+- 书证核验：BK-025 ChBenefits（direct），ChControl Measures（direct），ChEmbracing Risk（direct），ChForming Your Error Budget（direct），ChService Level Terminology（direct）；BK-026 ChGetting Started（direct），ChReliability Targets and Error Budgets（direct），ChWhat to Measure: Using SLIs（direct）
 - 入口链接：https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics
 - 入口链接：https://docs.datadoghq.com/service_management/service_level_objectives/
 - 入口链接：https://sre.google/workbook/table-of-contents/

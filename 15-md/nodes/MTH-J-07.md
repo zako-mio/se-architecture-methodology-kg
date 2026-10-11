@@ -99,6 +99,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：VEN-021、WEB-032、WEB-033、VEN-022、VEN-023
+- 书证核验：BK-025 ChChange Management（direct），ChEmergency Response（direct），ChGradual and Staged Rollouts（direct）；BK-026 ChDependencies and Isolation（direct），ChMinimizing Risk to SLOs and the Error Budget（direct），ChRelease Engineering Principles（direct），ChUse a Gradual Canary for Better Metric Selection（direct）
 - 入口链接：https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html
 - 勘误：常见误解「回滚只是把旧版本代码重新部署一遍」→ 核验结论「可靠回滚依赖不可变、版本化的制品与可切换路由，并需处理数据与结构兼容；有状态变更的回滚尤为复杂，代码回滚未必恢复一致状态」（VEN-022）
 

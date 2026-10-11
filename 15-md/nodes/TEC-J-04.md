@@ -114,6 +114,7 @@
 - 生命周期：active
 - 版本：2014（Fowler bliki）
 - 规范信源：WEB-033、VEN-021、VEN-022
+- 书证核验：BK-025 ChCanary test（direct），ChFeature Flag Frameworks（partial）；BK-026 ChCanarying Releases（direct），ChChoosing a Canary Population and Duration（direct），ChRequirements of a Canary Process（direct）
 - 入口链接：https://martinfowler.com/bliki/CanaryRelease.html
 - 勘误：常见误解「金丝雀发布可以顺带当作 A/B 测试」→ 核验结论「二者技术实现相似但目的不同：金丝雀检测故障/回归，应在分钟/小时级完成；A/B 验证假设，需达统计显著（天级）。混用会干扰 A/B 结果」（WEB-033）
 - 勘误：常见误解「金丝雀发布的主要成本只是多部署一份实例」→ 核验结论「其主要代价是需同时管理多个并发版本、依赖流量路由与可观测性，且数据库变更需让 schema 同时兼容两版；实现与观测成本较高」（WEB-033）

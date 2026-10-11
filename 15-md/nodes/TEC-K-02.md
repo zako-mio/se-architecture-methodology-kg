@@ -126,6 +126,7 @@
 - 生命周期：active
 - 版本：2026 (OpenTelemetry / Datadog)
 - 规范信源：VEN-026、VEN-027、BK-025
+- 书证核验：BK-025 ChBlack-Box Versus White-Box（direct），ChLatency（direct），ChThe Four Golden Signals（direct），ChWhy Monitor?（partial），ChWorrying About Your Tail (or, Instrumentation and Performance)（direct）；BK-026 ChIntended Changes（direct），ChSaturation（direct），ChSources of Monitoring Data（direct）
 - 入口链接：https://opentelemetry.io/docs/concepts/observability-primer/
 - 入口链接：https://docs.datadoghq.com/service_management/service_level_objectives/
 - 勘误：常见误解「可观测性三支柱是 OpenTelemetry 的官方术语」→ 核验结论「OTel 官方列 Traces/Metrics/Logs/Baggage，并未使用三支柱措辞；三支柱是工程界通行口语，术语未统一」（VEN-026）

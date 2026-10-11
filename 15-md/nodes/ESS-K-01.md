@@ -108,7 +108,7 @@
 - 复核日期：2026-09-11
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-027、VEN-029
-- 书证核验：BK-023 Ch2.3（partial）
+- 书证核验：BK-023 Ch2.3（partial）；BK-025 ChKey Insights（direct），ChManaging Risk（direct），ChRisk Tolerance of Services（direct），ChTypes of failures（direct）；BK-026 ChAccidents Are Normal（direct），ChIt’s Better to Fix It Yourself; Don’t Blame Someone Else（direct）
 - 入口链接：https://sre.google/sre-book/embracing-risk/
 - 入口链接：https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics
 - 勘误：常见误解「可靠性目标越高越好，应追求尽可能接近百分之百」→ 核验结论「百分之百既不可达也会因惧怕变更而扼杀演进；目标应基于业务可接受的不可靠度设定，内部目标比对外承诺更紧但不过度超额」（BK-025）

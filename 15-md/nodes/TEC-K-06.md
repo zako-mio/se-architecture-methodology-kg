@@ -117,6 +117,7 @@ DORA 研究以可度量的交付指标刻画组织的软件交付效能，并反
 - 生命周期：active
 - 版本：2024 (DORA four keys) / 2026 (DORA current five metrics)
 - 规范信源：VEN-018、VEN-036
+- 书证核验：BK-025 ChRelationships Between Testing and Mean Time to Repair（direct），ChThe Role of a Release Engineer（direct）；BK-026 ChChange Should Be Gradual（direct），ChCompare and Contrast（direct），ChMove Fast by Reducing the Cost of Failure（direct），ChNarrow, Rigid Incentives Narrow Your Success（direct）
 - 入口链接：https://dora.dev/guides/dora-metrics-four-keys/
 - 入口链接：https://dora.dev/guides/dora-metrics/
 - 勘误：常见误解「DORA 指标就是四键（four keys），共四项」→ 核验结论「当前官方口径已由四键扩展为五项指标，新增部署返工率（deployment rework rate），并以失败部署恢复时间取代平均修复时间」（VEN-018）

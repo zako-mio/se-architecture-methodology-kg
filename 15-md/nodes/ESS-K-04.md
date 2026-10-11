@@ -108,6 +108,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-026、VEN-018、BK-025
+- 书证核验：BK-025 ChControl Measures（direct），ChDefining Objectives（direct），ChMonitoring for the Long Term（direct），ChPractical Alerting from Time-Series Data（direct），ChTen Years On…（direct），ChTying These Principles Together（direct）；BK-026 ChDecision Making Using SLOs and Error Budgets（direct），ChWhy SREs Need SLOs（direct）
 - 入口链接：https://dora.dev/guides/dora-metrics-four-keys/
 - 勘误：常见误解「只要采集足够多的度量，系统就会自然改善」→ 核验结论「闭环要求观测、判断、行动、校准四环齐备；只有观测没有行动与校准，度量只是报表，改进不会自动发生」（BK-026）
 
