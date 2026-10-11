@@ -1,7 +1,7 @@
 ---
 name: architecture-judgment
 description: >
-  软件工程与架构设计方法论**可执行工作流**能力包（由「速查 + 路径路由」升级），内置 167 节点知识图谱（无需联网）。
+  软件工程与架构设计方法论**可执行工作流**能力包（由「速查 + 路径路由」升级），内置 168 节点知识图谱（无需联网）。
   当用户涉及：架构决策、技术选型、架构评审、需求工程、演进与技术债治理、
   康威定律/团队边界、质量属性权衡、上线与运维设计、测试策略、软件工程方法论、
   选型矩阵、架构判断力、遗留系统重构、可观测性、DORA 交付效能 等场景时加载。
@@ -16,7 +16,7 @@ description: >
 
 # architecture-judgment · 架构判断力能力包
 
-> 把「软件工程 / 架构设计方法论知识图谱」（167 节点 / 360 边 / 18 组 / 11 域 / 三层）
+> 把「软件工程 / 架构设计方法论知识图谱」（168 节点 / 364 边 / 18 组 / 11 域 / 三层）
 > 从"速查 + 路径路由"升级为 Agent 可执行的**架构设计工作流**。
 > 权威源（单一真相源）在本仓 `<MISSION_ROOT>/20-agent-skill/`；本机派生安装副本由
 > `install-skill.py` 生成，路径由 `local-bindings.json` 声明。
@@ -36,7 +36,8 @@ description: >
   - `templates/boundary.md` + `schemas/boundary.schema.json`：边界/模块设计说明契约（`kind=boundary`，门控级）。
   - `schemas/adr.schema.json`：ADR 结构化契约（机检依据，唯一真相源，不得改动）。
   - `integrations/openspec-design.md`：openspec `design` 工件集成契约（触发/动作/门控/留档）。
-- 覆盖三层：本质（为什么，51）→ 方法论（怎么做，67）→ 技术实践（用什么做，31）+ 案例（18）。
+  - `_private/CRITERIA.md`：判据事实表 + 负向覆盖矩阵 + 降级预登记规则 + 回报通道（ledger）契约。
+- 覆盖三层：本质（为什么，51）→ 方法论（怎么做，67）→ 技术实践（用什么做，32）+ 案例（18）。
 - 适用：绿地选型、遗留治理、需求收敛、质量权衡、团队边界、上线运维、测试与度量。
 - 边界：不提供具体厂商操作手册；技术实践层节点仅作选型标尺，落地细节需结合项目约束。
 
@@ -53,9 +54,12 @@ description: >
 ## 3. 何时加载（触发条件）
 
 1. **自动路由**：任务涉及技术选型 / 架构风格 / 模块与服务边界与粒度 / 架构评审 /
-   质量属性权衡 / 技术债治理 / 演进治理时，主流程（plan/build）自动加载本 skill 并委派 architect-worker。
-2. **显式命令**：`/arch <架构任务描述>` 或 `/arch 选型|评审|边界|技术债 ...`。
-3. **openspec design 阶段**：`design` 工件生成时，由行为层 `architecture-behavior.md` **强制触发**本 skill；详细契约见 `integrations/openspec-design.md`；`gate_architecture.py` PASS 前不得定稿 `design.md`。
+   质量属性权衡 / 技术债治理 / 演进治理时，主流程（plan/build）按行为层
+   `architecture-behavior.md` 的**规模三问**先定档：命中 ≥1 问才自动加载本 skill；
+   仅**门控级**（方案设计与选型，场景 1–5/10–12）强制委派 `architect-worker`，
+   产出级/按需级可自产，**咨询级（三问全不触发）不加载、不委派、不产工件**。
+2. **显式命令**：`/arch <架构任务描述>` 或 `/arch 选型|评审|边界|技术债 ...`（**一律按门控级**执行）。
+3. **openspec design 阶段**：`design` 工件生成时，由行为层 `architecture-behavior.md` 触发本 skill；详细契约见 `integrations/openspec-design.md`（该契约同样受规模三问的定档前置约束）；`gate_architecture.py` PASS 前不得定稿 `design.md`。
 
 具体场景（判类型见 `routing.md` §0）：技术选型 / 架构评审 / 需求获取与规格化 / 质量属性与 ATAM 分析 /
 技术债识别与偿还 / 遗留系统重构与绞杀者替换 / 演进式架构与防漂移 / 康威定律与团队拓扑 /
@@ -84,11 +88,12 @@ description: >
 | `templates/boundary.md` | 边界/模块设计说明模板（kind=boundary） | 设计模块/服务边界时（场景 11） |
 | `schemas/adr.schema.json` | ADR 结构化契约（机检依据，不得改动） | 产出前与门控时 |
 | `schemas/boundary.schema.json` | 边界/模块设计说明结构化契约（`gate_architecture.py --kind boundary` 依据） | 产出前与门控时 |
+| `_private/CRITERIA.md` | **判据事实表**：蕴含关系（G-A2⊂G-A1、G-B2⊂G-B1）、独立判据计数、负向覆盖矩阵、**降级预登记规则**、回报通道契约 | 质疑「门控是否有用」或要调判据档位时 |
 | `integrations/openspec-design.md` | openspec `design` 工件集成契约（触发/动作/门控/留档） | design 阶段被行为层触发时 |
 | `cheatsheet.md` | 三层各 8–12 条关键判断准则（每条 ≤60 字，附节点 id） | 需要快速判断时先读 |
 | `routing.md` | 18 个高频任务场景 → 应读节点/组/视图/学习路径 | 拿到问题先查这里定位 |
 | `decision-matrix.md` | 域 × 层落点矩阵 + 横切主题 + 权衡启发式（派生自决策矩阵视图） | 需要按域/层系统排查覆盖时 |
-| `node-index.md` | 167 节点 id ↔ 名称 ↔ 层 ↔ 域 一句话索引 | 需要按 id 深链或查名时 |
+| `node-index.md` | 168 节点 id ↔ 名称 ↔ 层 ↔ 域 一句话索引 | 需要按 id 深链或查名时 |
 
 ## 6. 深链与外部入口
 

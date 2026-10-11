@@ -133,9 +133,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：LOC-023、BK-021、BK-022
+- 书证核验：BK-021 ChDesign Changes That Are Difficult to Refactor（partial），ChFinding References（partial），ChLong Parameter List（partial），ChRefactoring Improves the Design of Software（direct），ChShotgun Surgery（direct），ChSwitch Statements（partial）
 - 勘误：常见误解「修一个删除函数引发的多处报错，只需逐处补改引用」→ 核验结论「症状根因是接口知识散落 12 文件、7 种定义方式且无交叉验证；必须把接口收敛为单一契约源并以注册中心替换全局变量，才能消除「改一处漏多处」」（LOC-023）
 
 ## §9 原始关系清单

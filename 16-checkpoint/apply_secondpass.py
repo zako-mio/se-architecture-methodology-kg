@@ -33,6 +33,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -44,7 +45,21 @@ REVIEW = os.path.join(VERIFY, "_review")
 PARTS = os.path.join(VERIFY, "_parts")
 
 STRENGTH_ORDER = {"contradicted": 0, "inferred": 1, "partial": 2, "direct": 3}
-SLUGS = {"team-topologies": "BK-030", "evolutionary-arch": "BK-011"}
+
+
+def discover_slugs(root):
+    """从 `_parts/ledger-<slug>.json` 文件名发现 slug（数据驱动，稳定排序）。
+
+    阶段7 阶段3 修正：原为硬编码 `{"team-topologies": ..., "evolutionary-arch": ...}`，
+    新增书会被 `--all` **静默跳过**（同 `derive_verification.py` 曾修过的 B3 类问题）。
+    改为与 `_parts/` 实际内容一致，新书自动纳入。
+    """
+    out = set()
+    for p in glob.glob(os.path.join(resolve(root, PARTS), "ledger-*.json")):
+        m = re.match(r"^ledger-(.+)\.json$", os.path.basename(p))
+        if m:
+            out.add(m.group(1))
+    return tuple(sorted(out))
 
 
 def resolve(root, p):
@@ -139,7 +154,7 @@ def main():
     args = ap.parse_args()
     root = os.path.abspath(args.root)
 
-    slugs = [args.slug] if args.slug else (sorted(SLUGS) if args.all else [])
+    slugs = [args.slug] if args.slug else (list(discover_slugs(root)) if args.all else [])
     if not slugs:
         print("请指定 --slug 或 --all")
         return 2

@@ -71,15 +71,25 @@
    并把结论回填到 ADR 的 `options` / `decision`。
 3. 边界/模块设计场景（场景 11）：按 `schemas/boundary.schema.json` 产出边界说明（模板 `templates/boundary.md`），
    `adr_ref` 回链对应 ADR，落 `BD-xxx.json`。
-4. 跑门控自检（`--kind` 按产物类型；schema 与 graph 自动解析，亦可显式 `--schema` / `--graph`）：
+4. 跑门控自检（`--kind` 按产物类型；schema 与 graph 自动解析，亦可显式 `--schema` / `--graph`）。
+   **本步骤由产出方自行执行**（0916 D-01：`architect-worker` 已获放行 `python3 *gate_architecture.py*`，
+   不必再等主 Agent 代跑）：
 
    ```bash
-   python3 _private/gate_architecture.py --kind adr      --input <adr.json>
-   python3 _private/gate_architecture.py --kind boundary --input <boundary.json>
+   python3 <SKILL>/_private/gate_architecture.py --kind adr      --input <adr.json>
+   python3 <SKILL>/_private/gate_architecture.py --kind boundary --input <boundary.json>
    ```
 
-   人读清单见 `checklist.md`。
+   `<SKILL>` 取 `local-bindings.json` 的 `TARGET_DIR`（默认 `~/.config/opencode/skills/architecture-judgment`）。
+   人读清单见 `checklist.md`；判据蕴含关系与降级预登记见 `_private/CRITERIA.md`。
+   把门控输出原文（`checks`/退出码/`schema 来源`）一并回报。
+   **每次真实调用会自动写一行 ledger**（回报通道，见 `CRITERIA.md` §3.1）；需要纯只读时加 `--no-ledger`。
 5. **门控不过不得交付**：修正后重跑，最多 2 轮；仍不过则回退并报告卡点。
+   **修正走最小补丁**：主 Agent 回传 FAIL 时，用 `task` 工具**带 `task_id` 续跑同一会话**（附门控
+   `checks`/`errors` 原文），不要新开委派整份重生成（重读 ~23.8 KB 必读件的成本可避免）。
+
+> 门控最常见的 FAIL 原因是**引用悬空**（图谱 id 不在 `methodology-dag.json`，或 `matrix_ref`/
+> `adr_ref` 指向不存在的文件）——交付前先自查 `checklist.md` §一/§三的两条「引用零悬挂」。
 
 **产出**：ADR（必选）+ 权衡矩阵（选型场景）+ 边界/模块设计说明（边界场景，`kind=boundary`）+ 门控通过记录。
 

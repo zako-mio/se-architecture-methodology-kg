@@ -34,6 +34,9 @@ PARTS = os.path.join("01-books", "_verify", "_parts")
 BOOKS = {
     "tt": ("team-topologies", "BK-030", "tt"),
     "ea": ("evolutionary-arch", "BK-011", "ea"),
+    "ref": ("refactoring", "BK-021", "ref"),
+    "ri": ("release-it", "BK-024", "ri"),
+    "cc": ("clean-code", "BK-020", "cc"),
 }
 
 

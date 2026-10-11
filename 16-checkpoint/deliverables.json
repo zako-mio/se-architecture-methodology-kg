@@ -6,21 +6,21 @@
   "data_dir": "10-dag-data",
   "graph": "10-dag-data/methodology-dag.json",
   "node_keyed": {
-    "html": {"dir": "11-node-pages", "ext": ".html", "expected": 167},
-    "md": {"dir": "15-md/nodes", "ext": ".md", "expected": 167}
+    "html": {"dir": "11-node-pages", "ext": ".html", "expected": 168},
+    "md": {"dir": "15-md/nodes", "ext": ".md", "expected": 168}
   },
   "deliverables": [
     {
       "id": "node-pages",
       "pattern": "11-node-pages/*.html",
-      "expected": 167,
+      "expected": 168,
       "kind": "node-keyed",
       "desc": "DAG 节点详情页（人读主入口），一节点一页"
     },
     {
       "id": "md-nodes",
       "pattern": "15-md/nodes/*.md",
-      "expected": 167,
+      "expected": 168,
       "kind": "node-keyed",
       "desc": "AI 友好 Markdown 节点镜像"
     },

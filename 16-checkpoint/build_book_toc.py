@@ -23,6 +23,7 @@ build_book_toc.py — 从 EPUB NCX 生成核验层 TOC 分片
     --book "Team Topologies" --edition "1st/2019"
 """
 import argparse
+import html
 import json
 import os
 import re
@@ -57,6 +58,9 @@ def ncx_points(epub_path):
         label = np.find("n:navLabel/n:text", ns)
         content = np.find("n:content", ns)
         txt = (label.text or "").strip() if label is not None else ""
+        # NCX 标题可能带 HTML 实体（如 Release It! 的 `&#160;`）→ 先解码，再折叠空白
+        # （`&#160;` 解码为 U+00A0，被 `\s` 匹配，故顺序不可颠倒）
+        txt = html.unescape(txt)
         txt = re.sub(r"\s+", " ", txt)   # NCX 标题内可能含换行（如 "9. Putting ... \ninto Practice"）
         src = content.get("src") if content is not None else ""
         depth = len(np.xpath("ancestor::n:navPoint", namespaces=ns))
@@ -99,9 +103,20 @@ def main():
 
     epub = args.epub if os.path.isabs(args.epub) else os.path.join(args.root, args.epub)
     toc = build_toc(ncx_points(epub))
+    out = os.path.join(args.root, PARTS_DIR, "toc-%s.json" % args.slug)
+
+    # fail-closed 护栏（2026-10-11 实测教训）：本脚本对部分既有 EPUB **非幂等** ——
+    #   `P0-02_clean-architecture_2017.epub` 的 NCX 解析返回 0 章，重生成会把原有 35 章 TOC 覆盖为空；
+    #   且 `01-books/` 被本地仓 .gitignore 整体忽略，**无本地版本控制可回滚**。
+    # 故：0 章一律拒绝写入（保留原文件），避免静默毁坏已冻结的核验层。
+    if not toc:
+        print("ABORT: NCX 解析得到 0 章 → 拒绝写入，保留原文件 %s"
+              % os.path.relpath(out, args.root))
+        print("        （该 EPUB 的 NCX 结构与本脚本预期不符；如需重建请先确认原 TOC 已备份）")
+        return 1
+
     doc = {"source_id": args.source_id, "book": args.book,
            "edition": args.edition, "toc": toc}
-    out = os.path.join(args.root, PARTS_DIR, "toc-%s.json" % args.slug)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8", newline="\n") as f:
         json.dump(doc, f, ensure_ascii=False, indent=2)

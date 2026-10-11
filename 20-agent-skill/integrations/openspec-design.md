@@ -21,14 +21,22 @@
 
 ## 3. 门控（强制，不通过不放行）
 
+> **定档前置（0916 A-02）**：本契约仍受行为层 `architecture-behavior.md` 的**规模三问**约束。
+> 三问全不触发（不改边界 / 不跨模块 / 反转成本低于「改回配置」量级）时，`design.md` 只需一段
+> 决策说明 + 末行标注 `[架构分档: 咨询级 · 三问全不触发 · 未走门控]`：**不产 ADR、不委派、不过门控**。
+> 命中 ≥1 问才按下述强制路径执行。
+
 ```bash
 python3 <SKILL>/_private/gate_architecture.py --kind adr \
   --input <change>/adr/ADR-xxx.json
 # schema / graph 自动解析；亦可显式 --schema / --graph
 ```
 
+- **执行主体**：`architect-worker` 已获放行 `python3 *gate_architecture.py*`，门控由产出方自跑并回传输出原文；
+  主 Agent 抽验复核 1 次即可（0916 D-01，取代「主 Agent 代跑」）。
 - **PASS（退出码 0）** → 允许写入 / 定稿 `design.md`。
-- **FAIL（退出码 1）** → 把门控输出回传 `architect-worker` 修正，**最多 2 轮**；仍不过则如实报告失败与原因，**不得降级为"口头通过"**。
+- **FAIL（退出码 1）** → 用 `task` 工具**带 `task_id` 续跑**同一 architect-worker 会话，附门控输出做最小字段补丁，
+  **最多 2 轮**；仍不过则如实报告失败与原因，**不得降级为"口头通过"**。
 - ⛔ **PASS 之前不得定稿 `design.md`**（"强制"的可达上限：openspec 为外部 CLI，由行为层明令 + 门控证据约束）。
 
 ## 4. 留档（双落）
@@ -40,7 +48,7 @@ python3 <SKILL>/_private/gate_architecture.py --kind adr \
 
 - 不修改 openspec 包，也不直接改其生成的 `openspec-*` skill（会被 `openspec update` 无条件覆写）。
 - 不用 `openspec schema fork`（快照会随上游 schema 漂移；留待阶段 3 视需要评估）。
-- 架构图不在本契约内产出；如需，由主 Agent 另委 `drawio-worker`（prompt 必含 `drawio-reference: 图表规范与导出验证`）。
+- 架构图不在本契约内产出；如需，由主 Agent 加载 `diagram-lite` skill 按档位出图（默认 T2：`dot -Tsvg`；对外发布级走 T3）。
 
 ## 6. 验证要点（供回归）
 

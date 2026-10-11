@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>依赖结构度量与渐进收紧治理 · 软件工程 / 架构设计方法论知识图谱</title>
+<style>
+
+:root{--bg:#f5f1e8;--panel:#fffdf8;--border:#e2d9c8;--text:#2b2620;--dim:#6f6656;--accent:#9a5b1b;--accent2:#1f6f5c;--line:#d8cdb8;--ok:#1f6f5c;--warn:#a8641a;--err:#a33a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;}
+header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+header .crumb a{color:var(--accent);text-decoration:none;}
+header .crumb a:hover{text-decoration:underline;}
+header h1{font-size:20px;font-weight:650;color:#f0f3f9;display:inline-block;margin-right:12px;}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid transparent;letter-spacing:.3px;}
+.badge.grp{background:#1d2a3f;color:#7fb0ff;border-color:#2b3d5f;}
+.badge.cnt{background:#23272f;color:#9aa0ab;border-color:#3a3f4a;}
+main{padding:24px;max-width:1150px;margin:0 auto;}
+h2{font-size:18px;margin:34px 0 12px;color:#cfd6e4;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h2 .dim{font-size:13px;font-weight:400;}
+h3{font-size:15px;margin:20px 0 8px;color:#b8c2d4;}
+p,li{font-size:14px;}
+ul{padding-left:22px;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.dim{color:var(--dim);}
+.section{scroll-margin-top:8px;}
+.brieflead{background:#0d1a14;border:1px solid #2f5a4a;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#cfe8dd;margin:12px 0;}
+.whybox{background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:8px;padding:14px 18px;margin:10px 0;}
+.whybox .tag{font-size:12px;font-weight:600;margin-bottom:6px;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:#d3d9e4;}
+.pit li{margin:5px 0;font-size:14px;}
+.pit li::marker{color:var(--warn);}
+.tblwrap{overflow-x:auto;margin:8px 0;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid var(--border);padding:7px 11px;font-size:13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#b8c2d4;white-space:nowrap;}
+td.nid{white-space:nowrap;font-family:Consolas,monospace;font-size:12px;}
+td.nid a{color:#8fb5ff;}
+td .nname{font-weight:600;color:var(--text);}
+td.brief{font-size:12.5px;color:#b6c0d0;}
+.navseq{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:#b8c2d4;text-align:center;min-width:150px;}
+.navseq a .dir{display:block;font-size:11px;color:var(--dim);margin-bottom:2px;}
+.navseq a .v{font-weight:600;color:var(--accent);}
+.navseq a.nav-index .v{color:var(--ok);}
+.navseq .spacer{flex:1;min-width:60px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.chip{font-size:12px;background:#1d2a3f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;}
+.chip:hover{background:#2b3d5f;}
+.chip .etype{font-size:10px;opacity:.85;margin-left:4px;}
+.pathbox{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.path-label{font-size:12px;color:var(--dim);margin-bottom:8px;}
+.path-seq{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13px;}
+.path-seq a{display:inline-block;background:#16273f;border:1px solid #2b3d5f;border-radius:6px;padding:2px 8px;color:#7fb0ff;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#2b3d5f;}
+.dep-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:8px;margin-top:8px;}
+.dep-list li{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;border-left:3px solid var(--warn);}
+.dep-list .evi{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
+.treenav{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0 18px;display:flex;flex-wrap:wrap;gap:2px 10px;}
+.treenav .label{font-size:12px;color:var(--dim);align-self:center;flex-shrink:0;}
+.treenav a{color:var(--dim);font-size:12px;text-decoration:none;border-radius:5px;padding:1px 6px;}
+.treenav a:hover{color:var(--accent);background:#1d2a3f;}
+.evidence{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13px;}
+.evidence .row{margin:4px 0;color:#c7d0de;}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.compare-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+footer{margin-top:44px;padding:16px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:12px;text-align:center;}
+@media (max-width:720px){
+  main{padding:14px;}
+  header{padding:12px 14px;}
+  header h1{font-size:17px;}
+  .navseq a{min-width:100%;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media print{
+  body{background:#fff;color:#000;}
+  header,footer,.navseq,.treenav{display:none;}
+  th,td{border-color:#999;color:#000;}
+}
+
+/* ================================================================
+   浅色 Codex 皮肤（阶段6·A 案）——新组件 + 旧组件浅色适配
+   ================================================================ */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.85;font-size:16px;}
+.serif,h1,h2,h3{font-family:Georgia,'Songti SC','Noto Serif CJK SC','SimSun',serif;}
+a{color:#1d4ed8;}
+a:hover{text-decoration:underline;}
+
+/* 顶栏 / 面包屑（新节点页） */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
+.topbar .in{max-width:1180px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.crumb{font-size:12.5px;color:var(--dim);}
+.crumb a{color:var(--accent);}
+.crumb .sep{margin:0 5px;opacity:.5;}
+.topbar .meta{font-size:12px;color:var(--dim);margin-left:auto;}
+
+/* 版心 / TOC */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:236px minmax(0,760px);gap:44px;padding:34px 22px 80px;}
+nav.toc{position:sticky;top:70px;align-self:start;font-size:13.5px;}
+nav.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+nav.toc a{display:block;color:var(--dim);padding:5px 0 5px 14px;border-left:2px solid var(--border);line-height:1.45;text-decoration:none;}
+nav.toc a:hover{color:var(--accent);border-left-color:var(--accent);}
+nav.toc a .n{font-family:Georgia,serif;color:var(--accent);font-weight:700;margin-right:6px;}
+article{min-width:0;}
+
+/* 文档头 */
+header.doc h1{font-size:34px;line-height:1.25;letter-spacing:-.01em;margin:2px 0 6px;font-weight:700;color:var(--text);display:block;}
+header.doc .en{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:16px;}
+header.doc .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;vertical-align:baseline;}
+
+/* 章节 */
+section{scroll-margin-top:76px;margin:46px 0;}
+section>h2{font-size:23px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;color:var(--text);border-bottom:0;padding-bottom:0;margin:0 0 8px;}
+section>h2 .num{font-size:15px;color:var(--accent);font-family:Georgia,serif;font-weight:700;}
+section>h2::after{content:"";flex:1;height:1px;background:var(--border);}
+section>h3{font-size:17px;margin:22px 0 8px;color:var(--text);}
+.lede{font-size:17px;}
+.lead{font-weight:600;}
+.hl{background:linear-gradient(transparent 58%,#f0dcae 58%);}
+
+/* 摘要卡 */
+.defcard{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:18px 22px;margin:16px 0 4px;position:relative;}
+.defcard .lab{position:absolute;top:-9px;left:16px;background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.14em;padding:1px 8px;border-radius:3px;}
+.defcard p{font-size:17px;margin:2px 0;}
+.note{font-family:Georgia,serif;font-style:italic;color:var(--dim);border-left:3px solid var(--border);padding:2px 0 2px 16px;margin:14px 0;font-size:14.5px;}
+
+/* 关系图 */
+figure{margin:22px 0;}
+.figbox{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nbhd{width:100%;height:auto;display:block;}
+figcaption{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:8px 2px;}
+.lgd{display:inline-flex;align-items:center;gap:6px;}
+.lgd i{width:18px;height:3px;border-radius:2px;display:inline-block;}
+
+/* 表格（浅色，兼容组页） */
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left;vertical-align:top;}
+th{background:#efe9dc;color:#5a5142;font-weight:600;}
+td.k{white-space:nowrap;color:var(--dim);font-size:12.5px;}
+table.cmp th{text-align:left;}
+
+/* 权衡卡 */
+.tradeoff{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--panel);}
+.tradeoff .row{display:grid;grid-template-columns:118px 1fr;border-top:1px solid var(--border);}
+.tradeoff .row:first-child{border-top:0;}
+.tradeoff .row .h{padding:14px;font-weight:700;font-size:13.5px;}
+.tradeoff .row .b{padding:14px 16px;font-size:14.5px;border-left:1px solid var(--border);margin:0;}
+.tradeoff ul.b{list-style:disc;padding-left:34px;}
+.tradeoff .row.gain .h{background:#eef7f2;color:#1f6f5c;}
+.tradeoff .row.cost .h{background:#fbf3e6;color:#8a5a12;}
+.tradeoff .row.counter .h{background:#fbeeee;color:#a01f2c;}
+.tradeoff .row.neutral .h{background:#f1ece0;color:#6f6656;}
+
+/* 学习路径条 */
+.pathbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:14px 16px;overflow-x:auto;}
+.pathbar .step{display:flex;flex-direction:column;gap:2px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:5px;padding:7px 12px;}
+.pathbar .step .id{font-size:10.5px;color:#4b6ea8;font-family:Georgia,serif;}
+.pathbar .step .nm{font-size:13.5px;color:#1d4ed8;}
+.pathbar .step.cur{background:#fbf1e8;border-color:#e0b79a;}
+.pathbar .step.cur .nm{font-weight:700;color:#8a3b12;font-family:Georgia,serif;}
+.pathbar .arw{color:var(--dim);font-size:16px;}
+
+/* 案例带 */
+.case-band{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.case-card{background:var(--panel);border:1px solid var(--border);border-top:3px solid #c2680e;border-radius:5px;padding:13px 15px;}
+.case-card .id{font-size:11px;color:#c2680e;font-family:Georgia,serif;font-weight:700;}
+.case-card h4{font-size:14.5px;margin:4px 0 6px;color:var(--text);}
+.case-card p{font-size:13px;color:#4d463a;margin:0;}
+
+/* 渐进披露 */
+details{border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:0 14px;margin:12px 0;}
+details summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px;color:#5a5142;}
+details[open] summary{border-bottom:1px solid var(--border);}
+details .in{padding:6px 0 14px;font-size:14px;}
+
+/* 信源核验（新 .r / 旧 .row 双兼容） */
+.evidence{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:6px 18px;font-size:13px;}
+.evidence .r{display:flex;gap:14px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text);flex-wrap:wrap;min-width:0;}
+.evidence .r:first-child{border-top:0;}
+.evidence .r .k{width:112px;flex:0 0 auto;color:var(--dim);font-size:12.5px;}
+.evidence .r a{word-break:break-all;overflow-wrap:anywhere;}
+.evidence .row{margin:6px 0;color:var(--text);}
+.evidence .k{color:var(--dim);display:inline-block;min-width:96px;}
+.erratum{background:#fbf1e8;border-left:3px solid #c2680e;padding:10px 14px;margin:10px 0;font-size:13.5px;}
+.erratum .m{color:#a01f2c;text-decoration:line-through;}
+
+/* 术语内联 */
+.term{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;text-decoration:none;}
+.term:hover{border-bottom-style:solid;}
+.glterm{border-bottom:1px dotted #b08a55;color:#7a4a12;font-weight:500;}
+
+/* 徽章（浅色） */
+body>header{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 24px;}
+body>header h1{font-size:20px;font-weight:650;color:var(--text);display:inline-block;margin-right:12px;}
+body>header .crumb{color:var(--dim);font-size:13px;margin-bottom:6px;}
+body>header .crumb a{color:var(--accent);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);color:var(--dim);letter-spacing:.3px;}
+.badge.basic{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.intermediate{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.advanced{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.pr{color:#8a3b12;border-color:#e0b79a;background:#fbf1e8;}
+.badge.ve{color:#1f6f5c;border-color:#a9cbbf;background:#eef7f2;}
+.badge.ly{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.tp{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.src{color:#1d4ed8;border-color:#c5d7f5;background:#eef4ff;}
+.badge.dm{color:#0d7f7f;border-color:#a9cfcf;background:#eaf6f6;}
+.badge.th{color:#5b3a8a;border-color:#c9b6e8;background:#f3eefb;}
+.badge.kind{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.grp{color:#7a4a12;border-color:#e0c9a0;background:#f7f0e2;}
+.badge.cnt{color:#6f6656;border-color:var(--border);background:#f1ece0;}
+
+/* 旧组件浅色适配（组页 / 视图页立即可用） */
+h2{color:var(--text);}
+h3{color:var(--text);}
+.brieflead{background:#eef7f2;border:1px solid #a9cbbf;border-left:4px solid var(--ok);border-radius:8px;padding:12px 16px;font-size:15px;color:#234a3d;margin:12px 0;}
+.bullet{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin:6px 0;font-size:14px;color:var(--text);}
+th{background:#efe9dc;color:#5a5142;}
+td.brief{font-size:12.5px;color:var(--dim);}
+.navseq a{display:inline-block;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:14px;color:var(--text);text-align:center;min-width:150px;}
+.chip{font-size:12px;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;}
+.chip:hover{background:#dbe7fb;}
+.path-seq a{display:inline-block;background:#eef4ff;border:1px solid #c5d7f5;border-radius:6px;padding:2px 8px;color:#1d4ed8;text-decoration:none;margin:2px;}
+.path-seq a:hover{background:#dbe7fb;}
+.treenav a:hover{color:var(--accent);background:#f1ece0;}
+.evidence .row{color:var(--text);}
+
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:20px;padding:20px 15px 60px;}
+  nav.toc{position:static;order:-1;border:1px solid var(--border);border-radius:5px;background:var(--panel);padding:8px 12px;}
+  nav.toc a{padding:4px 0 4px 12px;}
+  .nbhd{min-width:640px;}
+  header.doc h1{font-size:26px;}
+}
+@media(max-width:720px){
+  main{padding:14px;}
+  body>header{padding:12px 14px;}
+  body>header h1{font-size:17px;}
+  .badges{display:flex;margin-top:6px;}
+}
+@media(max-width:560px){
+  .tradeoff .row{grid-template-columns:1fr;}
+  .tradeoff .row .b{border-left:0;border-top:1px dashed var(--border);}
+  .nbhd{min-width:560px;}
+  table{font-size:12.5px;}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><div class="crumb"><a href="../index.html">软件工程 / 架构设计方法论知识图谱</a> <span class="sep">/</span> <a href="../12-groups/index.html">分组目录</a> <span class="sep">/</span> <a href="../12-groups/GL-TECHNOLOGY.html">技术实践层</a> <span class="sep">/</span> <span>依赖结构度量与渐进收紧治理</span></div><div class="meta">technology · H · P1 · active</div></div></div>
+<div class="wrap">
+<nav class="toc"><div class="t">目录 · CONTENTS</div><a href="#s1"><span class="n">§1</span>摘要与结论</a><a href="#s2"><span class="n">§2</span>局部关系图</a><a href="#s3"><span class="n">§3</span>原理 · 为什么</a><a href="#s4"><span class="n">§4</span>机制 · 如何运作</a><a href="#s5"><span class="n">§5</span>工程 · 怎么落地</a><a href="#s6"><span class="n">§6</span>权衡卡</a><a href="#s7"><span class="n">§7</span>案例带</a><a href="#s8"><span class="n">§8</span>信源与核验</a><a href="#s9"><span class="n">§9</span>原始关系清单</a></nav>
+<article>
+<header class="doc"><h1>依赖结构度量与渐进收紧治理</h1><div class="en">Dependency Structure Metrics and Progressive Tightening Governance</div><div class="badges"><span class="badge pr">P1</span><span class="badge st advanced">高级</span><span class="badge ve">verified</span><span class="badge ly">技术实践 technology</span><span class="badge tp">技术</span><span class="badge dm">H · 实现与构造</span><span class="badge th">质量属性</span><span class="badge th">技术债</span><span class="badge grp">GL-TECHNOLOGY · 技术实践层</span></div></header>
+<section id="s1"><h2><span class="num">§1</span>摘要与结论</h2><div class="defcard"><span class="lab">TL;DR · 一句话结论</span><p><span class="lead">依赖结构度量与渐进收紧治理把<a class="term" href="../14-views/glossary.html#g-060" title="component / unit testing — 在隔离状态下测试组件，通常需测试桩/框架，由开发者在开发环境执行。">组件</a>间的依赖关系折算为稳定性与<a class="term" href="../14-views/glossary.html#g-052" title="abstraction / leaky abstraction — 抽象=对实体的简化视图；Spolsky 定律：所有非平凡抽象都会有不同程度泄漏，无法完全屏蔽底层复杂性。">抽象</a>度等可计算指标，用归一化距主序列距离定位偏离健康线的组件，并以先告警、后报错的级联阈值在受控节奏内把结构拉回健康区间。</span></p></div><p class="note">别名：dependency structure metrics、distance from the main sequence、主序列距离、稳定依赖与稳定抽象原则、结构度量治理、渐进收紧　|　英文：Dependency Structure Metrics and Progressive Tightening Governance　|　类型：技术 / measurement</p></section>
+<section id="s2"><h2><span class="num">§2</span>局部关系图</h2><figure><div class="figbox"><svg class="nbhd" viewBox="-339 -364.8 704.2 703.8" role="img" aria-label="依赖结构度量与渐进收紧治理 的 1-2 跳邻域关系图"><title>依赖结构度量与渐进收紧治理 的 1-2 跳邻域关系图</title><circle cx="0" cy="0" r="150" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".35"/><circle cx="0" cy="0" r="275" fill="none" stroke="#d8cdb8" stroke-dasharray="3 6" opacity=".2"/><line x1="-5.6" y1="-136.4" x2="46.3" y2="-300.8" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>依据推导（derives_from）：适应度函数用于抑制架构侵蚀与漂移</title></line><line x1="-5.6" y1="-136.4" x2="73" y2="-194.1" stroke="#7c3aed" stroke-width="1.2" opacity=".45"><title>细化（refines）：适应度函数是演进式架构的强制机制</title></line><line x1="75.7" y1="213.5" x2="73" y2="-194.1" stroke="#6b7280" stroke-width="1.2" opacity=".45"><title>依赖关联（dependency）：债务治理与演进式架构协同</title></line><line x1="-142.2" y1="-239.6" x2="-5.6" y2="-136.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以可执行门控持续评估知识库架构完整性</title></line><line x1="-142.2" y1="-239.6" x2="-106.2" y2="-38.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：把架构约束转写为自动执行、可量化判定的校验</title></line><line x1="-48.3" y1="-289.2" x2="-5.6" y2="-136.4" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：用可执行门控持续校验图谱架构完整性</title></line><line x1="172.7" y1="-176.9" x2="212.6" y2="-25.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链与可再构建交付</title></line><line x1="172.7" y1="-176.9" x2="274.6" y2="-119.2" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以代码审查工具为解析对象的质量工程</title></line><line x1="-212.6" y1="54.8" x2="212.6" y2="-25.5" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控加无头渲染加视觉三重验证</title></line><line x1="130.4" y1="3.6" x2="274.6" y2="-119.2" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：静态分析平台为代码评审提供自动化检查信号</title></line><line x1="130.4" y1="3.6" x2="254.9" y2="118" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：平台产出可度量指标并驱动反馈闭环</title></line><line x1="130.4" y1="3.6" x2="212.6" y2="-25.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：质量门控把分析结果转化为变更准入判断</title></line><line x1="130.4" y1="3.6" x2="301.2" y2="34.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：规则引擎自动化识别代码坏味道</title></line><line x1="188.9" y1="203.4" x2="-56.4" y2="274.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为可维护性提供量化评估方法</title></line><line x1="188.9" y1="203.4" x2="75.7" y2="213.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：SQALE 为技术债量化与偿还提供方法基础</title></line><line x1="1.3" y1="134.9" x2="-56.4" y2="274.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务比率与评级把可维护性折算为可计算指标</title></line><line x1="1.3" y1="134.9" x2="75.7" y2="213.5" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务量化支撑按偿还优先级治理技术债</title></line><line x1="1.3" y1="134.9" x2="254.9" y2="118" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：债务度量指标纳入度量与反馈闭环</title></line><line x1="188.9" y1="203.4" x2="1.3" y2="134.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>促成（enables）：SQALE 方法使技术债量化指标得以落地</title></line><line x1="130.4" y1="3.6" x2="188.9" y2="203.4" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：SonarQube 采用 SQALE 指标命名实现债务度量</title></line><line x1="130.4" y1="3.6" x2="1.3" y2="134.9" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：平台提供技术债量化指标的计算与展示</title></line><line x1="1.3" y1="134.9" x2="130.4" y2="3.6" stroke="#a17c00" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>对照（contrasts）：度量指标是工具估算，不等于代码质量真值</title></line><line x1="0" y1="0" x2="130.4" y2="3.6" stroke="#6b7280" stroke-width="2.0" opacity=".85"><title>依赖关联（dependency）：结构度量依赖静态分析平台采集耦合与复杂度数据</title></line><line x1="0" y1="0" x2="1.3" y2="134.9" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>促成（enables）：结构度量为主序列距离等技术债判断提供可计算输入</title></line><line x1="0" y1="0" x2="-106.2" y2="-38.1" stroke="#0d7f7f" stroke-width="2.0" opacity=".85"><title>组合（combination）：渐进收紧以级联适应度函数在流水线中先告警后报错</title></line><line x1="0" y1="0" x2="-5.6" y2="-136.4" stroke="#0f8a63" stroke-width="2.0" opacity=".85"><title>实现（implements）：依赖结构度量与阈值收紧是架构适应度函数的代码层落地</title></line><line x1="-106.2" y1="-38.1" x2="-5.6" y2="-136.4" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：适应度函数工具化实现架构适应度函数方法论</title></line><line x1="-106.2" y1="-38.1" x2="73" y2="-194.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：工具化持续校验支撑演进式架构的增量变更原则</title></line><line x1="-234.8" y1="-81.1" x2="73" y2="-194.1" stroke="#0f8a63" stroke-width="1.2" opacity=".45"><title>实现（implements）：绞杀者增量迁移体现有引导的增量演进</title></line><line x1="-106.2" y1="-38.1" x2="-234.8" y2="-81.1" stroke="#0d7f7f" stroke-width="1.2" opacity=".45"><title>组合（combination）：适应度校验与绞杀者迁移组合保护遗留系统演进</title></line><line x1="172.7" y1="-176.9" x2="130.4" y2="3.6" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：以自动化代码审查工具为载体沉淀质量实践</title></line><line x1="172.7" y1="-176.9" x2="-106.2" y2="-38.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：多层门控链持续校验交付物完整性</title></line><line x1="-212.6" y1="54.8" x2="-106.2" y2="-38.1" stroke="#c2680e" stroke-width="1.2" opacity=".45" stroke-dasharray="5 4"><title>案例印证（case_instance）：印证：门控做无环断链覆盖一致校验，防漂移</title></line><circle cx="0" cy="0" r="13.0" fill="#9a5b1b" stroke="#9a5b1b" stroke-width="2.5"/><text x="0" y="23" text-anchor="middle" font-size="13.0" font-weight="700" fill="#2b2620">依赖结构度量与渐进收紧治…<title>依赖结构度量与渐进收紧治理（TEC-H-04）</title></text><circle cx="-5.6" cy="-136.4" r="9.0" fill="#c98a3a" stroke="none"/><text x="-5.6" y="-117.4" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构适应度函数<title>架构适应度函数（MTH-L-05）</title></text><circle cx="130.4" cy="3.6" r="9.0" fill="#c98a3a" stroke="none"/><text x="130.4" y="22.6" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">SonarQube 静态…<title>SonarQube 静态分析平台（TEC-H-01）</title></text><circle cx="1.3" cy="134.9" r="9.0" fill="#c98a3a" stroke="none"/><text x="1.3" y="153.9" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">技术债量化度量指标<title>技术债量化度量指标（TEC-H-03）</title></text><circle cx="-106.2" cy="-38.1" r="9.0" fill="#c98a3a" stroke="none"/><text x="-106.2" y="-19.1" text-anchor="middle" font-size="12.0" font-weight="700" fill="#2b2620">架构适应度函数工具化<title>架构适应度函数工具化（TEC-L-01）</title></text><circle cx="254.9" cy="118" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="254.9" y="134" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">度量与反馈闭环<title>度量与反馈闭环（MTH-O-11）</title></text><circle cx="212.6" cy="-25.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="212.6" y="-9.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">质量门控与持续集成<title>质量门控与持续集成（MTH-I-06）</title></text><circle cx="274.6" cy="-119.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="274.6" y="-103.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码复审与可读性治理<title>代码复审与可读性治理（MTH-H-04）</title></text><circle cx="73" cy="-194.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="73" y="-178.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">演进式架构<title>演进式架构（MTH-L-04）</title></text><circle cx="-56.4" cy="274.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-56.4" y="290.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">可维护性评估方法<title>可维护性评估方法（MTH-M-05）</title></text><circle cx="-142.2" cy="-239.6" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-142.2" y="-223.6" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG RC5→R…<title>插件 DAG RC5→RC7 升级（CAS-X-06）</title></text><circle cx="172.7" cy="-176.9" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="172.7" y="-160.9" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">Open Code Re…<title>Open Code Review 图谱（CAS-X-15）</title></text><circle cx="-212.6" cy="54.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-212.6" y="70.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">AI Agent 架构 …<title>AI Agent 架构 DAG 复盘（CAS-X-18）</title></text><circle cx="75.7" cy="213.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="75.7" y="229.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">技术债象限与偿还策略<title>技术债象限与偿还策略（MTH-L-03）</title></text><circle cx="188.9" cy="203.4" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="188.9" y="219.4" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">SQALE 技术债评估方…<title>SQALE 技术债评估方法（TEC-H-02）</title></text><circle cx="46.3" cy="-300.8" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="46.3" y="-284.8" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">架构侵蚀与漂移<title>架构侵蚀与漂移（ESS-L-03）</title></text><circle cx="-48.3" cy="-289.2" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-48.3" y="-273.2" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">插件 DAG 两次级联升…<title>插件 DAG 两次级联升级（CAS-X-07）</title></text><circle cx="301.2" cy="34.5" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="301.2" y="50.5" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">代码坏味道启发式<title>代码坏味道启发式（MTH-L-02）</title></text><circle cx="-234.8" cy="-81.1" r="6.0" fill="#fffdf8" stroke="#c98a3a" stroke-width="1.5"/><text x="-234.8" y="-65.1" text-anchor="middle" font-size="11.5" font-weight="500" fill="#2b2620">绞杀者渐进式替换<title>绞杀者渐进式替换（TEC-L-02）</title></text></svg></div><div class="legend"><span class="lgd"><i style="background:#2563eb"></i>前置依赖</span><span class="lgd"><i style="background:#0f8a63"></i>实现</span><span class="lgd"><i style="background:#7c3aed"></i>依据推导</span><span class="lgd"><i style="background:#c2680e"></i>案例印证</span><span class="lgd"><i style="background:#a17c00"></i>对比</span><span class="lgd"><i style="background:#c22836"></i>冲突</span></div><figcaption>以本节点为中心，静态内联 1–2 跳邻域：内环 4 个直接邻接、外环 14 个二跳节点，共 19 个节点；连线按边类型着色（六类配色见下）。构建期计算，无运行期脚本。</figcaption></figure></section>
+<section id="s3"><h2><span class="num">§3</span>原理 · 为什么</h2><p class="lede"><span class="lead">结构度量把「<a class="term" href="../14-views/glossary.html#g-011" title="architecture — 系统在其环境中根本性的概念或属性，体现于元素、关系及设计与演化原则；架构是抽象，不是工件。">架构</a>是否正在腐化」这一难以直接观察的判断，转写成依赖关系的可计算特征。</span>核心洞见是稳定与抽象必须匹配：被广泛依赖的组件应当抽象，以便在不破坏使用者的情况下继续扩展；而频繁变动的组件应当具体，以便低成本改写。稳定依赖原则要求依赖箭头指向更稳定的方向，稳定抽象原则进一步要求稳定者同时抽象，两者把「谁依赖谁」从偶然结果变成可检查的设计约束。若只谈原则而不度量，偏离只能靠评审偶然发现；一旦度量，偏离就变成坐标系上的距离，可以在每次提交后重新计算。<span class="hl">治<a class="term" href="../14-views/glossary.html#g-019" title="architecture decision / rationale — 影响 AD 元素并关联关注点的决策；理由记录决策依据及被否决的架构备选。">理由</a>此获得一个连续可观测的对象：问题不再是「架构好不好」，而是「有多少组件、偏离健康线多远、趋势在收敛还是发散」。</span>这使结构治理具备与性能、覆盖率同类的可追踪性，也让它能被纳入自动化门控，而不是停留在设计文档里。度量与治理因此是一体的：没有度量，原则只是口号，无法判断偏离是否真的发生；没有分级收紧，度量只会产出一份无人处理的告警清单。两者结合，结构约束才具备随时间生效的能力。</p></section>
+<section id="s4"><h2><span class="num">§4</span>机制 · 如何运作</h2><p class="lede"><span class="lead">度量族由几个相互衔接的量构成。</span><span class="hl">传入<a class="term" href="../14-views/glossary.html#g-044" title="coupling — 模块间相互依赖的程度；非二元而是多维，类型 Content→Data（高→低）。">耦合</a>统计指向某组件的连接数，传出耦合统计它指向外部的连接数；稳定性取传出耦合与两者之和的比值，接近一表示易变，接近零表示稳定。</span>抽象度取抽象构件与具体构件之比。二者合成归一化距主序列距离，即抽象度与稳定性之和相对理想值的偏差，取值区间为零到一，越接近零越贴近健康线。坐标系两端各有一个排斥区：既稳定又具体的组件落在痛苦区，改动代价高且难以扩展；既抽象又无人依赖的组件落在无用区。<span class="hl">函数级的圈复杂度按判定节点与路径数折算，用于约束单点复杂度过高；<a class="term" href="../14-views/glossary.html#g-043" title="cohesion — 模块内部元素彼此关联/隶属同一目标的程度；序数型，Coincidental→Functional。">内聚</a>缺失指标则用于判断某个<a class="term" href="../14-views/glossary.html#g-042" title="module / modularization — Parnas：模块是责任分配（非子程序）；模块化效果取决于划分判据。">模块</a>是否应当拆分。</span>治理机制是一条级联门控：先对超过宽松阈值的部分告警，随后随时间逐步收紧阈值并升级为错误，使存量债务在受控节奏内偿还，而新增偏离当场被拦下。整条链均可自动化，因此偏离能够在每次提交后被重新计算，并直接进入流水线的判定环节，而不必等待周期性的专项审查。</p></section>
+<section id="s5"><h2><span class="num">§5</span>工程 · 怎么落地</h2><p class="lede"><span class="lead">落地时先选定度量工具并固定采集口径，把耦合、抽象度、稳定性与主序列距离纳入<a class="term" href="../14-views/glossary.html#g-069" title="continuous integration (CI) — 团队成员至少每日把改动合并回主线，每次集成由自动化构建（含测试）验证。">持续集成</a>，使每次提交都产生可比较的数值。</span><span class="hl">阈值不应一次性设为理想值：先取当前分布的中位或较宽松档位，把超限设为告警而非阻断，观察一段时间后再分批收紧，并把每一档的收紧时点与目标写进<a class="term" href="../14-views/glossary.html#g-073" title="config — 随部署环境变化的一切（资源句柄、凭据、每部署值）；须与代码严格分离并存于环境变量。">配置</a>，避免阈值随讨论漂移。</span>治理对象要区分存量与增量——存量按模块影响面与变更频率排序偿还，增量在准入处直接拦截，这与把新代码与整体代码分开观察是同一思路。痛苦区的组件优先通过提取抽象、拆分职责或引入接口来降低具体性与被依赖程度；无用区的组件则检查是否属于过度设计，必要时合并或下沉。<span class="hl">度量结果须与<a class="term" href="../14-views/glossary.html#g-100" title="refactoring — 对软件内部结构的修改，目的是更易理解/修改，而不改变可观察行为（observable behavior）。">重构</a>、评审和排期衔接，并定期复核阈值是否仍匹配领域复杂度，防止团队为通过门控而拆分函数或堆砌空接口。</span>阈值与规则集应作为显式配置纳入版本管理，使每一轮收紧的时点、幅度与依据都可追溯、可复核、必要时可回滚，避免治理节奏因人员更替而中断。</p></section>
+<section id="s6"><h2><span class="num">§6</span>权衡卡</h2><div class="tradeoff"><div class="row neutral"><div class="h">原文要点</div><ul class="b"><li>这类度量的边界同样明确。</li><li>其一，它们无法区分<a class="term" href="../14-views/glossary.html#g-006" title="essential complexity (essence) — 构成抽象软件实体的复杂概念结构本身固有的复杂度；无法被任何单一技术或管理突破（无银弹）。Brooks 原文四固有属性：complexity / conformity / changeability / invisibility。">本质复杂度</a>与<a class="term" href="../14-views/glossary.html#g-007" title="accidental complexity (accident) — 将抽象实体用程序语言表示并映射到机器语言时受空间/速度约束产生的复杂度；属当下附带、可随技术进步消除的困难（过往高级语言/分时等突破多在此层）。">偶然复杂度</a>：算法本身困难的问题必然产生复杂函数，单看数值会把合理实现判为坏味道，因此阈值必须结合领域判断，行业常用的宽松上限往往偏高，照搬会放过真正需要重构的代码。</li><li>其二，抽象度与稳定性都是比例量，容易被表面改动左右——为了让数字好看而堆砌无人使用的接口，或用无意义的拆分降低圈复杂度，都会让指标失去指示意义，这正是把度量当作考核目标时的典型退化。</li><li>其三，主序列距离是启发式坐标，它假设抽象与稳定应当匹配，但对数据库模式这类天然具体又高度被依赖的构件，偏离是结构宿命而非设计失误，须作为已知例外登记。</li><li>其四，级联收紧依赖团队持续维护阈值，一旦无人推进，告警会长期停留而不产生约束。</li><li>因此这些度量适合作为定位与排序的信号，最终是否重构、按什么顺序偿还，仍须结合变更历史、业务重要性与人工判断。</li><li>更稳妥的定位是把它当作一副需要持续校准的传感器：借助它获得可比的信号，同时清楚它只观测到结构的一个侧面。</li></ul></div></div><p class="note">权衡原文仅按显式标记词归栏引用（收益 / 代价 / 反例），其余句子按原序列为「原文要点」；内容逐字引用未改写。</p></section>
+<section id="s7"><h2><span class="num">§7</span>案例带</h2><div class="case-band"><div class="case-card"><span class="id">CAS-X-06 · 经 MTH-L-05</span><h4>插件 DAG RC5→RC7 升级</h4><p>一次知识库随上游源码版本升级的级联维护：以三层差异分析把 219 个包收敛为 26 个实质变更包，经编译、运行时、组合三类依赖判定更新 DAG 数据后全量重生成页面，并以静态门控加渲染验证收口。</p></div><div class="case-card"><span class="id">CAS-X-07 · 经 MTH-L-05</span><h4>插件 DAG 两次级联升级</h4><p>在同一知识库上继续两轮上游级联升级：处理数百次提交与包的增删，暴露「依赖声明不等于运行时引用」、分层须按最长路径深度、纯外部依赖边不得入主图等差分陷阱，并以全量门控校验收口。</p></div><div class="case-card"><span class="id">CAS-X-15 · 2 跳派生：当前节点 → TEC-H-01 → MTH-I-06</span><h4>Open Code Review 图谱</h4><p>对阿里开源 AI 代码审查 CLI 做源码级解析并构建「知识 + 实践资产 + AI 索引」三合一知识图谱的工程案例。</p></div><div class="case-card"><span class="id">CAS-X-16 · 2 跳派生：当前节点 → TEC-H-01 → MTH-O-11</span><h4>控制理论⊗Agent 设计</h4><p>将控制理论五维（负反馈 / 状态估计 / PID / 鲁棒 / 分层）系统映射到 Agent 工程环节，并以真实产品案例验证的跨学科方法论案例。</p></div><div class="case-card"><span class="id">CAS-X-17 · 2 跳派生：当前节点 → TEC-H-01 → MTH-O-11</span><h4>技术知识中枢交付法</h4><p>从模糊需求到上线，把 AI Agent 驱动的端到端交付固化为四阶段加双共识加迭代的可迁移方法论的实战提炼案例。</p></div><div class="case-card"><span class="id">CAS-X-18 · 2 跳派生：当前节点 → TEC-H-01 → MTH-I-06</span><h4>AI Agent 架构 DAG 复盘</h4><p>对四个工作日内独立完成三个异构对象 DAG 分析的方法论复盘，总结「采集→建模→生成→门控→交付」可复用管线与关键教训。</p></div></div></section>
+<section id="s8"><h2><span class="num">§8</span>信源与核验</h2><div class="evidence"><div class="r"><span class="k">核验状态</span>True（verified）</div><div class="r"><span class="k">置信度</span>high</div><div class="r"><span class="k">复核日期</span>2026-10-11</div><div class="r"><span class="k">生命周期</span>active</div><div class="r"><span class="k">版本</span>2017/2022</div><div class="r"><span class="k">规范信源</span>BK-007、BK-011</div><div class="r"><span class="k">入口链接</span><a href="https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282" target="_blank" rel="noopener">https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009282</a>　<a href="https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/" target="_blank" rel="noopener">https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/</a></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：距主序列距离接近零就说明该组件设计健康</span><br>核验结论：该度量是抽象度与稳定性的启发式合成，无法区分本质复杂度与偶然复杂度；数据库模式等天然具体且被高度依赖的构件会长期偏离，须作为已知例外而非设计缺陷处理　<span class="k">[BK-007]</span></div></div><div class="r" style="display:block"><span class="k">勘误</span><div class="erratum"><span class="m">常见误解：把结构度量阈值一次性设到理想值即可改善架构</span><br>核验结论：对长期积累存量债务的项目，硬阈值会让多数项目集体失败；书中建议改用级联适应度函数，先告警再随时间升级为错误，给团队可控的偿还节奏　<span class="k">[BK-011]</span></div></div></div></section>
+<section id="s9"><h2><span class="num">§9</span>原始关系清单</h2><details><summary>展开：本节点的全部原始关系边（4 条，含边 ID 与方向）</summary><div class="in"><div class="tblwrap"><table><thead><tr><th>关系</th><th>方向</th><th>对端节点</th><th>说明</th></tr></thead><tbody><tr><td class="k">组合</td><td>→ TEC-L-01</td><td>架构适应度函数工具化<br><span style="color:var(--dim);font-size:12px">E-998</span></td><td>渐进收紧以级联适应度函数在流水线中先告警后报错</td></tr><tr><td class="k">依赖关联</td><td>→ TEC-H-01</td><td>SonarQube 静态分析平台<br><span style="color:var(--dim);font-size:12px">E-996</span></td><td>结构度量依赖静态分析平台采集耦合与复杂度数据</td></tr><tr><td class="k">促成</td><td>→ TEC-H-03</td><td>技术债量化度量指标<br><span style="color:var(--dim);font-size:12px">E-997</span></td><td>结构度量为主序列距离等技术债判断提供可计算输入</td></tr><tr><td class="k">实现</td><td>→ MTH-L-05</td><td>架构适应度函数<br><span style="color:var(--dim);font-size:12px">E-999</span></td><td>依赖结构度量与阈值收紧是架构适应度函数的代码层落地</td></tr></tbody></table></div></div></details></section>
+<footer>软件工程 / 架构设计方法论知识图谱 · 节点页由 16-checkpoint/gen-nodes.py 生成 · 数据源 10-dag-data/methodology-dag.json</footer>
+</article>
+</div>
+</body>
+</html>

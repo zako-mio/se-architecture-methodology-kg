@@ -95,6 +95,74 @@
         "review_date": "2026-09-11"
       }
     ],
+    "CAS-X-04": [
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "Design Changes That Are Difficult to Refactor",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "Refactoring Improves the Design of Software",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Long Parameter List",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Shotgun Surgery",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Switch Statements",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "Finding References",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
     "CAS-X-05": [
       {
         "source_id": "BK-011",
@@ -586,6 +654,164 @@
         "review_date": "2026-09-11"
       }
     ],
+    "ESS-H-06": [
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "3",
+        "section": "3.7",
+        "section_title": "Switch Statements",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "6",
+        "section": "6.1",
+        "section_title": "Data Abstraction",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "6",
+        "section": "6.2",
+        "section_title": "Data/Object Anti-Symmetry",
+        "evidence_strength": "inferred",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.2",
+        "section_title": "Encapsulation",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "16",
+        "section": "16.2",
+        "section_title": "Then Make It Right",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "17",
+        "section": "17.22",
+        "section_title": "G7: Base Classes Depending on Their Derivatives",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "17",
+        "section": "17.23",
+        "section_title": "G8: Too Much Information",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-H-08": [
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.3",
+        "section_title": "Classes Should Be Small!",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.4",
+        "section_title": "The Single Responsibility Principle",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.7",
+        "section_title": "Organizing for Change",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.7",
+        "section_title": "Organizing for Change",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "10",
+        "section": "10.8",
+        "section_title": "Isolating from Change",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "12",
+        "section": "12.6",
+        "section_title": "Minimal Classes and Methods",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-020",
+        "book": "Clean Code",
+        "chapter": "17",
+        "section": "17.38",
+        "section_title": "G23: Prefer Polymorphism to If/Else or Switch/Case",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "ESS-I-02": [
       {
         "source_id": "BK-007",
@@ -744,6 +970,72 @@
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Chain of Failure",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Chain of Failure",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "4",
+        "section": "",
+        "section_title": "Stability Antipatterns",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Bulkheads",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Wrapping Up",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "6",
+        "section": "",
+        "section_title": "Recovery-Oriented Computing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
       }
     ],
     "ESS-L-01": [
@@ -2282,6 +2574,74 @@
         "review_date": "2026-09-11"
       }
     ],
+    "MTH-H-01": [
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "Defining Refactoring",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "Format of the Refactorings",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "Format of the Refactorings",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "Format of the Refactorings",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "How Mature Are These Refactorings?",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-K-06": [
       {
         "source_id": "BK-023",
@@ -2293,6 +2653,208 @@
         "direction": "reverse",
         "second_pass": "disputed",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Breaking Things to Make Them Better",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Breaking Things to Make Them Better",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Antecedents of Chaos Engineering",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Designing the Experiment",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Prerequisites",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Automate and Repeat",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-L-01": [
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "Defining Refactoring",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "Defining Refactoring",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "The Two Hats",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "2",
+        "section": "When Shouldn't You Refactor?",
+        "section_title": "Principles in Refactoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "4",
+        "section": "",
+        "section_title": "Building Tests",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "5",
+        "section": "Format of the Refactorings",
+        "section_title": "Toward a Catalog of Refactorings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-L-02": [
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Duplicated Code",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Parallel Inheritance Hierarchies",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-021",
+        "book": "Refactoring",
+        "chapter": "3",
+        "section": "Refused Bequest",
+        "section_title": "Bad Smells in Code",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
       }
     ],
     "MTH-L-04": [
@@ -3574,6 +4136,140 @@
         "direction": "reverse",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Circuit Breaker",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Circuit Breaker",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Circuit Breaker",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Circuit Breaker",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Circuit Breaker",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "5",
+        "section": "",
+        "section_title": "Timeouts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "TEC-K-04": [
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Chaos Engineering",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "The Simian Army",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Opt In or Opt Out?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Injecting Chaos",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Targeting Chaos",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-024",
+        "book": "Release It!",
+        "chapter": "17",
+        "section": "",
+        "section_title": "Disaster Simulations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
       }
     ],
     "TEC-K-05": [
@@ -3955,6 +4651,202 @@
       "summary": "书中系统论证数据库、Web 与框架皆为可推迟的细节，主张核心策略不依赖这些选择，并把组合装配点（Main）视为终极细节；图谱缺少「细节可推迟」与组合根这一治理视角。",
       "proposed_action": "新增节点（细节可推迟与组合根），与 ESS-G-02、MTH-J-04 补引并建立依赖关联",
       "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-CC-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "10",
+      "section": "10.5",
+      "target": {
+        "existing_node_id": "ESS-H-02",
+        "proposed_node": null
+      },
+      "summary": "本书给出可操作的凝聚度判据：类应保有少量实例变量，每个方法至少操作其中一个，变量被全部方法共用即达最大凝聚；当少数方法想共享某些变量而其余方法不用时，几乎总意味着另一个类正试图从大类里脱出，应当拆分。它还给出反向信号——把大函数拆小时提升为实例变量的做法会稀释凝聚，此时应顺势切出新的类。图谱该节点未引用本书。",
+      "proposed_action": "为 ESS-H-02 补引 BK-020 第10章 10.5–10.6 节，作为「以实例变量共享度度量凝聚、以凝聚流失作为拆类触发条件」的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "12",
+      "section": "12.4",
+      "target": {
+        "existing_node_id": "ESS-H-03",
+        "proposed_node": null
+      },
+      "summary": "本书把消除重复列为四条简单设计规则中优先级最高的一条，并主张重复的每种形态都代表一次被漏掉的抽象机会：字面相同的代码应抽成方法，算法相似而代码不同的模块应改用模板方法或策略，重复还可以藏在实现层（如 isEmpty 与 size 各自维护状态）。第3章更把重复称为软件中万恶之源，并列举数据库范式、面向对象与结构化编程都在消除重复。图谱该节点未引用本书。",
+      "proposed_action": "为 ESS-H-03 补引 BK-020 第12章 12.4 节与第3章 3.24 节，作为「消除重复为最高优先规则」及「重复的多种形态与对应消解手法」的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "17",
+      "section": "17.38",
+      "target": {
+        "existing_node_id": "ESS-H-09",
+        "proposed_node": null
+      },
+      "summary": "本书给出以多态取代分支的启发式：同一类选择只允许存在一个分支语句，其分支必须负责创建多态对象以取代系统其余处的同类分支；并提醒多数人用分支只是因为那是最省事的暴力解法，函数比类型更易变的场合相对罕见，因此每条分支语句都应先被怀疑。第3章进一步给出藏法——把分支埋进抽象工厂，由工厂产出派生实例，其余函数经接口多态分派。图谱该节点未引用本书。",
+      "proposed_action": "为 ESS-H-09 补引 BK-020 第17章 17.38 节与第3章 3.7 节，作为「以多态封装类型选择、分支语句收敛为唯一工厂」这一模式化解法的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "10",
+      "section": "10.8",
+      "target": {
+        "existing_node_id": "ESS-G-02",
+        "proposed_node": null
+      },
+      "summary": "本书以 Portfolio 依赖东京证券交易所 API 为例，说明依赖具体细节会使测试受外部波动牵制，于是抽出只声明一个询价方法的接口、让具体实现去实现它、并由构造函数注入引用，测试即可换成固定报价的替身；作者由此显式陈述依赖倒置原则——类应依赖抽象而非具体细节，并指出解耦到可如此测试的系统同时更灵活、更易复用。第11章把该思路扩展为把构造与使用分离，并用依赖注入作为落地机制。图谱该节点未引用本书。",
+      "proposed_action": "为 ESS-G-02 补引 BK-020 第10章 10.8 节与第11章 11.2/11.5 节，作为「以抽象接口隔离外部细节、由注入实现依赖方向倒置」的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "8",
+      "section": "8.4",
+      "target": {
+        "existing_node_id": "MTH-I-05",
+        "proposed_node": null
+      },
+      "summary": "本书把「用测试去探索第三方 API」写成一种测试替身之外的独立用途：学习测试按自己的预期用法调用外部接口，是受控实验，成本近乎为零且不必事先读懂全部文档；第三方发布新版本时重跑这些测试即可立刻发现行为差异，避免把兼容性风险留到生产环境。它还主张干净的边界应由一组按生产用法行使接口的出站测试守护，并建议用包装层收窄对第三方细节的依赖，以便日后替换实现或做桩。图谱该节点未引用本书。",
+      "proposed_action": "为 MTH-I-05 补引 BK-020 第8章 8.2–8.4 与 8.6 节，作为「学习测试/边界出站测试」这一测试替身之外用途的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-006",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "17",
+      "section": "17.23",
+      "target": {
+        "existing_node_id": "ESS-G-03",
+        "proposed_node": null
+      },
+      "summary": "本书把接口宽度直接换算为耦合高低：定义良好的模块接口很小，能用很少的动作做成很多事；定义糟糕的模块接口又宽又深，做简单的事也要摆出许多手势。给出的收敛手段包括隐藏数据、工具函数、常量与临时变量，不造大量方法与实例变量，不为子类预留成批受保护成员。第17章另一条启发式（抽象层级错位）则以 Stack 接口里的「剩余容量百分比」为例，指出该操作只对部分实现有意义，应下移到有界栈这类派生接口。图谱该节点未引用本书。",
+      "proposed_action": "为 ESS-G-03 补引 BK-020 第17章 17.23 与 17.21 节，作为「接口宽度即耦合度」判据与「按使用方需要拆细接口」的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-007",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "17",
+      "section": "17.15",
+      "target": {
+        "existing_node_id": "MTH-L-02",
+        "proposed_node": null
+      },
+      "summary": "第17章把坏味道整理成一份带编号的巡诊清单，覆盖注释、环境、函数、命名与通用五类，每条给出命名、判据与处置建议，并强调这些是启发式而非可机械套用的规则、每条都要看具体情境。可支撑图谱该节点把坏味道当启发式使用的做法，但本书这一章本身未被引用。",
+      "proposed_action": "为 MTH-L-02 补引 BK-020 第17章全章（尤其 17.15 通用类与 17.10 函数类各条），作为「坏味道清单化、逐条给判据与处置」的原始出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-008",
+      "kind": "missed_citation",
+      "book_source_id": "BK-020",
+      "chapter": "12",
+      "section": "12.3",
+      "target": {
+        "existing_node_id": "MTH-O-09",
+        "proposed_node": null
+      },
+      "summary": "本书的简单设计由四条规则按优先级构成：先让全部测试通过，其次消除重复，再次确保表达力，最后才是最小化类与方法数量；作者并明确承认消除重复、表达力与单一职责都可能被做过头，为求小而造出过多微小类反而有害。这与图谱该节点「以理解成本优先」的取向高度同源，却未引用本书。",
+      "proposed_action": "为 MTH-O-09 补引 BK-020 第12章 12.1–12.6 节，作为「简单设计四规则的优先级排序」及「简洁可被做过头」的出处。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-009",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "3",
+      "section": "3.5",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-H-05"
+      },
+      "summary": "第3章整章给出函数粒度的设计纪律，且多有条目化判据：函数要短、只做一件事、块内缩进不超过一两层、每个函数只下降一个抽象层级、按自顶向下讲述的顺序排列（步降规则）、参数越少越好且避免标志参数与输出参数、避免副作用、命令与查询分离、用异常替代错误码。图谱现有节点覆盖重构手法、命名与评审，但没有「函数粒度与接口形状」这一层方法节点，本书最核心的这一章因此无处挂载。",
+      "proposed_action": "提案新节点 MTH-H-05「函数设计与抽象层级（Function Design and Abstraction Levels）」，以 BK-020 第3章为主信源，收纳函数长度、单一职责、步降规则、参数形态与副作用等判据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-010",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "2",
+      "section": "2.2",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-H-06"
+      },
+      "summary": "第2章给出完整的命名方法：名字要透露意图、避免误导与无意义区分、可发音、可搜索、不加编码前缀、类名用名词、方法名用动词、一概念只用一词、不用双关、优先取解空间与问题域的词汇、为名字补充有意义的上下文但不过度加长。图谱有可读性与认知负荷这一本质节点，却没有可执行的命名方法节点，命名这条最基础的工程纪律在图中缺位。",
+      "proposed_action": "提案新节点 MTH-H-06「命名方法与意图表达（Naming and Intention Revelation）」，以 BK-020 第2章为主信源，并与 ESS-H-07 可读性节点建立细化关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-011",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "7",
+      "section": "7.5",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-12"
+      },
+      "summary": "第7章把异常处理当作独立的设计主题：优先用异常而非返回码；先写 try-catch-finally 的骨架再填内容；用非受检异常；让异常带上足够的上下文以便定位；按调用方的需要而非异常的来源来划分异常类，必要时把第三方 API 的多种异常包装成一类；为特例定义正常流程；不返回也不传递 null，改用抛异常或特例对象。图谱现有节点覆盖错误/缺陷/失效的概念区分与容错、混沌等运行期议题，但缺少「异常与错误处理的编码策略」这一本质节点。",
+      "proposed_action": "提案新节点 ESS-H-10「异常处理策略（Exception Handling Strategy）」，以 BK-020 第7章为主信源，并与边界隔离、可测试性节点建立关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-012",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "8",
+      "section": "8.6",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-H-07"
+      },
+      "summary": "第8章把「与外部代码的接缝」写成一套做法：以包装层收窄对第三方包的依赖，使日后换库代价小、也便于在自测中做桩；用学习测试探索并固定对第三方行为的理解；在第三方尚未提供时先按理想接口编码、用适配器在边界转换；边界处保持清晰的分离并配一组出站测试界定期望；不让过多代码知道第三方的细节。图谱有边界与接口隔离这一本质节点、也有测试替身方法节点，但缺少「边界接入与防腐」这一方法层节点。",
+      "proposed_action": "提案新节点 MTH-H-07「边界接入与防腐（Boundary Integration and Anticorruption）」，以 BK-020 第8章为主信源，并与 ESS-G-03、MTH-I-05 建立关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-013",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "14",
+      "section": "14.5",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "MTH-H-08"
+      },
+      "summary": "第14章以 Args 解析器从粗稿到成品的全过程示范「持续精进」：先让代码跑起来、写测试固定行为，再以极小步骤逐步改动，每一步都保持测试通过；先让重复的临时结构存在，再逐步把行为下沉到合适的派生类，途中始终保持程序可运行。第16章与第10章也复述同一做法——把一次大函数拆成多个类不是重写，而是先写测试固定行为、再做一连串微小改动。图谱有行为保持重构与代码坏味道节点，但缺少「以测试保护的极小步增量精进」这一方法节点。",
+      "proposed_action": "提案新节点 MTH-H-08「持续精进与极小步改造（Successive Refinement and Tiny Steps）」，以 BK-020 第14章与第16章为主信源，并与 MTH-L-01、MTH-H-01 建立关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CC-014",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-020",
+      "chapter": "13",
+      "section": "13.4",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-14"
+      },
+      "summary": "第13章给出并发设计的职责划分判据：并发本身就是一个足以构成变更原因的关注点，因此应把线程管理代码与线程无关代码分开，只留少数受控位置管理线程；并给出限制共享数据作用域、使用数据副本、让线程尽量独立等推论，以及缩小同步区、警惕同步方法之间的依赖、把线程相关部分做成可插拔可调、把偶发失败当作线程问题的候选信号等做法。图谱现有节点覆盖可靠性、容错与混沌工程，但没有把「并发与线程管理的职责边界」作为本质层议题。",
+      "proposed_action": "提案新节点 ESS-H-11「并发职责划分（Concurrency Responsibility Partitioning）」，以 BK-020 第13章为主信源，并与 ESS-H-08 单一职责、ESS-I-02 可测试性建立关系。",
+      "evidence_strength": "direct"
     },
     {
       "gap_id": "GAP-DDIA-001",
@@ -4388,6 +5280,454 @@
       },
       "summary": "图谱缺少「防腐层」这一概念：本书主张在项目与外部库、消息中间件、厂商产品之间放一层隔离，把所需语义收敛到自己定义的接口上，使日后替换实现成为机械操作；并给出「即时防腐层」的做法——平时不必预先抽象，确需替换时再由工具抽出接口，以免为抽象而抽象反而损害可读性；第8章还把它列为摆脱厂商绑定反模式的对策。该概念应补挂在边界与接口隔离节点之下。",
       "proposed_action": "新增术语条目并补挂至 ESS-G-03，说明防腐层、即时防腐层与外部依赖替换成本之间的关系，并补边至抽象泄漏本质节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Refactoring Improves the Design of Software",
+      "target": {
+        "existing_node_id": "ESS-L-01",
+        "proposed_node": null
+      },
+      "summary": "书中指出不重构则设计必然腐化：为实现短期目标或在不完全理解设计的情况下改动代码会使结构丢失，而且这种丢失有累积效应——越难从代码中读出设计就越难保住它、腐化得越快，定期重构才使代码保住形状。该论述是「软件演化定律」中复杂度持续上升、结构需要主动维护这一命题在代码层的直接表述，而 ESS-L-01 的规范信源未包含 BK-021。",
+      "proposed_action": "为 ESS-L-01 补引 BK-021 第 2 章「Refactoring Improves the Design of Software」段，登记「结构丢失的累积效应」为该节点在代码层的直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "When Shouldn't You Refactor?",
+      "target": {
+        "existing_node_id": "ESS-L-02",
+        "proposed_node": null
+      },
+      "summary": "书中以 Ward Cunningham 的隐喻给出债务的三要素：未完成的重构即负债，负债带来利息即过于复杂的代码所增加的维护与扩展成本，公司需要一定负债才能高效运转但利息过重会被压垮，因此必须管理债务并分批偿还。这是技术债概念的经典出处之一，ESS-L-02「技术债本质」未收录 BK-021。",
+      "proposed_action": "为 ESS-L-02 补引 BK-021 第 2 章该节，登记「未完成重构＝负债、复杂度＝利息、须分批偿还」三要素为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Refactoring and Design",
+      "target": {
+        "existing_node_id": "MTH-H-03",
+        "proposed_node": null
+      },
+      "summary": "书中论述重构改变了前期设计的角色：设计压力来自「日后改设计很贵」，一旦重构使修改不再昂贵，前期设计就从「求出最优解」退为「得到合理解」，并因此转向更简单的设计。同时指出预置的灵活性本身有成本、且无法预测哪些真会被用到。MTH-H-03「战略式编程与持续设计投入」未收录 BK-021。",
+      "proposed_action": "为 MTH-H-03 补引 BK-021 第 2 章「Refactoring and Design」段，登记「前期设计角色转变」「简单设计优先」「预置灵活性的成本」三条为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Refactoring and Design",
+      "target": {
+        "existing_node_id": "MTH-O-09",
+        "proposed_node": null
+      },
+      "summary": "书中给出一条可执行的简单性判据：面对潜在变化先问「把简单方案重构成灵活方案有多难」，多数时候答案是相当容易，于是直接实现能工作的最简单方案；并指出预置的灵活性会使整体系统更复杂、更难维护，而其中大部分根本用不上。MTH-O-09「理解成本优先的简单原则」未收录 BK-021。",
+      "proposed_action": "为 MTH-O-09 补引 BK-021 第 2 章该段，把「能否重构过去」登记为选择简单方案的可操作判据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "The Rule of Three",
+      "target": {
+        "existing_node_id": "MTH-O-02",
+        "proposed_node": null
+      },
+      "summary": "书中给出一条具体的触发阈值启发式：第一次做某事就直接做，第二次遇到类似重复时皱眉但仍照做，第三次再遇到类似情形才动手重构（「事不过三」）。它把「何时该消除重复」从感觉转为可操作的次数判据，MTH-O-02「准入与触发时机选择」未收录 BK-021，且该节点现有内容未覆盖以重复次数为阈值的触发规则。",
+      "proposed_action": "为 MTH-O-02 补引 BK-021 第 2 章「The Rule of Three」节，登记三次法则为重复类变更的触发时机判据；若该节点定位不含代码级触发规则，则考虑另立方法节点承载。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-REF-006",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Refactor As You Do a Code Review",
+      "target": {
+        "existing_node_id": "MTH-H-04",
+        "proposed_node": null
+      },
+      "summary": "书中把重构作为代码评审的现场手段：评审者提出的意见若能当场重构实现，就能看到建议落地后的真实代码，从而产生原本想不到的第二层意见，评审也因此有更具体的产出；并建议代码评审保持小规模（一名评审者与原作者共同改码），大规模设计评审才另用图示与场景走查。MTH-H-04「代码复审与可读性治理」未收录 BK-021。",
+      "proposed_action": "为 MTH-H-04 补引 BK-021 第 2 章该节，登记「评审即重构」「小规模评审组」为直接证据，并补一条指向重构手法族节点的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-007",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Changing Interfaces",
+      "target": {
+        "existing_node_id": "MTH-L-07",
+        "proposed_node": null
+      },
+      "summary": "书中给出接口变更的迁移套路：当重构涉及被外部无法改动代码使用的已发布接口时，须在一段时间内同时保留新旧接口，让旧接口转调新接口而不是复制方法体（复制会走向重复代码），并标记为弃用以便调用方知情；同时建议不要过早发布接口、并调整代码所有权规则以便利重构。MTH-L-07「弃用与日落策略」未收录 BK-021。",
+      "proposed_action": "为 MTH-L-07 补引 BK-021 第 2 章「Changing Interfaces」段，登记「新旧接口并存＋旧接口转调＋弃用标记」为直接证据，并把「不要过早发布接口」补为该策略的前置条件。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-008",
+      "kind": "concept_missing",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Indirection and Refactoring",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "ESS-H-15"
+      },
+      "summary": "图谱缺少「间接层」这一概念节点。书中以专节论述：多数重构其实是在增加间接层（把大对象拆小、大方法拆小），而间接层能换来四项收益——共享逻辑、把意图与实现分开表述、隔离变化、以多态表达条件逻辑；但每拆一层就多一个要管理的对象，层层委托还会降低可读性，因此还要能识别并移除已经不再回本的「寄生间接」。这一「收益与代价并存、需按回本与否取舍」的判断在图谱中无处承载。",
+      "proposed_action": "新增 ESS-H-10「间接层与委托的成本收益」，收录四项收益、拆分的可读性与管理成本，以及寄生间接的识别与移除；与 ESS-H-01 信息隐藏、ESS-H-05 深模块与浅模块建立关系边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-009",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "2",
+      "section": "Refactoring and Performance",
+      "target": {
+        "existing_node_id": "ESS-M-03",
+        "proposed_node": null
+      },
+      "summary": "书中先区分性能优化与重构（都不改变行为、目的不同），再给出可操作的性能工作法：多数程序把大部分时间耗在一小部分代码上，故应先写成结构良好、便于调优的软件，在开发后期用剖析器定位热点、以与重构相同的小步方式优化、每步之后编译测试并在无改善时回退；并批评「全体随时关注性能」的均匀优化浪费九成力气。ESS-M-03「性能效率本质」未收录 BK-021。",
+      "proposed_action": "为 ESS-M-03 补引 BK-021 第 2 章「Refactoring and Performance」段，登记「先可调优再调优」「剖析驱动的后期小步优化」为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-010",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "3",
+      "section": "Speculative Generality",
+      "target": {
+        "existing_node_id": "MTH-O-08",
+        "proposed_node": null
+      },
+      "summary": "书中批评为「将来某天可能需要」而预置的钩子与特例：若这些机制并未真正被使用，它们只会妨碍理解与维护，应当删除；并给出可操作的识别法——当某个方法或类的唯一使用者是测试用例时即可删除，另有无用参数、抽象命名等对应处置手法。MTH-O-08「复杂度阶梯与演进时机」未收录 BK-021，缺少这条「过早引入复杂度」的直接反面证据。",
+      "proposed_action": "为 MTH-O-08 补引 BK-021 第 3 章「Speculative Generality」节，登记投机性泛化及其识别信号为该节点在重构语境的直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-011",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "3",
+      "section": "Feature Envy",
+      "target": {
+        "existing_node_id": "ESS-H-02",
+        "proposed_node": null
+      },
+      "summary": "书中把「共同变化的东西应放在一起」写成方法归属的判据：若一个方法更关心别的类的数据，就把它移到数据所在处；并进一步要求发散式变化与霰弹式修改最终收敛为「常见变更与类之间的一对一映射」，即每类变更只改动一个类。ESS-H-02「内聚与耦合」未收录 BK-021，缺少这组可直接操作的内聚判据。",
+      "proposed_action": "为 ESS-H-02 补引 BK-021 第 3 章「Feature Envy」「Divergent Change」「Shotgun Surgery」三节，登记「变更原因与类一对一映射」为直接证据。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-REF-012",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "4",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-I-02",
+        "proposed_node": null
+      },
+      "summary": "书中把可测试性直接写成重构的使能条件：「想重构，前提是有坚实的测试」，并补充即使有能自动完成重构的工具也仍然需要测试，因为不可能所有重构都被自动化；对既有的非自测试代码，须先把代码变成可自测的再重构。ESS-I-02「可测试性本质」未收录 BK-021。",
+      "proposed_action": "为 ESS-I-02 补引 BK-021 第 4 章开篇，登记「测试是重构的前提条件」为直接证据，并补一条指向行为保持重构节点的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-013",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "4",
+      "section": "The Value of Self-testing Code",
+      "target": {
+        "existing_node_id": "MTH-I-03",
+        "proposed_node": null
+      },
+      "summary": "书中给出自测试代码与先写测试两项实践：测试须全自动并自行判定结果（把期望值写进测试并比较），失败与成功都自动报告；并指出最有用的写测试时机之一是在开始编码之前——先写测试等于先问清要做什么、聚焦接口而非实现，并以测试通过作为完成标志。MTH-I-03「测试驱动开发」未收录 BK-021。",
+      "proposed_action": "为 MTH-I-03 补引 BK-021 第 4 章「The Value of Self-testing Code」节，登记「自测试代码」「先写测试」为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-014",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "5",
+      "section": "How Mature Are These Refactorings?",
+      "target": {
+        "existing_node_id": "ESS-H-09",
+        "proposed_node": null
+      },
+      "summary": "书中明确表述模式与重构的关系：模式是想要到达的形态，重构是从现状走到那里的路径；若干手法本身就是把模式引入系统的动作（以状态或策略取代类型码、形成模板方法），且目录尚未覆盖全部模式，这一缺口被作者点明。ESS-H-09「设计模式与反模式」未收录 BK-021，缺少「模式作为重构目标」这一关系表述的出处。",
+      "proposed_action": "为 ESS-H-09 补引 BK-021 第 5 章该节，登记「模式＝目标、重构＝路径」为直接证据，并补一条指向重构手法族节点的边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-015",
+      "kind": "missed_citation",
+      "book_source_id": "BK-021",
+      "chapter": "12",
+      "section": "The Nature of the Game",
+      "target": {
+        "existing_node_id": "MTH-L-06",
+        "proposed_node": null
+      },
+      "summary": "书中说明大型重构在生产系统上可能持续数月乃至数年：无法说服管理者停工集中清理，只能像啃面包屑一样今天一点、明天一点，按需推进、随时可停，并需全队对方向达成一致、各人的改动都朝同一方向；同时指出纠缠继承、过程式设计等大型重构缺少精确步骤，因为每个烂摊子都不一样。MTH-L-06「遗留系统渐进治理」未收录 BK-021。",
+      "proposed_action": "为 MTH-L-06 补引 BK-021 第 12 章「The Nature of the Game」与「Four Big Refactorings」两节，登记「按需分次推进＋全队方向共识＋无精确步骤」为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-REF-016",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-021",
+      "chapter": "14",
+      "section": "Technical Criteria for a Refactoring Tool",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "TEC-L-04"
+      },
+      "summary": "图谱缺少「自动化重构工具」节点，而书中以整章论述其技术条件与实践条件：技术上需要可全局检索的程序数据库与语法树，且必须承认完全保持行为不可能（如反射调用、实时约束下毫秒级差异）；实践上速度优先于边界完备、可撤销使探索式设计可行、必须集成进 IDE 否则无人使用。工具化的后果被明确推论为「设计错误成本下降，因此前期设计可以减少」。这些内容在图谱中无处承载。",
+      "proposed_action": "新增 TEC-L-03「自动化重构工具」，收录程序数据库／语法树／行为保持的准确性边界／撤销／IDE 集成五项要件、核心收益「免除每步重测」，以及「工具化降低设计错误成本」的推论；与 MTH-H-01、MTH-L-01 建立关系边。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "3",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-I-03",
+        "proposed_node": null
+      },
+      "summary": "第3章以独立术语条目给出「故障—错误—失效」的三层定义与递进关系：故障使软件内部状态变错，错误是可被看见的不正确行为，失效是系统不再响应；故障被触发打开裂纹，故障变错误、错误再引发失效。这正是 ESS-I-03 所主张的区分，但该节点未把 BK-024 列为信源。",
+      "proposed_action": "把 BK-024 第3章「Chain of Failure」补入 ESS-I-03 的规范信源与书证核验行，并用该书的三层定义作为术语区分的书证。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "6",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-K-01",
+        "proposed_node": null
+      },
+      "summary": "第6章引述面向恢复的计算（ROC）三条立论——硬件与软件的失效都不可避免、建模与分析永不完备因而无法先验预测全部失效模式、人的操作是主要失效来源——并明确其路线与「消除失效根源」的传统可靠性研究相反。ESS-K-01（可靠性即风险管理）正需要这类「失效不可消除、故须持续管理」的书证，但未引用 BK-024。",
+      "proposed_action": "将 BK-024 第6章「Recovery-Oriented Computing」补入 ESS-K-01 的信源与书证核验行，作为「以风险管理替代消除失效」的直接依据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-M-03",
+        "proposed_node": null
+      },
+      "summary": "第5章「Bulkheads」给出把容量按调用方、功能或拓扑切分以在故障中保住部分功能的可用性战术，并指出虚拟机冗余弱于物理机冗余（多数虚拟化工具无法强制物理隔离，多个虚拟机可能同处一台物理机）。MTH-M-03（可用性战术应用）未引用 BK-024，缺了这条关于资源隔离与损害封堵的经典战术来源。",
+      "proposed_action": "把 BK-024 第5章「Bulkheads」补入 MTH-M-03 信源，并在资源隔离类战术条目下补充该书关于分区依据与伪冗余风险的论证。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-004",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-M-04",
+        "proposed_node": null
+      },
+      "summary": "第5章「Let It Crash」给出以组件级不稳定换取系统级稳定的做法：崩溃必须被限制在边界内，重启要快，监督树负责决定重启范围、必要时让监督者自身崩溃以免掩盖根因，且组件恢复太慢时（如老式 JavaEE 单体）该策略并不适用。ESS-M-04（可靠性与可用性）未引用 BK-024，缺这条崩溃、监督与重入的可用性机制书证。",
+      "proposed_action": "考虑把 BK-024 第5章「Let It Crash」补入 ESS-M-04 的书证；或在 MTH-M-03 中作为可用性战术（故障检测/恢复准备/重新引入）的实例引用。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-RI-005",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "4",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-K-07",
+        "proposed_node": null
+      },
+      "summary": "第4章「Unbalanced Capacities」与「Scaling Effects」指出容量失衡是缩放效应的特例：流量模式一变（季节、市场或宣传驱动），平时无害的前端会突然淹没后端；应对需要调用方用断路器卸压、提供方用握手与背压让调用方减速，并用舱壁为关键调用方预留容量。MTH-K-07（容量规划与变更管理方法）未引用 BK-024，缺这条容量失衡与削峰的书证。",
+      "proposed_action": "把 BK-024 第4章「Unbalanced Capacities」与「Scaling Effects」补入 MTH-K-07 信源，并在容量规划正文中补入「前端突增淹没后端」的失效模式及三层应对。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-006",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "10",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-K-05",
+        "proposed_node": null
+      },
+      "summary": "第10章分析 AWS S3 事故复盘时强调全文没有出现「人为错误」一词：这不是人辜负了系统，而是系统辜负了人——管理工具与操作手册放大了一次误输入，因此必须定性为系统失败。书中还主张对成功的变更也做复盘、找出险肇事件并追问当时是什么安全网拦住了它。MTH-K-05（事件响应与无指责复盘方法）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第10章「System Failure, Not Human Error」补入 MTH-K-05 信源，并在无指责原则下增补「对成功变更复盘、追查险肇事件」这一条目。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-007",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "10",
+      "section": "",
+      "target": {
+        "existing_node_id": "TEC-K-05",
+        "proposed_node": null
+      },
+      "summary": "第10章指出一次公开复盘应完成三件事：说明发生了什么、致歉、承诺改进，并以 AWS 的公开复盘写作为正面范例。TEC-K-05（无指责复盘实践）作为落地实践节点，未引用 BK-024 这条关于复盘产出与对外沟通的实践书证。",
+      "proposed_action": "把 BK-024 第10章「Mechanical Advantage」补入 TEC-K-05 信源，并把「说明经过／致歉／承诺改进」三要素纳入复盘文档模板。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-008",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-I-05",
+        "proposed_node": null
+      },
+      "summary": "第5章「Test Harnesses」给出测试夹具与 mock 对象的关键差别：mock 只能按已定义接口产生行为，而夹具作为独立服务器不受接口约束，可制造连接被拒、连上后不发数据、只回 RESET、接收窗口打满却不排空等网络与协议级故障，用来验证系统在依赖脱规格时的行为。MTH-I-05（测试替身与测试策略）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第5章「Test Harnesses」补入 MTH-I-05 信源，并在测试替身谱系中补入「跨进程、可违反协议约定」的夹具这一档及其适用场景。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-009",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "4",
+      "section": "",
+      "target": {
+        "existing_node_id": "ESS-J-02",
+        "proposed_node": null
+      },
+      "summary": "第4章「Scaling Effects」指出开发环境每个应用一台机、QA 至多一两台，而生产里应用尺寸跨度极大，缩放效应因此很难在测试环境看到，这类缺陷测不掉、只能设计掉；第17章进一步说明暂存环境永远不会是生产的全尺寸副本，因而难以从非生产环境获得对整体系统的理解。ESS-J-02（开发生产一致性）未引用 BK-024 这条关于规模不一致的论证。",
+      "proposed_action": "把 BK-024 第4章「Scaling Effects」与第17章相关段落补入 ESS-J-02 信源，作为「一致性无法靠复制环境达成、需以设计消解」的书证。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-010",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "17",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-J-07",
+        "proposed_node": null
+      },
+      "summary": "第17章把爆炸半径界定为坏体验的量级——既看受影响客户的数量，也看他们被打扰的程度——并指出要按一组准则挑选受害者，从「每一万个请求失败一个」这类简单规则起步再逐步精细化。MTH-J-07（可回滚性与爆炸半径控制）未引用 BK-024，缺了该书对爆炸半径的双维度定义与选靶做法。",
+      "proposed_action": "把 BK-024 第17章「Prerequisites」补入 MTH-J-07 信源，并采用其爆炸半径双维度（受影响人数 × 受扰程度）作为度量口径与选靶准则。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-011",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "13",
+      "section": "",
+      "target": {
+        "existing_node_id": "TEC-J-02",
+        "proposed_node": null
+      },
+      "summary": "第13章论述不可变基础设施：机器部署后不再变更，需要改动的做法是更新自动化脚本并构建新镜像、随后删掉旧机器；其优势在于每次都从已知状态出发，而不必从不明现状收敛，从而避开长期存活机器上配方管不到的隐状态（如内核参数与 TCP 超时）。TEC-J-02（不可变基础设施实现）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第13章「Automated Deployments」补入 TEC-J-02 信源，并在实现要点中补入「收敛式 vs 不可变式」的对比论证与隐状态风险。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-012",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "TEC-K-02",
+        "proposed_node": null
+      },
+      "summary": "第5章要求断路器状态变化始终被记录、当前状态可查询可监控，并把状态变化频率视为值得趋势化的领先指标；第13章进一步要求健康检查页报告应用版本、运行时版本、主机 IP 以及连接池、缓存与断路器的状态。TEC-K-02（可观测性信号采集）未引用 BK-024，缺了「熔断、资源池与缓存状态作为可采集信号」这条具体埋点清单。",
+      "proposed_action": "把 BK-024 第5章「Circuit Breaker」与第13章「Rollout」补入 TEC-K-02 信源，并把健康检查页的字段清单纳入信号采集清单。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-013",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "5",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-O-07",
+        "proposed_node": null
+      },
+      "summary": "第5章「Governor」与第10章指出自动化没有判断力、出错时极快，等人察觉时往往已进入恢复而非干预阶段；因此应在不安全方向上施加阻力（关停、删除、阻断这类动作要放慢），给人类留出干预时间，并让动作在超出安全区间后遭遇递增阻力。MTH-O-07（自动化方式选择）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第5章「Governor」与第10章「Mechanical Advantage」补入 MTH-O-07 信源，并把「自动化负责重复任务与快速响应、人负责全局态势感知」的分工纳入选择准则。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-014",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "13",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-J-05",
+        "proposed_node": null
+      },
+      "summary": "第13章「Rollout」给出分批滚动更新的完整节奏：先让一批停止接新请求、等负载排空、更新代码与配置、等健康检查全绿、再恢复接流，然后逐批重复；首批应作为金丝雀并暂停评估，在负载均衡器上做流量整形逐步放量，同时盯错误日志、延迟与内存指标的异常，一旦异常就切走流量再排查。MTH-J-05（渐进暴露部署策略）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第13章「Rollout」补入 MTH-J-05 信源，并把「停流—排空—更新—健康检查—恢复」的批次步骤与金丝雀暂停评估纳入策略描述。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-RI-015",
+      "kind": "missed_citation",
+      "book_source_id": "BK-024",
+      "chapter": "16",
+      "section": "",
+      "target": {
+        "existing_node_id": "MTH-L-04",
+        "proposed_node": null
+      },
+      "summary": "第16章「Evolutionary Architecture」引用 Ford 等人的定义（把跨多个维度的增量、受引导的变更作为首要原则），并指出让演进式架构奏效的关键反而在于失败——必须对同类问题尝试不同做法并淘汰较差者，让技术单元与业务能力的小颗粒各自成功或失败，从而使组织获得适应性。MTH-L-04（演进式架构）未引用 BK-024。",
+      "proposed_action": "把 BK-024 第16章「Evolutionary Architecture」补入 MTH-L-04 信源，并把「以小颗粒独立成败换取适应性」作为该方法的支撑论据与判据来源。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-RI-016",
+      "kind": "concept_missing",
+      "book_source_id": "BK-024",
+      "chapter": "4",
+      "section": "",
+      "target": {
+        "existing_node_id": null,
+        "proposed_node": "TEC-K-07"
+      },
+      "summary": "全书第4章系统给出了一整套稳定性反模式（集成点、连锁反应、级联失效、用户与流量冲击、阻塞线程、自我拒绝攻击、缩放效应、容量失衡、惊群、慢响应、无界结果集），第5章再以稳定性模式逐一对治。当前图谱只在技术层有断路器与混沌实践等零散节点，没有承载「反模式—模式」这对成体系结构的节点，导致该书的稳定化主线无处挂载。",
+      "proposed_action": "新增一个方法层或技术层节点承载稳定性反模式体系，把第5章的稳定性模式（超时、断路器、舱壁、稳态、快速失败、握手、背压、卸载、调速器、解耦中间件、测试夹具、让它崩溃）作为其对策清单，并与 TEC-K-01、TEC-K-04 建立关系边。",
       "evidence_strength": "direct"
     },
     {

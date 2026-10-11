@@ -130,9 +130,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-032、PAP-023、BK-020
+- 书证核验：BK-020 Ch3.7（partial），Ch6.1（partial），Ch6.2（inferred），Ch10.2（partial），Ch16.2（partial），Ch17.22（direct），Ch17.23（direct）
 - 入口链接：https://www.pearson.com/en-us/subject-catalog/p/design-patterns-elements-of-reusable-object-oriented-software/P200000009144
 - 入口链接：https://doi.org/10.1007/BFb0054099
 - 勘误：常见误解「继承是纯粹的信息隐藏与复用手段」→ 核验结论「继承属白盒复用，暴露父类实现并破坏封装；父类实现改动可迫使子类改动，即脆弱基类问题」（BK-032）

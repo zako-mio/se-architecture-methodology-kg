@@ -147,9 +147,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-021、WEB-040、WEB-014、BK-022
+- 书证核验：BK-021 Ch4（direct），ChDefining Refactoring（direct），ChFormat of the Refactorings（direct），ChThe Two Hats（direct），ChWhen Shouldn't You Refactor?（direct）
 - 入口链接：https://martinfowler.com/bliki/DefinitionOfRefactoring.html
 - 入口链接：https://refactoring.com/catalog/
 - 勘误：常见误解「重构约等于重写或清理代码」→ 核验结论「重构以不改变可观察行为为硬判据；重写与改功能不属重构，二者以行为是否变化为分界」（BK-021）

@@ -33,6 +33,10 @@ CORPUS = [
     # 阶段7 轨B：新增核验书语料（BK-030 / BK-011）——证据素材亦须过版权红线
     os.path.join("01-books", "_verify", "_text", "team-topologies.txt"),
     os.path.join("01-books", "_verify", "_text", "evolutionary-arch.txt"),
+    # 阶段7 阶段3 轨B 续做：新增核验书语料（BK-021 / BK-024 / BK-020）
+    os.path.join("01-books", "_verify", "_text", "refactoring.txt"),
+    os.path.join("01-books", "_verify", "_text", "release-it.txt"),
+    os.path.join("01-books", "_verify", "_text", "clean-code.txt"),
 ]
 CORPUS_GLOB = os.path.join("01-books", "_files", "P0-11", "ddia-zh-src", "*.md")
 

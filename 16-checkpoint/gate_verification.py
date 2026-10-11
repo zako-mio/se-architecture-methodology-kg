@@ -60,6 +60,9 @@ SLUG_RECORD_PREFIX = {
     "saip": "SAIP",
     "team-topologies": "TT",
     "evolutionary-arch": "EA",
+    "refactoring": "REF",
+    "release-it": "RI",
+    "clean-code": "CC",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -70,6 +73,9 @@ SLUG_TEXT = {
     "saip": "saip.txt",
     "team-topologies": "team-topologies.txt",
     "evolutionary-arch": "evolutionary-arch.txt",
+    "refactoring": "refactoring.txt",
+    "release-it": "release-it.txt",
+    "clean-code": "clean-code.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -77,6 +83,9 @@ SOURCE_SLUG = {
     "BK-009": "saip",
     "BK-030": "team-topologies",
     "BK-011": "evolutionary-arch",
+    "BK-021": "refactoring",
+    "BK-024": "release-it",
+    "BK-020": "clean-code",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）
