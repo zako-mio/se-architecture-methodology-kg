@@ -198,10 +198,17 @@
     "ESS-K-01": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-09-11",
+      "review_date": "2026-10-11",
       "errata": [],
       "_evidence": [
-        "VR-DDIA-001"
+        "VR-DDIA-001",
+        "VR-SRE-130",
+        "VR-SRE-131",
+        "VR-SRE-132",
+        "VR-SRE-133",
+        "VR-SRE-134",
+        "VR-SREW-136",
+        "VR-SREW-137"
       ]
     },
     "ESS-K-02": {
@@ -222,6 +229,38 @@
         "VR-RI-004",
         "VR-RI-005",
         "VR-RI-006"
+      ]
+    },
+    "ESS-K-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-030",
+        "VR-SRE-031",
+        "VR-SRE-032",
+        "VR-SRE-033",
+        "VR-SREW-029",
+        "VR-SREW-030",
+        "VR-SREW-031",
+        "VR-SREW-032"
+      ]
+    },
+    "ESS-K-04": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-034",
+        "VR-SRE-035",
+        "VR-SRE-036",
+        "VR-SRE-037",
+        "VR-SRE-038",
+        "VR-SRE-039",
+        "VR-SREW-033",
+        "VR-SREW-034"
       ]
     },
     "ESS-L-01": {
@@ -534,6 +573,102 @@
         "VR-REF-018"
       ]
     },
+    "MTH-J-07": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-120",
+        "VR-SRE-121",
+        "VR-SRE-122",
+        "VR-SRE-123",
+        "VR-SREW-125",
+        "VR-SREW-126",
+        "VR-SREW-127",
+        "VR-SREW-128"
+      ]
+    },
+    "MTH-K-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-001",
+        "VR-SRE-002",
+        "VR-SRE-003",
+        "VR-SRE-004",
+        "VR-SRE-005",
+        "VR-SRE-006",
+        "VR-SREW-001",
+        "VR-SREW-002"
+      ]
+    },
+    "MTH-K-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-007",
+        "VR-SRE-008",
+        "VR-SRE-009",
+        "VR-SRE-010",
+        "VR-SRE-011",
+        "VR-SREW-007",
+        "VR-SREW-008",
+        "VR-SREW-009"
+      ]
+    },
+    "MTH-K-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-012",
+        "VR-SRE-013",
+        "VR-SRE-014",
+        "VR-SRE-015",
+        "VR-SRE-016",
+        "VR-SRE-017",
+        "VR-SREW-013",
+        "VR-SREW-014"
+      ]
+    },
+    "MTH-K-04": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-018",
+        "VR-SRE-019",
+        "VR-SRE-021",
+        "VR-SRE-022",
+        "VR-SRE-023",
+        "VR-SREW-017",
+        "VR-SREW-020",
+        "VR-SREW-022"
+      ]
+    },
+    "MTH-K-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-024",
+        "VR-SRE-025",
+        "VR-SRE-026",
+        "VR-SRE-027",
+        "VR-SRE-028",
+        "VR-SRE-029",
+        "VR-SREW-023",
+        "VR-SREW-024"
+      ]
+    },
     "MTH-K-06": {
       "verified": true,
       "confidence": "high",
@@ -547,6 +682,22 @@
         "VR-RI-010",
         "VR-RI-011",
         "VR-RI-012"
+      ]
+    },
+    "MTH-K-07": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-101",
+        "VR-SRE-102",
+        "VR-SRE-103",
+        "VR-SRE-104",
+        "VR-SRE-105",
+        "VR-SREW-101",
+        "VR-SREW-102",
+        "VR-SREW-103"
       ]
     },
     "MTH-L-01": {
@@ -710,6 +861,22 @@
         "VR-TT-119"
       ]
     },
+    "MTH-N-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-135",
+        "VR-SRE-136",
+        "VR-SRE-137",
+        "VR-SRE-138",
+        "VR-SREW-142",
+        "VR-SREW-144",
+        "VR-SREW-145",
+        "VR-SREW-146"
+      ]
+    },
     "MTH-N-06": {
       "verified": true,
       "confidence": "high",
@@ -833,6 +1000,22 @@
         "VR-EA-119"
       ]
     },
+    "TEC-J-04": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-125",
+        "VR-SRE-126",
+        "VR-SRE-127",
+        "VR-SRE-128",
+        "VR-SRE-129",
+        "VR-SREW-131",
+        "VR-SREW-132",
+        "VR-SREW-133"
+      ]
+    },
     "TEC-K-01": {
       "verified": true,
       "confidence": "high",
@@ -846,6 +1029,38 @@
         "VR-RI-016",
         "VR-RI-017",
         "VR-RI-018"
+      ]
+    },
+    "TEC-K-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-106",
+        "VR-SRE-107",
+        "VR-SRE-108",
+        "VR-SRE-109",
+        "VR-SRE-110",
+        "VR-SREW-107",
+        "VR-SREW-108",
+        "VR-SREW-109"
+      ]
+    },
+    "TEC-K-03": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-111",
+        "VR-SRE-112",
+        "VR-SRE-113",
+        "VR-SRE-114",
+        "VR-SRE-115",
+        "VR-SREW-113",
+        "VR-SREW-114",
+        "VR-SREW-115"
       ]
     },
     "TEC-K-04": {
@@ -874,6 +1089,22 @@
         "VR-D2-044",
         "VR-D2-045",
         "VR-DDIA-015"
+      ]
+    },
+    "TEC-K-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-11",
+      "errata": [],
+      "_evidence": [
+        "VR-SRE-116",
+        "VR-SRE-117",
+        "VR-SRE-118",
+        "VR-SRE-119",
+        "VR-SREW-119",
+        "VR-SREW-121",
+        "VR-SREW-122",
+        "VR-SREW-123"
       ]
     },
     "TEC-L-01": {

@@ -37,6 +37,9 @@ CORPUS = [
     os.path.join("01-books", "_verify", "_text", "refactoring.txt"),
     os.path.join("01-books", "_verify", "_text", "release-it.txt"),
     os.path.join("01-books", "_verify", "_text", "clean-code.txt"),
+    # 阶段7 阶段3 续做：新增在线采集语料（BK-025 / BK-026，CC BY-NC-ND 4.0 仅私有层）
+    os.path.join("01-books", "_verify", "_text", "sre-book.txt"),
+    os.path.join("01-books", "_verify", "_text", "workbook.txt"),
 ]
 CORPUS_GLOB = os.path.join("01-books", "_files", "P0-11", "ddia-zh-src", "*.md")
 

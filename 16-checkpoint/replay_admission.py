@@ -103,29 +103,48 @@ def eval_tier_broken_direct_only_sources(anchors, sources, subsumed=False,
 
 # ------------------------------------------------------------- 概念归组
 
+CONCEPT_TIERS = ("T1", "T2", "T3")
+
+
 def build_concepts(adr, gaps):
-    """从 ADR 裁决表读人工归组；同时机械校验「参与扩展 ⇔ proposed_node 非空」。"""
+    """从 ADR 裁决表读人工归组；机械校验「裁决表概念条目 ⊆ 参与扩展集合」。
+
+    ⚠️ 口径纠正（阶段3 回写轮）：**不得**再用 `target.proposed_node` 非空作为
+    「是否参与结构扩展」的代理判据。`proposed_node` 语义是**号分配状态**，
+    与「是否为概念提案」正交：T3 no-id / released 的概念条目按号释放政策
+    回写后 `proposed_node` 必须为空（否则缺口文件谎称占用已释放号）。
+    改为以裁决表的 `tier`（T1/T2/T3 = 概念条目）机械判定概念集。
+    """
     concepts = []
     register_gaps = set()
+    register_concept_gaps = set()
+    register_odd_tiers = set()
     for i, e in enumerate(adr.get("candidate_register") or [], 1):
         gap_ids = list(e.get("gap_ids") or [])
         register_gaps.update(gap_ids)
+        tier = e.get("tier")
+        if tier in CONCEPT_TIERS:
+            register_concept_gaps.update(gap_ids)
+        elif tier is not None:
+            register_odd_tiers.add(tier)
         reason = e.get("reason_code") or ""
         concepts.append({
             "idx": i,
             "key": normalize(e.get("concept")),
             "concept": e.get("concept"),
-            "tier_adr": e.get("tier"),
+            "tier_adr": tier,
             "id": e.get("id"),
             "gap_ids": gap_ids,
             "subsumed": "SUBSUMED" in reason.upper(),
             "reason_code": reason,
         })
 
-    # 机械筛选：proposed_node 非空 ⇒ 参与结构扩展
-    mech_expand = {gid for gid, g in gaps.items() if (g.get("target") or {}).get("proposed_node")}
-    mech_cite = {gid for gid, g in gaps.items() if not (g.get("target") or {}).get("proposed_node")}
-    return concepts, register_gaps, mech_expand, mech_cite
+    # 机械筛选：① 裁决表中的概念条目（tier ∈ T1/T2/T3）；② 尚未裁决但已占号的新提案
+    mech_expand = set(register_concept_gaps)
+    mech_expand |= {gid for gid, g in gaps.items()
+                    if gid not in register_gaps and (g.get("target") or {}).get("proposed_node")}
+    mech_cite = set(gaps) - mech_expand
+    return concepts, register_gaps, mech_expand, mech_cite, register_concept_gaps, register_odd_tiers
 
 
 def concept_metrics(concept, gaps):
@@ -171,7 +190,8 @@ def check_forbidden_constants(adr):
 # ------------------------------------------------------------- 重放
 
 def replay(adr, gaps, show=40):
-    concepts, register_gaps, mech_expand, mech_cite = build_concepts(adr, gaps)
+    (concepts, register_gaps, mech_expand, mech_cite,
+     register_concept_gaps, register_odd_tiers) = build_concepts(adr, gaps)
     rows = []
     for c in concepts:
         anchors, nsources, src_list = concept_metrics(c, gaps)
@@ -193,8 +213,8 @@ def replay(adr, gaps, show=40):
             "src_list": src_list, "subsumed": c["subsumed"], "reason_code": code,
             "match": tier_pred == c["tier_adr"],
         })
-    return rows, register_gaps, mech_expand, mech_cite
-
+    return (rows, register_gaps, mech_expand, mech_cite,
+            register_concept_gaps, register_odd_tiers)
 
 # ------------------------------------------------------- 负向测试
 
@@ -260,6 +280,169 @@ def negative_tests(adr, gaps):
     return results
 
 
+# ------------------------------------------------- T2 晋升扫描（P1）
+
+def eval_promotion(anchors, sources, subsumed=False, id_unique=True, layer_ok=True):
+    """T2 → T1 晋升谓词（ADR-004 §决定二 的 T1 条件在 T2 候选上的直接套用）。
+
+    语义：T2 候选取得「第二个独立信源」后即满足 T1 条件，可晋升入图。
+    返回 True 表示**当前证据下已可晋升**。判据不得含条数/清单/区间快照常量。
+    """
+    if subsumed or not id_unique or not layer_ok:
+        return False
+    if anchors < 1:
+        return False
+    return sources >= 2
+
+
+def eval_promotion_broken(anchors, sources, subsumed=False, id_unique=True, layer_ok=True):
+    """【负例用】错误谓词：只看 direct 锚数、漏检独立信源数 ⇒ 单源候选会被误判可晋升。"""
+    return anchors >= 1 and not subsumed
+
+
+def scan_promotion(adr, gaps):
+    """枚举全部 T2 候选（裁决表 T2 条目 ∪ 未裁决但已占号的新提案），逐条求值晋升谓词。"""
+    concepts, register_gaps, _mech_expand, _mech_cite, _rcg, _rot = build_concepts(adr, gaps)
+    rows = []
+    for c in concepts:
+        if c["tier_adr"] != "T2":
+            continue
+        anchors, nsources, src_list = concept_metrics(c, gaps)
+        rows.append({
+            "origin": "candidate_register",
+            "concept": c["concept"],
+            "id": c["id"],
+            "gap_ids": c["gap_ids"],
+            "anchors": anchors,
+            "sources": nsources,
+            "src_list": src_list,
+            "subsumed": c["subsumed"],
+            "promotable": eval_promotion(anchors, nsources, subsumed=c["subsumed"]),
+            "blocked_by": ("SUBSUMED" if c["subsumed"] else
+                           ("无 direct 锚" if anchors < 1 else
+                            ("独立信源 < 2（当前 %d）" % nsources if nsources < 2 else None))),
+        })
+    # 未裁决但已占号的新提案（无 ADR tier，按同一谓词评估；概念名即缺口提案）
+    for gid in sorted(gaps):
+        if gid in register_gaps:
+            continue
+        g = gaps[gid]
+        tgt = g.get("target") or {}
+        if not tgt.get("proposed_node"):
+            continue
+        anchors = 1 if g.get("evidence_strength") == "direct" else 0
+        src = g.get("book_source_id")
+        nsources = 1 if src else 0
+        rows.append({
+            "origin": "new_proposal_unaudited",
+            "concept": (g.get("summary") or "")[:60],
+            "id": tgt.get("proposed_node"),
+            "gap_ids": [gid],
+            "anchors": anchors,
+            "sources": nsources,
+            "src_list": [src] if src else [],
+            "subsumed": False,
+            "promotable": eval_promotion(anchors, nsources),
+            "blocked_by": ("无 direct 锚" if anchors < 1 else
+                           ("独立信源 < 2（当前 %d）" % nsources if nsources < 2 else None)),
+        })
+    return rows
+
+
+def promotion_negative_tests(adr, gaps):
+    """晋升判据可信度负例：错误谓词须被拦下、正确谓词须守住。"""
+    rows = scan_promotion(adr, gaps)
+    results = []
+
+    # NT5：单源候选（|A|≥1 且 |S|=1）—— 正确谓词判不可晋升，错误谓词会误判可晋升
+    single = [r for r in rows if r["anchors"] >= 1 and r["sources"] == 1]
+    if single:
+        r = single[0]
+        good = eval_promotion(r["anchors"], r["sources"])
+        bad = eval_promotion_broken(r["anchors"], r["sources"])
+        results.append({
+            "case": "NT5-单源候选误判可晋升（%s）" % str(r["id"]),
+            "expect_good": False, "got_good": good,
+            "expect_bad": True, "got_bad": bad,
+            "ok": good is False and bad is True,
+        })
+
+    # NT6：0 direct 锚 —— 即使 2 源也不得晋升（正确谓词守住；漏检 direct 要求者会误判）
+    # 合成用例（不依赖数据集中是否存在零锚候选），故无条件执行。
+    results.append({
+        "case": "NT6-零 direct 锚不得晋升（合成 |A|=0,|S|=2）",
+        "expect_good": False, "got_good": eval_promotion(0, 2),
+        "expect_bad": None, "got_bad": None,
+        "ok": eval_promotion(0, 2) is False,
+    })
+
+    # NT7：正例对照 —— 构造 2 源 direct 候选，正确谓词须判可晋升（判据未被负例改坏）
+    results.append({
+        "case": "NT7-正例对照（2 独立信源 + 1 direct 锚须判可晋升）",
+        "expect_good": True, "got_good": eval_promotion(1, 2),
+        "expect_bad": None, "got_bad": None,
+        "ok": eval_promotion(1, 2) is True,
+    })
+    return results
+
+
+def run_scan_promotion(root, adr, gaps):
+    """P1 晋升扫描报告（私有层；不含书证文本）。"""
+    rows = scan_promotion(adr, gaps)
+    nts = promotion_negative_tests(adr, gaps)
+    promotable = [r for r in rows if r["promotable"]]
+
+    print("=" * 78)
+    print("T2 候选册晋升扫描（ADR-004 §决定二 T1 谓词在 T2 候选上的套用）")
+    print("  候选来源：裁决表 T2 条目 ∪ 未裁决但已占号的新提案")
+    print("=" * 78)
+    print("\n[1] 逐条裁决（%-3s %-11s %-5s %-4s %-4s %-5s %s"
+          % ("#", "id", "来源", "|A|", "|S|", "可晋升", "概念 / 阻塞原因"))
+    for i, r in enumerate(sorted(rows, key=lambda x: str(x["id"])), 1):
+        print("    %-3d %-11s %-5s %-4d %-4d %-5s %s  [%s]"
+              % (i, str(r["id"] or "—"),
+                 "裁决表" if r["origin"] == "candidate_register" else "新提案",
+                 r["anchors"], r["sources"], "是" if r["promotable"] else "否",
+                 str(r["concept"])[:26], r["blocked_by"] or "已满足 T1 条件"))
+    print("\n[2] 汇总：候选 %d 条 ｜ 可晋升 %d 条" % (len(rows), len(promotable)))
+    for r in promotable:
+        print("    ! 可晋升：%s %s（|A|=%d |S|=%d %s）"
+              % (r["id"], r["concept"], r["anchors"], r["sources"], r["src_list"]))
+
+    print("\n[3] 晋升判据负向测试")
+    for t in nts:
+        if t["expect_bad"] is None:
+            print("    [%s] %-56s good=%s(期望 %s)"
+                  % ("OK" if t["ok"] else "FAIL", t["case"], t["got_good"], t["expect_good"]))
+        else:
+            print("    [%s] %-56s good=%s(期望 %s)  bad=%s(期望 %s)"
+                  % ("OK" if t["ok"] else "FAIL", t["case"], t["got_good"], t["expect_good"],
+                     t["got_bad"], t["expect_bad"]))
+    nt_ok = sum(1 for t in nts if t["ok"])
+    print("    负例汇总：%d/%d 如期" % (nt_ok, len(nts)))
+
+    report = {
+        "schema_version": "1.0.0",
+        "basis": "ADR-004 §决定二 准入谓词（T1 条件）在 T2 候选上的套用",
+        "predicate": "promotable ⇔ |A(c)| ≥ 1 且 |S(c)| ≥ 2（S 按 canonical source id 去重）",
+        "candidate_count": len(rows),
+        "promotable_count": len(promotable),
+        "candidates": sorted(rows, key=lambda x: str(x["id"])),
+        "negative_tests": nts,
+    }
+    out = os.path.join(root, os.path.dirname(GAPS_REL), "_meta", "t2-promotion-scan.json")
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=False) + "\n")
+    print("\n    wrote %s" % os.path.relpath(out, root))
+
+    passed = nt_ok == len(nts)
+    print("\n" + "=" * 78)
+    print("  负例 = %d/%d ｜ 可晋升 = %d 条 ｜ == 结果 = %s =="
+          % (nt_ok, len(nts), len(promotable), "PASS" if passed else "FAIL"))
+    print("=" * 78)
+    return 0 if passed else 1
+
+
 # --------------------------------------------------------------- main
 
 def main():
@@ -268,6 +451,8 @@ def main():
     ap.add_argument("--adr", default=None, help="ADR-004.json 路径")
     ap.add_argument("--gaps", default=None, help="reverse-gaps.json 路径")
     ap.add_argument("--show", type=int, default=40)
+    ap.add_argument("--scan-promotion", action="store_true",
+                    help="只做 T2→T1 晋升扫描（P1），不跑完整重放")
     args = ap.parse_args()
 
     root = os.path.abspath(args.root)
@@ -275,6 +460,9 @@ def main():
     gaps_path = args.gaps or os.path.join(root, GAPS_REL)
     adr = load(adr_path)
     gaps = {g["gap_id"]: g for g in load(gaps_path)["gaps"]}
+
+    if args.scan_promotion:
+        return run_scan_promotion(root, adr, gaps)
 
     print("=" * 78)
     print("ADR-004 准入谓词重放验收")
@@ -292,22 +480,26 @@ def main():
         print("    PASS：谓词本体未出现提案条数/清单/编号区间/书单长度等快照常量")
 
     # 2) 机械筛选校验
-    rows, register_gaps, mech_expand, mech_cite = replay(adr, gaps, args.show)
-    print("\n[2] 概念集筛选（机械：target.proposed_node 是否非空）")
-    # 不变量：**裁决表覆盖的缺口必须全部落在「参与结构扩展」集合内**（否则 ADR 判了不该判的东西）。
+    (rows, register_gaps, mech_expand, mech_cite,
+     register_concept_gaps, register_odd_tiers) = replay(adr, gaps, args.show)
+    print("\n[2] 概念集筛选（机械：裁决表 tier ∈ T1/T2/T3 ∪ 未裁决但已占号的新提案）")
+    # 不变量：**裁决表中的概念条目必须全部落在「参与结构扩展」集合内**（否则 ADR 判了不该判的东西）。
     # 反向不成立：新增缺口尚未经人工裁决，允许出现在 mech_expand 中而不在裁决表里。
-    missing_from_mech = sorted(register_gaps - mech_expand)
+    # 注：仅补引条目（missed_citation 指向既有节点）不属概念条目，故不参与本不变量。
+    missing_from_mech = sorted(register_concept_gaps - mech_expand)
     extra_new = sorted(mech_expand - register_gaps)
-    ok_filter = not missing_from_mech
-    print("    裁决表覆盖缺口 = %d ｜ 机械判定「参与扩展」= %d"
-          % (len(register_gaps), len(mech_expand)))
-    print("    裁决表 ⊆ 机械扩展 = %s（差集 %d 条）" % (ok_filter, len(missing_from_mech)))
+    ok_filter = not missing_from_mech and not register_odd_tiers
+    print("    裁决表覆盖缺口 = %d ｜ 其中概念条目缺口 = %d ｜ 机械判定「参与扩展」= %d"
+          % (len(register_gaps), len(register_concept_gaps), len(mech_expand)))
+    print("    裁决表概念条目 ⊆ 机械扩展 = %s（差集 %d 条）" % (ok_filter, len(missing_from_mech)))
+    if register_odd_tiers:
+        print("    ! 裁决表出现未知 tier：%s" % sorted(register_odd_tiers))
     if extra_new:
         print("    尚无人工裁决的新缺口（不在裁决表内，仅报告档位）= %d 条：%s"
               % (len(extra_new), extra_new[:6]))
-    print("    仅补引（proposed_node 为空且 existing_node_id 非空）= %d" % len(mech_cite))
+    print("    仅补引（不参与结构扩展）= %d" % len(mech_cite))
     if missing_from_mech:
-        print("    ! 裁决表含机械判定为「仅补引」的缺口：%s" % missing_from_mech)
+        print("    ! 裁决表概念条目被机械判定为「仅补引」：%s" % missing_from_mech)
 
     # 3) 逐条重放
     print("\n[3] 逐概念重放（概念归组与 SUBSUMED 为 ADR 人工语义输入；A/S/档位为机械求值）")

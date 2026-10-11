@@ -3,7 +3,7 @@
   "generated_by": "语料采集员（自写角色）",
   "generated_date": "2026-09-10",
   "access_date": "2026-09-10",
-  "policy": "严守版权红线：只提取公开在线目录/章节结构与核心论点摘要，不下载、不落盘任何书籍/PDF 全文；书籍本体仅可入本地语料层，公开仓库只承载消化重组后的知识。",
+  "policy": "严守版权红线：只提取公开在线目录/章节结构与核心论点摘要，不下载、不落盘任何书籍/PDF 全文；书籍本体仅可入本地语料层，公开仓库只承载消化重组后的知识。 【阶段7 阶段3 续做补充（2026-10-11）】BK-025/BK-026 的**全文**已采集进私有层（`01-books/_verify/_text/`，三重隔离：本地仓 .gitignore / _publish/.gitignore / publish-manifest private），用于核验层书证；公开层仍只承载消化重组后的知识。",
   "sources": [
     {
       "id": "FO-01",
@@ -194,7 +194,7 @@
       "url": "https://sre.google/sre-book/table-of-contents/",
       "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
       "reachable": true,
-      "channel": "proxy(<private-host>)",
+      "channel": "direct（境内直连 HTTP 200，无需代理；2026-10-11 实测）",
       "http_status": 200,
       "toc": [
         {
@@ -416,7 +416,17 @@
       "gaps": [
         "仅取目录与论点摘要，未下载/镜像正文",
         "访问需经代理，境内直连超时（连接层失败，http_code=000）"
-      ]
+      ],
+      "acquired_private_corpus": {
+        "slug": "sre-book",
+        "source_id": "BK-025",
+        "chapters": 42,
+        "chars": 1075398,
+        "text_path": "01-books/_verify/_text/sre-book.txt",
+        "toc_path": "01-books/_verify/_parts/toc-sre-book.json",
+        "collector": "16-checkpoint/extract_sre_web.py",
+        "visibility": "private（01-books/ 三重隔离）"
+      }
     },
     {
       "id": "FO-03",
@@ -427,7 +437,7 @@
       "url": "https://sre.google/workbook/table-of-contents/",
       "license": "CC BY-NC-ND 4.0（在线全文，官方免费）",
       "reachable": true,
-      "channel": "proxy(<private-host>)",
+      "channel": "direct（境内直连 HTTP 200，无需代理；2026-10-11 实测）",
       "http_status": 200,
       "toc": [
         {
@@ -589,7 +599,17 @@
       "gaps": [
         "仅取目录与论点摘要，未下载/镜像正文",
         "访问需经代理，境内直连超时（连接层失败，http_code=000）"
-      ]
+      ],
+      "acquired_private_corpus": {
+        "slug": "workbook",
+        "source_id": "BK-026",
+        "chapters": 29,
+        "chars": 925151,
+        "text_path": "01-books/_verify/_text/workbook.txt",
+        "toc_path": "01-books/_verify/_parts/toc-workbook.json",
+        "collector": "16-checkpoint/extract_sre_web.py",
+        "visibility": "private（01-books/ 三重隔离）"
+      }
     },
     {
       "id": "FO-04",
@@ -739,6 +759,7 @@
   "summary": "5 个 free-official 源全部可达：abseil.io、domainlanguage.com、12factor.net 直连 200；sre.google 两源境内直连失败（连接层，http_code=000），经代理 <private-host> 得 200。已提取各源完整目录结构与 200-500 字中文核心论点摘要。全程未下载/落盘任何书籍 PDF 或正文，仅提取结构与摘要。",
   "notes": [
     "访问日期：2026-09-10；可达性以 curl HTTP 状态码 + 内容字节数为证。",
-    "版权纪律：所有源均以「结构 + 摘要 + 链接」形式记录，正文/PDF 未落盘。"
+    "版权纪律：所有源均以「结构 + 摘要 + 链接」形式记录，正文/PDF 未落盘。",
+    "阶段7 阶段3 续做（2026-10-11）：BK-025《SRE》42 章（1 075 398 字符）与 BK-026《Workbook》29 章（925 151 字符）已由 `16-checkpoint/extract_sre_web.py` 直连采集进私有层。**ND（NoDerivatives）裁决**：本次只做私有层采集与核验，公开层处置另案；采集时把许可如实记为 CC BY-NC-ND 4.0（未标 unknown-thirdparty）。旧记录「境内直连失败、须代理」已实测推翻（2026-10-11：目录页与章节页直连均 HTTP 200）。"
   ]
 }

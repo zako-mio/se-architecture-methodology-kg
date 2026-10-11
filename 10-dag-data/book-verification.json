@@ -902,6 +902,83 @@
         "direction": "reverse",
         "second_pass": "disputed",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Key Insights",
+        "section_title": "Key Insights",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Managing Risk",
+        "section_title": "Managing Risk",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Managing Risk",
+        "section_title": "Managing Risk",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Risk Tolerance of Services",
+        "section_title": "Risk Tolerance of Services",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Types of failures",
+        "section_title": "Types of failures",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Accidents Are Normal",
+        "section_title": "Accidents Are Normal",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "It’s Better to Fix It Yourself; Don’t Blame Someone Else",
+        "section_title": "It’s Better to Fix It Yourself; Don’t Blame Someone Else",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
       }
     ],
     "ESS-K-02": [
@@ -1032,6 +1109,186 @@
         "chapter": "6",
         "section": "",
         "section_title": "Recovery-Oriented Computing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-K-03": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Black-Box Versus White-Box",
+        "section_title": "Black-Box Versus White-Box",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Black-Box Versus White-Box",
+        "section_title": "Black-Box Versus White-Box",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Definitions",
+        "section_title": "Definitions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "10",
+        "section": "Practical Alerting from Time-Series Data",
+        "section_title": "Practical Alerting from Time-Series Data",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Implementing Purposeful Metrics",
+        "section_title": "Implementing Purposeful Metrics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Monitoring",
+        "section_title": "Monitoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Monitoring",
+        "section_title": "Monitoring",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Sources of Monitoring Data",
+        "section_title": "Sources of Monitoring Data",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-K-04": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Control Measures",
+        "section_title": "Control Measures",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Defining Objectives",
+        "section_title": "Defining Objectives",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Monitoring for the Long Term",
+        "section_title": "Monitoring for the Long Term",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Tying These Principles Together",
+        "section_title": "Tying These Principles Together",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "10",
+        "section": "Practical Alerting from Time-Series Data",
+        "section_title": "Practical Alerting from Time-Series Data",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "10",
+        "section": "Ten Years On…",
+        "section_title": "Ten Years On…",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Decision Making Using SLOs and Error Budgets",
+        "section_title": "Decision Making Using SLOs and Error Budgets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Why SREs Need SLOs",
+        "section_title": "Why SREs Need SLOs",
         "evidence_strength": "direct",
         "direction": "forward",
         "second_pass": "passed",
@@ -2642,6 +2899,546 @@
         "review_date": "2026-10-11"
       }
     ],
+    "MTH-J-07": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "1",
+        "section": "Change Management",
+        "section_title": "Change Management",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "13",
+        "section": "Emergency Response",
+        "section_title": "Emergency Response",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "27",
+        "section": "Gradual and Staged Rollouts",
+        "section_title": "Gradual and Staged Rollouts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "27",
+        "section": "Gradual and Staged Rollouts",
+        "section_title": "Gradual and Staged Rollouts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Dependencies and Isolation",
+        "section_title": "Dependencies and Isolation",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Minimizing Risk to SLOs and the Error Budget",
+        "section_title": "Minimizing Risk to SLOs and the Error Budget",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Release Engineering Principles",
+        "section_title": "Release Engineering Principles",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Use a Gradual Canary for Better Metric Selection",
+        "section_title": "Use a Gradual Canary for Better Metric Selection",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-01": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Aggregation",
+        "section_title": "Aggregation",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Choosing Targets",
+        "section_title": "Choosing Targets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Objectives in Practice",
+        "section_title": "Objectives in Practice",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "SLOs Set Expectations",
+        "section_title": "SLOs Set Expectations",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Service Level Terminology",
+        "section_title": "Service Level Terminology",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Standardize Indicators",
+        "section_title": "Standardize Indicators",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Reliability Targets and Error Budgets",
+        "section_title": "Reliability Targets and Error Budgets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Reliability Targets and Error Budgets",
+        "section_title": "Reliability Targets and Error Budgets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-02": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Benefits",
+        "section_title": "Benefits",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Benefits",
+        "section_title": "Benefits",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Forming Your Error Budget",
+        "section_title": "Forming Your Error Budget",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Forming Your Error Budget",
+        "section_title": "Forming Your Error Budget",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Motivation for Error Budgets",
+        "section_title": "Motivation for Error Budgets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Establishing an Error Budget Policy",
+        "section_title": "Establishing an Error Budget Policy",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "5",
+        "section": "4: Alert on Burn Rate",
+        "section_title": "4: Alert on Burn Rate",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "5",
+        "section": "6: Multiwindow, Multi-Burn-Rate Alerts",
+        "section_title": "6: Multiwindow, Multi-Burn-Rate Alerts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-03": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "As Simple as Possible, No Simpler",
+        "section_title": "As Simple as Possible, No Simpler",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Errors",
+        "section_title": "Errors",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Latency",
+        "section_title": "Latency",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Saturation",
+        "section_title": "Saturation",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "The Four Golden Signals",
+        "section_title": "The Four Golden Signals",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Worrying About Your Tail (or, Instrumentation and Performance)",
+        "section_title": "Worrying About Your Tail (or, Instrumentation and Performance)",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "3",
+        "section": "The SLO Culture Project",
+        "section_title": "The SLO Culture Project",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Dependencies",
+        "section_title": "Dependencies",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-04": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Black-Box Versus White-Box",
+        "section_title": "Black-Box Versus White-Box",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Black-Box Versus White-Box",
+        "section_title": "Black-Box Versus White-Box",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Definitions",
+        "section_title": "Definitions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "10",
+        "section": "Alerting",
+        "section_title": "Alerting",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "10",
+        "section": "Black-Box Monitoring",
+        "section_title": "Black-Box Monitoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Improve both logs and metrics",
+        "section_title": "Improve both logs and metrics",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Monitoring",
+        "section_title": "Monitoring",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Testing Alerting Logic",
+        "section_title": "Testing Alerting Logic",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-05": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "13",
+        "section": "What to Do When Systems Break",
+        "section_title": "What to Do When Systems Break",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "14",
+        "section": "Live Incident State Document",
+        "section_title": "Live Incident State Document",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "14",
+        "section": "Recursive Separation of Responsibilities",
+        "section_title": "Recursive Separation of Responsibilities",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "14",
+        "section": "When to Declare an Incident",
+        "section_title": "When to Declare an Incident",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "15",
+        "section": "Collaborate and Share Knowledge",
+        "section_title": "Collaborate and Share Knowledge",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "15",
+        "section": "Google’s Postmortem Philosophy",
+        "section_title": "Google’s Postmortem Philosophy",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "9",
+        "section": "Incident Command System",
+        "section_title": "Incident Command System",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "9",
+        "section": "Main Roles in Incident Response",
+        "section_title": "Main Roles in Incident Response",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-K-06": [
       {
         "source_id": "BK-023",
@@ -2718,6 +3515,96 @@
         "evidence_strength": "partial",
         "direction": "forward",
         "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-K-07": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "1",
+        "section": "Demand Forecasting and Capacity Planning",
+        "section_title": "Demand Forecasting and Capacity Planning",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "21",
+        "section": "Handling Overload",
+        "section_title": "Handling Overload",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "21",
+        "section": "Per-Customer Limits",
+        "section_title": "Per-Customer Limits",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "21",
+        "section": "The Pitfalls of \"Queries per Second\"",
+        "section_title": "The Pitfalls of \"Queries per Second\"",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "27",
+        "section": "Capacity Planning",
+        "section_title": "Capacity Planning",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "11",
+        "section": "Case Study 2: When Load Shedding Attacks",
+        "section_title": "Case Study 2: When Load Shedding Attacks",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "11",
+        "section": "Configuring Conservatively",
+        "section_title": "Configuring Conservatively",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "12",
+        "section": "Why “Non-Abstract”?",
+        "section_title": "Why “Non-Abstract”?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
         "review_date": "2026-10-11"
       }
     ],
@@ -3546,6 +4433,96 @@
         "review_date": "2026-10-11"
       }
     ],
+    "MTH-N-05": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "8",
+        "section": "High Velocity",
+        "section_title": "High Velocity",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Automate This Year’s Job Away",
+        "section_title": "Automate This Year’s Job Away",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Share Ownership with Developers",
+        "section_title": "Share Ownership with Developers",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "The Wisdom of Production",
+        "section_title": "The Wisdom of Production",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Use the Same Tooling, Regardless of Function or Job Title",
+        "section_title": "Use the Same Tooling, Regardless of Function or Job Title",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "MTH-N-06": [
       {
         "source_id": "BK-030",
@@ -4125,6 +5102,96 @@
         "review_date": "2026-09-11"
       }
     ],
+    "TEC-J-04": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Canary test",
+        "section_title": "Canary test",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Canary test",
+        "section_title": "Canary test",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Canary test",
+        "section_title": "Canary test",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Canary test",
+        "section_title": "Canary test",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "27",
+        "section": "Feature Flag Frameworks",
+        "section_title": "Feature Flag Frameworks",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Canarying Releases",
+        "section_title": "Canarying Releases",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Choosing a Canary Population and Duration",
+        "section_title": "Choosing a Canary Population and Duration",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "16",
+        "section": "Requirements of a Canary Process",
+        "section_title": "Requirements of a Canary Process",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
     "TEC-K-01": [
       {
         "source_id": "BK-023",
@@ -4198,6 +5265,186 @@
         "chapter": "5",
         "section": "",
         "section_title": "Timeouts",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "TEC-K-02": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Black-Box Versus White-Box",
+        "section_title": "Black-Box Versus White-Box",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Latency",
+        "section_title": "Latency",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "The Four Golden Signals",
+        "section_title": "The Four Golden Signals",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Why Monitor?",
+        "section_title": "Why Monitor?",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "6",
+        "section": "Worrying About Your Tail (or, Instrumentation and Performance)",
+        "section_title": "Worrying About Your Tail (or, Instrumentation and Performance)",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Intended Changes",
+        "section_title": "Intended Changes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Saturation",
+        "section_title": "Saturation",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "4",
+        "section": "Sources of Monitoring Data",
+        "section_title": "Sources of Monitoring Data",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      }
+    ],
+    "TEC-K-03": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Benefits",
+        "section_title": "Benefits",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Embracing Risk",
+        "section_title": "Embracing Risk",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "3",
+        "section": "Forming Your Error Budget",
+        "section_title": "Forming Your Error Budget",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Control Measures",
+        "section_title": "Control Measures",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "4",
+        "section": "Service Level Terminology",
+        "section_title": "Service Level Terminology",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Getting Started",
+        "section_title": "Getting Started",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "Reliability Targets and Error Budgets",
+        "section_title": "Reliability Targets and Error Budgets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "2",
+        "section": "What to Measure: Using SLIs",
+        "section_title": "What to Measure: Using SLIs",
         "evidence_strength": "direct",
         "direction": "forward",
         "second_pass": "passed",
@@ -4338,6 +5585,96 @@
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
+      }
+    ],
+    "TEC-K-06": [
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "8",
+        "section": "The Role of a Release Engineer",
+        "section_title": "The Role of a Release Engineer",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-025",
+        "book": "Site Reliability Engineering: How Google Runs Production Systems",
+        "chapter": "17",
+        "section": "Relationships Between Testing and Mean Time to Repair",
+        "section_title": "Relationships Between Testing and Mean Time to Repair",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Change Should Be Gradual",
+        "section_title": "Change Should Be Gradual",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Compare and Contrast",
+        "section_title": "Compare and Contrast",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Move Fast by Reducing the Cost of Failure",
+        "section_title": "Move Fast by Reducing the Cost of Failure",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-026",
+        "book": "The Site Reliability Workbook: Practical Ways to Implement SRE",
+        "chapter": "1",
+        "section": "Narrow, Rigid Incentives Narrow Your Success",
+        "section_title": "Narrow, Rigid Incentives Narrow Your Success",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-11"
       }
     ],
     "TEC-L-01": [
@@ -4576,7 +5913,7 @@
       "section": "13.4",
       "target": {
         "existing_node_id": "ESS-H-02",
-        "proposed_node": "MTH-G-07"
+        "proposed_node": null
       },
       "summary": "书中以三原则刻画组件级内聚：复用/发布等价、共同闭包、共同复用，并给出三者相互拉扯的张力图与随成熟度动态平衡的规律；图谱现有内聚耦合节点偏模块层级，未单列组件级内聚原则。",
       "proposed_action": "新增节点（组件内聚三原则与张力平衡），并在 ESS-H-02 与组件/边界节点间补边",
@@ -4590,7 +5927,7 @@
       "section": "14.4",
       "target": {
         "existing_node_id": "ESS-G-03",
-        "proposed_node": "MTH-G-08"
+        "proposed_node": "TEC-H-04"
       },
       "summary": "书中给出组件依赖治理的完整方法族：无环依赖原则、稳定依赖原则、稳定抽象原则，以及入/出耦合、抽象度与主序列距离等度量；图谱边界节点未覆盖依赖环治理与稳定性度量这类可操作方法。",
       "proposed_action": "新增节点（组件依赖管理与度量方法），并与 ESS-G-02、ESS-G-03 补边",
@@ -4604,7 +5941,7 @@
       "section": "21.1",
       "target": {
         "existing_node_id": "ESS-G-07",
-        "proposed_node": "ESS-G-08"
+        "proposed_node": null
       },
       "summary": "书中主张架构应把用例与领域意图喊出来，让系统结构本身可读地说明业务，而非被框架或技术分层淹没；图谱有架构描述节点，却无「架构表意/意图可见」这一独立概念。",
       "proposed_action": "新增节点（架构表意与意图可见性），从 ESS-G-07 与 MTH-G-05 建立依据推导边",
@@ -4618,7 +5955,7 @@
       "section": "6.3",
       "target": {
         "existing_node_id": "ESS-O-01",
-        "proposed_node": "ESS-O-04"
+        "proposed_node": null
       },
       "summary": "书中把函数式范式的不可变性提升为架构约束，主张把可变状态隔离到少数受控位置并以事件溯源等结构承载状态变化，以此抑制并发与状态带来的复杂度；图谱缺少不可变性与可变隔离概念。",
       "proposed_action": "新增节点（不可变性与可变隔离），与 ESS-O-01、ESS-G-01 建立前置/组合边",
@@ -4632,7 +5969,7 @@
       "section": "23.1",
       "target": {
         "existing_node_id": "ESS-I-02",
-        "proposed_node": "TEC-I-04"
+        "proposed_node": null
       },
       "summary": "书中以谦卑对象模式在边界处把难测行为压缩为极简外壳，并以 Presenter/View、数据库网关、数据映射与服务监听器等实例承载，使可测试性成为边界设计的直接产物；图谱可测试性节点未覆盖该模式族。",
       "proposed_action": "新增节点（谦卑对象与测试边界模式），从 ESS-I-02 与边界节点建立实现/依据推导边",
@@ -4646,7 +5983,7 @@
       "section": "26.1",
       "target": {
         "existing_node_id": "ESS-O-02",
-        "proposed_node": "MTH-G-09"
+        "proposed_node": null
       },
       "summary": "书中系统论证数据库、Web 与框架皆为可推迟的细节，主张核心策略不依赖这些选择，并把组合装配点（Main）视为终极细节；图谱缺少「细节可推迟」与组合根这一治理视角。",
       "proposed_action": "新增节点（细节可推迟与组合根），与 ESS-G-02、MTH-J-04 补引并建立依赖关联",
@@ -5009,8 +6346,8 @@
       "chapter": "8",
       "section": "8.3",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "ESS-H-12"
+        "existing_node_id": "ESS-H-11",
+        "proposed_node": null
       },
       "summary": "「可串行化快照隔离（SSI）」这一概念在图谱中缺失：它是在快照隔离之上做乐观冲突检测、以较小性能代价换取完整可串行化的并发控制机制，DDIA 第8章有专节论述。",
       "proposed_action": "新增节点（提案：ESS-H-12 可串行化快照隔离，待评审），并关联事务与隔离级别节点。",
@@ -5135,8 +6472,8 @@
       "chapter": "5",
       "section": "5.2",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "MTH-H-05"
+        "existing_node_id": "ESS-H-02",
+        "proposed_node": null
       },
       "summary": "本书用五个小节展开「共生耦合」这一概念：把耦合细分为源码层的静态类型（名称、类型、含义、位置、算法）与运行时的动态类型（执行、时序、值、身份），并给出三个度量属性——强度（重构难度）、局部性（元素间距）、度（影响范围），配套「把强形式改成弱形式」「距离越远用越弱形式」两条改造规则，以及把跨封装边界的耦合降到最低、把封装内部的耦合提到最高的三条准则。图谱只有一般性的内聚耦合本质节点，没有这套可直接指导重构的耦合词汇表与判据。",
       "proposed_action": "新增节点（提案 MTH-H-05 共生耦合分析，待评审），补边至内聚与耦合本质节点、重构手法族节点与演进式架构节点。",
@@ -5150,7 +6487,7 @@
       "section": "5.7",
       "target": {
         "existing_node_id": null,
-        "proposed_node": "MTH-G-07"
+        "proposed_node": "MTH-G-10"
       },
       "summary": "本书定义「架构量子」为可独立部署、功能内聚度高、静态耦合高且运行时以同步耦合为主的单元，并把数据库、界面、编排器等共享耦合点一并计入量子边界：共用数据库或与界面强耦合会把分布式架构压回单一量子，只有互不共享耦合点时才形成多量子。量子大小决定增量变更的下限，量子数量与单位成本之间存在最优点，且不同量子可各自选择适配的技术架构与质量特性。图谱没有任何节点刻画这一结构单位及其计数与判定方式。",
       "proposed_action": "新增节点（提案 MTH-G-07 架构量子与量子粒度，待评审），补边至内聚与耦合本质节点、粒度与边界设定节点、演进式架构节点。",
@@ -5164,7 +6501,7 @@
       "section": "5.11",
       "target": {
         "existing_node_id": null,
-        "proposed_node": "MTH-G-08"
+        "proposed_node": "MTH-G-11"
       },
       "summary": "本书把量子之间的运行时耦合刻画为三个相互牵制的维度：通信取同步还是异步、一致性取原子事务还是最终一致、协调取编排还是协同；三者不能孤立决定，事务性偏向同步加编排，高规模偏向异步加最终一致加协同，取舍需放在同一决策空间里权衡。图谱缺少这一组运行时耦合的取舍框架，现有节点只覆盖质量属性层面的冲突治理与可靠性实现。",
       "proposed_action": "新增节点（提案 MTH-G-08 动态量子耦合三维决策，待评审），补边至架构量子节点、质量属性冲突治理节点与契约松紧相关节点。",
@@ -5766,7 +7103,7 @@
       "section": "19.1",
       "target": {
         "existing_node_id": null,
-        "proposed_node": "架构上重要的需求 (Architecturally Significant Requirements, ASR)"
+        "proposed_node": "MTH-F-07"
       },
       "summary": "该书把「架构上重要的需求」提升为独立主题，论述从需求文档、干系人访谈与业务目标三条途径收集 ASR，并指出其驱动架构决策；现有 167 节点中缺少该概念节点。",
       "proposed_action": "新增节点 ASR，挂接现有需求工程节点（MTH-F-01..06）与 MTH-G-02，补入其与该书的边。",
@@ -5780,7 +7117,7 @@
       "section": "20.1",
       "target": {
         "existing_node_id": null,
-        "proposed_node": "属性驱动设计 (Attribute-Driven Design, ADD)"
+        "proposed_node": "MTH-G-12"
       },
       "summary": "该书以整章给出属性驱动设计的七步迭代流程，把驱动转化为结构与接口；现有图中只有战术映射与 ATAM 评估，缺少这一与评估配对的架构设计方法节点。",
       "proposed_action": "新增节点 ADD，作为 MTH-G-02（评估）与 MTH-M-01（战术映射）的伴生设计方法，并补入与该书的边。",
@@ -5821,12 +7158,194 @@
       "chapter": "24",
       "section": "24.3",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "架构师角色与架构能力建设"
+        "existing_node_id": "MTH-N-06",
+        "proposed_node": null
       },
       "summary": "该书第24、25章讨论架构师在项目中的角色（与项目经理分工、增量架构、敏捷与分布式开发）以及个人与组织的架构能力建设，现有图在团队与康威域有组织节点，但缺少「架构师角色/架构能力」这一角色与能力维度节点。",
       "proposed_action": "新增节点「架构师角色与架构能力」，挂接 ESS-N-* 团队域与 MTH-N-* 方法论节点，并补入与该书的边。",
       "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-SRE-001",
+      "kind": "missed_citation",
+      "book_source_id": "BK-025",
+      "chapter": "6",
+      "section": "Black-Box Versus White-Box",
+      "target": {
+        "existing_node_id": "MTH-K-04",
+        "proposed_node": null
+      },
+      "summary": "第6章把观测手段按位置分为两类：一类依据系统内部暴露的指标与日志，另一类只按用户可见的外部行为试探；并写明前者能发现迫近隐患与被重试掩盖的失败，后者只反映已经发生且构成真实症状的问题。同章还指出同一现象在不同层级会由症状变为成因，第10章进一步说明只看内部视角会漏掉未抵达目标与随崩溃消失的请求。该节点主张的正是多类信号须组合关联，却未把 BK-025 列入信源。",
+      "proposed_action": "把 BK-025 第6章「Black-Box Versus White-Box」与第10章「Black-Box Monitoring」补入 MTH-K-04 的信源与书证核验行，作为两类观测视角须组合使用的书证。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-002",
+      "kind": "missed_citation",
+      "book_source_id": "BK-025",
+      "chapter": "6",
+      "section": "Definitions",
+      "target": {
+        "existing_node_id": "ESS-K-03",
+        "proposed_node": null
+      },
+      "summary": "第6章以相邻条目给出监控、内部暴露型与外部试探型三个术语的界定，并交代监控涵盖实时定量数据的采集、加工、聚合与呈现；第10章则说明在如此体量下为单机故障告警会因噪声过大而无法据以行动，需聚合信号并剪除离群值，同时保留下钻到单个组件的粒度。该节点虽已列出 BK-025，但缺少与这两章对应的书证核验行。",
+      "proposed_action": "为 ESS-K-03 补上 BK-025 第6章「Definitions」与第10章开篇的书证核验行，用以支撑观测视角的界定与规模化聚合粒度这两条论断。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-101",
+      "kind": "missed_citation",
+      "book_source_id": "BK-025",
+      "chapter": "8",
+      "section": "The Role of a Release Engineer",
+      "target": {
+        "existing_node_id": "TEC-K-06",
+        "proposed_node": null
+      },
+      "summary": "本书只在发布工程一章提到从改动到上线所花的时间以及修复时长、故障间隔等零散指标，通篇没有引用交付效能领域那套被广泛使用的四指标研究框架，也没有把「变更失败率」与「部署频率」作为成对指标提出。因此以该框架为知识来源的节点，无法从本书取得对其指标集合本身的引证。",
+      "proposed_action": "BK-025 只零散给出发布速度、修复时长与故障间隔，未引用该四指标框架；故 TEC-K-06 的指标集合本身不宜以本书为出处，只可补引其发布工程相关分节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-102",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-025",
+      "chapter": "1",
+      "section": "Change Management",
+      "target": {
+        "existing_node_id": "MTH-J-07",
+        "proposed_node": null
+      },
+      "summary": "关于可回滚性与损坏范围控制，本书给足了定性做法（渐进铺开、金丝雀、自动回退、开关撤回），但没有任何把「暴露面」量化的口径：既没有给出受损用户数或受损请求比例的计算式，也没有给出回退决策的阈值标准。相关节点若需要可度量的判据，本书无法提供。",
+      "proposed_action": "BK-025 对可回滚性只给定性做法、未给暴露面量化口径；MTH-J-07 的可度量判据须另寻出处，本书仅补引其定性做法。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-103",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-025",
+      "chapter": "18",
+      "section": "Auxon",
+      "target": {
+        "existing_node_id": "MTH-K-07",
+        "proposed_node": null
+      },
+      "summary": "本书对容量规划有一处专门的工程化实现（以意图描述资源需求、求解线性或整数规划并输出分配方案），但该内容集中在一个独立的软件工程案例章里；容量规划主题所覆盖的负载均衡与过载处置各章只讨论供给信号的选择与配额限流，未涉及这套意图驱动的方法。按既定章节取证据时会漏掉该实现。",
+      "proposed_action": "BK-025 的意图驱动容量规划实现集中在第18章 Auxon 案例，按主题章节取证会漏掉；MTH-K-07 补引时应显式覆盖该案例章。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-104",
+      "kind": "concept_missing",
+      "book_source_id": "BK-025",
+      "chapter": "6",
+      "section": "Definitions",
+      "target": {
+        "existing_node_id": "TEC-K-02",
+        "proposed_node": null
+      },
+      "summary": "可观测性信号采集在本主题章节内只有面向人与监控系统两类的信号划分，缺少机器可读的追踪数据形态：没有讨论按单次请求串联调用链的追踪、跨服务上下文传播，也没有给出追踪与指标在采样策略上的取舍。若要覆盖这一维度，本书在本主题章节内不构成依据。",
+      "proposed_action": "BK-025 在本主题章节内只论指标与告警，未涉及调用链追踪与上下文传播；TEC-K-02 的追踪维度不能以本书为依据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SRE-105",
+      "kind": "concept_missing",
+      "book_source_id": "BK-025",
+      "chapter": "3",
+      "section": "Forming Your Error Budget",
+      "target": {
+        "existing_node_id": "MTH-K-02",
+        "proposed_node": null
+      },
+      "summary": "本书把错误预算的讨论限定在季度粒度上，并明确谈到用放慢发布或回退来应对预算接近耗尽，但没有引入预算消耗速率这一动态量，也没有讨论按消耗快慢决定是否冻结发布的判据。以多窗口预算或燃尽速率为内容的节点，在本书中找不到对应论述。",
+      "proposed_action": "BK-025 只按季度粒度讨论错误预算，未引入消耗速率或多时间窗判据；MTH-K-02 的燃尽率部分不能以本书为依据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SREW-001",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-026",
+      "chapter": "4",
+      "section": "Dependencies",
+      "target": {
+        "existing_node_id": "TEC-K-02",
+        "proposed_node": null
+      },
+      "summary": "本书没有为四黄金信号设立专节，只在监控与依赖埋点两处顺带提及该概念，饱和度虽有独立小节却未与其余三项合成完整体系；因此本节点内可标为单节直陈的条目偏少，四项信号的完整定义与相互关系需借第4章多处文字乃至第一本 SRE 书才能补齐。",
+      "proposed_action": "BK-026 未为四大黄金信号设立专节，只在第4章「Dependencies」与监控相关小节顺带提及，饱和度虽有独立小节却未与其余三项合成体系；故 TEC-K-02 的完整信号体系不宜以本书为单一出处，只可补引其监控与饱和度分节。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-SREW-101",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-026",
+      "chapter": "4",
+      "section": "Sources of Monitoring Data",
+      "target": {
+        "existing_node_id": "TEC-K-02",
+        "proposed_node": null
+      },
+      "summary": "本书在讨论可观测性信号时只深入展开指标与结构化日志两类来源，明确把分布式追踪与运行时内省排除在章节范围之外，因此关于链路级追踪与运行时状态的采集方法在本书中缺少可引用的展开，节点在该维度的覆盖需要另找来源。",
+      "proposed_action": "BK-026 明示不覆盖分布式追踪与运行时内省；TEC-K-02 的链路级追踪维度不能以本书为依据，只可补引其监控数据来源分节。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-SREW-102",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-026",
+      "chapter": "1",
+      "section": "Move Fast by Reducing the Cost of Failure",
+      "target": {
+        "existing_node_id": "TEC-K-06",
+        "proposed_node": null
+      },
+      "summary": "与交付效能直接对应的四项行业通行指标（部署频率、变更前置时间、变更失败率、平均恢复时间）在本书中没有被并列定义或成体系地讨论，书中只在与 DevOps 对比时谈到度量流程产出、反馈回路时长与缩短平均修复时间带来的速度收益，并把相关研究书目列入延伸阅读，因此该节点的指标口径无法在本书内部完整闭合。",
+      "proposed_action": "BK-026 未并列定义四项交付效能指标；TEC-K-06 的指标口径不能以本书闭合，只可补引其反馈回路与修复时长论述。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-SREW-103",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-026",
+      "chapter": "16",
+      "section": "Release Engineering and Canarying",
+      "target": {
+        "existing_node_id": "TEC-J-04",
+        "proposed_node": null
+      },
+      "summary": "金丝雀评估的判定方法在本书中停留在流程与经验层面：作者明确表示不深入统计学，只讨论整体流程与实务考量，因此样本量估算、显著性判定、误判概率控制等量化判据在本书中缺失，节点若需要可复核的判定阈值须依赖外部资料。",
+      "proposed_action": "BK-026 明确不深入统计学；TEC-J-04 的样本量与显著性判据须另找来源，只可补引其金丝雀流程与实务考量。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-SREW-104",
+      "kind": "concept_missing",
+      "book_source_id": "BK-026",
+      "chapter": "17",
+      "section": "From Load to Overload",
+      "target": {
+        "existing_node_id": "MTH-K-07",
+        "proposed_node": null
+      },
+      "summary": "本书第17章标题指向过载的识别与恢复，但正文讨论的是团队运维负荷意义上的过载及其心理影响，而非系统层面的过载判定与恢复；系统侧的降载、优雅降级、限流与容量腾挪分散在第11章与第12章，因此「容量规划与变更管理」节点若要从本书取得系统过载恢复的完整链条，必须跨章拼接，单章无法自洽。",
+      "proposed_action": "BK-026 第17章的「过载」指团队运维负荷而非系统过载；MTH-K-07 的系统侧过载恢复链条须跨章拼接，单章不自洽。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-SREW-105",
+      "kind": "missed_citation",
+      "book_source_id": "BK-026",
+      "chapter": "4",
+      "section": "Dependencies",
+      "target": {
+        "existing_node_id": "TEC-K-02",
+        "proposed_node": null
+      },
+      "summary": "本书在给出依赖监控建议时要求读者参照四大黄金信号来挑选指标，却没有在本书内定义这四类信号，其定义只存在于前作；因此该建议在本书范围内缺少自洽的概念锚点，节点引用时需注明定义出处或改用本书内的等价表述。",
+      "proposed_action": "BK-026 只要求参照四大黄金信号却未在本书定义；TEC-K-02 引用本书时须注明定义出处或改用本书内等价表述。",
+      "evidence_strength": "direct"
     },
     {
       "gap_id": "GAP-TT-001",
@@ -5919,8 +7438,8 @@
       "chapter": "5",
       "section": "",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "MTH-N-07"
+        "existing_node_id": "MTH-N-02",
+        "proposed_node": null
       },
       "summary": "流对齐团队是本书拓扑体系中的主团队类型：围绕单条价值流组建（可以是单一产品、单组特性、单条用户旅程或单一用户画像），具备从需求探索到生产运行的多学科能力，并尽量不把工作移交给其他团队。图谱只有一个概括四类型的节点，没有刻画这一主类型的独立节点，其定义、能力清单、期望行为与衡量方式均无处挂载。",
       "proposed_action": "新增节点（提案 MTH-N-07 流对齐团队，待评审），并补边至团队拓扑四类型节点与团队边界治理节点。",
@@ -5933,8 +7452,8 @@
       "chapter": "5",
       "section": "",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "MTH-N-08"
+        "existing_node_id": "MTH-N-02",
+        "proposed_node": null
       },
       "summary": "赋能团队以短期介入的方式帮助流对齐团队补齐能力缺口：由某一技术或产品领域的专家组成，先理解对方的具体问题再给建议，不以代劳为目的，并主动避免成为发号施令的知识象牙塔。图谱缺少该团队类型的节点，其与常设的跨团队实践社群之间的分工差异也无处体现。",
       "proposed_action": "新增节点（提案 MTH-N-08 赋能团队，待评审），并补边至团队拓扑四类型节点与教练式促进交互模式。",
@@ -5947,8 +7466,8 @@
       "chapter": "5",
       "section": "",
       "target": {
-        "existing_node_id": null,
-        "proposed_node": "MTH-N-09"
+        "existing_node_id": "MTH-N-02",
+        "proposed_node": null
       },
       "summary": "复杂子系统团队为依赖高度专门知识、多数成员须是该领域专家的子系统而设，其成立依据是团队认知负荷而非组件复用机会，因此数量应远少于传统按共享组件划分的团队。图谱缺少该类型节点，导致「何时应为专门知识单独建队」这一判断依据在图谱中没有承载概念。",
       "proposed_action": "新增节点（提案 MTH-N-09 复杂子系统团队，待评审），并补边至团队拓扑四类型节点与服务消费交互模式。",

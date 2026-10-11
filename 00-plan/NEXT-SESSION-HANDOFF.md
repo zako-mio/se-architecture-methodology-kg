@@ -1,38 +1,66 @@
-# 接力 Prompt：软件工程 / 架构设计方法论母库 · 阶段7（阶段2 已完成 → 轨B 已核验 5 本 → 阶段3 待启动）
+# 接力 Prompt：软件工程 / 架构设计方法论母库 · 阶段7（阶段2 已完成 → 轨B 已核验 8 本 → 阶段3 首批已准入）
 
 > 用途：跨窗口接续任务。把本文档**整段**交给下一个会话的主Agent 作为任务输入即可。
 > 生成：2026-09-11（阶段2 方案定稿 + 留档报告 + 门控 5/5 后）　生成者：上一窗口主Agent
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-10-11 · 阶段7 **轨B 高价值书核验**）—— 本节优先于下方 §A 的旧任务陈述
+## ⚠️ 本轮增量（2026-10-11 · 阶段7 **阶段3 轨C 首批准入 + 轨B 续做三本 + 轨D 能力包同步**）—— 本节优先于下方 §A 的旧任务陈述
 
-**阶段7 阶段2（内容增密）已于 2026-10-11 完成上线**（26 节点正文 2423–2998 字）。
-**本轮执行的是轨B：核验 Team Topologies（BK-030）与 Building Evolutionary Architectures（BK-011）**，
-并产出 **ADR-004**（阶段3 前置，门控级）。
+**本轮执行的是阶段3 全量四轨**：轨C（消费 ADR-004 做首批准入）、轨B 续做（BK-021/BK-024/BK-020）、
+轨D（能力包同步 + 两段派生）、收尾 7 条裁决。全部已上线。
 
 | 项 | 本轮实测结果 |
 |---|---|
-| 已核验书 | **5 本**（原 3 本 + BK-030 + BK-011）；`_parts/` 现有 **5 个 slug** |
-| 核验记录 | **341 条**（原 189 + 152） |
-| 覆盖节点 | **57 个**（原 35 + 23，含 1 个重叠） |
-| 升级节点（≥1 direct 且 0 contradicted） | **45 个** |
-| 缺口清单 | **60 条**（原 28 + 32） |
-| 图谱指纹 | `865e6a3d…4e915` → **`b11eae6c…c197789`**（**仅 23 个节点的 `review_date`**，零语义翻转） |
-| 门控 | `gate_verification` **9/9 PASS**；`check_corpus_overlap` **0 命中**；G-D 5/5；方法论 4/4；L6/L7 PASS |
-| ADR-004 | `18-design/adr/ADR-004.{json,md}`，`gate_architecture --kind adr` **6/6 PASS** |
+| **轨C 首批准入** | 新增 **`TEC-H-04` 依赖结构度量与渐进收紧治理**（technology/H，正文 1697 字，`sources` = BK-007 + BK-011）+ **4 条边**（E-996..E-999） |
+| 图谱规模 | **168 节点 / 364 边 / 18 组**（**新建组 0**）；层分布 51 / 67 / 32 / 18 |
+| 计数对账 | 五处（`meta.total_nodes` / 实际 / `deliverables.json` ×4 / `node-index.md` 表行 / `stats.md`）**偏差 0** |
+| **谓词重放** | 新增 `replay_admission.py`：**一致率 100%（33/33）** + 负例 **4/4** + 禁止快照常量自检 PASS |
+| **轨B 续做** | 新核验 **3 本**（`refactoring`/BK-021、`release-it`/BK-024、`clean-code`/BK-020）→ 已核验书 **8 本** |
+| 核验层规模 | 记录 **341→403**；覆盖节点 **57→64**；缺口 **60→106** |
+| 第二路复核 | 覆盖全部 `direct` **54/54 = 100%**；agree 51 / **降级 3**（`VR-CC-013`→inferred、`VR-RI-006`/`VR-RI-012`→partial） |
+| 图谱指纹 | `b11eae6c…c197789` → **`f1f09a9b…87303a39`**（仅 10 行 `review_date` + 1 行 `verified`） |
+| 门控 | `gate_verification` **9/9 PASS**；`validate_graph` errors=0；L6/L7/L8 + 方法论 4/4 + G-D 5/5 + `kb_gate` 2/2 全 PASS；版权 **0 命中**；负例 11/11 + 6/6 |
+| 公开层 | 远端 commit **`2319cede…`**，tree **562 blobs == 本地 `ls-files`**；CI **success**；Pages **200** |
+| 能力包 | 两段派生完成；DSH `reconcile.py` **PASS**（46 skills 逐字节可复现） |
+| 基线 | `MISSION_ROOT/00-plan/stage7p4-baseline.md` |
 
-**🔴 必须知道的一处前提纠正**：旧接力文档称 BK-030/BK-011「已有抽文本、零解析成本」——**实测证伪**：
-`_files/_structure/*/source.txt` 全部 11 个都是 **284–372 字节的官网爬取元数据桩**（非书正文）。
-两本实属「需先抽文本」，本轮已补做 EPUB 抽取（工具 `16-checkpoint/extract_book_text.py`）。
+**🔴 本轮发现的三处「文档不可信」前提纠正**（务必继承）：
+
+1. **EPUB 体积表不准**：接力文档 §E.1 的 Tier A 体积有误（Release It! 称 6.2MB **实为 0.46MB** 等）。
+   但**8 本 EPUB 抽取实测全部成功**（386KB–1.68MB 正文），Tier A 成立。
+2. **「引用密度」不可复现**：文档称 BK-021=13 / BK-025=46 / BK-008=37；按节点 `sources[]` 实测为
+   **BK-021=4 / BK-025=26 / BK-008=16**。文档数字口径未知，排序须重算。
+3. **`refactoring.txt` 实为第 1 版（1999）**，不是任务书与 manifest 写的 2nd/2018 ——
+   版权页 `Copyright © 1999`、ISBN `0-201-48567-2`、13/14/15 章作者为 Opdyke/Roberts+Brant/Beck、
+   第 2 版专有坏味道（Mysterious Name / Global Data / Insider Trading）**全部缺席**。
+   ⇒ `toc-refactoring.json` 的 `edition` 已改为 `1st/1999`；**manifest `P0-09` 的 `edition_actual` 仍是错的**，
+   下一轮应订正（或补入真正的第 2 版语料）。锚点（章号）与语料一致，本次核验结论不受影响。
+
+**🔴 本轮厘清的两段派生链与两处反向漂移**（见基线 §6）：
+
+- 派生链 = `20-agent-skill/` --[`install-skill.py`]--> `~/.config/opencode/skills/architecture-judgment/`
+  --[`~/.dsh/skills/opencode/install.py`]--> `~/.dsh/skills/opencode/architecture-judgment/`。
+  **接力文档只写了第一段。**
+- 反向漂移①（内容）：opencode 侧含仓内源侧没有的 0916 内容（规模三问、architect-worker 放行、ledger 回报通道）。
+  **直接 `--apply` 会丢失** → 本轮用**三方合并**无损回植。
+- 反向漂移②（私有层）：DSH `_private/{gate_architecture.py,local-bindings.json}` 比 0911 tooling **更新**
+  （含 `GATE_LEDGER`/`ARTIFACT_ROOT`）→ 已从 1011 构建产物回植并重跑派生。
+  **⚠️ 遗留风险：再跑一次 stage-1 `--apply` 会重新引入降级**（根治需更新 0911 tooling，属另一任务目录，本轮未动）。
 
 **下一窗口的输入件**：
-- 缺口与阶段3 准入资格 → `MISSION_ROOT/00-plan/stage7p3-trackB-gap-handoff.md`
-- ADR-004 输入数据包（机器实测） → `MISSION_ROOT/18-design/adr/ADR-004-inputs.md`
-- 本轮基线 → `MISSION_ROOT/00-plan/stage7p3-baseline.md`
+- 本轮基线（指纹 + 门控全表 + 公开层对账 + 回滚路径 + 待裁决） → `MISSION_ROOT/00-plan/stage7p4-baseline.md`
+- 缺口号归一化报告 → `MISSION_ROOT/01-books/_verify/_meta/gap-id-reassignments.json`
+- ADR-004（阶段3 准入与 ID 分配规则） → `MISSION_ROOT/18-design/adr/ADR-004.json`
 
-**下一步（阶段3）**：须先消费 ADR-004 的准入与 ID 分配规则，再做结构改动；
-最高引用密度（BK-025 SRE 46 引用 / BK-026 22 引用）**语料仍不存在** —— 若要覆盖，第一步是**采集**而非核验。
+**下一步建议（按优先级）**：
+1. **旧缺口 `proposed_node` 回写**（ADR-004 §决定三要求）：`GAP-SAIP-003/004/007` 等仍是中文概念名，
+   应按 ADR 裁决回写为 `MTH-F-07`（ASR）/ `MTH-G-12`（ADD）/ T3 宿主。
+2. **T2 候选册晋升**：21 个 T2 保留号 + 本轮新增 36 个 T2 提案，取得第二个独立信源的 `direct` 锚即晋升 T1。
+3. **SRE 采集**（`BK-025` 44 章 / `BK-026` 30 章，全文可得、CC BY-NC-ND 4.0）：
+   许可为 **ND**，须先裁决「SRE 派生的节点正文是否进公开层」；建议先只做私有层采集 + 核验。
+4. `BK-008`（APoSD）语料不足（本地仅 20 页无文本层），需 OCR 或补采集。
+
 
 
 路径约定（全文只在此处声明一次，正文一律写 `MISSION_ROOT/...` / `SUB_LIB_ROOT/...`）：

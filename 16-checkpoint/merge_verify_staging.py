@@ -37,6 +37,8 @@ BOOKS = {
     "ref": ("refactoring", "BK-021", "ref"),
     "ri": ("release-it", "BK-024", "ri"),
     "cc": ("clean-code", "BK-020", "cc"),
+    "sre": ("sre-book", "BK-025", "sre"),
+    "srew": ("workbook", "BK-026", "srew"),
 }
 
 
@@ -113,10 +115,25 @@ def collect_claims(root, prefix, problems, skipped):
     return ordered
 
 
+def _prefix_glob(root, kind, prefix):
+    """精确收集某前缀的暂存分片。
+
+    ⚠️ 不能用 `gaps-<prefix>*.json`：前缀互为子串时（如 `sre` 与 `srew`）
+    会串号——实测 `sre` 曾吞掉 `gaps-srew-*.json`，导致 sre-book 的缺口表
+    混入 GAP-SREW-*。故只接受 `gaps-<prefix>.json` 与 `gaps-<prefix>-*.json`。
+    """
+    pats = [os.path.join(resolve(root, STAGING), "%s-%s.json" % (kind, prefix)),
+            os.path.join(resolve(root, STAGING), "%s-%s-*.json" % (kind, prefix))]
+    out = []
+    for p in pats:
+        out.extend(glob.glob(p))
+    return sorted(set(out))
+
+
 def collect_gaps(root, prefix, book_source_id, problems, skipped):
     gaps = []
     seen = set()
-    for p in sorted(glob.glob(os.path.join(resolve(root, STAGING), "gaps-%s*.json" % prefix))):
+    for p in _prefix_glob(root, "gaps", prefix):
         name = os.path.basename(p)
         try:
             doc = load(p)

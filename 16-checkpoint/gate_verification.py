@@ -63,6 +63,8 @@ SLUG_RECORD_PREFIX = {
     "refactoring": "REF",
     "release-it": "RI",
     "clean-code": "CC",
+    "sre-book": "SRE",
+    "workbook": "SREW",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -76,6 +78,8 @@ SLUG_TEXT = {
     "refactoring": "refactoring.txt",
     "release-it": "release-it.txt",
     "clean-code": "clean-code.txt",
+    "sre-book": "sre-book.txt",
+    "workbook": "workbook.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -86,6 +90,8 @@ SOURCE_SLUG = {
     "BK-021": "refactoring",
     "BK-024": "release-it",
     "BK-020": "clean-code",
+    "BK-025": "sre-book",
+    "BK-026": "workbook",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）
