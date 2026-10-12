@@ -5,7 +5,35 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 **P0 claims 链修复 + P1 K 域上限 ADR-005 + 42 条证据回捞**）—— 本节优先于下方所有旧陈述
+## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2b **16 条未登记缺口提案准入补录**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = `NEXT-ROUND-PROMPT-3.md §D.3` 唯一剩余欠账 D3-1 的「全量」收口：把 `reverse-gaps.json` 中 16 条 `target.proposed_node` 不在 ADR-004 候选册内的提案逐条做准入裁决与取号，并清除 `validate_staging_shards` 的 WARN（用户本轮选择「全量 16 条」而非仅新书 7 条）。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-4.md`；**基线**：`00-plan/stage7p5-p2b-baseline.md`。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **准入裁决（ADR-006）** | 新增 `18-design/adr/ADR-006.json`（修订 ADR-004）：16 条全部判 **T2 登记占号**（**无 T1、无 T3**）；`gate_architecture --kind adr` **6/6 PASS**；ADR-004 加 `amended_by: ["ADR-006"]`（ADR-004 自身门控复查仍 6/6） |
+| **候选册补录** | `candidate_register` **33 → 49 条**（T1 1 / T2 37 / T3 11）；覆盖缺口 **34 → 50**；`reserved_ids_this_round` 21 → 37；`released_ids_this_round` **8 → 5**；`reassignment_map` 4 → 6 |
+| **取号（规则 6 最小可用号）** | 11 条原号直取 + **3 条释放号复用**（原属『共生耦合分析』『可串行化快照隔离』『谦卑对象与测试边界模式』⇒ 由 `released_removed` 显式回收）+ **2 条撞在用节点重取**（`MTH-J-06/07` → `MTH-J-08/09`，图谱现有『发布与部署解耦』『可回滚性与爆炸半径控制』）+ 5 条原为中文概念名者补层域后取正式号（`MTH-M-07/08`、`ESS-M-06`、`TEC-I-04`、`TEC-H-05`） |
+| **WARN 清零** | `validate_staging_shards` 6 书合计 **11 → 0** 行（clean-code 4 / saip-ch4 3 / twelve-factor 2 / sweg 2）；`problems` **未新增**（clean-code 14、refactoring 19 为**既有**「章头缺失致节一致性校验跳过」，非本轮引入） |
+| **回写与派生** | `writeback_gap_ids.py` 变更 **7 条**（幂等复跑 0 条）；`derive_verification` PASS 且 `--check` 幂等；`aggregate` 连跑哈希一致 |
+| **图谱** | **结构不变**：168 节点 / 364 边 / 18 组 / 18 案例；`validate_graph` errors=0、kahn 168/168；**DAG 指纹不变** `83721ec6…50ff4940` |
+| **9 文件指纹** | **2 处变更**：`reverse-gaps.json` `07e95931…` → **`a9bb052b…`**、`book-verification.json` `15f2c19c…` → **`1464f8f2…`**；其余 7 处（含 ledger / node-claim-map / overrides / DAG）**不变** |
+| **核验层** | 记录 **636**（direct 448 / partial 164 / inferred 24）、覆盖节点 **93**、缺口 **133**、direct 第二路复核 **100%** —— 全部不变 |
+| **重放与判据可信度** | `replay_admission` 一致率 **100%**（49/49）+ 负例 **4/4**；`--scan-promotion` 候选 37 / 可晋升 **0** / 负例 **3/3**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11** |
+| **门控全表** | `gate_verification` **9/9**、G-D **5/5**、`gate_coverage` 100%、`gate_sources` PASS（悬挂 0）、`gate_layout` 2140/2140、`gate_methodology` PASS、`kb_gate` **2/2**（5397 检查项 / 0 问题）、`gate_visual` L4 **PASS**、`gate_render` L5 **PASS**（7/7，skipped=0）、版权 **0 命中** |
+| **公开层** | 推送 1 次（`d54698e3aeb7`，tree `ef85fb855f92`，CI **success** run 38223829041）+ 1 次 API 删除提交（`9a38db50`）；远端 HEAD **`9a38db50dbb9`**；**576 blobs == 本地 ls-files 576**；Pages **200** |
+| **新增可执行物** | `16-checkpoint/backfill_candidate_register.py`（修订型 ADR → 候选册并入；fail-closed + 幂等 + no-op 守卫 + 3 条负例探针） |
+
+**🔴 本轮发现的四处「机制/判据不可信」纠正（务必继承）**：
+1. **`assemble_publish.py --check` 的 0/0/0 是「对 staging 的一致性」，不是「对源的一致性」**：`sanitize` 类内容取自 `_publish-staging/`，只有 `--refresh-sanitize`（跑 `audit_publish.py --emit`）才按当前源重生成。只改 `00-plan/*.md` 而不刷新 ⇒ `--check` 给出**假绿**（本轮实测：`--check` 报 modified=0，`--apply --refresh-sanitize` 后 `NEXT-SESSION-HANDOFF.md` / `stage7p5p1-baseline.md` 实际变更）。⇒ **终局对账必须用 `--apply --refresh-sanitize` 之后的 `--check`**。
+2. **`push_publish.py` 不能删远端文件**：走 Git Data API 的 `base_tree` +「本地 `git ls-files` 集合」，远端已有而本地没有的文件由 `base_tree` **自动保留**（本轮实测：`NEXT-ROUND-PROMPT-3.md` 在 `_publish` 内已 `git rm`，推送后仍在远端 tree）。⇒ 「归 `classes.never`」只阻止**新增**，**不能下架已发布件**；下架须显式 `gh api -X DELETE .../contents/<path>`。
+3. **`classes.never` 漏登记即泄漏**：`00-plan/NEXT-ROUND-PROMPT.md` / `-2` 在 `never` 中而 `-3` **不在**（其文件自述「归 classes.never，不公开」与清单不符）⇒ 实测 `-3` 已随上一轮推送进入公开仓（远端 blob `d292a507…`、22 673 B）。已补 `-3` / `-4` 进 `never` 并**从公开层 HEAD 移除**（`9a38db50`）；⚠️ **git 历史中的 blob 未回收**（需重写历史，未做）。
+4. **候选册补录的「已释放号复用」是政策放行项、不是撞号**：`backfill_candidate_register.py` 首版把 3 例释放号复用误判为撞号 ⇒ 现要求「原条目 `id_status ∈ {released,no-id}` **且** 该号出现在修订件 `id_allocation_delta.released_removed` 中」二者同时成立方放行，并加两条负例探针（撞 `reserved` 号必拒、`released_removed` 含非释放号必拒）实测 exit=1。
+
+**刚性协作模式**：计数权归主Agent，工人只写文本、不报数字；凡工人自评一律机器或第二路复验。本轮 `oc_architect` 首版经**独立机检 FAIL**（1 处门控 FAIL + 3 处实质缺陷），回传 2 轮后仍余 1 处门控 FAIL，末次由**主 Agent 机械修补**（仅删 `decision` 中残留的技术层号 + 对齐 2 处机读计数，**非设计变更**）。
+
+## ⚠️ 上一轮增量（2026-10-12 · 阶段7 阶段3 续做轮 **P0 claims 链修复 + P1 K 域上限 ADR-005 + 42 条证据回捞**）—— 本节优先于下方所有旧陈述
 
 **本轮主任务 = 修 `node-claim-map` 的 claims 完整性（P0）→ K 域记录上限 ADR 裁决（P1）→ 轨B 三本（P2，未完）→ 收尾（P3）。**
 **接力件**：`00-plan/NEXT-ROUND-PROMPT-3.md`（下一轮自包含）；**基线**：`00-plan/stage7p5p1-baseline.md`。
