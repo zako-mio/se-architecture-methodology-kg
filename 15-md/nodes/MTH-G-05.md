@@ -145,9 +145,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-015、OFF-016、BK-013、STD-001
+- 书证核验：BK-013 Ch6.2 Descriptive Completeness（direct），Ch10.1.1   A Standard Organization for Documenting a View（direct），Ch10.2.1   A Standard Organization for Documenting Information（direct），ChYou can use the templates in this chapter to create architecture（direct）
 - 入口链接：https://www.sei.cmu.edu/library/documenting-software-architectures-views-and-beyond-second-edition/
 - 入口链接：https://web.archive.org/web/20110807114506/http://www.sei.cmu.edu/architecture/tools/document/viewsandbeyond.cfm
 - 勘误：常见误解「架构文档化是设计完成后的独立收尾步骤」→ 核验结论「文档化应是架构决策过程的产物；与设计分离得越重，越可能根本不落下文档，或文档迅速与实现脱节」（OFF-015）

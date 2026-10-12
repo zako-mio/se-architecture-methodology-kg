@@ -111,9 +111,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：BK-022、WEB-041、WEB-016、PAP-017
+- 书证核验：BK-022 ChFour Reasons to Change Software（direct），ChRisky Change（direct），ChTest Coverings（direct），ChThe Legacy Code Change Algorithm（direct），ChWe Feel Overwhelmed（direct）
 - 入口链接：https://martinfowler.com/bliki/StranglerFigApplication.html
 - 勘误：常见误解「遗留代码指年代久远或技术栈过时的代码」→ 核验结论「遗留代码的判据是「没有测试、难以安全修改」；年代与技术栈并非定义标准」（BK-022）
 - 勘误：常见误解「整机重写是遗留系统现代化最干净的方案」→ 核验结论「整机重写耗时且需在动工前掌握全部既有行为，实践多失败；渐进迁移（strangler fig）逐块接管行为更稳健」（WEB-016）

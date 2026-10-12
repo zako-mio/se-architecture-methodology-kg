@@ -118,9 +118,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：LOC-028、BK-013、OFF-015
+- 书证核验：BK-013 Ch1.3 What Module Views Are For（direct），Ch1.4.3   Dependency Structure Matrix（direct），ChTooling Requirements（partial），ChVariation 1: Divide the View into View Packets（partial）
 - 勘误：常见误解「上下文压缩可以直接改写发送给模型的提示，只要结果更短」→ 核验结论「模型可见内容必须走可追加日志通道，派生消息是唯一投影；压缩须以受控的替换操作修改消息面，否则崩溃恢复、审计回放与界面重建都会失联」（LOC-028）
 
 ## §9 原始关系清单

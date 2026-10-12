@@ -141,10 +141,11 @@
 ## §8 信源与核验
 
 - 核验状态：True（verified）
-- 置信度：medium
-- 复核日期：2026-09-10
+- 置信度：high
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：LOC-020、BK-013、OFF-002
+- 书证核验：BK-013 Ch4.3 Call-Return Styles（direct），ChExamples of the Peer-to-Peer Style（direct），ChTable 4.3 Summary of the peer-to-peer style（direct），ChWhat the Peer-to-Peer Style Is For（direct）
 - 勘误：常见误解「架构 DAG 分析必须以可编译的源码为输入」→ 核验结论「该项目仅有 58 份设计文档且尚未实现，本案例证明设计文档经结构化转写同样能产出可用的模块依赖 DAG 与数据流 DAG；但依赖边属文档推断，须标注置信度」（LOC-020）
 
 ## §9 原始关系清单

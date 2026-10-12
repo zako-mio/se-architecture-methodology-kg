@@ -5,7 +5,38 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2b **16 条未登记缺口提案准入补录**）—— 本节优先于下方所有旧陈述
+## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2c **BK-013 / BK-022 双书核验入层 + ADR-007 准入补录 + 图谱再生**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = `NEXT-ROUND-PROMPT-4.md §D.1` 首选路径：把 BK-013《Documenting Software Architectures》(2nd/2010, `P1-19` PDF 591 页) 与 BK-022《Working Effectively with Legacy Code》(1st/2004, `P0-10` PDF 458 页) 按 10 步口径核验入层 → 生成链再生 → 公开层同步。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-5.md`；**基线**：`00-plan/stage7p5-p2c-baseline.md`（图谱指纹 **`c413c6fd…a6a8fc21`**）。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **语料层（新增 PDF 一路）** | 新增 `16-checkpoint/extract_pdf_book.py`（章图驱动 + 页数/标题落位/页码递增三条 fail-closed + `--negative-test` 3 条负例探针 3/3 如期拒写）；`welc.txt` 1 002 011 字符 / 26 章头、`documenting-sa.txt` 1 710 000 字符 / 15 章头；两份章图 100% 落位（P0-10 偏移 +23、P1-19 偏移 +43，逐章断言） |
+| **登记层** | **6 处登记齐备**（`SLUG_RECORD_PREFIX` / `SLUG_TEXT` / `SOURCE_SLUG` / `BOOKS` / `CORPUS` / 契约登记表）；`DSA` / `WELC` 与既有 14 前缀互不为前缀 |
+| **核验层** | 4 个分片工人 → 机检 **problems 0 / WARN 0** → `merge --only documenting-sa,welc`（**既有 52 件逐字节不变**）；records **55**（direct 51）：`documenting-sa` 37（覆盖 7 节点 / 9 缺口）、`welc` 18（5 节点 / 6 缺口） |
+| **第二路复核** | 3 个独立工人覆盖 **55/55**；`apply_secondpass` 报 `未复核 direct = 0`、`悬挂 verdict = 0`、`downgraded = 0`；总账 `matched 491 / passed 446 / disputed 45` |
+| **准入补录（ADR-007）** | 新增 `18-design/adr/ADR-007.json`（`amends: ["ADR-004"]`）**6/6 PASS**：`GAP-DSA-106` ⇒ **T2 / `MTH-G-13` / newly-allocated**；`GAP-DSA-003` ⇒ **T3 / no-id / 宿主 `MTH-G-05`**；`GAP-WELC-002` ⇒ **T3 / no-id / 宿主 `TEC-L-02`**；候选册 **49 → 52**、`reserved_ids` **37 → 38**、覆盖缺口 **50 → 53**；ADR-004 复查 **6/6** |
+| **核验层终值** | 记录 **636 → 691**（`direct 448→499 / partial 164→168 / inferred 24`）；覆盖节点 **93 → 100**；缺口 **133 → 148**；已核验书 **13 → 15 本**；`verified=true` **151→153**（GR-10 89.88% → **91.07%**） |
+| **图谱** | **结构不变**：168 节点 / 364 边 / 18 组 / 18 案例；`validate_graph` errors=0、kahn 168/168；**指纹变更** `83721ec6…` → **`c413c6fd…`**（7 节点新增覆盖 + 既有节点 `review_date` 前移） |
+| **9 文件指纹** | **8 处变更**（ledger / node-claim-map / book-toc-index / reverse-gaps / overrides / book-verification / methodology-dag / verify-contract），`_verification-baseline.json` 不变 |
+| **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **38** / 可晋升 **0** / 负例 **3/3**（**新提案行 = 0**）；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_pdf_book --negative-test` **3/3** |
+| **门控全表** | `gate_verification` **9/9**、G-D **5/5**、`gate_coverage` 100%、`gate_sources` PASS（verified 91.07%）、`gate_layout` 2140/2140、`gate_methodology` PASS、`kb_gate` **2/2**（5419 检查项 / 0 问题）、`gate_visual` L4 **PASS**（212/272，与上轮完全一致）、`gate_render` L5 **PASS**（7/7，skipped=0）、版权 **0 命中**（8 561 894 个 20-gram） |
+| **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致；`build` 连跑总哈希一致；`writeback_gap_ids --check` 0 变更；`apply_secondpass` ⚠️ 见纠正③ |
+| **公开层** | 推送 **1 次**（Git Data API），远端 HEAD 见 `stage7p5-p2c-baseline.md §4`；`rebuild.yml` 的 `push.paths` 含 `10-dag-data/**` 与 `16-checkpoint/**` ⇒ **本轮 CI 自动触发** |
+
+**🔴 本轮发现的六处「机制/判据不可信」纠正（务必继承）**：
+
+1. **登记处是 6 处、不是 4 处**：`gate_verification.py` 有 **3** 张表（`SLUG_RECORD_PREFIX` / `SLUG_TEXT` / `SOURCE_SLUG`）。**只登记第一张时 G-V5 会把新书记 SKIP（书文本不可用）而不是 FAIL**——门控仍报 9/9 **伪绿**。新书验收必须显式断言「G-V5 的『可用书文本源』列出该书 `source_id`」。
+2. **G-V5 在 `derive_verification.py` 之前也是伪绿**：`gate_verification` 读的是**派生**的 `verification-ledger.json`，不是 `_parts/`。合并 `_parts` 后**不跑 derive** 就复核 G-V5，看到的仍是旧记录集（本轮实测：derive 前可用源列表不含 `BK-013`/`BK-022`）。
+3. **`apply_secondpass.py --all` 对「已降级」记录非幂等**：重跑会把既有的「**判为 X（原判 Y），按保守终裁降级**」改写成「**结论有分歧但未低于原判，保留原强度**」（**数据值不变、留痕语义反转**；根因是脚本以「当前 `evidence_strength`」而非「该 record 的降级史」为判据）。本轮实测污染 `ledger-sweg.json` 3 条，**已从备份逐字节还原**。⇒ 收口：**新书只跑 `--slug`**，不整体重跑 `--all`；根治须加幂等判据。
+4. **L4/L5 在工作区只读沙箱下全 FAIL、并非内容缺陷**：`gate_visual` / `gate_render` 用 headless Chromium，socket 目录为 `$HOME/.agent-browser` ⇒ `workspace-write` 档下 `runtime.open` 32/32 FAIL（`Read-only file system`）。**须放宽沙箱重跑**才得到真实判定（本轮放宽后 L4 212/272 PASS、L5 7/7 PASS）。
+5. **`merge_secondpass_worklists.py` 会重写全部既有 `secondpass-*.json`**：实测内容逐字节相同（30/30 不变），属可接受，但**必须**在跑前对既有件做 SHA-256 快照以便复验。
+6. **`01-books/_verify/_meta/adr-register-backfill.json` 是单槽报告**：每轮补录会**覆盖**上一轮（本轮已把 ADR-006 版另存 `adr-register-backfill-adr006.json`）；建议改为按修订件命名。
+
+> **抓手（本轮实测有效）**：① 派工前先给每本书产**章图 + 承载页码的唯一私有档**；② 工人 prompt 必须写死「只读所给章切片、`grep` 定位 + 窄读」；③ **每步之后对既有件做 `sha256sum -c` 快照复验**——本轮正是靠它抓出纠正③；④ 工人会在 `_review/staging/` 留**隐藏点文件**（`.tmp-*` / `.gate-*` / `.z-*`），收尾扫描不能只扫 `_tmp*`。
+
+## ⚠️ 上一轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2b **16 条未登记缺口提案准入补录**）—— 本节优先于下方所有旧陈述
 
 **本轮主任务 = `NEXT-ROUND-PROMPT-3.md §D.3` 唯一剩余欠账 D3-1 的「全量」收口：把 `reverse-gaps.json` 中 16 条 `target.proposed_node` 不在 ADR-004 候选册内的提案逐条做准入裁决与取号，并清除 `validate_staging_shards` 的 WARN（用户本轮选择「全量 16 条」而非仅新书 7 条）。**
 **接力件**：`00-plan/NEXT-ROUND-PROMPT-4.md`；**基线**：`00-plan/stage7p5-p2b-baseline.md`。

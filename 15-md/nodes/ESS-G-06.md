@@ -152,9 +152,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：STD-001、OFF-002、BK-013、OFF-015、OFF-016
+- 书证核验：BK-013 Ch6.3.1   Create Context Diagrams Using the Vocabulary of the View（direct），Ch9.2 A Method for Choosing the Views（direct），ChP.3 Architecture Views（direct），ChUsing View Packets to Record Architecture（direct），ChVariation 1: Divide the View into View Packets（direct）
 - 入口链接：https://www.iso.org/standard/74393.html
 - 入口链接：https://www.sei.cmu.edu/architecture/
 - 入口链接：https://www.sei.cmu.edu/library/documenting-software-architectures-views-and-beyond-second-edition/

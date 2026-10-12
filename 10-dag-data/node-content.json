@@ -2569,8 +2569,8 @@
         "BK-013",
         "OFF-002"
       ],
-      "verified": "cited",
-      "confidence": "medium",
+      "verified": true,
+      "confidence": "high",
       "char_count": 1530,
       "sections": {
         "definition": "对一个仅有 58 份设计文档、尚未实现的开源去中心化聊天项目做架构逆向：从设计文本提炼 18 个模块及其依赖关系，重建模块依赖 DAG 与三条核心数据流 DAG，并输出全景理解与深度需求分析。",
@@ -2753,7 +2753,7 @@
         "BK-013",
         "OFF-015"
       ],
-      "verified": "cited",
+      "verified": true,
       "confidence": "high",
       "char_count": 1529,
       "sections": {

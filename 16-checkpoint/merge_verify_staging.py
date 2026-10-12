@@ -44,6 +44,9 @@ BOOKS = {
     "sweg": ("sweg", "BK-001", "sweg"),
     "tfa": ("twelve-factor", "BK-031", "tfa"),
     "qasc": ("saip-ch4", "BK-036", "qasc"),
+    # 阶段7 阶段3 续做 P2c（2026-10-12）：BK-013 / BK-022（PDF 抽取）
+    "dsa": ("documenting-sa", "BK-013", "dsa"),
+    "welc": ("welc", "BK-022", "welc"),
 }
 
 

@@ -149,9 +149,10 @@ Nygard 模板含五个部分：Title（短名词短语）、Context（价值中�
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：WEB-004、WEB-005、STD-001、BK-013
+- 书证核验：BK-013 Ch6.5.1   Why Document Architectural Decisions?（direct），Ch6.5.2   A Template for Documenting Architectural Decisions（direct），Ch6.5.4   Which Decisions to Document（direct），Ch6.5.5   The Payback for Documenting Architectural Decisions（direct）
 - 入口链接：https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - 入口链接：https://martinfowler.com/bliki/ArchitectureDecisionRecord.html
 - 勘误：常见误解「ADR 是长篇架构设计文档」→ 核验结论「ADR 是记录单个 architecturally significant decision 的短文本文件（1–2 页），含 Title/Context/Decision/Status/Consequences，与完整架构描述互补而非替代」（WEB-004）

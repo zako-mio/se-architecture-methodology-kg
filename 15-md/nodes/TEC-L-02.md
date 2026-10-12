@@ -113,10 +113,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 版本：2024-08
 - 规范信源：WEB-016、BK-022、WEB-041
+- 书证核验：BK-022 ChFaking Collaborators（direct），ChHow Do I Add a Feature?（direct），ChSeam Types（direct），ChSprout Method（direct），ChWrap Method（direct）
 - 入口链接：https://martinfowler.com/bliki/StranglerFigApplication.html
 - 入口链接：https://www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/P200000009308
 - 勘误：常见误解「绞杀者就是重写，只是换成增量方式」→ 核验结论「绞杀者以既有行为安全网与可切换接缝为前提，在旧系统旁生长并逐步接管，强调保留可回退能力；缺乏接缝与行为保护的盲目增量重写不属该方法」（WEB-016）

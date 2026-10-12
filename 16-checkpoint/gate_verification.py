@@ -73,6 +73,10 @@ SLUG_RECORD_PREFIX = {
     "sweg": "SWEG",
     "twelve-factor": "TFA",
     "saip-ch4": "QASC",
+    # 阶段7 阶段3 续做 P2c（2026-10-12）：BK-013 / BK-022
+    # ⚠️ 前缀不得互为前缀：DSA / WELC 与既有 14 个前缀互不为前缀（已复核）
+    "documenting-sa": "DSA",
+    "welc": "WELC",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -92,6 +96,9 @@ SLUG_TEXT = {
     "sweg": "sweg.txt",
     "twelve-factor": "twelve-factor.txt",
     "saip-ch4": "saip-ch4.txt",
+    # 阶段7 阶段3 续做 P2c（2026-10-12）：PDF 抽取（extract_pdf_book.py）
+    "documenting-sa": "documenting-sa.txt",
+    "welc": "welc.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -108,6 +115,9 @@ SOURCE_SLUG = {
     "BK-001": "sweg",
     "BK-031": "twelve-factor",
     "BK-036": "saip-ch4",
+    # 阶段7 阶段3 续做 P2c（2026-10-12）
+    "BK-013": "documenting-sa",
+    "BK-022": "welc",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）

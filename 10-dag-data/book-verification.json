@@ -5,6 +5,52 @@
     "note": "书证核验的公开安全投影：仅章节级引用元数据（信源 id + 章/节编号与标题 + 强度 + 方向 + 复核状态 + 日期）。不含 claim 文本、页码、摘句；gaps.summary 为改写摘要。"
   },
   "by_node": {
+    "CAS-X-01": [
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "4",
+        "section": "4.3 Call-Return Styles",
+        "section_title": "4.3.2 Peer-to-Peer Style",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "4",
+        "section": "Examples of the Peer-to-Peer Style",
+        "section_title": "Examples of the Peer-to-Peer Style",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "4",
+        "section": "Table 4.3 Summary of the peer-to-peer style",
+        "section_title": "Elements, Relations, and Properties",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "4",
+        "section": "What the Peer-to-Peer Style Is For",
+        "section_title": "What the Peer-to-Peer Style Is For",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
     "CAS-X-02": [
       {
         "source_id": "BK-007",
@@ -161,6 +207,28 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "21",
+        "section": "First Steps",
+        "section_title": "First Steps",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "21",
+        "section": "First Steps",
+        "section_title": "First Steps",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "CAS-X-05": [
@@ -365,6 +433,63 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-10-11"
+      }
+    ],
+    "CAS-X-09": [
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "1",
+        "section": "1.3 What Module Views Are For",
+        "section_title": "1.3 What Module Views Are For",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "1",
+        "section": "1.3 What Module Views Are For",
+        "section_title": "1.3 What Module Views Are For",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "1",
+        "section": "1.4.3   Dependency Structure Matrix",
+        "section_title": "1.4.3   Dependency Structure Matrix",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Tooling Requirements",
+        "section_title": "Tooling Requirements",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Variation 1: Divide the View into View Packets",
+        "section_title": "Variation 1: Divide the View into View Packets",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "ESS-G-01": [
@@ -628,6 +753,74 @@
         "review_date": "2026-09-11"
       }
     ],
+    "ESS-G-06": [
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.3.1   Create Context Diagrams Using the Vocabulary of the View",
+        "section_title": "6.3.1 Create Context Diagrams Using the Vocabulary of the View",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "9",
+        "section": "9.2 A Method for Choosing the Views",
+        "section_title": "9.2 A Method for Choosing the Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Using View Packets to Record Architecture",
+        "section_title": "Using View Packets to Record Architecture Design Steps",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Variation 1: Divide the View into View Packets",
+        "section_title": "Variation 1: Divide the View into View Packets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Variation 1: Divide the View into View Packets",
+        "section_title": "Variation 1: Divide the View into View Packets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "P.3 Architecture Views",
+        "section_title": "P.3 Architecture Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
     "ESS-G-07": [
       {
         "source_id": "BK-007",
@@ -639,6 +832,50 @@
         "direction": "reverse",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "3",
+        "section": "3.5 Relation to Other Kinds of Views",
+        "section_title": "3.5 Relation to Other Kinds of Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "5",
+        "section": "5.1 Overview",
+        "section_title": "5.1 Overview",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Section 4. Mapping Between Views",
+        "section_title": "10.2.1 A Standard Organization for Documenting Information Beyond Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "Section 4. Mapping Between Views",
+        "section_title": "10.2.1 A Standard Organization for Documenting Information Beyond Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "ESS-H-02": [
@@ -2969,6 +3206,74 @@
         "review_date": "2026-10-12"
       }
     ],
+    "MTH-G-01": [
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.1   Why Document Architectural Decisions?",
+        "section_title": "6.5.1   Why Document Architectural Decisions?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.1   Why Document Architectural Decisions?",
+        "section_title": "6.5.1   Why Document Architectural Decisions?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.2   A Template for Documenting Architectural Decisions",
+        "section_title": "6.5.2   A Template for Documenting Architectural Decisions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.2   A Template for Documenting Architectural Decisions",
+        "section_title": "6.5.2   A Template for Documenting Architectural Decisions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.4   Which Decisions to Document",
+        "section_title": "6.5.4   Which Decisions to Document",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.5.5   The Payback for Documenting Architectural Decisions",
+        "section_title": "6.5.5   The Payback for Documenting Architectural Decisions",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
     "MTH-G-02": [
       {
         "source_id": "BK-009",
@@ -3195,6 +3500,52 @@
         "review_date": "2026-10-11"
       }
     ],
+    "MTH-G-05": [
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "6",
+        "section": "6.2 Descriptive Completeness",
+        "section_title": "6.2 Descriptive Completeness",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "10.1.1   A Standard Organization for Documenting a View",
+        "section_title": "10.1.1 A Standard Organization for Documenting a View",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "10.2.1   A Standard Organization for Documenting Information",
+        "section_title": "10.2.1 A Standard Organization for Documenting Information Beyond Views",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "You can use the templates in this chapter to create architecture",
+        "section_title": "10.4.1 Packaging Schemes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
     "MTH-G-06": [
       {
         "source_id": "BK-009",
@@ -3384,6 +3735,28 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "4",
+        "section": "Seam Types",
+        "section_title": "Seam Types",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "4",
+        "section": "Seams",
+        "section_title": "Seams",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "MTH-H-04": [
@@ -4565,6 +4938,28 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-11"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "1",
+        "section": "Improving Design",
+        "section_title": "Improving Design",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "2",
+        "section": "Legacy Code Change Algorithm",
+        "section_title": "Legacy Code Change Algorithm",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "MTH-L-02": [
@@ -4813,6 +5208,74 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-10-11"
+      }
+    ],
+    "MTH-L-06": [
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "1",
+        "section": "Four Reasons to Change Software",
+        "section_title": "Four Reasons to Change Software",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "1",
+        "section": "Risky Change",
+        "section_title": "Risky Change",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "2",
+        "section": "Test Coverings",
+        "section_title": "Test Coverings",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "2",
+        "section": "The Legacy Code Change Algorithm",
+        "section_title": "The Legacy Code Change Algorithm",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "2",
+        "section": "The Legacy Code Change Algorithm",
+        "section_title": "The Legacy Code Change Algorithm",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "24",
+        "section": "We Feel Overwhelmed",
+        "section_title": "We Feel Overwhelmed",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
       }
     ],
     "MTH-M-01": [
@@ -6061,6 +6524,94 @@
     ],
     "MTH-O-09": [
       {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "10.1.3   Avoiding Unnecessary Repetition Across Views or View",
+        "section_title": "10.1.3   Avoiding Unnecessary Repetition Across Views or View Packets",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "10",
+        "section": "10.1.3   Avoiding Unnecessary Repetition Across Views or View",
+        "section_title": "10.1.3   Avoiding Unnecessary Repetition Across Views or View Packets",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "P.2.4   Economics of Architecture Documentation",
+        "section_title": "P.2.4   Economics of Architecture Documentation",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "Rule 1: Write Documentation from the Reader’s Point of View",
+        "section_title": "Rule 1: Write Documentation from the Reader’s Point of View",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "Rule 2: Avoid Unnecessary Repetition",
+        "section_title": "Rule 2: Avoid Unnecessary Repetition",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "Rule 2: Avoid Unnecessary Repetition",
+        "section_title": "Rule 2: Avoid Unnecessary Repetition",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "Rule 6: Keep Documentation Current but Not Too Current",
+        "section_title": "Rule 6: Keep Documentation Current but Not Too Current",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-013",
+        "book": "Documenting Software Architectures: Views and Beyond",
+        "chapter": "P",
+        "section": "Rule 6: Keep Documentation Current but Not Too Current",
+        "section_title": "Rule 6: Keep Documentation Current but Not Too Current",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",
         "chapter": "2",
@@ -7040,6 +7591,74 @@
         "review_date": "2026-10-11"
       }
     ],
+    "TEC-L-02": [
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "3",
+        "section": "Faking Collaborators",
+        "section_title": "Faking Collaborators",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "4",
+        "section": "Seam Types",
+        "section_title": "Seam Types",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "6",
+        "section": "Sprout Method",
+        "section_title": "Sprout Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "6",
+        "section": "Wrap Method",
+        "section_title": "Wrap Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "6",
+        "section": "Wrap Method",
+        "section_title": "Wrap Method",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-022",
+        "book": "Working Effectively with Legacy Code",
+        "chapter": "8",
+        "section": "How Do I Add a Feature?",
+        "section_title": "How Do I Add a Feature?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
     "TEC-M-03": [
       {
         "source_id": "BK-009",
@@ -7677,6 +8296,132 @@
       },
       "summary": "「权威记录系统与衍生数据系统」这一对概念在图谱中缺失：按数据是否为首要权威源区分记录系统与派生系统，是梳理多组件数据架构数据流与集成方式的基本视角，DDIA 第1、13章反复使用。",
       "proposed_action": "新增节点（提案：ESS-H-13 记录系统与衍生数据，待评审）。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-001",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-013",
+      "chapter": "10",
+      "section": "10.4.3",
+      "target": {
+        "existing_node_id": "MTH-G-05",
+        "proposed_node": null
+      },
+      "summary": "该书把架构文档与代码置于同一配置管理之下：文档要标注日期与版本号，翻看多张图时应能一眼判断它们是否出自同一系统版本；文档版本与代码版本还要能互相指认，即从代码出发能查证它对应哪一版架构。这一条把「文档化方法」从写什么推进到如何长期维持版本一致，属于文档化方法的运维侧内容。",
+      "proposed_action": "在 MTH-G-05 下补一条工程类记录，锚定第 10 章该小节，写明文档纳入配置管理、文档与代码版本互相指认这两项要求。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-002",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-013",
+      "chapter": "10",
+      "section": "Your project’s development plan should specify the process for",
+      "target": {
+        "existing_node_id": "MTH-G-05",
+        "proposed_node": null
+      },
+      "summary": "该书主张架构文档也应有发布节奏：由项目开发计划规定维持文档最新的流程，架构师配合重大里程碑提前发布文档版本，给开发者留出把架构用起来的时间；发布节拍与项目早期迭代快、后期进入维护后转慢的规律相呼应，可把每次迭代或增量发布的收尾与文档改版绑定。",
+      "proposed_action": "在 MTH-G-05 下补一条工程类记录，锚定第 10 章该小节，写明文档发布节奏与里程碑的绑定方式。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-003",
+      "kind": "concept_missing",
+      "book_source_id": "BK-013",
+      "chapter": "10",
+      "section": "10.4.3",
+      "target": {
+        "existing_node_id": "MTH-G-05",
+        "proposed_node": null
+      },
+      "summary": "现有节点只覆盖「架构文档化方法」的产出结构，没有承载文档自身的版本管理这一维度。该书明确要求把文档当作软件一样纳入配置管理，并与代码版本互相指认，同时按项目节拍发布文档。若缺乏独立承载点，这类要求会被当成写作技巧而非可治理的工程实践，也难以与持续交付场景中的文档新鲜度问题对接。",
+      "proposed_action": "考虑新建一个关于架构文档版本治理与发布节奏的节点，把配置管理、版本互指、里程碑发布三项要求归入，并与文档化方法节点建立关联。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-DSA-101",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-013",
+      "chapter": "6",
+      "section": "6.5.2   A Template for Documenting Architectural Decisions",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": null
+      },
+      "summary": "既有节点把决策之间的关系笼统写成「用链接形成可追溯的决策图」，未登记该书给出的三类具体关系轴：因果（哪条决策引出了哪条）、结构（沿架构元素层级构成的父决策与子决策）、时间（决策之间的先后次序）。该书建议用追溯矩阵或决策树承载，也可用对象模型之类的图示表达复杂关系。缺少这三条关系轴，「决策图」只能表达取代关系，无法支撑跨层级的追责与影响回溯。",
+      "proposed_action": "为 MTH-G-01 的 mechanism 段补引 BK-013 第6章该小节，登记因果、结构、时间三类决策关系及其可用载体（追溯矩阵、决策树、图示），作为取代关系之外的补充。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-102",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-013",
+      "chapter": "6",
+      "section": "6.5.2   A Template for Documenting Architectural Decisions",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": null
+      },
+      "summary": "该书把「前提假设」设为决策记录的独立字段，并区分两类假设：关于环境的（环境中可用的东西、不变的前提，例如开发环境所具备的工具与团队技能水平）与关于需求的（为何所提供的设计足以满足需要）。其作用是让假设显式写出后可直接被复核其是否准确、是否仍然成立；相较之下，靠审读设计去反推假设要困难得多。既有节点只提到记录上下文与假设，未把假设拆成这两类，也未说明显式化假设对架构验证的作用。",
+      "proposed_action": "为 MTH-G-01 补引 BK-013 第6章该小节所附建议框，把环境假设与需求假设的区分、以及「写下来才便于复核准确性」的验证作用登记为直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-103",
+      "kind": "missed_citation",
+      "book_source_id": "BK-013",
+      "chapter": "10",
+      "section": "Section 5. Rationale",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": null
+      },
+      "summary": "该书把决策记录落到文档包的两个不同层次上：视图内部的理由一节只需交代本视图内设计为何如此，并论证其成立；而适用于多个视图的决策、组织或背景约束、以及影响全局的基本模式与风格选择，则归入跨视图的架构背景一节。既有节点覆盖了决策模板本身，却未登记「决策按影响范围分置两层」这一落地口径，读者因而无法判断某条决策应写进哪个位置。",
+      "proposed_action": "为 MTH-G-01 的 engineering 段补引 BK-013 第10章视图模板的理由一节与跨视图的理由一节，登记「视图内理由 / 跨视图架构背景」两级归属口径。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-104",
+      "kind": "missed_citation",
+      "book_source_id": "BK-013",
+      "chapter": "10",
+      "section": "10.3 Documenting a Mapping to Requirements",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": null
+      },
+      "summary": "该书为决策到需求的对应关系给了一条可检查的完备性判据：每条架构决策至少要挂靠在一个要求之上，或至少能追溯到某位架构师；同时承认反向并不成立——并非每条决策都对得上一条明文要求。它主张建立需求与架构元素或决策之间的双向引用，使评审者能顺着业务目标走到技术决策、再回到该决策对目标的影响，并让架构师在被追问时能自证其取舍。既有节点提到决策要与需求建立映射，但未登记这条判据及其在评审中被用作核查项。",
+      "proposed_action": "为 MTH-G-01 补引 BK-013 第10章该节，登记「每条决策至少挂靠一个要求或可追溯到架构师」的完备性判据及需求—决策双向引用在评审中的作用。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-105",
+      "kind": "missed_citation",
+      "book_source_id": "BK-013",
+      "chapter": "11",
+      "section": "11.2.2   Example Question Set for Supporting Evaluation",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": null
+      },
+      "summary": "该书把决策与理据是否被记录变成评审时可直接发问的检查项，并按不同评审目的分设问题：为支撑架构评估而审时，追问架构文档是否指出了关键决策及其所在位置、是否捕获了这些决策的理由；为支撑开发而审时，追问是否记录了关键决策与设计理据；为核对与 ISO/IEC 42010 的一致性而审时，追问文档是否包含架构决策的理由，包括视角与模型的选择、对应规则、以及各视图内关键决策的理由。既有节点未登记这条「以提问核验决策记录完备性」的评审路径。",
+      "proposed_action": "为 MTH-G-01 补引 BK-013 第11章的示例问题集，登记三组以决策与理据为对象的评审提问及其对应评审目的。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DSA-106",
+      "kind": "concept_missing",
+      "book_source_id": "BK-013",
+      "chapter": "6",
+      "section": "6.4     Documenting Variation Points",
+      "target": {
+        "existing_node_id": "MTH-G-01",
+        "proposed_node": "MTH-G-13"
+      },
+      "summary": "该书把变化点界定为架构中有意留待后续才定的决策：产品族共用一套架构时靠它派生出一族相似而结构不同的系统；有些系统的变化点甚至允许运行期改变基本结构。每个变化点需要写清留待决定的是什么、在哪些情形下采用哪一取值、以及这些取值之间如何相互制约。它与决策记录同属「决策」这一族，但记录对象恰好相反——不是已经作出的决定，而是被刻意推迟、连同允许取值一并存档的决定；既有节点只承载已作出的决策，无法容纳这一类对象。",
+      "proposed_action": "提案新增节点「有意留待后续的决策项与变化点记录」，以 BK-013 第6章该节为直接信源，并与 MTH-G-01 建立并列或互补关系：MTH-G-01 管已作决策，本节点管被推迟的决策及其允许取值与约束。",
       "evidence_strength": "direct"
     },
     {
@@ -9050,6 +9795,90 @@
       "summary": "「把运行与维护活动当作开发的高保真感官输入、从而形成可自我导向的控制论闭环」在图谱中缺失：本书主张不要另设只做维护与常规运营的团队，让构建者对同一系统的新功能与存量维护并行负责，使运行信号持续回流并校正设计。该机制应在度量与反馈闭环节点下补充。",
       "proposed_action": "新增术语条目并补挂至 MTH-O-11，说明以运行信号驱动设计校正的组织级反馈闭环及其反模式。",
       "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-WELC-001",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-022",
+      "chapter": "6",
+      "section": "Wrap Method",
+      "target": {
+        "existing_node_id": "TEC-L-02",
+        "proposed_node": null
+      },
+      "summary": "在逐方法、逐类的尺度上，发芽与包裹已经把「新旧同时在场、调用方不必知情」这件事讲透了：新方法先执行新增行为、再委派改名后私有化的旧方法，调用点保持原样。但本书停在了进程内的方法与类这一层，没有给出跨部署单元的路由与切换实体——谁来持有那条始终存在的分流通道、判定依据放在哪里、一次功能迁移到哪一步才算切断旧路径、以及切断前如何保留一键回退。TEC-L-02 的定义要求「可切换的接缝与路由」，而本书只交付了前者。",
+      "proposed_action": "以 BK-022 第 6 章「Wrap Method」的委派改写为最小尺度的路由接缝证据，为该节点补入跨尺度说明：进程内的方法接缝仅覆盖单次调用分流，节点所要求的系统级可切换路由（请求分流、灰度切量、旧路径退场）需另引其他来源。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-WELC-002",
+      "kind": "concept_missing",
+      "book_source_id": "BK-022",
+      "chapter": "24",
+      "section": "We Feel Overwhelmed",
+      "target": {
+        "existing_node_id": "TEC-L-02",
+        "proposed_node": null
+      },
+      "summary": "本书在批评整机重写时描述了一个反复出现的场景：旧系统仍在服役，业务方逐项判断某个新需求是进旧系统还是让客户等新系统，很多时候客户等不了，同一个改动就只能两套系统都做，新团队因此被迫双份作业，替换愈发遥遥无期。本书把「同一改动两套都做」当作失败征兆来叙述，并未把它正面处理为迁移期必须承担的过渡成本，也没有给出并行期的数据同步与归属规则。既有节点中，弃用与日落策略管的是退场，增量演化与一致性治理管的是架构约束的持续一致，都不承载「新旧并行期间两侧数据如何同步、以哪侧为准、何时解除双写」。",
+      "proposed_action": "提案新节点「渐进迁移中的新旧并行数据同步策略」，承载并行期的双写与同步机制、数据归属与权威侧判定、以及双写解除时机；BK-022 第 24 章「We Feel Overwhelmed」可登记为问题侧的直接证据，机制侧证据需另引。",
+      "evidence_strength": "inferred"
+    },
+    {
+      "gap_id": "GAP-WELC-003",
+      "kind": "missed_citation",
+      "book_source_id": "BK-022",
+      "chapter": "2",
+      "section": "The Legacy Code Change Algorithm",
+      "target": {
+        "existing_node_id": "MTH-L-06",
+        "proposed_node": null
+      },
+      "summary": "本书把遗留代码工作的日常目标定成一条可累积的纪律：每一轮编程结束时交付的不只是带来价值的功能改动，还有它的测试；被覆盖的区域像岛屿一样浮出水面并逐步连成陆地。这为「渐进治理」提供了节奏与进度判据——以每轮编程为单位同时产出功能与测试覆盖，而不是以季度或版本为单位安排一次清理。该节点若只强调接缝与绞杀者，会缺少这条定义推进节奏的依据。",
+      "proposed_action": "为 MTH-L-06 补引 BK-022 第 2 章「The Legacy Code Change Algorithm」中关于日常目标与测试覆盖岛屿化的段落，登记为「以单轮编程为推进单位、功能与测试同步交付」的直接证据。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-WELC-101",
+      "kind": "missed_citation",
+      "book_source_id": "BK-022",
+      "chapter": "4",
+      "section": "Seams",
+      "target": {
+        "existing_node_id": "MTH-H-01",
+        "proposed_node": null
+      },
+      "summary": "该书用整章篇幅给出「接缝」这一改造视角：接缝是可换掉行为而不必编辑该处的落点，每个接缝都配一个启用点来决定走哪种行为，并可按语言与构建阶段区分预处理、链接、对象等接缝类型，其中对象接缝在面向对象语言中最实用。这是「在何处下手替换依赖 / 替换实现」的判定框架，与本图谱既有的重构手法族、测试替身与测试策略节点都只能部分对应，目前没有节点把「替换点 + 启用点 + 接缝类型选择」作为独立判定对象承载。",
+      "proposed_action": "在 MTH-H-01「重构手法族」节点下补入 BK-022 第4章的接缝与启用点证据（含对象接缝优先于预处理/链接接缝的选择结论）；若后续多本书反复出现该视角，再考虑为其单列一个「接缝与启用点」方法节点，并与测试替身与测试策略、可测试性本质建立关系边。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-WELC-102",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-022",
+      "chapter": "3",
+      "section": "Sensing and Separation",
+      "target": {
+        "existing_node_id": "MTH-L-01",
+        "proposed_node": null
+      },
+      "summary": "书中把「为什么要断开依赖」拆成两类互不相同的理由：一是感知，值根本取不到、只能借助替身把计算结果暴露出来；二是分离，连把代码放进测试夹具跑起来都做不到。书中并指出两者孰难并无定论，替身对象与带内置断言的模拟对象分别服务不同场景。图谱现有节点只在「行为保持重构」下谈测试支撑，没有把断依赖的动机分类作为可判定的内容收进来，导致「为感知而断」与「为分离而断」在实践指导上无从区分。",
+      "proposed_action": "以 BK-022 第3章为该细分的证据来源，在 MTH-L-01「行为保持重构」节点内补入「感知 / 分离」两类断依赖动机及其对应手段（替身、模拟对象）；并与测试替身与测试策略节点建立引用关系，避免两处重复承载。",
+      "evidence_strength": "partial"
+    },
+    {
+      "gap_id": "GAP-WELC-103",
+      "kind": "concept_missing",
+      "book_source_id": "BK-022",
+      "chapter": "2",
+      "section": "Legacy Code Change Algorithm",
+      "target": {
+        "existing_node_id": "MTH-L-01",
+        "proposed_node": null
+      },
+      "summary": "该书把遗留系统中的日常改动固化为一个五步次序：定位改动点、找测试点、断开依赖、写测试、再改动并重构；其配套主张是每次编程回合结束时应同时交出功能与其测试，受测区域因此像岛屿一样逐步扩大。图谱目前缺少这条「在无测试的既有代码里先建立可测性、再实施行为变更」的操作性次序，现有行为保持重构内容讲的是重构本身如何保持行为，不覆盖进入遗留代码的入口流程。",
+      "proposed_action": "在 MTH-L-01「行为保持重构」或遗留系统渐进治理节点下补入 BK-022 第2章的遗留代码改动次序，并明确其与「测试先行的扩大受测范围」目标的绑定关系；同时在注释中标注该书把为可测性而做的断依赖改造也视为重构这一归类。",
+      "evidence_strength": "partial"
     }
   ]
 }

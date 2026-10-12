@@ -16,7 +16,7 @@
 | layer=methodology | 67 |
 | layer=technology | 32 |
 | layer=null（案例层） | 18 |
-| verified=true | 151 / 168 |
+| verified=true | 153 / 168 |
 | 含 errata 的节点 | 162 |
 
 ### 1.1 按 domain

@@ -99,10 +99,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-11
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-015、OFF-016、BK-013、BK-008、WEB-002、OFF-022、WEB-045
-- 书证核验：BK-023 Ch2.4（direct），Ch2.5（direct）
+- 书证核验：BK-013 Ch10.1.3   Avoiding Unnecessary Repetition Across Views or View（direct），ChP.2.4   Economics of Architecture Documentation（direct），ChRule 1: Write Documentation from the Reader’s Point of View（direct），ChRule 2: Avoid Unnecessary Repetition（direct），ChRule 6: Keep Documentation Current but Not Too Current（direct）；BK-023 Ch2.4（direct），Ch2.5（direct）
 - 勘误：常见误解「组件越少、功能越少系统就越简单」→ 核验结论「简单指理解成本低而非功能贫乏；复杂度主要来源于依赖与不透明，不可理解的黑盒在出问题时比功能少但透明的系统更致命，平台应保持最薄可行」（OFF-015）
 
 ## §9 原始关系清单

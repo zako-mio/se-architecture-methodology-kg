@@ -5,6 +5,18 @@
     "source_of_truth": true
   },
   "overrides": {
+    "CAS-X-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-DSA-011",
+        "VR-DSA-012",
+        "VR-DSA-013",
+        "VR-DSA-014"
+      ]
+    },
     "CAS-X-02": {
       "verified": "cited",
       "confidence": "high",
@@ -24,7 +36,7 @@
     "CAS-X-04": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-10-11",
+      "review_date": "2026-10-12",
       "errata": [],
       "_evidence": [
         "VR-REF-019",
@@ -32,7 +44,9 @@
         "VR-REF-021",
         "VR-REF-022",
         "VR-REF-023",
-        "VR-REF-024"
+        "VR-REF-024",
+        "VR-WELC-104",
+        "VR-WELC-106"
       ]
     },
     "CAS-X-05": {
@@ -75,6 +89,19 @@
         "VR-EA-135",
         "VR-EA-136",
         "VR-EA-137"
+      ]
+    },
+    "CAS-X-09": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-DSA-115",
+        "VR-DSA-116",
+        "VR-DSA-117",
+        "VR-DSA-118",
+        "VR-DSA-119"
       ]
     },
     "ESS-G-01": {
@@ -132,13 +159,31 @@
         "VR-DDIA-013"
       ]
     },
+    "ESS-G-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-DSA-001",
+        "VR-DSA-002",
+        "VR-DSA-003",
+        "VR-DSA-004",
+        "VR-DSA-005",
+        "VR-DSA-006"
+      ]
+    },
     "ESS-G-07": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-09-11",
+      "review_date": "2026-10-12",
       "errata": [],
       "_evidence": [
-        "VR-CA-027"
+        "VR-CA-027",
+        "VR-DSA-015",
+        "VR-DSA-016",
+        "VR-DSA-017",
+        "VR-DSA-018"
       ]
     },
     "ESS-H-02": {
@@ -595,6 +640,20 @@
         "VR-QASC-021"
       ]
     },
+    "MTH-G-01": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-DSA-101",
+        "VR-DSA-102",
+        "VR-DSA-103",
+        "VR-DSA-104",
+        "VR-DSA-105",
+        "VR-DSA-106"
+      ]
+    },
     "MTH-G-02": {
       "verified": true,
       "confidence": "high",
@@ -639,6 +698,18 @@
         "VR-TT-144"
       ]
     },
+    "MTH-G-05": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-DSA-007",
+        "VR-DSA-008",
+        "VR-DSA-009",
+        "VR-DSA-010"
+      ]
+    },
     "MTH-G-06": {
       "verified": true,
       "confidence": "high",
@@ -661,7 +732,7 @@
     "MTH-H-01": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-10-11",
+      "review_date": "2026-10-12",
       "errata": [],
       "_evidence": [
         "VR-REF-013",
@@ -669,7 +740,9 @@
         "VR-REF-015",
         "VR-REF-016",
         "VR-REF-017",
-        "VR-REF-018"
+        "VR-REF-018",
+        "VR-WELC-101",
+        "VR-WELC-102"
       ]
     },
     "MTH-H-04": {
@@ -870,7 +943,7 @@
     "MTH-L-01": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-10-11",
+      "review_date": "2026-10-12",
       "errata": [],
       "_evidence": [
         "VR-REF-001",
@@ -878,7 +951,9 @@
         "VR-REF-003",
         "VR-REF-004",
         "VR-REF-005",
-        "VR-REF-006"
+        "VR-REF-006",
+        "VR-WELC-103",
+        "VR-WELC-105"
       ]
     },
     "MTH-L-02": {
@@ -925,6 +1000,20 @@
         "VR-EA-025",
         "VR-EA-026",
         "VR-EA-027"
+      ]
+    },
+    "MTH-L-06": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-WELC-001",
+        "VR-WELC-002",
+        "VR-WELC-003",
+        "VR-WELC-004",
+        "VR-WELC-005",
+        "VR-WELC-006"
       ]
     },
     "MTH-M-01": {
@@ -1176,7 +1265,7 @@
     "MTH-O-09": {
       "verified": true,
       "confidence": "high",
-      "review_date": "2026-09-11",
+      "review_date": "2026-10-12",
       "errata": [],
       "_evidence": [
         "VR-D2-036",
@@ -1184,7 +1273,15 @@
         "VR-D2-038",
         "VR-D2-039",
         "VR-D2-040",
-        "VR-DDIA-012"
+        "VR-DDIA-012",
+        "VR-DSA-107",
+        "VR-DSA-108",
+        "VR-DSA-109",
+        "VR-DSA-110",
+        "VR-DSA-111",
+        "VR-DSA-112",
+        "VR-DSA-113",
+        "VR-DSA-114"
       ]
     },
     "MTH-O-10": {
@@ -1354,6 +1451,20 @@
         "VR-EA-142",
         "VR-EA-143",
         "VR-EA-144"
+      ]
+    },
+    "TEC-L-02": {
+      "verified": true,
+      "confidence": "high",
+      "review_date": "2026-10-12",
+      "errata": [],
+      "_evidence": [
+        "VR-WELC-007",
+        "VR-WELC-008",
+        "VR-WELC-009",
+        "VR-WELC-010",
+        "VR-WELC-011",
+        "VR-WELC-012"
       ]
     },
     "TEC-M-03": {

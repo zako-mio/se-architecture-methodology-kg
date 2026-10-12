@@ -133,10 +133,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-10-11
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：BK-021、BK-022、WEB-017、WEB-014
-- 书证核验：BK-021 Ch3（direct），ChDefining Refactoring（direct），ChFormat of the Refactorings（direct），ChHow Mature Are These Refactorings?（direct）
+- 书证核验：BK-021 Ch3（direct），ChDefining Refactoring（direct），ChFormat of the Refactorings（direct），ChHow Mature Are These Refactorings?（direct）；BK-022 ChSeam Types（direct），ChSeams（direct）
 - 入口链接：https://refactoring.com/catalog/
 - 入口链接：https://martinfowler.com/bliki/OpportunisticRefactoring.html
 - 勘误：常见误解「重构就是重写或可顺带加功能」→ 核验结论「重构是对内部结构的修改，不改变可观察行为；加功能或重写会改变行为，二者须与重构分开进行」（BK-021）
