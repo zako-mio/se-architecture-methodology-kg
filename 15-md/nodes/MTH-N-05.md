@@ -98,7 +98,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：VEN-036、VEN-037、VEN-038
 - 书证核验：BK-025 ChHigh Velocity（direct），ChRelationships Between Testing and Mean Time to Repair（direct）；BK-026 ChAutomate This Year’s Job Away（direct），ChShare Ownership with Developers（direct），ChThe Wisdom of Production（direct），ChUse the Same Tooling, Regardless of Function or Job Title（direct）

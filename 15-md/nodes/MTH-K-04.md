@@ -94,8 +94,8 @@
 ## §8 信源与核验
 
 - 核验状态：True（verified）
-- 置信度：medium
-- 复核日期：2026-09-10
+- 置信度：high
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：VEN-026、VEN-027
 - 书证核验：BK-025 ChAlerting（direct），ChBlack-Box Monitoring（direct），ChBlack-Box Versus White-Box（direct），ChDefinitions（direct），ChSymptoms Versus Causes（partial）；BK-026 ChExamples（partial），ChImprove both logs and metrics（direct），ChMetrics with Purpose（partial），ChMonitoring（direct），ChSources of Monitoring Data（partial），ChTesting Alerting Logic（direct）

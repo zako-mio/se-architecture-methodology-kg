@@ -93,7 +93,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-025、VEN-027
 - 书证核验：BK-025 ChAs Simple as Possible, No Simpler（direct），ChErrors（direct），ChLatency（direct），ChSaturation（direct），ChThe Four Golden Signals（direct），ChWorrying About Your Tail (or, Instrumentation and Performance)（direct）；BK-026 ChDependencies（direct），ChSaturation（direct），ChStatus of Served Traffic（direct），ChThe SLO Culture Project（direct）

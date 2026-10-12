@@ -105,7 +105,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-11
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-027、VEN-029
 - 书证核验：BK-023 Ch2.3（partial）；BK-025 ChKey Insights（direct），ChManaging Risk（direct），ChRisk Tolerance of Services（direct），ChTypes of failures（direct）；BK-026 ChAccidents Are Normal（direct），ChConclusion（partial），ChFrom Load to Overload（partial），ChIt’s Better to Fix It Yourself; Don’t Blame Someone Else（direct）

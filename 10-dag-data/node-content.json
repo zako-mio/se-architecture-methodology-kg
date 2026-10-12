@@ -1235,7 +1235,7 @@
         "VEN-027"
       ],
       "verified": true,
-      "confidence": "medium",
+      "confidence": "high",
       "char_count": 1514,
       "sections": {
         "definition": "用数值聚合、带上下文的事件记录与请求级路径追踪三类信号共同刻画系统，并通过统一的身份与时间基准把它们关联起来；价值在于信号可相互串联以定位根因，而非信号数量或支柱的划分。",

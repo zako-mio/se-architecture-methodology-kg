@@ -94,7 +94,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-018、VEN-029
 - 书证核验：BK-025 ChCapacity Planning（direct），ChDemand Forecasting and Capacity Planning（direct），ChHandling Overload（partial），ChPer-Customer Limits（direct），ChThe Pitfalls of "Queries per Second"（direct）；BK-026 ChCase Study 2: When Load Shedding Attacks（direct），ChConfiguring Conservatively（direct），ChFuture-proofing（partial），ChIntroducing Non-Abstract Large System Design（partial），ChStrategies for Mitigating Overload（partial），ChWhy “Non-Abstract”?（direct）

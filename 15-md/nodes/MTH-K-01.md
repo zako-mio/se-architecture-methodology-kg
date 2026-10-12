@@ -139,7 +139,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-027、VEN-029
 - 书证核验：BK-025 ChAggregation（direct），ChChoosing Targets（direct），ChObjectives in Practice（direct），ChSLOs Set Expectations（direct），ChService Level Terminology（direct），ChStandardize Indicators（direct）；BK-026 ChChoosing an Appropriate Time Window（direct），ChGetting Stakeholder Agreement（direct），ChReliability Targets and Error Budgets（direct），ChWhat to Measure: Using SLIs（direct）

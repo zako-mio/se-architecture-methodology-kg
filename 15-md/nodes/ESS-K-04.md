@@ -105,7 +105,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-026、VEN-018、BK-025
 - 书证核验：BK-025 ChControl Measures（direct），ChDefining Objectives（direct），ChMonitoring for the Long Term（direct），ChPractical Alerting from Time-Series Data（direct），ChTen Years On…（direct），ChTying These Principles Together（direct）；BK-026 ChDecision Making Using SLOs and Error Budgets（direct），ChImproving the Quality of Your SLO（partial），ChLowering the SLO or Increasing the Window（direct），ChWhy SREs Need SLOs（direct）

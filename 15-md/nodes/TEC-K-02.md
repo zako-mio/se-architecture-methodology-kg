@@ -122,7 +122,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 版本：2026 (OpenTelemetry / Datadog)
 - 规范信源：VEN-026、VEN-027、BK-025

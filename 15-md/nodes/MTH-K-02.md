@@ -115,7 +115,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-026、BK-025、VEN-027
 - 书证核验：BK-025 ChBenefits（direct），ChForming Your Error Budget（direct），ChMotivation for Error Budgets（direct）；BK-026 Ch2: Increased Alert Window（partial），Ch4: Alert on Burn Rate（direct），Ch6: Multiwindow, Multi-Burn-Rate Alerts（direct），ChAlerting Considerations（direct），ChEstablishing an Error Budget Policy（direct）

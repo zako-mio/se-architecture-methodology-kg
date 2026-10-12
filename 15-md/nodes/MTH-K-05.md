@@ -111,7 +111,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：BK-025、BK-026、WEB-039
 - 书证核验：BK-025 ChCollaborate and Share Knowledge（direct），ChGoogle’s Postmortem Philosophy（direct），ChLive Incident State Document（direct），ChRecursive Separation of Responsibilities（direct），ChWhat to Do When Systems Break（direct），ChWhen to Declare an Incident（direct）；BK-026 ChCase Study 2: Service Fault—Cache Me If You Can（direct），ChCounterproductive finger pointing（partial），ChIncident Command System（direct），ChMain Roles in Incident Response（direct），ChOrganizational Incentives（direct），ChTools and Templates（direct）

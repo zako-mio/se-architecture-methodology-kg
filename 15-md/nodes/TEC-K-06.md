@@ -113,7 +113,7 @@ DORA 研究以可度量的交付指标刻画组织的软件交付效能，并反
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 版本：2024 (DORA four keys) / 2026 (DORA current five metrics)
 - 规范信源：VEN-018、VEN-036

@@ -96,7 +96,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：VEN-021、WEB-032、WEB-033、VEN-022、VEN-023
 - 书证核验：BK-025 ChChange Management（direct），ChEmergency Response（direct），ChGradual and Staged Rollouts（direct）；BK-026 ChDependencies and Isolation（direct），ChMinimizing Risk to SLOs and the Error Budget（direct），ChRelease Engineering Principles（direct），ChUse a Gradual Canary for Better Metric Selection（direct）

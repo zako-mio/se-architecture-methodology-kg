@@ -95,7 +95,7 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-11
 - 生命周期：active
 - 规范信源：VEN-026、VEN-027、BK-025
 - 书证核验：BK-025 ChBlack-Box Versus White-Box（direct），ChDefinitions（direct），ChPractical Alerting from Time-Series Data（direct）；BK-026 ChImplementing Purposeful Metrics（direct），ChMonitoring（direct），ChSources of Monitoring Data（partial）
