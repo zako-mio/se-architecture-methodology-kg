@@ -85,15 +85,22 @@ TFA-003 MTH-J-08†  TFA-004 MTH-J-09†
 ## 4. 公开层对账（**含本轮两处机制纠正**）
 
 ```text
-推送           = 1 次（Git Data API）：new_commit d54698e3aeb7，tree ef85fb855f92，parent 6499c3962f3e
-                 CI（rebuild）= run 38223829041 success（31s）
+推送           = 2 次（Git Data API）：
+                 ① d54698e3aeb7（tree ef85fb855f92，parent 6499c3962f3e）—— 代码 / 装配件 / manifest
+                    CI（push 触发）= run 38223829041 success（31s）
+                 ② 24ae2958a2b3（tree d3c2a127c9a5）—— 收尾文档（接力件 -4 / 本基线 / 增量块）
+                    CI = run 38224758772 success（**workflow_dispatch 手动触发**）
 删除           = 1 次（Contents API DELETE）：commit 9a38db50（下架 NEXT-ROUND-PROMPT-3.md）
-远端 HEAD      = 9a38db50dbb9829ea99897b74cd8489db673953f
-remote blobs   = 576  ==  本地 _publish ls-files 576
-Pages          = index.html 200
-装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0（570 期望 + 6 preserve）
-gate_disclosure= PASS（0 hit / 511 file）
+远端 HEAD      = 24ae2958a2b3e93b3d992f613bda41a58040dc1a
+remote blobs   = 577  ==  本地 _publish ls-files 577
+Pages 回验     = index.html / 00-plan/stage7p5-p2b-baseline.md / 00-plan/NEXT-SESSION-HANDOFF.md /
+                 11-node-pages/MTH-K-04.html / 10-dag-data/methodology-dag.json 均 **200**；
+                 00-plan/NEXT-ROUND-PROMPT-3.md 与 -4.md 均 **404**（`never` 类生效）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0（571 期望 + 6 preserve）
+gate_disclosure= PASS（0 hit / 512 file）
 ```
+
+> **纠正③（CI 与 Pages 不随文档走）**：`rebuild.yml` 的 `push.paths` 仅含 `10-dag-data/**`、`16-checkpoint/**` 与 workflow 自身 ⇒ **只改 `00-plan/**` 的推送既不会触发 CI，也不会重部署 Pages**（实测：推送②未产生任何 run，本基线在 Pages 上先 404、手动 `gh workflow run rebuild.yml` 后才 200）。**凡改动 `00-plan/**`（接力件/基线/报告）的轮次，推送后必须手动触发一次 workflow 并回验 Pages。**
 
 > **纠正①（假绿）**：`assemble_publish.py --check` 的 `sanitize` 类取自 `_publish-staging/`，只有 `--refresh-sanitize` 才按当前源重生成 ⇒ **只跑 `--check` 会对「仅改了 `00-plan/*.md`」的轮次给出假绿**。终局对账必须 `--apply --refresh-sanitize` 之后再 `--check`。
 > **纠正②（不能下架）**：`push_publish.py` 用 `base_tree` + 本地 `git ls-files` 构树，**远端已有而本地没有的文件会被自动保留** ⇒ 「归 `classes.never`」只阻止新增，**下架须显式 DELETE**（本轮已对 `NEXT-ROUND-PROMPT-3.md` 执行）。
@@ -111,6 +118,11 @@ gate_disclosure= PASS（0 hit / 511 file）
 | `18-design/adr/ADR-004.json` / `.md` | 改：候选册 33→49、号表增量、`amended_by: ["ADR-006"]` |
 | `01-books/_verify/_meta/adr006-inputs.json` | **新增**：ADR-006 输入包（16 条缺口原文 + 取号上下文），私有层 |
 | `01-books/_verify/_meta/adr-register-backfill.json` | **新增**：补录报告（含 3 条释放号复用的原概念留痕） |
+| `00-plan/NEXT-ROUND-PROMPT-4.md` | **新增**：下一轮接力件（`classes.never`，不公开） |
+| `00-plan/stage7p5-p2b-baseline.md` | **新增**：本基线（公开层 `sanitize` 类） |
+| `00-plan/NEXT-SESSION-HANDOFF.md` | 改：新增顶部「本轮增量（P2b）」块，原 P0/P1 块降为「上一轮增量」 |
+
+> ⚠️ **收尾文档的末次提交为本地提交**（沿用本仓惯例：公开层推送后仍会补写文档）。故公开站点上的 `stage7p5-p2b-baseline.md` / 接力件增量块与本地最新一版可能相差一次 `docs:` 提交（差异仅为本节 §4/§6 的推送与回验记录）。
 
 ---
 
@@ -119,7 +131,7 @@ gate_disclosure= PASS（0 hit / 511 file）
 - **备份**：`~/.dsh-backups/stage7p5-p2b-20261012/`（38 MB；`01-books/_verify/_parts`、`_meta`、`_review`、`_text`、`10-dag-data`、`18-design` + `ADR-004.pre-backfill.json` / `ADR-006.pre-patch.json` + `pre-state-validate-staging.txt`）。
 - **回退顺序**：`_parts/gaps-*.json` 回滚 → `18-design/adr/ADR-004.json` 回滚（或删 16 条 `amended_by=ADR-006` 条目 + 还原号表）→ `derive_verification` → `aggregate` → `build` → 公开层重装配。
 - **`01-books/` 无 git 历史**（本地仓与 `_publish` 双重 ignore）⇒ 只能靠上述备份回滚。
-- 本地归档仓：`git log --oneline -3`。
+- 本地归档仓：`04b74cc`（P2b 主提交）→ `206da19` → `0f6aedf`；其后如有 `docs:` 收尾提交，以 `git log --oneline -3` 为准。
 
 ---
 

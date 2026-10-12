@@ -22,7 +22,7 @@
 | **核验层** | 记录 **636**（direct 448 / partial 164 / inferred 24）、覆盖节点 **93**、缺口 **133**、direct 第二路复核 **100%** —— 全部不变 |
 | **重放与判据可信度** | `replay_admission` 一致率 **100%**（49/49）+ 负例 **4/4**；`--scan-promotion` 候选 37 / 可晋升 **0** / 负例 **3/3**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11** |
 | **门控全表** | `gate_verification` **9/9**、G-D **5/5**、`gate_coverage` 100%、`gate_sources` PASS（悬挂 0）、`gate_layout` 2140/2140、`gate_methodology` PASS、`kb_gate` **2/2**（5397 检查项 / 0 问题）、`gate_visual` L4 **PASS**、`gate_render` L5 **PASS**（7/7，skipped=0）、版权 **0 命中** |
-| **公开层** | 推送 1 次（`d54698e3aeb7`，tree `ef85fb855f92`，CI **success** run 38223829041）+ 1 次 API 删除提交（`9a38db50`）；远端 HEAD **`9a38db50dbb9`**；**576 blobs == 本地 ls-files 576**；Pages **200** |
+| **公开层** | 推送 **2 次**：① `d54698e3aeb7`（tree `ef85fb855f92`，CI **success** run 38223829041）；② `24ae2958a2b3`（tree `d3c2a127c9a5`，文档，CI 需**手动** `gh workflow run rebuild.yml`，run **38224758772 success**）+ 1 次 API 删除提交（`9a38db50`）；远端 HEAD **`24ae2958a2b3`**；**577 blobs == 本地 ls-files 577**；Pages 回验 index/新基线/接力文档/节点页/DAG **均 200**，两个接力件 **404** |
 | **新增可执行物** | `16-checkpoint/backfill_candidate_register.py`（修订型 ADR → 候选册并入；fail-closed + 幂等 + no-op 守卫 + 3 条负例探针） |
 
 **🔴 本轮发现的四处「机制/判据不可信」纠正（务必继承）**：
@@ -30,6 +30,7 @@
 2. **`push_publish.py` 不能删远端文件**：走 Git Data API 的 `base_tree` +「本地 `git ls-files` 集合」，远端已有而本地没有的文件由 `base_tree` **自动保留**（本轮实测：`NEXT-ROUND-PROMPT-3.md` 在 `_publish` 内已 `git rm`，推送后仍在远端 tree）。⇒ 「归 `classes.never`」只阻止**新增**，**不能下架已发布件**；下架须显式 `gh api -X DELETE .../contents/<path>`。
 3. **`classes.never` 漏登记即泄漏**：`00-plan/NEXT-ROUND-PROMPT.md` / `-2` 在 `never` 中而 `-3` **不在**（其文件自述「归 classes.never，不公开」与清单不符）⇒ 实测 `-3` 已随上一轮推送进入公开仓（远端 blob `d292a507…`、22 673 B）。已补 `-3` / `-4` 进 `never` 并**从公开层 HEAD 移除**（`9a38db50`）；⚠️ **git 历史中的 blob 未回收**（需重写历史，未做）。
 4. **候选册补录的「已释放号复用」是政策放行项、不是撞号**：`backfill_candidate_register.py` 首版把 3 例释放号复用误判为撞号 ⇒ 现要求「原条目 `id_status ∈ {released,no-id}` **且** 该号出现在修订件 `id_allocation_delta.released_removed` 中」二者同时成立方放行，并加两条负例探针（撞 `reserved` 号必拒、`released_removed` 含非释放号必拒）实测 exit=1。
+5. **CI 与 Pages 不随文档走**：`rebuild.yml` 的 `push.paths` 仅含 `10-dag-data/**`、`16-checkpoint/**` 与 workflow 自身 ⇒ **只改 `00-plan/**` 的推送既不触发 CI、也不重部署 Pages**（本轮实测：文档推送未产生 run，新基线在 Pages 上先 404，手动 `gh workflow run rebuild.yml` 后才 200）。⇒ 凡改 `00-plan/**` 的轮次，推送后**必须手动触发一次 workflow 并回验 Pages**。
 
 **刚性协作模式**：计数权归主Agent，工人只写文本、不报数字；凡工人自评一律机器或第二路复验。本轮 `oc_architect` 首版经**独立机检 FAIL**（1 处门控 FAIL + 3 处实质缺陷），回传 2 轮后仍余 1 处门控 FAIL，末次由**主 Agent 机械修补**（仅删 `decision` 中残留的技术层号 + 对齐 2 处机读计数，**非设计变更**）。
 

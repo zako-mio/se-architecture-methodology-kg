@@ -11,10 +11,10 @@
       "src_sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386"
     },
     "00-plan/NEXT-SESSION-HANDOFF.md": {
-      "sha256": "fa183bfb392c9d232efd4b2a5f5d96514d38feef650dfa557672123a6a99ab71",
+      "sha256": "7fe7bf84a93c478cf7cf07415deb792e35c68e10014ed085fd5ea389420111e8",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/NEXT-SESSION-HANDOFF.md",
-      "src_sha256": "fa183bfb392c9d232efd4b2a5f5d96514d38feef650dfa557672123a6a99ab71"
+      "src_sha256": "7fe7bf84a93c478cf7cf07415deb792e35c68e10014ed085fd5ea389420111e8"
     },
     "00-plan/contract.md": {
       "sha256": "f35b271848dd07d5292fefbbf57c2fcfe7dc44b804a5dbe5cc016d7fb50e4170",
@@ -155,10 +155,10 @@
       "src_sha256": "c692a1262c4a80640feea854eefded0e7fd0e99e2a499f739a94984089565854"
     },
     "00-plan/stage7p5-p2b-baseline.md": {
-      "sha256": "699ea4a3408535b2dacbd1b62c766ce3e01b97734a8cf97fff4b0a8b29564ce1",
+      "sha256": "b5f0492671138f6c60314c7402cf5dedea353103f5abb6803ab806b7fb534d3f",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage7p5-p2b-baseline.md",
-      "src_sha256": "699ea4a3408535b2dacbd1b62c766ce3e01b97734a8cf97fff4b0a8b29564ce1"
+      "src_sha256": "b5f0492671138f6c60314c7402cf5dedea353103f5abb6803ab806b7fb534d3f"
     },
     "00-plan/stage7p5p1-baseline.md": {
       "sha256": "e87fb0a7a6332e4772c6eab5826efdf8e9ee3145019a28be37e9d51b52f2e7b3",
