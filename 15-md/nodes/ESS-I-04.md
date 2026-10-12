@@ -108,9 +108,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-018、OFF-019、BK-001
+- 书证核验：BK-001 ChA Note on Code Coverage（direct），ChThe Beyoncé Rule（direct），ChUnanticipated behaviors, inputs, and side effects（direct）
 - 入口链接：https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf
 - 勘误：常见误解「只要测试全部通过，就说明系统没有缺陷」→ 核验结论「测试是对行为空间的抽样，只能证明在所选样本上未观察到失效，不能证明不存在缺陷；未被触发条件激活的缺陷仍可能存在」（OFF-018）
 

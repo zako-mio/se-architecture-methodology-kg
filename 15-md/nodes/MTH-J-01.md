@@ -105,9 +105,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：WEB-036、VEN-020、BK-025、BK-031
+- 书证核验：BK-031 ChII（direct），ChV（direct）
 - 入口链接：https://martinfowler.com/bliki/DeploymentPipeline.html
 - 勘误：常见误解「每个环境各自构建即可，流水线只是把步骤串起来」→ 核验结论「应只构建一次同一制品并逐环境提升；各环境重新构建会使测试对象与生产对象不一致，破坏流水线的置信度累积」（VEN-020）
 

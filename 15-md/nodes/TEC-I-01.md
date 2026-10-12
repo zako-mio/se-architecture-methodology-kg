@@ -123,10 +123,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 版本：2024
 - 规范信源：WEB-030、BK-028、VEN-019、BK-001
+- 书证核验：BK-001 ChAccessible and actionable feedback（direct），ChContinuous Integration（direct），ChFast Feedback Loops（direct），ChHermetic Testing（direct），ChPresubmit versus post-submit（direct），ChTAP: Google’s Global Continuous Build（partial）
 - 入口链接：https://martinfowler.com/articles/continuousIntegration.html
 - 入口链接：https://docs.sonarsource.com/sonarqube-server/latest/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates/
 - 入口链接：https://www.pearson.com/en-us/subject-catalog/p/continuous-delivery-reliable-software-releases-through-build-test-and-deployment-automation/P200000009253

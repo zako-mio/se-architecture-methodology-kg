@@ -24,6 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT_DEFAULT = os.path.dirname(HERE)
 VERIFY = os.path.join("01-books", "_verify")
 REVIEW = os.path.join(VERIFY, "_review")
+PARTS = os.path.join(VERIFY, "_parts")
 RECOVERY_REL = os.path.join(VERIFY, "_meta", "trimmed-recovery.json")
 
 
@@ -40,13 +41,35 @@ def main():
     ap.add_argument("--root", default=ROOT_DEFAULT)
     ap.add_argument("--parts", type=int, default=2)
     ap.add_argument("--strength", default="direct", help="只纳入该强度的记录")
+    ap.add_argument("--slug", help="从 `_parts/ledger-<slug>.json` 取记录（新书用；缺省走 P1 恢复报告）")
+    ap.add_argument("--tag", default=None, help="工单文件名标签（缺省用 slug）")
     args = ap.parse_args()
     root = os.path.abspath(args.root)
 
-    rec = json.load(open(resolve(root, RECOVERY_REL), encoding="utf-8"))
-    removed = {x["record_id"] for x in rec.get("out_of_domain_removed", [])}
-    rows = [r for r in rec["records"]
-            if r["record_id"] not in removed and r.get("evidence_strength") == args.strength]
+    if args.slug:
+        led = json.load(open(resolve(root, os.path.join(PARTS, "ledger-%s.json" % args.slug)),
+                            encoding="utf-8"))
+        covered = set()
+        import glob as _glob
+        for f in _glob.glob(os.path.join(resolve(root, REVIEW), "secondpass-*.json")):
+            try:
+                d = json.load(open(f, encoding="utf-8"))
+            except ValueError:
+                continue
+            for v in d.get("verdicts") or []:
+                covered.add(v.get("record_id"))
+        rows = [r for r in led.get("records") or []
+                if r.get("evidence_strength") == args.strength
+                and r.get("record_id") not in covered]
+        tag = args.tag or args.slug
+        note = "新书 %s 的 %s 复核工单（只读输入；结论由主 Agent 合并）" % (args.slug, args.strength)
+    else:
+        rec = json.load(open(resolve(root, RECOVERY_REL), encoding="utf-8"))
+        removed = {x["record_id"] for x in rec.get("out_of_domain_removed", [])}
+        rows = [r for r in rec["records"]
+                if r["record_id"] not in removed and r.get("evidence_strength") == args.strength]
+        tag = "p1-recovery"
+        note = "恢复记录的第二路复核工单（只读输入；结论由主 Agent 合并）"
     rows.sort(key=lambda r: r["record_id"])
 
     parts = [[] for _ in range(args.parts)]
@@ -55,12 +78,12 @@ def main():
 
     written = []
     for i, chunk in enumerate(parts, 1):
-        rel = os.path.join(REVIEW, "secondpass-worklist-%02d.json" % i)
+        rel = os.path.join(REVIEW, "secondpass-worklist-%s-%02d.json" % (tag, i))
         doc = {
-            "meta": {"schema_version": "1.0.0", "generated": "2026-09-11",
-                     "note": "恢复记录的第二路复核工单（只读输入；结论由主 Agent 合并）"},
+            "meta": {"schema_version": "1.0.0", "generated": "2026-09-11", "note": note},
             "part": i,
             "of": args.parts,
+            "slug": args.slug,
             "strength_filter": args.strength,
             "records": [{
                 "record_id": r["record_id"],

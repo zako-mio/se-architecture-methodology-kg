@@ -147,9 +147,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：BK-001、WEB-032、VEN-022、BK-025、VEN-036
+- 书证核验：BK-001 ChContinuous Delivery（direct），ChDistributed Builds（partial），ChExpressiveness: Token Versus Substring Versus Regex（direct），ChSearch Query Latency（direct），ChTime, Scale, Trade-Offs（direct）
 - 勘误：常见误解「提升交付速度必然以牺牲稳定性为代价」→ 核验结论「DORA 度量表明吞吐与不稳定指标并非负相关，高绩效组织速度与稳定兼得；应区分一次性与持续成本，聚焦持续成本与减小变更批量」（VEN-036）
 
 ## §11 原始关系清单

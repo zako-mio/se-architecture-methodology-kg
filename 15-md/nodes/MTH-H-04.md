@@ -149,9 +149,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：BK-001、BK-008、WEB-017
+- 书证核验：BK-001 ChAutomate Where Possible（direct），ChCode Consistency（direct），ChHow Code Review Works at Google（direct），ChWrite Small Changes（direct）
 - 入口链接：https://abseil.io/resources/swe-book/html/ch03.html
 - 勘误：常见误解「代码评审的价值主要在于发现缺陷，因此应由最资深者集中把关」→ 核验结论「评审同时承担传播最佳实践、统一标准与知识共享的功能；强制集中把关会随组织规模线性受限，宜以合作式导师机制与自动化分工，并用评审延迟与满意度等信号校准流程」（BK-001）
 - 勘误：常见误解「可读性标准可以完全由静态分析自动执行」→ 核验结论「自动化只能覆盖机械风格与部分可检测问题；接口设计、结构与可读性取舍需人工评审与语境判断，二者应分工而非替代」（BK-001）

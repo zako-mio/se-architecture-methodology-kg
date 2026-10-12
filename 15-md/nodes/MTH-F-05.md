@@ -92,9 +92,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-010、BK-036、OFF-001、STD-005
+- 书证核验：BK-036 ChModifiability Scenario（direct），ChQUALITY ATTRIBUTE SCENARIO GENERATION（direct），ChQUALITY ATTRIBUTE SCENARIOS（direct）
 - 入口链接：https://web.archive.org/web/20241212105347/https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics
 - 勘误：常见误解「非功能需求是锦上添花，可以在功能完成后再处理」→ 核验结论「功能不决定质量属性水平，是架构选择决定各质量属性的相对水平；质量诉求须在架构设计前以可度量方式显式表达」（BK-036）
 

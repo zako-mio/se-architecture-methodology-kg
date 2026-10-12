@@ -232,7 +232,10 @@ def main():
             problems.append("%s 正文字符数 %d < 阈值 %d（疑似截断）"
                             % (url, len(text), min_chars))
             continue
-        blocks.append("## %s. %s\n\n%s" % (no, title, text))
+        # ⚠️ 章头格式必须与 `extract_sre_web.py` 一致（`=== <章号> | <标题> ===`）：
+        # `validate_staging_shards.py` 以该正则切「章级正文」做节标题交叉校验；
+        # 用其它格式（如 `## N. Title`）会使该机检**静默退化**为「无法读取所声明章」。
+        blocks.append("=== %s | %s ===\n\n%s" % (no, title, text))
         toc.append({"chapter": no, "title": title, "url": url, "chars": len(text)})
 
     print("== %s（%s）==" % (slug, site["source_id"]))

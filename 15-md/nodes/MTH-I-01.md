@@ -106,9 +106,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-018、OFF-019、WEB-028、WEB-027、BK-001
+- 书证核验：BK-001 ChDesigning a Test Suite（direct），ChTest Size（direct），ChUnfaithful doubles（direct）
 - 入口链接：https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4
 - 入口链接：https://martinfowler.com/bliki/IntegrationTest.html
 - 勘误：常见误解「测试层次必须严格按阶段串行执行，下层不完成就不能开始上层」→ 核验结论「测试层次是按测试对象范围组织测试活动的分组，与开发阶段并非硬性串行；在敏捷与持续交付中，各层测试可并行存在，关键是每层有明确的目标与责任归属」（OFF-019）

@@ -157,9 +157,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：STD-011、OFF-010、BK-036、WEB-024、VEN-017、BK-025、BK-026、PAP-002
+- 书证核验：BK-036 ChModifiability Scenario（direct），ChQUALITY ATTRIBUTE SCENARIO GENERATION（direct）
 - 勘误：常见误解「提高测试覆盖与降低误报可以同时无条件达成」→ 核验结论「覆盖与精确是同一判据的两端，此消彼长；代价不对称时应默认偏向覆盖，再以分层过滤回收精确率，并显式设定阈值」（BK-036）
 
 ## §11 原始关系清单

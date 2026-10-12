@@ -104,9 +104,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：BK-001、BK-008、WEB-017
+- 书证核验：BK-001 ChComprehension of Code（direct），ChDocumentation Philosophy（inferred），ChKnow Your Audience（direct），ChThe Parameters of Good Documentation（direct）
 - 入口链接：https://abseil.io/resources/swe-book
 - 入口链接：https://martinfowler.com/bliki/CodeSmell.html
 - 勘误：常见误解「可读性只是主观的风格偏好」→ 核验结论「代码被读的次数远多于被写，可读性影响变更速度与缺陷率，是工程属性；判断标准是理解与修改所需的认知负荷是否降低」（BK-001）

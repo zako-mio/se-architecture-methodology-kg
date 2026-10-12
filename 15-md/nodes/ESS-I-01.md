@@ -117,9 +117,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：STD-014、OFF-017、OFF-018、OFF-019、BK-001
+- 书证核验：BK-001 ChBenefits of Testing Code（partial），ChWhy Do We Write Tests?（direct），ChWrite, Run, React（direct）
 - 入口链接：https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4
 - 入口链接：https://softwaretestingstandard.org/
 - 勘误：常见误解「测试的作用只是在开发完成后验证功能是否正确」→ 核验结论「测试同时是持续反馈与设计工具，能提前暴露耦合与接口问题，并在变更中支撑重构；Google 将防止缺陷逃逸与支持变更能力并列为测试的两大动机」（BK-001）

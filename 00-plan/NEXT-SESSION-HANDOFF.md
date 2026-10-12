@@ -5,7 +5,38 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-10-11 · 阶段7 **阶段3 轨C 首批准入 + 轨B 续做三本 + 轨D 能力包同步**）—— 本节优先于下方 §A 的旧任务陈述
+## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 **P0 claims 链修复 + P1 K 域上限 ADR-005 + 42 条证据回捞**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = 修 `node-claim-map` 的 claims 完整性（P0）→ K 域记录上限 ADR 裁决（P1）→ 轨B 三本（P2，未完）→ 收尾（P3）。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-3.md`（下一轮自包含）；**基线**：`00-plan/stage7p5p1-baseline.md`。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **P0 claims 完整性** | `ledger.claim_id − node-claim-map.claim_id`：**73 → 0**。根因①「`build_claims()` 首 slug 胜出」丢 50 条（16 个 `sre-book`×`workbook` 成对节点 + `ddia`×`release-it` 的 `ESS-K-02`）→ 改为**按 `claim_id` 跨 slug 并集去重**；根因②「从未进分片」23 条（BK-023 18 + BK-007 5）→ 新增 `fill_missing_claims.py` 补写（含「无 staging 书手写 SSOT」例外） |
+| **P0 历史重复 `claim_id`** | 全层仅 1 组 `ESS-O-02#principle#1`（两条**语义不同**，不合并）→ `fix_duplicate_claim_ids.py` 按 record_id 字典序保留首条、后到者重编号为 `#principle#3`；重复 **0 组** |
+| **P0 判据补强** | G-V1 新增**claims 完整性**、**`claim_id` 全局唯一**（由 WARN 升 FAIL）、**档位集合自洽性**三项子判据；`negative_test_verification` **6/6 → 11/11** |
+| **P1 K 域上限裁决** | **ADR-005** 落盘并过 `gate_architecture --kind adr` **6/6**：K 域**全 17 节点**纳入高档位（上限 16），`DENSIFY_NODES` **26 → 41**（`STAGE2_NODES` 26 ∪ `K_DOMAIN_NODES` 17）；ADR-003 加 `amended_by: ["ADR-005"]` |
+| **P1 42 条被裁证据回捞** | 新增 `recover_trimmed_records.py`：从 **DSH 会话转录**（多帧 zstd，ctypes libzstd 流式；工具结果双重编码需转义形态配对）**完整回捞 42/42**；按 ADR-005 边界**恢复 34 条在域**、**裁回 8 条域外**（`MTH-J-07` 3 / `MTH-N-05` 3 / `TEC-J-04` 2） |
+| **P1 第二路复核** | 恢复记录中 **24 条 direct** 全部独立复核（2 工人）→ **5 条降级**；`direct` 的 `second_pass` 覆盖率 **100%**（379/379） |
+| 核验层规模 | 记录 **522 → 556**（`direct 379 / partial 155 / inferred 22`）；覆盖节点 78；缺口 **119** |
+| 图谱指纹 | `f1f09a9b…87303a39` → **`a96354c7…46378f85`**（`aggregate.py` 把 overrides 并回节点：15 节点 `review_date` 前移至 2026-10-11；**`MTH-K-04` 的 `confidence` 由 medium 升 high**）。结构不变：**168 节点 / 364 边 / 18 组 / 18 案例** |
+| 单节点上限 | 超限 **0**；K 域最高 **12**（`ESS-K-02`）；域外贴限 `MTH-J-07`/`MTH-N-05`/`TEC-J-04` 各 **8** |
+| 门控 | `gate_verification` **9/9**；G-D **5/5**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`replay_admission` 一致率 100% + 负例 4/4；L4/L5 **PASS**；`kb_gate` 2/2；版权 **0 命中** |
+| 公开层 | 推送 **2 次**；远端 HEAD **`0ff129d6deb3`**，**573 blobs == 本地 ls-files**；CI **success**（38188672569 / 38189349224）；Pages **200** |
+| **P2 进度** | 三本语料 + TOC + **按章切片** + **4 处登记全部就绪**；**BK-036 暂存分片已产出并过机检**（21 记录 / 21 主张 / 4 缺口，7 节点，19 direct + 2 partial），**尚未合并**；BK-031 工人**因上下文耗尽零产出**（须用切片重派）；BK-001 未派工 |
+| 本轮新增可执行物 | `fill_missing_claims.py`、`fix_duplicate_claim_ids.py`、`recover_trimmed_records.py`、`make_secondpass_worklist.py`、`merge_secondpass_worklists.py`、`extract_web_book.py`、`slice_corpus_by_chapter.py` |
+
+**🔴 本轮发现的五处「前提/机制不可信」纠正**（务必继承）：
+
+1. **`/tmp` 会被环境清理**：本轮首份备份（11 MB）在会话间隙**消失** ⇒ 备份一律放 `~/.dsh-backups/`。
+2. **`merge_verify_staging.py` 不是幂等同步**：`apply_secondpass.py` / 缺口号脚本**只写 `_parts/`、不回写 staging**，staging 对已复核书**落后**；重跑 merge 会**整批回退**第二路裁决与缺口号回写。已加 **fail-closed 护栏**（`--check` 的 stale 属预期，不是漂移）。
+3. **`apply_secondpass.py` 曾非幂等**：留痕标记会重复叠加（实测叠 3 份）⇒ 已修为「追加前先剥历史标记」。
+4. **动核验层后必须跑 `aggregate.py`**（不只是 `build.py`）：它把 overrides 并回 DAG ⇒ **图谱指纹会变**；指纹变更须新建基线（append-only）。
+5. **给工人的语料必须窄**：BK-001 语料 1.3 MB，整读会让工人 `ran out of room` **零产出** ⇒ 已生成 `_text/_slices/<slug>/ch-*.txt`，派活只给目标章切片。
+
+---
+
+## ⚠️ 上一轮增量（2026-10-11 · 阶段7 **阶段3 轨C 首批准入 + 轨B 续做三本 + 轨D 能力包同步**）—— 本节优先于下方 §A 的旧任务陈述
 
 **本轮执行的是阶段3 全量四轨**：轨C（消费 ADR-004 做首批准入）、轨B 续做（BK-021/BK-024/BK-020）、
 轨D（能力包同步 + 两段派生）、收尾 7 条裁决。全部已上线。

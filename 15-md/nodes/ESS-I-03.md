@@ -96,9 +96,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-10-12
 - 生命周期：active
 - 规范信源：OFF-018、OFF-019、BK-001
+- 书证核验：BK-001 ChConfiguration issues（direct），ChTesting Overview（direct），ChThe Story of Google Web Server（direct）
 - 入口链接：https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf
 - 勘误：常见误解「错误、缺陷与失效是同一件事的三种说法」→ 核验结论「三者构成因果链：错误是人的不正确行为，缺陷是制品中被写入的瑕疵，失效是运行时观察到的行为偏离；测试观察到失效，据此推断缺陷并追溯错误」（OFF-018）
 

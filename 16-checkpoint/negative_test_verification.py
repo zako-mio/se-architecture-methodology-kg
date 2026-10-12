@@ -58,6 +58,21 @@ def dump(path, obj):
         f.write("\n")
 
 
+def _copy_files(src_dir, dst_dir):
+    """复制目录下的**普通文件**（跳过子目录）。
+
+    ⚠️ 2026-10-12 修：`_text/` 下新增了 `_slices/`（按章切片，见
+    `slice_corpus_by_chapter.py`）；旧实现对所有条目无差别 `shutil.copyfile`
+    会抛 `IsADirectoryError`，使负例自检**整体崩溃**（判据可信度归零）。
+    """
+    os.makedirs(dst_dir, exist_ok=True)
+    for fn in sorted(os.listdir(src_dir)):
+        src = os.path.join(src_dir, fn)
+        if not os.path.isfile(src):
+            continue
+        shutil.copyfile(src, os.path.join(dst_dir, fn))
+
+
 def stage(root, tmp):
     """把真实核验层复制到临时 root。"""
     for rel in COPY_FILES:
@@ -65,12 +80,8 @@ def stage(root, tmp):
         dst = os.path.join(tmp, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copyfile(src, dst)
-    os.makedirs(os.path.join(tmp, PARTS), exist_ok=True)
-    for fn in os.listdir(os.path.join(root, PARTS)):
-        shutil.copyfile(os.path.join(root, PARTS, fn), os.path.join(tmp, PARTS, fn))
-    os.makedirs(os.path.join(tmp, TEXT), exist_ok=True)
-    for fn in os.listdir(os.path.join(root, TEXT)):
-        shutil.copyfile(os.path.join(root, TEXT, fn), os.path.join(tmp, TEXT, fn))
+    _copy_files(os.path.join(root, PARTS), os.path.join(tmp, PARTS))
+    _copy_files(os.path.join(root, TEXT), os.path.join(tmp, TEXT))
 
 
 def run_gate(tmp):
