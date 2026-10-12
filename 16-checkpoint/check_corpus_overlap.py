@@ -40,6 +40,10 @@ CORPUS = [
     # 阶段7 阶段3 续做：新增在线采集语料（BK-025 / BK-026，CC BY-NC-ND 4.0 仅私有层）
     os.path.join("01-books", "_verify", "_text", "sre-book.txt"),
     os.path.join("01-books", "_verify", "_text", "workbook.txt"),
+    # 阶段7 阶段3 续做（2026-10-12）：BK-001 / BK-031 / BK-036
+    os.path.join("01-books", "_verify", "_text", "sweg.txt"),
+    os.path.join("01-books", "_verify", "_text", "twelve-factor.txt"),
+    os.path.join("01-books", "_verify", "_text", "saip-ch4.txt"),
 ]
 CORPUS_GLOB = os.path.join("01-books", "_files", "P0-11", "ddia-zh-src", "*.md")
 

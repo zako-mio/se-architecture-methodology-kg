@@ -8,8 +8,11 @@ gate_verification.py — 阶段7 核验层门控（G-V1 … G-V9）
     python3 16-checkpoint/gate_verification.py --check G-V1,G-V4
 
 判据：
-    G-V1 核验层 JSON 合法 + 必填字段齐全（含 id 格式、单节点主张上限）
-         —— 上限按节点分档（ADR-003）：阶段2 参与节点 ≤16，其余节点 ≤8
+    G-V1 核验层 JSON 合法 + 必填字段齐全（含 id 格式、单节点主张上限、
+         **claims 完整性**、**claim_id 全局唯一**）
+         —— 上限按节点分档（ADR-003 / ADR-005）：阶段2 参与节点与 K 域 ≤16，其余节点 ≤8
+         —— claims 完整性：ledger.claim_id ⊆ node-claim-map.claim_id（2026-10-12 新增）
+         —— claim_id 全局唯一：重复 ⇒ FAIL（2026-10-12 由 WARN 提升）
     G-V2 evidence_strength / direction / gap.kind 封闭枚举
     G-V3 记录 anchor 存在；chapter 非空（例外：inferred 且书无章节结构）
     G-V4 「无锚点升级」= 0（升级节点 direct 记录须有 anchor+direction）
@@ -65,6 +68,11 @@ SLUG_RECORD_PREFIX = {
     "clean-code": "CC",
     "sre-book": "SRE",
     "workbook": "SREW",
+    # 阶段7 阶段3 续做（2026-10-12）：BK-001 / BK-031 / BK-036
+    # ⚠️ 前缀不得互为前缀：BK-036 用 QASC（**不用** SAIPCH4 —— `SAIP` ⊂ `SAIPCH4` 会串号）
+    "sweg": "SWEG",
+    "twelve-factor": "TFA",
+    "saip-ch4": "QASC",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -80,6 +88,10 @@ SLUG_TEXT = {
     "clean-code": "clean-code.txt",
     "sre-book": "sre-book.txt",
     "workbook": "workbook.txt",
+    # 阶段7 阶段3 续做（2026-10-12）
+    "sweg": "sweg.txt",
+    "twelve-factor": "twelve-factor.txt",
+    "saip-ch4": "saip-ch4.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -92,11 +104,35 @@ SOURCE_SLUG = {
     "BK-020": "clean-code",
     "BK-025": "sre-book",
     "BK-026": "workbook",
+    # 阶段7 阶段3 续做（2026-10-12）
+    "BK-001": "sweg",
+    "BK-031": "twelve-factor",
+    "BK-036": "saip-ch4",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）
-CLAIM_CAP_DENSIFY = 16           # ADR-003：阶段2 参与节点上限（场景限定）
+CLAIM_CAP_DENSIFY = 16           # ADR-003 / ADR-005：高档位上限（场景限定）
 # ADR-003：阶段2 参与节点集合（封闭；与 00-plan/stage7-phase2-content-densification-plan.md §2.2 一致）
+# ⚠️ 语义保持为「阶段2 参与节点」：G-V9 用它判 VR-D2- 记录的落点合法性，**不得**并入 K 域。
+STAGE2_NODES = {
+    "ESS-G-01", "ESS-G-02", "ESS-G-04", "ESS-I-02", "ESS-K-02", "ESS-L-05",
+    "ESS-M-01", "ESS-M-02", "ESS-M-03", "ESS-M-04", "ESS-M-05",
+    "ESS-O-01", "ESS-O-02", "ESS-O-03",
+    "MTH-G-02", "MTH-G-03", "MTH-G-06", "MTH-M-01", "MTH-M-02", "MTH-M-03",
+    "MTH-M-06", "MTH-O-03", "MTH-O-05", "MTH-O-09",
+    "TEC-K-05", "TEC-M-03",
+}
+# ADR-005：K 域（运维域）全量 17 节点 —— 该域证据密度由「两本一手书同时覆盖」决定，属高密度域。
+K_DOMAIN_NODES = {
+    "ESS-K-01", "ESS-K-02", "ESS-K-03", "ESS-K-04",
+    "MTH-K-01", "MTH-K-02", "MTH-K-03", "MTH-K-04", "MTH-K-05",
+    "MTH-K-06", "MTH-K-07",
+    "TEC-K-01", "TEC-K-02", "TEC-K-03", "TEC-K-04", "TEC-K-05", "TEC-K-06",
+}
+# 单节点记录上限的**档位集合**（≤16 档）= 两种成员来源的并集（ADR-005）。
+# ⚠️ 必须保持**字面 set 字面量**写法：`validate_staging_shards.py` 以正则
+#    `DENSIFY_NODES = \{(.*?)\}` 从本文件解析该集合做「合并前」上限检查，
+#    若改为集合运算表达式则解析为空集（cap 全部退化为 8）。自洽性由 G-V1 显式校验。
 DENSIFY_NODES = {
     "ESS-G-01", "ESS-G-02", "ESS-G-04", "ESS-I-02", "ESS-K-02", "ESS-L-05",
     "ESS-M-01", "ESS-M-02", "ESS-M-03", "ESS-M-04", "ESS-M-05",
@@ -104,6 +140,10 @@ DENSIFY_NODES = {
     "MTH-G-02", "MTH-G-03", "MTH-G-06", "MTH-M-01", "MTH-M-02", "MTH-M-03",
     "MTH-M-06", "MTH-O-03", "MTH-O-05", "MTH-O-09",
     "TEC-K-05", "TEC-M-03",
+    "ESS-K-01", "ESS-K-03", "ESS-K-04",
+    "MTH-K-01", "MTH-K-02", "MTH-K-03", "MTH-K-04", "MTH-K-05",
+    "MTH-K-06", "MTH-K-07",
+    "TEC-K-01", "TEC-K-02", "TEC-K-03", "TEC-K-04", "TEC-K-06",
 }
 # 阶段2 新增记录识别：record_id 前缀（主Agent 回写时使用，见 densify-contract.md §4.1）
 DENSIFY_RECORD_PREFIX = "VR-D2-"
@@ -174,6 +214,42 @@ def check_gv1(ctx):
             over.append((n, c, cap))
     for n, c, cap in over:
         problems.append("%s 记录数 %d 超上限 %d" % (n, c, cap))
+
+    # 档位集合自洽性（ADR-005）：DENSIFY_NODES 必须等于两种成员来源的并集。
+    # 防「改了字面集合却忘了同步 STAGE2_NODES / K_DOMAIN_NODES」的静默漂移。
+    if DENSIFY_NODES != (STAGE2_NODES | K_DOMAIN_NODES):
+        problems.append(
+            "档位集合不自洽：DENSIFY_NODES(%d) != STAGE2_NODES(%d) | K_DOMAIN_NODES(%d)"
+            "；仅并集=%s；仅字面集=%s"
+            % (len(DENSIFY_NODES), len(STAGE2_NODES), len(K_DOMAIN_NODES),
+               sorted((STAGE2_NODES | K_DOMAIN_NODES) - DENSIFY_NODES),
+               sorted(DENSIFY_NODES - (STAGE2_NODES | K_DOMAIN_NODES))))
+
+    # claims 完整性（2026-10-12 新增硬判据）：
+    #   ledger.claim_id 集合 ⊆ node-claim-map.claim_id 集合。
+    # 否则「ledger 有记录、claims 分片缺失」会静默悬挂（阶段1 曾漏 73 条，
+    # 其中 50 条是派生器首 slug 胜出、23 条从未进分片）。
+    map_ids = ctx.get("claim_map_ids")
+    missing_claims = []
+    if map_ids is None:
+        problems.append("node-claim-map.json 缺失或非法，无法校验 claims 完整性")
+    else:
+        missing_claims = sorted({str(r.get("claim_id")) for r in records if r.get("claim_id")}
+                                - map_ids)
+        if missing_claims:
+            problems.append("claims 不完整：%d 个 claim_id 在 ledger 有记录但 node-claim-map 缺失"
+                            "（前 5：%s）" % (len(missing_claims), ", ".join(missing_claims[:5])))
+
+    # claim_id 全局唯一（2026-10-12：阶段1 遗留重复已修 ⇒ 由 WARN 提升为 FAIL）
+    seen_cid = {}
+    for r in records:
+        cid = r.get("claim_id")
+        if cid:
+            seen_cid.setdefault(cid, []).append(r.get("record_id"))
+    dup_cid = [(c, rs) for c, rs in sorted(seen_cid.items()) if len(rs) > 1]
+    for c, rs in dup_cid[:ctx["show"]]:
+        problems.append("claim_id 全局重复: %s (%s)" % (c, ", ".join(rs)))
+
     for g in ctx["gaps"]:
         gid = g.get("gap_id", "?")
         for key in ("gap_id", "kind", "book_source_id", "anchor", "target",
@@ -184,7 +260,8 @@ def check_gv1(ctx):
         if isinstance(tgt, dict) and not (tgt.get("existing_node_id") or tgt.get("proposed_node")):
             problems.append("%s target 两字段均为空" % gid)
     ok = not problems
-    lines = ["记录 %d 条 / gap %d 条；问题 %d" % (len(records), len(ctx["gaps"]), len(problems))]
+    lines = ["记录 %d 条 / gap %d 条 / claims 完整性缺口 %d / claim_id 重复 %d 组；问题 %d"
+             % (len(records), len(ctx["gaps"]), len(missing_claims), len(dup_cid), len(problems))]
     for p in problems[:ctx["show"]]:
         lines.append("  ! " + p)
     if len(problems) > ctx["show"]:
@@ -399,7 +476,7 @@ def check_gv9(ctx):
         nid = str(r.get("node_id", ""))
         if nid and not re.match(r"^%s#(%s)#\d+$" % (re.escape(nid), "|".join(ORIGINS)), cid):
             problems.append("%s claim_id 非法或 origin 非封闭枚举: %s" % (rid, cid))
-        if nid and nid not in DENSIFY_NODES:
+        if nid and nid not in STAGE2_NODES:
             problems.append("%s node_id 不在阶段2 参与节点集: %s" % (rid, nid))
 
     # claim_id 唯一性：**阶段2 新增记录**不得与任何既有记录冲突（FAIL）；
@@ -449,6 +526,14 @@ def build_ctx(root):
     toc, _ = safe_load(resolve(root, TOC_REL))
     gaps_doc, _ = safe_load(resolve(root, GAPS_REL))
     overrides, _ = safe_load(resolve(root, OVERRIDES_REL))
+    claims_map, _ = safe_load(resolve(root, CLAIMS_REL))
+    claim_map_ids = None
+    if isinstance(claims_map, dict):
+        claim_map_ids = set()
+        for _nid, nd in (claims_map.get("nodes") or {}).items():
+            for c in ((nd or {}).get("claims") or []):
+                if c.get("claim_id"):
+                    claim_map_ids.add(c["claim_id"])
     toc_by_source = {}
     if isinstance(toc, dict):
         toc_by_source = {k: (v.get("toc") if isinstance(v, dict) else None)
@@ -469,6 +554,7 @@ def build_ctx(root):
         "gaps": (gaps_doc or {}).get("gaps", []) or [],
         "toc_by_source": toc_by_source,
         "overrides": overrides,
+        "claim_map_ids": claim_map_ids,
         "unregistered_slugs": unregistered,
     }, None
 

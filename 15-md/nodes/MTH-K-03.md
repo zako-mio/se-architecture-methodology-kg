@@ -96,7 +96,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-025、VEN-027
-- 书证核验：BK-025 ChAs Simple as Possible, No Simpler（direct），ChErrors（direct），ChLatency（direct），ChSaturation（direct），ChThe Four Golden Signals（direct），ChWorrying About Your Tail (or, Instrumentation and Performance)（direct）；BK-026 ChDependencies（direct），ChThe SLO Culture Project（direct）
+- 书证核验：BK-025 ChAs Simple as Possible, No Simpler（direct），ChErrors（direct），ChLatency（direct），ChSaturation（direct），ChThe Four Golden Signals（direct），ChWorrying About Your Tail (or, Instrumentation and Performance)（direct）；BK-026 ChDependencies（direct），ChSaturation（direct），ChStatus of Served Traffic（direct），ChThe SLO Culture Project（direct）
 - 入口链接：https://sre.google/sre-book/monitoring-distributed-systems/
 - 勘误：常见误解「监控平均延迟即可反映用户体验」→ 核验结论「延迟通常呈长尾分布，均值会掩盖尾部，而尾部决定用户体验；应使用百分位并区分成功与失败请求的延迟」（BK-025）
 

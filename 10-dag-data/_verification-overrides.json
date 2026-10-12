@@ -208,7 +208,10 @@
         "VR-SRE-133",
         "VR-SRE-134",
         "VR-SREW-136",
-        "VR-SREW-137"
+        "VR-SREW-137",
+        "VR-SREW-138",
+        "VR-SREW-139",
+        "VR-SREW-140"
       ]
     },
     "ESS-K-02": {
@@ -260,7 +263,10 @@
         "VR-SRE-038",
         "VR-SRE-039",
         "VR-SREW-033",
-        "VR-SREW-034"
+        "VR-SREW-034",
+        "VR-SREW-035",
+        "VR-SREW-036",
+        "VR-SREW-037"
       ]
     },
     "ESS-L-01": {
@@ -602,7 +608,11 @@
         "VR-SRE-005",
         "VR-SRE-006",
         "VR-SREW-001",
-        "VR-SREW-002"
+        "VR-SREW-002",
+        "VR-SREW-003",
+        "VR-SREW-004",
+        "VR-SREW-005",
+        "VR-SREW-006"
       ]
     },
     "MTH-K-02": {
@@ -618,7 +628,10 @@
         "VR-SRE-011",
         "VR-SREW-007",
         "VR-SREW-008",
-        "VR-SREW-009"
+        "VR-SREW-009",
+        "VR-SREW-010",
+        "VR-SREW-011",
+        "VR-SREW-012"
       ]
     },
     "MTH-K-03": {
@@ -634,7 +647,9 @@
         "VR-SRE-016",
         "VR-SRE-017",
         "VR-SREW-013",
-        "VR-SREW-014"
+        "VR-SREW-014",
+        "VR-SREW-015",
+        "VR-SREW-016"
       ]
     },
     "MTH-K-04": {
@@ -645,11 +660,15 @@
       "_evidence": [
         "VR-SRE-018",
         "VR-SRE-019",
+        "VR-SRE-020",
         "VR-SRE-021",
         "VR-SRE-022",
         "VR-SRE-023",
         "VR-SREW-017",
+        "VR-SREW-018",
+        "VR-SREW-019",
         "VR-SREW-020",
+        "VR-SREW-021",
         "VR-SREW-022"
       ]
     },
@@ -666,7 +685,11 @@
         "VR-SRE-028",
         "VR-SRE-029",
         "VR-SREW-023",
-        "VR-SREW-024"
+        "VR-SREW-024",
+        "VR-SREW-025",
+        "VR-SREW-026",
+        "VR-SREW-027",
+        "VR-SREW-028"
       ]
     },
     "MTH-K-06": {
@@ -697,7 +720,10 @@
         "VR-SRE-105",
         "VR-SREW-101",
         "VR-SREW-102",
-        "VR-SREW-103"
+        "VR-SREW-103",
+        "VR-SREW-104",
+        "VR-SREW-105",
+        "VR-SREW-106"
       ]
     },
     "MTH-L-01": {
@@ -1044,7 +1070,10 @@
         "VR-SRE-110",
         "VR-SREW-107",
         "VR-SREW-108",
-        "VR-SREW-109"
+        "VR-SREW-109",
+        "VR-SREW-110",
+        "VR-SREW-111",
+        "VR-SREW-112"
       ]
     },
     "TEC-K-03": {
@@ -1060,7 +1089,10 @@
         "VR-SRE-115",
         "VR-SREW-113",
         "VR-SREW-114",
-        "VR-SREW-115"
+        "VR-SREW-115",
+        "VR-SREW-116",
+        "VR-SREW-117",
+        "VR-SREW-118"
       ]
     },
     "TEC-K-04": {
@@ -1102,9 +1134,11 @@
         "VR-SRE-118",
         "VR-SRE-119",
         "VR-SREW-119",
+        "VR-SREW-120",
         "VR-SREW-121",
         "VR-SREW-122",
-        "VR-SREW-123"
+        "VR-SREW-123",
+        "VR-SREW-124"
       ]
     },
     "TEC-L-01": {

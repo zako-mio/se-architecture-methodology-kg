@@ -97,7 +97,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-018、VEN-029
-- 书证核验：BK-025 ChCapacity Planning（direct），ChDemand Forecasting and Capacity Planning（direct），ChHandling Overload（partial），ChPer-Customer Limits（direct），ChThe Pitfalls of "Queries per Second"（direct）；BK-026 ChCase Study 2: When Load Shedding Attacks（direct），ChConfiguring Conservatively（direct），ChWhy “Non-Abstract”?（direct）
+- 书证核验：BK-025 ChCapacity Planning（direct），ChDemand Forecasting and Capacity Planning（direct），ChHandling Overload（partial），ChPer-Customer Limits（direct），ChThe Pitfalls of "Queries per Second"（direct）；BK-026 ChCase Study 2: When Load Shedding Attacks（direct），ChConfiguring Conservatively（direct），ChFuture-proofing（partial），ChIntroducing Non-Abstract Large System Design（partial），ChStrategies for Mitigating Overload（partial），ChWhy “Non-Abstract”?（direct）
 - 入口链接：https://sre.google/sre-book/table-of-contents/
 - 入口链接：https://dora.dev/guides/dora-metrics-four-keys/
 - 勘误：常见误解「速度与稳定性不可兼得」→ 核验结论「交付效能研究显示高绩效团队在吞吐与稳定两个维度均优；减小变更批量可同时改善两者」（VEN-018）

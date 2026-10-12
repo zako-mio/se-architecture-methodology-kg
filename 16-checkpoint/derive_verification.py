@@ -30,8 +30,9 @@ GENERATED = "2026-09-11"          # 冻结常量：禁止 datetime.date.today() 
 SCHEMA_VERSION = "1.0.0"
 # slug 发现改为**数据驱动**（阶段7 轨B：新书不得因硬编码而被静默排除）。
 # 语义：扫描 _parts/ 下 {ledger,claims,toc,gaps}-<slug>.json 的文件名取 slug 并稳定排序；
-# 排序沿用 slug 名字典序——既有三本 clean-architecture < ddia < saip 的相对顺序不变，
-# 故 `build_claims` 的「首 slug 优先」合并语义对既有节点**逐字节不变**。
+# 排序沿用 slug 名字典序。⚠️ `build_claims` 现为**按 claim_id 跨 slug 并集去重**
+# （2026-10-12 修复「首 slug 胜出」缺陷，见该函数 docstring）；字典序仍决定
+# 同一 claim_id 冲突时的保留方，故 slug 排序须保持稳定。
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 
 LEDGER_DIR = os.path.join("01-books", "_verify")
@@ -134,19 +135,39 @@ def build_ledger(ledger_parts, slugs):
 
 
 def build_claims(claims_parts, slugs):
+    """跨书合并同一节点的 claims：**按 claim_id 并集去重**（与
+    `merge_verify_staging.collect_claims()` 同语义）。
+
+    历史缺陷（本函数旧实现，已修）：旧版 `if node_id not in nodes:` 使后到的 slug
+    被**整段丢弃**，跨 ≥2 信源的节点只保留字典序在先 slug 的 claims
+    （实测丢 50 条：16 个 `sre-book`×`workbook` 成对节点 + `ddia`×`release-it` 的 ESS-K-02）。
+    现语义：同一 claim_id 以**字典序在先的 slug** 为准（`slugs` 已由
+    `discover_slugs()` 稳定排序），其余 slug 的同 id 条目丢弃并记 WARN。
+    """
     nodes = {}
+    owner = {}
+    conflicts = []
     for slug in slugs:
         doc = claims_parts.get(slug)
         if doc is None:
             continue
-        for node_id, node_doc in doc.items():
-            if node_id not in nodes:
-                nodes[node_id] = node_doc
+        for node_id, node_doc in (doc or {}).items():
+            bucket = nodes.setdefault(node_id, {})
+            for c in ((node_doc or {}).get("claims", []) or []):
+                cid = c.get("claim_id")
+                if cid in bucket:
+                    if bucket[cid] != c:
+                        conflicts.append((node_id, cid, owner.get(cid), slug))
+                    continue
+                bucket[cid] = c
+                owner[cid] = slug
     ordered = {}
     for node_id in sorted(nodes):
-        claims = list(nodes[node_id].get("claims", []) or [])
-        claims.sort(key=lambda c: c.get("claim_id", ""))
-        ordered[node_id] = {"claims": claims}
+        bucket = nodes[node_id]
+        ordered[node_id] = {"claims": [bucket[cid] for cid in sorted(bucket)]}
+    if conflicts:
+        sys.stderr.write("[WARN] 跨书同 claim_id 内容冲突 %d 条（保留字典序在先 slug）：%s\n"
+                         % (len(conflicts), conflicts[:3]))
     return {"meta": meta(False), "nodes": ordered}
 
 

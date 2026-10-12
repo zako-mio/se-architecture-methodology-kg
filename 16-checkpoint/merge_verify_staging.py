@@ -21,6 +21,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -39,6 +40,10 @@ BOOKS = {
     "cc": ("clean-code", "BK-020", "cc"),
     "sre": ("sre-book", "BK-025", "sre"),
     "srew": ("workbook", "BK-026", "srew"),
+    # 阶段7 阶段3 续做（2026-10-12）
+    "sweg": ("sweg", "BK-001", "sweg"),
+    "tfa": ("twelve-factor", "BK-031", "tfa"),
+    "qasc": ("saip-ch4", "BK-036", "qasc"),
 }
 
 
@@ -187,11 +192,56 @@ def build(root, problems, skipped, only=None):
     return outputs, stats
 
 
+SECOND_PASS_SET = ("passed", "disputed")
+
+
+def slug_of(rel):
+    m = re.match(r"^(?:ledger|claims|gaps)-(.+)\.json$", os.path.basename(rel))
+    return m.group(1) if m else None
+
+
+def _count_secondpass(text):
+    try:
+        doc = json.loads(text)
+    except ValueError:
+        return 0
+    return sum(1 for r in (doc.get("records") or [])
+               if isinstance(r, dict)
+               and ((r.get("review") or {}).get("second_pass") in SECOND_PASS_SET))
+
+
+def guard_secondpass(root, outputs):
+    """返回 [(slug, why)]：重合并会回退已落地的第二路裁决的书。
+
+    `apply_secondpass.py` / `writeback_gap_ids.py` / `normalize_gap_ids.py`
+    只写 `_parts/`，不回写 staging ⇒ staging 对已复核书落后。直接重跑本脚本
+    会把 second_pass 与缺口号回写整批回退。本护栏 fail-closed：该书的
+    ledger / claims / gaps 一并拒写，须显式 `--force`。
+    """
+    blocked = []
+    for rel, text in sorted(outputs.items()):
+        if not os.path.basename(rel).startswith("ledger-"):
+            continue
+        path = resolve(root, rel)
+        if not os.path.isfile(path):
+            continue
+        with open(path, encoding="utf-8") as f:
+            disk = f.read()
+        have, new = _count_secondpass(disk), _count_secondpass(text)
+        if have > new:
+            blocked.append((slug_of(rel),
+                            "磁盘 %d 条已复核，重合并后只剩 %d 条（staging 落后于 _parts）"
+                            % (have, new)))
+    return blocked
+
+
 def main():
     ap = argparse.ArgumentParser(description="合并核验暂存分片 → _parts SSOT 分片")
     ap.add_argument("--root", default=ROOT_DEFAULT)
     ap.add_argument("--check", action="store_true", help="只读：报告盘上状态，不写")
     ap.add_argument("--only", help="只合并指定 slug（逗号分隔），如 team-topologies")
+    ap.add_argument("--force", action="store_true",
+                    help="忽略第二路复核护栏（会回退 second_pass 与缺口回写，慎用）")
     args = ap.parse_args()
     root = os.path.abspath(args.root)
 
@@ -227,15 +277,33 @@ def main():
             stale.append(rel)
         print("  [%s] %s" % ("up-to-date" if disk == text else ("missing" if disk is None else "stale"), rel))
 
+    # 🔴 数据安全护栏（2026-10-12 新增）：`_parts/` 是本链的**权威终态**——
+    # `apply_secondpass.py`（第二路裁决）与 `writeback_gap_ids.py` /
+    # `normalize_gap_ids.py`（缺口号回写）都**只写 `_parts/`，不回写 staging**。
+    # 因此 staging 对已复核书是**落后**的：直接重跑本脚本会把 second_pass 与
+    # 缺口回写**整批回退**。故 fail-closed：某书的 ledger 若会丢失 second_pass，
+    # 则该书的 ledger 与 gaps 一并拒写，须显式 `--force` 才覆盖。
+    blocked = [] if args.force else guard_secondpass(root, outputs)
+    if blocked:
+        print("")
+        for slug, why in blocked:
+            print("  !! 拒写 [%s]：%s" % (slug, why))
+        print("  !! 如确要覆盖，请显式传 --force（会回退第二路复核与缺口回写）")
+
     if args.check:
         print("== --check：%s ==" % ("全部 up-to-date" if not stale else "有 %d 件待写" % len(stale)))
         return 0
+    blocked_slugs = {s for s, _ in blocked}
+    wrote = 0
     for rel, text in sorted(outputs.items()):
+        if slug_of(rel) in blocked_slugs:
+            continue
         path = resolve(root, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(text)
-    print("== 已写入 %d 件 ==" % len(outputs))
+        wrote += 1
+    print("== 已写入 %d 件（拒写 %d 件）==" % (wrote, len(outputs) - wrote))
     return 0
 
 

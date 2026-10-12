@@ -46,6 +46,14 @@ PARTS = os.path.join(VERIFY, "_parts")
 
 STRENGTH_ORDER = {"contradicted": 0, "inferred": 1, "partial": 2, "direct": 3}
 
+# 复核留痕标记（追加进 evidence_note）。2026-10-12 修：追加前先**剥掉历史标记**，
+# 否则重跑会不断叠加（实测某记录已叠 3 份，违背「幂等」声明）。
+MARK_RE = re.compile(r"\s*【第二路复核】[^【]*")
+
+
+def strip_review_marks(note):
+    return MARK_RE.sub("", note or "").rstrip()
+
 
 def discover_slugs(root):
     """从 `_parts/ledger-<slug>.json` 文件名发现 slug（数据驱动，稳定排序）。
@@ -114,6 +122,7 @@ def apply_one(root, slug, check):
         sp_strength = v.get("second_pass_strength")
         rev["second_pass"] = "passed" if agree else "disputed"
         rev["second_pass_by"] = vdoc.get("reviewed_by") or ""
+        base_note = strip_review_marks(r.get("evidence_note"))
         if not agree:
             report["disputed"] += 1
             cur = r.get("evidence_strength")
@@ -122,19 +131,18 @@ def apply_one(root, slug, check):
                     and STRENGTH_ORDER[sp_strength] < STRENGTH_ORDER[cur]):
                 r["evidence_strength"] = sp_strength
                 report["downgraded"] += 1
-                note = (r.get("evidence_note") or "").rstrip()
                 marker = "【第二路复核】判为 %s（原判 %s），按保守终裁降级。" % (sp_strength, cur)
-                r["evidence_note"] = (note + " " + marker).strip()
+                r["evidence_note"] = (base_note + " " + marker).strip()
             else:
-                note = (r.get("evidence_note") or "").rstrip()
                 marker = "【第二路复核】结论有分歧但未低于原判（复核=%s），保留原强度。" % sp_strength
-                r["evidence_note"] = (note + " " + marker).strip()
+                r["evidence_note"] = (base_note + " " + marker).strip()
         else:
             report["passed"] += 1
+            r["evidence_note"] = base_note
         if v.get("anchor_locatable") is False:
             report["anchor_unlocatable"] = report.get("anchor_unlocatable", 0) + 1
-            note = (r.get("evidence_note") or "").rstrip()
-            r["evidence_note"] = (note + " 【第二路复核】锚点未能定位，章号待回修。").strip()
+            r["evidence_note"] = (strip_review_marks(r.get("evidence_note"))
+                                  + " 【第二路复核】锚点未能定位，章号待回修。").strip()
         r["review"] = rev
     for rid in sorted(by_rid):
         if not any(r.get("record_id") == rid for r in records):

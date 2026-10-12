@@ -142,7 +142,7 @@
 - 复核日期：2026-09-10
 - 生命周期：active
 - 规范信源：BK-025、BK-026、VEN-027、VEN-029
-- 书证核验：BK-025 ChAggregation（direct），ChChoosing Targets（direct），ChObjectives in Practice（direct），ChSLOs Set Expectations（direct），ChService Level Terminology（direct），ChStandardize Indicators（direct）；BK-026 ChReliability Targets and Error Budgets（direct）
+- 书证核验：BK-025 ChAggregation（direct），ChChoosing Targets（direct），ChObjectives in Practice（direct），ChSLOs Set Expectations（direct），ChService Level Terminology（direct），ChStandardize Indicators（direct）；BK-026 ChChoosing an Appropriate Time Window（direct），ChGetting Stakeholder Agreement（direct），ChReliability Targets and Error Budgets（direct），ChWhat to Measure: Using SLIs（direct）
 - 入口链接：https://sre.google/workbook/table-of-contents/
 - 入口链接：https://docs.datadoghq.com/service_management/service_level_objectives/
 - 勘误：常见误解「百分之百是合理的服务目标」→ 核验结论「百分之百既不可达也会扼杀变更，且用户难以感知极高水平之间的差异；目标应低于百分之百并留安全边际」（BK-025）
