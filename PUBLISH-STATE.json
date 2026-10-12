@@ -10,17 +10,11 @@
       "src": "_publish-staging/00-plan/01-alignment.md",
       "src_sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386"
     },
-    "00-plan/NEXT-ROUND-PROMPT-3.md": {
-      "sha256": "fdb519fe5d1f6e81d4037806c2abd34bb49a24ecf915ef4c60e9b4ebf1c6caf2",
-      "class": "sanitize",
-      "src": "_publish-staging/00-plan/NEXT-ROUND-PROMPT-3.md",
-      "src_sha256": "fdb519fe5d1f6e81d4037806c2abd34bb49a24ecf915ef4c60e9b4ebf1c6caf2"
-    },
     "00-plan/NEXT-SESSION-HANDOFF.md": {
-      "sha256": "6f5e1690eff16c8a9c69f0d744f76947d1e49189832fc8a3e2585e5b4dd83411",
+      "sha256": "dd7479a50bc5225d13345093dabc79a4be7f03a9537271b1bc6905d751f57df4",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/NEXT-SESSION-HANDOFF.md",
-      "src_sha256": "6f5e1690eff16c8a9c69f0d744f76947d1e49189832fc8a3e2585e5b4dd83411"
+      "src_sha256": "dd7479a50bc5225d13345093dabc79a4be7f03a9537271b1bc6905d751f57df4"
     },
     "00-plan/contract.md": {
       "sha256": "f35b271848dd07d5292fefbbf57c2fcfe7dc44b804a5dbe5cc016d7fb50e4170",
@@ -161,10 +155,10 @@
       "src_sha256": "c692a1262c4a80640feea854eefded0e7fd0e99e2a499f739a94984089565854"
     },
     "00-plan/stage7p5p1-baseline.md": {
-      "sha256": "a6a5d180089ff3be91268bdc66395b117aff4bc6a8f16089b21d7aa9965b4a86",
+      "sha256": "e87fb0a7a6332e4772c6eab5826efdf8e9ee3145019a28be37e9d51b52f2e7b3",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage7p5p1-baseline.md",
-      "src_sha256": "a6a5d180089ff3be91268bdc66395b117aff4bc6a8f16089b21d7aa9965b4a86"
+      "src_sha256": "e87fb0a7a6332e4772c6eab5826efdf8e9ee3145019a28be37e9d51b52f2e7b3"
     },
     "01-books/D-book-candidates.json": {
       "sha256": "f63d7237040ab102621df588d18a0ce94db4a8289b17337da9e95e6cf2c3269d",
@@ -599,10 +593,10 @@
       "src_sha256": "d49abb3e802f42c96dcbe4564100d8e39fe057ab5c72d2e30ab1fb89b3fb0c79"
     },
     "10-dag-data/book-verification.json": {
-      "sha256": "15f2c19c99ba347f31c3034797ee81a0962731bbcf787fce63fbfd42798b0870",
+      "sha256": "1464f8f20b62fb72b266885bd8e5e7941b9e9688f37bbc65a1bf983eb1ab5506",
       "class": "mask",
       "src": "10-dag-data/book-verification.json",
-      "src_sha256": "15f2c19c99ba347f31c3034797ee81a0962731bbcf787fce63fbfd42798b0870"
+      "src_sha256": "1464f8f20b62fb72b266885bd8e5e7941b9e9688f37bbc65a1bf983eb1ab5506"
     },
     "10-dag-data/methodology-dag.json": {
       "sha256": "451f0238b3284dd4609e445f8665253c48b8394540300463ae7764033074726e",
@@ -1811,10 +1805,10 @@
       "src_sha256": "6595ab4a942dcce48fbcf88743ac04f79dac74fa8a3eb9326d163e26c8e83f97"
     },
     "14-views/06-book-verification.html": {
-      "sha256": "10eeff546605dd64db455ce4dc5edb7a13ab88f4f81ed4f14bf00fb776cc1dff",
+      "sha256": "2237564e5d476cc3206a77aa9442f43c10385b15aca81c8843a1bc9df8287147",
       "class": "mirror",
       "src": "14-views/06-book-verification.html",
-      "src_sha256": "10eeff546605dd64db455ce4dc5edb7a13ab88f4f81ed4f14bf00fb776cc1dff"
+      "src_sha256": "2237564e5d476cc3206a77aa9442f43c10385b15aca81c8843a1bc9df8287147"
     },
     "14-views/glossary.html": {
       "sha256": "15feb7fc77aa0b9a71e988dd8325532dadd0fd25bb4112cd98d0afae34cd079c",
@@ -2926,6 +2920,12 @@
       "src": "16-checkpoint/audit_publish.py",
       "src_sha256": "2f1f8963afe4c537613173ec7a11aaf6b02bd7fd1f26cd244504ce399c3bfcfe"
     },
+    "16-checkpoint/backfill_candidate_register.py": {
+      "sha256": "1fd33433cd3c30f2d212fec4c80d429787b2dafa5566f89ab1962893d59fbfe6",
+      "class": "mask",
+      "src": "16-checkpoint/backfill_candidate_register.py",
+      "src_sha256": "1fd33433cd3c30f2d212fec4c80d429787b2dafa5566f89ab1962893d59fbfe6"
+    },
     "16-checkpoint/backup-manifest.txt": {
       "sha256": "d111aae699074af7318b44aedf3b767dd9a25f816bd18dab4bf163da061b6e1a",
       "class": "mask",
@@ -3215,10 +3215,10 @@
       "src_sha256": "801541fc483c8bbc24b9913f8182c9cab066c688681c6860f6739b2fd2dd4006"
     },
     "16-checkpoint/publish-manifest.json": {
-      "sha256": "0a36d9ddf9c7433867da9ebd1e951dcd429ae44b2c47c50ea7e5ab173ed19e1e",
+      "sha256": "ec39ade512b22ce459cdb58e133e53e7d284355e9c93eebdea035ac667ae3aee",
       "class": "mask",
       "src": "16-checkpoint/publish-manifest.json",
-      "src_sha256": "0a36d9ddf9c7433867da9ebd1e951dcd429ae44b2c47c50ea7e5ab173ed19e1e"
+      "src_sha256": "ec39ade512b22ce459cdb58e133e53e7d284355e9c93eebdea035ac667ae3aee"
     },
     "16-checkpoint/push_publish.py": {
       "sha256": "3e937ce4200ac75f876fede7dceb50f088562d37ed580f860d310c9c9942d1ae",

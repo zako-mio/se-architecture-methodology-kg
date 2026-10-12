@@ -23,7 +23,10 @@
 | 单节点上限 | 超限 **0**；K 域最高 **12**（`ESS-K-02`）；域外贴限 `MTH-J-07`/`MTH-N-05`/`TEC-J-04` 各 **8** |
 | 门控 | `gate_verification` **9/9**；G-D **5/5**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`replay_admission` 一致率 100% + 负例 4/4；L4/L5 **PASS**；`kb_gate` 2/2；版权 **0 命中** |
 | 公开层 | 推送 **2 次**；远端 HEAD **`0ff129d6deb3`**，**573 blobs == 本地 ls-files**；CI **success**（38188672569 / 38189349224）；Pages **200** |
-| **P2 进度** | 三本语料 + TOC + **按章切片** + **4 处登记全部就绪**；**BK-036 暂存分片已产出并过机检**（21 记录 / 21 主张 / 4 缺口，7 节点，19 direct + 2 partial），**尚未合并**；BK-031 工人**因上下文耗尽零产出**（须用切片重派）；BK-001 未派工 |
+| **P2 轨B 三本** | **全部完成**：BK-036（21 记录 / 7 节点 / 4 缺口）、BK-031（24 / 6 / 4）、BK-001（35 / 8 / 6）—— 均「机检 PASS → 合并 → 第二路复核 100%」；三本合计入层 **80 条记录**，新增覆盖节点 **15 个**（78 → 93） |
+| 核验层规模（终值） | 记录 **522 → 636**（`direct 448 / partial 164 / inferred 24`）；覆盖节点 **78 → 93**；缺口 **119 → 133**；已核验书 **10 → 13 本** |
+| 第二路复核（终值） | `direct` **448 条全部有 verdict（100%）**；本轮新增降级 **10 条**（P1 恢复记录 5 + 三本 5） |
+| 公开层（终值） | 推送 **3 次**；远端 HEAD **`6499c3962f3e`**，**576 blobs == 本地 ls-files**；三次 CI 均 **success**；Pages **200** |
 | 本轮新增可执行物 | `fill_missing_claims.py`、`fix_duplicate_claim_ids.py`、`recover_trimmed_records.py`、`make_secondpass_worklist.py`、`merge_secondpass_worklists.py`、`extract_web_book.py`、`slice_corpus_by_chapter.py` |
 
 **🔴 本轮发现的五处「前提/机制不可信」纠正**（务必继承）：
