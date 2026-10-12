@@ -111,14 +111,24 @@ BK-022 welc（1st/2004，P0-10 PDF 458 页）
 ## 4. 公开层对账
 
 ```text
-推送           = 见 §4.1（本轮推送后回填）
-远端 HEAD      =
-remote blobs   = 期望 == 本地 _publish ls-files
-CI             = rebuild.yml 的 push.paths 含 10-dag-data/** 与 16-checkpoint/** ⇒ 本轮**自动触发**
-Pages 回验     =
-装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0
-gate_disclosure= PASS
+推送           = 1 次（Git Data API）：parent ccad1873a9eb / base_tree 513f88528a64
+                 → new_commit 96a89ae7453b / new_tree 3f782b674728
+                 （`_publish` 本地提交 32f3eb9；推送前已在 `_publish` 内 git add -A && git commit）
+远端 HEAD      = 96a89ae7453bdfa071a09a6458f5faf048770a15
+remote blobs   = 579  ==  本地 _publish ls-files 579
+CI             = run 38234154454（push 自动触发，36s）**success**
+                 （本轮改了 10-dag-data/** 与 16-checkpoint/**，故**自动触发**，无需手动 workflow_dispatch）
+Pages 回验     = / 、00-plan/stage7p5-p2c-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
+                 11-node-pages/ESS-G-06.html 、11-node-pages/TEC-L-02.html 、
+                 10-dag-data/methodology-dag.json 、14-views/06-book-verification.html 、
+                 16-checkpoint/extract_pdf_book.py   均 **200**
+                 ；00-plan/NEXT-ROUND-PROMPT-3.md / -4.md / -5.md 均 **404**（`never` 类生效）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（573 文件）
+gate_disclosure= PASS（0 hit / 513 file）
 ```
+
+> **纠正确认**：本轮改动了 `10-dag-data/**` 与 `16-checkpoint/**` ⇒ CI **自动触发**（实测 run 38234154454 在推送后 25s 内出现），
+> 与「只改 `00-plan/**` 的推送不触发 CI」不矛盾；若下轮只改文档，仍须手动 `gh workflow run rebuild.yml` 并回验 Pages。
 
 ---
 
