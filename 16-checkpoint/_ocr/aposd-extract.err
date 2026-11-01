@@ -1,3 +1,0 @@
-[pdf_ocr] OCR 后端: rapidocr_onnxruntime（捆绑 ch_PP-OCRv4 det/rec，覆盖简体中文+英文/数字）
-[pdf_ocr] 请求语言: zh+en
-[pdf_ocr] 完成: 20 页 (文本层 0 / OCR 20), 渲染 300 dpi
