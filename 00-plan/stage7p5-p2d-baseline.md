@@ -106,21 +106,40 @@ BK-008 aposd（2nd/2021 抽取件；印刷页 39–49 / 76 / 99–100 / 171–17
 ## 4. 公开层对账
 
 ```text
-推送           = 1 次（Git Data API）：parent 74e0faacc1b8 / base_tree d2671b0e9664
-                 → new_commit 875d43f873c1 / new_tree f4feb6e05d5b
-                 （`_publish` 本地提交 2ebb389；推送前已在 `_publish` 内 git add -A && git commit）
-远端 HEAD      = 875d43f873c1016a34de5a20daf5907d5beb302f
-remote blobs   = 586  ==  本地 _publish ls-files 586（580 受控文件 + 6 项 preserve 类）
-CI             = run 41290533613（push 自动触发，30s）**success**
-                 （本轮改了 10-dag-data/** 与 16-checkpoint/**，故**自动触发**，无需手动 workflow_dispatch）
+推送           = 3 次（Git Data API）+ 5 次 Contents API 删除提交
+  ① 主体：parent 74e0faacc1b8 / base_tree d2671b0e9664 → new_commit 875d43f873c1 / new_tree f4feb6e05d5b
+     （`_publish` 本地提交 2ebb389；推送前已在 `_publish` 内 git add -A && git commit）
+  ② 文档对账回填：parent 875d43f873c1 → new_commit cc1992dff551 / new_tree cec14cf896d2
+     （`_publish` 提交 85357b1；**纯 00-plan/** 推送 ⇒ 未自动触发 CI，手动 workflow_dispatch run 41290940423 success）
+  ③ 下架泄漏：parent cc1992dff551 → new_commit c44e83b5cfe8 / new_tree beba0879a24
+     （`_publish` 提交 7577d72；`push_publish.py` 用 base_tree ⇒ **不会删除远端文件**，见 §7-8）
+  ④ 显式删除 5 个泄漏 blob（`gh api -X DELETE .../contents/<path>`）：
+     c7199fdd → 7b8e026c → befa7bb5 → f23f3d10 → **d5e5c6d8436b（远端 HEAD）**
+远端 HEAD      = d5e5c6d8436bd43ba2b009a3a163b25692a3d4f6
+remote blobs   = 581  ==  本地 _publish ls-files 581（575 受控文件 + 6 项 preserve 类）
+                 ① 前为 586（受控 580），下架 `16-checkpoint/_ocr` 与 `_snap` 共 5 个 blob
+CI             = push 自动触发：run **41290533613 success**（30s，push #1）
+                 ；文档推送不触发 ⇒ 手动 run **41290940423 success**（35s）
+                 ；删除提交自动触发：run **41291433407 success**（32s；同秒其余 3 个 run 被 cancelled，属 GitHub 合并行为）
 Pages 回验     = / 、00-plan/stage7p5-p2d-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
-                 11-node-pages/ESS-H-01.html 、11-node-pages/ESS-H-05.html 、
+                 11-node-pages/ESS-H-01.html 、11-node-pages/ESS-H-05.html 、11-node-pages/MTH-H-02.html 、
                  10-dag-data/methodology-dag.json 、14-views/06-book-verification.html 、
-                 16-checkpoint/extract_ocr_book.py   均 **200**
+                 16-checkpoint/extract_ocr_book.py 、16-checkpoint/apply_secondpass.py   均 **200**
                  ；00-plan/NEXT-ROUND-PROMPT-5.md / -6.md 均 **404**（`never` 类生效）
-装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（580 文件）
-gate_disclosure= PASS（0 hit / 515 file）
+                 ；**泄漏回验**：16-checkpoint/_ocr/{aposd-extract.raw.json,aposd-extract.err} 与
+                 16-checkpoint/_snap/{parts,parts.postfix,secondpass}.sha256 均 **404**（已下架）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（575 文件）
+gate_disclosure= PASS（0 hit / 514 file）
 ```
+
+> 🔴 **本轮发生并已处置的一起真实泄漏（务必继承）**：把 OCR 临时工作目录建在 **`16-checkpoint/`（mask 类，会发布）**
+> 下，导致 `_ocr/aposd-extract.raw.json`（**OCR 出来的书页原文 39 KB**）与 3 个 `_snap/*.sha256` 随 push #1 进了公开仓。
+> 处置：① `publish-manifest.json` 的 `classes.never` 增 `16-checkpoint/_ocr/` 与 `_snap/`；② 从 `_publish` 工作树移除
+> （commit 7577d72）并推送（push #3）；③ 因 `push_publish.py` 用 `base_tree`、**不能删远端文件**，逐条
+> `gh api -X DELETE` 下架 5 个 blob；④ 删除提交触发 CI 41291433407 success、Pages 回验泄漏路径全部 **404**。
+> ⚠️ **但 blob 仍在公开仓 git 历史中**（commit 875d43f8 / cc1992df / c44e83b5）⇒ 彻底清除须 force-push（**未做**，见 §7-8）。
+> **教训**：临时/中间产物一律建在 `01-books/`（private）或仓外的 `~/.dsh-backups/`，**绝不要**建在 mask/mirror 类目录下。
+
 
 > **注**：本文件在推送后仍可能有末次本地 `docs:` 提交（本节文本），故公开站点版本可能落后本地一次；
 > 若紧接着做了纯 `00-plan/**` 的第二次推送，CI **不会**自动触发，须手动 `gh workflow run rebuild.yml` 并回验 Pages。
@@ -179,6 +198,7 @@ gate_disclosure= PASS（0 hit / 515 file）
 2. **`BK-016`（POSA Vol.1）仍未采集**（不变）：canonical `verified=false` / `confidence=low`，需先补采集。
 3. **T2 → T1 晋升**：本轮候选册 T2 由 38 增至 **40**（两条新 T2 均为单源）；`--scan-promotion` 仍为「可晋升 0」。晋升属结构变更，须另立 ADR。
 4. **域外贴限证据**：`MTH-J-07` / `MTH-N-05` / `TEC-J-04` 各 8 条，维持 ADR-005 边界（用户默认：维持）。
-5. **公开仓历史 blob**：`NEXT-ROUND-PROMPT-3.md` 等仍在公开仓 git 历史中；彻底清除需 force-push（**未做**，用户默认不处理）。
+5. **公开仓历史 blob（旧）**：`NEXT-ROUND-PROMPT-3.md` 等仍在公开仓 git 历史中；彻底清除需 force-push（**未做**，用户默认不处理）。
 6. **`apply_secondpass` 的兜底分支**：当 `review.first_pass_strength` 与 verdict 的 `first_pass_strength` **双缺**时仍退回「当前强度」判据（老数据兜底）；实测 789/789 条 verdict 均带该字段，故未触发。若要彻底消除，需给该分支加显式 WARN。
 7. **`merge_secondpass_worklists.py` 仍会重写全部既有 `secondpass-*.json`**（内容逐字节相同）：属可接受但须跑前快照（本轮未跑该脚本，直接由主 Agent 合并 3 名工人的 verdict）。
+8. 🔴 **本轮新增的历史遗留：泄漏的 OCR 书页原文仍在公开仓历史**（`16-checkpoint/_ocr/aposd-extract.raw.json`，39 KB，含 BK-008 抽取件的 OCR 结果）。HEAD 与 Pages 均已 404，但 blob 存于 commit `875d43f8` / `cc1992df` / `c44e83b5`。**彻底清除须 force-push 重写历史**（`git filter-repo` 或 `gh api` 重建），属不可逆操作 ⇒ **须用户裁决**。风险等级高于第 5 条（那是内部 Prompt，本条是被授权仅免费抽取的书页原文）。

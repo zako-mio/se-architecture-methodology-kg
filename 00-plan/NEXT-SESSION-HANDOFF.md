@@ -24,7 +24,8 @@
 | **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **40** / 可晋升 **0** / 负例 **3/3**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_ocr_book` **5/5**；`apply_secondpass` **4/4**；`backfill_candidate_register` **3/3** |
 | **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-008**、缺失 无）；G-D **5/5**；`gate_coverage` 100%；`gate_sources` PASS（verified 91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 922 / links 10 904，0 问题）；`gate_visual` L4 **PASS**（212/272，与上轮一致）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（8 592 676 个 20-gram） |
 | **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致；`build` 连跑总哈希一致（`0346f9c8…`）；`writeback_gap_ids --check` 0 变更；`apply_secondpass --all` 第二次 0 变更；补录报告三件复跑逐字节不变 |
-| **公开层** | 推送 **1 次**（Git Data API）：`875d43f873c1` / tree `f4feb6e05d5b`；**remote blobs 586 == 本地 586**；CI run **41290533613 success**（30s，自动触发）；Pages 8 条 **200**（index / p2d 基线 / handoff / `ESS-H-01` / `ESS-H-05` / DAG / 书证视图 / `extract_ocr_book.py`）、`NEXT-ROUND-PROMPT-5.md` 与 `-6.md` **404**；装配 0/0/0、`gate_disclosure` 0 hit / 515 file |
+| **公开层** | 推送 **3 次** + 5 次 Contents API 删除提交：`875d43f8`（主体）→ `cc1992df`（文档回填）→ `c44e83b5`（下架泄漏）→ **远端 HEAD `d5e5c6d8`**；**remote blobs 581 == 本地 581**；CI `41290533613` success（push 自动）/ `41290940423` success（文档手动 dispatch）/ `41291433407` success（删除自动）；Pages 10 条 **200**、两条接力件 **404**、**5 个泄漏路径 404**；装配 0/0/0、`gate_disclosure` 0 hit / 514 file |
+| **🔴 本轮发生并已处置的泄漏** | OCR 临时目录建在 `16-checkpoint/`（mask 类）下 ⇒ `_ocr/aposd-extract.raw.json`（**书页原文 39 KB**）与 3 个 `_snap/*.sha256` 随 push #1 进了公开仓。已：①`classes.never` 增 `16-checkpoint/_ocr/`、`_snap/`；②本地移除并推送；③`gh api -X DELETE` 逐条下架 5 blob；④CI + Pages 回验全部 404。**但 blob 仍在公开仓历史**（需 force-push 才能清除，见基线 §7-8） |
 
 **🔴 本轮新增/复现的五处「机制/判据不可信」（务必继承）**：
 
@@ -33,6 +34,7 @@
 3. **补录报告「一修订件一报告 + 索引」有两个必备件**：旧单槽迁移 **＋** 「先写者胜」。只做迁移会在同一轮里被紧随其后的 no-op 复跑覆盖成 `entries_added=0 / entries=[]`（本轮实测踩中，已补 N1 探针守住）。
 4. **无文本层 PDF 不能塞进 `extract_pdf_book.py`**：`pdftotext` 对 20 页扫描件返回 **0 字符**（只有分页符），其三条判据必然失败；OCR 一路须独立脚本 + 独立负例。且 **OCR 每页文本下限（≥30 字）** 是「识别静默失败」的唯一护栏——空页若被当作「该页无内容」放过，G-V5 会用残缺语料做改写检查（伪绿）。
 5. **章图必须同时声明 `pdf_page` 与 `printed_page`**：OCR 页内同时含页眉（章标题重复）与页脚（印刷页码），单靠 pdf 页序递增无法发现「抽取件章序与印刷页错位」。本轮 `printed_page` 递增判据的负例 N5 即为此设。
+6. 🔴 **临时/中间产物绝不能建在 mask/mirror 类目录下**：`assemble_publish.py` 会把 `16-checkpoint/`（mask 类）下**一切**非白名单文件发布出去。本轮把 OCR 原始结果与 SHA 快照放在 `16-checkpoint/_ocr`、`_snap` ⇒ 随首次推送**泄漏了书页原文**（HEAD 已下架、历史仍存）。⇒ 约定：临时件写 `01-books/_verify/`（private）或仓外 `~/.dsh-backups/`；新增任何工具目录须先查 `publish-manifest.json` 的类归属。
 
 > **抓手（沿用并新增）**：① 派工前先给章切片 + 承载页码的唯一私有档；② prompt 写死「`grep` 定位 + 窄读」；③ **每步之后对既有件做 SHA-256 快照复验**（本轮靠它确认 `merge --only` 后既有 60 件不变，并定位 6 个分片的 33 条留痕更正）；④ 收尾扫隐藏点文件；⑤ **新判据必须同时提交负例**，且负例要有一条「旧判据反证」（证明探针能区分新旧实现，不是恒真）。
 
