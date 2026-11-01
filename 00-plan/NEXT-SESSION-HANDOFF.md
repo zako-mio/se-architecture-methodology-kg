@@ -24,7 +24,7 @@
 | **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **40** / 可晋升 **0** / 负例 **3/3**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_ocr_book` **5/5**；`apply_secondpass` **4/4**；`backfill_candidate_register` **3/3** |
 | **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-008**、缺失 无）；G-D **5/5**；`gate_coverage` 100%；`gate_sources` PASS（verified 91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 922 / links 10 904，0 问题）；`gate_visual` L4 **PASS**（212/272，与上轮一致）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（8 592 676 个 20-gram） |
 | **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致；`build` 连跑总哈希一致（`0346f9c8…`）；`writeback_gap_ids --check` 0 变更；`apply_secondpass --all` 第二次 0 变更；补录报告三件复跑逐字节不变 |
-| **公开层** | 见 `stage7p5-p2d-baseline.md §4`（远端 HEAD / CI run / Pages 回验） |
+| **公开层** | 推送 **1 次**（Git Data API）：`875d43f873c1` / tree `f4feb6e05d5b`；**remote blobs 586 == 本地 586**；CI run **41290533613 success**（30s，自动触发）；Pages 8 条 **200**（index / p2d 基线 / handoff / `ESS-H-01` / `ESS-H-05` / DAG / 书证视图 / `extract_ocr_book.py`）、`NEXT-ROUND-PROMPT-5.md` 与 `-6.md` **404**；装配 0/0/0、`gate_disclosure` 0 hit / 515 file |
 
 **🔴 本轮新增/复现的五处「机制/判据不可信」（务必继承）**：
 

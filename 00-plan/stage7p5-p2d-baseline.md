@@ -106,8 +106,24 @@ BK-008 aposd（2nd/2021 抽取件；印刷页 39–49 / 76 / 99–100 / 171–17
 ## 4. 公开层对账
 
 ```text
-（待本轮首次推送后回填）
+推送           = 1 次（Git Data API）：parent 74e0faacc1b8 / base_tree d2671b0e9664
+                 → new_commit 875d43f873c1 / new_tree f4feb6e05d5b
+                 （`_publish` 本地提交 2ebb389；推送前已在 `_publish` 内 git add -A && git commit）
+远端 HEAD      = 875d43f873c1016a34de5a20daf5907d5beb302f
+remote blobs   = 586  ==  本地 _publish ls-files 586（580 受控文件 + 6 项 preserve 类）
+CI             = run 41290533613（push 自动触发，30s）**success**
+                 （本轮改了 10-dag-data/** 与 16-checkpoint/**，故**自动触发**，无需手动 workflow_dispatch）
+Pages 回验     = / 、00-plan/stage7p5-p2d-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
+                 11-node-pages/ESS-H-01.html 、11-node-pages/ESS-H-05.html 、
+                 10-dag-data/methodology-dag.json 、14-views/06-book-verification.html 、
+                 16-checkpoint/extract_ocr_book.py   均 **200**
+                 ；00-plan/NEXT-ROUND-PROMPT-5.md / -6.md 均 **404**（`never` 类生效）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（580 文件）
+gate_disclosure= PASS（0 hit / 515 file）
 ```
+
+> **注**：本文件在推送后仍可能有末次本地 `docs:` 提交（本节文本），故公开站点版本可能落后本地一次；
+> 若紧接着做了纯 `00-plan/**` 的第二次推送，CI **不会**自动触发，须手动 `gh workflow run rebuild.yml` 并回验 Pages。
 
 ---
 
