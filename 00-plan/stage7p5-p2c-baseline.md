@@ -129,6 +129,12 @@ gate_disclosure= PASS（0 hit / 513 file）
 
 > **纠正确认**：本轮改动了 `10-dag-data/**` 与 `16-checkpoint/**` ⇒ CI **自动触发**（实测 run 38234154454 在推送后 25s 内出现），
 > 与「只改 `00-plan/**` 的推送不触发 CI」不矛盾；若下轮只改文档，仍须手动 `gh workflow run rebuild.yml` 并回验 Pages。
+>
+> **第二次推送（纯文档）**：收尾时把本节对账记录写入基线 ⇒ 再次 `--apply --refresh-sanitize` → `_publish` 提交 `3ec2e2c`
+> → `push_publish.py` 得 new_commit **`74e0faacc1b8`**（tree `d2671b0e9664`）。该次**只改 `00-plan/**` 与 `_publish` 根**
+> ⇒ **未自动触发 CI**（实测 `gh run list` 无新 run）⇒ 手动 `gh workflow run rebuild.yml`（run **38234668814 success**），
+> 复验 Pages：基线 / 接力文档 / 节点页 / DAG 均 200、接力件 404，且远端基线已含 `96a89ae7453b`（公开副本与本地一致）。
+> ⚠️ 沿用本仓惯例：**本文件在推送后仍可能有末次本地 `docs:` 提交**，故公开站点版本可能落后本地一次（差异仅为本节文本）。
 
 ---
 

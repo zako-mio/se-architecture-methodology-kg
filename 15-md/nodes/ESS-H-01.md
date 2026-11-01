@@ -158,9 +158,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-01
 - 生命周期：active
 - 规范信源：PAP-002、BK-008、BK-032
+- 书证核验：BK-008 Ch6.4（direct）
 - 入口链接：https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf
 - 入口链接：https://web.stanford.edu/~ouster/cgi-bin/book.php
 - 勘误：常见误解「模块就是一个或多个子程序」→ 核验结论「Parnas 把 module 定义为责任分配（responsibility assignment），主张为高效实现而放弃「模块=子程序」假设」（PAP-002）

@@ -687,6 +687,17 @@
     ],
     "ESS-G-04": [
       {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "6",
+        "section": "6.7",
+        "section_title": "Example: editor undo mechanism",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-11-01"
+      },
+      {
         "source_id": "BK-023",
         "book": "Designing Data-Intensive Applications",
         "chapter": "2",
@@ -878,6 +889,19 @@
         "review_date": "2026-10-12"
       }
     ],
+    "ESS-H-01": [
+      {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "6",
+        "section": "6.4",
+        "section_title": "Generality leads to better information hiding",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-01"
+      }
+    ],
     "ESS-H-02": [
       {
         "source_id": "BK-007",
@@ -889,6 +913,19 @@
         "direction": "reverse",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-H-05": [
+      {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "6",
+        "section": "6.2",
+        "section_title": "Example: storing text for an editor",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-01"
       }
     ],
     "ESS-H-06": [
@@ -1014,6 +1051,17 @@
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "12",
+        "section": "12.6",
+        "section_title": "A different opinion: comments are failures",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-01"
       }
     ],
     "ESS-H-08": [
@@ -3759,6 +3807,19 @@
         "review_date": "2026-10-12"
       }
     ],
+    "MTH-H-02": [
+      {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "9",
+        "section": "9.9",
+        "section_title": "Conclusion",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-01"
+      }
+    ],
     "MTH-H-04": [
       {
         "source_id": "BK-001",
@@ -6320,6 +6381,17 @@
     ],
     "MTH-O-06": [
       {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "6",
+        "section": "6.6",
+        "section_title": "Push specialization upwards (and downwards!)",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-01"
+      },
+      {
         "source_id": "BK-030",
         "book": "Team Topologies",
         "chapter": "6",
@@ -6523,6 +6595,17 @@
       }
     ],
     "MTH-O-09": [
+      {
+        "source_id": "BK-008",
+        "book": "A Philosophy of Software Design",
+        "chapter": "21",
+        "section": "21.1",
+        "section_title": "How to decide what matters?",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "none",
+        "review_date": "2026-11-01"
+      },
       {
         "source_id": "BK-013",
         "book": "Documenting Software Architectures: Views and Beyond",
@@ -7808,6 +7891,34 @@
     ]
   },
   "gaps": [
+    {
+      "gap_id": "GAP-APOSD-001",
+      "kind": "concept_missing",
+      "book_source_id": "BK-008",
+      "chapter": "12",
+      "section": "12.6",
+      "target": {
+        "existing_node_id": "MTH-H-04",
+        "proposed_node": "MTH-H-09"
+      },
+      "summary": "该书把代码注释当作设计工作的一部分而非补救手段：注释要记录代码无法表达的设计意图与不显见之处，可降低认知负荷与「未知未知」；作者明确反对「注释即表达失败」，并主张先把注释写好再写实现。图谱现有的「架构文档化方法」只覆盖架构级视图文档、「可读性」只覆盖写法与认知负荷，缺一条代码级注释的工程实践。",
+      "proposed_action": "在 MTH-H-04 的正文补一条工程类记录，锚定第 12 章：写明注释的记录对象（设计意图、不显见之处）、「注释不是失败」的判据，以及先写注释再写实现的做法；不新建节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-APOSD-002",
+      "kind": "concept_missing",
+      "book_source_id": "BK-008",
+      "chapter": "6",
+      "section": "6.8",
+      "target": {
+        "existing_node_id": "MTH-O-09",
+        "proposed_node": "MTH-O-13"
+      },
+      "summary": "该书把代码里的特例（special case）单列为一种复杂度来源，主张从表示上消除它：与其在每个使用点判断「暂无选择」这类边界状态，不如让常态结构天然容纳边界情形（空选择用起止位置相同的选择表示），使主路径不再需要条件分支；章末把这套做法与异常处理并列为特例治理。图谱在「深模块／浅模块」与「模块化分解」里都没有把消除特例当作独立的设计动作。",
+      "proposed_action": "在 MTH-O-09 的正文补一条工程类记录，锚定第 6 章 6.8 节：写明「把边界情形并入常态表示、使主路径无分支」这一消除特例的做法及其收益；不新建节点。",
+      "evidence_strength": "direct"
+    },
     {
       "gap_id": "GAP-CA-001",
       "kind": "coverage_hole",

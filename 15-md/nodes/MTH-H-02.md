@@ -117,9 +117,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-01
 - 生命周期：active
 - 规范信源：PAP-002、BK-008、STD-005、BK-016
+- 书证核验：BK-008 Ch9.9（direct）
 - 入口链接：https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf
 - 勘误：常见误解「按处理步骤或流程图分解模块即可获得高可修改性」→ 核验结论「Parnas 用 KWIC 证明按流程分解时核心存储格式变更会波及所有模块，按信息隐藏分解时只影响单个模块」（PAP-002）
 - 勘误：常见误解「模块化等于把系统拆成若干子程序」→ 核验结论「Parnas 把 module 定义为责任分配（responsibility assignment），模块化效果取决于划分判据而非结构单位」（PAP-002）

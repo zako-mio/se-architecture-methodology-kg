@@ -5,7 +5,38 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2c **BK-013 / BK-022 双书核验入层 + ADR-007 准入补录 + 图谱再生**）—— 本节优先于下方所有旧陈述
+## ⚠️ 本轮增量（2026-11-01 · 阶段7 阶段3 续做轮 P2d **BK-008（APoSD）OCR 核验入层 + 两个工具缺陷收口 + ADR-008 双 T2 补录**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = `NEXT-ROUND-PROMPT-5.md §D.1 + §H#5`：先判 BK-008 的 OCR 覆盖度并按其结果入层，同时收口 §C#17（`apply_secondpass` 降级非幂等）与 §C#20（补录报告单槽）两个工具缺陷 → 生成链再生 → 公开层同步。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-6.md`；**基线**：`00-plan/stage7p5-p2d-baseline.md`（图谱指纹 **`9212644f…9bc647a`**）。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **BK-008 OCR 覆盖度裁决** | 本地 `P0-03` 抽取件 **20 页全无文本层**（`pdftotext` = 0 字符）；OCR 后实测覆盖 **4 个章节片段**：第 6 章全文（印刷 39–49）、9.8–9.9（76）、12 章片段（99–100）、第 21 章（171–174）⇒ **非全书**。据此只做已覆盖章节的正向核验，**不做全书级反查**（口径已写进 `verify-contract.md` §0 与 `toc-aposd.json.coverage`） |
+| **语料层（新增 OCR 一路）** | 新增 `16-checkpoint/extract_ocr_book.py`（消费 `pdf_ocr.py --json`，只做装配与校验；**5 条** fail-closed：页数三方一致 / OCR 页序完整 1..N / 单页 ≥30 字（空页＝识别静默失败）/ 章标题落位 + `pdf_page` 递增 / `printed_page` 递增；`--negative-test` **5/5** 如期拒写）；`aposd.txt` 39 040 字符 / 4 章头；章图 `_meta/pdf-chapters-aposd.json` 4 章 17 节全落位 |
+| **登记层** | **6 处登记齐备**；`APOSD` 与既有 16 前缀互不为前缀。⚠️ 本轮**再次复现**「只登记第一张表 ⇒ G-V5 报缺失源」的伪绿（见纠正①） |
+| **核验层** | 单分片 → 机检 **problems 0 / WARN 0** → `merge --only aposd`（**既有 60 件逐字节不变**）；records **691 → 698**（`direct 499→503 / partial 168→171 / inferred 24`）；覆盖节点 **100 → 103**（`ESS-H-01` / `ESS-H-05` / `MTH-H-02` 三个**此前零记录**节点首次入层）；缺口 **148 → 150**；已核验书 **15 → 16 本** |
+| **第二路复核** | 3 个独立工人覆盖 **5/5 direct**：`agree 4 / 分歧 1`（`VR-APOSD-005`：claim 的机制腿落在 12.6 节之外 ⇒ **direct 降 partial**）；总账 `matched 496 / passed 450 / disputed 46`；`未复核 direct = 0`、`悬挂 verdict = 0` |
+| **准入补录（ADR-008）** | 新增 `18-design/adr/ADR-008.json`（`amends: ["ADR-004"]`）**6/6 PASS**：`GAP-APOSD-001` ⇒ **T2 / `MTH-H-09`**；`GAP-APOSD-002` ⇒ **T2 / `MTH-O-13`**（两条均 direct 单源 ⇒ 谓词机械输出 T2，不降档）；候选册 **52 → 54**（T1 1 / T2 40 / T3 13）、`reserved_ids` **38 → 40**、覆盖缺口 **53 → 55**；ADR-004 复查 **6/6** |
+| **工具缺陷收口** | ① `apply_secondpass`：判据改锚「复核前强度」⇒ 第二次 `--all` **60/60 分片逐字节不变**，并**按事实还原 33 条历史反转留痕**（6 个分片，值不变仅 note）；② 补录报告改「一修订件一报告 + 索引」⇒ `adr006/adr007/adr008` 三份共存，`adr007` 的旧单槽明细已迁移回来 |
+| **图谱** | **结构不变**：168 节点 / 364 边 / 18 组 / 18 案例；`validate_graph` errors=0、kahn 168/168；**指纹变更** `c413c6fd…` → **`9212644f…`**（3 个新覆盖节点 + 4 个既有节点 `review_date` 前移） |
+| **9 文件指纹** | **8 处变更**（ledger / node-claim-map / book-toc-index / reverse-gaps / overrides / book-verification / methodology-dag / verify-contract），`_verification-baseline.json` 不变 |
+| **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **40** / 可晋升 **0** / 负例 **3/3**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_ocr_book` **5/5**；`apply_secondpass` **4/4**；`backfill_candidate_register` **3/3** |
+| **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-008**、缺失 无）；G-D **5/5**；`gate_coverage` 100%；`gate_sources` PASS（verified 91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 922 / links 10 904，0 问题）；`gate_visual` L4 **PASS**（212/272，与上轮一致）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（8 592 676 个 20-gram） |
+| **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致；`build` 连跑总哈希一致（`0346f9c8…`）；`writeback_gap_ids --check` 0 变更；`apply_secondpass --all` 第二次 0 变更；补录报告三件复跑逐字节不变 |
+| **公开层** | 见 `stage7p5-p2d-baseline.md §4`（远端 HEAD / CI run / Pages 回验） |
+
+**🔴 本轮新增/复现的五处「机制/判据不可信」（务必继承）**：
+
+1. **纠正①在本轮被完整复现**：新书只登记 `SLUG_RECORD_PREFIX`、未登 `SLUG_TEXT`/`SOURCE_SLUG` 时，`gate_verification` 仍报 **9/9 PASS**，而 G-V5 的可用源列表里**没有** `BK-008`（记「缺失源」＝SKIP）。⇒ **验收必须逐字断言** G-V5 输出里出现该书 `source_id`，光看 9/9 不算数。
+2. **`apply_secondpass` 修复的收益不止「止住新污染」**：修后第一次 `--all` 会把**历史上已被反转的 33 条留痕**按事实改写回「按保守终裁降级」（`evolutionary-arch 6 / team-topologies 11 / saip 9 / release-it 2 / sre-book 2 / workbook 3`；`evidence_strength` 值不变、结构等价，仅 `evidence_note`）。⇒ 处置口径：**属缺陷修复后的数据更正**，须在基线登记并保留更正前字节快照；公开投影不含 `evidence_note`，对公开层无影响。
+3. **补录报告「一修订件一报告 + 索引」有两个必备件**：旧单槽迁移 **＋** 「先写者胜」。只做迁移会在同一轮里被紧随其后的 no-op 复跑覆盖成 `entries_added=0 / entries=[]`（本轮实测踩中，已补 N1 探针守住）。
+4. **无文本层 PDF 不能塞进 `extract_pdf_book.py`**：`pdftotext` 对 20 页扫描件返回 **0 字符**（只有分页符），其三条判据必然失败；OCR 一路须独立脚本 + 独立负例。且 **OCR 每页文本下限（≥30 字）** 是「识别静默失败」的唯一护栏——空页若被当作「该页无内容」放过，G-V5 会用残缺语料做改写检查（伪绿）。
+5. **章图必须同时声明 `pdf_page` 与 `printed_page`**：OCR 页内同时含页眉（章标题重复）与页脚（印刷页码），单靠 pdf 页序递增无法发现「抽取件章序与印刷页错位」。本轮 `printed_page` 递增判据的负例 N5 即为此设。
+
+> **抓手（沿用并新增）**：① 派工前先给章切片 + 承载页码的唯一私有档；② prompt 写死「`grep` 定位 + 窄读」；③ **每步之后对既有件做 SHA-256 快照复验**（本轮靠它确认 `merge --only` 后既有 60 件不变，并定位 6 个分片的 33 条留痕更正）；④ 收尾扫隐藏点文件；⑤ **新判据必须同时提交负例**，且负例要有一条「旧判据反证」（证明探针能区分新旧实现，不是恒真）。
+
+## ⚠️ 上一轮增量（2026-10-12 · 阶段7 阶段3 续做轮 P2c **BK-013 / BK-022 双书核验入层 + ADR-007 准入补录 + 图谱再生**）—— 本节优先于下方所有旧陈述
 
 **本轮主任务 = `NEXT-ROUND-PROMPT-4.md §D.1` 首选路径：把 BK-013《Documenting Software Architectures》(2nd/2010, `P1-19` PDF 591 页) 与 BK-022《Working Effectively with Legacy Code》(1st/2004, `P0-10` PDF 458 页) 按 10 步口径核验入层 → 生成链再生 → 公开层同步。**
 **接力件**：`00-plan/NEXT-ROUND-PROMPT-5.md`；**基线**：`00-plan/stage7p5-p2c-baseline.md`（图谱指纹 **`c413c6fd…a6a8fc21`**）。

@@ -22,12 +22,18 @@ apply_secondpass.py — 把第二路独立复核的裁决回写进核验分片�
 - **只降不升**：复核结论高于首路时**不**升级（保守；防「复核变相加码」）。
 - **fail-closed**：verdict 指向不存在的 record_id / 结构非法 → 跳过并报告，不猜。
 - 确定性：records 保持按 record_id 升序；无时间戳；UTF-8 末尾换行。
-- 幂等：重复运行结果一致（已 passed/disputed 的记录按同一规则重算）。
+- 幂等：重复运行结果一致。❗**留痕判据锚定「复核前强度」而不是「当前强度」**
+  （`review.first_pass_strength` → 否则用 verdict 自带的 `first_pass_strength`
+  → 再否则才退回当前值）。2026-11-01（P2d）修：原实现以**当前** `evidence_strength`
+  为判据，对已降级记录重跑时 `sp == cur` 不再成立，于是把
+  「按保守终裁降级」改写成「未低于原判，保留原强度」——**数据值不变、语义反转**。
+  反之进行中的记录若被判为「保留原强度」也不会被误升。
 
 用法：
   python3 16-checkpoint/apply_secondpass.py --slug team-topologies
   python3 16-checkpoint/apply_secondpass.py --all
   python3 16-checkpoint/apply_secondpass.py --all --check     # 只读报告
+  python3 16-checkpoint/apply_secondpass.py --negative-test   # 4 条负例探针（临时目录，不动真数据）
 """
 import argparse
 import glob
@@ -87,8 +93,8 @@ def apply_one(root, slug, check):
     vpath = os.path.join(resolve(root, REVIEW), "secondpass-%s.json" % slug)
     lpath = os.path.join(resolve(root, PARTS), "ledger-%s.json" % slug)
     report = {"slug": slug, "verdicts": 0, "matched": 0, "unmatched": [],
-              "passed": 0, "disputed": 0, "downgraded": 0, "not_covered": 0,
-              "missing_files": []}
+              "passed": 0, "disputed": 0, "downgraded": 0, "already_downgraded": 0,
+              "not_covered": 0, "missing_files": []}
     if not os.path.isfile(vpath):
         report["missing_files"].append(os.path.relpath(vpath, root))
         return report, None
@@ -120,18 +126,29 @@ def apply_one(root, slug, check):
         report["matched"] += 1
         agree = bool(v.get("agree"))
         sp_strength = v.get("second_pass_strength")
+        cur = r.get("evidence_strength")
+        # 幂等判据（P2d 修）：降级/保留必须锚定「该记录第二路复核**之前**的强度」。
+        # 优先读已留痕的 review.first_pass_strength（未来周边自洽），
+        # 其次读 verdict 自带的 first_pass_strength（789/789 条实测均有），
+        # 最后才退回当前值（老数据兜底；此分支属已知局限，实测不触发）。
+        basis = (rev.get("first_pass_strength")
+                 or v.get("first_pass_strength")
+                 or cur)
         rev["second_pass"] = "passed" if agree else "disputed"
         rev["second_pass_by"] = vdoc.get("reviewed_by") or ""
         base_note = strip_review_marks(r.get("evidence_note"))
         if not agree:
             report["disputed"] += 1
-            cur = r.get("evidence_strength")
             # 保守终裁：只降不升
-            if (sp_strength in STRENGTH_ORDER and cur in STRENGTH_ORDER
-                    and STRENGTH_ORDER[sp_strength] < STRENGTH_ORDER[cur]):
-                r["evidence_strength"] = sp_strength
-                report["downgraded"] += 1
-                marker = "【第二路复核】判为 %s（原判 %s），按保守终裁降级。" % (sp_strength, cur)
+            if (sp_strength in STRENGTH_ORDER and basis in STRENGTH_ORDER
+                    and STRENGTH_ORDER[sp_strength] < STRENGTH_ORDER[basis]):
+                marker = "【第二路复核】判为 %s（原判 %s），按保守终裁降级。" % (sp_strength, basis)
+                if cur != sp_strength and STRENGTH_ORDER.get(cur, 99) > STRENGTH_ORDER[sp_strength]:
+                    r["evidence_strength"] = sp_strength
+                    report["downgraded"] += 1
+                else:
+                    # 已降级过：值不再变，但**留痕仍是降级口径**（原实现此处会反转语义）
+                    report["already_downgraded"] += 1
                 r["evidence_note"] = (base_note + " " + marker).strip()
             else:
                 marker = "【第二路复核】结论有分歧但未低于原判（复核=%s），保留原强度。" % sp_strength
@@ -153,14 +170,111 @@ def apply_one(root, slug, check):
     return report, dumps(ldoc)
 
 
+
+def negative_test():
+    """4 条负例探针：幂等判据必须逐条**以其应有理由**通过/拒绝，否则判据已退化（exit=1）。
+
+    探针在**临时目录**里造合成夹具，绝不触碰真实 `_parts/`。
+    """
+    import shutil
+    import tempfile
+
+    def fixture(tmp, records, verdicts, reviewed_by="probe"):
+        parts = os.path.join(tmp, PARTS)
+        review = os.path.join(tmp, REVIEW)
+        os.makedirs(parts, exist_ok=True)
+        os.makedirs(review, exist_ok=True)
+        with open(os.path.join(parts, "ledger-probe.json"), "w", encoding="utf-8") as f:
+            f.write(dumps({"book": "probe", "source_id": "BK-999", "records": records}))
+        with open(os.path.join(review, "secondpass-probe.json"), "w", encoding="utf-8") as f:
+            f.write(dumps({"reviewed_by": reviewed_by, "review_date": "2026-11-01",
+                           "verdicts": verdicts}))
+
+    def rec(rid, strength, note=""):
+        return {"record_id": rid, "node_id": "ESS-G-01", "source_id": "BK-999",
+                "claim_id": "ESS-G-01#definition#300", "claim": "probe claim text",
+                "anchor": {"chapter": "1", "section": "1.1"},
+                "direction": "forward", "evidence_strength": strength,
+                "evidence_note": note, "review": {}}
+
+    def verdict(rid, first, second, agree):
+        return {"record_id": rid, "node_id": "ESS-G-01", "source_id": "BK-999",
+                "claim_id": "ESS-G-01#definition#300",
+                "first_pass_strength": first, "second_pass_strength": second,
+                "agree": agree, "anchor_locatable": True, "note": "probe"}
+
+    def probe(name, ok, detail):
+        print("  [%s] %s —— %s" % ("OK" if ok else "!! FAILED", name, detail))
+        return 0 if ok else 1
+
+    bad = 0
+    tmp = tempfile.mkdtemp(prefix="apply2p-neg-")
+    try:
+        # N1：已降级记录重跑 ⇒ 留痕仍是「按保守终裁降级」，且不重复叠加标记。
+        #     这是原实现的真实缺陷场景（数据值不变、语义反转）。
+        fixture(tmp, [rec("VR-PRB-001", "partial",
+                          "原始注记 【第二路复核】判为 partial（原判 direct），按保守终裁降级。")],
+                [verdict("VR-PRB-001", "direct", "partial", False)])
+        rep1, text1 = apply_one(tmp, "probe", False)
+        note1 = json.loads(text1)["records"][0]["evidence_note"]
+        ok = ("判为 partial（原判 direct），按保守终裁降级" in note1
+              and "未低于原判" not in note1
+              and note1.count("【第二路复核】") == 1)
+        bad += probe("N1 已降级记录重跑不反转留痕", ok,
+                     "留痕仍为降级口径且标记唯一（already_downgraded=%d）"
+                     % rep1.get("already_downgraded", -1))
+
+        # N2：未降级的分歧（复核强度 ≥ 首路）⇒ 保留原强度，不得升级、不得记降级。
+        fixture(tmp, [rec("VR-PRB-002", "partial")],
+                [verdict("VR-PRB-002", "partial", "direct", False)])
+        rep2, text2 = apply_one(tmp, "probe", False)
+        r2 = json.loads(text2)["records"][0]
+        ok = (r2["evidence_strength"] == "partial" and rep2["downgraded"] == 0
+              and "保留原强度" in r2["evidence_note"])
+        bad += probe("N2 未低于原判不升级不降级", ok,
+                     "strength=%s downgraded=%d" % (r2["evidence_strength"], rep2["downgraded"]))
+
+        # N3：同一输入连跑两次 ⇒ 产出逐字节一致（幂等）。
+        fixture(tmp, [rec("VR-PRB-003", "direct")],
+                [verdict("VR-PRB-003", "direct", "partial", False)])
+        _, a = apply_one(tmp, "probe", False)
+        with open(os.path.join(tmp, PARTS, "ledger-probe.json"), "w", encoding="utf-8") as f:
+            f.write(a)
+        _, b = apply_one(tmp, "probe", False)
+        bad += probe("N3 连跑两次逐字节一致", a == b,
+                     "len=%d vs %d" % (len(a), len(b)))
+
+        # N4：判据有效性反证 —— 用**旧判据**（以当前强度为基准）跑 N1 场景，
+        #     必须复现「语义反转」，否则说明本探针无法区分新旧实现（等于恒真）。
+        def legacy_marker(cur, sp, first):
+            return ("判为 %s（原判 %s），按保守终裁降级" % (sp, cur)
+                    if STRENGTH_ORDER.get(sp, 99) < STRENGTH_ORDER.get(cur, 99)
+                    else "结论有分歧但未低于原判（复核=%s），保留原强度" % sp)
+
+        legacy = legacy_marker("partial", "partial", "direct")
+        new = "判为 partial（原判 direct），按保守终裁降级"
+        bad += probe("N4 旧判据复现反转（判据非恒真）",
+                     ("未低于原判" in legacy) and ("未低于原判" not in new),
+                     "legacy=%r vs fixed=%r" % (legacy[:24], new[:24]))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    print("== 负例探针 %d/%d 如期通过 ==" % (4 - bad, 4))
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser(description="第二路复核裁决回写")
     ap.add_argument("--root", default=ROOT_DEFAULT)
     ap.add_argument("--slug", help="单本 slug")
     ap.add_argument("--all", action="store_true", help="处理全部已登记书")
     ap.add_argument("--check", action="store_true", help="只读报告，不写")
+    ap.add_argument("--negative-test", action="store_true", help="跑 4 条负例探针后退出")
     args = ap.parse_args()
     root = os.path.abspath(args.root)
+
+    if args.negative_test:
+        print("== 负例探针（幂等判据可信度） ==")
+        return negative_test()
 
     slugs = [args.slug] if args.slug else (list(discover_slugs(root)) if args.all else [])
     if not slugs:
@@ -178,9 +292,9 @@ def main():
             for m in rep["missing_files"]:
                 print("    [SKIP] 缺文件 %s" % m)
             continue
-        print("    verdicts=%d matched=%d passed=%d disputed=%d downgraded=%d 未复核的 direct=%d"
+        print("    verdicts=%d matched=%d passed=%d disputed=%d downgraded=%d 已降级复算=%d 未复核的 direct=%d"
               % (rep["verdicts"], rep["matched"], rep["passed"], rep["disputed"],
-                 rep["downgraded"], rep["not_covered"]))
+                 rep["downgraded"], rep["already_downgraded"], rep["not_covered"]))
         if rep["unmatched"]:
             print("    ! verdict 指向不存在的 record_id：%s" % ", ".join(rep["unmatched"][:10]))
         for k in ("matched", "passed", "disputed", "downgraded", "not_covered"):

@@ -47,6 +47,8 @@ BOOKS = {
     # 阶段7 阶段3 续做 P2c（2026-10-12）：BK-013 / BK-022（PDF 抽取）
     "dsa": ("documenting-sa", "BK-013", "dsa"),
     "welc": ("welc", "BK-022", "welc"),
+    # 阶段7 阶段3 续做 P2d（2026-11-01）：BK-008（OCR 抽取；仅作者免费 20 页抽取件）
+    "aposd": ("aposd", "BK-008", "aposd"),
 }
 
 
