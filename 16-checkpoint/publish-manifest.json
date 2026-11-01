@@ -16,6 +16,8 @@
       "_backup-idmigration/",
       "18-design/",
       "16-checkpoint/_render-shots/",
+      "16-checkpoint/_ocr/",
+      "16-checkpoint/_snap/",
       "__pycache__/",
       "ARCHIVE-INDEX.md",
       ".git/",

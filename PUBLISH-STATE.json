@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated_by": "assemble_publish.py",
   "manifest_version": "1.0",
-  "file_count": 580,
+  "file_count": 575,
   "files": {
     "00-plan/01-alignment.md": {
       "sha256": "6a1dc2d7e9f2f879ac5d3fe9ed7f3ae0ac96e6997ffefdcee664590ea4fd9386",
@@ -2902,36 +2902,6 @@
       "src": "16-checkpoint/_base_extract.py",
       "src_sha256": "9ad3b9600396b9d7b840b94f0ae86d26c23ba20579ff3bf5546406d131827ef2"
     },
-    "16-checkpoint/_ocr/aposd-extract.err": {
-      "sha256": "c8306866720e7707f393e6c31165f2d8148be36a054fca45c623eb9ec8035fae",
-      "class": "mask",
-      "src": "16-checkpoint/_ocr/aposd-extract.err",
-      "src_sha256": "c8306866720e7707f393e6c31165f2d8148be36a054fca45c623eb9ec8035fae"
-    },
-    "16-checkpoint/_ocr/aposd-extract.raw.json": {
-      "sha256": "4ad2f3fa45058e551208774351e582f88a6b604d5a66ba0e4b663d1a93e5453d",
-      "class": "mask",
-      "src": "16-checkpoint/_ocr/aposd-extract.raw.json",
-      "src_sha256": "4ad2f3fa45058e551208774351e582f88a6b604d5a66ba0e4b663d1a93e5453d"
-    },
-    "16-checkpoint/_snap/parts.postfix.sha256": {
-      "sha256": "c913fd1b0c6a623da8c3fef1c2162cbb83958675ab99f4fa6c54abf718972267",
-      "class": "mask",
-      "src": "16-checkpoint/_snap/parts.postfix.sha256",
-      "src_sha256": "c913fd1b0c6a623da8c3fef1c2162cbb83958675ab99f4fa6c54abf718972267"
-    },
-    "16-checkpoint/_snap/parts.sha256": {
-      "sha256": "5d22ef13fd2e90457822056bf825c3cc3b350a52011c2fd0bea9c3bd2e0fe551",
-      "class": "mask",
-      "src": "16-checkpoint/_snap/parts.sha256",
-      "src_sha256": "5d22ef13fd2e90457822056bf825c3cc3b350a52011c2fd0bea9c3bd2e0fe551"
-    },
-    "16-checkpoint/_snap/secondpass.sha256": {
-      "sha256": "5d5b21ed889c1779493b4a32589b0eefdf8fe560999a9cb9c437bb2e3a75ea4f",
-      "class": "mask",
-      "src": "16-checkpoint/_snap/secondpass.sha256",
-      "src_sha256": "5d5b21ed889c1779493b4a32589b0eefdf8fe560999a9cb9c437bb2e3a75ea4f"
-    },
     "16-checkpoint/adr_json2md.py": {
       "sha256": "0426f39a30ca08dc31ca72252e8f4a678c5d71e0678e14ab3ffad2e6c78e68b5",
       "class": "mask",
@@ -3275,10 +3245,10 @@
       "src_sha256": "801541fc483c8bbc24b9913f8182c9cab066c688681c6860f6739b2fd2dd4006"
     },
     "16-checkpoint/publish-manifest.json": {
-      "sha256": "dc0a24cbc96acadaa200670f861d563d9f990cb70f0324e8e9e9a741e95d2d9a",
+      "sha256": "6eae67e8284ad622d1ab8d539c5140d980663a670c4d5a15651b312a730623b8",
       "class": "mask",
       "src": "16-checkpoint/publish-manifest.json",
-      "src_sha256": "dc0a24cbc96acadaa200670f861d563d9f990cb70f0324e8e9e9a741e95d2d9a"
+      "src_sha256": "6eae67e8284ad622d1ab8d539c5140d980663a670c4d5a15651b312a730623b8"
     },
     "16-checkpoint/push_publish.py": {
       "sha256": "3e937ce4200ac75f876fede7dceb50f088562d37ed580f860d310c9c9942d1ae",
