@@ -106,23 +106,25 @@ BK-008 aposd（2nd/2021 抽取件；印刷页 39–49 / 76 / 99–100 / 171–17
 ## 4. 公开层对账
 
 ```text
-推送           = 3 次（Git Data API）+ 5 次 Contents API 删除提交
+推送           = 4 次（Git Data API）+ 5 次 Contents API 删除提交
   ① 主体：parent 74e0faacc1b8 / base_tree d2671b0e9664 → new_commit 875d43f873c1 / new_tree f4feb6e05d5b
      （`_publish` 本地提交 2ebb389；推送前已在 `_publish` 内 git add -A && git commit）
   ② 文档对账回填：parent 875d43f873c1 → new_commit cc1992dff551 / new_tree cec14cf896d2
-     （`_publish` 提交 85357b1；**纯 00-plan/** 推送 ⇒ 未自动触发 CI，手动 workflow_dispatch run 41290940423 success）
+     （`_publish` 提交 85357b1；**纯 00-plan/** ⇒ 未自动触发，手动 dispatch run 41290940423 success）
   ③ 下架泄漏：parent cc1992dff551 → new_commit c44e83b5cfe8 / new_tree beba0879a24
-     （`_publish` 提交 7577d72；`push_publish.py` 用 base_tree ⇒ **不会删除远端文件**，见 §7-8）
-  ④ 显式删除 5 个泄漏 blob（`gh api -X DELETE .../contents/<path>`）：
-     c7199fdd → 7b8e026c → befa7bb5 → f23f3d10 → **d5e5c6d8436b（远端 HEAD）**
-远端 HEAD      = d5e5c6d8436bd43ba2b009a3a163b25692a3d4f6
+     （`_publish` 提交 7577d72；含 `16-checkpoint/**` 改动 ⇒ **自动触发** run 41291433407 success）
+  ④ 收尾文档：parent d5e5c6d8（删除后的 HEAD）→ new_commit ace01c17e6aa / new_tree c03f0ff24008
+     （`_publish` 提交 0e97d9d；**纯 00-plan/** ⇒ 未自动触发，手动 dispatch run 41292109595 success）
+  ⑤-⑨ 显式删除 5 个泄漏 blob（`gh api -X DELETE .../contents/<path>`）：
+     c7199fdd → 7b8e026c → befa7bb5 → f23f3d10 → **d5e5c6d8436b** → 其后由推送④接回主线
+远端 HEAD      = ace01c17e6aa25e1e15cf649a01128d291c16d13
 remote blobs   = 581  ==  本地 _publish ls-files 581（575 受控文件 + 6 项 preserve 类）
                  ① 前为 586（受控 580），下架 `16-checkpoint/_ocr` 与 `_snap` 共 5 个 blob
-CI             = push 自动触发：run **41290533613 success**（30s，push #1）
-                 ；文档推送不触发 ⇒ 手动 run **41290940423 success**（35s）
-                 ；删除提交自动触发：run **41291433407 success**（32s；同秒其余 3 个 run 被 cancelled，属 GitHub 合并行为）
+CI             = push 自动触发：run **41290533613 success**（30s，push①）/ **41291433407 success**（32s，push③；
+                 同秒其余 3 个删除提交 run 被 cancelled，属 GitHub 合并行为）
+                 ；纯文档推送不触发 ⇒ 手动 run **41290940423 success**（35s，push②）/ **41292109595 success**（30s，push④）
 Pages 回验     = / 、00-plan/stage7p5-p2d-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
-                 11-node-pages/ESS-H-01.html 、11-node-pages/ESS-H-05.html 、11-node-pages/MTH-H-02.html 、
+                 11-node-pages/ESS-H-01.html 、ESS-H-05.html 、MTH-H-02.html 、
                  10-dag-data/methodology-dag.json 、14-views/06-book-verification.html 、
                  16-checkpoint/extract_ocr_book.py 、16-checkpoint/apply_secondpass.py   均 **200**
                  ；00-plan/NEXT-ROUND-PROMPT-5.md / -6.md 均 **404**（`never` 类生效）
