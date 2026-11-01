@@ -115,9 +115,13 @@ BK-008 aposd（2nd/2021 抽取件；印刷页 39–49 / 76 / 99–100 / 171–17
      （`_publish` 提交 7577d72；含 `16-checkpoint/**` 改动 ⇒ **自动触发** run 41291433407 success）
   ④ 收尾文档：parent d5e5c6d8（删除后的 HEAD）→ new_commit ace01c17e6aa / new_tree c03f0ff24008
      （`_publish` 提交 0e97d9d；**纯 00-plan/** ⇒ 未自动触发，手动 dispatch run 41292109595 success）
-  ⑤-⑨ 显式删除 5 个泄漏 blob（`gh api -X DELETE .../contents/<path>`）：
-     c7199fdd → 7b8e026c → befa7bb5 → f23f3d10 → **d5e5c6d8436b** → 其后由推送④接回主线
-远端 HEAD      = ace01c17e6aa25e1e15cf649a01128d291c16d13
+  ⑤ 终态对账：parent ace01c17e6aa → new_commit 1abd2edb143d（`_publish` 提交紧随；纯文档 ⇒
+     手动 dispatch run 41292548004 success）
+  ⑥-⑩ 显式删除 5 个泄漏 blob（`gh api -X DELETE .../contents/<path>`）：
+     c7199fdd → 7b8e026c → befa7bb5 → f23f3d10 → **d5e5c6d8436b**（其后由推送④⑤接回主线）
+远端 HEAD      = 1abd2edb143dbeaec99057c36d437b7a68359d0b
+                 （⚠️ 本文件在推送⑤之后还有一次**纯文档**本地提交以写入本节终值 ⇒ 公开站点版本落后本地一次，
+                  差异仅为本节文本；远端 HEAD 以 `gh api repos/.../commits/main` 为准）
 remote blobs   = 581  ==  本地 _publish ls-files 581（575 受控文件 + 6 项 preserve 类）
                  ① 前为 586（受控 580），下架 `16-checkpoint/_ocr` 与 `_snap` 共 5 个 blob
 CI             = push 自动触发：run **41290533613 success**（30s，push①）/ **41291433407 success**（32s，push③；
