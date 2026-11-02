@@ -179,10 +179,10 @@
       "src_sha256": "1c591e4b0c0e56971882ce2129ffe8edd8e9544567dc40b63b17855252d89079"
     },
     "00-plan/stage7p5-p2f-baseline.md": {
-      "sha256": "b7bb942610d07acae69c4fc540d7aad44834ac40b6c714b5aaebf2db103f297d",
+      "sha256": "a695e1347589f7296e5fb4326ba3dedf38ecfef443b875d2ea6394a7141cf69b",
       "class": "sanitize",
       "src": "_publish-staging/00-plan/stage7p5-p2f-baseline.md",
-      "src_sha256": "b7bb942610d07acae69c4fc540d7aad44834ac40b6c714b5aaebf2db103f297d"
+      "src_sha256": "a695e1347589f7296e5fb4326ba3dedf38ecfef443b875d2ea6394a7141cf69b"
     },
     "00-plan/stage7p5p1-baseline.md": {
       "sha256": "e87fb0a7a6332e4772c6eab5826efdf8e9ee3145019a28be37e9d51b52f2e7b3",

@@ -116,7 +116,26 @@ BK-028 continuous-delivery（1st/2010，ePub 全文，无印刷页码）
 ## 4. 公开层对账
 
 ```text
-（推送后回填）
+推送           = 1 次（Git Data API）
+  parent f87d60f7c21b / base_tree d84fb4de00e8 → new_tree 76419b4e68b1 / new_commit e744ad95c461
+  （`_publish` 本地提交 f040805；推送前已在 `_publish` 内 git add -A && git commit）
+  受控文件      = 583 个（本地 ls-files 583 == 远端 blobs 583）
+远端 HEAD      = e744ad95c461b9342462218bf90166d1989a1f89
+CI             = push 自动触发：run **41397813893 success**（32s；`10-dag-data/**` 与 `16-checkpoint/**` 命中 push.paths）
+Pages 回验     = / 、00-plan/stage7p5-p2f-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
+                 11-node-pages/MTH-J-02.html 、11-node-pages/ESS-J-03.html 、11-node-pages/MTH-I-05.html 、
+                 14-views/06-book-verification.html 、10-dag-data/methodology-dag.json 、
+                 10-dag-data/book-verification.json   均 **200**
+                 ；00-plan/NEXT-ROUND-PROMPT-7.md / -8.md 均 **404**（`never` 类生效）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（577 文件）
+gate_disclosure= PASS（0 hit / 516 file）
+```
+
+> 本节终值已按实测回填；回填本身是一次**纯 `00-plan/**` 文档提交**（不触发 CI，须手动 dispatch run 并回验 Pages）。
+> 另：上一轮 P2e 基线 §4「推送②」那段回填此前只落本地、未进公开层（其文末自我标注了「站点落后一次」），**本轮推送已一并补上**。
+
+```text
+推送②（本节回填）  = （回填后另行记录）
 ```
 
 ---
