@@ -142,9 +142,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：VEN-019、WEB-030、BK-028、BK-029、VEN-018
+- 书证核验：BK-028 ChImplementing Continuous Integration（partial），ChWhat Should Break the Commit Stage?（partial）
 - 入口链接：https://martinfowler.com/articles/continuousIntegration.html
 - 入口链接：https://dora.dev/guides/dora-metrics-four-keys/
 - 勘误：常见误解「质量门控条件越多越严格，质量就越有保障」→ 核验结论「门控以一组可量化条件判定可发布性，条件过多过严会阻塞交付并诱发针对指标的形式化优化（如为覆盖率而测试）；应选择少数与真实风险相关的条件并区分新增/整体代码」（VEN-019）

@@ -98,9 +98,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：STD-015、STD-016、STD-024、STD-014、STD-019
+- 书证核验：BK-028 ChIntroduction（direct）
 - 入口链接：https://softwaretestingstandard.org/
 - 勘误：常见误解「ISO/IEC/IEEE 29119 系列只有 Part 1 到 Part 5」→ 核验结论「官方工作站确认现行共 8 个部分（Part 1/2/3/4/5/6/11/13），其中 Part 6/11/13 为技术报告；29119 取代 IEEE 829、IEEE 1008、BS 7925-1/-2」（STD-024）
 

@@ -51,6 +51,8 @@ BOOKS = {
     "aposd": ("aposd", "BK-008", "aposd"),
     # 阶段7 阶段3 续做 P2e（2026-11-02）：BK-017（PDF 抽取；电子重排版 446 页）
     "ddd": ("ddd", "BK-017", "ddd"),
+    # 阶段7 阶段3 续做 P2f（2026-11-02）：BK-028（EPUB 抽取；15 章）
+    "cd": ("continuous-delivery", "BK-028", "cd"),
 }
 
 

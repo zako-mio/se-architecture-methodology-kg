@@ -1509,6 +1509,17 @@
     ],
     "ESS-J-01": [
       {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "1",
+        "section": "Every Change Should Trigger the Feedback Process",
+        "section_title": "Every Change Should Trigger the Feedback Process",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
         "source_id": "BK-031",
         "book": "The Twelve-Factor App",
         "chapter": "V",
@@ -1555,6 +1566,17 @@
     ],
     "ESS-J-02": [
       {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "11",
+        "section": "Introduction",
+        "section_title": "Introduction",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
         "source_id": "BK-031",
         "book": "The Twelve-Factor App",
         "chapter": "II",
@@ -1597,6 +1619,43 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-12"
+      }
+    ],
+    "ESS-J-03": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "11",
+        "section": "Managing Virtual Environments",
+        "section_title": "Managing Virtual Environments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "11",
+        "section": "Virtual Environments and the Deployment Pipeline",
+        "section_title": "Virtual Environments and the Deployment Pipeline",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "ESS-J-04": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "1",
+        "section": "Antipattern: Manual Configuration Management of Production Environments",
+        "section_title": "Antipattern: Manual Configuration Management of Production Environments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-K-01": [
@@ -4140,7 +4199,138 @@
         "review_date": "2026-10-12"
       }
     ],
+    "MTH-I-02": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "4",
+        "section": "Types of Tests",
+        "section_title": "Types of Tests",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "8",
+        "section": "Introduction",
+        "section_title": "Introduction",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "9",
+        "section": "Measuring Capacity",
+        "section_title": "Measuring Capacity",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-I-04": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "4",
+        "section": "Should Acceptance Tests Hit the UI?",
+        "section_title": "Should Acceptance Tests Hit the UI?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "4",
+        "section": "Technology-Facing Tests That Support the Development Process",
+        "section_title": "Technology-Facing Tests That Support the Development Process",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-I-05": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "8",
+        "section": "Using Test Doubles",
+        "section_title": "Using Test Doubles",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-I-06": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "3",
+        "section": "Implementing Continuous Integration",
+        "section_title": "Implementing Continuous Integration",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "7",
+        "section": "What Should Break the Commit Stage?",
+        "section_title": "What Should Break the Commit Stage?",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-I-07": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "4",
+        "section": "Introduction",
+        "section_title": "Introduction",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
     "MTH-J-01": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "5",
+        "section": "Only Build Your Binaries Once",
+        "section_title": "Only Build Your Binaries Once",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "5",
+        "section": "What Is a Deployment Pipeline?",
+        "section_title": "What Is a Deployment Pipeline?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
       {
         "source_id": "BK-031",
         "book": "The Twelve-Factor App",
@@ -4186,17 +4376,120 @@
         "review_date": "2026-10-12"
       }
     ],
+    "MTH-J-02": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "1",
+        "section": "The Release Candidate",
+        "section_title": "The Release Candidate",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "13",
+        "section": "Keeping Your Application Releasable",
+        "section_title": "Keeping Your Application Releasable",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "13",
+        "section": "Pipelining Dependency Graphs",
+        "section_title": "Pipelining Dependency Graphs",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "14",
+        "section": "Develop on Mainline",
+        "section_title": "Develop on Mainline",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-J-03": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "2",
+        "section": "Keep Absolutely Everything in Version Control",
+        "section_title": "Keep Absolutely Everything in Version Control",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "6",
+        "section": "Maven",
+        "section_title": "Maven",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "13",
+        "section": "Managing Libraries",
+        "section_title": "Managing Libraries",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "14",
+        "section": "Continuous Integration with Stream-Based Version Control Systems",
+        "section_title": "Continuous Integration with Stream-Based Version Control Systems",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      }
+    ],
     "MTH-J-04": [
       {
-        "source_id": "BK-031",
-        "book": "The Twelve-Factor App",
-        "chapter": "III",
-        "section": "",
-        "section_title": "Config",
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "2",
+        "section": "Types of Configuration",
+        "section_title": "Types of Configuration",
         "evidence_strength": "direct",
         "direction": "forward",
         "second_pass": "passed",
-        "review_date": "2026-10-12"
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "6",
+        "section": "Use the Same Scripts to Deploy to Every Environment",
+        "section_title": "Use the Same Scripts to Deploy to Every Environment",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       },
       {
         "source_id": "BK-031",
@@ -4230,6 +4523,43 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-031",
+        "book": "The Twelve-Factor App",
+        "chapter": "III",
+        "section": "",
+        "section_title": "Config",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-10-12"
+      }
+    ],
+    "MTH-J-05": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Canary Releasing",
+        "section_title": "Canary Releasing",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "MTH-J-06": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Deployments to Staging Environments",
+        "section_title": "Deployments to Staging Environments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "MTH-J-07": [
@@ -7011,6 +7341,28 @@
         "direction": "reverse",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "15",
+        "section": "Enforcing Traceability",
+        "section_title": "Enforcing Traceability",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "15",
+        "section": "How to Use the Maturity Model",
+        "section_title": "How to Use the Maturity Model",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "MTH-O-11": [
@@ -7169,6 +7521,65 @@
         "direction": "reverse",
         "second_pass": "disputed",
         "review_date": "2026-10-12"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "7",
+        "section": "Brute Force",
+        "section_title": "Brute Force",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "7",
+        "section": "The Artifact Repository",
+        "section_title": "The Artifact Repository",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "TEC-J-02": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "11",
+        "section": "Managing Virtual Environments",
+        "section_title": "Managing Virtual Environments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "TEC-J-03": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Blue-Green Deployments",
+        "section_title": "Blue-Green Deployments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Blue-Green Deployments",
+        "section_title": "Blue-Green Deployments",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "TEC-J-04": [
@@ -7259,6 +7670,65 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-11"
+      }
+    ],
+    "TEC-J-05": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "6",
+        "section": "Ensure the Deployment Process Is Idempotent",
+        "section_title": "Ensure the Deployment Process Is Idempotent",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Emergency Fixes",
+        "section_title": "Emergency Fixes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "11",
+        "section": "Ongoing Management of Servers",
+        "section_title": "Ongoing Management of Servers",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
+    "TEC-J-06": [
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "5",
+        "section": "Each Change Should Propagate through the Pipeline Instantly",
+        "section_title": "Each Change Should Propagate through the Pipeline Instantly",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-028",
+        "book": "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation",
+        "chapter": "10",
+        "section": "Modeling Your Release Process and Promoting Builds",
+        "section_title": "Modeling Your Release Process and Promoting Builds",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "TEC-K-01": [
@@ -8436,6 +8906,202 @@
       },
       "summary": "第13章给出并发设计的职责划分判据：并发本身就是一个足以构成变更原因的关注点，因此应把线程管理代码与线程无关代码分开，只留少数受控位置管理线程；并给出限制共享数据作用域、使用数据副本、让线程尽量独立等推论，以及缩小同步区、警惕同步方法之间的依赖、把线程相关部分做成可插拔可调、把偶发失败当作线程问题的候选信号等做法。图谱现有节点覆盖可靠性、容错与混沌工程，但没有把「并发与线程管理的职责边界」作为本质层议题。",
       "proposed_action": "提案新节点 ESS-H-11「并发职责划分（Concurrency Responsibility Partitioning）」，以 BK-020 第13章为主信源，并与 ESS-H-08 单一职责、ESS-I-02 可测试性建立关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-701",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "1",
+      "section": "Every Change Should Trigger the Feedback Process",
+      "target": {
+        "existing_node_id": "ESS-J-02",
+        "proposed_node": null
+      },
+      "summary": "图谱在「开发生产一致性」下只强调环境相似与配置等同，未收录本书对变更载体的划分：一个可用的应用由可执行码、配置、宿主环境与数据四部分构成，任一部分变动都可能改变行为，故四者都必须受控、且每次变动都要触发验证。",
+      "proposed_action": "挂在 ESS-J-02 下补一条「四类变更载体均须纳入反馈闭环」的子主张，并注明环境与数据两类载体不能只靠环境相似性覆盖。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-702",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "2",
+      "section": "Managing Your Environments",
+      "target": {
+        "existing_node_id": "MTH-J-04",
+        "proposed_node": null
+      },
+      "summary": "本书把「环境」本身当作可版本化的对象：环境处于正确部署状态即一个基线，任何宿主环境改动都须入库并生成新的基线版本、与应用版本绑定，从而使环境的创建与重建成为可预测的自动化过程；图谱的配置外置只覆盖配置项，未覆盖环境基线的版本化与重建。",
+      "proposed_action": "挂在 MTH-J-04 下补「环境基线可版本化、可重建，且创建新环境应比修复旧环境更便宜」的子主张，并与 ESS-J-02 建立指向关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-703",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "5",
+      "section": "Modeling Your Value Stream and Creating a Walking Skeleton",
+      "target": {
+        "existing_node_id": "MTH-J-01",
+        "proposed_node": "MTH-J-10"
+      },
+      "summary": "本书给出流水线落地的第一步：用纸笔画出从检入到发布的那段价值流并标注各步耗时与增值时间，再以「走通骨架」用最小工作量把提交、验收、部署三个环节全部打通；图谱的部署流水线节点只描述终态结构，缺这两项启动方法。",
+      "proposed_action": "挂在 MTH-J-01 下补「价值流映射 + 走通骨架」作为流水线建设的启动步骤，并说明其先于全量流水线完成。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-704",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "5",
+      "section": "Metrics",
+      "target": {
+        "existing_node_id": "MTH-J-02",
+        "proposed_node": "MTH-O-16"
+      },
+      "summary": "本书主张以周期时间作为交付过程的唯一全局指标，并给出以约束理论治理瓶颈的五步循环：识别约束、充分利用约束、其余环节从属于约束、提升约束、再回到第一步；同时指出缺陷数属次级指标、局部优化无益。图谱的发布工程节点缺这套度量与瓶颈治理口径。",
+      "proposed_action": "挂在 MTH-J-02 下补「周期时间为全局指标 + 约束理论五步」的主张，并说明指标选择本身会改变团队行为。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-705",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "4",
+      "section": "Test Doubles",
+      "target": {
+        "existing_node_id": "MTH-I-02",
+        "proposed_node": null
+      },
+      "summary": "本书按 Meszaros 的术语把测试替身细分为五类并逐一界定其职责边界，同时指出其中「预置期望」那一类最易被滥用——用它去断言代码内部调用细节，换来的测试既无意义又一改实现即碎。图谱的测试类型节点只到单元、组件、验收三层，未收录替身细分与滥用反模式。",
+      "proposed_action": "挂在 MTH-I-02 下补「测试替身五分类及预置期望型替身的滥用反模式」作为测试类型之下的实现级子类。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-731",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "8",
+      "section": "The Window Driver Pattern: Decoupling the Tests from the GUI",
+      "target": {
+        "existing_node_id": "MTH-I-05",
+        "proposed_node": null
+      },
+      "summary": "本书把自动化验收测试拆成三层：可执行的验收标准、只使用业务语言的测试实现、以及唯一懂得如何与系统交互的应用驱动层；界面部分再由窗口驱动承担。窗口驱动是专为 GUI 设计的替身层，界面改动只需改驱动而测试不动，缺少它时测试会与界面元素强耦合、一改即碎。",
+      "proposed_action": "在 MTH-I-05 的替身谱系中补入「应用驱动层 / 窗口驱动」这一档（针对 GUI 与外部接口的粗粒度替身），并补引 BK-028 第8章该节，说明其与对象级桩/模拟的使用层级差别及适用场景。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-732",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "6",
+      "section": "Deploying and Testing Layers",
+      "target": {
+        "existing_node_id": "TEC-J-05",
+        "proposed_node": null
+      },
+      "summary": "本书把部署视为逐层堆叠：操作系统、中间件及其依赖、中间件的具体配置，最后才是应用自身的二进制与守护进程。每层落地后立即做一次极轻量的冒烟（能取到一条库记录、能连通站点、消息代理里注册的消息齐全、防火墙回环分发正常），使环境配置问题在最早的一层被定位而不是拖到应用起来之后。",
+      "proposed_action": "在 TEC-J-05 下补「分层部署 + 逐层冒烟」这一部署验证序列，并把「失败须指出是哪一层」写成该节点的工程要求；同时登记多层架构下解析各层配置逐个地址试连的定位手法。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-733",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "10",
+      "section": "Continuously Releasing User-Installed Software",
+      "target": {
+        "existing_node_id": "MTH-J-05",
+        "proposed_node": "MTH-J-11"
+      },
+      "summary": "对装在用户自己机器上的软件，本书给出一套与服务端发布不同的做法：把升级做成静默且可回退的（失败自动恢复旧版本并回传）、让任意版本都能升到任意版本（数据与配置各自版本化并配前进/回滚脚本）、并把升级流程本身放进流水线里反复演练。其前提是升级时机不由发布方掌握，因此与服务端渐进暴露是两套问题。",
+      "proposed_action": "在 MTH-J-05 下补「客户端安装型软件的自更新与版本迁移」子题（静默升级、失败自恢复、数据与配置版本化、升级流程入流水线），并标注其与服务器端渐进暴露的适用边界差异。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-734",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "9",
+      "section": "Using Capacity Test Stubs to Develop Tests",
+      "target": {
+        "existing_node_id": "MTH-I-02",
+        "proposed_node": "MTH-I-08"
+      },
+      "summary": "容量测试有一条容易被忽略的自证要求：先用一个什么都不做的桩替掉被测系统，跑一遍基准，证明测试装置本身能达到目标速率、并在对端不做任何工作时仍能正确判通过。否则当被测系统被判定为不达标时，无法区分是系统慢还是测试自己跟不上。本书把这套基准结果与正式结果并排展示，以便一眼看出失败在哪一侧。",
+      "proposed_action": "在 MTH-I-02 的非功能测试部分补入「测试装置自校验」这一判据：容量/性能测试须先对空实现跑基准，证明注入速率与判定能力达标，并将基准结果与被测结果并列归档。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-735",
+      "kind": "missed_citation",
+      "book_source_id": "BK-028",
+      "chapter": "9",
+      "section": "Additional Benefits of a Capacity Test System",
+      "target": {
+        "existing_node_id": "MTH-I-02",
+        "proposed_node": null
+      },
+      "summary": "本书把容量测试环境当作生产系统最接近的类比物与可复用实验台：一旦测试写成可组合的场景，就能用它复现生产缺陷、查内存泄漏、做长时运行、评估与调优垃圾回收、调中间件与操作系统参数、模拟最坏日、模拟集成失败、有选择地让部分组件失效以观察降级、以及演练复杂部署的回滚。这层「测试资产的反向价值」在节点中未登记。",
+      "proposed_action": "为 MTH-I-02 补引 BK-028 第9章该节，登记「非功能测试环境的可复用实验价值」为测试类型选择的收益项，并在节点工程段补一句：场景化、可组合的测试设计同时产出可复用的诊断资源。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-761",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "12",
+      "section": "Versioning Your Database",
+      "target": {
+        "existing_node_id": "TEC-J-05",
+        "proposed_node": "TEC-J-07"
+      },
+      "summary": "书把有状态数据的迁移当成部署自动化的必管对象：给库本身记版本号，每次结构变更都成对写前滚与回滚脚本，部署时按应用声明的目标版本自动挑选并按序执行，使任何环境都能从版本库初始化或升到指定版本。图谱的部署自动化多讲无状态制品与环境编排，缺这段有状态资源迁移的机制。",
+      "proposed_action": "在 TEC-J-05 下补一条机制类记录，锚定第 12 章该节：写明库版本表、前滚与回滚成对脚本、部署时按目标版本自动挑选执行，并补上回滚脚本对已发生事务的数据保全约束；不新建节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-762",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "12",
+      "section": "Decoupling Application Deployment from Database Migration",
+      "target": {
+        "existing_node_id": "MTH-J-06",
+        "proposed_node": null
+      },
+      "summary": "书主张把应用部署与数据库迁移拆成两条独立动作：先发布一个同时兼容新旧两版模式的过渡版本并观察其稳定性，确认无需回退后再单独迁移库；配套要求是变更尽量做成可加式、保持前后向兼容，或用视图与存储过程充当抽象层。图谱的发布与部署解耦多讲用户可见性与流量切换，缺这条针对有状态依赖的解耦路径。",
+      "proposed_action": "在 MTH-J-06 下补一条机制类记录：把「过渡版本兼容双模式 → 观察 → 再迁移库」写成解耦序列，并标注前后向兼容为默认可加式变更策略、抽象层为备选路径；不新建节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-763",
+      "kind": "concept_missing",
+      "book_source_id": "BK-028",
+      "chapter": "13",
+      "section": "Cautious Optimism",
+      "target": {
+        "existing_node_id": "MTH-J-03",
+        "proposed_node": "MTH-J-12"
+      },
+      "summary": "书把依赖更新策略显式化为三态触发：静态不取上游变更，流动取每次变更并在构建失败时自动降级为受控态，受控态钉住已知良好版本只作提醒；起步建议是「有依据的悲观」——默认全静态但通知下游有新版本。图谱讲依赖锁定与可重现，缺「何时接受上游变更、失败后如何自动回退」这层策略化机制。",
+      "proposed_action": "在 MTH-J-03 下补一条机制类记录，锚定第 13 章该节：写明静态、受控、流动三态触发的语义，构建失败自动钉住已知良好版本的判据，以及长期固定上游版本带来的反馈滞后风险。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-CD-764",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-028",
+      "chapter": "15",
+      "section": "A Risk Management Process",
+      "target": {
+        "existing_node_id": "MTH-O-10",
+        "proposed_node": "MTH-O-17"
+      },
+      "summary": "书给出一套可操作的发布风险治理程序：按影响与发生概率相乘给风险定级，缓解成本不得超过风险本身，有些灾难性风险不必设缓解方案；风险在立项末与会启动末各复盘一次并在开发期持续维护；发现异常时连续追问追到根因，再把该症状纳入监控。图谱的演化治理缺这段风险登记到根因闭环的可执行程序。",
+      "proposed_action": "在 MTH-O-10 下补一条工程类记录，锚定第 15 章该节并联动「Common Delivery Problems」：写明风险等于影响乘概率的定级法、缓解成本的取舍判据、三个复盘时点，以及症状入监控的根因闭环。",
       "evidence_strength": "direct"
     },
     {

@@ -83,6 +83,9 @@ SLUG_RECORD_PREFIX = {
     # 阶段7 阶段3 续做 P2e（2026-11-02）：BK-017（PDF 抽取）
     # ⚠️ DDD 与既有 17 个前缀互不为前缀（`DDD` ⊄ `DDIA`、`DDIA` ⊄ `DDD`，已复核）
     "ddd": "DDD",
+    # 阶段7 阶段3 续做 P2f（2026-11-02）：BK-028（EPUB 抽取）
+    # ⚠️ CD 与既有 17 个前缀互不为前缀（`CA` ⊄ `CD`、`CD` ⊄ `CC`/`DDIA`，已复核）
+    "continuous-delivery": "CD",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -110,6 +113,9 @@ SLUG_TEXT = {
     "aposd": "aposd.txt",
     # 阶段7 阶段3 续做 P2e（2026-11-02）：PDF 抽取（extract_pdf_book.py）
     "ddd": "ddd.txt",
+    # 阶段7 阶段3 续做 P2f（2026-11-02）：EPUB 抽取（extract_book_text.py）
+    # ⚠️ 漏登本表 ⇒ G-V5 把该书记 SKIP 而非 FAIL（伪绿）；BK-028 须实测纳入「可用书文本源」
+    "continuous-delivery": "continuous-delivery.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -133,6 +139,8 @@ SOURCE_SLUG = {
     "BK-008": "aposd",
     # 阶段7 阶段3 续做 P2e（2026-11-02）
     "BK-017": "ddd",
+    # 阶段7 阶段3 续做 P2f（2026-11-02）
+    "BK-028": "continuous-delivery",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）

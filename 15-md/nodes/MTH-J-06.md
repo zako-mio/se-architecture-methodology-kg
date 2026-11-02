@@ -112,9 +112,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：WEB-033、VEN-020、BK-025、VEN-022
+- 书证核验：BK-028 ChDeployments to Staging Environments（direct）
 - 入口链接：https://martinfowler.com/bliki/FeatureToggle.html
 - 勘误：常见误解「部署完成就意味着功能已经发布给用户」→ 核验结论「部署与发布可以解耦：部署是把制品投入运行环境，发布是让功能对用户可见，运行时开关使二者独立，功能可先暗部署再逐步放量」（VEN-022）
 

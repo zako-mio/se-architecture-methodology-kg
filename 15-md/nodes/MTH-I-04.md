@@ -117,9 +117,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：WEB-024、WEB-025、VEN-017、OFF-018、BK-038
+- 书证核验：BK-028 ChShould Acceptance Tests Hit the UI?（direct），ChTechnology-Facing Tests That Support the Development Process（partial）
 - 入口链接：https://martinfowler.com/bliki/TestPyramid.html
 - 入口链接：https://martinfowler.com/articles/practical-test-pyramid.html
 - 勘误：常见误解「测试金字塔要求严格按单元/服务/端到端三层固定比例分配测试」→ 核验结论「测试金字塔是关于测试粒度的启发式，其成立前提是高层测试更慢更贵更脆；应依据实际反馈速度与置信度调整分布，倒置的冰淇淋甜筒与缺失中间层的沙漏是需避免的反模式」（WEB-024）

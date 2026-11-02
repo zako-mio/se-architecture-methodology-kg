@@ -98,10 +98,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 版本：2024（DORA）
 - 规范信源：VEN-020、BK-025、VEN-022
+- 书证核验：BK-028 ChEmergency Fixes（direct），ChEnsure the Deployment Process Is Idempotent（partial），ChOngoing Management of Servers（direct）
 - 入口链接：https://dora.dev/devops-capabilities/technical/deployment-automation
 - 勘误：常见误解「部署自动化就是把手工作业流程原样写成脚本」→ 核验结论「复杂脆弱的流程被自动化只会得到复杂脆弱的自动化；需先为可部署性重构，追求无编排、可独立部署、向后兼容的服务」（VEN-020）
 

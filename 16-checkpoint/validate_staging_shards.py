@@ -74,6 +74,10 @@ def main():
     dens = densify_nodes()
 
     # TOC 章号集合 + 章级正文切片（用于「节标题属哪一章」交叉校验）
+    # 口径（2026-11-02 起）：优先用正文内的 `=== 章号 | 标题 ===` 章头（web/pdf/ocr 一路）；
+    # 正文无章头时（EPUB 一路 `extract_book_text.py` 不产章头，改由
+    # `slice_corpus_by_chapter.py --pattern` 切章）回退读 `_text/_slices/<slug>/ch-<n>.txt`。
+    # ⚠️ 回退只改变「章节正文从哪来」，不改变任何判定阈值；ddd（有章头）实测 PASS 0 问题不变。
     toc_path = os.path.join(root, PARTS, "toc-%s.json" % args.slug)
     toc = load(toc_path)
     toc_ch = {str(c["chapter"]) for c in toc["toc"]}
@@ -86,6 +90,14 @@ def main():
         for i, (off, no) in enumerate(marks):
             end = marks[i + 1][0] if i + 1 < len(marks) else len(raw)
             chapter_text[str(no)] = raw[off:end]
+    slice_dir = os.path.join(root, "01-books", "_verify", "_text", "_slices", args.slug)
+    if not chapter_text and os.path.isdir(slice_dir):
+        for name in sorted(os.listdir(slice_dir)):
+            m = re.match(r"^ch-(.+)\.txt$", name)
+            if not m:
+                continue
+            with open(os.path.join(slice_dir, name), encoding="utf-8") as f:
+                chapter_text[str(m.group(1))] = f.read()
     print("=" * 80)
     print("暂存分片机检：slug=%s prefix=%s" % (args.slug, args.prefix))
     print("  TOC 章号 = %d 个：%s" % (len(toc_ch), sorted(toc_ch)[:12]))

@@ -127,6 +127,16 @@ gate_disclosure= PASS（0 hit / 515 file）
 
 > 本节终值已按实测回填；回填本身是一次**纯 `00-plan/**` 文档提交**（不触发 CI，须手动 dispatch run 并回验 Pages）。
 
+```text
+推送②（本节回填）  = parent 42e2df9cf34a → new_tree d84fb4de00e8 / new_commit f87d60f7c21b（`_publish` 提交 3ddbae7）
+远端 HEAD（②后）   = f87d60f7c21bf0b4984aeaeb018264fb8fcfecff
+CI（②）            = 纯文档推送不自动触发 ⇒ 手动 dispatch run **41390723093 success**（32s）
+Pages 回验（②）    = / 、00-plan/stage7p5-p2e-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 均 200，
+                     且页面内容已含 `42e2df9c` 与 `41390128846`（逐字断言命中）
+```
+
+> ⚠️ 本文件在推送②之后还有一次**纯文档**本地提交（把这段「推送②」本身写进 §4）⇒ 公开站点版本落后本地一次，差异仅为本段文本；远端 HEAD 以 `gh api repos/.../commits/main` 为准。
+
 ---
 
 ## 5. 本轮新增/修改的可执行物

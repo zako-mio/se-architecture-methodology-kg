@@ -91,9 +91,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：BK-025、WEB-036、VEN-020
+- 书证核验：BK-028 ChDevelop on Mainline（partial），ChKeeping Your Application Releasable（partial），ChPipelining Dependency Graphs（partial），ChThe Release Candidate（partial）
 - 入口链接：https://sre.google/sre-book/release-engineering/
 - 勘误：常见误解「发布工程只是写几个打包与上传脚本」→ 核验结论「它是以可复现、自动化方式构建并交付软件的完整学科，含源码管理、编译、构建配置、包管理与安装，并确保发布可重复而非独特雪花」（BK-025）
 

@@ -114,10 +114,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 版本：2021（AWS 白皮书）/ 2010（Fowler bliki）
 - 规范信源：WEB-032、VEN-021、VEN-022
+- 书证核验：BK-028 ChBlue-Green Deployments（direct）
 - 入口链接：https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html
 - 入口链接：https://martinfowler.com/bliki/BlueGreenDeployment.html
 - 勘误：常见误解「蓝绿部署模式由 Martin Fowler 命名」→ 核验结论「Fowler 页面明确：蓝绿部署名称由 Daniel Terhorst-North 与 Jez Humble 提出，模式本身早已存在，Fowler 仅作介绍」（WEB-032）

@@ -99,9 +99,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：BK-025、WEB-034、VEN-024
+- 书证核验：BK-028 ChContinuous Integration with Stream-Based Version Control Systems（partial），ChKeep Absolutely Everything in Version Control（partial），ChManaging Libraries（partial），ChMaven（partial）
 - 入口链接：https://sre.google/sre-book/release-engineering/
 - 勘误：常见误解「只要用自动化构建流水线就是可复现构建」→ 核验结论「可复现构建要求对构建机环境不敏感、依赖与工具链版本锁定，且同一修订在不同机器上结果一致；普通自动化构建仍可能受宿主环境与动态依赖影响」（BK-025）
 

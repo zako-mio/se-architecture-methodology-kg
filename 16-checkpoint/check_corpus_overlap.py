@@ -51,6 +51,8 @@ CORPUS = [
     os.path.join("01-books", "_verify", "_text", "aposd.txt"),
     # 阶段7 阶段3 续做 P2e（2026-11-02）：BK-017（PDF 抽取语料）
     os.path.join("01-books", "_verify", "_text", "ddd.txt"),
+    # 阶段7 阶段3 续做 P2f（2026-11-02）：BK-028（EPUB 抽取语料）
+    os.path.join("01-books", "_verify", "_text", "continuous-delivery.txt"),
 ]
 CORPUS_GLOB = os.path.join("01-books", "_files", "P0-11", "ddia-zh-src", "*.md")
 

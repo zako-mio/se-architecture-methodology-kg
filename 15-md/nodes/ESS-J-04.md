@@ -92,9 +92,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：VEN-022、VEN-020、BK-025
+- 书证核验：BK-028 ChAntipattern: Manual Configuration Management of Production Environments（direct）
 - 入口链接：https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/safe-deployments
 - 勘误：常见误解「变更管理就是一套审批签字流程」→ 核验结论「其核心是技术护栏：版本化制品、健康模型、渐进暴露与回滚能力，流程与审批只是配套；缺少护栏的审批无法真正控制风险」（VEN-022）
 

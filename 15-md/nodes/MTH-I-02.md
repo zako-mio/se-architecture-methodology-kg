@@ -99,9 +99,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：OFF-018、STD-017、OFF-019、OFF-017
+- 书证核验：BK-028 ChIntroduction（partial），ChMeasuring Capacity（direct），ChTypes of Tests（direct）
 - 入口链接：https://softwaretestingstandard.org/
 - 勘误：常见误解「测试类型只能绑定在某个特定测试层次上执行」→ 核验结论「测试类型与测试层次是两个正交坐标，大多数测试类型可应用于每一个测试层次；不同类型技术对缺陷的揭示能力不同，应依据目标风险混合选用」（OFF-018）
 

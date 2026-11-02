@@ -106,9 +106,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：WEB-032、WEB-033、VEN-022、VEN-021、VEN-023
+- 书证核验：BK-028 ChCanary Releasing（partial）
 - 入口链接：https://martinfowler.com/bliki/BlueGreenDeployment.html
 - 入口链接：https://martinfowler.com/bliki/CanaryRelease.html
 - 勘误：常见误解「蓝绿部署这一命名归功于 Martin Fowler」→ 核验结论「Fowler 页面明确说明，蓝绿部署的名称由 Daniel Terhorst-North 与 Jez Humble 提出，模式本身早已存在，Fowler 仅作介绍」（WEB-032）

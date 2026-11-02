@@ -121,10 +121,11 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 版本：2013（Fowler bliki）
 - 规范信源：WEB-036、VEN-020、VEN-022
+- 书证核验：BK-028 ChEach Change Should Propagate through the Pipeline Instantly（direct），ChModeling Your Release Process and Promoting Builds（direct）
 - 入口链接：https://martinfowler.com/bliki/DeploymentPipeline.html
 - 勘误：常见误解「部署流水线只是 CI 里串起来的一条脚本」→ 核验结论「流水线是多阶段、置信度递增的自动化链路，核心是构建一次、同一制品逐环境晋级，含人工/自动门禁与审计轨迹，生产部署通常为最后阶段」（WEB-036）
 - 勘误：常见误解「流水线越长、门禁越多越安全」→ 核验结论「阶段与门禁越多，反馈越慢、维护成本越高；流水线应随服务风险画像调整，过长过严会拖慢交付并诱使团队绕过门禁」（WEB-036）

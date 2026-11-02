@@ -83,9 +83,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：VEN-024、WEB-034、WEB-035
+- 书证核验：BK-028 ChManaging Virtual Environments（direct），ChVirtual Environments and the Deployment Pipeline（direct）
 - 入口链接：https://glossary.cncf.io/immutable-infrastructure/
 - 入口链接：https://martinfowler.com/bliki/ImmutableServer.html
 - 勘误：常见误解「不可变基础设施由 Netflix 提出并命名」→ 核验结论「术语 Immutable Server 由 ThoughtWorks 的 Ben Butler-Cole 命名；Netflix 是该模式最早的实践者之一（AMI/Aminator），并非命名者」（WEB-034）

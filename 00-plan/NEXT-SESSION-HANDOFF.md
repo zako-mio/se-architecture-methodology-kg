@@ -5,7 +5,36 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-11-02 · 阶段7 阶段3 续做轮 P2e **BK-017（DDD）全书核验入层 + ADR-009 九条 T2 补录 + 两个工具兜底收口**）—— 本节优先于下方所有旧陈述
+## ⚠️ 本轮增量（2026-11-02 · 阶段7 阶段3 续做轮 P2f **BK-028（Continuous Delivery）EPUB 全书核验入层 + ADR-010 十四条缺口准入 + 两处判据收口**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = `NEXT-ROUND-PROMPT-7.md §D.1`：先按「未覆盖簇潜力」重选书（旧口径「sources[] 引用密度」已耗尽，剩余未核验书密度全 ≤1）→ BK-028 本地 EPUB 全文 15 章核验入层 → 14 条新缺口走 ADR-010 准入 → 收口 `apply_secondpass` 的两条静默放宽路径与 `validate_staging_shards` 的 EPUB 口径缺路 → 生成链再生 → 公开层同步。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-8.md`；**基线**：`00-plan/stage7p5-p2f-baseline.md`（图谱指纹 **`b8729124…`**）。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **选书（换口径）** | 按「未覆盖簇潜力」现算：J 域 11 个零证据节点、I 域 8 个；BK-028 章目录逐章对上 **10 个 J + 5 个 I**，是剩余语料里单本边际最高的一本（旧口径下它只有 2 条 `sources[]` 引用 —— 与 DDD 同型，再次证明引用密度是弱预测） |
+| **语料层（EPUB 一路）** | `continuous-delivery.txt` **1 270 486 字符 / 11 747 行**；**发现 EPUB 一路从不产章头 ⇒ 既有 7 本 EPUB 书从未切章**；新增 `slice_corpus_by_chapter.py --pattern`（三条 fail-closed + 4 条负例，含「不带 `--pattern` 时 ddd 的 17 个切片逐字节不变」的**旧判据反证**）→ 15 个章切片 |
+| **登记层** | **6 处登记齐备**（`SLUG_RECORD_PREFIX` / `SLUG_TEXT` / `SOURCE_SLUG` / `BOOKS` / `CORPUS` / 契约登记表）；`CD` 与既有 17 前缀互不为前缀（`CA ⊄ CD`、`CD ⊄ CC`/`DDIA`） |
+| **核验层** | 3 个分片工人 → `validate_staging_shards` **problems 0 / WARN 0** → `merge --only continuous-delivery`（**既有 68 件 `_parts` 逐字节不变**）；records **719 → 759**（`direct 517→541 / partial 178→194 / inferred 24`）；覆盖节点 **107 → 122**（**15 个零记录节点首次入层**：`ESS-J-03/04`、`MTH-I-02/04/05/06/07`、`MTH-J-02/03/05/06`、`TEC-J-02/03/05/06`）；缺口 **159 → 173**；已核验书 **17 → 18 本** |
+| **第二路复核** | 3 名独立复核工人覆盖 **40/40**：`passed 32 / 分歧 8`；**保守终裁降级 16 条**（direct → partial）；`未复核 direct = 0`、`悬挂 verdict = 0`、`兜底判据 = 0`；`--slug` 复跑 `downgraded=0 / 已降级复算=16`（幂等） |
+| **准入补录（ADR-010）** | `gate_architecture --kind adr` **6/6 首轮 PASS**：14 条缺口 **7 T2 占号**（`MTH-J-10`/`MTH-J-11`/`MTH-J-12`/`MTH-O-16`/`MTH-O-17`/`MTH-I-08`/`TEC-J-07`）+ **7 T3 归并**（no-id，逐条点名最近邻节点）；候选册 **63 → 77**（T1 1 / T2 56 / T3 20）、`reserved_ids_this_round` **49 → 56**、覆盖缺口 **64 → 78**；`replay_admission` **77/77 = 100%** + 负例 4/4；`--scan-promotion` 候选 56 / 可晋升 0 / 新提案行 0 |
+| **判据收口（本轮核心）** | ① `apply_secondpass` 两条静默放宽路径：`agree=true` 但复核强度更低 ⇒ 原实现忽略（本轮 8 条 direct 虚高）；`agree=false` 且同强度 ⇒ 原实现保留 direct（1 条）。修后探针 **5 → 8 条**（N6/N7/N8，含防恒降反证），本轮共降 **16 条**；② `validate_staging_shards` 章级正文改为「章头优先、缺则回退 `_slices/`」——改前 EPUB 书 40 条记录**全部**报「无法读取章正文」，改后 `ddd` 回归仍 0 问题 |
+| **图谱** | **结构不变**：168 节点 / 364 边 / 18 组 / 18 案例；`validate_graph` errors=0、kahn 168/168；**指纹变更** `690cfbdb…` → **`b8729124…`**（15 个新覆盖节点 + 6 个既有节点 `review_date` 前移） |
+| **9 文件指纹** | **8 处变更**（ledger / node-claim-map / book-toc-index / reverse-gaps / overrides / book-verification / methodology-dag / verify-contract），`_verification-baseline.json` 不变 |
+| **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-028**、缺失 无、命中 0；G-V8 覆盖 **122/122**）；G-D 5/5；`gate_coverage` 100%；`gate_sources` PASS（91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 924 / links 10964，0 问题）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（10 182 794 个 20-gram） |
+| **L4 的两个口径** | **默认 8 页样本**：PASS 212/272（与上轮完全一致）；**扩展样本（168 页全量）**：5370/5712 = 94.01%，**6 FAIL 全是既有缺陷**——4 条 `pixel.svg-ink` 假红（1–2 条边的稀疏节点：0.89%–1.45% < 1.5%）+ `MTH-G-01 @390` 横向溢出（69 字符不可断 token）。**默认样本不含任何稀疏节点**，故该判据长期未暴露问题 |
+| **公开层** | 见基线 §4（推送 / CI / Pages 回验） |
+
+**🔴 本轮新增的四处「机制/判据不可信」（务必继承）**：
+
+1. **「给工人必须是章切片」这条纪律在 EPUB 一路是空转的**：`extract_book_text.py` 按 spine 拼接、不产 `===` 章头，`slice_corpus_by_chapter.py` 只认 `===` 章头 ⇒ 7 本既有 EPUB 书**一个切片都没有**。本轮补 `--pattern` 通道。
+2. **`apply_secondpass` 的两条静默放宽路径没人报过**：因为既有 876 条 verdict 里恰好没有「同意但降强度」与「否决但同强度」的组合，缺陷一直隐着；本轮 CD 的严格复核一上来就命中 9 条。
+3. **默认 L4 样本（8 页）会给人「全绿」的错觉**：新覆盖的节点页根本不在样本里。⇒ 每轮必须对新覆盖页另跑 `--pages` 扩展样本；本轮正是靠它发现 4 个稀疏节点假红与 1 个移动端溢出。
+4. **`pixel.svg-ink` 的 1.5% 阈值对稀疏节点是结构性假红**：墨迹占比随邻居数下降，1 边节点实测 0.89%，无论画得多正确都过不了。⇒ 判据应按邻居数分档，否则每次扩展样本都会重复报同一批假红。
+
+**🔴 上一轮（P2e）的四处纠正仍然有效**（分片工人会整批漏写 `review`、`target` 双空、复核工人抄错编号、电子重排版 PDF 无印刷页码）。
+
+## ⚠️ 上一轮增量（2026-11-02 · 阶段7 阶段3 续做轮 P2e **BK-017（DDD）全书核验入层 + ADR-009 九条 T2 补录 + 两个工具兜底收口**）—— 本节优先于下方所有旧陈述
 
 **本轮主任务 = `NEXT-ROUND-PROMPT-6.md §D.1 + §H#5`：先实测「下一本高密度书」的语料可得性（实测结论：BK-017 全书 PDF 文本层完好、17 章可落位）→ 按轨B 10 步核验入层 → 收口 §D.3 两项工具兜底（`apply_secondpass` 兜底分支 WARN、`merge_secondpass_worklists` 无变化不写盘）→ 生成链再生 → 公开层同步。**
 **接力件**：`00-plan/NEXT-ROUND-PROMPT-7.md`；**基线**：`00-plan/stage7p5-p2e-baseline.md`（图谱指纹 **`690cfbdb…`**）。

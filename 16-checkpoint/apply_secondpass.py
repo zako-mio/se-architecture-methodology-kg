@@ -20,6 +20,9 @@ apply_secondpass.py — 把第二路独立复核的裁决回写进核验分片�
 
 纪律：
 - **只降不升**：复核结论高于首路时**不**升级（保守；防「复核变相加码」）。
+- **降级触发（2026-11-02 P2f 收紧）**：① 复核强度 < 验前强度 ⇒ 一律降（不论 agree）；
+  ② `agree=false` ⇒ 终裁强度至多 `partial`。原实现只在 agree=false 时读强度、且允许
+  「否决但同强度」保留 direct ⇒ 两条静默放宽路径（见负例 N6/N7）。
 - **fail-closed**：verdict 指向不存在的 record_id / 结构非法 → 跳过并报告，不猜。
 - 确定性：records 保持按 record_id 升序；无时间戳；UTF-8 末尾换行。
 - 幂等：重复运行结果一致。❗**留痕判据锚定「复核前强度」而不是「当前强度」**
@@ -33,7 +36,7 @@ apply_secondpass.py — 把第二路独立复核的裁决回写进核验分片�
   python3 16-checkpoint/apply_secondpass.py --slug team-topologies
   python3 16-checkpoint/apply_secondpass.py --all
   python3 16-checkpoint/apply_secondpass.py --all --check     # 只读报告
-  python3 16-checkpoint/apply_secondpass.py --negative-test   # 5 条负例探针（临时目录，不动真数据）
+  python3 16-checkpoint/apply_secondpass.py --negative-test   # 8 条负例探针（临时目录，不动真数据）
 """
 import argparse
 import glob
@@ -143,25 +146,44 @@ def apply_one(root, slug, check):
         rev["second_pass"] = "passed" if agree else "disputed"
         rev["second_pass_by"] = vdoc.get("reviewed_by") or ""
         base_note = strip_review_marks(r.get("evidence_note"))
-        if not agree:
-            report["disputed"] += 1
-            # 保守终裁：只降不升
-            if (sp_strength in STRENGTH_ORDER and basis in STRENGTH_ORDER
+        report["disputed" if not agree else "passed"] += 1
+
+        # —— 终裁强度（2026-11-02 P2f 收紧；原实现有两条静默放宽路径）——
+        # ① 复核强度低于验前强度 ⇒ 一律取复核值。原实现只在 `agree=False` 时读它，
+        #    于是「同意结论方向、但判定证据只够 partial」的复核被**静默忽略**，
+        #    direct 被原样保留 = 强度虚高（本轮实测 8 条命中）。
+        # ② `agree=False` ⇒ 终裁强度**至多 partial**。原实现在「复核强度 = 验前强度」
+        #    时保留 direct，等于「结论被否决但强度不变」（本轮实测 1 条命中）。
+        final = basis
+        if (sp_strength in STRENGTH_ORDER and basis in STRENGTH_ORDER
+                and STRENGTH_ORDER[sp_strength] < STRENGTH_ORDER[final]):
+            final = sp_strength
+        if (not agree and final in STRENGTH_ORDER
+                and STRENGTH_ORDER[final] > STRENGTH_ORDER["partial"]):
+            final = "partial"
+
+        if (final in STRENGTH_ORDER and basis in STRENGTH_ORDER
+                and STRENGTH_ORDER[final] < STRENGTH_ORDER[basis]):
+            if (sp_strength in STRENGTH_ORDER
                     and STRENGTH_ORDER[sp_strength] < STRENGTH_ORDER[basis]):
-                marker = "【第二路复核】判为 %s（原判 %s），按保守终裁降级。" % (sp_strength, basis)
-                if cur != sp_strength and STRENGTH_ORDER.get(cur, 99) > STRENGTH_ORDER[sp_strength]:
-                    r["evidence_strength"] = sp_strength
-                    report["downgraded"] += 1
-                else:
-                    # 已降级过：值不再变，但**留痕仍是降级口径**（原实现此处会反转语义）
-                    report["already_downgraded"] += 1
+                marker = "【第二路复核】判为 %s（原判 %s），按保守终裁降级。" % (final, basis)
+            else:
+                marker = ("【第二路复核】复核否决归属或结论，降至 %s（原判 %s）。"
+                          % (final, basis))
+            if cur != final and STRENGTH_ORDER.get(cur, 99) > STRENGTH_ORDER[final]:
+                r["evidence_strength"] = final
+                report["downgraded"] += 1
+            else:
+                # 已降级过：值不再变，但**留痕仍是降级口径**（原实现此处会反转语义）
+                report["already_downgraded"] += 1
+            r["evidence_note"] = (base_note + " " + marker).strip()
+        else:
+            if not agree:
+                marker = ("【第二路复核】结论有分歧但未低于原判（复核=%s），保留原强度。"
+                          % sp_strength)
                 r["evidence_note"] = (base_note + " " + marker).strip()
             else:
-                marker = "【第二路复核】结论有分歧但未低于原判（复核=%s），保留原强度。" % sp_strength
-                r["evidence_note"] = (base_note + " " + marker).strip()
-        else:
-            report["passed"] += 1
-            r["evidence_note"] = base_note
+                r["evidence_note"] = base_note
         if v.get("anchor_locatable") is False:
             report["anchor_unlocatable"] = report.get("anchor_unlocatable", 0) + 1
             r["evidence_note"] = (strip_review_marks(r.get("evidence_note"))
@@ -276,9 +298,43 @@ def negative_test():
         bad += probe("N5 兜底分支置位 WARN（有字段时不置位）", ok,
                      "缺字段 basis_fallback=%d / 有字段 basis_fallback=%d"
                      % (rep5.get("basis_fallback", -1), rep6.get("basis_fallback", -1)))
+
+        # N6：agree=true 但复核强度更低 ⇒ 必须降级（旧实现只在 agree=false 时看强度，
+        #     此路径会把「同意但证据不足」静默放过、direct 虚高）。同时 second_pass 仍须 passed。
+        fixture(tmp, [rec("VR-PRB-007", "direct")],
+                [verdict("VR-PRB-007", "direct", "partial", True)])
+        rep7, text7 = apply_one(tmp, "probe", False)
+        r7 = json.loads(text7)["records"][0]
+        ok = (r7["evidence_strength"] == "partial" and rep7["downgraded"] == 1
+              and r7["review"]["second_pass"] == "passed"
+              and "按保守终裁降级" in r7["evidence_note"])
+        bad += probe("N6 agree=true 但强度更低须降级", ok,
+                     "strength=%s downgraded=%d second_pass=%s"
+                     % (r7["evidence_strength"], rep7["downgraded"],
+                        r7["review"]["second_pass"]))
+
+        # N7：agree=false 且复核强度 = 验前强度 ⇒ 仍须降至 partial（否决不得保留 direct）。
+        fixture(tmp, [rec("VR-PRB-008", "direct")],
+                [verdict("VR-PRB-008", "direct", "direct", False)])
+        rep8, text8 = apply_one(tmp, "probe", False)
+        r8 = json.loads(text8)["records"][0]
+        ok = (r8["evidence_strength"] == "partial" and rep8["downgraded"] == 1
+              and "否决归属或结论" in r8["evidence_note"])
+        bad += probe("N7 否决须降至 partial（不得保留 direct）", ok,
+                     "strength=%s downgraded=%d" % (r8["evidence_strength"], rep8["downgraded"]))
+
+        # N8：agree=true 且复核强度 = 验前强度 ⇒ 不得降级、不得加标记（防「恒降」）。
+        fixture(tmp, [rec("VR-PRB-009", "direct")],
+                [verdict("VR-PRB-009", "direct", "direct", True)])
+        rep9, text9 = apply_one(tmp, "probe", False)
+        r9 = json.loads(text9)["records"][0]
+        ok = (r9["evidence_strength"] == "direct" and rep9["downgraded"] == 0
+              and "【第二路复核】" not in r9["evidence_note"])
+        bad += probe("N8 一致且同强度不降级（防恒降）", ok,
+                     "strength=%s downgraded=%d" % (r9["evidence_strength"], rep9["downgraded"]))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    print("== 负例探针 %d/%d 如期通过 ==" % (5 - bad, 5))
+    print("== 负例探针 %d/%d 如期通过 ==" % (8 - bad, 8))
     return 1 if bad else 0
 
 
@@ -288,7 +344,7 @@ def main():
     ap.add_argument("--slug", help="单本 slug")
     ap.add_argument("--all", action="store_true", help="处理全部已登记书")
     ap.add_argument("--check", action="store_true", help="只读报告，不写")
-    ap.add_argument("--negative-test", action="store_true", help="跑 5 条负例探针后退出")
+    ap.add_argument("--negative-test", action="store_true", help="跑 8 条负例探针后退出")
     args = ap.parse_args()
     root = os.path.abspath(args.root)
 
