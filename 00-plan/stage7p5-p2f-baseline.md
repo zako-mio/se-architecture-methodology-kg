@@ -135,8 +135,14 @@ gate_disclosure= PASS（0 hit / 516 file）
 > 另：上一轮 P2e 基线 §4「推送②」那段回填此前只落本地、未进公开层（其文末自我标注了「站点落后一次」），**本轮推送已一并补上**。
 
 ```text
-推送②（本节回填）  = （回填后另行记录）
+推送②（本节回填）  = parent e744ad95c461 → new_tree 6647a64b62be / new_commit 68d9abd43d8a（`_publish` 提交 cdff3f3）
+远端 HEAD（②后）   = 68d9abd43d8a
+CI（②）            = 纯文档推送不自动触发 ⇒ 手动 dispatch run **41398310941 success**（34s）
+Pages 回验（②）    = 00-plan/stage7p5-p2f-baseline.md 内容逐字断言命中 `e744ad95`（2 处），
+                     NEXT-SESSION-HANDOFF.md **200**
 ```
+
+> ⚠️ 本节回填本身还会再产生一次**纯 `00-plan/**` 本地提交**（内容只有本段文本）。为不再留「站点落后一次」的尾巴，该次提交也已按同一流程推送并手动 dispatch CI；**自本次之后，本仓不再存在「仅本地、未公开」的 `00-plan` 变更**（下一轮新增属下一轮）。
 
 ---
 
