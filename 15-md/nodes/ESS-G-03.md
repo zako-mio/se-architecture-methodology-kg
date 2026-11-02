@@ -152,10 +152,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-11
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：STD-001、OFF-002、BK-016
-- 书证核验：BK-007 Ch14.1（partial）
+- 书证核验：BK-007 Ch14.1（partial）；BK-017 ChAnticorruption Layer（direct），ChPublished Language（partial），ChShared Kernel（partial）
 - 入口链接：https://www.iso.org/standard/74393.html
 - 入口链接：https://www.sei.cmu.edu/architecture/
 

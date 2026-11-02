@@ -118,10 +118,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-11-01
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：BK-008、PAP-002、STD-005
-- 书证核验：BK-008 Ch6.2（direct）
+- 书证核验：BK-008 Ch6.2（direct）；BK-017 ChIntention-Revealing Interfaces（direct），ChStandalone Classes（direct）
 - 入口链接：https://web.stanford.edu/~ouster/cgi-bin/book.php
 - 入口链接：https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf
 - 勘误：常见误解「深模块指代码行数很多的模块」→ 核验结论「深/浅由接口复杂度与所提供功能之比决定，与代码行数无必然关系；接口简单而功能强的模块为深，接口相对功能复杂的为浅」（BK-008）

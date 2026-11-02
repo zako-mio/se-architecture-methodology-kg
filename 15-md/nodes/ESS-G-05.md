@@ -146,9 +146,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：PAP-007、VEN-014、BK-016、OFF-002
+- 书证核验：BK-017 ChLayered Architecture（partial）
 - 入口链接：https://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf
 - 入口链接：https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/
 - 勘误：常见误解「架构风格是可以直接套用的成品模板」→ 核验结论「风格定义的是可用的组件/连接件词汇表与组合约束（约束集），符合约束会带来一组属性，而非可逐字复制的设计」（PAP-007）

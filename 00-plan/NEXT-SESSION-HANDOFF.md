@@ -5,7 +5,35 @@
 > 本版**全面覆写**上一版（阶段7 阶段1 之后）；上一版仍在本地归档仓历史中可取回。
 > 上一窗口已完成：**阶段2（内容增密）方案设计**（只出方案、不执行）。**本窗口的主任务 = 按方案执行。**
 
-## ⚠️ 本轮增量（2026-11-01 · 阶段7 阶段3 续做轮 P2d **BK-008（APoSD）OCR 核验入层 + 两个工具缺陷收口 + ADR-008 双 T2 补录**）—— 本节优先于下方所有旧陈述
+## ⚠️ 本轮增量（2026-11-02 · 阶段7 阶段3 续做轮 P2e **BK-017（DDD）全书核验入层 + ADR-009 九条 T2 补录 + 两个工具兜底收口**）—— 本节优先于下方所有旧陈述
+
+**本轮主任务 = `NEXT-ROUND-PROMPT-6.md §D.1 + §H#5`：先实测「下一本高密度书」的语料可得性（实测结论：BK-017 全书 PDF 文本层完好、17 章可落位）→ 按轨B 10 步核验入层 → 收口 §D.3 两项工具兜底（`apply_secondpass` 兜底分支 WARN、`merge_secondpass_worklists` 无变化不写盘）→ 生成链再生 → 公开层同步。**
+**接力件**：`00-plan/NEXT-ROUND-PROMPT-7.md`；**基线**：`00-plan/stage7p5-p2e-baseline.md`（图谱指纹 **`690cfbdb…`**）。
+
+| 项 | 本轮实测结果 |
+|---|---|
+| **选书（先实测语料可得性）** | 按节点 `sources[]` 实测引用密度排序（未核验书）：BK-016 POSA 4 引用/**无本地语料**（需购买）；BK-010 FSA 2 引用/仅免费单章；**BK-017 DDD 2 引用/全书 446 页 PDF 文本层完好** ⇒ 定 BK-017。⛔ 未使用旧文档的「引用密度」数字，一律回盘现算。 |
+| **语料层（PDF 一路）** | 新增章图 `_meta/pdf-chapters-ddd.json`（17 章，`pages_expected=446` 与 `pdfinfo`/`pdftotext` 三方一致，17/17 章头逐章落位）；`extract_pdf_book.py` 抽出 `ddd.txt` **852 442 字符 / 17 章头**；`slice_corpus_by_chapter.py` 切 17 个章切片（868 KB）。**该件为电子重排版（Safari/Team LiB 式分页，无印刷页码，446 页 ≠ 纸书 560 页）⇒ 章图不登记 `printed_page`，锚点页码只在私有字段记 pdf 页区间**，口径已写入 `verify-contract.md` §0 |
+| **登记层** | **6 处登记齐备**（`SLUG_RECORD_PREFIX` / `SLUG_TEXT` / `SOURCE_SLUG` / `BOOKS` / `CORPUS` / 契约登记表）；`DDD` 与既有 17 前缀互不为前缀（`DDD` ⊄ `DDIA`、`DDIA` ⊄ `DDD`） |
+| **核验层** | 3 个分片工人 → 机检首轮 **problems 16**（C 分片 6 条记录缺 `review` + 4 条 gap `target` 双空）⇒ 主 Agent 修正后 **problems 0 / WARN 0** → `merge --only ddd`（**既有 64 分片逐字节不变**）；records **698 → 719**（`direct 503→517 / partial 171→178 / inferred 24`）；覆盖节点 **103 → 107**（`ESS-G-05` / `ESS-H-09` / `ESS-L-03` / `MTH-H-03` 四个**此前零记录**节点首次入层）；缺口 **150 → 159**；已核验书 **16 → 17 本** |
+| **第二路复核** | 3 个独立复核工人覆盖 **21/21**（direct 18 条无一遗漏）：`passed 16 / 分歧 5`，**保守终裁降级 4 条**（`VR-DDD-104` 发布语言 / `VR-DDD-106` 上下文映射 / `VR-DDD-108` 一队一语言 / `VR-DDD-304` 危机即机会）；总账 `matched 517 / passed 466 / disputed 51`；`未复核 direct = 0`、`悬挂 verdict = 0`、`兜底判据 = 0` |
+| **准入补录（ADR-009）** | 新增 `18-design/adr/ADR-009.json`（`amends: ["ADR-004"]`）**6/6 PASS**：9 条新缺口**全部 T2 占号**（谓词机械输出 A=1/S=1，逐条 SUBSUMED 检测未命中）；候选册 **54 → 63**（`T1 1 / T2 49 / T3 13`）、`reserved_ids_this_round` **40 → 49**、覆盖缺口 **55 → 64**；ADR-004 复查 6/6 |
+| **工具缺陷收口** | ① `apply_secondpass` 兜底分支（验前强度双缺）改为**显式 WARN + `basis_fallback` 计数**，探针 **4 条 → 5 条**（新增 N5），实测 `--all` 复跑 `兜底判据 = 0` 且 60/64 分片逐字节不变；② `merge_secondpass_worklists` 加「**无变化不写盘**」守卫 + `--negative-test` **2/2**，实测 `写盘 0 / 无变化跳过 6`，既有 36 个 `secondpass-*.json` SHA 逐一不变 |
+| **图谱** | **结构不变**：168 节点 / 364 边 / 18 组 / 18 案例；`validate_graph` errors=0、kahn 168/168；**指纹变更** `9212644f…` → **`690cfbdb…`**（4 个新覆盖节点 + 8 个既有节点 `review_date` 前移） |
+| **9 文件指纹** | **8 处变更**（ledger / node-claim-map / book-toc-index / reverse-gaps / overrides / book-verification / methodology-dag / verify-contract），`_verification-baseline.json` 不变 |
+| **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **49** / 可晋升 **0** / 负例 **3/3** / **新提案行 = 0**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_pdf_book` **3/3**；`apply_secondpass` **5/5**；`merge_secondpass_worklists` **2/2**；`backfill_candidate_register` **3/3** |
+| **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-017**、缺失 无、命中 0）；G-D **5/5**；`gate_coverage` 100%；`gate_sources` PASS（verified 91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 442 / links 5437，0 问题）；`gate_visual` L4 **PASS**（212/272，与上轮一致）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（9 265 553 个 20-gram） |
+| **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致（`690cfbdb…`）；`build` 连跑总哈希一致（`12be31ae…`）；`writeback_gap_ids --check` 0 变更；`apply_secondpass --all` 复跑兜底 0；`merge_secondpass_worklists` 复跑 0 写盘 |
+| **公开层** | 见基线 §4（推送 / CI / Pages 回验） |
+
+**🔴 本轮新增/复现的四处「机制/判据不可信」（务必继承）**：
+
+1. **分片工人会漏写首路 `review` 对象**：C 分片 6 条记录整批缺 `review` 字段（A/B 分片正常）⇒ `validate_staging_shards` 报 12 条问题。机检拦住了，但说明**工人自述「已写全字段」不可信**，合并前必须机器逐字段校验。
+2. **工人会把 `target` 双空当合法形态**：4 条 gap 的 `target` 写成 `{existing_node_id: null, proposed_node: null}`；`proposed_node=null` 是纪律要求，但 `existing_node_id` 必须给出短期落点（G-V1 硬校验 target 不得双空）。派工 prompt 须显式写「`existing_node_id` 必填、`proposed_node` 必 null」。
+3. **复核工人会把 `node_id` / `claim_id` 抄错**：一条 verdict 把 `ESS-N-03#mechanism#606` 写成 `ESS-G-03#mechanism#606`（主题对、编号错）⇒ 主 Agent 必须逐条对齐 `_parts/ledger-<slug>.json` 才合并（本轮已加对齐审计，改前 `claim_id` 不一致 = 1）。
+4. **电子重排版 PDF 没有印刷页码**：BK-017 的 446 页件是 Safari/Team LiB 式重排（页首页尾 `[ Team LiB ]`），**纸书 560 页**；若照抄「`printed_page` 递增」判据会造出假页码。口径：章图不登记 `printed_page`、锚点页码只在私有字段记 pdf 页区间，并在契约 §0 写明原因。
+
+**🔴 上一轮（P2d）的六处纠正仍然有效**（OCR 一路须独立脚本与负例、每页文本下限 ≥30 字、章图须双页码、补录报告按修订件留存、`apply_secondpass --all` 现可跑但须先快照、**临时件绝不建在 mask/mirror 类目录下**）。
 
 **本轮主任务 = `NEXT-ROUND-PROMPT-5.md §D.1 + §H#5`：先判 BK-008 的 OCR 覆盖度并按其结果入层，同时收口 §C#17（`apply_secondpass` 降级非幂等）与 §C#20（补录报告单槽）两个工具缺陷 → 生成链再生 → 公开层同步。**
 **接力件**：`00-plan/NEXT-ROUND-PROMPT-6.md`；**基线**：`00-plan/stage7p5-p2d-baseline.md`（图谱指纹 **`9212644f…9bc647a`**）。

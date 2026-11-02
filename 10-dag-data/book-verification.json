@@ -580,6 +580,28 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "4",
+        "section": "Layered Architecture",
+        "section_title": "Layered Architecture",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "4",
+        "section": "The Smart UI \"Anti-Pattern\"",
+        "section_title": "The Smart UI Anti-Pattern",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-G-02": [
@@ -683,6 +705,39 @@
         "direction": "reverse",
         "second_pass": "none",
         "review_date": "2026-09-11"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "14",
+        "section": "Anticorruption Layer",
+        "section_title": "Anticorruption Layer",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "14",
+        "section": "Published Language",
+        "section_title": "Published Language",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "14",
+        "section": "Shared Kernel",
+        "section_title": "Shared Kernel",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-G-04": [
@@ -696,6 +751,28 @@
         "direction": "forward",
         "second_pass": "none",
         "review_date": "2026-11-01"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "5",
+        "section": "Modules (a.k.a. Packages)",
+        "section_title": "Modules (a.k.a. Packages)",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "10",
+        "section": "Conceptual Contours",
+        "section_title": "Conceptual Contours",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       },
       {
         "source_id": "BK-023",
@@ -762,6 +839,19 @@
         "direction": "reverse",
         "second_pass": "passed",
         "review_date": "2026-09-11"
+      }
+    ],
+    "ESS-G-05": [
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "4",
+        "section": "Layered Architecture",
+        "section_title": "Layered Architecture",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-G-06": [
@@ -926,6 +1016,28 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-11-01"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "10",
+        "section": "Intention-Revealing Interfaces",
+        "section_title": "Intention-Revealing Interfaces",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "10",
+        "section": "Standalone Classes",
+        "section_title": "Standalone Classes",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-H-06": [
@@ -1062,6 +1174,17 @@
         "direction": "forward",
         "second_pass": "disputed",
         "review_date": "2026-11-01"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "2",
+        "section": "One Team, One Language",
+        "section_title": "One Team, One Language",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-H-08": [
@@ -1141,6 +1264,30 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-10-11"
+      }
+    ],
+    "ESS-H-09": [
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "11",
+        "section": "Analysis Patterns Are Knowledge to Draw On",
+        "section_title": "Analysis Patterns Are Knowledge to Draw On",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "12",
+        "section": "Why Not FLYWEIGHT?",
+        "section_title": "Why Not FLYWEIGHT?",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "ESS-I-01": [
@@ -1979,6 +2126,30 @@
         "review_date": "2026-10-11"
       }
     ],
+    "ESS-L-03": [
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "16",
+        "section": "Communication and Self-Discipline",
+        "section_title": "Communication and Self-Discipline",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "16",
+        "section": "Evolving Order",
+        "section_title": "Evolving Order",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      }
+    ],
     "ESS-L-04": [
       {
         "source_id": "BK-011",
@@ -2680,6 +2851,17 @@
       }
     ],
     "ESS-N-03": [
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "14",
+        "section": "Context Map",
+        "section_title": "Context Map",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
       {
         "source_id": "BK-030",
         "book": "Team Topologies",
@@ -3482,6 +3664,28 @@
     ],
     "MTH-G-04": [
       {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "2",
+        "section": "Ubiquitous Language",
+        "section_title": "Ubiquitous Language",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "17",
+        "section": "Six Essentials for Strategic Design Decision Making",
+        "section_title": "Six Essentials for Strategic Design Decision Making",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
         "source_id": "BK-030",
         "book": "Team Topologies",
         "chapter": "6",
@@ -3818,6 +4022,30 @@
         "direction": "forward",
         "second_pass": "passed",
         "review_date": "2026-11-01"
+      }
+    ],
+    "MTH-H-03": [
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "13",
+        "section": "Crisis as Opportunity",
+        "section_title": "Crisis as Opportunity",
+        "evidence_strength": "partial",
+        "direction": "forward",
+        "second_pass": "disputed",
+        "review_date": "2026-11-02"
+      },
+      {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "13",
+        "section": "Timing",
+        "section_title": "Timing",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
       }
     ],
     "MTH-H-04": [
@@ -6392,6 +6620,17 @@
         "review_date": "2026-11-01"
       },
       {
+        "source_id": "BK-017",
+        "book": "Domain-Driven Design: Tackling Complexity in the Heart of Software",
+        "chapter": "15",
+        "section": "Generic Subdomains",
+        "section_title": "Generic Subdomains",
+        "evidence_strength": "direct",
+        "direction": "forward",
+        "second_pass": "passed",
+        "review_date": "2026-11-02"
+      },
+      {
         "source_id": "BK-030",
         "book": "Team Topologies",
         "chapter": "6",
@@ -8197,6 +8436,132 @@
       },
       "summary": "第13章给出并发设计的职责划分判据：并发本身就是一个足以构成变更原因的关注点，因此应把线程管理代码与线程无关代码分开，只留少数受控位置管理线程；并给出限制共享数据作用域、使用数据副本、让线程尽量独立等推论，以及缩小同步区、警惕同步方法之间的依赖、把线程相关部分做成可插拔可调、把偶发失败当作线程问题的候选信号等做法。图谱现有节点覆盖可靠性、容错与混沌工程，但没有把「并发与线程管理的职责边界」作为本质层议题。",
       "proposed_action": "提案新节点 ESS-H-11「并发职责划分（Concurrency Responsibility Partitioning）」，以 BK-020 第13章为主信源，并与 ESS-H-08 单一职责、ESS-I-02 可测试性建立关系。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-101",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "14",
+      "section": "Context Map",
+      "target": {
+        "existing_node_id": "ESS-N-03",
+        "proposed_node": "MTH-N-14"
+      },
+      "summary": "图谱在团队边界与架构边界耦合一节里只讲到所有权、沟通、激励三条通道，没有把「跨边界关系图」当作一件必须维护的工件来治理。书中给出的是可执行纪律：先把当前真实状况画出来（含糊处先按最接近的关系模式命名，不强行套用），只修明显矛盾，等图清晰之后再动组织与设计，且现实没变之前不先去改图。这套「先求真、后改真」的次序缺位时，映射图容易退化为理想态宣示，团队据此做的边界决策会落空。",
+      "proposed_action": "挂在 ESS-N-03 之下补一条 engineering 类记录（不新建节点），把「映射须反映现状、按现状点出每一处关系、仅消除硬矛盾、变更落地后才更新图」写成可执行的评审动作；若主 Agent 判断需要独立成节，则另立一个节点承载「边界清单与关系图的维护纪律」。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-102",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "14",
+      "section": "Continuous Integration",
+      "target": {
+        "existing_node_id": "ESS-G-03",
+        "proposed_node": "MTH-G-14"
+      },
+      "summary": "边界与接口隔离一节把边界视为契约与假设的管理，但只覆盖了两侧之间的隔离，没有覆盖边界内部的持续统一。书里指出：一旦同一边界内有多人协作，模型就有碎裂倾向，边界划得越细越会丢掉必要的整合度；因此需要一条双向流程——概念侧靠持续使用同一套语言磨合，实现侧靠可复现的合并构建与自动测试尽早暴露碎片，并对未整合变更的存活时长设上限。图谱缺这条「划界之后如何守住边界内部的单一含义」的机制。",
+      "proposed_action": "挂在 ESS-G-03 之下补一条 mechanism 类记录，写明边界内部统一的两种整合（概念整合与制品整合）及未整合变更的时限约束；若认为它与团队协作更近，可改挂 ESS-N-03，但落点仍应是既有节点而非新节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-103",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "15",
+      "section": "Cohesive Mechanisms",
+      "target": {
+        "existing_node_id": "MTH-O-06",
+        "proposed_node": "MTH-O-14"
+      },
+      "summary": "粒度与边界设定一节按信息隐藏、内聚耦合、认知负荷三条线索决定切分，但没有区分两类被切出物的性质差异。书中区分得很清楚：通用子域仍然表达领域（只是不核心、不专门），而黏合机制根本不对应领域概念，它只承接某个难缠的计算或规则代劳；后者宜剥成独立的轻量框架，并通过表意明确的声明式接口被核心模型调用，使核心模型能说出业务语句而非调用晦涩函数。缺这条区分时，切分只按「是否核心」一刀切，会把两类性质不同的部件混在同一层级，接口风格也随之失配。",
+      "proposed_action": "挂在 MTH-O-06 之下补一条 mechanism 或 tradeoff 类记录，把「表达领域的子域」与「代劳计算的机制」作为两种切出物分别给出接口要求与剥离判据；同样不新建节点，如确需独立承载，交由主 Agent 经 ADR 决定。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-201",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "7",
+      "section": "AGGREGATE Boundaries",
+      "target": {
+        "existing_node_id": "MTH-O-06",
+        "proposed_node": "MTH-O-15"
+      },
+      "summary": "书里把边界划在「一致性与身份」这条轴上，给出可操作的判据：只被某个宿主对象带出来的内部元素、其身份由宿主派生的，应留在宿主的边界内；而脱离宿主仍有独立业务含义、需要被单独查找的元素，必须自成边界并作根；边界一旦画出，只有根才配持久化访问入口，内部元素只能经根访问。图谱在粒度与边界一节给出的判据全部是结构性的（信息隐藏、内聚耦合、认知负荷、变更原因），没有一条是「这个边界同时是事务与不变量的守护范围」，因此切分可以在结构上自洽却在并发与一致性上失守。",
+      "proposed_action": "建议新增一个承载「一致性边界与不变量守护」的节点（与 MTH-O-06 粒度与边界设定互补而非替代）：先用 BK-017 第 7 章划界判据立 definition 与 principle，再用第 6 章补齐边界内的不变量规则与访问约束作为 engineering。若主 Agent 判定暂不新建，则最低限度应在 MTH-O-06 下补一条 mechanism 记录，写明「结构判据之外还需一条一致性判据」。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-202",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "5",
+      "section": "Value Objects",
+      "target": {
+        "existing_node_id": "ESS-H-09",
+        "proposed_node": "MTH-H-10"
+      },
+      "summary": "书里把「有无概念身份」当作建模的第一道判别，并给出反面理由：给所有对象都强行配身份会拖累性能、增加分析身份与追踪的工作量，还会把模型抹平成同一种形态；而这类无身份的描述性对象并非「缺少身份」，它们自有独立含义，值得作为一等建模构件。同一个名词（书以地址为例）算有身份还是无身份，取决于它所服务的业务语境，因此这是一条随语境变化的判别而非固定分类。图谱没有任何节点承载这一判别，值语义、不可变与可整体替换这一族在架构讨论中缺席，「对象身份与相等性」这类设计决定缺少依据。",
+      "proposed_action": "建议新建「值语义与对象身份」节点：definition 用「按有无概念身份区分两类建模构件，并承认该判别随语境变化」，principle 收「强行给一切对象加身份的代价」与「无身份对象自身有意义」，engineering 收「默认取不可变、可整体替换、以属性相等而非标识比较」的落地纪律；证据可复用 BK-017 第 5 章，无需与既有 DRY 或信息隐藏节点混挂。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-203",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "5",
+      "section": "Services",
+      "target": {
+        "existing_node_id": "ESS-H-08",
+        "proposed_node": "MTH-H-11"
+      },
+      "summary": "书里为「不属于任何对象的重要领域操作」给出安放规则与三条准入特征：该操作涉及的概念不自然属于某个对象、接口以模型中的其它元素来表述、操作无状态；并同时警告两个对称的错误——太容易放弃把行为放进合适的对象会滑向过程式编程，硬塞进不合适的对象则会毁掉该对象的概念清晰度、并因协调多个对象而把它们纠缠成一团。图谱里行为归属只在职责划分一类节点被间接涉及，缺少「何时应把行为从对象上摘出来单独声明、以什么形态声明」的判据，于是遇到纯动作型领域逻辑时往往要么塞进实体、要么落到过程式代码。",
+      "proposed_action": "建议以 engineering 记录落在 SOLID 职责划分与替换性（ESS-H-08）之下，写明三条准入特征与「不得借此抽空对象行为」的反向约束；若主 Agent 认为该族需要独立承载，则另立「行为归属与无状态领域服务」节点，本轮仍建议先在既有节点下补记录以控制节点增量。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-301",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-017",
+      "chapter": "16",
+      "section": "How Restrictive Should a Structure Be?",
+      "target": {
+        "existing_node_id": "ESS-L-03",
+        "proposed_node": "MTH-L-12"
+      },
+      "summary": "书把「结构该多严」当作可调的设计维度而不是既定属性：同一类分层可以只规定概念如何分派与依赖方向，也可以细到规定层与层之间的通信方式；限制越强则一致性越强、设计越易解读，但会削掉不同上下文、异构技术下真正需要的灵活性，作者因此劝团队抵制把结构做成框架、成套管制的冲动，判据是每条结构规则是否真的让开发更省力。图谱现有治理类条目多讲加约束、上自动校验与适应度函数，缺「约束松紧度本身是设计决策、以及何时应当放松」这一面。",
+      "proposed_action": "在 ESS-L-03 正文补一条权衡类记录，锚定第 16 章该节：写明严格度两端的收益（一致性与可解读性 vs 跨上下文灵活性与异构适配），以及「抵制框架化、每条规则须让开发更易」的判据；不新建节点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-302",
+      "kind": "concept_missing",
+      "book_source_id": "BK-017",
+      "chapter": "16",
+      "section": "System Metaphor",
+      "target": {
+        "existing_node_id": "ESS-G-05",
+        "proposed_node": "MTH-G-15"
+      },
+      "summary": "书在领域层给出一类介于模块化与架构风格之间的组织概念：可跨限界上下文适用的「大尺度结构」，并示范了四种形态（共享隐喻、职责分层、知识层级、可插拔组件框架），同时规定它是可选项与最小集——只在能显著提升整体可理解性、又不把不自然的约束强加给模型开发时采用，且必须允许各上下文按本地需要偏离。图谱在「模块化与分解」（必选分解动作）与「架构风格」之间缺这一层「可演化的、可撤换的整体组织约定」。",
+      "proposed_action": "建议经 ADR 裁决后新增概念条目或在高相关节点补正文：把大尺度结构写成与模块化相区别的可选组织约定（可选、最小集、可更换、允许按上下文偏离），并标注其与限界上下文适用范围的层级关系；本文件不预设落点。",
+      "evidence_strength": "direct"
+    },
+    {
+      "gap_id": "GAP-DDD-303",
+      "kind": "coverage_hole",
+      "book_source_id": "BK-017",
+      "chapter": "1",
+      "section": "Continuous Learning",
+      "target": {
+        "existing_node_id": "MTH-H-03",
+        "proposed_node": "MTH-H-12"
+      },
+      "summary": "书把知识流失列为必须持续投入设计的直接理由：已获得的理解散落于多人、多文档与外包交付物之中，人员流动、团队重组、以及只交付代码不交付理解的合作方式都会让它流失，而常规的设计与文档形态不把这些来之不易的理解固化成可复用的形式，一旦口头传承中断即告丢失。图谱里战略式编程一侧讲的是复杂度如何靠日常捷径累积、以及要为结构改进留出时间份额，缺「知识随人员与协作变动而流失」这条因果链，因而也缺「把理解写进模型与代码」这一对抗手段的动机说明。",
+      "proposed_action": "在 MTH-H-03 正文补一条机制类记录，锚定第 1 章该节：写明知识流失的三条途径（人员流动、重组、只交付制品的合作）与「把理解固化进模型与代码、并由稳定核心成员承载」的对策，使持续设计投入有知识保全这一侧的动机；不新建节点。",
       "evidence_strength": "direct"
     },
     {

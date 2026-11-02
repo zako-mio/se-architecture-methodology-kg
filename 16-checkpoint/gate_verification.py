@@ -80,6 +80,9 @@ SLUG_RECORD_PREFIX = {
     # 阶段7 阶段3 续做 P2d（2026-11-01）：BK-008（无文本层 PDF → OCR 抽取件）
     # ⚠️ APOSD 与既有 16 个前缀互不为前缀（已复核）
     "aposd": "APOSD",
+    # 阶段7 阶段3 续做 P2e（2026-11-02）：BK-017（PDF 抽取）
+    # ⚠️ DDD 与既有 17 个前缀互不为前缀（`DDD` ⊄ `DDIA`、`DDIA` ⊄ `DDD`，已复核）
+    "ddd": "DDD",
 }
 RECORD_PREFIX_EXTRA = ("D2",)     # 阶段2 增密记录前缀 VR-D2-
 RECORD_RE = re.compile(r"^VR-(%s)-\d{3}$" % "|".join(
@@ -105,6 +108,8 @@ SLUG_TEXT = {
     # 阶段7 阶段3 续做 P2d（2026-11-01）：OCR 抽取（extract_ocr_book.py）
     # ⚠️ 漏登本表 ⇒ G-V5 把该书记 SKIP 而非 FAIL（伪绿）；BK-008 已实测纳入「可用书文本源」
     "aposd": "aposd.txt",
+    # 阶段7 阶段3 续做 P2e（2026-11-02）：PDF 抽取（extract_pdf_book.py）
+    "ddd": "ddd.txt",
 }
 # 信源 id → slug（BK-023 走 glob 特例，不在此表）
 SOURCE_SLUG = {
@@ -126,6 +131,8 @@ SOURCE_SLUG = {
     "BK-022": "welc",
     # 阶段7 阶段3 续做 P2d（2026-11-01）
     "BK-008": "aposd",
+    # 阶段7 阶段3 续做 P2e（2026-11-02）
+    "BK-017": "ddd",
 }
 PART_FILE_RE = re.compile(r"^(ledger|claims|toc|gaps)-(.+)\.json$")
 CLAIM_CAP = 8                    # ADR-002 默认上限（其余节点）

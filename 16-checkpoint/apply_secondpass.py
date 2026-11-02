@@ -33,7 +33,7 @@ apply_secondpass.py — 把第二路独立复核的裁决回写进核验分片�
   python3 16-checkpoint/apply_secondpass.py --slug team-topologies
   python3 16-checkpoint/apply_secondpass.py --all
   python3 16-checkpoint/apply_secondpass.py --all --check     # 只读报告
-  python3 16-checkpoint/apply_secondpass.py --negative-test   # 4 条负例探针（临时目录，不动真数据）
+  python3 16-checkpoint/apply_secondpass.py --negative-test   # 5 条负例探针（临时目录，不动真数据）
 """
 import argparse
 import glob
@@ -94,7 +94,7 @@ def apply_one(root, slug, check):
     lpath = os.path.join(resolve(root, PARTS), "ledger-%s.json" % slug)
     report = {"slug": slug, "verdicts": 0, "matched": 0, "unmatched": [],
               "passed": 0, "disputed": 0, "downgraded": 0, "already_downgraded": 0,
-              "not_covered": 0, "missing_files": []}
+              "not_covered": 0, "basis_fallback": 0, "missing_files": []}
     if not os.path.isfile(vpath):
         report["missing_files"].append(os.path.relpath(vpath, root))
         return report, None
@@ -130,10 +130,16 @@ def apply_one(root, slug, check):
         # 幂等判据（P2d 修）：降级/保留必须锚定「该记录第二路复核**之前**的强度」。
         # 优先读已留痕的 review.first_pass_strength（未来周边自洽），
         # 其次读 verdict 自带的 first_pass_strength（789/789 条实测均有），
-        # 最后才退回当前值（老数据兜底；此分支属已知局限，实测不触发）。
-        basis = (rev.get("first_pass_strength")
-                 or v.get("first_pass_strength")
-                 or cur)
+        # 最后才退回当前值（老数据兜底）。P2e 修：兜底分支**必须显式 WARN**，
+        # 否则未来数据一旦缺字段，会静默退化回「以当前强度为判据」的旧缺陷。
+        basis = rev.get("first_pass_strength") or v.get("first_pass_strength")
+        if not basis:
+            basis = cur
+            report["basis_fallback"] += 1
+            print("    [WARN] %s：验前强度两处均缺（review.first_pass_strength / "
+                  "verdict.first_pass_strength），已退回当前强度 %r 为判据——"
+                  "此路径会静默退化降级留痕，请补齐 verdict 的 first_pass_strength。"
+                  % (rid, basis), file=sys.stderr)
         rev["second_pass"] = "passed" if agree else "disputed"
         rev["second_pass_by"] = vdoc.get("reviewed_by") or ""
         base_note = strip_review_marks(r.get("evidence_note"))
@@ -172,7 +178,7 @@ def apply_one(root, slug, check):
 
 
 def negative_test():
-    """4 条负例探针：幂等判据必须逐条**以其应有理由**通过/拒绝，否则判据已退化（exit=1）。
+    """5 条负例探针：幂等判据与兜底分支必须逐条**以其应有理由**通过/拒绝，否则判据已退化（exit=1）。
 
     探针在**临时目录**里造合成夹具，绝不触碰真实 `_parts/`。
     """
@@ -256,9 +262,23 @@ def negative_test():
         bad += probe("N4 旧判据复现反转（判据非恒真）",
                      ("未低于原判" in legacy) and ("未低于原判" not in new),
                      "legacy=%r vs fixed=%r" % (legacy[:24], new[:24]))
+
+        # N5：兜底分支必须**可见**——验前强度两处均缺时须置位 basis_fallback（并 WARN），
+        #     而有字段时不得置位。旧实现静默退回当前强度（无任何信号）。
+        v5 = verdict("VR-PRB-005", "direct", "partial", False)
+        v5.pop("first_pass_strength")
+        fixture(tmp, [rec("VR-PRB-005", "direct")], [v5])
+        rep5, _ = apply_one(tmp, "probe", False)
+        fixture(tmp, [rec("VR-PRB-006", "direct")],
+                [verdict("VR-PRB-006", "direct", "partial", False)])
+        rep6, _ = apply_one(tmp, "probe", False)
+        ok = (rep5.get("basis_fallback") == 1 and rep6.get("basis_fallback") == 0)
+        bad += probe("N5 兜底分支置位 WARN（有字段时不置位）", ok,
+                     "缺字段 basis_fallback=%d / 有字段 basis_fallback=%d"
+                     % (rep5.get("basis_fallback", -1), rep6.get("basis_fallback", -1)))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    print("== 负例探针 %d/%d 如期通过 ==" % (4 - bad, 4))
+    print("== 负例探针 %d/%d 如期通过 ==" % (5 - bad, 5))
     return 1 if bad else 0
 
 
@@ -268,7 +288,7 @@ def main():
     ap.add_argument("--slug", help="单本 slug")
     ap.add_argument("--all", action="store_true", help="处理全部已登记书")
     ap.add_argument("--check", action="store_true", help="只读报告，不写")
-    ap.add_argument("--negative-test", action="store_true", help="跑 4 条负例探针后退出")
+    ap.add_argument("--negative-test", action="store_true", help="跑 5 条负例探针后退出")
     args = ap.parse_args()
     root = os.path.abspath(args.root)
 
@@ -284,7 +304,7 @@ def main():
     print("== 第二路复核裁决回写 ==")
     print("")
     total = {"matched": 0, "passed": 0, "disputed": 0, "downgraded": 0,
-             "not_covered": 0, "unmatched": 0}
+             "not_covered": 0, "unmatched": 0, "basis_fallback": 0}
     for slug in slugs:
         rep, text = apply_one(root, slug, args.check)
         print("[%s]" % slug)
@@ -297,18 +317,22 @@ def main():
                  rep["downgraded"], rep["already_downgraded"], rep["not_covered"]))
         if rep["unmatched"]:
             print("    ! verdict 指向不存在的 record_id：%s" % ", ".join(rep["unmatched"][:10]))
-        for k in ("matched", "passed", "disputed", "downgraded", "not_covered"):
+        for k in ("matched", "passed", "disputed", "downgraded", "not_covered",
+                  "basis_fallback"):
             total[k] += rep[k]
         total["unmatched"] += len(rep["unmatched"])
+        if rep.get("basis_fallback"):
+            print("    [WARN] %d 条记录走兜底分支（验前强度两处均缺，已退回当前强度判据）"
+                  % rep["basis_fallback"])
         if text is not None and not args.check:
             p = os.path.join(resolve(root, PARTS), "ledger-%s.json" % slug)
             with open(p, "w", encoding="utf-8", newline="\n") as f:
                 f.write(text)
             print("    wrote %s" % os.path.relpath(p, root))
     print("")
-    print("== 汇总 == matched=%d passed=%d disputed=%d downgraded=%d 未复核 direct=%d 悬挂 verdict=%d"
+    print("== 汇总 == matched=%d passed=%d disputed=%d downgraded=%d 未复核 direct=%d 悬挂 verdict=%d 兜底判据=%d"
           % (total["matched"], total["passed"], total["disputed"], total["downgraded"],
-             total["not_covered"], total["unmatched"]))
+             total["not_covered"], total["unmatched"], total["basis_fallback"]))
     if args.check:
         print("== --check：未写盘 ==")
     return 0

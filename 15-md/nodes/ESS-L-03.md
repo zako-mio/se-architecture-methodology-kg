@@ -116,9 +116,10 @@
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：WEB-019、PAP-008、WEB-013
+- 书证核验：BK-017 ChCommunication and Self-Discipline（direct），ChEvolving Order（partial）
 - 入口链接：https://users.ece.utexas.edu/~perry/work/papers/swa-sen.pdf
 - 勘误：常见误解「架构侵蚀与架构漂移是同义词」→ 核验结论「侵蚀源于对架构的违规，漂移源于对架构的不敏感；二者后果侧重不同、互为因果但机制不同」（WEB-019）
 - 勘误：常见误解「架构腐化只需工具化的架构合规检查即可治理」→ 核验结论「架构腐化成因兼有技术与非技术（组织/沟通）因素，只做工具合规会漏掉非技术成因，治标不治本」（PAP-008）

@@ -139,9 +139,10 @@ SOLID 职责划分与替换性（ESS-H-08） → **设计模式与反模式（ES
 
 - 核验状态：True（verified）
 - 置信度：high
-- 复核日期：2026-09-10
+- 复核日期：2026-11-02
 - 生命周期：active
 - 规范信源：BK-032、VEN-016、WEB-021、PAP-022、WEB-023
+- 书证核验：BK-017 ChAnalysis Patterns Are Knowledge to Draw On（direct），ChWhy Not FLYWEIGHT?（direct）
 - 入口链接：https://www.laputan.org/mud/
 - 入口链接：https://en.wikipedia.org/wiki/Design_Patterns
 - 勘误：常见误解「设计模式是放之四海皆准的成品解法，遇到相似问题套用即可」→ 核验结论「模式是对反复出现问题解的模板，须结合具体语境与作用力判断适用性；误用会引入不必要复杂度与额外间接层，且经典模式在实现中自身也会退化出坏味道」（VEN-016）
