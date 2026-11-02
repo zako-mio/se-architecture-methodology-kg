@@ -24,7 +24,7 @@
 | **重放与判据可信度** | `replay_admission` 一致率 **100%** + 负例 **4/4**；`--scan-promotion` 候选 **49** / 可晋升 **0** / 负例 **3/3** / **新提案行 = 0**；`negative_test_verification` **11/11**；`negative_test_densify` **11/11**；`extract_pdf_book` **3/3**；`apply_secondpass` **5/5**；`merge_secondpass_worklists` **2/2**；`backfill_candidate_register` **3/3** |
 | **门控全表** | `gate_verification` **9/9**（G-V5 可用源**含 BK-017**、缺失 无、命中 0）；G-D **5/5**；`gate_coverage` 100%；`gate_sources` PASS（verified 91.07%）；`gate_layout` 2140/2140；`gate_methodology` PASS；`kb_gate` **2/2**（structure 442 / links 5437，0 问题）；`gate_visual` L4 **PASS**（212/272，与上轮一致）；`gate_render` L5 **PASS**（7/7，skipped=0）；版权 **0 命中**（9 265 553 个 20-gram） |
 | **幂等** | `derive --check` PASS；`aggregate` 连跑哈希一致（`690cfbdb…`）；`build` 连跑总哈希一致（`12be31ae…`）；`writeback_gap_ids --check` 0 变更；`apply_secondpass --all` 复跑兜底 0；`merge_secondpass_worklists` 复跑 0 写盘 |
-| **公开层** | 见基线 §4（推送 / CI / Pages 回验） |
+| **公开层** | 推送 **1 次**：`parent 2006bc86` → `new_commit 42e2df9c`（`_publish` 提交 b87c250）；**远端 HEAD `42e2df9c`**；**remote blobs 582 == 本地 582**；CI run **41390128846 success**（34s，push 自动触发）；Pages 8 条 **200**、两条接力件 **404**；装配 0/0/0、`gate_disclosure` 0 hit / 515 file |
 
 **🔴 本轮新增/复现的四处「机制/判据不可信」（务必继承）**：
 

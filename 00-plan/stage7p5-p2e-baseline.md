@@ -110,16 +110,22 @@ BK-017 ddd（1st/2003，e-text 446 页 / 17 章；无印刷页码）
 ## 4. 公开层对账
 
 ```text
-推送           = （推送后回填本节终值）
-远端 HEAD      =
-remote blobs   =
-CI             =
-Pages 回验     =
-装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（575 文件）
-gate_disclosure= PASS（0 hit / 514 file）
+推送           = 1 次（Git Data API）
+  parent 2006bc86584f / base_tree 1dbdd9716f9e → new_tree 9f7f93d7c0ef / new_commit 42e2df9cf34a
+  （`_publish` 本地提交 b87c250；推送前已在 `_publish` 内 git add -A && git commit）
+远端 HEAD      = 42e2df9cf34ae09bbd54f45759ca5c42a8870c45
+remote blobs   = 582  ==  本地 _publish ls-files 582
+CI             = push 自动触发：run **41390128846 success**（34s；`16-checkpoint/**` 与 `10-dag-data/**` 命中 push.paths）
+Pages 回验     = / 、00-plan/stage7p5-p2e-baseline.md 、00-plan/NEXT-SESSION-HANDOFF.md 、
+                 11-node-pages/MTH-H-03.html 、11-node-pages/ESS-H-09.html 、
+                 14-views/06-book-verification.html 、10-dag-data/methodology-dag.json 、
+                 10-dag-data/book-verification.json   均 **200**
+                 ；00-plan/NEXT-ROUND-PROMPT-6.md / -7.md 均 **404**（`never` 类生效）
+装配           = --apply --refresh-sanitize 后 --check 三类差异 0/0/0；P1–P5 预检全 OK（576 文件）
+gate_disclosure= PASS（0 hit / 515 file）
 ```
 
-> ⚠️ 本节在首次推送后按实测回填；回填本身是一次**纯 `00-plan/**` 文档提交**（不触发 CI，须手动 dispatch run 并回验 Pages）。
+> 本节终值已按实测回填；回填本身是一次**纯 `00-plan/**` 文档提交**（不触发 CI，须手动 dispatch run 并回验 Pages）。
 
 ---
 
